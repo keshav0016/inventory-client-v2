@@ -5,25 +5,24 @@ import AddAsset from './AddAsset'
 import UpdateAsset from './UpdateAsset'
 import moment from 'moment'
 
-var pageIndex = window.location.search.slice(1).split('=').indexOf('page')
 class Assets extends Component{
     constructor(props){
         super(props)
         this.state = {
             assetList : [],
             pagination : {totalPage : 1, currentPage : 1},
-            page : window.location.search.slice(1).split('=')[pageIndex + 1],
+            page : 1,
             handleListRequest : true
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
-        this.updateAsset = this.updateAsset.bind(this)
+        this.setPage = this.setPage.bind(this)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/asset/list${window.location.search}`,
+            url : `http://localhost:3001/asset/list?page=${this.state.page}`,
             withCredentials : true
         })
         .then(res => {
@@ -39,16 +38,20 @@ class Assets extends Component{
     }
 
 
-    updateAsset(){
-
-    }
-
-
     setHandleListRequest(){
         this.setState({
             handleListRequest : true
         })
     }
+
+
+    setPage(e){
+        this.setState({
+            page : e,
+            handleListRequest : true
+        })
+    }
+
 
 
     render(){
@@ -110,7 +113,7 @@ class Assets extends Component{
                     <AddAsset setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
-                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.pagination.currentPage} maxButtons={5} onSelect = {this.setPage} />
+                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div> 
             </div>
         )

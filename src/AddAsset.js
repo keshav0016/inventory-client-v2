@@ -39,7 +39,6 @@ class AddAsset extends Component{
             this.setState({
                 addAssetRequest : true
             })
-            window.Materialize.toast('Asset Added', 4000)
         }
     }
 
@@ -116,20 +115,29 @@ class AddAsset extends Component{
             }
         })
         .then(res => {
-            this.setState({
-                addAssetRequest : false,
-                serial_number : '',
-                asset_name : '',
-                purchase_date : '',
-                description : '',
-                invoice_number : '',
-                vendor : '',
-                amount : 0,
-                gst : 0,
-                total : 0,
-                category : ''
-            })
-            this.props.setHandleListRequest()
+            if(res.data.error){
+                window.Materialize.toast(res.data.error, 4000)
+                this.setState({
+                    addAssetRequest : false
+                })                
+            }
+            else{
+                this.setState({
+                    addAssetRequest : false,
+                    serial_number : '',
+                    asset_name : '',
+                    purchase_date : '',
+                    description : '',
+                    invoice_number : '',
+                    vendor : '',
+                    amount : 0,
+                    gst : 0,
+                    total : 0,
+                    category : ''
+                })
+                window.Materialize.toast('Asset Added', 4000)                
+                this.props.setHandleListRequest()
+            }
         })
         .catch(error => {
             console.error(error)
