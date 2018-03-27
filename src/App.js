@@ -14,18 +14,12 @@ import Consumables from './Consumables';
 class App extends Component {
   render() {
     return (
-        <div>
       <Router>
-        {/* <Route exact path="/" component={Homepage}/> */}
-        {/* <Route exact path="/loginform" component={LoginForm}/> */}
-        {/* <Route exact path="/adminhomepage" component={Adminhomepage} /> */}
-        {/* <Route exact path="/employee" component={EmployeesList}/> */}
-        {/* <Route exact path="/employee/add" component={EmployeeAdd}/> */}
-        <Route exact path="/consumables" component={Consumables} />
+          <div>
+            <Link to="/consumables"></Link>
+            <Route exact path="/consumables" component={Consumables} />
+          </div>
       </Router>
-        
-        
-        </div>
     );
   }
 }

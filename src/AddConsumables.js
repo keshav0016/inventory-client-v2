@@ -54,8 +54,14 @@ class AddConsumables extends Component{
             }
         })
         .then(obj => {
-            console.log(obj.data.message)
             this.props.setHandleListRequest()
+            this.setState({
+                name : '',
+                vendor_name : '',
+                purchase_date : '',
+                purchased_quantity : 0
+            })
+            console.log(obj.data.message)
         })
         .catch(error => {
             console.log(error)
