@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Dropdown, Icon, NavItem} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem} from 'react-materialize'
 import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
 
@@ -10,21 +10,25 @@ class Consumables extends Component{
         super(props)
         this.state = {
             consumableList : [],
+            pagination : {totalPage : 1, currentPage : 1},
+            page : 1,
             handleListRequest : true
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
+        this.setPage = this.setPage.bind(this)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : 'http://localhost:3001/consumables/list',
+            url : `http://localhost:3001/consumables/list?page=${this.state.page}`,
             withCredentials : true
         })
         .then(res => {
             this.setState({
-                consumableList : res.data.consumables,
+                consumableList : res.data.consumables.sort((a, b) => a.consumable_id - b.consumable_id),
+                pagination : res.data.pagination,
                 handleListRequest : false
             })
         })
@@ -51,6 +55,13 @@ class Consumables extends Component{
 
     setHandleListRequest(){
         this.setState({
+            handleListRequest : true
+        })
+    }
+
+    setPage(e){
+        this.setState({
+            page : e,
             handleListRequest : true
         })
     }
@@ -98,6 +109,9 @@ class Consumables extends Component{
                     trigger={<Button floating large className = 'red addConsumableButton' waves = 'light' icon = 'add' />}>
                     <AddConsumables setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
+                <div>
+                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
+                </div>
             </div>
         )
     }
