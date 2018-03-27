@@ -55,6 +55,7 @@ class AddConsumables extends Component{
         })
         .then(obj => {
             console.log(obj.data.message)
+            this.props.setHandleListRequest()
         })
         .catch(error => {
             console.log(error)

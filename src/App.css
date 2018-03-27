@@ -32,3 +32,9 @@
   top:85%;
   left:90%;
 }
+
+.addAssetButton{
+  position: absolute;
+  bottom : 5%;
+  right : 3%
+}

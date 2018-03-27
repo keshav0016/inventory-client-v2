@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Dropdown, Icon, NavItem} from 'react-materialize'
 import AddConsumables from './AddConsumables'
+import UpdateConsumables from './UpdateConsumables'
 
 
 class Consumables extends Component{
@@ -12,6 +13,7 @@ class Consumables extends Component{
             handleListRequest : true
         }
         this.handleList = this.handleList.bind(this)
+        this.setHandleListRequest = this.setHandleListRequest.bind(this)
     }
 
     handleList(){
@@ -47,6 +49,12 @@ class Consumables extends Component{
         })
     }
 
+    setHandleListRequest(){
+        this.setState({
+            handleListRequest : true
+        })
+    }
+
     render(){
         return(
             <div>
@@ -69,7 +77,12 @@ class Consumables extends Component{
                             <td><Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
                                 }>
-                                <NavItem>Edit</NavItem >
+                                <Modal
+                                    header='Edit Consumable'
+                                    fixedFooter
+                                    trigger={<NavItem>Edit</NavItem >}>
+                                    <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+                                </Modal>
                                 <NavItem onClick={this.handleDelete.bind(this,index)}>Delete</NavItem>
                                 <NavItem>History</NavItem>
                                 </Dropdown></td>
@@ -83,7 +96,7 @@ class Consumables extends Component{
                     header='Add Consumable'
                     fixedFooter
                     trigger={<Button floating large className = 'red addConsumableButton' waves = 'light' icon = 'add' />}>
-                    <AddConsumables />
+                    <AddConsumables setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
             </div>
         )
