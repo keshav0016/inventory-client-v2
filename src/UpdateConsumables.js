@@ -42,7 +42,7 @@ class UpdateConsumables extends Component {
             }
         })
         .then(res => {
-            console.log(res.data.message)
+            window.Materialize.toast('Consumable Updated Successfully', 4000)
             this.props.setHandleListRequest()
         })
         .catch(error => {

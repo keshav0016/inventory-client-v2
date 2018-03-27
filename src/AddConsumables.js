@@ -9,13 +9,26 @@ class AddConsumables extends Component{
             name : '',
             vendor_name : '',
             purchase_date : '',
-            purchased_quantity : 0
+            purchased_quantity : 0,
+            addConsumableRequest : false
         }
         this.setConsumableName = this.setConsumableName.bind(this)
         this.setVendorName = this.setVendorName.bind(this)
         this.setPurchaseDate = this.setPurchaseDate.bind(this)
         this.setPurchaseQuantity = this.setPurchaseQuantity.bind(this)
         this.addConsumable = this.addConsumable.bind(this)
+        this.checkForValidation = this.checkForValidation.bind(this)
+    }
+
+    checkForValidation(){
+        if(!this.state.name || !this.state.vendor_name || !this.state.purchase_date || !this.state.purchased_quantity){
+            window.Materialize.toast('All the fields are required', 4000)
+        }
+        else{
+            this.setState({
+                addConsumableRequest : true
+            })
+        }
     }
 
     setConsumableName(e){
@@ -54,14 +67,15 @@ class AddConsumables extends Component{
             }
         })
         .then(obj => {
-            this.props.setHandleListRequest()
             this.setState({
                 name : '',
                 vendor_name : '',
                 purchase_date : '',
-                purchased_quantity : 0
+                purchased_quantity : 0,
+                addConsumableRequest : false
             })
-            console.log(obj.data.message)
+            this.props.setHandleListRequest()
+            window.Materialize.toast('Consumable Added Successfully', 4000)
         })
         .catch(error => {
             console.log(error)
@@ -72,12 +86,13 @@ class AddConsumables extends Component{
         return(
             <div>
                 <Row>
-                    <Input s={6} label="Consumable" defaultValue = {this.state.name} onChange = {this.setConsumableName}/>
-                    <Input s={6} label="Vendor" defaultValue = {this.state.vendor_name} onChange = {this.setVendorName}/>
-                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} defaultValue = {this.state.purchase_date} />
-                    <Input s={6} label="Purchased Quantity" type = "number" defaultValue = {this.state.purchased_quantity} onChange = {this.setPurchaseQuantity}/>
+                    <Input s={6} label="Consumable" value = {this.state.name} onChange = {this.setConsumableName}/>
+                    <Input s={6} label="Vendor" value = {this.state.vendor_name} onChange = {this.setVendorName}/>
+                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
+                    <Input s={6} label="Purchased Quantity" type = "number" value = {this.state.purchased_quantity} onChange = {this.setPurchaseQuantity}/>
                 </Row>
-                    <Button waves='light' type = "submit" name = "action" onClick={this.addConsumable}>Add Consumable</Button>
+                    <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
+                    {this.state.addConsumableRequest ? this.addConsumable () : null}
             </div>
         )
     }
