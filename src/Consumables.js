@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal} from 'react-materialize'
+import {Table, Button, Modal, Dropdown, Icon, NavItem} from 'react-materialize'
 import AddConsumables from './AddConsumables'
 
 
@@ -31,6 +31,21 @@ class Consumables extends Component{
         })
     }
 
+    handleDelete(index){
+        axios({
+            method : 'post',
+            url : 'http://localhost:3001/consumables/delete',
+            data : {
+                consumable_id : this.state.consumableList[index].consumable_id
+            }
+        })
+        .then(obj => {
+            console.log(obj.data.message)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     render(){
         return(
@@ -47,19 +62,27 @@ class Consumables extends Component{
 
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
-                            return <tr key={consumable.consumable_id}>
+                            return (<tr key={index}>
                             <td>{consumable.consumable_id}</td>
                             <td>{consumable.name}</td>
                             <td>{consumable.quantity}</td>
+                            <td><Dropdown trigger={
+                                <Button> <Icon>more_vert</Icon></Button>
+                                }>
+                                <NavItem>Edit</NavItem >
+                                <NavItem onClick={this.handleDelete.bind(this,index)}>Delete</NavItem>
+                                <NavItem>History</NavItem>
+                                </Dropdown></td>
                             </tr>
-                        })}
+                            )
+                        },this)}
                     </tbody>
                 </Table>
                 
                 <Modal
                     header='Add Consumable'
                     fixedFooter
-                    trigger={<Button floating large className = 'red' waves = 'light' icon = 'add' />}>
+                    trigger={<Button floating large className = 'red addConsumableButton' waves = 'light' icon = 'add' />}>
                     <AddConsumables />
                 </Modal>
             </div>
