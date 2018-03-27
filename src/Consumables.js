@@ -46,6 +46,7 @@ class Consumables extends Component{
             }
         })
         .then(obj => {
+            window.Materialize.toast('Consumable Deleted Successfully', 4000)
             console.log(obj.data.message)
         })
         .catch(error => {
