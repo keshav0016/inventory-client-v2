@@ -122,17 +122,7 @@ class UpdateAsset extends Component {
         })
         .then(res => {
             this.setState({
-                updateAssetRequest: false,
-                // serial_number: '',
-                // asset_name: '',
-                // purchase_date: '',
-                // description: '',
-                // invoice_number: '',
-                // vendor: '',
-                // amount: 0,
-                // gst: 0,
-                // total: 0,
-                // category: ''
+                updateAssetRequest: false
             })
             this.props.setHandleListRequest()
         })

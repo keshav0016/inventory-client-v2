@@ -164,8 +164,8 @@ class AddAsset extends Component{
                     <Input s={6} label="Description" value = {this.state.description} onChange = {this.setDescription}/>
                     <Input s={6} label="Invoice Number *" value = {this.state.invoice_number} onChange = {this.setInvoiceNumber}/>
                     <Input s={6} label="Vendor *" value = {this.state.vendor} onChange = {this.setVendor}/>
-                    <Input s={6} label="Amount *" type = "number" value = {this.state.amount} onChange = {this.setAmount}/>
-                    <Input s={6} label="GST" type = "number" value = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} label="Amount *" min = '0' type = "number" value = {this.state.amount} onChange = {this.setAmount}/>
+                    <Input s={6} label="GST" type = "number" min = '0' value = {this.state.gst} onChange = {this.setGst}/>
                     <br />
                     <Badge>Total : {this.state.total}</Badge>
                     <Input s={12} type='select' label="Category" onChange = {this.setCategory} defaultValue='Other'>
@@ -174,7 +174,7 @@ class AddAsset extends Component{
                         <option value='Other'>Other</option>
                     </Input>
                 </Row>
-                    <Button waves='light' onClick = {this.checkForValidation} toast = {this.state.toastText} >Submit <Icon small right>send</Icon></Button>
+                    <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                     {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
             </div>
         )

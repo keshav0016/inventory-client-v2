@@ -3,7 +3,9 @@ import axios from 'axios'
 import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem} from 'react-materialize'
 import AddAsset from './AddAsset'
 import UpdateAsset from './UpdateAsset'
+import DeleteAsset from './DeleteAsset'
 import moment from 'moment'
+import $ from 'jquery'
 
 class Assets extends Component{
     constructor(props){
@@ -53,6 +55,14 @@ class Assets extends Component{
     }
 
 
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.handleListRequest === true){
+            $(".modal").fadeToggle().hide()
+            $(".modal-overlay").fadeToggle().hide()
+        }
+    }
+
+
 
     render(){
         return(
@@ -95,12 +105,18 @@ class Assets extends Component{
                                     <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
+                                        id = "close"
                                         header='Edit Asset'
                                         fixedFooter
                                         trigger={<NavItem>Edit</NavItem>}>
                                         <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
                                     </Modal>
-                                    <NavItem>Delete</NavItem>
+                                    <Modal
+                                        header='Delete Asset'
+                                        bottomSheet
+                                        trigger={<NavItem>Delete</NavItem>}>
+                                        <DeleteAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                    </Modal>
                                 </Dropdown>
                             </tr>
                         })}
