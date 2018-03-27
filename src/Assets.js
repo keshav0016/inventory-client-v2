@@ -1,34 +1,52 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem} from 'react-materialize'
 import AddAsset from './AddAsset'
-// import Button from 'react-materialize/lib/Button';
+import UpdateAsset from './UpdateAsset'
+import moment from 'moment'
 
-
+var pageIndex = window.location.search.slice(1).split('=').indexOf('page')
 class Assets extends Component{
     constructor(props){
         super(props)
         this.state = {
             assetList : [],
+            pagination : {totalPage : 1, currentPage : 1},
+            page : window.location.search.slice(1).split('=')[pageIndex + 1],
             handleListRequest : true
         }
         this.handleList = this.handleList.bind(this)
+        this.setHandleListRequest = this.setHandleListRequest.bind(this)
+        this.updateAsset = this.updateAsset.bind(this)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : 'http://localhost:3001/asset/list',
+            url : `http://localhost:3001/asset/list${window.location.search}`,
             withCredentials : true
         })
         .then(res => {
             this.setState({
-                assetList : res.data.assets,
+                assetList : res.data.assets.sort((a, b) => a.asset_id - b.asset_id),
+                pagination : res.data.pagination,
                 handleListRequest : false
             })
         })
         .catch(error => {
             console.error(error)
+        })
+    }
+
+
+    updateAsset(){
+
+    }
+
+
+    setHandleListRequest(){
+        this.setState({
+            handleListRequest : true
         })
     }
 
@@ -61,7 +79,7 @@ class Assets extends Component{
                             <td>{item.asset_id}</td>
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
-                            <td>{item.purchase_date}</td>
+                            <td>{moment(item.purchase_date).format('DD MMM YYYY')}</td>
                             <td>{item.description}</td>
                             <td>{item.invoice_number}</td>
                             <td>{item.vendor}</td>
@@ -70,17 +88,30 @@ class Assets extends Component{
                             <td>{item.total}</td>
                             <td>{item.current_status}</td>
                             <td>{item.category}</td>
+                            <Dropdown trigger={
+                                    <Button><Icon tiny>more_vert</Icon></Button>
+                                }>
+                                    <Modal
+                                        header='Edit Asset'
+                                        fixedFooter
+                                        trigger={<NavItem>Edit</NavItem>}>
+                                        <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
+                                    </Modal>
+                                    <NavItem>Delete</NavItem>
+                                </Dropdown>
                             </tr>
                         })}
                     </tbody>
                 </Table>
-                
                 <Modal
                     header='Add Asset'
                     fixedFooter
-                    trigger={<Button floating large className = 'red' waves = 'light' icon = 'add' />}>
-                    <AddAsset />
+                    trigger={<Button floating large className = 'red addAssetButton' waves = 'light' icon = 'add' />}>
+                    <AddAsset setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
+                <div>
+                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.pagination.currentPage} maxButtons={5} onSelect = {this.setPage} />
+                </div> 
             </div>
         )
     }

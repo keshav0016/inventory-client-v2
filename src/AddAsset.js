@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-// import axios from 'axios'
-import {Row, Input, Button, Badge} from 'react-materialize'
+import axios from 'axios'
+import {Row, Input, Button, Badge, Icon} from 'react-materialize'
 
 class AddAsset extends Component{
     constructor(props){
@@ -15,7 +15,8 @@ class AddAsset extends Component{
             amount : 0,
             gst : 0,
             total : 0,
-            category : ''
+            category : '',
+            addAssetRequest : false
         }
         this.setSerialNumber = this.setSerialNumber.bind(this)
         this.setAssetName = this.setAssetName.bind(this)
@@ -26,6 +27,20 @@ class AddAsset extends Component{
         this.setAmount = this.setAmount.bind(this)
         this.setGst = this.setGst.bind(this)
         this.setCategory = this.setCategory.bind(this)
+        this.checkForValidation = this.checkForValidation.bind(this)
+        this.addAssetIntoDb = this.addAssetIntoDb.bind(this)
+    }
+
+    checkForValidation(){
+        if(!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || !this.state.vendor || !this.state.amount){
+            window.Materialize.toast('All the * marked fields are required', 4000)
+        }
+        else{
+            this.setState({
+                addAssetRequest : true
+            })
+            window.Materialize.toast('Asset Added', 4000)
+        }
     }
 
     setSerialNumber(e){
@@ -82,6 +97,45 @@ class AddAsset extends Component{
         })
     }
 
+    addAssetIntoDb(){
+        axios({
+            method : 'post',
+            url : 'http://localhost:3001/asset/create',
+            withCredentials : true,
+            data : {
+                serial_number : this.state.serial_number ,
+                asset_name : this.state.asset_name,
+                purchase_date : this.state.purchase_date,
+                description : this.state.description,
+                invoice_number : this.state.invoice_number,
+                vendor : this.state.vendor,
+                amount : this.state.amount,
+                gst : this.state.gst,
+                total : this.state.total,
+                category : this.state.category
+            }
+        })
+        .then(res => {
+            this.setState({
+                addAssetRequest : false,
+                serial_number : '',
+                asset_name : '',
+                purchase_date : '',
+                description : '',
+                invoice_number : '',
+                vendor : '',
+                amount : 0,
+                gst : 0,
+                total : 0,
+                category : ''
+            })
+            this.props.setHandleListRequest()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
     componentDidUpdate(prevProps, prevState){
         if(prevState.amount !== this.state.amount  || prevState.gst !== this.state.gst){
             this.setState({
@@ -96,14 +150,14 @@ class AddAsset extends Component{
         return(
             <div>
                 <Row>
-                    <Input s={6} label="Serial Number" defaultValue = {this.state.serial_number} onChange = {this.setSerialNumber} validate/>
-                    <Input s={6} label="Asset Name" defaultValue = {this.state.asset_name} onChange = {this.setAssetName}/>
-                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} defaultValue = {this.state.purchase_date} />
-                    <Input s={6} label="Description" defaultValue = {this.state.description} onChange = {this.setDescription}/>
-                    <Input s={6} label="Invoice Number" defaultValue = {this.state.invoice_number} onChange = {this.setInvoiceNumber}/>
-                    <Input s={6} label="Vendor" defaultValue = {this.state.vendor} onChange = {this.setVendor}/>
-                    <Input s={6} label="Amount" type = "number" defaultValue = {this.state.amount} onChange = {this.setAmount}/>
-                    <Input s={6} label="GST" type = "number" defaultValue = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} label="Serial Number *" value = {this.state.serial_number} onChange = {this.setSerialNumber} />
+                    <Input s={6} label="Asset Name *" value = {this.state.asset_name} onChange = {this.setAssetName} />
+                    <Input s={6} name='on' type='date' label="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
+                    <Input s={6} label="Description" value = {this.state.description} onChange = {this.setDescription}/>
+                    <Input s={6} label="Invoice Number *" value = {this.state.invoice_number} onChange = {this.setInvoiceNumber}/>
+                    <Input s={6} label="Vendor *" value = {this.state.vendor} onChange = {this.setVendor}/>
+                    <Input s={6} label="Amount *" type = "number" value = {this.state.amount} onChange = {this.setAmount}/>
+                    <Input s={6} label="GST" type = "number" value = {this.state.gst} onChange = {this.setGst}/>
                     <br />
                     <Badge>Total : {this.state.total}</Badge>
                     <Input s={12} type='select' label="Category" onChange = {this.setCategory} defaultValue='Other'>
@@ -112,7 +166,8 @@ class AddAsset extends Component{
                         <option value='Other'>Other</option>
                     </Input>
                 </Row>
-                    <Button waves='light' type = "submit" name = "action">Add Asset</Button>
+                    <Button waves='light' onClick = {this.checkForValidation} toast = {this.state.toastText} >Submit <Icon small right>send</Icon></Button>
+                    {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
             </div>
         )
     }
