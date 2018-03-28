@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem} from 'react-materialize'
 import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
+import './ListPage.css'
 
 
 class Consumables extends Component{
@@ -107,7 +108,7 @@ class Consumables extends Component{
                 <Modal
                     header='Add Consumable'
                     fixedFooter
-                    trigger={<Button floating large className = 'red addConsumableButton' waves = 'light' icon = 'add' />}>
+                    trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
                     <AddConsumables setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
                 <div>

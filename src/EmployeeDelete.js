@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Modal, Button } from 'react-materialize';
+import { Button } from 'react-materialize';
 
 class EmployeeDelete extends Component {
     constructor(props){

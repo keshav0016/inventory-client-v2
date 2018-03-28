@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import {Row, Input, Button, Toast} from 'react-materialize'
+import {Row, Input, Button} from 'react-materialize'
 
 
 

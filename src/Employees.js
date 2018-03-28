@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import './ListPage.css';
 import EmployeeAdd from './EmployeeAdd';
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeDelete from './EmployeeDelete'
@@ -103,7 +103,7 @@ class EmployeesList extends Component {
           <div className = 'Addbtn'>
           <Modal 
             header='Employee Add Form'
-            trigger={<Button floating large className='red 'onClick={this.handleAdd} waves='light' icon='add' />}>
+            trigger={<Button floating large className='red addResourceButton'onClick={this.handleAdd} waves='light' icon='add' />}>
             <EmployeeAdd setHandleListRequest = {this.setHandleListRequest}/>
           </Modal>
           </div>

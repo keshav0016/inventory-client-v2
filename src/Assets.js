@@ -6,6 +6,7 @@ import UpdateAsset from './UpdateAsset'
 import DeleteAsset from './DeleteAsset'
 import moment from 'moment'
 import $ from 'jquery'
+import './ListPage.css'
 
 class Assets extends Component{
     constructor(props){
@@ -125,7 +126,7 @@ class Assets extends Component{
                 <Modal
                     header='Add Asset'
                     fixedFooter
-                    trigger={<Button floating large className = 'red addAssetButton' waves = 'light' icon = 'add' />}>
+                    trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
                     <AddAsset setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
