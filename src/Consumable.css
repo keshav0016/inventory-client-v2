@@ -29,12 +29,6 @@
 
 .addConsumableButton {
   position: absolute;
-  top:100%;
-  left:90%;
-}
-
-.addAssetButton{
-  position: absolute;
   bottom : 5%;
   right : 3%
 }

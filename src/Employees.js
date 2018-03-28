@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import logo from './logo.svg';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect
-} from 'react-router-dom';
 import EmployeeAdd from './EmployeeAdd';
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeDelete from './EmployeeDelete'
-import {Modal, Button, Table, Input, Row, Icon, Dropdown, NavItem, Pagination } from 'react-materialize'
+import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination } from 'react-materialize'
 
 
 class EmployeesList extends Component {
@@ -60,11 +53,11 @@ class EmployeesList extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div>
         {this.state.handleListRequest ? this.handleList() : null}
           <h4>Employees List</h4>
          
-          <Table class='container'>
+          <Table>
             <thead>
               <tr>
                 <th data-field="id">Id</th>
