@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import './Consumables.css'
+import './Consumable.css'
 import {
   BrowserRouter as Router,
   Route,
@@ -10,15 +10,15 @@ import {
 // import Adminhomepage from './Adminhomepage';
 // import EmployeesList from './Employees';
 // import EmployeeAdd from './EmployeeAdd';
-import Consumables from './Consumables';
+import Homepage from './Homepage';
 
 class App extends Component {
   render() {
     return (
       <Router>
           <div>
-            <Link to="/consumables"></Link>
-            <Route exact path="/consumables" component={Consumables} />
+            <Link to="/adminhomepage"></Link>
+            <Route path="/adminhomepage" component={Homepage} />
           </div>
       </Router>
     );
