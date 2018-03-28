@@ -105,7 +105,6 @@ class Assets extends Component{
                                     <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
-                                        id = "close"
                                         header='Edit Asset'
                                         fixedFooter
                                         trigger={<NavItem>Edit</NavItem>}>
