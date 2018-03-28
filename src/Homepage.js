@@ -18,7 +18,7 @@ class Homepage extends Component{
             <div>
                 <div className="masterComponentBackground">
                 <div>
-                    <Navbar>
+                    <Navbar className="masterComponentNavBar">
                         <NavItem className="masterComponentLogoutButton">LOGOUT</NavItem>
                     </Navbar>
                     <SideNav className="masterComponentSideBar" trigger={<Button className="red lighten-2 masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
