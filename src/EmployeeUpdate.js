@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
+import { error } from 'util';
 
 class EmployeeUpdate extends Component{
     constructor(props){
         super(props)
         this.state = {
+            user_id: this.props.user_id,
             first_name: this.props.user.first_name,
             last_name: this.props.user.last_name,
             age: this.props.user.age,
@@ -21,7 +23,13 @@ class EmployeeUpdate extends Component{
         this.handleLastname = this.handleLastname.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
         this.handleGender = this.handleGender.bind(this)
+        this.handleUserid = this.handleUserid.bind(this)
          
+    }
+    handleUserid(e){
+        this.setState({
+            user_id: e.target.value
+        })
     }
     handleFirstname(e){
         this.setState({
@@ -68,7 +76,7 @@ class EmployeeUpdate extends Component{
            method: 'post',
            url: 'http://localhost:3001/employee/update',
            data:{
-               id: this.props.user.id,
+               user_id: this.props.user.id,
                first_name:this.state.first_name,
                 last_name:this.state.last_name,
                 age:this.state.age,
@@ -81,9 +89,14 @@ class EmployeeUpdate extends Component{
        .then((res) => {
         if(res.data.message === 'employee has been updated'){
             window.Materialize.toast('Employee Edited', 4000)
-        }
            this.props.setHandleListRequest()
+            
+        }
           
+       })
+       .catch(error => {
+         window.Materialize.toast('can not edit employee', 4000)
+
        })
    }
     render() {
@@ -91,6 +104,7 @@ class EmployeeUpdate extends Component{
         return (           
             <div>           
                 <Row>
+                <Input  defaultValue={this.state.user_id} onChange={this.handleUserid}s={6} label="User Id" />
                  <Input  defaultValue={this.state.first_name} onChange={this.handleFirstname}s={6} label="First Name" />
                     <Input  defaultValue={this.state.last_name}onChange={this.handleLastname} s={6}label="Last Name" />
                     <Input type="number"min='0' label="age" defaultValue={this.state.age}onChange={this.handleAge}s={6} />

@@ -9,6 +9,7 @@ import {
     Route,
     Link
   } from 'react-router-dom';
+import LoginForm from './LoginForm';
 
 
 class Homepage extends Component{
@@ -18,21 +19,23 @@ class Homepage extends Component{
             <div>
                 <div className="masterComponentBackground">
                 <div>
-                    <Navbar>
-                        <NavItem className="masterComponentLogoutButton">LOGOUT</NavItem>
+                    <Navbar className="masterComponentNavBar">
+                       <Link to='/login'> <NavItem className="masterComponentLogoutButton">LOGOUT</NavItem></Link>
                     </Navbar>
                     <SideNav className="masterComponentSideBar" trigger={<Button className="red lighten-2 masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
-                    <Link to="/assets"><SideNavItem className="masterComponentSideBarItem">Assets</SideNavItem></Link>
-                    <Link to="/consumables"><SideNavItem className="masterComponentSideBarItem">Consumables</SideNavItem></Link>
-                    <Link to="/employees"><SideNavItem className="masterComponentSideBarItem">Employees</SideNavItem></Link>
+                    <Link to="/adminhomepage/assets"><SideNavItem className="masterComponentSideBarItem">Assets</SideNavItem></Link>
+                    <Link to="/adminhomepage/consumables"><SideNavItem className="masterComponentSideBarItem">Consumables</SideNavItem></Link>
+                    <Link to="/adminhomepage/employees"><SideNavItem className="masterComponentSideBarItem">Employees</SideNavItem></Link>
                     </SideNav>
                 </div>
                 <div>
-                    <Route exact path="/assets" component={Assets} />
-                    <Route exact path="/consumables" component={Consumables} />
-                    <Route exact path="/employees" component={EmployeesList} />
+                    <Route exact path="/adminhomepage/assets" component={Assets} />
+                    <Route exact path="/adminhomepage/consumables" component={Consumables} />
+                    <Route exact path="/adminhomepage/employees" component={EmployeesList} />
                 </div>
                 </div>
+                <Route  path ='/login' component={LoginForm}/>
+                
             </div>
             </Router>
         )
