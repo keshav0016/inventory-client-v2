@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} from 'react-materialize'
 import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
+import AssignConsumables from './AssignConsumable'
 import './ListPage.css'
+import $ from 'jquery'
 
 
 class Consumables extends Component{
@@ -13,22 +15,30 @@ class Consumables extends Component{
             consumableList : [],
             pagination : {totalPage : 1, currentPage : 1},
             page : 1,
-            handleListRequest : true
+            handleListRequest : true,
+            sort : 'default',
+            minQuantity : '',
+            maxQuantity : '',
+            keyword : ''
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
         this.setPage = this.setPage.bind(this)
+        this.sortBy = this.sortBy.bind(this)
+        this.minQuantity = this.minQuantity.bind(this)
+        this.maxQuantity = this.maxQuantity.bind(this)
+        this.searchKeyword = this.searchKeyword.bind(this)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/consumables/list?page=${this.state.page}`,
+            url : `http://localhost:3001/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity}&max=${this.state.maxQuantity}`,
             withCredentials : true
         })
         .then(res => {
             this.setState({
-                consumableList : res.data.consumables.sort((a, b) => a.consumable_id - b.consumable_id),
+                consumableList : res.data.consumables,
                 pagination : res.data.pagination,
                 handleListRequest : false
             })
@@ -68,10 +78,64 @@ class Consumables extends Component{
         })
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.handleListRequest === true){
+            $(".modal-close").trigger('click')
+        }
+    }
+
+    sortBy(e){
+        this.setState({
+            sort:e.target.value,
+            handleListRequest : true
+        })
+    }
+
+    minQuantity(e){
+        if(e.target.value >= 0){
+            this.setState({
+                minQuantity: e.target.value,
+                handleListRequest : true
+            })
+        }
+        else{
+            window.Materialize.toast('The Quantity cannot be negative', 4000)
+        }
+    }
+
+    maxQuantity(e){
+        if(e.target.value >=0){
+            this.setState({
+                maxQuantity: e.target.value,
+                handleListRequest : true
+            })
+        }
+        else{
+            window.Materialize.toast('The Quantity cannot be negative', 4000)
+        }
+    }
+
+    searchKeyword(e){
+        this.setState({
+            keyword : e.target.value,
+            handleListRequest : true
+        })
+    }
+
     render(){
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
+                <Row>
+                <Input s={2} type='select' onChange={this.sortBy}>
+                    <option value='default'>Sort By Quantity</option>
+                    <option value='asc'>Low - High</option>
+                    <option value='desc'>High - Low</option> 
+                </Input>
+                <Input s={2} type='text' label="Minimum Quantity" onChange={this.minQuantity}></Input>
+                <Input s={2} type='text' label="Maximum Quantity" onChange={this.maxQuantity}></Input>
+                <Input s={4} type='text' label="Search" onChange={this.searchKeyword}></Input>
+                </Row>
                 <Table centered>
                     <thead>
                         <tr>
@@ -83,7 +147,7 @@ class Consumables extends Component{
 
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
-                            return (<tr key={index}>
+                            return (<tr key={consumable.consumable_id}>
                             <td>{consumable.consumable_id}</td>
                             <td>{consumable.name}</td>
                             <td>{consumable.quantity}</td>
@@ -97,6 +161,12 @@ class Consumables extends Component{
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
                                 <NavItem onClick={this.handleDelete.bind(this,index)}>Delete</NavItem>
+                                <Modal
+                                    header='Assign Consumable'
+                                    fixedFooter
+                                    trigger={<NavItem>Assign</NavItem >}>
+                                    <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+                                </Modal>
                                 <NavItem>History</NavItem>
                                 </Dropdown></td>
                             </tr>
