@@ -1,28 +1,28 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Icon, Button} from 'react-materialize'
+import {Button} from 'react-materialize'
 
 
 class DeleteAsset extends Component{
     constructor(props){
         super(props)
         this.state = {
-            deleteAssetRequest : false
+            recoverAssetRequest : false
         }
-        this.setDeleteAssetRequest = this.setDeleteAssetRequest.bind(this);
-        this.deleteAssetFromDb = this.deleteAssetFromDb.bind(this)
+        this.setRecoverAssetRequest = this.setRecoverAssetRequest.bind(this);
+        this.recoverAssetFromDb = this.recoverAssetFromDb.bind(this)
     }
 
-    setDeleteAssetRequest(){
+    setRecoverAssetRequest(){
         this.setState({
-            deleteAssetRequest : true
+            recoverAssetRequest : true
         })
     }
 
-    deleteAssetFromDb(){
+    recoverAssetFromDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/delete',
+            url : 'http://localhost:3001/asset/recover',
             data : {
                 asset_id : this.props.asset
             }
@@ -32,13 +32,13 @@ class DeleteAsset extends Component{
             if(res.data.error){
                 window.Materialize.toast(res.data.error, 4000)
                 this.setState({
-                    deleteAssetRequest : false
+                    recoverAssetRequest : false
                 })                
             }
             else{
                 window.Materialize.toast(res.data.error, 4000)
                 this.setState({
-                    deleteAssetRequest : false
+                    recoverAssetRequest : false
                 })
                 this.props.setHandleListRequest()
             }
@@ -52,10 +52,9 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div>
-                <Icon large>delete forever</Icon>
-                <h4>Do you really want to delete this asset?</h4>
-                <Button onClick = {this.setDeleteAssetRequest}>Delete</Button>
-                {this.state.deleteAssetRequest ? this.deleteAssetFromDb() : null}
+                <h4>Do you really want to recover this asset?</h4>
+                <Button onClick = {this.setRecoverAssetRequest}>Recover</Button>
+                {this.state.recoverAssetRequest ? this.recoverAssetFromDb() : null}
             </div>
         )
     }
