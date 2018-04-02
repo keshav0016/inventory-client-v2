@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Input, Button, Row, Icon} from 'react-materialize'
-import { IncomingMessage } from 'http';
 import {
-    BrowserRouter as Router,
    Redirect
   } from 'react-router-dom';
 
@@ -13,7 +11,7 @@ class PasswordChange extends Component {
         this.state = {
             Confirm_Password : '',
             New_Password : '',
-            user_id: '',
+            user_id: this.props.user_id,
             change: true
             
         }

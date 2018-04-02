@@ -3,7 +3,11 @@ import axios from 'axios';
 import './Employee.css';
 import EmployeeAdd from './EmployeeAdd';
 import EmployeeUpdate from './EmployeeUpdate';
-import EmployeeDelete from './EmployeeDelete'
+import EmployeeDelete from './EmployeeDelete';
+import {
+  Link,
+} from 'react-router-dom';
+
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination } from 'react-materialize'
 
 
@@ -100,7 +104,7 @@ class EmployeesList extends Component {
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <NavItem>history</NavItem>
+                  <Link to={{ pathname : '/adminhomepage/employees/history', user : item.user_id}}><NavItem>History</NavItem></Link>
                 </Dropdown></td>
               </tr>
               )

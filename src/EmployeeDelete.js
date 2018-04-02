@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Button , Icon} from 'react-materialize';
-import { error } from 'util';
 
 class EmployeeDelete extends Component {
     constructor(props){

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Icon, Input, Button } from 'react-materialize';
-import './App.css';
+import './Login.css';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
+ 
   Redirect
 } from 'react-router-dom';
 // import PasswordChange from './PwdChange';
@@ -45,10 +43,31 @@ class LoginForm extends Component {
 
   //function to check the credentials provided  by the user
   verifyCredentials() {
-    if (this.state.user_id === 'admin' && this.state.password === 'admin') {
-      this.setState({ admin: true })
+    //  if (this.state.user_id === this.state.password) {
+    //   axios({
+    //     method: 'post',
+    //     url: 'http://localhost:3001/user/login',
+    //     data: {
+    //       user_id: this.state.user_id,
+    //       password: this.state.password
+    //     },
+    //     withCredentials: true
+    //   })
+    //   .then((res) => {
+    //     console.log(res)
+    //     if(res.data.passwordSame === true){
+    //       this.setState({
+    //         change: true,
+    //         admin: false
+    //       })
+    //     }
+    //   })
+    //   .catch(() =>{
+    //     window.Materialize.toast('incorrect password',4000)
 
-    } else if (this.state.user_id === this.state.password) {
+    //   })
+    // }else 
+     {
       axios({
         method: 'post',
         url: 'http://localhost:3001/user/login',
@@ -65,44 +84,19 @@ class LoginForm extends Component {
             change: true,
             admin: false
           })
-        }
-        // if (res.data.success === true) {
-        //   this.setState({
-        //     employee: true,
-        //     admin: false,
-        //     login: false
-        //   })
-        // }
-      })
-    }else  {
-      axios({
-        method: 'post',
-        url: 'http://localhost:3001/user/login',
-        data: {
-          user_id: this.state.user_id,
-          password: this.state.password
-        },
-        withCredentials: true
-      })
-      .then((res) => {
-        console.log(res)
-        if(res.data.passwordSame === true){
+        }else if(res.data.passwordSame === false && res.data.user.role === 'Admin'){
           this.setState({
-            change: true,
-            admin: false
+            admin: true
+
           })
-        }else{
+        }else {
           this.setState({
-            employee: true
+            employee : true
           })
         }
-        // if (res.data.success === true) {
-        //   this.setState({
-        //     employee: true,
-        //     admin: false,
-        //     login: false
-        //   })
-        // }
+      })
+      .catch(() =>{
+        alert('aaaaaaaaaaaaaaaaaaa')
       })
     }
   }

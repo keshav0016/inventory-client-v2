@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import {Row, Input, Button, Toast} from 'react-materialize'
+import {Row, Input, Button} from 'react-materialize'
 
 class EmployeeAdd extends Component {
   constructor(props) {
@@ -29,7 +28,7 @@ class EmployeeAdd extends Component {
   handleCreate(){
     if(!this.state.first_name || !this.state.last_name || !this.state.age || !this.state.gender || !this.state.designation || !this.state.department){
       window.Materialize.toast('All the * marked fields are required', 4000)
-    }
+    }else
     {
       axios({
         method: 'post',

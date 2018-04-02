@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
-import { error } from 'util';
 
 class EmployeeUpdate extends Component{
     constructor(props){
         super(props)
         this.state = {
-            user_id: this.props.user_id,
+            user_id: this.props.user.user_id,
             first_name: this.props.user.first_name,
             last_name: this.props.user.last_name,
             age: this.props.user.age,
