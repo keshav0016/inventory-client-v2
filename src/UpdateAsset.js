@@ -47,76 +47,75 @@ class UpdateAsset extends Component {
             this.setState({
                 updateAssetRequest: true
             })
-            window.Materialize.toast('Asset Edited', 4000)
         }
     }
-
+    
     setSerialNumber(e) {
         this.setState({
             serial_number: e.target.value
         })
     }
-
+    
     setAssetName(e) {
         this.setState({
             asset_name: e.target.value
         })
     }
-
+    
     setPurchaseDate(e) {
         this.setState({
             purchase_date: e.target.value
         })
     }
-
+    
     setDescription(e) {
         this.setState({
             description: e.target.value
         })
     }
-
+    
     setInvoiceNumber(e) {
         this.setState({
             invoice_number: e.target.value
         })
     }
-
+    
     setVendor(e) {
         this.setState({
             vendor: e.target.value
         })
     }
-
+    
     setAmount(e) {
         this.setState({
             amount: Number(e.target.value),
         })
     }
-
+    
     setGst(e) {
         this.setState({
             gst: Number(e.target.value),
         })
     }
-
+    
     setCategory(e) {
         this.setState({
             category: e.target.value
         })
     }
-
+    
     setCondition(e){
         this.setState({
             condition : e.target.value
         })
     }
-
+    
     setLocation(e){
         this.setState({
             location : e.target.value
         })
     }
-
+    
     updateAssetIntoDb() {
         axios({
             method: 'post',
@@ -137,10 +136,19 @@ class UpdateAsset extends Component {
             }
         })
         .then(res => {
-            this.setState({
-                updateAssetRequest: false
-            })
-            this.props.setHandleListRequest()
+            if(res.data.error){
+                window.Materialize.toast(res.data.error, 4000)
+                this.setState({
+                    updateAssetRequest : false
+                })                
+            }
+            else{
+                window.Materialize.toast('Asset Edited', 4000)
+                this.setState({
+                    updateAssetRequest: false
+                })
+                this.props.setHandleListRequest()
+            }
         })
         .catch(error => {
             console.error(error)

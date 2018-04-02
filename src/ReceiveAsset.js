@@ -29,9 +29,14 @@ class ReceiveAsset extends Component{
             window.Materialize.toast('All the * marked fields are required', 4000)
         }
         else{
-            this.setState({
-                receiveAssetRequest : true
-            })
+            if(new Date(this.state.repairInfo.from) > new Date(this.state.to)){
+                window.Materialize.toast('TO cannot be less than FROM', 4000)
+            }
+            else{
+                this.setState({
+                    receiveAssetRequest : true
+                })
+            }
         }
     }
 
@@ -91,7 +96,7 @@ class ReceiveAsset extends Component{
                     gst : 0,
                     total : 0,
                 })
-                window.Materialize.toast('Asset Added', 4000)                
+                window.Materialize.toast('Asset Received', 4000)                
                 this.props.setHandleListRequest(true)
             }
         })

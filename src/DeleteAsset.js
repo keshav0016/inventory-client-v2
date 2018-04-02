@@ -36,7 +36,7 @@ class DeleteAsset extends Component{
                 })                
             }
             else{
-                window.Materialize.toast(res.data.error, 4000)
+                window.Materialize.toast('Asset deleted', 4000)
                 this.setState({
                     deleteAssetRequest : false
                 })

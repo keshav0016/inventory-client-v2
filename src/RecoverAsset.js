@@ -24,7 +24,8 @@ class DeleteAsset extends Component{
             method : 'post',
             url : 'http://localhost:3001/asset/recover',
             data : {
-                asset_id : this.props.asset
+                asset_id : this.props.asset,
+                to : new Date()
             }
             ,withCredentials : true
         })
@@ -36,7 +37,7 @@ class DeleteAsset extends Component{
                 })                
             }
             else{
-                window.Materialize.toast(res.data.error, 4000)
+                window.Materialize.toast('Asset recovered', 4000)
                 this.setState({
                     recoverAssetRequest : false
                 })

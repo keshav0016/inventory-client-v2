@@ -25,13 +25,22 @@ class RepairAsset extends Component{
     }
 
     checkForValidation(){
-        if(this.state.vendor === 'Select' || !this.state.from || !this.state.expected_recovery){
+        if(this.state.vendor === 'Select' || !this.state.from || !this.state.expected_delivery){
             window.Materialize.toast('All the * marked fields are required', 4000)
         }
         else{
-            this.setState({
-                repairAssetRequest : true
-            })
+            if(new Date(this.state.from) > new Date(this.state.expected_delivery)){
+                console.log(this.state.from)
+                console.log(this.state.expected_delivery)
+                window.Materialize.toast('Expected Delivery cannot be less than FROM', 4000)
+            }
+            else{
+                this.setState({
+                    repairAssetRequest : true
+                })
+                console.log(this.state.from)
+                console.log(this.state.expected_delivery)
+            }
         }
     }
 
@@ -94,7 +103,7 @@ class RepairAsset extends Component{
 
     setExpectedDelivery(e){
         this.setState({
-            expected_recovery : e.target.value
+            expected_delivery : e.target.value
         })
     }
 

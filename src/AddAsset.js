@@ -228,6 +228,7 @@ class AddAsset extends Component{
     render(){
         return(
             <div>
+                <h3>Add Asset</h3>
                 <Row>
                     <Input s={3} label="Serial Number *" value = {this.state.serial_number} onChange = {this.setSerialNumber} />
                     <Input s={3} label="Asset Name *" value = {this.state.asset_name} onChange = {this.setAssetName} />

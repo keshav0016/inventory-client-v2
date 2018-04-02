@@ -36,7 +36,7 @@ class Assets extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <br />
+                <h3>History</h3>
                 {/* <div><h5>{this.props.asset.asset_id}</h5><br /><h5>{this.props.asset.asset_name}</h5><br /><h5>{this.props.asset.current_status}</h5></div> */}
                 <Table centered>
                     <thead>

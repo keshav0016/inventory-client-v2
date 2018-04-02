@@ -27,9 +27,14 @@ class AssignAsset extends Component{
             window.Materialize.toast('All the * marked fields are required', 4000)
         }
         else{
-            this.setState({
-                assignAssetRequest : true
-            })
+            if(new Date(this.state.from) > new Date(this.state.expected_recovery)){
+                window.Materialize.toast('Expected Recovery cannot be less than FROM', 4000)
+            }
+            else{
+                this.setState({
+                    assignAssetRequest : true
+                })
+            }
         }
     }
 
