@@ -10,7 +10,7 @@ class DeleteAsset extends Component{
             deleteAssetRequest : false
         }
         this.setDeleteAssetRequest = this.setDeleteAssetRequest.bind(this);
-        this.deleteAssetFromDb = this.deleteAssetFromDb.bind(this)
+        this.deleteAssetFroDb = this.deleteAssetFroDb.bind(this)
     }
 
     setDeleteAssetRequest(){
@@ -19,7 +19,7 @@ class DeleteAsset extends Component{
         })
     }
 
-    deleteAssetFromDb(){
+    deleteAssetFroDb(){
         axios({
             method : 'post',
             url : 'http://localhost:3001/asset/delete',
@@ -36,7 +36,7 @@ class DeleteAsset extends Component{
                 })                
             }
             else{
-                window.Materialize.toast('Asset deleted', 4000)
+                window.Materialize.toast(res.data.error, 4000)
                 this.setState({
                     deleteAssetRequest : false
                 })
@@ -55,7 +55,7 @@ class DeleteAsset extends Component{
                 <Icon large>delete forever</Icon>
                 <h4>Do you really want to delete this asset?</h4>
                 <Button onClick = {this.setDeleteAssetRequest}>Delete</Button>
-                {this.state.deleteAssetRequest ? this.deleteAssetFromDb() : null}
+                {this.state.deleteAssetRequest ? this.deleteAssetFroDb() : null}
             </div>
         )
     }

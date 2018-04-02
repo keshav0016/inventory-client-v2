@@ -19,8 +19,6 @@ class UpdateAsset extends Component {
             gst: this.props.asset.gst,
             total: this.props.asset.total,
             category: this.props.asset.category,
-            condition : this.props.asset.condition,
-            location : this.props.asset.location,
             updateAssetRequest: false
         }
 
@@ -35,8 +33,6 @@ class UpdateAsset extends Component {
         this.setCategory = this.setCategory.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.updateAssetIntoDb = this.updateAssetIntoDb.bind(this)
-        this.setCondition = this.setCondition.bind(this)
-        this.setLocation = this.setLocation.bind(this)
     }
 
     checkForValidation() {
@@ -47,75 +43,64 @@ class UpdateAsset extends Component {
             this.setState({
                 updateAssetRequest: true
             })
+            window.Materialize.toast('Asset Edited', 4000)
         }
     }
-    
+
     setSerialNumber(e) {
         this.setState({
             serial_number: e.target.value
         })
     }
-    
+
     setAssetName(e) {
         this.setState({
             asset_name: e.target.value
         })
     }
-    
+
     setPurchaseDate(e) {
         this.setState({
             purchase_date: e.target.value
         })
     }
-    
+
     setDescription(e) {
         this.setState({
             description: e.target.value
         })
     }
-    
+
     setInvoiceNumber(e) {
         this.setState({
             invoice_number: e.target.value
         })
     }
-    
+
     setVendor(e) {
         this.setState({
             vendor: e.target.value
         })
     }
-    
+
     setAmount(e) {
         this.setState({
             amount: Number(e.target.value),
         })
     }
-    
+
     setGst(e) {
         this.setState({
             gst: Number(e.target.value),
         })
     }
-    
+
     setCategory(e) {
         this.setState({
             category: e.target.value
         })
     }
-    
-    setCondition(e){
-        this.setState({
-            condition : e.target.value
-        })
-    }
-    
-    setLocation(e){
-        this.setState({
-            location : e.target.value
-        })
-    }
-    
+
     updateAssetIntoDb() {
         axios({
             method: 'post',
@@ -136,19 +121,10 @@ class UpdateAsset extends Component {
             }
         })
         .then(res => {
-            if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
-                this.setState({
-                    updateAssetRequest : false
-                })                
-            }
-            else{
-                window.Materialize.toast('Asset Edited', 4000)
-                this.setState({
-                    updateAssetRequest: false
-                })
-                this.props.setHandleListRequest()
-            }
+            this.setState({
+                updateAssetRequest: false
+            })
+            this.props.setHandleListRequest()
         })
         .catch(error => {
             console.error(error)
@@ -169,19 +145,17 @@ class UpdateAsset extends Component {
         return (
             <div>
                 <Row>
-                    <Input s={3} label="Serial Number *" defaultValue={this.state.serial_number} onChange={this.setSerialNumber} />
-                    <Input s={3} label="Asset Name *" defaultValue={this.state.asset_name} onChange={this.setAssetName} />
-                    <Input s={3} name='on' type='date'  onChange={this.setPurchaseDate} label={moment(this.state.purchase_date).format('D MMMM, YYYY')} />
+                    <Input s={6} label="Serial Number *" defaultValue={this.state.serial_number} onChange={this.setSerialNumber} />
+                    <Input s={6} label="Asset Name *" defaultValue={this.state.asset_name} onChange={this.setAssetName} />
+                    <Input s={6} name='on' type='date'  onChange={this.setPurchaseDate} label={moment(this.state.purchase_date).format('D MMMM, YYYY')} />
                     <Input s={6} label="Description" defaultValue={this.state.description} onChange={this.setDescription} />
-                    <Input s={3} label="Invoice Number *" defaultValue={this.state.invoice_number} onChange={this.setInvoiceNumber} />
-                    <Input s={3} label="Vendor *" defaultValue={this.state.vendor} onChange={this.setVendor} />
-                    <Input s={3} label="Condition *" defaultValue = {this.state.condition} onChange = {this.setCondition}/>
-                    <Input s={3} label="Location *" defaultValue = {this.state.location} onChange = {this.setLocation}/>
-                    <Input s={3} label="Amount *" type="number" min={0} defaultValue={this.state.amount} onChange={this.setAmount} />
-                    <Input s={3} label="GST" type="number" min={0} defaultValue={this.state.gst} onChange={this.setGst} />
+                    <Input s={6} label="Invoice Number *" defaultValue={this.state.invoice_number} onChange={this.setInvoiceNumber} />
+                    <Input s={6} label="Vendor *" defaultValue={this.state.vendor} onChange={this.setVendor} />
+                    <Input s={6} label="Amount *" type="number" defaultValue={this.state.amount} onChange={this.setAmount} />
+                    <Input s={6} label="GST" type="number" defaultValue={this.state.gst} onChange={this.setGst} />
                     <br />
                     <Badge>Total : {this.state.total}</Badge>
-                    <Input s={6} type='select' label="Category" onChange={this.setCategory} defaultValue={this.state.category}>
+                    <Input s={12} type='select' label="Category" onChange={this.setCategory} defaultValue={this.state.category}>
                         <option value='Electronics'>Electronics</option>
                         <option value='Non - Electronics'>Non - Electronics</option>
                         <option value='Other'>Other</option>
