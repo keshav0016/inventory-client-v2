@@ -1,14 +1,18 @@
 import React, {Component} from 'react'
 import {Navbar, NavItem, Icon, SideNav, SideNavItem, Button} from 'react-materialize'
 import './MasterComponent.css';
-import Assets from './Assets';
-import Consumables from './Consumables';
-import EmployeesList from './Employees';
 import {
     BrowserRouter as Router,
     Route,
     Link
   } from 'react-router-dom';
+import Assets from './Assets';
+import Consumables from './Consumables';
+import EmployeesList from './Employees';
+import EmployeeHistory from './EmployeeHistory';
+
+
+import LoginForm from './LoginForm';
 
 
 class Homepage extends Component{
@@ -19,7 +23,7 @@ class Homepage extends Component{
                 <div className="masterComponentBackground">
                 <div>
                     <Navbar className="masterComponentNavBar">
-                        <NavItem className="masterComponentLogoutButton">LOGOUT</NavItem>
+                       <Link to='/logout'> <NavItem className="masterComponentLogoutButton">LOGOUT</NavItem></Link>
                     </Navbar>
                     <SideNav className="masterComponentSideBar" trigger={<Button className="red lighten-2 masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                     <Link to="/adminhomepage/assets"><SideNavItem className="masterComponentSideBarItem">Assets</SideNavItem></Link>
@@ -31,8 +35,14 @@ class Homepage extends Component{
                     <Route exact path="/adminhomepage/assets" component={Assets} />
                     <Route exact path="/adminhomepage/consumables" component={Consumables} />
                     <Route exact path="/adminhomepage/employees" component={EmployeesList} />
+                    <Route  exact path ='/adminhomepage/employees/history' component={EmployeeHistory}/>
+                    
+                    
                 </div>
                 </div>
+                <Route  path ='/login' component={LoginForm}/>
+                
+                
             </div>
             </Router>
         )

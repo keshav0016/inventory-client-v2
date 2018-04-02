@@ -12,9 +12,10 @@ class Tickets extends Component{
             availableItems: [],
             assets: '',
             item_type: '',
-            user_id: '',
+            user_id: this.props.user_id,
             requestResource: false,
-            item:''
+            item:'',
+            data: []
         }
         this.requestQuantity = this.requestQuantity.bind(this)
         this.requestResourceType = this.requestResourceType.bind(this)
@@ -48,8 +49,8 @@ class Tickets extends Component{
     }
 
     checkForValidation(){
-        if(this.state.quantity <= 0 || !this.state.user_id){
-            window.Materialize.toast('The resource cannot be requested, Check your Employee Id or the quantity cannot be negative', 4000)
+        if(this.state.quantity > this.state.data){
+            window.Materialize.toast(`available quantity is only ${this.state.data}`, 4000)
         }
         else{
             this.setState({
@@ -67,7 +68,7 @@ class Tickets extends Component{
     confirmRequest(){
         axios({
             method:'post',
-            url:'http://localhost:3001/user/ticket/create',
+            url:'http://localhost:3001/employee/ticket/create',
             data:{
                 user_id:this.state.user_id,
                 date:Date.now(),
@@ -83,33 +84,34 @@ class Tickets extends Component{
             window.Materialize.toast('Success', 4000)
         })
         .catch(error => {
-            console.log('Error')
+            window.Materialize.toast('sorry, request can not be made', 4000)
         })
     }
 
    componentDidMount(){
        axios({
            method:'get',
-           url:'http://localhost:3001/user/ticket/listitems',
+           url:'http://localhost:3001/employee/ticket/listItems',
            withCredentials:true
        })
-       .then(resources => {
+       .then((res) => {
            this.setState({
-               availableItems: resources.data.items,
-               assets: resources.data.assetLimit
+               availableItems: res.data.items,
+               assets: res.data.assetLimit,
+               data : res.data.quantity
            })
        })
        .catch(error => {
-           alert('No Available Resources')
-       })
+        window.Materialize.toast('Sorry, there are no available resorces', 4000)
+    })
    }
 
    render(){
         return(
             <div>
                 <Row>
-                <Input s={2} label="Employee Id" type="number" value = {this.state.user_id} onChange = {this.requestUser}/>
-                    <Input s={3} type='select' onChange={this.requestResourceType}>
+                    {/* <Input s={6} label="Employee Id" type="text" value = {this.state.user_id} onChange = {this.requestUser}/> */}
+                    <Input s={6} type='select' onChange={this.requestResourceType}>
                         {this.state.availableItems.map((element,index)=>{
                             return( 
                                 <option key={index} value={index}>{element}</option>
@@ -118,11 +120,11 @@ class Tickets extends Component{
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={2} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity}/>
+                    <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity}/>
                 </Row>
                     <Badge>Resource Type : {this.state.item_type}</Badge>
                     <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request Resource</Button>
-                    {this.state.requestResource ? this.confirmRequest() : null}
+                    {this.state.requestResource ? this.confirmRequest() : null} 
             </div>
         )
     }

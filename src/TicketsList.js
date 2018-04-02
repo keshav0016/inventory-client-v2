@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import './ListPage.css'
 import {Table, Button, Pagination, Row, Input} from 'react-materialize'
+import Tickets from './Tickets';
+import {Modal} from 'react-materialize';
+import moment from 'moment'
 
 
 class TicketsList extends Component{
@@ -63,12 +67,12 @@ class TicketsList extends Component{
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){
             axios({
                 method : 'get',
-                url : `http://localhost:3001/admin/ticket/list?page=${this.state.page}`,
+                url : `http://localhost:3001/employee/ticket/list?page=${this.state.page}`,
                 withCredentials : true
             })
             .then(res => {
                 this.setState({
-                    ticketsList : res.data.tickets,
+                    ticketsList : res.data.ticketsListing,
                     pagination : res.data.pagination,
                     handleListRequest : false
                 })
@@ -80,12 +84,12 @@ class TicketsList extends Component{
         else{
             axios({
                 method : 'get',
-                url : `http://localhost:3001/admin/ticket/list?page=${this.state.page}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
+                url : `http://localhost:3001/employee/ticket/list?page=${this.state.page}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
                 withCredentials : true
             })
             .then(res => {
                 this.setState({
-                    ticketsList : res.data.tickets,
+                    ticketsList : res.data.ticketsListing.sort((a, b) => a.ticket_id - b.ticket_id),
                     pagination : res.data.pagination,
                     handleListRequest : false
                 })
@@ -96,50 +100,14 @@ class TicketsList extends Component{
         }
         
     }
-
-    acceptTicket(ticket_number){
-        axios({
-            method:'post',
-            url:'http://localhost:3001/admin/ticket/accept',
-            data:{
-                ticket_number:ticket_number
-            },
-            withCredentials:true
-        })
-        .then(res =>{
-            this.setState({
-                handleListRequest:true
-            })
-            console.log('success')
-        })
-        .catch(error =>{
-            console.log('error')
-        })
-    }
-
-    rejectTicket(ticket_number){
-        axios({
-            method:'post',
-            url:'http://localhost:3001/admin/ticket/reject',
-            data:{
-                ticket_number:ticket_number
-            },
-            withCredentials:true
-        })
-        .then(res =>{
-            this.setState({
-                handleListRequest:true
-            })
-            window.Materialize.toast(res.data.message,4000)
-        })
-        .catch(error =>{
-            window.Materialize.toast(error.data.error,4000)
-        })
-    }
-
     render(){
         return(
-            <div>
+            
+            <div >
+                <br/>
+            <br/>
+            <br/>
+            <br/>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Row>
                     <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
@@ -149,7 +117,6 @@ class TicketsList extends Component{
                 <Table centered>
                     <thead>
                         <tr>
-                            <th data-field="user_id">Employee Id</th>
                             <th data-field="tiket_number">Ticket Number</th>
                             <th data-field="date">Requested Date</th>
                             <th data-field="requested_asset_id">Requested Asset Id</th>
@@ -163,21 +130,23 @@ class TicketsList extends Component{
                     <tbody>
                         {this.state.ticketsList.map((ticket, index) => {
                             return (<tr key={ticket.ticket_number}>
-                            <td>{ticket.user_id}</td>
                             <td>{ticket.ticket_number}</td>
-                            <td>{ticket.date}</td>
+                            <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
                             <td>{ticket.requested_asset_id}</td>
                             <td>{ticket.requested_consumable_id}</td>
                             <td>{ticket.item_type}</td>
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
-                            <td>{ticket.status === 'Pending' ? <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> : null}</td>
-                            <td>{ticket.status === 'Pending' ? <Button onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             </tr>
                             )
                         })}
                     </tbody>
                 </Table>
+                <Modal 
+                    header='request ticket'
+                    trigger={<Button floating large className='red addemployeebtn'onClick={this.handleAdd} waves='light' icon='add' />}>
+                    <Tickets setHandleListRequest = {this.setHandleListRequest}/>
+                </Modal>
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div>

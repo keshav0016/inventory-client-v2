@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './ListPage.css';
+import './Employee.css';
 import EmployeeAdd from './EmployeeAdd';
 import EmployeeUpdate from './EmployeeUpdate';
-import EmployeeDelete from './EmployeeDelete'
+import EmployeeDelete from './EmployeeDelete';
+import {
+  Link,
+} from 'react-router-dom';
+
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination } from 'react-materialize'
 
 
@@ -15,13 +19,20 @@ class EmployeesList extends Component {
       pagination:{totalPage : 1, currentPage : 1},
       add:false,
       page: 1,
-      handleListRequest : true
+      handleListRequest : true,
+      list: true
      
     }
     this.handleList = this.handleList.bind(this)
     this.setPage = this.setPage.bind(this)
     this.setHandleListRequest = this.setHandleListRequest.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this)
     
+  }
+  handleUpdate(){
+    this.setState({
+      update: true
+    })
   }
   setHandleListRequest(){
     this.setState({
@@ -36,13 +47,13 @@ class EmployeesList extends Component {
     })
     .then((res) => {
       this.setState({
-        data: res.data.user,
+        data: res.data.user.sort((a, b) => a.id - b.id),
         pagination : res.data.pagination,
         handleListRequest : false
       })
     })
     .catch(error => {
-      alert('list not found')
+      window.Materialize.toast('list not found',3000)
     })
   }
   setPage(e){
@@ -52,7 +63,7 @@ class EmployeesList extends Component {
     })
   }
   render() {
-    return (
+    var employeelist = (
       <div>
         {this.state.handleListRequest ? this.handleList() : null}
           <h4>Employees List</h4>
@@ -60,7 +71,7 @@ class EmployeesList extends Component {
           <Table>
             <thead>
               <tr>
-                <th data-field="id">Id</th>
+                <th data-field="user_id">User Id</th>
                   <th data-field="first_name">First Name</th>
                   <th data-field="last_name">Last Name</th>
                   <th data-field="age">Age</th>
@@ -72,8 +83,8 @@ class EmployeesList extends Component {
 
             <tbody>{this.state.data.map(function (item,key){
               return(
-              <tr key={item.id}>
-                <td>{item.id}</td>
+              <tr key={item.user_id}>
+                <td>{item.user_id}</td>
                 <td>{item.first_name}</td>
                 <td>{item.last_name}</td>
                 <td>{item.age}</td>
@@ -89,11 +100,11 @@ class EmployeesList extends Component {
                     <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
                   <Modal
-                    header='Delete Employee'
+                    header='Delete Employee' bottomSheet
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <NavItem>history</NavItem>
+                  <Link to={{ pathname : '/adminhomepage/employees/history', user : item.user_id}}><NavItem>History</NavItem></Link>
                 </Dropdown></td>
               </tr>
               )
@@ -103,13 +114,19 @@ class EmployeesList extends Component {
           <div className = 'Addbtn'>
           <Modal 
             header='Employee Add Form'
-            trigger={<Button floating large className='red addResourceButton'onClick={this.handleAdd} waves='light' icon='add' />}>
+            trigger={<Button floating large className='red addemployeebtn'onClick={this.handleAdd} waves='light' icon='add' />}>
             <EmployeeAdd setHandleListRequest = {this.setHandleListRequest}/>
           </Modal>
           </div>
           <div>
             <Pagination items = {this.state.pagination.totalPage} activePage = {this.state.page } maxButton = {5} onSelect = {this.setPage}/> 
           </div>
+      </div>
+    );
+    return (
+      <div>
+        {this.state.list ? employeelist :null}
+        
       </div>
        
     );
