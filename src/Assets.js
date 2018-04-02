@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input} from 'react-materialize'
-import AddAsset from './AddAsset'
 import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
 import DeleteAsset from './DeleteAsset'
 import RecoverAsset from './RecoverAsset'
 import RepairAsset from './RepairAsset'
 import ReceiveAsset from './ReceiveAsset'
+import {Link} from 'react-router-dom'
 import moment from 'moment'
 import $ from 'jquery'
 import './ListPage.css'
@@ -167,7 +167,7 @@ class Assets extends Component{
                             <td>{item.current_status}</td>
                             <td>{item.category}</td>
                             <Dropdown trigger={
-                                    <Button><Icon tiny>more_vert</Icon></Button>
+                                    <Button ><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
                                         header='Edit Asset'
@@ -184,35 +184,32 @@ class Assets extends Component{
                                         header='Assign'
                                         fixedFooter
                                         trigger={item.current_status === 'Available' ? <NavItem>Assign</NavItem> : null}>
-                                        <AssignAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                        {item.current_status === 'Available' ? <AssignAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
                                         trigger={item.current_status === 'Assigned' ? <NavItem>Recover</NavItem> : null}>
-                                        <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                        {item.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
                                         header='Repair'
                                         fixedFooter
                                         trigger={item.current_status === 'Available' ? <NavItem>Repair</NavItem> : null}>
-                                        <RepairAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                        {item.current_status ? <RepairAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
                                         header='Recover from Service'
                                         fixedFooter
                                         trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
-                                        <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                        {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
+                                    <Link to={{ pathname : '/adminhomepage/assets/history', asset : item.asset_id}}><NavItem>History</NavItem></Link>
                                 </Dropdown>
                             </tr>
                         })}
                     </tbody>
                 </Table>
-                <Modal
-                    header='Add Asset'
-                    fixedFooter
-                    trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
-                    <AddAsset setHandleListRequest = {this.setHandleListRequest}/>
-                </Modal>
+                <Link to={{ pathname : '/adminhomepage/assets/create'}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div> 

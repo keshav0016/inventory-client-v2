@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import moment from 'moment'
 import {Row, Input, Button, Badge, Icon} from 'react-materialize'
-// import $ from 'jquery'
+import $ from 'jquery'
 
 class ReceiveAsset extends Component{
     constructor(props){
@@ -12,6 +13,7 @@ class ReceiveAsset extends Component{
             amount : 0,
             gst : 0,
             total : 0,
+            repairInfo : {asset_id : '' , from : '', to : '', expected_delivery : ''},
             receiveAssetRequest : false
         }
         this.setTo = this.setTo.bind(this)
@@ -33,12 +35,6 @@ class ReceiveAsset extends Component{
         }
     }
 
-    // setVendorListRequest(){
-    //     this.setState({
-    //         vendorListRequest : true
-    //     })
-    //     $('#addVendor .modal-footer button').click()
-    // }
 
     setTo(e){
         this.setState({
@@ -46,35 +42,12 @@ class ReceiveAsset extends Component{
         })
     }
 
-    // setAssetName(e){
-    //     this.setState({
-    //         asset_name : e.target.value
-    //     })
-    // }
-
-    // setPurchaseDate(e){
-    //     this.setState({
-    //         purchase_date : e.target.value
-    //     })
-    // }
-
-    // setDescription(e){
-    //     this.setState({
-    //         description : e.target.value
-    //     })
-    // }
-
     setRepairInvoice(e){
         this.setState({
             repair_invoice : e.target.value
         })
     }
 
-    // setVendor(e){
-    //     this.setState({
-    //         vendor : e.target.value
-    //     })
-    // }
 
     setAmount(e){
         this.setState({
@@ -87,40 +60,6 @@ class ReceiveAsset extends Component{
             gst : Number(e.target.value),
         })
     }
-
-    // setCategory(e){
-    //     this.setState({
-    //         category : e.target.value
-    //     })
-    // }
-
-    // setCondition(e){
-    //     this.setState({
-    //         condition : e.target.value
-    //     })
-    // }
-
-    // setLocation(e){
-    //     this.setState({
-    //         location : e.target.value
-    //     })
-    // }
-
-    // setAddVendor(){
-    //     this.setState({
-    //         addVendor : true
-    //     })
-    //     $("#triggerAddVendor").trigger('click')
-    // }
-
-    // vendorListDropdown(){
-    //     var vendorArr = []
-    //     vendorArr.push(<option key='Select' value='Select'>Select</option>)
-    //     this.state.vendorList.forEach(vendor => {
-    //         vendorArr.push(<option key={vendor.id} value={vendor.name}>{vendor.name}</option>)
-    //     });
-    //     return vendorArr
-    // }
 
     receiveAssetIntoDb(){
         axios({
@@ -145,7 +84,7 @@ class ReceiveAsset extends Component{
             }
             else{
                 this.setState({
-                    addAssetRequest : false,
+                    receiveAssetRequest : false,
                     to : '',
                     repair_invoice : '',
                     amount : 0,
@@ -169,55 +108,39 @@ class ReceiveAsset extends Component{
         }
     }
 
+    componentDidMount(){
+        axios({
+            method : 'get', 
+            url : `http://localhost:3001/asset/repair-info?asset_id=${this.props.asset}`
+            ,withCredentials : true
+        })
+        .then(res => {
+            this.setState({
+                repairInfo : res.data.repairInfo
+            })
+        })
+        $('label').addClass('active')
+    }
 
-    // handleVendorList(){
-    //     axios({
-    //         method : 'get',
-    //         url : `http://localhost:3001/vendor/list`,
-    //         withCredentials : true
-    //     })
-    //     .then(res => {
-    //         this.setState({
-    //             vendorList : res.data.vendors.sort((a, b) => a.asset_id - b.asset_id),
-    //             vendorListRequest : false
-    //         })
-    //     })
-    //     .catch(error => {
-    //         console.error(error)
-    //     })
-
-        // $("#triggerAddVendor").hide()
-    // }
 
 
     render(){
         return(
             <div>
                 <Row>
-                    <Input s={12} label="Asset Id" defaultValue={this.props.asset} disabled />
+                    <Input s={3} label="Asset Id" value={this.state.repairInfo.asset_id} disabled />
+                    <Input s={3} label="Vendor" value={this.state.repairInfo.vendor} disabled />
+                    <Input s={3} label="From" value={moment(this.state.repairInfo.from).format('DD MMM YYYY')} disabled />
+                    <Input s={3} label="Expected Delivery" value={moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')} disabled />
                     <Input s={3} name='on' type='date' label="To *" onChange={this.setTo} value = {this.state.to} />
                     <Input s={3} label="Repair Invoice *" value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
                     <Input s={3} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
                     <Input s={3} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
                     <br />
                     <Badge>Total : {this.state.total}</Badge>
-                    {/* <Input s={6} type='select' label="Category" onChange = {this.setCategory} defaultValue='Other'>
-                        <option value='Electronics'>Electronics</option>
-                        <option value='Non - Electronics'>Non - Electronics</option>
-                        <option value='Other'>Other</option>
-                    </Input> */}
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
-                {/* <Button onClick = {this.setAddVendor}>Add Vendor</Button> */}
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}
-                {/* {this.state.vendorListRequest ? this.handleVendorList() : null} */}
-                <br /><br />
-                {/* <Modal
-                    header='Add Vendor'
-                    id="addVendor"
-                    trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
-                    <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                </Modal>  */}
             </div>
         )
     }

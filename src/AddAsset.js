@@ -201,6 +201,9 @@ class AddAsset extends Component{
         }
     }
 
+    componentDidMount(){
+        $('label').addClass('active')
+    }
 
     handleVendorList(){
         axios({
@@ -245,7 +248,6 @@ class AddAsset extends Component{
                     </Input>
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
-                {/* <Button onClick = {this.setAddVendor}>Add Vendor</Button> */}
                 {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
                 <br /><br />

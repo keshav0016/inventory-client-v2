@@ -11,14 +11,14 @@ class RepairAsset extends Component{
             repairAssetRequest : false,
             vendor : 'Select',
             from : '',
-            expected_recovery : '',
+            expected_delivery : '',
             vendorList : [],
             addVendor : false,
             vendorListRequest : true
         }
         this.repairAssetIntoDb = this.repairAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
-        this.setExpectedRecovery = this.setExpectedRecovery.bind(this)
+        this.setExpectedDelivery = this.setExpectedDelivery.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.setVendor = this.setVendor.bind(this)
         this.handleVendorList = this.handleVendorList.bind(this)
@@ -59,7 +59,7 @@ class RepairAsset extends Component{
                 asset_id : this.props.asset,
                 vendor : this.state.vendor,
                 from : this.state.from,
-                expected_recovery : this.state.expected_recovery
+                expected_delivery : this.state.expected_delivery
             },
             withCredentials : true
         })
@@ -92,7 +92,7 @@ class RepairAsset extends Component{
         })
     }
 
-    setExpectedRecovery(e){
+    setExpectedDelivery(e){
         this.setState({
             expected_recovery : e.target.value
         })
@@ -124,7 +124,7 @@ class RepairAsset extends Component{
                 <Row>
                     <Input s={6} type="select" label="Vendor*" value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
                     <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
-                    <Input s={6} type='date' label="Expected Recovery*" value = {this.state.expected_recovery} onChange = {this.setExpectedRecovery} />
+                    <Input s={6} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} />
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                 <br /><br />
