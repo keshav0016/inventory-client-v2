@@ -63,11 +63,11 @@ class HistoryConsumables extends Component{
                            <td>{consumable.consumable_id ? consumable.consumable_id : '-'}</td>
                            <td>{consumable.user_id ? consumable.user_id : '-'}</td>
                            <td>{consumable.user_id ? (consumable.ticket_number ? consumable.ticket_number : '(Assigned by Admin)') : '-'}</td>
-                           <td>{moment(consumable.assigned_date).format('DD MMM YYYY')}</td>
-                           <td>{consumable.quantity ? consumable.quantity : '-'}</td>
+                           <td>{consumable.assigned_date ? moment(consumable.assigned_date).format('DD MMM YYYY') : '-'}</td>
+                           <td>{consumable.assigned_date ? consumable.quantity : '-'}</td>
                            <td>{consumable.vendor_name ? consumable.vendor_name : '-'}</td>
-                           <td>{moment(consumable.purchase_date).format('DD MMM YYYY')}</td>
-                           <td>{consumable.quantity ? consumable.quantity : '-'}</td>
+                           <td>{consumable.purchase_date ? moment(consumable.purchase_date).format('DD MMM YYYY') : '-'}</td>
+                           <td>{consumable.purchase_date ? consumable.quantity : '-'}</td>
                            <td>{consumable.item_price ? consumable.item_price : '-'}</td>
                            <td>{consumable.whole_price ? consumable.whole_price : '-'}</td>
                            <td>{consumable.discount ? consumable.discount : '-'}</td>

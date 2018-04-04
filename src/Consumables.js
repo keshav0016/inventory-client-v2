@@ -39,14 +39,23 @@ class Consumables extends Component{
     }
 
     checkForValidation(){
-        if(this.state.minQuantity < 0){
+        if(Number(this.state.minQuantity) < 0){
             window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
+            this.setState({
+                handleListRequest : true
+            })
         }
-        else if(this.state.maxQuantity < 0){
+        else if(Number(this.state.maxQuantity) < 0){
             window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
+            this.setState({
+                handleListRequest : true
+            })
         }
-        else if(this.state.minQuantity > this.state.maxQuantity){
+        else if(Number(this.state.minQuantity) > Number(this.state.maxQuantity)){
             window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+            this.setState({
+                handleListRequest : true
+            })
         }
         else{
             this.setState({
@@ -180,7 +189,7 @@ class Consumables extends Component{
                                     header='Edit Consumable'
                                     fixedFooter
                                     trigger={<NavItem>Edit</NavItem >}>
-                                    <UpdateConsumables consumable={consumable} />
+                                    <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
                                 <Modal
                                         header='Delete Asset'
@@ -201,6 +210,7 @@ class Consumables extends Component{
                         },this)}
                     </tbody>
                 </Table>
+                <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div>
                 }
                 <div className="filterContainer">
@@ -219,9 +229,8 @@ class Consumables extends Component{
                     trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
                     <AddConsumables setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
-                <div>
-                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
-                </div>
+                {/* <div>
+                </div> */}
             </div>
         )
     }

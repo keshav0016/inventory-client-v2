@@ -58,8 +58,8 @@ class UpdateConsumables extends Component {
             this.setState({
                 updateConsumableRequest : false
             })
-            this.props.setHandleListRequest()
             window.Materialize.toast('Consumable Updated Successfully', 4000)
+            this.props.setHandleListRequest()
         })
         .catch(error => {
             console.error(error)
