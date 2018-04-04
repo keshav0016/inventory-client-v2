@@ -40,7 +40,7 @@ class AddAsset extends Component{
         this.setLocation = this.setLocation.bind(this)
         this.handleVendorList = this.handleVendorList.bind(this)
         this.setVendorListRequest = this.setVendorListRequest.bind(this)
-        this.setAddVendor = this.setAddVendor.bind(this)
+        // this.setAddVendor = this.setAddVendor.bind(this)
     }
 
     checkForValidation(){
@@ -127,12 +127,12 @@ class AddAsset extends Component{
         })
     }
 
-    setAddVendor(){
-        this.setState({
-            addVendor : true
-        })
-        $("#triggerAddVendor").trigger('click')
-    }
+    // setAddVendor(){
+    //     this.setState({
+    //         addVendor : true
+    //     })
+    //     $("#triggerAddVendor").trigger('click')
+    // }
 
     vendorListDropdown(){
         var vendorArr = []
@@ -240,7 +240,7 @@ class AddAsset extends Component{
                     <br />
                     <Input s={6} type='select' label="Category" onChange = {this.setCategory} defaultValue='Other'>
                         <option value='Electronics'>Electronics</option>
-                        <option value='Non - Electronics'>Non - Electronics</option>
+                        <option value='Non-Electronics'>Non-Electronics</option>
                         <option value='Other'>Other</option>
                     </Input>
                     <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
@@ -250,8 +250,7 @@ class AddAsset extends Component{
                 <Modal
                     header='Add Vendor'
                     id="addVendor"
-                    actions={<div></div>}
-                    trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
+                    trigger={<Button>Add Vendor</Button>}>
                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                 </Modal>
                 </Row>

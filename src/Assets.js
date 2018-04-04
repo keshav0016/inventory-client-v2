@@ -5,7 +5,6 @@ import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
 import DeleteAsset from './DeleteAsset'
 import RecoverAsset from './RecoverAsset'
-import RepairAsset from './RepairAsset'
 import ReceiveAsset from './ReceiveAsset'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
@@ -139,7 +138,7 @@ class Assets extends Component{
         this.setState({
             handleListRequest : true
         })
-        $(".modal-close").trigger('click')
+        $(".modal-overlay").click()
         if(itemAdded){
             this.setPage(this.state.pagination.totalPage)
         }
@@ -240,13 +239,7 @@ class Assets extends Component{
                                         trigger={item.current_status === 'Assigned' ? <NavItem>Recover</NavItem> : null}>
                                         {item.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
-                                    <Modal
-                                        header='Repair'
-                                        fixedFooter
-                                        actions={<div></div>}
-                                        trigger={item.current_status === 'Available' ? <NavItem>Repair</NavItem> : null}>
-                                        {item.current_status ? <RepairAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
-                                    </Modal>
+                                    {item.current_status === 'Available' ? <Link to={{ pathname : '/adminhomepage/assets/repair', asset : item.asset_id}}><NavItem>Repair</NavItem></Link> : null}
                                     <Modal
                                         header='Recover from Service'
                                         fixedFooter
