@@ -44,6 +44,15 @@ class AddConsumables extends Component{
         else if(this.state.purchased_quantity <= 0){
             window.Materialize.toast('The quantity cannot be negative', 4000)
         }
+        else if(this.state.item_price <= 0){
+            window.Materialize.toast('The Consumable price cannot be negative', 4000)
+        }
+        else if(this.state.gst < 0){
+            window.Materialize.toast('The Consumable gst cannot be negative', 4000)
+        }
+        else if(this.state.discount < 0){
+            window.Materialize.toast('The Consumable discount cannot be negative', 4000)
+        }
         else{
             this.setState({
                 addConsumableRequest : true
@@ -167,7 +176,6 @@ class AddConsumables extends Component{
         .catch(error => {
             console.error(error)
         })
-        // $("#triggerAddVendor").hide()
     }
 
     componentDidUpdate(prevProps, prevState){
@@ -192,9 +200,9 @@ class AddConsumables extends Component{
                     <Input s={6} label="Vendor" type='select' onChange = {this.setVendorName}>{this.vendorListDropdown()}</Input>
                     <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
                     <Input s={6} label="Purchased Quantity" type="number" min={0} value = {this.state.purchased_quantity} onChange = {this.setPurchaseQuantity}/>
-                    <Input s={6} label="Price" type='number' value = {this.state.item_price} onChange = {this.setItemPrice}/>
-                    <Input s={6} label="GST" type='number' value = {this.state.gst} onChange = {this.setGst}/>
-                    <Input s={6} label="Discount" type='number' value = {this.state.discount} onChange = {this.setDiscount}/>
+                    <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price} onChange = {this.setItemPrice}/>
+                    <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount} onChange = {this.setDiscount}/>
                     <Badge>Total : {this.state.total}</Badge>
                     <Badge>Total Price : {this.state.whole_price}</Badge>
                 </Row>

@@ -65,6 +65,8 @@ class Tickets extends Component{
         })
     }
 
+
+    //user_id,first_name and last_name will be taken from the req.currentUser
     confirmRequest(){
         axios({
             method:'post',
