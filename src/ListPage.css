@@ -36,6 +36,19 @@
   text-align: center;
 }
 
-.filterFields {
-  color: white;
+.form {
+  position: absolute;
+  top: 20%;
+  right: 50%
+}
+.ticketslist {
+  position: absolute;
+  top: 20%;
+  right: 50%
+}
+.items {
+  position: absolute;
+  top: 20%;
+  width: 70%;
+  left: 20%
 }

@@ -11,6 +11,10 @@ import {
     Route,
     Link
   } from 'react-router-dom';
+import EmployeeHistory from './EmployeeHistory';
+
+
+import LoginForm from './LoginForm';
 
 class Homepage extends Component{
     render(){
@@ -35,8 +39,14 @@ class Homepage extends Component{
                     <Route exact path="/adminhomepage/employees" component={EmployeesList} />
                     <Route exact path="/adminhomepage/tickets" component={TicketsList} />
                     <Route exact path="/adminhomepage/consumables/history" component={HistoryConsumables}/>
+                    <Route  exact path ='/adminhomepage/employees/history' component={EmployeeHistory}/>
+                    
+                    
                 </div>
                 </div>
+                <Route  path ='/login' component={LoginForm}/>
+                
+                
             </div>
             </Router>
         )
