@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Pagination, Row, Input} from 'react-materialize'
+import moment from 'moment'
 
 
 class TicketsList extends Component{
@@ -11,7 +12,7 @@ class TicketsList extends Component{
             pagination : {totalPage : 1, currentPage : 1},
             page : 1,     
             handleListRequest : true,
-            isPendingChecked : false,
+            isPendingChecked : true,
             isAcceptedChecked : false,
             isRejectedChecked : false,
         }
@@ -149,12 +150,13 @@ class TicketsList extends Component{
                 <Table centered>
                     <thead>
                         <tr>
-                            <th data-field="user_id">Employee Id</th>
-                            <th data-field="tiket_number">Ticket Number</th>
+                            <th data-field="ticket_number">Ticket Number</th>
+                            <th data-field="employeeName">Employee Name</th>
                             <th data-field="date">Requested Date</th>
-                            <th data-field="requested_asset_id">Requested Asset Id</th>
+                            <th data-field="requestedItem">Requested Item</th>
+                            {/* <th data-field="requested_asset_id">Requested Asset Id</th>
                             <th data-field="requested_consumable_id">Requested Consumable Id</th>
-                            <th data-field="item_type">Resource Type</th>
+                            <th data-field="item_type">Resource Type</th> */}
                             <th data-field="quantity">Quantity</th>
                             <th data-field="status">Status</th>
                         </tr>
@@ -163,12 +165,13 @@ class TicketsList extends Component{
                     <tbody>
                         {this.state.ticketsList.map((ticket, index) => {
                             return (<tr key={ticket.ticket_number}>
-                            <td>{ticket.user_id}</td>
                             <td>{ticket.ticket_number}</td>
-                            <td>{ticket.date}</td>
-                            <td>{ticket.requested_asset_id}</td>
+                            <td>{ticket.user.first_name + " " + ticket.user.last_name}</td>
+                            <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
+                            <td>{ticket.requested_asset_item ? ticket.request_asset_item + " " + ticket.item_type : ticket.requested_consumable_item + " " + "[ "+ticket.item_type+" ]"}</td>
+                            {/* <td>{ticket.requested_asset_id}</td>
                             <td>{ticket.requested_consumable_id}</td>
-                            <td>{ticket.item_type}</td>
+                            <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
                             <td>{ticket.status === 'Pending' ? <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> : null}</td>

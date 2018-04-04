@@ -4,6 +4,7 @@ import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} f
 import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
+import HistoryConsumables from './HistoryConsumables'
 import './ListPage.css'
 import $ from 'jquery'
 
@@ -28,6 +29,25 @@ class Consumables extends Component{
         this.minQuantity = this.minQuantity.bind(this)
         this.maxQuantity = this.maxQuantity.bind(this)
         this.searchKeyword = this.searchKeyword.bind(this)
+        this.checkForValidation = this.checkForValidation.bind(this)
+        this.resetFilter = this.resetFilter.bind(this)
+    }
+
+    checkForValidation(){
+        if(this.state.minQuantity < 0){
+            window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
+        }
+        else if(this.state.maxQuantity < 0){
+            window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
+        }
+        else if(this.state.minQuantity > this.state.maxQuantity){
+            window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+        }
+        else{
+            this.setState({
+                handleListRequest : true
+            })
+        }
     }
 
     handleList(){
@@ -37,11 +57,21 @@ class Consumables extends Component{
             withCredentials : true
         })
         .then(res => {
-            this.setState({
-                consumableList : res.data.consumables,
-                pagination : res.data.pagination,
-                handleListRequest : false
-            })
+            if(res.data.consumables.length !== 0)
+            {
+                this.setState({
+                    consumableList : res.data.consumables,
+                    pagination : res.data.pagination,
+                    handleListRequest : false
+                })
+            }
+            else{
+                this.setState({
+                    consumableList : res.data.consumables,
+                    pagination : res.data.pagination,
+                    handleListRequest : false
+                })
+            }
         })
         .catch(error => {
             console.error(error)
@@ -54,11 +84,14 @@ class Consumables extends Component{
             url : 'http://localhost:3001/consumables/delete',
             data : {
                 consumable_id : this.state.consumableList[index].consumable_id
-            }
+            },
+            withCredentials:true
         })
         .then(obj => {
+            this.setState({
+                handleListRequest:true
+            })
             window.Materialize.toast('Consumable Deleted Successfully', 4000)
-            console.log(obj.data.message)
         })
         .catch(error => {
             console.log(error)
@@ -92,33 +125,29 @@ class Consumables extends Component{
     }
 
     minQuantity(e){
-        if(e.target.value >= 0){
             this.setState({
                 minQuantity: e.target.value,
-                handleListRequest : true
             })
-        }
-        else{
-            window.Materialize.toast('The Quantity cannot be negative', 4000)
-        }
     }
 
     maxQuantity(e){
-        if(e.target.value >=0){
             this.setState({
                 maxQuantity: e.target.value,
-                handleListRequest : true
             })
-        }
-        else{
-            window.Materialize.toast('The Quantity cannot be negative', 4000)
-        }
     }
 
     searchKeyword(e){
         this.setState({
             keyword : e.target.value,
             handleListRequest : true
+        })
+    }
+
+    resetFilter(){
+        this.setState({
+            minQuantity:'',
+            maxQuantity:'',
+            handleListRequest:true
         })
     }
 
@@ -132,16 +161,24 @@ class Consumables extends Component{
                     <option value='asc'>Low - High</option>
                     <option value='desc'>High - Low</option> 
                 </Input>
-                <Input s={2} type='text' label="Minimum Quantity" onChange={this.minQuantity}></Input>
-                <Input s={2} type='text' label="Maximum Quantity" onChange={this.maxQuantity}></Input>
-                <Input s={4} type='text' label="Search" onChange={this.searchKeyword}></Input>
+                <Input s={4} type='text' label="Search ( Case Sensitive )" onChange={this.searchKeyword}></Input>
                 </Row>
-                <Table centered>
+                {this.state.consumableList.length === 0 
+                    ?
+
+                    <div className="noRecordsScreen">
+                        No Records
+                    </div>
+
+                    :
+
+                    <div>
+                    <Table centered hoverable striped className="consumableTable">
                     <thead>
                         <tr>
-                            <th data-field="consumable_id">Consumable Id</th>
+                            <th data-field="consumable_id">Id</th>
                             <th data-field="name">Consumable Name</th>
-                            <th data-field="quantity">Consumable Quantity</th>
+                            <th data-field="quantity">Available Consumable Quantity</th>
                         </tr>
                     </thead>
 
@@ -167,14 +204,30 @@ class Consumables extends Component{
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <NavItem>History</NavItem>
+                                <Modal
+                                    header='Consumable History'
+                                    fixedFooter
+                                    trigger={<NavItem>History</NavItem >}>
+                                    <HistoryConsumables consumable={consumable.consumable_id} setHandleListRequest={this.setHandleListRequest}/>
+                                </Modal>
                                 </Dropdown></td>
                             </tr>
                             )
                         },this)}
                     </tbody>
                 </Table>
-                
+                </div>
+                }
+                <div className="filterContainer">
+                    <Row>
+                        <Input s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity} onChange={this.minQuantity}></Input>
+                        <Input s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity} onChange={this.maxQuantity}></Input>
+                    </Row>
+                        <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
+                        <br />
+                        <br />
+                        <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
+                </div>                
                 <Modal
                     header='Add Consumable'
                     fixedFooter

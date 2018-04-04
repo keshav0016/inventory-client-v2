@@ -9,6 +9,7 @@ import {
 // import EmployeesList from './Employees';
 // import EmployeeAdd from './EmployeeAdd';
 import Homepage from './Homepage';
+import Tickets from './Tickets'
 
 class App extends Component {
   render() {
@@ -16,7 +17,9 @@ class App extends Component {
       <Router>
           <div>
             <Link to="/adminhomepage"></Link>
+            <Link to="/employee/tickets"></Link>
             <Route path="/adminhomepage" component={Homepage} />
+            <Route path="/employee/tickets" component={Tickets} />
           </div>
       </Router>
     );

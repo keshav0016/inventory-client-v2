@@ -58,8 +58,7 @@ class Assets extends Component{
 
     componentDidUpdate(prevProps, prevState){
         if(this.state.handleListRequest === true){
-            $(".modal").hide()
-            $(".modal-overlay").hide()
+            $(".modal-close").trigger('click')
         }
     }
 

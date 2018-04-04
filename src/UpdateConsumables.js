@@ -21,7 +21,7 @@ class UpdateConsumables extends Component {
     }
 
     checkForValidation(){
-        if(this.state.quantity < 0){
+        if(this.state.quantity <= 0){
             window.Materialize.toast('The quantity cannot be negative', 4000)
         }
         else{
