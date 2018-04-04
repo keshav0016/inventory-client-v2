@@ -105,9 +105,11 @@ class AssignAsset extends Component{
             <div>
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
                 <Row>
-                    <Input s={6} type="select" label="Assign to*" onChange = {this.setEmployee}>{this.setEmployeeDropdown()}</Input>
+                    <br />
+                    <br />
+                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
-                    <Input s={6} type='date' label="Expected Recovery*" value = {this.state.expected_recovery} onChange = {this.setExpectedRecovery} />
+                    <Input s={12} type='date' label="Expected Recovery*" value = {this.state.expected_recovery} onChange = {this.setExpectedRecovery} />
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
             </div>

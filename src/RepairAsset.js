@@ -30,16 +30,12 @@ class RepairAsset extends Component{
         }
         else{
             if(new Date(this.state.from) > new Date(this.state.expected_delivery)){
-                console.log(this.state.from)
-                console.log(this.state.expected_delivery)
                 window.Materialize.toast('Expected Delivery cannot be less than FROM', 4000)
             }
             else{
                 this.setState({
                     repairAssetRequest : true
                 })
-                console.log(this.state.from)
-                console.log(this.state.expected_delivery)
             }
         }
     }
@@ -131,18 +127,19 @@ class RepairAsset extends Component{
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
                 {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 <Row>
-                    <Input s={6} type="select" label="Vendor*" value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
-                    <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
-                    <Input s={6} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} />
+                    <br /><br />
+                    <Input s={4} type="select" label="Vendor*" value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
+                    <Input s={4} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
+                    <Input s={4} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} />
                 </Row>
-                <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                <br /><br />
                 <Modal
                     header='Add Vendor'
                     id="addVendor"
                     trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                 </Modal> 
+                <br /><br />
+                <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
             </div>
         )
     }
