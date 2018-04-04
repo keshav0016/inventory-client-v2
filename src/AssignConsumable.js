@@ -9,20 +9,49 @@ class AssignConsumables extends Component {
         super(props)
         this.state = {
             consumable_id : this.props.consumable.consumable_id,
-            user_id : '',
             quantity : '',
+            employeesList: [],
+            fetchEmployeeList: true,
+            user_id:'',
             assignConsumableRequest : false
         }
 
-        this.setEmployeeId=this.setEmployeeId.bind(this)
         this.setConsumableQuantity=this.setConsumableQuantity.bind(this)
         this.AssignConsumable=this.AssignConsumable.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
+        this.getEmployeeList = this.getEmployeeList.bind(this)
+        this.assignedEmployee = this.assignedEmployee.bind(this)
     }
+
+    getEmployeeList(){
+        axios({
+            method:'get',
+            url:'http://localhost:3001/user/ticket/listEmployee',
+            withCredentials:true
+        })
+        .then(employeeList => {
+            this.setState({
+                employeesList: employeeList.data.employeeList,
+                fetchEmployeeList: false
+            })
+        })
+        .catch(error => {
+            alert('No Employee')
+        })
+       }
+    
+       assignedEmployee(e){
+           this.setState({
+               user_id:this.state.employeesList[e.target.value].user_id
+           })
+       }
 
     checkForValidation(){
         if(this.state.quantity <= 0){
             window.Materialize.toast('The quantity cannot be negative', 4000)
+        }
+        else if(this.props.consumable.quantity < this.state.quantity){
+            window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
         }
         else if(!this.state.user_id){
             window.Materialize.toast('The Employee Id field cannot be empty', 4000)
@@ -34,12 +63,6 @@ class AssignConsumables extends Component {
         }
     }
 
-
-    setEmployeeId(e) {
-        this.setState({
-            user_id : e.target.value
-        })
-    }
 
     setConsumableQuantity(e) {
         this.setState({
@@ -76,10 +99,17 @@ class AssignConsumables extends Component {
         return (
             <div>
                 <Row>
-                    <Input s={6} label="Employee Id" value={this.state.user_id} onChange={this.setEmployeeId} />
+                    <Input s={5} type='select' onChange={this.assignedEmployee}>
+                        {this.state.employeesList.map((element,index)=>{
+                            return( 
+                                <option key={index} value={index}>{element.first_name + " " + element.last_name}</option>
+                            )
+                        })}
+                    </Input>
                     <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity} onChange={this.setConsumableQuantity} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
+                {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}
             </div>
         )

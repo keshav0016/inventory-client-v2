@@ -21,7 +21,7 @@ class UpdateConsumables extends Component {
     }
 
     checkForValidation(){
-        if(this.state.quantity < 0){
+        if(this.state.quantity <= 0){
             window.Materialize.toast('The quantity cannot be negative', 4000)
         }
         else{
@@ -58,8 +58,8 @@ class UpdateConsumables extends Component {
             this.setState({
                 updateConsumableRequest : false
             })
-            this.props.setHandleListRequest()
             window.Materialize.toast('Consumable Updated Successfully', 4000)
+            this.props.setHandleListRequest()
         })
         .catch(error => {
             console.error(error)
