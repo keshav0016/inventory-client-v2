@@ -38,7 +38,7 @@ class HistoryConsumables extends Component{
        return(
            <div>
                {this.state.fetchHistory ? this.getHistory() : null}
-               <Table centered>
+               <Table centered striped>
                    <thead>
                        <tr>
                            <th data-field="consumable id">Consumable Id</th>

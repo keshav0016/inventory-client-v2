@@ -158,7 +158,7 @@ class Consumables extends Component{
                     :
 
                     <div>
-                    <Table centered hoverable striped className="consumableTable">
+                    <Table centered striped className="consumableTable">
                     <thead>
                         <tr>
                             <th data-field="consumable_id">Id</th>
