@@ -4,7 +4,10 @@ import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} f
 import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
-import HistoryConsumables from './HistoryConsumables'
+import DeleteConsumable from './DeleteConsumable'
+import {
+    BrowserRouter as Link
+  } from 'react-router-dom';
 import './ListPage.css'
 import $ from 'jquery'
 
@@ -75,26 +78,6 @@ class Consumables extends Component{
         })
         .catch(error => {
             console.error(error)
-        })
-    }
-
-    handleDelete(index){
-        axios({
-            method : 'post',
-            url : 'http://localhost:3001/consumables/delete',
-            data : {
-                consumable_id : this.state.consumableList[index].consumable_id
-            },
-            withCredentials:true
-        })
-        .then(obj => {
-            this.setState({
-                handleListRequest:true
-            })
-            window.Materialize.toast('Consumable Deleted Successfully', 4000)
-        })
-        .catch(error => {
-            console.log(error)
         })
     }
 
@@ -195,21 +178,21 @@ class Consumables extends Component{
                                     header='Edit Consumable'
                                     fixedFooter
                                     trigger={<NavItem>Edit</NavItem >}>
-                                    <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+                                    <UpdateConsumables consumable={consumable} />
                                 </Modal>
-                                <NavItem onClick={this.handleDelete.bind(this,index)}>Delete</NavItem>
+                                <Modal
+                                        header='Delete Asset'
+                                        bottomSheet
+                                        trigger={<NavItem>Delete</NavItem>}>
+                                        <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
+                                </Modal>
                                 <Modal
                                     header='Assign Consumable'
                                     fixedFooter
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <Modal
-                                    header='Consumable History'
-                                    fixedFooter
-                                    trigger={<NavItem>History</NavItem >}>
-                                    <HistoryConsumables consumable={consumable.consumable_id} setHandleListRequest={this.setHandleListRequest}/>
-                                </Modal>
+                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>History</NavItem ></Link>
                                 </Dropdown></td>
                             </tr>
                             )

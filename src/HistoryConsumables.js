@@ -7,7 +7,6 @@ class HistoryConsumables extends Component{
    constructor(props){
        super(props)
        this.state = {
-           consumable_id : this.props.consumable,
            history : [],
            fetchHistory : true,
        }
@@ -19,16 +18,15 @@ class HistoryConsumables extends Component{
            method : 'post',
            url : `http://localhost:3001/consumables/history`,
            data: {
-               consumable_id : this.state.consumable_id
+               consumable_id : this.props.location.consumable
            },
            withCredentials : true
        })
        .then(res => {
            this.setState({
-               history : res.data.history.sort((a, b) => b.updatedAt - a.updatedAt),
+               history : res.data.history,
                fetchHistory : false
            })
-           this.props.setHandleListRequest()
        })
        .catch(error => {
            console.error(error)
@@ -40,7 +38,6 @@ class HistoryConsumables extends Component{
        return(
            <div>
                {this.state.fetchHistory ? this.getHistory() : null}
-               <br />
                <Table centered>
                    <thead>
                        <tr>
@@ -80,8 +77,6 @@ class HistoryConsumables extends Component{
                        })}
                    </tbody>
                </Table>
-               <div>
-               </div>
            </div>
        )
    }

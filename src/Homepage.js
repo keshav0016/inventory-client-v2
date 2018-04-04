@@ -5,6 +5,7 @@ import Assets from './Assets';
 import Consumables from './Consumables';
 import EmployeesList from './Employees';
 import TicketsList from './TicketsList';
+import HistoryConsumables from './HistoryConsumables'
 import {
     BrowserRouter as Router,
     Route,
@@ -33,6 +34,7 @@ class Homepage extends Component{
                     <Route exact path="/adminhomepage/consumables" component={Consumables} />
                     <Route exact path="/adminhomepage/employees" component={EmployeesList} />
                     <Route exact path="/adminhomepage/tickets" component={TicketsList} />
+                    <Route exact path="/adminhomepage/consumables/history" component={HistoryConsumables}/>
                 </div>
                 </div>
             </div>
