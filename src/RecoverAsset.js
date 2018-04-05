@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Button, Input} from 'react-materialize'
-
+import $ from 'jquery'
 
 class DeleteAsset extends Component{
     constructor(props){
@@ -64,6 +64,7 @@ class DeleteAsset extends Component{
         .catch(error => {
             console.error(error)
         })
+        $('label').addClass('active')
     }
 
     render(){

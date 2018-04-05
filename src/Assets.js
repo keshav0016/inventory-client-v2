@@ -233,7 +233,7 @@ class Assets extends Component{
                     </Table>
                     </div> )}
                 
-                <Link to={{ pathname : '/adminhomepage/assets/create'}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/adminhomepage/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
                 
                 <div>
                     {this.state.assetList.length === 0 ? null : <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
