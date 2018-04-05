@@ -46,7 +46,7 @@ class Admindashboard extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Row>
                     <Col m={4}>
-                        <CardPanel className=" grey darken-3 white-text">
+                        <CardPanel className=" grey darken-3 white-text adminDashboardCards1">
                             <label className="adminDashCardTitle">Consumables</label>
                             <br />
                             <br />
@@ -59,7 +59,7 @@ class Admindashboard extends Component{
                         </CardPanel>
                     </Col>
                     <Col m={4}>
-                        <CardPanel className=" grey darken-3 white-text">
+                        <CardPanel className=" grey darken-3 white-text adminDashboardCards2">
                             <label className="adminDashCardTitle">Assets</label>
                             <br />
                             <br />
