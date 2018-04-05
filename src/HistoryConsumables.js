@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button} from 'react-materialize'
+import {Table} from 'react-materialize'
 import moment from 'moment'
 
 class HistoryConsumables extends Component{

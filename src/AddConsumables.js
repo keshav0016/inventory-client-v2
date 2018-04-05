@@ -116,7 +116,8 @@ class AddConsumables extends Component{
                 discount : this.state.discount,
                 gst : this.state.gst,
                 total : this.state.total
-            }
+            },
+            withCredentials:true
         })
         .then(obj => {
             this.setState({

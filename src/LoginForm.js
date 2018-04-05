@@ -43,31 +43,6 @@ class LoginForm extends Component {
 
   //function to check the credentials provided  by the user
   verifyCredentials() {
-    //  if (this.state.user_id === this.state.password) {
-    //   axios({
-    //     method: 'post',
-    //     url: 'http://localhost:3001/user/login',
-    //     data: {
-    //       user_id: this.state.user_id,
-    //       password: this.state.password
-    //     },
-    //     withCredentials: true
-    //   })
-    //   .then((res) => {
-    //     console.log(res)
-    //     if(res.data.passwordSame === true){
-    //       this.setState({
-    //         change: true,
-    //         admin: false
-    //       })
-    //     }
-    //   })
-    //   .catch(() =>{
-    //     window.Materialize.toast('incorrect password',4000)
-
-    //   })
-    // }else 
-     {
       axios({
         method: 'post',
         url: 'http://localhost:3001/user/login',
@@ -99,7 +74,6 @@ class LoginForm extends Component {
         window.Materialize.toast('wrong password',3000)
 
       })
-    }
   }
 
 
@@ -137,7 +111,7 @@ class LoginForm extends Component {
       <div>
         {this.state.login ? loginform : null}
         {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange' , user:{user_id:this.state.user_id}}}/>) : null}
-        {this.state.employee ? (<Redirect push to ='/employeehomepage'  user_id={this.state.user_id}/>) : null}
+        {this.state.employee ? (<Redirect  to ={{pathname:'/employeehomepage' , user:{user_id:this.state.user_id}}}/>) : null}
         {this.state.admin ? (<Redirect push to ='/adminhomepage'/>): null}
       </div>
 
