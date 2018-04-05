@@ -73,9 +73,9 @@ class EmployeeUpdate extends Component{
    handleUpdate(){
        axios({
            method: 'post',
-           url: 'http://localhost:3001/employee/update',
+           url: 'http://localhost:3001/employees/update',
            data:{
-               user_id: this.props.user.id,
+               user_id: this.state.user_id,
                first_name:this.state.first_name,
                 last_name:this.state.last_name,
                 age:this.state.age,
