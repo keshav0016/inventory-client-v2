@@ -70,7 +70,7 @@ class Tickets extends Component{
     confirmRequest(){
         axios({
             method:'post',
-            url:'http://localhost:3001/employee/ticket/create',
+            url:'http://localhost:3001/user/ticket/create',
             data:{
                 user_id:this.state.user_id,
                 date:Date.now(),
@@ -93,7 +93,7 @@ class Tickets extends Component{
    componentDidMount(){
        axios({
            method:'get',
-           url:'http://localhost:3001/employee/ticket/listItems',
+           url:'http://localhost:3001/user/ticket/listItems',
            withCredentials:true
        })
        .then((res) => {
@@ -104,7 +104,7 @@ class Tickets extends Component{
            })
        })
        .catch(error => {
-        window.Materialize.toast('Sorry, there are no available resorces', 4000)
+        window.Materialize.toast('Sorry, there are no resources available', 4000)
     })
    }
 
