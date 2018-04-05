@@ -27,10 +27,10 @@ class Homepage extends Component{
             <div>
                 <div className="masterComponentBackground">
                 <div>
-                    <Navbar>
+                    <Navbar className="teal lighten-1">
                         <NavItem href="/" className="masterComponentLogoutButton">LOGOUT</NavItem>
                     </Navbar>
-                    <SideNav className="masterComponentSideBar" trigger={<Button className="red btn-flat lighten-2 masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
+                    <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                     <Link to="/adminhomepage">Dashboard</Link>
                     <Link to="/adminhomepage/assets">Assets</Link>
                     <Link to="/adminhomepage/consumables">Consumables</Link>

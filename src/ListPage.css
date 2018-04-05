@@ -25,7 +25,7 @@
   left: 80%;
   top: 10%;
   height: 900px;
-  background-color: gray;
+  background-color: #212121;
 }
 
 .filterButton {
@@ -51,4 +51,10 @@
   top: 20%;
   width: 70%;
   left: 20%
+}
+
+.addVendorButton {
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
 }

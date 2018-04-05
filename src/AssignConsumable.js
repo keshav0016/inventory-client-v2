@@ -79,7 +79,8 @@ class AssignConsumables extends Component {
                 user_id: this.state.user_id,
                 assigned_date:Date.now(),
                 quantity : this.state.quantity
-            }
+            },
+            withCredentials:true
         })
         .then(obj => {
             this.setState({

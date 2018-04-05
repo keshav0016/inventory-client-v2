@@ -52,7 +52,8 @@ class UpdateConsumables extends Component {
                 consumable_id : this.state.consumable_id,
                 name : this.state.name,
                 quantity : this.state.quantity
-            }
+            },
+            withCredentials:true
         })
         .then(obj => {
             this.setState({
