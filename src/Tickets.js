@@ -104,7 +104,7 @@ class Tickets extends Component{
            })
        })
        .catch(error => {
-        window.Materialize.toast('Sorry, there are no available resorces', 4000)
+        window.Materialize.toast('Sorry, there are no resources available', 4000)
     })
    }
 
