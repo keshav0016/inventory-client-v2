@@ -171,7 +171,7 @@ class UpdateAsset extends Component {
                 <Row>
                     <Input s={3} label="Serial Number *" defaultValue={this.state.serial_number} onChange={this.setSerialNumber} />
                     <Input s={3} label="Asset Name *" defaultValue={this.state.asset_name} onChange={this.setAssetName} />
-                    <Input s={3} name='on' type='date'  onChange={this.setPurchaseDate} label={moment(this.state.purchase_date).format('D MMMM, YYYY')} />
+                    <Input s={3} name='on' type='date' label="Purchase Date" onChange={this.setPurchaseDate} placeholder={moment(this.state.purchase_date).format('D MMMM, YYYY')} />
                     <Input s={6} label="Description" defaultValue={this.state.description} onChange={this.setDescription} />
                     <Input s={3} label="Invoice Number *" defaultValue={this.state.invoice_number} onChange={this.setInvoiceNumber} />
                     <Input s={3} label="Vendor *" defaultValue={this.state.vendor} onChange={this.setVendor} />
@@ -187,7 +187,7 @@ class UpdateAsset extends Component {
                         <option value='Other'>Other</option>
                     </Input>
                 </Row>
-                <Button waves='light' onClick={this.checkForValidation} toast={this.state.toastText} >Submit <Icon small right>send</Icon></Button>
+                <Button waves='light' onClick={this.checkForValidation}>Submit <Icon small right>send</Icon></Button>
                 {this.state.updateAssetRequest ? this.updateAssetIntoDb() : null}
             </div>
         )

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Icon} from 'react-materialize'
+// import $ from 'jquery'
+
 
 class AddVendor extends Component{
     constructor(props){
@@ -76,6 +78,9 @@ class AddVendor extends Component{
         })
     }
 
+    // componentDidMount(){
+    //     $('#addVendor').click(this.checkForValidation)
+    // }
 
     render(){
         return(
@@ -84,7 +89,8 @@ class AddVendor extends Component{
                     <Input s={6} label="Name *" value = {this.state.name} onChange = {this.setName} />
                     <Input s={12} label="Address *" value = {this.state.address} onChange = {this.setAddress} />
                 </Row>
-                    <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}
             </div>
         )

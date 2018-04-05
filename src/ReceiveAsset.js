@@ -133,14 +133,14 @@ class ReceiveAsset extends Component{
         return(
             <div>
                 <Row>
-                    <Input s={3} label="Asset Id" value={this.state.repairInfo.asset_id} disabled />
-                    <Input s={3} label="Vendor" value={this.state.repairInfo.vendor} disabled />
-                    <Input s={3} label="From" value={moment(this.state.repairInfo.from).format('DD MMM YYYY')} disabled />
-                    <Input s={3} label="Expected Delivery" value={moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')} disabled />
-                    <Input s={3} name='on' type='date' label="To *" onChange={this.setTo} value = {this.state.to} />
-                    <Input s={3} label="Repair Invoice *" value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
-                    <Input s={3} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
-                    <Input s={3} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} label="Asset Id" value={this.state.repairInfo.asset_id} disabled />
+                    <Input s={6} label="Vendor" value={this.state.repairInfo.vendor} disabled />
+                    <Input s={6} label="From" value={moment(this.state.repairInfo.from).format('DD MMM YYYY')} disabled />
+                    <Input s={6} label="Expected Delivery" value={moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')} disabled />
+                    <Input s={6} name='on' type='date' label="To *" onChange={this.setTo} value = {this.state.to} />
+                    <Input s={6} label="Repair Invoice *" value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
+                    <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
+                    <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
                     <br />
                     <Badge>Total : {this.state.total}</Badge>
                 </Row>

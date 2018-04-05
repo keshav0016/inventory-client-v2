@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table} from 'react-materialize'
+import {CardPanel, Col, Row} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 
@@ -8,6 +8,9 @@ class Assets extends Component{
     constructor(props){
         super(props)
         this.state = {
+            assetDetails : {},
+            historyAssigned : [],
+            historyRepair : [],
             history : [],
             handleListRequest : true,
         }
@@ -22,7 +25,10 @@ class Assets extends Component{
         })
         .then(res => {
             this.setState({
-                history : res.data.history.sort((a, b) => b.updatedAt - a.updatedAt),
+                assetDetails : res.data.assetDetails,
+                historyAssigned : res.data.historyAssigned,
+                historyRepair : res.data.historyRepair,
+                history : res.data.historyAssigned.concat(res.data.historyRepair).sort((a,b) => b.id - a.id),
                 handleListRequest : false
             })
         })
@@ -37,40 +43,46 @@ class Assets extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3>History</h3>
-                {/* <div><h5>{this.props.asset.asset_id}</h5><br /><h5>{this.props.asset.asset_name}</h5><br /><h5>{this.props.asset.current_status}</h5></div> */}
-                <Table centered>
-                    <thead>
-                        <tr>
-                            <th data-field="user id">User Id</th>
-                            <th data-field="Vendor">Vendor</th>
-                            <th data-field="type">Type</th>
-                            <th data-field="from">From</th>
-                            <th data-field="to">To</th>
-                            <th data-field="ticket_number">Ticket No.</th>
-                            <th data-field="repair_invoice">Repair Invoice</th>
-                            <th data-field="amount">Amount</th>
-                            <th data-field="gst">GST</th>
-                            <th data-field="total">Total</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {this.state.history.map((item, index) => {
-                            return <tr key={index}>
-                            <td>{item.user_id ? item.user_id : '-'}</td>
-                            <td>{item.vendor ? item.vendor : '-'}</td>
-                            <td>{item.user_id ? 'Assigned' : 'Repair'}</td>
-                            <td>{moment(item.from).format('DD MMM YYYY')}</td>
-                            <td>{item.user_id ? (item.to ? moment(item.to).format('DD MMM YYYY') : `${moment(item.expected_recovery).format('DD MMM YYYY')} (exp)`) : (item.to ? moment(item.to).format('DD MMM YYYY') : `${moment(item.expected_delivery).format('DD MMM YYYY')} (exp)`)}</td>
-                            <td>{item.user_id ? (item.ticket_number ? item.ticket_number : '(Assigned by Admin)') : '-'}</td>
-                            <td>{item.repair_invoice ? item.repair_invoice : '-'}</td>
-                            <td>{item.amount ? item.amount : '-'}</td>
-                            <td>{item.gst ? item.gst : '-'}</td>
-                            <td>{item.total ? item.total : '-'}</td>
-                            </tr>
-                        })}
-                    </tbody>
-                </Table>
+                {this.state.assetDetails ? <div>
+                <h5 style={{float : 'right', position : 'absolute', left:'40%'}}>Current Status : {this.state.assetDetails.current_status}</h5>
+                <h6>Asset Name : {this.state.assetDetails.asset_name}</h6>
+                <h6>Serial Number : {this.state.assetDetails.serial_number}</h6>
+                <h6>Invoice Number : {this.state.assetDetails.invoice_number}</h6>
+                <h6>Vendor : {this.state.assetDetails.vendor}</h6>
+                <h6>Category : {this.state.assetDetails.category}</h6>
+                <h6>Purchase Date : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
+                <h6>Description : {this.state.assetDetails.description}</h6>
+                <h6>Amount : {this.state.assetDetails.amount}</h6>
+                <h6>GST : {this.state.assetDetails.gst}</h6>
+                <h6>Total : {this.state.assetDetails.total}</h6>
+                 </div> : null}
+                <br /><br />
+                <div>
+                    <Row>
+                    {this.state.history.map((element, index) => {
+                        return <Col s={12} m={4} key={index}>
+                            <CardPanel className="blue lighten-4 black-text" >
+                                {element.vendor ? <div>
+                                    <h5>Repair</h5>
+                                    <h6>From : {moment(element.from).format('DD MMM YYYY')}</h6>
+                                    {element.to ? <h6>To : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6>Expected Delivery : { moment(element.expected_delivery).format('DD MMM YYYY') }</h6>}
+                                    {element.to ? <h6>Repair Invoice : {element.repair_invoice}</h6> : null}
+                                    {element.to ? <h6>Amount : {element.amount}</h6> : null}
+                                    {element.to ? <h6>GST : {element.gst}</h6> : null}
+                                    {element.to ? <h6>Total : {element.total}</h6> : null}
+                                    <h6>Vendor : {element.vendor}</h6>
+                                </div> : <div>
+                                    <h5>Assigned</h5>
+                                    <h6>User Id : {element.user_id}</h6>
+                                    <h6>From : {moment(element.from).format('DD MMM YYYY')}</h6>
+                                    {element.to ? <h6>To : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6>Expected Recovery : { moment(element.expected_recovery).format('DD MMM YYYY') }</h6>}
+                                    {element.ticekt_number ? <h6>Ticket Number : {element.ticekt_number}</h6> : <h6>Assigned by admin</h6>}
+                                </div>}
+                            </CardPanel>
+                        </Col>
+                    })}
+                    </Row>
+                </div>
                 <div>
                 </div> 
             </div>

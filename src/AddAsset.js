@@ -40,7 +40,7 @@ class AddAsset extends Component{
         this.setLocation = this.setLocation.bind(this)
         this.handleVendorList = this.handleVendorList.bind(this)
         this.setVendorListRequest = this.setVendorListRequest.bind(this)
-        this.setAddVendor = this.setAddVendor.bind(this)
+        // this.setAddVendor = this.setAddVendor.bind(this)
     }
 
     checkForValidation(){
@@ -127,12 +127,12 @@ class AddAsset extends Component{
         })
     }
 
-    setAddVendor(){
-        this.setState({
-            addVendor : true
-        })
-        $("#triggerAddVendor").trigger('click')
-    }
+    // setAddVendor(){
+    //     this.setState({
+    //         addVendor : true
+    //     })
+    //     $("#triggerAddVendor").trigger('click')
+    // }
 
     vendorListDropdown(){
         var vendorArr = []
@@ -230,34 +230,34 @@ class AddAsset extends Component{
             <div>
                 <h3>Add Asset</h3>
                 <Row>
-                    <Input s={3} label="Serial Number *" value = {this.state.serial_number} onChange = {this.setSerialNumber} />
-                    <Input s={3} label="Asset Name *" value = {this.state.asset_name} onChange = {this.setAssetName} />
-                    <Input s={3} name='on' type='date' label="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
+                    <Input s={6} label="Serial Number *" value = {this.state.serial_number} onChange = {this.setSerialNumber} />
+                    <Input s={6} label="Asset Name *" value = {this.state.asset_name} onChange = {this.setAssetName} />
+                    <Input s={6} name='on' type='date' label="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
                     <Input s={6} label="Description" value = {this.state.description} onChange = {this.setDescription}/>
-                    <Input s={3} label="Invoice Number *" value = {this.state.invoice_number} onChange = {this.setInvoiceNumber}/>
-                    <Input s={2} label="Vendor *" type='select' value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
-                    <Input s={3} label="Condition *" value = {this.state.condition} onChange = {this.setCondition}/>
-                    <Input s={3} label="Location *" value = {this.state.location} onChange = {this.setLocation}/>
-                    <Input s={3} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
-                    <Input s={3} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} label="Invoice Number *" value = {this.state.invoice_number} onChange = {this.setInvoiceNumber}/>
+                    <Input s={6} label="Condition *" value = {this.state.condition} onChange = {this.setCondition}/>
+                    <Input s={6} label="Location *" value = {this.state.location} onChange = {this.setLocation}/>
                     <br />
-                    <Badge>Total : {this.state.total}</Badge>
                     <Input s={6} type='select' label="Category" onChange = {this.setCategory} defaultValue='Other'>
                         <option value='Electronics'>Electronics</option>
-                        <option value='Non - Electronics'>Non - Electronics</option>
+                        <option value='Non-Electronics'>Non-Electronics</option>
                         <option value='Other'>Other</option>
                     </Input>
-                </Row>
-                <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
-                {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
-                {this.state.vendorListRequest ? this.handleVendorList() : null}
-                <br /><br />
+                    <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
+                    <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
+                    <Badge>Total : {this.state.total}</Badge>
+                    <Input s={6} label="Vendor *" type='select' value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
                 <Modal
                     header='Add Vendor'
                     id="addVendor"
-                    trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
+                    trigger={<Button>Add Vendor</Button>}>
                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                </Modal> 
+                </Modal>
+                </Row>
+                <Button style={{position : 'absolute', bottom : '3%', right : '3%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
+                {this.state.vendorListRequest ? this.handleVendorList() : null}
+                <br /><br />
             </div>
         )
     }

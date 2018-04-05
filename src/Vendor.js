@@ -66,15 +66,12 @@ class Assets extends Component{
     }
 
 
-
     render(){
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                {/* <Row>
-                    <Input s={3} label="Search" onChange = {this.setSearch} />
-                </Row> */}
+                <h4>Vendors</h4>
                 <Table centered>
                     <thead>
                         <tr>
@@ -90,31 +87,15 @@ class Assets extends Component{
                             <td>{item.id}</td>
                             <td>{item.name}</td>
                             <td>{item.address}</td>
-                            {/* <Dropdown trigger={
-                                    <Button><Icon tiny>more_vert</Icon></Button>
-                                }>
-                                    <Modal
-                                        header='Edit Vendor'
-                                        fixedFooter
-                                        trigger={<NavItem>Edit</NavItem>}>
-                                        <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
-                                    </Modal>
-                                    <Modal
-                                        header='Delete Vendor'
-                                        bottomSheet
-                                        trigger={<NavItem>Delete</NavItem>}>
-                                        <DeleteAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
-                                    </Modal>
-                                    <NavItem href = "/adminhomepage/assets/history">History</NavItem>
-                                </Dropdown> */}
                             </tr>
                         })}
                     </tbody>
                 </Table>
                 <Modal
                     header='Add Vendor'
-                    fixedFooter
                     id="addVendor"
+                    actions ={<div></div>}
+                    // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
                     trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
                     <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
