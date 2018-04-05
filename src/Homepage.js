@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Navbar, NavItem, Icon, SideNav, Button} from 'react-materialize'
+import {Navbar, NavItem, Icon, SideNav, Button, SideNavItem} from 'react-materialize'
 import './MasterComponent.css';
 import Assets from './Assets';
 import Consumables from './Consumables';
@@ -13,7 +13,10 @@ import {
     Link
   } from 'react-router-dom';
 import EmployeeHistory from './EmployeeHistory';
-
+import Vendor from './Vendor'
+import History from './History'
+import AddAsset from './AddAsset'
+import RepairAsset from './RepairAsset'
 
 import LoginForm from './LoginForm';
 
@@ -33,6 +36,7 @@ class Homepage extends Component{
                     <Link to="/adminhomepage/consumables">Consumables</Link>
                     <Link to="/adminhomepage/employees">Employees</Link>
                     <Link to="/adminhomepage/tickets">Tickets</Link>
+                    <Link to="/adminhomepage/vendor">Vendor</Link>
                     </SideNav>
                 </div>
                 <div>
@@ -43,7 +47,10 @@ class Homepage extends Component{
                     <Route exact path="/adminhomepage/tickets" component={TicketsList} />
                     <Route exact path="/adminhomepage/consumables/history" component={HistoryConsumables}/>
                     <Route  exact path ='/adminhomepage/employees/history' component={EmployeeHistory}/>
-                    
+                    <Route  exact path ='/adminhomepage/vendor' component={Vendor}/>
+                    <Route  exact path ='/adminhomepage/assets/history' component={History}/>
+                    <Route  exact path ='/adminhomepage/assets/create' component={AddAsset}/>
+                    <Route  exact path ='/adminhomepage/assets/repair' component={RepairAsset}/>
                     
                 </div>
                 </div>
