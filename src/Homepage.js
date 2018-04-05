@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Navbar, NavItem, Icon, SideNav, Button, SideNavItem} from 'react-materialize'
+import {Navbar, NavItem, Icon, SideNav, Button} from 'react-materialize'
 import './MasterComponent.css';
 import Assets from './Assets';
 import Consumables from './Consumables';

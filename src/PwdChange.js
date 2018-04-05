@@ -86,5 +86,6 @@ class PasswordChange extends Component {
         }
        
     }
+ 
 }
 export default PasswordChange
