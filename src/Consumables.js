@@ -215,8 +215,8 @@ class Consumables extends Component{
                 }
                 <div className="filterContainer">
                     <Row>
-                        <Input s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity} onChange={this.minQuantity}></Input>
-                        <Input s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity} onChange={this.maxQuantity}></Input>
+                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity} onChange={this.minQuantity}></Input>
+                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity} onChange={this.maxQuantity}></Input>
                     </Row>
                         <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
                         <br />

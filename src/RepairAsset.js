@@ -165,7 +165,7 @@ class RepairAsset extends Component{
                         <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                     </Modal> 
                     <br /><br />
-                    <Button waves='light' style={{position : 'absolute', bottom : '3%', right : '3%'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    <Button waves='light' style={{position : 'fixed', bottom : '3%', right : '3%'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>
