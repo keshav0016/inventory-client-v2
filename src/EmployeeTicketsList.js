@@ -3,8 +3,6 @@ import axios from 'axios'
 import {Table, Button, Pagination, Row, Input,Modal} from 'react-materialize'
 import moment from 'moment';
 import Tickets from './Tickets'
-
-
 class EmployeeTicketsList extends Component{
     constructor(props){
         super(props)
@@ -23,44 +21,36 @@ class EmployeeTicketsList extends Component{
         this.setPendingChecked = this.setPendingChecked.bind(this)
         this.setAcceptedChecked = this.setAcceptedChecked.bind(this)
         this.setRejectedChecked = this.setRejectedChecked.bind(this)
-
     }
-
     setPendingChecked(){
         this.setPage(1)
         this.setState({
             isPendingChecked : !this.state.isPendingChecked,
         })
     }
-
     setAcceptedChecked(){
         this.setPage(1)
         this.setState({
             isAcceptedChecked : !this.state.isAcceptedChecked,
         })
     }
-
     setRejectedChecked(){
         this.setPage(1)
         this.setState({
             isRejectedChecked : !this.state.isRejectedChecked,
         })
     }
-
     setHandleListRequest(){
         this.setState({
             handleListRequest : true
         })
     }
-
-
     setPage(e){
         this.setState({
             page : e,
             handleListRequest : true
         })
     }
-
     handleList(){
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){
             axios({
@@ -76,7 +66,6 @@ class EmployeeTicketsList extends Component{
                 })
                 if(this.state.ticketsList.length === 0){
                     window.Materialize.toast("no tickets to show", 4000)
-
                 }
             })
             .catch(error => {
@@ -97,7 +86,6 @@ class EmployeeTicketsList extends Component{
                 })
                 if(this.state.ticketsList.length === 0){
                     window.Materialize.toast("no tickets to show", 4000)
-
                 }
             })
             .catch(error => {
@@ -106,9 +94,7 @@ class EmployeeTicketsList extends Component{
         }
         
     }
-
     
-
     render(){
         return(
             <div>
@@ -131,7 +117,6 @@ class EmployeeTicketsList extends Component{
                             <th data-field="status">Status</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         {this.state.ticketsList.map((ticket, index) => {
                             return (<tr key={ticket.ticket_number}>
@@ -161,10 +146,7 @@ class EmployeeTicketsList extends Component{
             </div>
         )
     }
-
-
 }
-
-
-
 export default EmployeeTicketsList
+
+
