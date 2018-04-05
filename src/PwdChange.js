@@ -43,7 +43,7 @@ class PasswordChange extends Component {
         return ( 
             <div>
                 {this.state.change ? change : null}
-                {this.state.employee ? (<Redirect push to = '/employeehomepage'/>): null}
+                {this.state.employee ? (<Redirect push to = '/login'/>): null}
             </div>
         )
     }
