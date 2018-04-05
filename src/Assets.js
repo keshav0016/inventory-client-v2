@@ -139,13 +139,13 @@ class Assets extends Component{
                     <Input s={3} label="Search" onChange = {this.setSearch} />
                 </Row>
                 <div className="filterContainer">
-                    <h5>Filter by Current Status</h5>
+                    <h5 style={{color:'white'}}>Filter by Current Status</h5>
                     <Input name='filter' type='checkbox' value='red' label='Available' onClick = {this.setAvailableChecked} checked={this.state.isAvailableChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssignedChecked} checked={this.state.isAssignedChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Service' onClick = {this.setServiceChecked} checked={this.state.isServiceChecked} />
                     <span> </span>
                     <br />
-                    <h5>Filter by Category</h5>
+                    <h5 style={{color:'white'}}>Filter by Category</h5>
                     <Input name='filter' type='checkbox' value='red' label='Electronics' onClick = {this.setElectronicsChecked} checked={this.state.isElectronicsChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick = {this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Other' onClick = {this.setOtherChecked} checked={this.state.isOtherChecked} />
