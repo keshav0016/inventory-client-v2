@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Badge} from 'react-materialize'
-
+import $ from 'jquery'
 //CHANGE THE USER ID IN CLIENT AS WELL AS SERVER
 
 class Tickets extends Component{
@@ -15,7 +15,6 @@ class Tickets extends Component{
             user_id: this.props.user_id,
             requestResource: false,
             item:'',
-            data: []
         }
         this.requestQuantity = this.requestQuantity.bind(this)
         this.requestResourceType = this.requestResourceType.bind(this)
@@ -49,8 +48,8 @@ class Tickets extends Component{
     }
 
     checkForValidation(){
-        if(this.state.quantity > this.state.data){
-            window.Materialize.toast(`available quantity is only ${this.state.data}`, 4000)
+        if(this.state.quantity <= 0){
+            window.Materialize.toast(`requested quantity cannot be negative`, 4000)
         }
         else{
             this.setState({
@@ -77,13 +76,16 @@ class Tickets extends Component{
                 item:this.state.item,
                 item_type:this.state.item_type,
                 quantity:this.state.quantity,
-            }
+            },
+            withCredentials:true
         })
         .then(res => {
             this.setState({
                 requestResource:false
             })
             window.Materialize.toast('Success', 4000)
+            $(".modal-overlay").click()
+            this.props.setHandleListRequest()
         })
         .catch(error => {
             window.Materialize.toast('sorry, request can not be made', 4000)
@@ -100,7 +102,6 @@ class Tickets extends Component{
            this.setState({
                availableItems: res.data.items,
                assets: res.data.assetLimit,
-               data : res.data.quantity
            })
        })
        .catch(error => {
