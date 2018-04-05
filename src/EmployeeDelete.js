@@ -11,7 +11,7 @@ class EmployeeDelete extends Component {
     handleDelete(){
         axios({
           method: 'post',
-          url: 'http://localhost:3001/employee/delete',
+          url: 'http://localhost:3001/employees/delete',
           data:{
             id: this.props.user.id
           },

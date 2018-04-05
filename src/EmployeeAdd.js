@@ -32,7 +32,7 @@ class EmployeeAdd extends Component {
     {
       axios({
         method: 'post',
-        url: 'http://localhost:3001/employee/create',
+        url: 'http://localhost:3001/employees/create',
         data:{
           first_name:this.state.first_name,
           last_name:this.state.last_name,
@@ -130,7 +130,7 @@ class EmployeeAdd extends Component {
             <option value='Other'>Other</option>
           </Input>
           <Input s={6} type='select' label="* Department" onChange={this.handleDepartment}defaultValue='Other'>
-            <option value='Hr'>Hr</option>
+            <option value='Hr'>HR</option>
             <option value='Delivery'>Delivery</option>
             <option value='Developer'>Developer</option>
             <option value='Other'>Other</option>

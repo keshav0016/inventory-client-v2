@@ -4,14 +4,14 @@ import {Input, Button, Row, Icon} from 'react-materialize'
 import {
    Redirect
   } from 'react-router-dom';
-
+import './Employee.css'
 class PasswordChange extends Component {
     constructor(props){
         super(props)
         this.state = {
             Confirm_Password : '',
             New_Password : '',
-            user_id: this.props.user_id,
+            user_id: this.props.location.user.user_id,
             change: true
             
         }
@@ -22,6 +22,7 @@ class PasswordChange extends Component {
     }
     render(){
         var change =(
+            <div className='background'>
             <div class='passwordchangeform'>
                 <Row>
                     <div className ='header'>
@@ -36,6 +37,7 @@ class PasswordChange extends Component {
                     </div>
 
                 </Row>
+            </div>
             </div>
         );
         return ( 
@@ -68,7 +70,8 @@ class PasswordChange extends Component {
                 data: {
                     user_id: this.state.user_id,
                     password: this.state.New_Password
-                }
+                },
+                withCredentials : true
             })
             .then((res) => {
                 if(res.data.message === 'password has been changed'){
