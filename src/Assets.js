@@ -42,45 +42,22 @@ class Assets extends Component{
     }
 
     handleList(){
-        // if(!this.state.isAssignedChecked && !this.state.isAvailableChecked && !this.state.isServiceChecked && !this.state.isElectronicsChecked && !this.state.isNonElectronicsChecked && !this.state.isOtherChecked){
-        //     axios({
-        //         method : 'get',
-        //         url : `http://localhost:3001/asset/list?page=${this.state.page}&search=%${this.state.search}%`,
-        //         withCredentials : true
-        //     })
-        //     .then(res => {
-        //         this.setState({
-        //             assetList : res.data.assets.sort((a, b) => a.asset_id - b.asset_id),
-        //             pagination : res.data.pagination,
-        //             handleListRequest : false,
-        //             loading : false
-        //         })
-        //     })
-        //     .catch(error => {
-        //         console.error(error)
-        //     })
-        // }
-
-        // else{
-            axios({
-                method : 'get',
-                url : `http://localhost:3001/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%`,
-                withCredentials : true
+        axios({
+            method : 'get',
+            url : `http://localhost:3001/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%`,
+            withCredentials : true
+        })
+        .then(res => {
+            this.setState({
+                assetList : res.data.assets.sort((a, b) => a.asset_id - b.asset_id),
+                pagination : res.data.pagination,
+                handleListRequest : false,
+                loading : false
             })
-            .then(res => {
-                this.setState({
-                    assetList : res.data.assets.sort((a, b) => a.asset_id - b.asset_id),
-                    pagination : res.data.pagination,
-                    handleListRequest : false,
-                    loading : false
-                })
-            })
-            .catch(error => {
-                console.error(error)
-            })
-        // }
-
-        
+        })
+        .catch(error => {
+            console.error(error)
+        })
     }
 
     setSearch(e){
@@ -176,7 +153,7 @@ class Assets extends Component{
                 {this.state.loading ? <ProgressBar /> :
                 (this.state.assetList.length === 0 ? <h3 style={{left : '40%'}}>No Records</h3> :
                 <div>
-                <Table centered className="assetTable">
+                <Table centered hoverable className="assetTable">
                     <thead>
                         <tr>
                             <th data-field="serial_number">Serial No.</th>
