@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table} from 'react-materialize'
+import {Table, Button} from 'react-materialize'
 import moment from 'moment'
 
 class HistoryConsumables extends Component{
@@ -73,6 +73,8 @@ class HistoryConsumables extends Component{
                            <td>{consumable.discount ? consumable.discount : '-'}</td>
                            <td>{consumable.gst ? consumable.gst : '-'}</td>
                            <td>{consumable.total ? consumable.total : '-'}</td>
+                           {/* <td>{consumable.purchase_date ? <Button>Edit</Button> : null}</td>
+                           <td>{consumable.purchase_date ? <Button>Submit</Button> : null}</td> */}
                            </tr>
                        })}
                    </tbody>
