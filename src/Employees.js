@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination } from 'react-materialize'
-
+import $ from 'jquery'
 
 class EmployeesList extends Component {
   constructor(props){
@@ -38,6 +38,7 @@ class EmployeesList extends Component {
     this.setState({
       handleListRequest : true
     })
+    $(".modal-overlay").click()
   }
   handleList(){
     axios({

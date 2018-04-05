@@ -18,7 +18,7 @@ class Logout extends Component{
     render(){
         return(
             <div>
-            {this.state.home ? <Redirect to ='login'/>:null}
+            {this.state.home ? <Redirect push to ='/login'/>:null}
             </div>
         )
     }
@@ -37,7 +37,6 @@ class Logout extends Component{
                     home : true
                 })
             }
-            window.location.reload(true);
             
         })
         .catch(error=>{

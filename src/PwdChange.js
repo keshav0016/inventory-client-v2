@@ -11,7 +11,7 @@ class PasswordChange extends Component {
         this.state = {
             Confirm_Password : '',
             New_Password : '',
-            user_id: this.props.location.user.user_id,
+            user_id: this.props.location.user,
             change: true
             
         }
@@ -66,7 +66,7 @@ class PasswordChange extends Component {
         if(this.state.Confirm_Password === this.state.New_Password){
             axios({
                 method: 'post',
-                url: 'http://localhost:3001/employee/changepassword',
+                url: 'http://localhost:3001/employee/ticket/changepassword',
                 data: {
                     user_id: this.state.user_id,
                     password: this.state.New_Password
