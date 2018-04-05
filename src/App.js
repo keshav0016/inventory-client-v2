@@ -10,6 +10,7 @@ import {
 // import EmployeesList from './Employees';
 // import EmployeeAdd from './EmployeeAdd';
 import Homepage from './Homepage';
+import Tickets from './Tickets'
 import PasswordChange from './PwdChange'
 import EmployeeDB from './EmployeeDB';
 
@@ -21,11 +22,13 @@ class App extends Component {
             <Link to ='/login'></Link>
             <Link to ='/logout'></Link>
             <Link to="/adminhomepage"></Link>
+            <Link to="/employee/tickets"></Link>
+            <Route path="/adminhomepage" component={Homepage} />
+            <Route path="/employee/tickets" component={Tickets} />
             <Link to="/user/passwordchange"></Link>
             <Link to='/user'></Link>
             <Route path = '/login' component = {LoginForm}/>
             <Route path = '/logout' component = {Logout}/>            
-            <Route path="/adminhomepage" component={Homepage} />
             <Route path="/user/passwordchange" component={PasswordChange} />
             <Route path ='/employeehomepage' component={EmployeeDB}/>
             

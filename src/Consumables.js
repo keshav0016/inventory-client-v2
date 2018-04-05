@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} from 'react-materialize'
 import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
+import AssignConsumables from './AssignConsumable'
+import DeleteConsumable from './DeleteConsumable'
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+  } from 'react-router-dom';
 import './ListPage.css'
+import $ from 'jquery'
 
 
 class Consumables extends Component{
@@ -13,45 +21,74 @@ class Consumables extends Component{
             consumableList : [],
             pagination : {totalPage : 1, currentPage : 1},
             page : 1,
-            handleListRequest : true
+            handleListRequest : true,
+            sort : 'default',
+            minQuantity : '',
+            maxQuantity : '',
+            keyword : ''
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
         this.setPage = this.setPage.bind(this)
+        this.sortBy = this.sortBy.bind(this)
+        this.minQuantity = this.minQuantity.bind(this)
+        this.maxQuantity = this.maxQuantity.bind(this)
+        this.searchKeyword = this.searchKeyword.bind(this)
+        this.checkForValidation = this.checkForValidation.bind(this)
+        this.resetFilter = this.resetFilter.bind(this)
+    }
+
+    checkForValidation(){
+        if(Number(this.state.minQuantity) < 0){
+            window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
+            this.setState({
+                handleListRequest : true
+            })
+        }
+        else if(Number(this.state.maxQuantity) < 0){
+            window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
+            this.setState({
+                handleListRequest : true
+            })
+        }
+        else if(Number(this.state.minQuantity) > Number(this.state.maxQuantity)){
+            window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+            this.setState({
+                handleListRequest : true
+            })
+        }
+        else{
+            this.setState({
+                handleListRequest : true
+            })
+        }
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/consumables/list?page=${this.state.page}`,
+            url : `http://localhost:3001/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity}&max=${this.state.maxQuantity}`,
             withCredentials : true
         })
         .then(res => {
-            this.setState({
-                consumableList : res.data.consumables.sort((a, b) => a.consumable_id - b.consumable_id),
-                pagination : res.data.pagination,
-                handleListRequest : false
-            })
+            if(res.data.consumables.length !== 0)
+            {
+                this.setState({
+                    consumableList : res.data.consumables,
+                    pagination : res.data.pagination,
+                    handleListRequest : false
+                })
+            }
+            else{
+                this.setState({
+                    consumableList : res.data.consumables,
+                    pagination : res.data.pagination,
+                    handleListRequest : false
+                })
+            }
         })
         .catch(error => {
             console.error(error)
-        })
-    }
-
-    handleDelete(index){
-        axios({
-            method : 'post',
-            url : 'http://localhost:3001/consumables/delete',
-            data : {
-                consumable_id : this.state.consumableList[index].consumable_id
-            }
-        })
-        .then(obj => {
-            window.Materialize.toast('Consumable Deleted Successfully', 4000)
-            console.log(obj.data.message)
-        })
-        .catch(error => {
-            console.log(error)
         })
     }
 
@@ -68,22 +105,80 @@ class Consumables extends Component{
         })
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(this.state.handleListRequest === true){
+            $(".modal-close").trigger('click')
+        }
+    }
+
+    sortBy(e){
+        this.setState({
+            sort:e.target.value,
+            handleListRequest : true
+        })
+    }
+
+    minQuantity(e){
+            this.setState({
+                minQuantity: e.target.value,
+            })
+    }
+
+    maxQuantity(e){
+            this.setState({
+                maxQuantity: e.target.value,
+            })
+    }
+
+    searchKeyword(e){
+        this.setState({
+            keyword : e.target.value,
+            handleListRequest : true
+        })
+    }
+
+    resetFilter(){
+        this.setState({
+            minQuantity:'',
+            maxQuantity:'',
+            handleListRequest:true
+        })
+    }
+
     render(){
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <Table centered>
+                <Row>
+                <Input s={2} type='select' onChange={this.sortBy}>
+                    <option value='default'>Sort By Quantity</option>
+                    <option value='asc'>Low - High</option>
+                    <option value='desc'>High - Low</option> 
+                </Input>
+                <Input s={4} type='text' label="Search ( Case Sensitive )" onChange={this.searchKeyword}></Input>
+                </Row>
+                {this.state.consumableList.length === 0 
+                    ?
+
+                    <div className="noRecordsScreen">
+                        No Records
+                    </div>
+
+                    :
+
+                    <div>
+                    <Table centered striped className="consumableTable">
                     <thead>
                         <tr>
-                            <th data-field="consumable_id">Consumable Id</th>
+                            <th data-field="consumable_id">Id</th>
                             <th data-field="name">Consumable Name</th>
-                            <th data-field="quantity">Consumable Quantity</th>
+                            <th data-field="quantity">Available Consumable Quantity</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
-                            return (<tr key={index}>
+                            return (<tr key={consumable.consumable_id}>
                             <td>{consumable.consumable_id}</td>
                             <td>{consumable.name}</td>
                             <td>{consumable.quantity}</td>
@@ -96,24 +191,46 @@ class Consumables extends Component{
                                     trigger={<NavItem>Edit</NavItem >}>
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <NavItem onClick={this.handleDelete.bind(this,index)}>Delete</NavItem>
-                                <NavItem>History</NavItem>
+                                <Modal
+                                        header='Delete Asset'
+                                        bottomSheet
+                                        trigger={<NavItem>Delete</NavItem>}>
+                                        <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
+                                </Modal>
+                                <Modal
+                                    header='Assign Consumable'
+                                    fixedFooter
+                                    trigger={<NavItem>Assign</NavItem >}>
+                                    <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+                                </Modal>
+                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>History</NavItem ></Link>
                                 </Dropdown></td>
                             </tr>
                             )
                         },this)}
                     </tbody>
                 </Table>
-                
+                <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
+                </div>
+                }
+                <div className="filterContainer">
+                    <Row>
+                        <Input s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity} onChange={this.minQuantity}></Input>
+                        <Input s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity} onChange={this.maxQuantity}></Input>
+                    </Row>
+                        <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
+                        <br />
+                        <br />
+                        <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
+                </div>                
                 <Modal
                     header='Add Consumable'
                     fixedFooter
                     trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
                     <AddConsumables setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
-                <div>
-                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
-                </div>
+                {/* <div>
+                </div> */}
             </div>
         )
     }
