@@ -12,6 +12,12 @@
   width:25%;
   background-image: url(http://idesktopwallpaper.com/wp-content/uploads/2016/01/android_lollipop_art_wallpaper.jpg);
 }
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: url(https://images8.alphacoders.com/713/713604.jpg); 
+}
 .FormIcon {
   position: absolute;
   size: 20%;

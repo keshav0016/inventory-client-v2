@@ -42,7 +42,7 @@ class EmployeesList extends Component {
   handleList(){
     axios({
       method: 'get',
-      url: `http://localhost:3001/employee/list?page=${this.state.page}`,
+      url: `http://localhost:3001/employees/list?page=${this.state.page}`,
       withCredentials: true
     })
     .then((res) => {

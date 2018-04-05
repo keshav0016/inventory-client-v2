@@ -48,7 +48,7 @@ class EmployeeHistory extends Component {
     handleList(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/employee/history',
+            url : 'http://localhost:3001/employees/history',
             data : {
                 user_id : this.state.user_id
             },
@@ -59,6 +59,10 @@ class EmployeeHistory extends Component {
                 data : res.data.history
                 
             })
+            if(this.state.data.length === 0){
+                window.Materialize.toast('There is no history to show',3000)
+
+            }
         })
         .catch(error => {
             window.Materialize.toast('list not found',3000)

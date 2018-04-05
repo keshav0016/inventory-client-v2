@@ -27,10 +27,6 @@ class EmployeeDB extends Component {
                 </div>
                 <div>
                     <Route exact path="/employeehomepage/list" component={TicketsList} />
-                    
-                    
-                    {/* <Route exact path="/adminhomepage/consumables" component={Consumables} />
-                    <Route exact path="/adminhomepage/employees" component={EmployeesList} /> */}
                 </div>
                 </div>
             </div>

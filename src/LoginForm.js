@@ -96,7 +96,8 @@ class LoginForm extends Component {
         }
       })
       .catch(() =>{
-        alert('aaaaaaaaaaaaaaaaaaa')
+        window.Materialize.toast('wrong password',3000)
+
       })
     }
   }
@@ -135,7 +136,7 @@ class LoginForm extends Component {
     return (
       <div>
         {this.state.login ? loginform : null}
-        {this.state.change ? (<Redirect push to ='/user/passwordchange'  user_id={this.state.user_id}/>) : null}
+        {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange' , user:{user_id:this.state.user_id}}}/>) : null}
         {this.state.employee ? (<Redirect push to ='/employeehomepage'  user_id={this.state.user_id}/>) : null}
         {this.state.admin ? (<Redirect push to ='/adminhomepage'/>): null}
       </div>
