@@ -201,6 +201,7 @@ class Assets extends Component{
                                     <Modal
                                         header='Delete Asset'
                                         actions={<div></div>}
+                                        bottomSheet
                                         trigger={<NavItem>Delete</NavItem>}>
                                         <DeleteAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
                                     </Modal>
