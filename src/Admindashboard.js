@@ -55,9 +55,7 @@ class Admindashboard extends Component{
                             <br />
                             <span>Accepted Requests: {this.state.consumablesAcceptedCount}</span>
                             <br />
-                            <span>Most Requested Consumable: {this.state.consumablesLowStock}</span>
-                            <br />
-                            <span>No of consumables running low on stock: </span>
+                            <span>No of consumables running low on stock: {this.state.consumablesLowStock}</span>
                         </CardPanel>
                     </Col>
                     <Col m={4}>
@@ -69,8 +67,6 @@ class Admindashboard extends Component{
                             <span>Pending Requests: {this.state.assetPendingCount}</span>
                             <br />
                             <span>Accepted Requests: {this.state.assetAcceptedCount}</span>
-                            <br />
-                            <span>Most Requested Assets: </span>
                         </CardPanel>
                     </Col>
                 </Row>

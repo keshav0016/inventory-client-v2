@@ -26,7 +26,7 @@ class AssignConsumables extends Component {
     getEmployeeList(){
         axios({
             method:'get',
-            url:'http://localhost:3001/user/ticket/listEmployee',
+            url:'http://localhost:3001/admin/ticket/listEmployee',
             withCredentials:true
         })
         .then(employeeList => {
@@ -36,7 +36,7 @@ class AssignConsumables extends Component {
             })
         })
         .catch(error => {
-            alert('No Employee')
+            console.log(error)
         })
        }
     
