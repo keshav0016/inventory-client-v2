@@ -13,7 +13,7 @@ class EmployeeDelete extends Component {
           method: 'post',
           url: 'http://localhost:3001/employees/delete',
           data:{
-            id: this.props.user.id
+            user_id: this.props.user.user_id
           },
           withCredentials: true
         })

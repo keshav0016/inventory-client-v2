@@ -7,7 +7,7 @@ import {
     Link,
   } from 'react-router-dom';
 import Tickets from './Tickets';
-import TicketsList from './TicketsList';
+import EmployeeTicketsList from './EmployeeTicketsList';
 
 
 class EmployeeDB extends Component {
@@ -18,7 +18,7 @@ class EmployeeDB extends Component {
                 <div className="masterComponentBackground">
                 <div>
                     <Navbar className="masterComponentNavBar">
-                       <Link to='/logout'> <NavItem className="masterComponentLogoutButton">LOGOUT</NavItem></Link>
+                        <NavItem href='/logout' className="masterComponentLogoutButton">LOGOUT</NavItem>
                     </Navbar>
                     <SideNav className="masterComponentSideBar" trigger={<Button className="red lighten-2 masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                     <Link to="/employeehomepage/list"><SideNavItem className="masterComponentSideBarItem">TicketsList</SideNavItem></Link>
@@ -26,7 +26,7 @@ class EmployeeDB extends Component {
                     </SideNav>
                 </div>
                 <div>
-                    <Route exact path="/employeehomepage/list" component={TicketsList} />
+                    <Route exact path="/employeehomepage/list" component={EmployeeTicketsList} />
                 </div>
                 </div>
             </div>
