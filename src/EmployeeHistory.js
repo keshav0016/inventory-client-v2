@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table} from 'react-materialize'
+import {Row, Col, CardPanel,Table} from 'react-materialize'
+import moment from 'moment'
 
 class EmployeeHistory extends Component {
     constructor(props){
@@ -14,32 +15,26 @@ class EmployeeHistory extends Component {
     render(){
         return (
            
-            <div>
-                 <p>history</p>
-            <Table>
-            <thead>
-                <tr>
-                <th data-field="id">User Id</th>
-                <th data-field="name">Asset</th>
-                <th data-field="price">Consumables</th>
+        <div>
+        <Table centered striped>
+        <thead>
+            <tr>
+                <th data-field="consumable id"> User held Consumable Id</th>
+                <th data-field="asset id">User held Asset Id</th>
+             
+            </tr>
+        </thead>
 
+        <tbody>
+            {this.state.data.map((item, index) => {
+                return <tr key={index}>
+                <td>{item.consumable_id}</td>
+                <td>{item.asset_id}</td>
                 </tr>
-            </thead>
-
-            <tbody>{this.state.data.map(function (item,key){
-                return(
-                    <tr>
-                    <td>{item.user_id}</td>
-                    <td>{item.asset_name}</td>
-                    <td>{item.consumable_name}</td>
-                    </tr>
-                    
-                )
             })}
-               
-            </tbody>
-            </Table>
-            </div>
+        </tbody>
+    </Table>
+        </div>
         )
     }
     componentWillMount(){
