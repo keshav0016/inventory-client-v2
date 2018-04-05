@@ -24,7 +24,7 @@ class EmployeeDB extends Component {
            <div>
                <div className="masterComponentBackground">
                <div>
-                   <Navbar className="masterComponentNavBar">
+                   <Navbar className="teal lighten-1 masterComponentNavBar">
                        <NavItem href='/logout' className="masterComponentLogoutButton">LOGOUT</NavItem>
                    </Navbar>
                  
