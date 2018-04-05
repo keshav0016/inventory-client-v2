@@ -61,7 +61,7 @@ class Assets extends Component{
                     <Row>
                     {this.state.history.map((element, index) => {
                         return <Col s={12} m={4} key={index}>
-                            <CardPanel className="blue lighten-4 black-text" >
+                            <CardPanel className="grey darken-3 black-text " >
                                 {element.vendor ? <div>
                                     <h5>Repair</h5>
                                     <h6>From : {moment(element.from).format('DD MMM YYYY')}</h6>
