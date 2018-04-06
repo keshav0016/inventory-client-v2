@@ -81,10 +81,8 @@ class LoginForm extends Component {
     var loginform = (
       <div>
         <div className="loginBackground">
+          <h4 style={{color:'white',position:'relative', left:'32%'}}>Inventory Management System</h4>
           <div className="z-depth-4 loginForm">
-            <div className="loginBanner">
-              <p className="loginBannerText">My Account</p>
-            </div>
             <div className="loginFormIcon">
               <Icon className="medium material-icons white-text">account_circle</Icon>
             </div>
