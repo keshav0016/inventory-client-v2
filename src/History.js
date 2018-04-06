@@ -40,7 +40,7 @@ class Assets extends Component{
 
     render(){
         return(
-            <div>
+            <div  style={{marginLeft : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3>History</h3>
                 {this.state.assetDetails ? <div>
