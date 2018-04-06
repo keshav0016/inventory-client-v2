@@ -115,7 +115,7 @@ class EmployeesList extends Component {
           <div className = 'Addbtn'>
           <Modal 
             header='Employee Add Form'
-            trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add'  />}>
+            trigger={<Button floating large className = 'red addemployeebtn' waves = 'light' icon = 'add'  />}>
             <EmployeeAdd setHandleListRequest = {this.setHandleListRequest}/>
           </Modal>
           </div>
