@@ -62,6 +62,7 @@
 .assetCheckbox{
   position: relative;
   left:20%;
+  width: fit-content;
 }
 
 .assetCheckbox label{
