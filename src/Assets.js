@@ -132,7 +132,7 @@ class Assets extends Component{
 
     render(){
         return(
-            <div>
+            <div  style={{marginLeft : '1%', marginRight : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
                 <Row style={{position : 'relative', left : '0'}}>
