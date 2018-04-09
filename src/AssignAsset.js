@@ -63,7 +63,7 @@ class AssignAsset extends Component{
         var employeesArr = []
         employeesArr.push(<option key='Select' value='Select'>Select</option>)
         this.state.employees.forEach(employee => {
-            employeesArr.push(<option key={employee.id} value={employee.id}>{`${employee.first_name} ${employee.last_name}`}</option>)
+            employeesArr.push(<option key={employee.user_id} value={employee.user_id}>{`${employee.first_name} ${employee.last_name}`}</option>)
         });
         return employeesArr
     }

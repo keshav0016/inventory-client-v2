@@ -12,6 +12,8 @@ class Assets extends Component{
             historyAssigned : [],
             historyRepair : [],
             history : [],
+            assignedEmployee : {},
+            repairDetails : {},
             handleListRequest : true,
         }
         this.handleList = this.handleList.bind(this)
@@ -29,6 +31,8 @@ class Assets extends Component{
                 historyAssigned : res.data.historyAssigned,
                 historyRepair : res.data.historyRepair,
                 history : res.data.historyAssigned.concat(res.data.historyRepair).sort((a,b) => b.id - a.id),
+                assignedEmployee : res.data.employeeDetails,
+                repairDetails : res.data.repairDetails,
                 handleListRequest : false
             })
         })
@@ -42,41 +46,66 @@ class Assets extends Component{
         return(
             <div  style={{marginLeft : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3>History</h3>
-                {this.state.assetDetails ? <div>
-                <h5 style={{float : 'right', position : 'absolute', left:'40%'}}>Current Status : {this.state.assetDetails.current_status}</h5>
-                <h6>Asset Name : {this.state.assetDetails.asset_name}</h6>
-                <h6>Serial Number : {this.state.assetDetails.serial_number}</h6>
-                <h6>Invoice Number : {this.state.assetDetails.invoice_number}</h6>
-                <h6>Vendor : {this.state.assetDetails.vendor}</h6>
-                <h6>Category : {this.state.assetDetails.category}</h6>
-                <h6>Purchase Date : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
-                <h6>Description : {this.state.assetDetails.description}</h6>
-                <h6>Amount : {this.state.assetDetails.amount}</h6>
-                <h6>GST : {this.state.assetDetails.gst}</h6>
-                <h6>Total : {this.state.assetDetails.total}</h6>
-                 </div> : null}
-                <br /><br />
+                <h3>Details</h3>
+                {this.state.assetDetails.current_status === 'Available' ? <h4>Current Status : {this.state.assetDetails.current_status}</h4> : null }
+                {this.state.assetDetails.current_status === 'Assigned' ? <h4>Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
+                {this.state.assetDetails.current_status === 'Service' ? <h4>Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
                 <div>
                     <Row>
+                        <Col s={12} m={12}>
+                        <CardPanel  >
+                            <h5>Purchase</h5>
+                            <hr />
+                            <div style = {{display : 'flex'}} >
+                                <div style={{float : 'left', width : '50%'}} >
+                                    <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
+                                    <h6><b>Serial Number</b> : {this.state.assetDetails.serial_number}</h6>
+                                    <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
+                                    <h6><b>Vendor</b> : {this.state.assetDetails.vendor}</h6>
+                                    <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
+                                </div>
+                                <div style={{float: 'right', width : '50%'}} >
+                                    <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
+                                    <h6><b>Description</b> : {this.state.assetDetails.description}</h6>
+                                    <h6><b>Amount</b> : {this.state.assetDetails.amount}</h6>
+                                    <h6><b>GST</b> : {this.state.assetDetails.gst}</h6>
+                                    <h6><b>Total</b> : {this.state.assetDetails.total}</h6>
+                                </div>
+                            </div>
+                        </CardPanel>
+                        </Col>
                     {this.state.history.map((element, index) => {
-                        return <Col s={12} m={4} key={index}>
-                            <CardPanel className="grey darken-3 white-text " >
+                        return <Col s={12} m={12} key={index}>
+                            <CardPanel  >
                                 {element.vendor ? <div>
                                     <h5>Repair</h5>
-                                    <h6>From : {moment(element.from).format('DD MMM YYYY')}</h6>
-                                    {element.to ? <h6>To : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6>Expected Delivery : { moment(element.expected_delivery).format('DD MMM YYYY') }</h6>}
-                                    {element.to ? <h6>Repair Invoice : {element.repair_invoice}</h6> : null}
-                                    {element.to ? <h6>Amount : {element.amount}</h6> : null}
-                                    {element.to ? <h6>GST : {element.gst}</h6> : null}
-                                    {element.to ? <h6>Total : {element.total}</h6> : null}
-                                    <h6>Vendor : {element.vendor}</h6>
+                                    <hr />
+                                    <div style={{display : 'flex'}} >
+                                        <div style={{float : 'left', width : '50%'}} >
+                                            <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
+                                            {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6><b>Expected Delivery</b> : { moment(element.expected_delivery).format('DD MMM YYYY') }</h6>}
+                                            {element.to ? <h6><b>Repair Invoice</b> : {element.repair_invoice}</h6> : null}
+                                            <h6><b>Vendor</b> : {element.vendor}</h6>
+                                        </div>
+                                        <div style={{float : 'right', width : '50%'}} >
+                                            {element.to ? <h6><b>Amount</b> : {element.amount}</h6> : null}
+                                            {element.to ? <h6><b>GST</b> : {element.gst}</h6> : null}
+                                            {element.to ? <h6><b>Total</b> : {element.total}</h6> : null}
+                                        </div>
+                                    </div>
                                 </div> : <div>
                                     <h5>Assigned</h5>
-                                    <h6>User Id : {element.user_id}</h6>
-                                    <h6>From : {moment(element.from).format('DD MMM YYYY')}</h6>
-                                    {element.to ? <h6>To : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6>Expected Recovery : { moment(element.expected_recovery).format('DD MMM YYYY') }</h6>}
-                                    {element.ticekt_number ? <h6>Ticket Number : {element.ticekt_number}</h6> : <h6>Assigned by admin</h6>}
+                                    <hr />
+                                    <div style={{display : 'flex'}} >
+                                        <div style={{float: 'left', width : '50%'}} >
+                                            <h6><b>User Id</b> : {element.user_id}</h6>
+                                            <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
+                                        </div>
+                                        <div style={{float: 'right', width : '50%'}} >
+                                            {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6><b>Expected Recovery</b> : { moment(element.expected_recovery).format('DD MMM YYYY') }</h6>}
+                                            {element.ticekt_number ? <h6><b>Ticket Number</b> : {element.ticekt_number}</h6> : <h6><b>Assigned by admin</b></h6>}
+                                        </div>
+                                    </div>
                                 </div>}
                             </CardPanel>
                         </Col>
