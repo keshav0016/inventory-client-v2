@@ -44,6 +44,8 @@ class Admindashboard extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
+                <img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" className="adminDasboardLogo" />
+                <p className="adminDashboardTitle">Dashboard</p>
                 <Row>
                     <Col m={4}>
                         <CardPanel className=" grey darken-3 white-text adminDashboardCards1">
