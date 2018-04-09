@@ -204,8 +204,8 @@ class AddConsumables extends Component{
                     <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price} onChange = {this.setItemPrice}/>
                     <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst} onChange = {this.setGst}/>
                     <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount} onChange = {this.setDiscount}/>
-                    <Badge>Total : {this.state.total}</Badge>
-                    <Badge>Total Price : {this.state.whole_price}</Badge>
+                    <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
+                    <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
                     <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
                     {this.state.addConsumableRequest ? this.addConsumable () : null}

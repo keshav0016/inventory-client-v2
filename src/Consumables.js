@@ -149,7 +149,7 @@ class Consumables extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <p>Available Consumables</p>
+                <p className="adminDashboardTitle">Consumables</p>
                 <Row>
                 <Input s={2} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By Quantity</option>
@@ -204,7 +204,7 @@ class Consumables extends Component{
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>History</NavItem ></Link>
+                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>Details</NavItem ></Link>
                                 </Dropdown></td>
                             </tr>
                             )
