@@ -229,7 +229,7 @@ class Assets extends Component{
                                         trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
                                         {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
-                                    <Link to={{ pathname : '/adminhomepage/assets/history', asset : item.asset_id}}><NavItem>History</NavItem></Link>
+                                    <Link to={{ pathname : '/adminhomepage/assets/history', asset : item.asset_id}}><NavItem>Details</NavItem></Link>
                                 </Dropdown>
                             </tr>
                         })}
