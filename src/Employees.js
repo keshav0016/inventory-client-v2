@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Employee.css';
+import './adminDash.css'
 import EmployeeAdd from './EmployeeAdd';
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeDelete from './EmployeeDelete';
@@ -65,9 +66,9 @@ class EmployeesList extends Component {
   }
   render() {
     var employeelist = (
-      <div>
+      <div style={{marginLeft : '1%', marginRight : '1%'}}>
         {this.state.handleListRequest ? this.handleList() : null}
-          <p>Employees List</p>
+          <p className="adminDashboardTitle">Employees List</p>
          
           <Table>
             <thead>
@@ -115,7 +116,7 @@ class EmployeesList extends Component {
           <div className = 'Addbtn'>
           <Modal 
             header='Employee Add Form'
-            trigger={<Button floating large className = 'red addemployeebtn' waves = 'light' icon = 'add'  />}>
+            trigger={<Button  floating large className = 'red addemployeebtn' waves = 'light' icon = 'add'  />}>
             <EmployeeAdd setHandleListRequest = {this.setHandleListRequest}/>
           </Modal>
           </div>

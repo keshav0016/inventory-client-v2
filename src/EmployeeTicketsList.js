@@ -3,6 +3,9 @@ import axios from 'axios'
 import {Table, Button, Pagination, Row, Input,Modal} from 'react-materialize'
 import moment from 'moment';
 import Tickets from './Tickets'
+import {Link} from 'react-router-dom'
+
+
 class EmployeeTicketsList extends Component{
     constructor(props){
         super(props)
@@ -44,6 +47,7 @@ class EmployeeTicketsList extends Component{
         this.setState({
             handleListRequest : true
         })
+
     }
     setPage(e){
         this.setState({
@@ -97,7 +101,8 @@ class EmployeeTicketsList extends Component{
     
     render(){
         return(
-            <div>
+            <div style={{marginLeft : '1%', marginRight : '1%'}}>
+                <p className="adminDashboardTitle">Tickets List</p>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Row>
                     <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
@@ -109,10 +114,10 @@ class EmployeeTicketsList extends Component{
                         <tr>
                             <th data-field="ticket_number">Ticket Number</th>
                             <th data-field="date">Requested Date</th>
-                            <th data-field="requestedItem">Requested asset Item</th>
-                            <th data-field="requested_asset_id">Requested consumable item</th>
+                            <th data-field="requestedItem">Requested Item</th>
+                            {/* <th data-field="requested_asset_id">Requested consumable item</th> */}
                             {/* <th data-field="requested_consumable_id">Requested Consumable Id</th> */}
-                            <th data-field="item_type">Resource Type</th>
+                            {/* <th data-field="item_type">Resource Type</th> */}
                             <th data-field="quantity">Quantity</th>
                             <th data-field="status">Status</th>
                         </tr>
@@ -122,9 +127,9 @@ class EmployeeTicketsList extends Component{
                             return (<tr key={ticket.ticket_number}>
                             <td>{ticket.ticket_number}</td>
                             <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                            <td>{ticket.requested_asset_item}</td>
-                            <td>{ticket.requested_consumable_item}</td>
-                            <td>{ticket.item_type}</td>
+                            <td>{ticket.requested_asset_item ? ticket.requested_asset_item + " " + "[" + ticket.item_type + "]" : ticket.requested_consumable_item + " " + "[ "+ticket.item_type+" ]"}</td>
+                            {/* <td>{ticket.requested_consumable_item}</td> */}
+                            {/* <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
                     
@@ -133,19 +138,16 @@ class EmployeeTicketsList extends Component{
                         })}
                     </tbody>
                 </Table>
-                <div className = 'Addbtn'>
-                <Modal 
-                    header='Ticket Request form'
-                    trigger={<Button floating large className='red addemployeebtn'onClick={this.handleAdd} waves='light' icon='add' />}>
-                    <Tickets setHandleListRequest = {this.setHandleListRequest}/>
-                </Modal>
-                </div>
+                <Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+
+           
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div>
             </div>
         )
     }
+    
 }
 export default EmployeeTicketsList
 

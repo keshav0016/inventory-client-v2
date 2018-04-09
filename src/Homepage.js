@@ -17,7 +17,7 @@ import Vendor from './Vendor'
 import History from './History'
 import AddAsset from './AddAsset'
 import RepairAsset from './RepairAsset'
-
+import Tickets from './Tickets'
 import LoginForm from './LoginForm';
 
 class Homepage extends Component{
@@ -46,11 +46,13 @@ class Homepage extends Component{
                     <Route exact path="/adminhomepage/employees" component={EmployeesList} />
                     <Route exact path="/adminhomepage/tickets" component={TicketsList} />
                     <Route exact path="/adminhomepage/consumables/history" component={HistoryConsumables}/>
-                    <Route  exact path ='/adminhomepage/employees/history' component={EmployeeHistory}/>
+                    <Route  exact path ='/adminhomepage/employees/details' component={EmployeeHistory}/>
                     <Route  exact path ='/adminhomepage/vendor' component={Vendor}/>
                     <Route  exact path ='/adminhomepage/assets/history' component={History}/>
                     <Route  exact path ='/adminhomepage/assets/create' component={AddAsset}/>
                     <Route  exact path ='/adminhomepage/assets/repair' component={RepairAsset}/>
+                    <Route  exact path ='/employeehomepage/RequestTicket' component={Tickets}/>
+                    
                     
                 </div>
                 </div>
