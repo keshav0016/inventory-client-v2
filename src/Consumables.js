@@ -6,7 +6,9 @@ import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
 import {
-    BrowserRouter as Link
+    BrowserRouter as Router,
+    Route,
+    Link
   } from 'react-router-dom';
 import './ListPage.css'
 import $ from 'jquery'
