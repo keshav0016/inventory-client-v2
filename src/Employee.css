@@ -1,6 +1,6 @@
 
 .addemployeebtn {
-    position: absolute;
+    position: fixed;
     bottom : 5%;
     right : 3%
 }
@@ -46,4 +46,15 @@
 .header {
   position: absolute;
   left: 11%
+}
+.profilebtn {
+  position: fixed;
+  top: 10.5%;
+  right: 0.2%
+}
+.RequestForm {
+  width: 50%;
+  position: absolute;
+  right: 10%;
+  top: 30%
 }

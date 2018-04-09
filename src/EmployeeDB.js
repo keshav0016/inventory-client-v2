@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem,  Row, Col,CardPanel} from 'react-materialize'
+import {Navbar, NavItem, Modal, Button} from 'react-materialize'
 import './MasterComponent.css';
 import {
    BrowserRouter as Router,
@@ -8,6 +8,7 @@ import {
  } from 'react-router-dom';
 import EmployeeTicketsList from './EmployeeTicketsList';
 import axios from 'axios'
+import Tickets from './Tickets'
 
 
 
@@ -15,7 +16,7 @@ class EmployeeDB extends Component {
    constructor(props){
        super(props)
        this.state = {
-           data: []
+           profile: []
        }
    }
    render(){
@@ -29,45 +30,40 @@ class EmployeeDB extends Component {
                    </Navbar>
                  
                    <Redirect to="/employeehomepage/list" />
-                   <Row>
-                  <Col m={4}>
-                      <CardPanel className=" grey darken-3 white-text">
-                          <label className="adminDashCardTitle">User Details</label>
-                          <br />
-                          <br />
-                          <br />
-                          <span>First Name: {this.state.data.first_name}</span>
-                          <br />
-                          <span>Last Name: {this.state.data.last_name}</span>
-                      </CardPanel>
-                  </Col>
-
-                   </Row>
+                   <div className = 'profilebtn'> 
+                <Modal 
+                    header='Profile'
+                    trigger={<Button className = 'red' floating large  waves = 'light' icon = 'person'  />}>
+                    <p>Name: {this.state.profile.first_name} {this.state.profile.last_name} </p>
+                    <p>UserId: {this.state.profile.user_id}</p>
+                </Modal>
+               </div>
                </div>
                <div>
                    <Route exact path="/employeehomepage/list" component={EmployeeTicketsList} />
+                   <Route exact path="/employeehomepage/RequestTicket" component={Tickets} />
+
                </div>
                </div>
            </div>
        </Router>
        )
    }
-
    componentDidMount(){
-       axios({
-           method: 'get',
-           url: 'http://localhost:3001/employee/ticket/current',
-           withCredentials: true
-       })
-       .then((res) => {
-           this.setState({
-               data: res.data.currentUser
+    axios({
+        method: 'get',
+        url: 'http://localhost:3001/employee/ticket/current',
+        withCredentials: true
+    })
+    .then((res) => {
+        this.setState({
+            profile: res.data.currentUser
 
-           })
-       })
-       .catch(error => {
-           window.Materialize.toast('user details not found',3000)
-       })
-   }
+        })
+    })
+    .catch(error => {
+        window.Materialize.toast('user details not found',3000)
+    })
+}
 }
 export default EmployeeDB

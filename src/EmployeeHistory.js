@@ -7,8 +7,10 @@ class EmployeeHistory extends Component {
     constructor(props){
         super(props)
         this.state = {
+            user_id: this.props.location.user,
             data : [],
-            user_id: this.props.location.user
+            history : [],
+            historyAssets :[],
         }
         this.handleList = this.handleList.bind(this)
     }
@@ -19,8 +21,8 @@ class EmployeeHistory extends Component {
         <Table centered striped>
         <thead>
             <tr>
-                <th data-field="consumable id"> User held Consumable Id</th>
-                <th data-field="asset id">User held Asset Id</th>
+                <th data-field="item"> Item</th>
+                <th data-field="quantity">Quantity</th>
              
             </tr>
         </thead>
@@ -28,8 +30,8 @@ class EmployeeHistory extends Component {
         <tbody>
             {this.state.data.map((item, index) => {
                 return <tr key={index}>
-                <td>{item.consumable_id}</td>
-                <td>{item.asset_id}</td>
+                        <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
+                        <td>{item.quantity}</td>
                 </tr>
             })}
         </tbody>
@@ -51,7 +53,10 @@ class EmployeeHistory extends Component {
         })
         .then((res) => {
             this.setState({
-                data : res.data.history
+                history : res.data.history,
+                historyAssets : res.data.historyAssets,
+                data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id),
+
                 
             })
             if(this.state.data.length === 0){
