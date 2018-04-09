@@ -4,6 +4,7 @@ import {Table, Button, Modal, Pagination} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import './ListPage.css'
+import './Employee.css'
 
 class Assets extends Component{
     constructor(props){
@@ -71,7 +72,7 @@ class Assets extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                <p className="adminDashboardTitle">Vendors</p>
+                <h3 className='heading' >Vendors</h3 >
                 <Table centered>
                     <thead>
                         <tr>

@@ -16,8 +16,13 @@ class EmployeeDB extends Component {
    constructor(props){
        super(props)
        this.state = {
-           profile: []
+           profile: [],
+           user_id: this.props.location.user,
+           data: [],
+           history: [],
+           historyAssets: []
        }
+       this.handleList = this.handleList.bind(this)
    }
    render(){
        return(
@@ -33,9 +38,10 @@ class EmployeeDB extends Component {
                    <div className = 'profilebtn'> 
                 <Modal 
                     header='Profile'
-                    trigger={<Button className = 'red' floating large  waves = 'light' icon = 'person'  />}>
+                    trigger={<Button className = 'black' onClick={this.handleList}  icon='person' >User Profile</Button>}>
                     <p>Name: {this.state.profile.first_name} {this.state.profile.last_name} </p>
-                    <p>UserId: {this.state.profile.user_id}</p>
+                    <p>UserId: {this.state.profile.user_id}</p> 
+                    {/* <p>assets held: {this.state.historyAssets.length}</p> */}
                 </Modal>
                </div>
                </div>
@@ -64,6 +70,24 @@ class EmployeeDB extends Component {
     .catch(error => {
         window.Materialize.toast('user details not found',3000)
     })
-}
+    }
+    handleList(){
+        axios({
+            method:'post',
+            url : 'http://localhost:3001/employees/history',
+            data :{
+                user_id: this.state.user_id
+            },
+            withCredentials:true
+        })
+        .then((res) => {
+            this.setState({
+                history : res.data.history,
+                historyAssets : res.data.historyAssets,
+                data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
+
+            })
+        })
+    }
 }
 export default EmployeeDB

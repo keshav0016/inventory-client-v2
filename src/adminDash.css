@@ -11,17 +11,17 @@ span {
 
 .adminDashboardCards1 {
     position: absolute;
-    top: 30%;
     height: 40%;
     width:30%;
+    top: 30%;
     left:25%;
 }
 
 .adminDashboardCards2 {
     position: absolute;
-    top: 30%;
     height: 40%;
     width:30%;
+    top: 30%;
     left:60%;
 }
 
@@ -34,8 +34,8 @@ span {
 
 .adminDasboardLogo {
     position: absolute;
-    height: 100px;
-    width: 100px;
-    left:25%;
-    top:10.2%;
+    height: 200px;
+    width: 200px;
+    /* left:25%;
+    top:10.2%; */
 }
