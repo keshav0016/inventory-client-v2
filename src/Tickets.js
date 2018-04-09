@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Badge} from 'react-materialize'
-import $ from 'jquery'
+import './Employee.css'
+import './adminDash.css'
 //CHANGE THE USER ID IN CLIENT AS WELL AS SERVER
 
 class Tickets extends Component{
@@ -83,13 +84,17 @@ class Tickets extends Component{
             this.setState({
                 requestResource:false
             })
-            window.Materialize.toast('Success', 4000)
-            $(".modal-overlay").click()
-            this.props.setHandleListRequest()
+            if(res.data.message === 'ticket created'){
+                window.Materialize.toast('Success', 4000)
+            }else if(res.data.error === 'ticket can not br created'){
+                window.Materialize.toast('sorry, request can not be made', 4000)
+
+            }
+            // this.props.setHandleListRequest()
         })
-        .catch(error => {
-            window.Materialize.toast('sorry, request can not be made', 4000)
-        })
+        // .catch(error => {
+        //     window.Materialize.toast('sorry, request can not be made', 4000)
+        // })
     }
 
    componentDidMount(){
@@ -111,9 +116,10 @@ class Tickets extends Component{
 
    render(){
         return(
-            <div>
+            <div >
+            <p className="adminDashboardTitle">Request Ticket form</p>
+            <div className ='RequestForm'>
                 <Row>
-                    {/* <Input s={6} label="Employee Id" type="text" value = {this.state.user_id} onChange = {this.requestUser}/> */}
                     <Input s={6} type='select' onChange={this.requestResourceType}>
                         {this.state.availableItems.map((element,index)=>{
                             return( 
@@ -125,9 +131,11 @@ class Tickets extends Component{
                 <Row>
                     <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity}/>
                 </Row>
-                    <Badge>Resource Type : {this.state.item_type}</Badge>
+                <Badge>Resource Type : {this.state.item_type}</Badge>
                     <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request Resource</Button>
                     {this.state.requestResource ? this.confirmRequest() : null} 
+                </div>
+                   
             </div>
         )
     }
