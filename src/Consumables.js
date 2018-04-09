@@ -149,7 +149,7 @@ class Consumables extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <p>Available Consumables</p>
+                <p className="adminDashboardTitle">Consumables</p>
                 <Row>
                 <Input s={2} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By Quantity</option>

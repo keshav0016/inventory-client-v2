@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Pagination, Row, Input} from 'react-materialize'
 import moment from 'moment'
-
+import './ListPage.css'
 
 class TicketsList extends Component{
     constructor(props){
@@ -142,12 +142,8 @@ class TicketsList extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <Row>
-                    <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
-                </Row>
-                <Table centered>
+                <p className="adminDashboardTitle">Tickets List</p>
+                <Table centered striped className="consumableTable">
                     <thead>
                         <tr>
                             <th data-field="ticket_number">Ticket Number</th>
@@ -183,6 +179,14 @@ class TicketsList extends Component{
                 </Table>
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
+                </div>
+                <div className="filterContainer">
+                <p style={{color:'white'}} className="adminDashboardTitle">Status Filters</p>
+                    <Row className="assetCheckbox">
+                        <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
+                        <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
+                        <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
+                    </Row>
                 </div>
             </div>
         )
