@@ -6,9 +6,7 @@ import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
 import {
-    BrowserRouter as Router,
-    Route,
-    Link
+    BrowserRouter as Link
   } from 'react-router-dom';
 import './ListPage.css'
 import $ from 'jquery'
@@ -204,7 +202,7 @@ class Consumables extends Component{
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>History</NavItem ></Link>
+                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>Details</NavItem ></Link>
                                 </Dropdown></td>
                             </tr>
                             )

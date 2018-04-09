@@ -38,6 +38,7 @@ class HistoryConsumables extends Component{
        return(
            <div>
                {this.state.fetchHistory ? this.getHistory() : null}
+               <p className="adminDashboardTitle">Consumable Details</p>
                <Table centered striped>
                    <thead>
                        <tr>
