@@ -29,6 +29,7 @@ class EmployeeDB extends Component {
                    </Navbar>
                  
                    <Redirect to="/employeehomepage/list" />
+                   <p>Employee Dashboard</p>
                    <Row>
                   <Col m={4}>
                       <CardPanel className=" grey darken-3 white-text">

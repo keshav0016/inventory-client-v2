@@ -67,7 +67,7 @@ class EmployeesList extends Component {
     var employeelist = (
       <div>
         {this.state.handleListRequest ? this.handleList() : null}
-          <h4>Employees List</h4>
+          <p>Employees List</p>
          
           <Table>
             <thead>
@@ -105,7 +105,7 @@ class EmployeesList extends Component {
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <Link to={{ pathname : '/adminhomepage/employees/history', user : item.user_id}}><NavItem>History</NavItem></Link>
+                  <Link to={{ pathname : '/adminhomepage/employees/details', user : item.user_id}}><NavItem>Details</NavItem></Link>
                 </Dropdown></td>
               </tr>
               )
