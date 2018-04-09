@@ -134,7 +134,7 @@ class Assets extends Component{
         return(
             <div  style={{marginLeft : '1%', marginRight : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <br />
+                <p className="adminDashboardTitle">Assets</p>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={3} label="Search" onChange = {this.setSearch} />
                 </Row>

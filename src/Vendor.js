@@ -71,7 +71,7 @@ class Assets extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                <h4>Vendors</h4>
+                <p className="adminDashboardTitle">Vendors</p>
                 <Table centered>
                     <thead>
                         <tr>
