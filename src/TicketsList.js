@@ -15,6 +15,7 @@ class TicketsList extends Component{
             isPendingChecked : true,
             isAcceptedChecked : false,
             isRejectedChecked : false,
+            checkAll : false
         }
         this.setPage = this.setPage.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -22,7 +23,7 @@ class TicketsList extends Component{
         this.setPendingChecked = this.setPendingChecked.bind(this)
         this.setAcceptedChecked = this.setAcceptedChecked.bind(this)
         this.setRejectedChecked = this.setRejectedChecked.bind(this)
-
+        this.setCheckAll = this.setCheckAll.bind(this)
     }
 
     setPendingChecked(){
@@ -52,6 +53,14 @@ class TicketsList extends Component{
         })
     }
 
+    setCheckAll(){
+        this.setPage(1)
+        this.setState({
+            isPendingChecked : true,
+            isAcceptedChecked : true,
+            isRejectedChecked : true
+        })
+    }
 
     setPage(e){
         this.setState({
@@ -186,6 +195,7 @@ class TicketsList extends Component{
                         <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
+                        <Input name='filter' type='checkbox' value='red' label='Select All' onClick = {this.setCheckAll} checked={this.state.checkAll} />
                     </Row>
                 </div>
             </div>
