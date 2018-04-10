@@ -120,7 +120,7 @@ class EmployeeAdd extends Component {
   render() {
     return (
       <div style={{marginLeft : '1%', marginRight : '1%'}} >
-      <h3 className='heading'>Employee Add Form</h3>
+      <h3 className='heading'>Add a Employee</h3>
         <Row>
         <Input  onChange={this.handleUser_Id}s={6}  label="* Employee Id" />
           <Input  onChange={this.handleFirstname}s={6}  label="* First Name" />
