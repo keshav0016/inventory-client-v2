@@ -44,7 +44,7 @@ class Assets extends Component{
 
     render(){
         return(
-            <div  style={{marginLeft : '1%'}}>
+            <div  style={{marginLeft : '1%', marginRight : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3>Details</h3>
                 {this.state.assetDetails.current_status === 'Available' ? <h4>Current Status : {this.state.assetDetails.current_status}</h4> : null }
@@ -53,9 +53,8 @@ class Assets extends Component{
                 <div>
                     <Row>
                         <Col s={12} m={12}>
-                        <CardPanel  >
-                            <h5>Purchase</h5>
-                            <hr />
+                        <CardPanel className="z-depth-2" >
+                            <h5><u>Purchase</u></h5>
                             <div style = {{display : 'flex'}} >
                                 <div style={{float : 'left', width : '50%'}} >
                                     <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
@@ -76,10 +75,9 @@ class Assets extends Component{
                         </Col>
                     {this.state.history.map((element, index) => {
                         return <Col s={12} m={12} key={index}>
-                            <CardPanel  >
+                            <CardPanel className="z-depth-2" >
                                 {element.vendor ? <div>
-                                    <h5>Repair</h5>
-                                    <hr />
+                                    <h5><u>Repair</u></h5>
                                     <div style={{display : 'flex'}} >
                                         <div style={{float : 'left', width : '50%'}} >
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
@@ -94,8 +92,7 @@ class Assets extends Component{
                                         </div>
                                     </div>
                                 </div> : <div>
-                                    <h5>Assigned</h5>
-                                    <hr />
+                                    <h5><u>Assigned</u></h5>
                                     <div style={{display : 'flex'}} >
                                         <div style={{float: 'left', width : '50%'}} >
                                             <h6><b>User Id</b> : {element.user_id}</h6>
