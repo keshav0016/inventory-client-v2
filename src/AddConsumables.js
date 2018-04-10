@@ -195,30 +195,31 @@ class AddConsumables extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{marginLeft:'1%',marginRight:'1%'}}>
+                <h3>Add Consumable</h3>
                 <Row>
                     <Input s={6} label="Consumable" value = {this.state.name} onChange = {this.setConsumableName}/>
-                    <Input s={6} label="Vendor" type='select' onChange = {this.setVendorName}>{this.vendorListDropdown()}</Input>
                     <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
                     <Input s={6} label="Purchased Quantity" type="number" min={0} value = {this.state.purchased_quantity} onChange = {this.setPurchaseQuantity}/>
                     <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price} onChange = {this.setItemPrice}/>
                     <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst} onChange = {this.setGst}/>
                     <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount} onChange = {this.setDiscount}/>
+                    <Input s={6} label="Vendor" type='select' onChange = {this.setVendorName}>{this.vendorListDropdown()}</Input>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
-                    <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
+                    <Modal
+                        header='Add Vendor'
+                        id="addVendor"
+                        trigger={<Button style={{marginLeft:'1%'}} id="triggerAddVendor">Add Vendor</Button>}>
+                        <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                    </Modal> 
+                    <Button style={{position:'absolute', right:'3%', bottom:'3%'}} waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
                     {this.state.addConsumableRequest ? this.addConsumable () : null}
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
                     <br />
                     <br />
-                    <Modal
-                        header='Add Vendor'
-                        id="addVendor"
-                        trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
-                        <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                    </Modal> 
-            </div>
+            </div>  
         )
     }
 
