@@ -5,6 +5,8 @@ import {
    Redirect
   } from 'react-router-dom';
 import './Employee.css'
+import $ from 'jquery'
+
 class PasswordChange extends Component {
     constructor(props){
         super(props)
@@ -60,6 +62,9 @@ class PasswordChange extends Component {
         this.setState({
             New_Password: e.target.value
         })
+    }
+    componentDidMount(){
+        $('label').addClass('active')
     }
     handleSubmit(){
         if(this.state.Confirm_Password === this.state.New_Password){
