@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table} from 'react-materialize'
+import {Table, Col, CardPanel} from 'react-materialize'
 import moment from 'moment'
 
 class HistoryConsumables extends Component{
@@ -36,50 +36,49 @@ class HistoryConsumables extends Component{
 
    render(){
        return(
-           <div>
-               {this.state.fetchHistory ? this.getHistory() : null}
-               <p className="adminDashboardTitle">Consumable Details</p>
-               <Table centered striped>
-                   <thead>
-                       <tr>
-                           <th data-field="consumable id">Consumable Name</th>
-                           <th data-field="user id">Employee Name</th>
-                           <th data-field="ticket number">Ticket Number</th>
-                           <th data-field="assigned date">Assigned Date</th>
-                           <th data-field="assigned quantity">Assigned Quantity</th>
-                           <th data-field="vendor name">Vendor Name</th>
-                           <th data-field="purchase date">Purchase Date</th>
-                           <th data-field="purchased quantity">Purchased Quantity</th>
-                           <th data-field="item price">Individual Price</th>
-                           <th data-field="collective price">Collective Price</th>
-                           <th data-field="discount">Discount</th>
-                           <th data-field="gst">GST</th>
-                           <th data-field="total">Total</th>
-                       </tr>
-                   </thead>
-
-                   <tbody>
-                       {this.state.history.map((consumable, index) => {
-                           return <tr key={index}>
-                           <td>{consumable.consumable.name ? consumable.consumable.name : '-'}</td>
-                           <td>{consumable.user ? consumable.user.first_name + " " + consumable.user.last_name : '-'}</td>
-                           <td>{consumable.user_id ? (consumable.ticket_number ? consumable.ticket_number : '(Assigned by Admin)') : '-'}</td>
-                           <td>{consumable.assigned_date ? moment(consumable.assigned_date).format('DD MMM YYYY') : '-'}</td>
-                           <td>{consumable.assigned_date ? consumable.quantity : '-'}</td>
-                           <td>{consumable.vendor_name ? consumable.vendor_name : '-'}</td>
-                           <td>{consumable.purchase_date ? moment(consumable.purchase_date).format('DD MMM YYYY') : '-'}</td>
-                           <td>{consumable.purchase_date ? consumable.quantity : '-'}</td>
-                           <td>{consumable.item_price ? consumable.item_price.toFixed(2) : '-'}</td>
-                           <td>{consumable.whole_price ? consumable.whole_price.toFixed(2) : '-'}</td>
-                           <td>{consumable.discount ? consumable.discount : '-'}</td>
-                           <td>{consumable.gst ? consumable.gst : '-'}</td>
-                           <td>{consumable.total ? consumable.total.toFixed(2) : '-'}</td>
-                           {/* <td>{consumable.purchase_date ? <Button>Edit</Button> : null}</td>
-                           <td>{consumable.purchase_date ? <Button>Submit</Button> : null}</td> */}
-                           </tr>
+           <div style={{marginLeft : '1%',marginRight : '1%'}}>
+            {this.state.fetchHistory ? this.getHistory() : null}
+            <p className="adminDashboardTitle">Consumable Details</p>
+            {this.state.history.map((consumable, index) => {
+                return <Col s={12} m={12} key={index}>
+                        <CardPanel className='z-depth-2'>
+                            {consumable.vendor_name ? 
+                            <div> 
+                                <h5><u>Purchased</u></h5>
+                                <div style={{display : 'flex'}} >
+                                    <div style={{float : 'left', width : '50%'}} >
+                                        <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
+                                        <h6><b>Vendor Name</b> : {consumable.vendor_name}</h6>
+                                        <h6><b>Purchase Date</b> : {moment(consumable.purchase_date).format('DD MMM YYYY')}</h6>
+                                        {consumable.purchase_date ? <h6><b>Purchased Quantity</b> : {consumable.quantity}</h6> : null}
+                                    </div>
+                                    <div style={{float: 'right', width : '50%'}} >
+                                        <h6><b>Individual Price</b> : {consumable.item_price.toFixed(2)}</h6>
+                                        <h6><b>Collective Price</b> : {consumable.whole_price.toFixed(2)}</h6>
+                                        <h6><b>Discount</b> : {consumable.discount}</h6>
+                                        <h6><b>GST</b> : {consumable.gst}</h6>
+                                        <h6><b>Total</b> : {consumable.total.toFixed(2)}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                             : 
+                             <div>
+                                <h5><u>Assigned</u></h5>
+                                <div style={{display : 'flex'}} >
+                                    <div style={{float: 'left', width : '50%'}} >
+                                        <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
+                                        <h6><b>User Name</b> : {consumable.user.first_name + " " + consumable.user.last_name}</h6>
+                                        <h6><b>Assigned Date</b> : {moment(consumable.assigned_date).format('DD MMM YYYY')}</h6>
+                                    </div>
+                                    <div style={{float: 'right', width : '50%'}} >
+                                        {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.quantity}</h6>) : 'Assigned by Admin'}
+                                        {consumable.assigned_date ? (<h6><b>Assigned Quantity</b> : {consumable.quantity}</h6>) : null}
+                                    </div>
+                                </div>
+                            </div>}
+                        </CardPanel>
+                    </Col>
                        })}
-                   </tbody>
-               </Table>
            </div>
        )
    }

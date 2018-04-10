@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Table, Button, Pagination, Row, Input} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
+import $ from 'jquery'
 
 class TicketsList extends Component{
     constructor(props){
@@ -55,11 +56,8 @@ class TicketsList extends Component{
 
     setCheckAll(){
         this.setPage(1)
-        this.setState({
-            isPendingChecked : true,
-            isAcceptedChecked : true,
-            isRejectedChecked : true
-        })
+        $('input:checkbox').not('.pendingCheckbox').click()
+
     }
 
     setPage(e){
@@ -152,7 +150,14 @@ class TicketsList extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <p className="adminDashboardTitle">Tickets List</p>
-                <Table centered striped className="consumableTable">
+                {this.state.ticketsList.length === 0
+                    ?
+                    <div className="noRecordsScreen">
+                        No Records
+                    </div>
+                    :
+                    <div>
+                    <Table centered striped className="consumableTable">
                     <thead>
                         <tr>
                             <th data-field="ticket_number">Ticket Number</th>
@@ -180,19 +185,19 @@ class TicketsList extends Component{
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
                             <td>{ticket.status === 'Pending' ? <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> : null}</td>
-                            <td>{ticket.status === 'Pending' ? <Button onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
+                            <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             </tr>
                             )
                         })}
                     </tbody>
                 </Table>
-                <div>
-                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
+                <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div>
+                }
                 <div className="filterContainer">
                 <p style={{color:'white'}} className="adminDashboardTitle">Status Filters</p>
                     <Row className="assetCheckbox">
-                        <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
+                        <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Select All' onClick = {this.setCheckAll} checked={this.state.checkAll} />
