@@ -113,7 +113,7 @@ class EmployeesList extends Component {
             </tbody>
           </Table>
           <div className = 'Addbtn'>
-          <Link to={{ pathname : '/adminhomepage/employees/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+          <Link to={{ pathname : '/adminhomepage/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
           </div>
           <div>
             <Pagination items = {this.state.pagination.totalPage} activePage = {this.state.page } maxButton = {5} onSelect = {this.setPage}/> 

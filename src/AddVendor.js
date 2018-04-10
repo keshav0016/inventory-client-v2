@@ -11,7 +11,7 @@ class AddVendor extends Component{
             name : '',
             address : '',
             addVendorRequest : false,
-            Contact : ''
+            contact : ''
         }
         this.checkForValidation = this.checkForValidation.bind(this)
         this.addVendorIntoDb = this.addVendorIntoDb.bind(this)
@@ -55,7 +55,7 @@ class AddVendor extends Component{
             data : {
                 name: this.state.name,
                 address : this.state.address,
-                Contact : this.state.Contact
+                contact : this.state.contact
             }
         })
         .then(res => {
@@ -94,7 +94,7 @@ class AddVendor extends Component{
             <div>
                 <Row>
                     <Input s={6} label="Name *" value = {this.state.name} onChange = {this.setName} />
-                    <Input s={6} label="Contact " onChange ={this.setContact} validate type='tel'><Icon>phone</Icon></Input>
+                    <Input s={6} label="Contact "value = {this.state.contact} onChange ={this.setContact} validate type='tel'><Icon>phone</Icon></Input>
 
                     <Input s={12} label="Address *" value = {this.state.address} onChange = {this.setAddress} />
 

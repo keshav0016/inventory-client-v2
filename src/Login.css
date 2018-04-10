@@ -11,7 +11,8 @@
 
 .loginFormIcon {
   position:relative;
-  left:90px;
+  top: 10px;
+  left:110px;
 }
 .loginBackground {
   position: fixed;

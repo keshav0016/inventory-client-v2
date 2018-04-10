@@ -138,7 +138,7 @@ class EmployeeTicketsList extends Component{
                         })}
                     </tbody>
                 </Table>
-                <Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
 
            
                 <div>

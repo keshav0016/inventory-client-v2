@@ -23,17 +23,16 @@ class PasswordChange extends Component {
     render(){
         var change =(
             <div className='background'>
-            <div class='passwordchangeform'>
+            <div class='passwordchangeform1'>
                 <Row>
                     <div className ='header'>
                         <h4>Reset Password</h4>
                     </div>
-                    <div className='fields'>
-                    <Input s={10}  label="User Id" onChange={this.handleUserid}><Icon>account_circle</Icon></Input>
-                    <Input s={10}  type='password'onChange={this.handleNewPassword} label="New Password" ><Icon>lock</Icon></Input>
-                    <Input s={10} type='password' onChange={this.handleConfirmPassword} label="Confirm Password"><Icon>lock</Icon></Input>
-                    {/* <Input name='group1' type='checkbox' value='yes' label='Remember me' /> */}
-                    <Button onClick={this.handleSubmit}className='submitbtn'>Submit</Button>
+                    <div className='fields1'>
+                    <Input s={12}  label="User Id" onChange={this.handleUserid}><Icon>account_circle</Icon></Input>
+                    <Input s={12}  type='password'onChange={this.handleNewPassword} label="New Password" ><Icon>lock</Icon></Input>
+                    <Input s={12} type='password' onChange={this.handleConfirmPassword} label="Confirm Password"><Icon>lock</Icon></Input>
+                    <Button className='submitbtn'onClick={this.handleSubmit}>Submit</Button>
                     </div>
 
                 </Row>

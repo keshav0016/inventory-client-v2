@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Icon, Input, Button } from 'react-materialize';
 import './Login.css';
+import './Employee.css'
 import {
  
   Redirect
@@ -80,25 +81,21 @@ class LoginForm extends Component {
 
   render() {
     var loginform = (
-        <div className="loginBackground">
-          <h4 style={{color:'white',textAlign:'center'}}>Inventory Management System</h4>
-          <br/>
-          <div className="z-depth-4 loginForm">
+      <div className='background'>
+          <div className ='header1 white-text'>
+              <h4>Inventory Management System </h4>
+          </div> 
+      <div class='passwordchangeform'>
           <Row>
-          <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon>
+            <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon>
+            <div className='fields'>
+            <Input s={10} onChange={this.getUserid} label="User Id" icon='account_box' />
+            <Input type="password" s={10} onChange={this.getPassword} label="password" icon='lock' />
+            <Button className ='submitbtn'onClick={this.verifyCredentials}>LOGIN</Button>
+            </div>
           </Row>
-          <Row>
-          <Input s={10} className='white-text'onChange={this.getUserid} label="User Id" icon='account_box' />
-          </Row>
-          <Row>
-          <Input className='white-text'type="password" s={10} onChange={this.getPassword} label="password" icon='lock' />
-          </Row>
-          <Row>
-          <Button className ='loginFormButton'onClick={this.verifyCredentials}>LOGIN</Button>
-          </Row>
-          </div>
-        </div>
-       
+      </div>
+      </div>
     );
     return (
       <div>
