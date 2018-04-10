@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button, Badge, Icon, Modal} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
+import './Employee.css'
 
 class AddAsset extends Component{
     constructor(props){
@@ -227,8 +228,8 @@ class AddAsset extends Component{
 
     render(){
         return(
-            <div>
-                <h3>Add Asset</h3>
+            <div style={{marginLeft : '1%', marginRight : '1%'}} >
+                <h3 className='heading'>Add Asset</h3>
                 <Row>
                     <Input s={6} label="Serial Number *" value = {this.state.serial_number} onChange = {this.setSerialNumber} />
                     <Input s={6} label="Asset Name *" value = {this.state.asset_name} onChange = {this.setAssetName} />
@@ -248,13 +249,13 @@ class AddAsset extends Component{
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Input s={6} label="Vendor *" type='select' value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
                     <br /> <br />
+                </Row>
                 <Modal
                     header='Add Vendor'
                     id="addVendor"
                     trigger={<Button>Add Vendor</Button>}>
                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                 </Modal>
-                </Row>
                 <Button style={{position : 'absolute', bottom : '3%', right : '3%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                 {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
                 {this.state.vendorListRequest ? this.handleVendorList() : null}

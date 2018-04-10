@@ -4,6 +4,7 @@ import {Row, Input, Button, Icon, Modal} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import moment from 'moment'
+import './Employee.css'
 
 class RepairAsset extends Component{
     constructor(props){
@@ -140,7 +141,7 @@ class RepairAsset extends Component{
     render(){
         return(
             <div style={{marginLeft : '1%'}} >
-                <h3>Repair Asset</h3>
+                <h3 className="heading">Repair Asset</h3>
                 <br /><br />
                 {this.state.assetDetails ? 
                 <div>
@@ -156,8 +157,8 @@ class RepairAsset extends Component{
                     <h6>Total : {this.state.assetDetails.total}</h6>
                     <br /><br />
                     <Row>
-                        <Input s={12} type="select" label="Vendor*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input>
-                        <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} disabled = {this.state.isDisabled}/>
+                        <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input>
+                        <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from} onChange = {this.setFrom} disabled = {this.state.isDisabled}/>
                         <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled}/>
                     </Row>
                     <Modal

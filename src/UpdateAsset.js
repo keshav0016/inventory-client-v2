@@ -180,7 +180,7 @@ class UpdateAsset extends Component {
                     <Input s={3} label="Amount *" type="number" min={0} defaultValue={this.state.amount} onChange={this.setAmount} />
                     <Input s={3} label="GST" type="number" min={0} defaultValue={this.state.gst} onChange={this.setGst} />
                     <br />
-                    <Badge>Total : {this.state.total}</Badge>
+                    <Badge>Total : ₹{this.state.total}</Badge>
                     <Input s={6} type='select' label="Category" onChange={this.setCategory} defaultValue={this.state.category}>
                         <option value='Electronics'>Electronics</option>
                         <option value='Non - Electronics'>Non - Electronics</option>
