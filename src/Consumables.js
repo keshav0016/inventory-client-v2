@@ -171,7 +171,7 @@ class Consumables extends Component{
                     <Table centered striped className="consumableTable">
                     <thead>
                         <tr>
-                            <th data-field="consumable_id">Id</th>
+                            <th style={{paddingLeft:'20px'}} data-field="consumable_id">Id</th>
                             <th data-field="name">Consumable Name</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
                         </tr>
@@ -180,9 +180,9 @@ class Consumables extends Component{
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
                             return (<tr key={consumable.consumable_id}>
-                            <td>{consumable.consumable_id}</td>
-                            <td>{consumable.name}</td>
-                            <td>{consumable.quantity}</td>
+                            <td style={{textAlign:'left',paddingLeft:'60px'}}>{consumable.consumable_id}</td>
+                            <td style={{textAlign:'left',paddingLeft:'160px'}}>{consumable.name}</td>
+                            <td style={{textAlign:'left',paddingLeft:'160px'}}>{consumable.quantity}</td>
                             <td><Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
                                 }>
@@ -193,7 +193,7 @@ class Consumables extends Component{
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
                                 <Modal
-                                        header='Delete Asset'
+                                        header='Delete Consumable'
                                         bottomSheet
                                         trigger={<NavItem>Delete</NavItem>}>
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
@@ -224,14 +224,8 @@ class Consumables extends Component{
                         <br />
                         <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
                 </div>                
-                <Modal
-                    header='Add Consumable'
-                    fixedFooter
-                    trigger={<Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' />}>
-                    <AddConsumables setHandleListRequest={this.setHandleListRequest}/>
-                </Modal>
-                {/* <div>
-                </div> */}
+                <Link to={{ pathname : '/adminhomepage/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                    {/* <AddConsumables setHandleListRequest={this.setHandleListRequest}/> */}
             </div>
         )
     }

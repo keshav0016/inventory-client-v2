@@ -132,7 +132,7 @@ class AddConsumables extends Component{
                 total : 0,
                 addConsumableRequest : false
             })
-            this.props.setHandleListRequest()
+            this.props.location.setHandleListRequest()
             window.Materialize.toast('Consumable Added Successfully', 4000)
         })
         .catch(error => {

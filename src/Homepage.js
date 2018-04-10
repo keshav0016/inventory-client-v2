@@ -6,7 +6,8 @@ import Consumables from './Consumables';
 import EmployeesList from './Employees';
 import TicketsList from './TicketsList';
 import HistoryConsumables from './HistoryConsumables';
-import Admindashboard from './Admindashboard'
+import Admindashboard from './Admindashboard';
+import AddConsumables from './AddConsumables';
 import {
     BrowserRouter as Router,
     Route,
@@ -47,6 +48,7 @@ class Homepage extends Component{
                     <Route exact path="/adminhomepage/employees" component={EmployeesList} />
                     <Route exact path="/adminhomepage/tickets" component={TicketsList} />
                     <Route exact path="/adminhomepage/consumables/history" component={HistoryConsumables}/>
+                    <Route exact path ='/adminhomepage/consumables/add' component={AddConsumables}/>
                     <Route  exact path ='/adminhomepage/employees/details' component={EmployeeHistory}/>
                     <Route  exact path ='/adminhomepage/vendor' component={Vendor}/>
                     <Route  exact path ='/adminhomepage/assets/history' component={History}/>
