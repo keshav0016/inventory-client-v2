@@ -245,8 +245,9 @@ class AddAsset extends Component{
                     </Input>
                     <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
                     <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
-                    <Badge>Total : {this.state.total}</Badge>
+                    <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Input s={6} label="Vendor *" type='select' value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
+                    <br /> <br />
                 <Modal
                     header='Add Vendor'
                     id="addVendor"
