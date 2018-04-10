@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input,Modal} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input} from 'react-materialize'
 import moment from 'moment';
-import Tickets from './Tickets'
 import {Link} from 'react-router-dom'
+import './Employee.css'
 
 
 class EmployeeTicketsList extends Component{
@@ -102,7 +102,7 @@ class EmployeeTicketsList extends Component{
     render(){
         return(
             <div style={{marginLeft : '1%', marginRight : '1%'}}>
-                <p className="adminDashboardTitle">Tickets List</p>
+                <h3 className='heading'>Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Row>
                     <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />

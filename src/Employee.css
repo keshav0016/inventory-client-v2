@@ -49,12 +49,19 @@
 }
 .profilebtn {
   position: fixed;
-  top: 10.5%;
+  padding-left: 15px;
+  /* top: 10.5%; */
   right: 0.2%
 }
 .RequestForm {
+  position: fixed;
   width: 50%;
-  position: absolute;
   right: 10%;
   top: 30%
+}
+.heading{
+  padding-left: 15px
+}
+.btnalign{
+  left: 50%  
 }

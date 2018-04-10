@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, Modal} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
+import $ from 'jquery'
 
 class TicketsList extends Component{
     constructor(props){
@@ -15,7 +16,8 @@ class TicketsList extends Component{
             isPendingChecked : true,
             isAcceptedChecked : false,
             isRejectedChecked : false,
-            checkAll : false
+            checkAll : false,
+            expected_recovery : ''
         }
         this.setPage = this.setPage.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -24,12 +26,18 @@ class TicketsList extends Component{
         this.setAcceptedChecked = this.setAcceptedChecked.bind(this)
         this.setRejectedChecked = this.setRejectedChecked.bind(this)
         this.setCheckAll = this.setCheckAll.bind(this)
+        this.handleExpected = this.handleExpected.bind(this)
     }
 
     setPendingChecked(){
         this.setPage(1)
         this.setState({
             isPendingChecked : !this.state.isPendingChecked,
+        })
+    }
+    handleExpected(e){
+        this.setState({
+            expected_recovery : e.target.value
         })
     }
 
@@ -51,6 +59,8 @@ class TicketsList extends Component{
         this.setState({
             handleListRequest : true
         })
+        $(".modal-overlay").click()
+        
     }
 
     setCheckAll(){
@@ -112,7 +122,8 @@ class TicketsList extends Component{
             method:'post',
             url:'http://localhost:3001/admin/ticket/accept',
             data:{
-                ticket_number:ticket_number
+                ticket_number:ticket_number,
+                expected_recovery : this.state.expected_recovery
             },
             withCredentials:true
         })
@@ -120,6 +131,7 @@ class TicketsList extends Component{
             this.setState({
                 handleListRequest:true
             })
+
             console.log('success')
         })
         .catch(error =>{
@@ -179,7 +191,18 @@ class TicketsList extends Component{
                             <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
-                            <td>{ticket.status === 'Pending' ? <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> : null}</td>
+                            <td>{ticket.status === 'Pending' ? <Modal
+                                header='expected date of recovery'
+                                trigger={ <Button >Accept</Button> }>
+                                <Row>
+                                <Input name='on' type='date' onChange={this.handleExpected} />
+                                <br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> 
+                                </Row>
+                                </Modal>    : null}</td>
                             <td>{ticket.status === 'Pending' ? <Button onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             </tr>
                             )
