@@ -36,6 +36,9 @@ class AddConsumables extends Component{
         this.handleVendorList = this.handleVendorList.bind(this)
         this.vendorListDropdown = this.vendorListDropdown.bind(this)
     }
+    componentDidMount(){
+        $('label').addClass('active')
+    }
 
     checkForValidation(){
         if(!this.state.name || !this.state.vendor_name || !this.state.purchase_date){
@@ -132,6 +135,7 @@ class AddConsumables extends Component{
                 total : 0,
                 addConsumableRequest : false
             })
+            $('label').addClass('active')
             this.props.location.setHandleListRequest()
             window.Materialize.toast('Consumable Added Successfully', 4000)
         })

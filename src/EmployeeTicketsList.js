@@ -4,6 +4,7 @@ import {Table, Button, Pagination, Row, Input} from 'react-materialize'
 import moment from 'moment';
 import {Link} from 'react-router-dom'
 import './Employee.css'
+import './ListPage.css'
 
 
 class EmployeeTicketsList extends Component{
@@ -104,11 +105,14 @@ class EmployeeTicketsList extends Component{
             <div style={{marginLeft : '1%', marginRight : '1%'}}>
                 <h3 className='heading'>Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <Row>
-                    <Input name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
-                </Row>
+                <div className="filterContainer">
+                <p style={{color:'white'}} className="adminDashboardTitle">Status Filters</p>
+                    <Row className="ticketListCheckbox">
+                        <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
+                        <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
+                        <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
+                    </Row>
+                </div>
                 {this.state.ticketsList.length === 0 ? <h3>No Records</h3>:
                 <Table >
                     <thead>

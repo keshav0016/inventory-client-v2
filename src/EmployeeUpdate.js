@@ -118,7 +118,7 @@ class EmployeeUpdate extends Component{
                         
                     </Input>
                     <Input s={6} type='select' label="Department" onChange={this.handleDepartment}defaultValue={this.state.department}>
-                        <option value='Hr'>Hr</option>
+                        <option value='Hr'>HR</option>
                         <option value='Delivery'>Delivery</option>
                         <option value='Developer'>Developer</option>
                         <option value='Other'>Other</option>
