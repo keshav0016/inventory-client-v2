@@ -10,12 +10,14 @@ class AddVendor extends Component{
         this.state = {
             name : '',
             address : '',
-            addVendorRequest : false
+            addVendorRequest : false,
+            contact : ''
         }
         this.checkForValidation = this.checkForValidation.bind(this)
         this.addVendorIntoDb = this.addVendorIntoDb.bind(this)
         this.setName = this.setName.bind(this)
         this.setAddress = this.setAddress.bind(this)
+        this.setContact = this.setContact.bind(this)
     }
 
     checkForValidation(){
@@ -34,7 +36,11 @@ class AddVendor extends Component{
             name : e.target.value
         })
     }
-
+    setContact(e){
+        this.setState({
+            contact : e.target.value
+        })
+    }
     setAddress(e){
         this.setState({
             address : e.target.value
@@ -48,7 +54,8 @@ class AddVendor extends Component{
             withCredentials : true,
             data : {
                 name: this.state.name,
-                address : this.state.address
+                address : this.state.address,
+                contact : this.state.contact
             }
         })
         .then(res => {
@@ -87,7 +94,10 @@ class AddVendor extends Component{
             <div>
                 <Row>
                     <Input s={6} label="Name *" value = {this.state.name} onChange = {this.setName} />
+                    <Input s={6} label="Contact "value = {this.state.contact} onChange ={this.setContact} validate type='tel'><Icon>phone</Icon></Input>
+
                     <Input s={12} label="Address *" value = {this.state.address} onChange = {this.setAddress} />
+
                 </Row>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}

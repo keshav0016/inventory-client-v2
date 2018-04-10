@@ -4,6 +4,7 @@ import {Table, Button, Modal, Pagination} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import './ListPage.css'
+import './Employee.css'
 
 class Assets extends Component{
     constructor(props){
@@ -71,13 +72,15 @@ class Assets extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                <p className="adminDashboardTitle">Vendors</p>
+                <h3 className='heading' >Vendors</h3 >
                 <Table centered>
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="name">Vendor Name</th>
                             <th data-field="address">Address</th>
+                            <th data-field="contact">Contact No</th>
+                            
                         </tr>
                     </thead>
 
@@ -87,6 +90,8 @@ class Assets extends Component{
                             <td>{item.id}</td>
                             <td>{item.name}</td>
                             <td>{item.address}</td>
+                            <td>{item.contact}</td>
+                            
                             </tr>
                         })}
                     </tbody>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Row, Col, CardPanel,Table} from 'react-materialize'
-import moment from 'moment'
+import {Table} from 'react-materialize'
+import './Employee.css'
 
 class EmployeeHistory extends Component {
     constructor(props){
@@ -17,8 +17,9 @@ class EmployeeHistory extends Component {
     render(){
         return (
            
-        <div>
-        <Table centered striped>
+        <div style={{marginLeft : '1%', marginRight : '1%'}}>
+      <h3 className='heading'>Items held by Employee</h3>
+      <Table >
         <thead>
             <tr>
                 <th data-field="item"> Item</th>
@@ -30,8 +31,8 @@ class EmployeeHistory extends Component {
         <tbody>
             {this.state.data.map((item, index) => {
                 return <tr key={index}>
-                        <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
-                        <td>{item.quantity}</td>
+                    <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
+                    <td>{item.quantity}</td>
                 </tr>
             })}
         </tbody>
@@ -55,9 +56,7 @@ class EmployeeHistory extends Component {
             this.setState({
                 history : res.data.history,
                 historyAssets : res.data.historyAssets,
-                data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id),
-
-                
+                data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
             })
             if(this.state.data.length === 0){
                 window.Materialize.toast('There is no history to show',3000)

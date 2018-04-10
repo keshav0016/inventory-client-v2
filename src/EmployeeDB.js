@@ -16,13 +16,20 @@ class EmployeeDB extends Component {
    constructor(props){
        super(props)
        this.state = {
-           profile: []
+           profile: [],
+        //    user_id: this.props.location.user,
+           data: [],
+           assetsCount: '',
+           consumablesCount: '',
+           handleList : true
        }
+       this.handleList = this.handleList.bind(this)
    }
    render(){
        return(
            <Router>
            <div>
+               {this.state.handleList ? this.handleList() : null}
                <div className="masterComponentBackground">
                <div>
                    <Navbar className="teal lighten-1 masterComponentNavBar">
@@ -33,9 +40,12 @@ class EmployeeDB extends Component {
                    <div className = 'profilebtn'> 
                 <Modal 
                     header='Profile'
-                    trigger={<Button className = 'red' floating large  waves = 'light' icon = 'person'  />}>
+                    trigger={<Button className = 'black' onClick={this.handleList}  icon='person' >User Profile</Button>}>
                     <p>Name: {this.state.profile.first_name} {this.state.profile.last_name} </p>
-                    <p>UserId: {this.state.profile.user_id}</p>
+                    <p>User Id: {this.state.profile.user_id}</p> 
+                    <p>No of Assets held: {this.state.assetsCount}</p>
+                    <p>No of Consumables held: {this.state.consumablesCount}</p>
+                    
                 </Modal>
                </div>
                </div>
@@ -64,6 +74,21 @@ class EmployeeDB extends Component {
     .catch(error => {
         window.Materialize.toast('user details not found',3000)
     })
-}
+    }
+    handleList(){
+        axios({
+            method:'get',
+            url : 'http://localhost:3001/employee/ticket/count',
+            withCredentials:true
+        })
+        .then((res) => {
+            this.setState({
+                assetsCount : res.data.assetsCount,
+                consumablesCount : res.data.consumablesCount,
+                handleList : false
+
+            })
+        })
+    }
 }
 export default EmployeeDB

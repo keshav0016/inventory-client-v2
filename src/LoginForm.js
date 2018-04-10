@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Icon, Input, Button } from 'react-materialize';
 import './Login.css';
+import './Employee.css'
 import {
  
   Redirect
 } from 'react-router-dom';
+import Row from 'react-materialize/lib/Row';
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
 // import AdminHomepage from './AdminHomepage';
@@ -79,30 +81,20 @@ class LoginForm extends Component {
 
   render() {
     var loginform = (
-      <div>
-        <div className="loginBackground">
-          <h4 style={{color:'white',textAlign:'center'}}>Inventory Management System</h4>
-          <div className="z-depth-4 loginForm">
-            <div className="loginFormIcon">
-              <Icon className="medium material-icons white-text">account_circle</Icon>
+      <div className='background'>
+          <div className ='header1 white-text'>
+              <h4>Inventory Management System </h4>
+          </div> 
+      <div class='passwordchangeform'>
+          <Row>
+            <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon>
+            <div className='fields'>
+            <Input s={10} onChange={this.getUserid} label="User Id" icon='account_box' />
+            <Input type="password" s={10} onChange={this.getPassword} label="password" icon='lock' />
+            <Button className ='submitbtn'onClick={this.verifyCredentials}>LOGIN</Button>
             </div>
-            <div className="z-depth-4 loginFormCredentialContainer">
-              <div className="row loginFormUsernameMargin">
-                <div className="input-field col s12 loginFormUsernameFieldContainer">
-                  <Input s={12} onChange={this.getUserid} label="User Id" icon='account_box' />
-                </div>
-              </div>
-              <div className="row loginFormPasswordMargin">
-                <div className="input-field col s12 loginFormUsernameFieldContainer">
-                  <Input type="password" s={12} onChange={this.getPassword} label="password" icon='lock' />
-                </div>
-              </div>
-              <Button className="btn waves-effect waves-teal loginFormButton z-depth-4" onClick={this.verifyCredentials}>LOGIN</Button>
-            </div>
-          </div>
-        </div>
-        <div>
-        </div>
+          </Row>
+      </div>
       </div>
     );
     return (
