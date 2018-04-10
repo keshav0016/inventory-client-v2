@@ -135,7 +135,7 @@ class ReceiveAsset extends Component{
                 <Row><br /><br />
                     {this.state.repairInfo.asset ? <div>
                         <h6><b>Asset Name</b> : {this.state.repairInfo.asset.asset_name}</h6>
-                        <h6><b>Vendor</b> : {this.state.repairInfo.vendor}</h6>
+                        <h6><b>Service Provider</b> : {this.state.repairInfo.vendor}</h6>
                         <h6><b>Given for service on</b> : {moment(this.state.repairInfo.from).format('DD MMM YYYY')}</h6>
                         <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
                         </div> : null}

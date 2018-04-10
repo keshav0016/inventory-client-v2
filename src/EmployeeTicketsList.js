@@ -68,9 +68,9 @@ class EmployeeTicketsList extends Component{
                     pagination : res.data.pagination,
                     handleListRequest : false
                 })
-                if(this.state.ticketsList.length === 0){
-                    window.Materialize.toast("no tickets to show", 4000)
-                }
+                // if(this.state.ticketsList.length === 0){
+                //     window.Materialize.toast("no tickets to show", 4000)
+                // }
             })
             .catch(error => {
                 console.error(error)
@@ -88,9 +88,9 @@ class EmployeeTicketsList extends Component{
                     pagination : res.data.pagination,
                     handleListRequest : false
                 })
-                if(this.state.ticketsList.length === 0){
-                    window.Materialize.toast("no tickets to show", 4000)
-                }
+                // if(this.state.ticketsList.length === 0){
+                //     window.Materialize.toast("no tickets to show", 4000)
+                // }
             })
             .catch(error => {
                 console.error(error)
@@ -109,6 +109,7 @@ class EmployeeTicketsList extends Component{
                     <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
                 </Row>
+                {this.state.ticketsList.length === 0 ? <h3>No Records</h3>:
                 <Table >
                     <thead>
                         <tr>
@@ -137,7 +138,7 @@ class EmployeeTicketsList extends Component{
                             )
                         })}
                     </tbody>
-                </Table>
+                </Table>}
                 <Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
 
            
