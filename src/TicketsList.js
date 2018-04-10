@@ -220,7 +220,7 @@ class TicketsList extends Component{
                 }
                 <div className="filterContainer">
                 <p style={{color:'white'}} className="adminDashboardTitle">Status Filters</p>
-                    <Row className="assetCheckbox">
+                    <Row className="ticketListCheckbox">
                         <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
