@@ -60,12 +60,23 @@
 }
 
 .assetCheckbox{
-  position: absolute;
+  position: relative;
   left: 20%;
   height: 100px;
   width: 150px;
 }
 
+.ticketListCheckbox{
+  position: relative;
+  left: 1%;
+  height: 100px;
+  width: 150px;
+}
+
 .assetCheckbox label{
+  color: white;
+}
+
+.ticketListCheckbox label{
   color: white;
 }
