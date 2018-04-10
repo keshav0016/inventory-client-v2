@@ -71,8 +71,11 @@ class DeleteAsset extends Component{
         return(
             <div>
                 <h4>Do you really want to recover this asset?</h4>
-                <Input s={3} label="Asset Id" value={this.state.recoverInfo.asset_id} disabled />
-                <Input s={3} label="Employee Id" value={this.state.recoverInfo.user_id} disabled />
+                <br /><br />
+                {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <div>
+                    <p><b>Asset Name</b> : {this.state.recoverInfo.asset.asset_name}<br /><b>Assigned Employee</b> : {this.state.recoverInfo.user.first_name} {this.state.recoverInfo.user.last_name}</p>
+                </div> : null}
+                <br /><br />
                 <Button onClick = {this.setRecoverAssetRequest}>Recover</Button>
                 {this.state.recoverAssetRequest ? this.recoverAssetFromDb() : null}
             </div>

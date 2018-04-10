@@ -25,7 +25,7 @@ class ReceiveAsset extends Component{
     }
 
     checkForValidation(){
-        if(!this.state.repair_invoice || !this.state.amount || !this.state.to){
+        if(!this.state.repair_invoice || !this.state.to){
             window.Materialize.toast('All the * marked fields are required', 4000)
         }
         else{
@@ -132,12 +132,15 @@ class ReceiveAsset extends Component{
     render(){
         return(
             <div>
-                <Row>
-                    <Input s={6} label="Asset Id" value={this.state.repairInfo.asset_id} disabled />
-                    <Input s={6} label="Vendor" value={this.state.repairInfo.vendor} disabled />
-                    <Input s={6} label="From" value={moment(this.state.repairInfo.from).format('DD MMM YYYY')} disabled />
-                    <Input s={6} label="Expected Delivery" value={moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')} disabled />
-                    <Input s={6} name='on' type='date' label="To *" onChange={this.setTo} value = {this.state.to} />
+                <Row><br /><br />
+                    {this.state.repairInfo.asset ? <div>
+                        <h6><b>Asset Name</b> : {this.state.repairInfo.asset.asset_name}</h6>
+                        <h6><b>Vendor</b> : {this.state.repairInfo.vendor}</h6>
+                        <h6><b>Given for service on</b> : {moment(this.state.repairInfo.from).format('DD MMM YYYY')}</h6>
+                        <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
+                        </div> : null}
+                    <br /><br />
+                    <Input s={6} name='on' type='date' label="Received from Service *" onChange={this.setTo} value = {this.state.to} />
                     <Input s={6} label="Repair Invoice *" value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
                     <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
                     <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>

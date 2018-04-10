@@ -16,7 +16,8 @@ class RepairAsset extends Component{
             vendorList : [],
             addVendor : false,
             assetDetails : {},
-            vendorListRequest : true
+            vendorListRequest : true,
+            isDisabled : false
         }
         this.repairAssetIntoDb = this.repairAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
@@ -73,7 +74,8 @@ class RepairAsset extends Component{
         })
         .then(res => {
             this.setState({
-                repairAssetRequest : false
+                repairAssetRequest : false,
+                isDisabled : true
             })
             window.Materialize.toast('Repair information has been stored', 4000)
             // this.props.setHandleListRequest()
@@ -137,7 +139,7 @@ class RepairAsset extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{marginLeft : '1%'}} >
                 <h3>Repair Asset</h3>
                 <br /><br />
                 {this.state.assetDetails ? 
@@ -154,9 +156,9 @@ class RepairAsset extends Component{
                     <h6>Total : {this.state.assetDetails.total}</h6>
                     <br /><br />
                     <Row>
-                        <Input s={12} type="select" label="Vendor*" value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
-                        <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
-                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} />
+                        <Input s={12} type="select" label="Vendor*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input>
+                        <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} disabled = {this.state.isDisabled}/>
+                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled}/>
                     </Row>
                     <Modal
                         header='Add Vendor'
