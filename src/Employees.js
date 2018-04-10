@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Employee.css';
 import './adminDash.css'
-import EmployeeAdd from './EmployeeAdd';
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeDelete from './EmployeeDelete';
 import {
@@ -68,7 +67,7 @@ class EmployeesList extends Component {
     var employeelist = (
       <div style={{marginLeft : '1%', marginRight : '1%'}}>
         {this.state.handleListRequest ? this.handleList() : null}
-          <p className="adminDashboardTitle">Employees List</p>
+        <h3 className='heading'>Employees List</h3>
          
           <Table>
             <thead>
@@ -114,11 +113,7 @@ class EmployeesList extends Component {
             </tbody>
           </Table>
           <div className = 'Addbtn'>
-          <Modal 
-            header='Employee Add Form'
-            trigger={<Button  floating large className = 'red addemployeebtn' waves = 'light' icon = 'add'  />}>
-            <EmployeeAdd setHandleListRequest = {this.setHandleListRequest}/>
-          </Modal>
+          <Link to={{ pathname : '/adminhomepage/employees/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
           </div>
           <div>
             <Pagination items = {this.state.pagination.totalPage} activePage = {this.state.page } maxButton = {5} onSelect = {this.setPage}/> 

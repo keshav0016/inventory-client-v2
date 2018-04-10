@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
+import './Employee.css'
 
 class EmployeeAdd extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class EmployeeAdd extends Component {
      
   }
   handleCreate(){
-    if(!this.state.first_name || !this.state.last_name || !this.state.age || !this.state.gender || !this.state.designation || !this.state.department){
+    if(!this.state.user_id || !this.state.first_name || !this.state.last_name || !this.state.age || !this.state.gender || !this.state.designation || !this.state.department){
       window.Materialize.toast('All the * marked fields are required', 4000)
     }else
     {
@@ -47,8 +48,6 @@ class EmployeeAdd extends Component {
       })
       .then((res)=>{
         if(res.data.message === 'employee created'){
-        this.props.setHandleListRequest()
-          window.Materialize.toast('Employee added', 4000)
           this.setState({
             first_name: '',
             last_name: '',
@@ -58,6 +57,8 @@ class EmployeeAdd extends Component {
             designation: '',
             user_id: ''
           })
+        this.props.setHandleListRequest()
+          window.Materialize.toast('Employee added', 4000)
         }else if(res.data.error[0].message ==='first name should be alphabets'){
           window.Materialize.toast('firstname should be filled and should be only letters',3000)
         }else if(res.data.error[0].message ==='last name should be alphabets'){
@@ -118,7 +119,8 @@ class EmployeeAdd extends Component {
 
   render() {
     return (
-      <div >
+      <div style={{marginLeft : '1%', marginRight : '1%'}} >
+      <h3 className='heading'>Employee Add Form</h3>
         <Row>
         <Input  onChange={this.handleUser_Id}s={6}  label="* Employee Id" />
           <Input  onChange={this.handleFirstname}s={6}  label="* First Name" />
@@ -138,7 +140,7 @@ class EmployeeAdd extends Component {
           </Input>
           <Input type="text" label="* Designation"onChange={this.handleDesignation} s={6} />
         </Row>
-          <Button onClick={this.handleCreate}>Add</Button>
+          <Button className='btnalign' onClick={this.handleCreate}>Add</Button>
       </div>
 
     )

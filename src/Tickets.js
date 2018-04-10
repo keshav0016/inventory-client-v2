@@ -9,7 +9,7 @@ class Tickets extends Component{
     constructor(props){
         super(props)
         this.state = {
-            quantity:0,
+            quantity:'',
             availableItems: [],
             assets: '',
             item_type: '',
@@ -117,8 +117,8 @@ class Tickets extends Component{
    render(){
         return(
             <div >
-            <p className="adminDashboardTitle">Request Ticket form</p>
-            <div className ='RequestForm'>
+                <h3 className='heading'>Ticket RequestForm</h3>
+                <div className ='RequestForm'>
                 <Row>
                     <Input s={6} type='select' onChange={this.requestResourceType}>
                         {this.state.availableItems.map((element,index)=>{
@@ -131,9 +131,9 @@ class Tickets extends Component{
                 <Row>
                     <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity}/>
                 </Row>
-                <Badge>Resource Type : {this.state.item_type}</Badge>
-                    <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request Resource</Button>
-                    {this.state.requestResource ? this.confirmRequest() : null} 
+                    <Badge>Resource Type : {this.state.item_type}</Badge>
+                <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request Resource</Button>
+                {this.state.requestResource ? this.confirmRequest() : null} 
                 </div>
                    
             </div>

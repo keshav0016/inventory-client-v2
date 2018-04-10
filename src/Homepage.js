@@ -19,6 +19,7 @@ import AddAsset from './AddAsset'
 import RepairAsset from './RepairAsset'
 import Tickets from './Tickets'
 import LoginForm from './LoginForm';
+import EmployeeAdd from './EmployeeAdd';
 
 class Homepage extends Component{
     render(){
@@ -52,6 +53,8 @@ class Homepage extends Component{
                     <Route  exact path ='/adminhomepage/assets/create' component={AddAsset}/>
                     <Route  exact path ='/adminhomepage/assets/repair' component={RepairAsset}/>
                     <Route  exact path ='/employeehomepage/RequestTicket' component={Tickets}/>
+                    <Route  exact path ='/adminhomepage/employees/create' component={EmployeeAdd}/>
+
                     
                     
                 </div>
