@@ -9,12 +9,12 @@ class Tickets extends Component{
     constructor(props){
         super(props)
         this.state = {
-            quantity:'',
             availableItems: [],
-            assets: '',
-            item_type: '',
             user_id: this.props.user_id,
             requestResource: false,
+            quantity:'',
+            assets: '',
+            item_type: '',
             item:'',
         }
         this.requestQuantity = this.requestQuantity.bind(this)
@@ -82,7 +82,12 @@ class Tickets extends Component{
         })
         .then(res => {
             this.setState({
-                requestResource:false
+                requestResource:false,
+                quantity:'',
+                assets: '',
+                item_type: '',
+                item:'',
+
             })
             if(res.data.message === 'ticket created'){
                 window.Materialize.toast('Success', 4000)

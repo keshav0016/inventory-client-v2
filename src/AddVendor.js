@@ -69,6 +69,7 @@ class AddVendor extends Component{
                 this.setState({
                     name: '',
                     address : '',
+                    contact : '',
                     addVendorRequest : false
                 })
                 window.Materialize.toast('Vendor Added', 4000)
@@ -94,7 +95,7 @@ class AddVendor extends Component{
             <div>
                 <Row>
                     <Input s={6} label="Name *" value = {this.state.name} onChange = {this.setName} />
-                    <Input s={6} label="Contact "value = {this.state.contact} onChange ={this.setContact} validate type='tel'><Icon>phone</Icon></Input>
+                    <Input s={6} label="Contact "value = {this.state.contact} onChange ={this.setContact} ><Icon>phone</Icon></Input>
 
                     <Input s={12} label="Address *" value = {this.state.address} onChange = {this.setAddress} />
 

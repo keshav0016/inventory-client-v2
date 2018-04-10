@@ -183,7 +183,7 @@ class UpdateAsset extends Component {
                     <Badge>Total : ₹{this.state.total}</Badge>
                     <Input s={6} type='select' label="Category" onChange={this.setCategory} defaultValue={this.state.category}>
                         <option value='Electronics'>Electronics</option>
-                        <option value='Non - Electronics'>Non - Electronics</option>
+                        <option value='Non-Electronics'>Non - Electronics</option>
                         <option value='Other'>Other</option>
                     </Input>
                 </Row>
