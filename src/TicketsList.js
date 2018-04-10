@@ -173,7 +173,7 @@ class TicketsList extends Component{
                     </div>
                     :
                     <div>
-                    <Table style={{marginLeft:'2%'}}  className="consumableTable">
+                    <Table style={{marginLeft:'1%'}}  className="consumableTable">
                     <thead>
                         <tr>
                             <th data-field="ticket_number">Ticket Number</th>
