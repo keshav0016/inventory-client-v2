@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem, Modal, Button} from 'react-materialize'
+import {Navbar, NavItem, Modal, Button, Table} from 'react-materialize'
 import './MasterComponent.css';
 import {
    BrowserRouter as Router,
@@ -17,11 +17,13 @@ class EmployeeDB extends Component {
        super(props)
        this.state = {
            profile: [],
-        //    user_id: this.props.location.user,
+        //    user_id: this.props.location.user.user_id,
            data: [],
            assetsCount: '',
            consumablesCount: '',
-           handleList : true
+           handleList : true,
+           history : [],
+           historyAssets :[],
        }
        this.handleList = this.handleList.bind(this)
    }
@@ -45,6 +47,24 @@ class EmployeeDB extends Component {
                     <p>User Id: {this.state.profile.user_id}</p> 
                     <p>No of Assets held: {this.state.assetsCount}</p>
                     <p>No of Consumables held: {this.state.consumablesCount}</p>
+                    {/* <Table >
+                        <thead>
+                            <tr>
+                                <th data-field="item"> Item</th>
+                                <th data-field="quantity">Quantity</th>
+                            
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {this.state.data.map((item, index) => {
+                                return <tr key={index}>
+                                    <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
+                                    <td>{item.asset_id ? "1": item.quantity}</td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </Table> */}
                     
                 </Modal>
                </div>
@@ -85,10 +105,14 @@ class EmployeeDB extends Component {
             this.setState({
                 assetsCount : res.data.assetsCount,
                 consumablesCount : res.data.consumablesCount,
+                // history : res.data.history,
+                // historyAssets : res.data.historyAssets,
+                // data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
                 handleList : false
 
             })
         })
+       
     }
 }
 export default EmployeeDB

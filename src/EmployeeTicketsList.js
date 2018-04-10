@@ -109,7 +109,7 @@ class EmployeeTicketsList extends Component{
                     <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
                 </Row>
-                <Table centered>
+                <Table >
                     <thead>
                         <tr>
                             <th data-field="ticket_number">Ticket Number</th>
