@@ -67,8 +67,8 @@
   left: 400px;
 }
 .profilebtn {
-  position: fixed;
-  padding-left: 15px;
+  position: relative;
+  padding-right: 15px;
   /* top: 10.5%; */
   right: 0.2%
 }

@@ -32,7 +32,7 @@ class EmployeeHistory extends Component {
             {this.state.data.map((item, index) => {
                 return <tr key={index}>
                     <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
-                    <td>{item.quantity}</td>
+                    <td>{item.asset_id ? "1": item.quantity}</td>
                 </tr>
             })}
         </tbody>
