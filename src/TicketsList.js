@@ -128,7 +128,12 @@ class TicketsList extends Component{
             this.setState({
                 handleListRequest:true
             })
-
+            if(res.data.message === 'Requested Quantity greater than available'){
+                window.Materialize.toast('Requested Quantity greater than available', 4000)
+            }
+            else{
+                window.Materialize.toast('Ticket Accepted', 4000)
+            }
             console.log('success')
         })
         .catch(error =>{
@@ -195,7 +200,7 @@ class TicketsList extends Component{
                             <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
-                            <td>{ticket.status === 'Pending' ? <Modal
+                            <td>{ticket.item_type === 'assets' ? <Modal
                                 header='expected date of recovery'
                                 trigger={ <Button >Accept</Button> }>
                                 <Row>
@@ -206,7 +211,7 @@ class TicketsList extends Component{
                                 <br/>
                                 <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> 
                                 </Row>
-                                </Modal>    : null}</td>
+                                </Modal>    : <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> }</td>
                             <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             </tr>
                             )
