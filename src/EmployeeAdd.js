@@ -48,6 +48,7 @@ class EmployeeAdd extends Component {
       })
       .then((res)=>{
         if(res.data.message === 'employee created'){
+          window.Materialize.toast('Employee added', 4000)
           this.setState({
             first_name: '',
             last_name: '',
@@ -57,8 +58,7 @@ class EmployeeAdd extends Component {
             designation: '',
             user_id: ''
           })
-        this.props.setHandleListRequest()
-          window.Materialize.toast('Employee added', 4000)
+          // this.props.setHandleListRequest(true)
         }else if(res.data.error[0].message ==='first name should be alphabets'){
           window.Materialize.toast('firstname should be filled and should be only letters',3000)
         }else if(res.data.error[0].message ==='last name should be alphabets'){
@@ -140,7 +140,7 @@ class EmployeeAdd extends Component {
           </Input>
           <Input type="text" label="* Designation"onChange={this.handleDesignation} s={6} />
         </Row>
-          <Button className='btnalign' onClick={this.handleCreate}>Add</Button>
+          <Button  onClick={this.handleCreate}>Add</Button>
       </div>
 
     )

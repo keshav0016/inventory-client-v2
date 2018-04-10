@@ -79,6 +79,8 @@ class Assets extends Component{
                             <th data-field="id">Id</th>
                             <th data-field="name">Vendor Name</th>
                             <th data-field="address">Address</th>
+                            <th data-field="contact">Contact No</th>
+                            
                         </tr>
                     </thead>
 
@@ -88,6 +90,8 @@ class Assets extends Component{
                             <td>{item.id}</td>
                             <td>{item.name}</td>
                             <td>{item.address}</td>
+                            <td>{item.contact}</td>
+                            
                             </tr>
                         })}
                     </tbody>

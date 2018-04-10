@@ -17,10 +17,11 @@ class EmployeeDB extends Component {
        super(props)
        this.state = {
            profile: [],
-           user_id: this.props.location.user,
+        //    user_id: this.props.location.user,
            data: [],
-           history: [],
-           historyAssets: []
+           assetsCount: '',
+           consumablesCount: '',
+           handleList : true
        }
        this.handleList = this.handleList.bind(this)
    }
@@ -28,6 +29,7 @@ class EmployeeDB extends Component {
        return(
            <Router>
            <div>
+               {this.state.handleList ? this.handleList() : null}
                <div className="masterComponentBackground">
                <div>
                    <Navbar className="teal lighten-1 masterComponentNavBar">
@@ -40,8 +42,10 @@ class EmployeeDB extends Component {
                     header='Profile'
                     trigger={<Button className = 'black' onClick={this.handleList}  icon='person' >User Profile</Button>}>
                     <p>Name: {this.state.profile.first_name} {this.state.profile.last_name} </p>
-                    <p>UserId: {this.state.profile.user_id}</p> 
-                    {/* <p>assets held: {this.state.historyAssets.length}</p> */}
+                    <p>User Id: {this.state.profile.user_id}</p> 
+                    <p>No of Assets held: {this.state.assetsCount}</p>
+                    <p>No of Consumables held: {this.state.consumablesCount}</p>
+                    
                 </Modal>
                </div>
                </div>
@@ -73,18 +77,15 @@ class EmployeeDB extends Component {
     }
     handleList(){
         axios({
-            method:'post',
-            url : 'http://localhost:3001/employees/history',
-            data :{
-                user_id: this.state.user_id
-            },
+            method:'get',
+            url : 'http://localhost:3001/employee/ticket/count',
             withCredentials:true
         })
         .then((res) => {
             this.setState({
-                history : res.data.history,
-                historyAssets : res.data.historyAssets,
-                data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
+                assetsCount : res.data.assetsCount,
+                consumablesCount : res.data.consumablesCount,
+                handleList : false
 
             })
         })
