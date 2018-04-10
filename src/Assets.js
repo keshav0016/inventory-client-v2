@@ -9,6 +9,7 @@ import ReceiveAsset from './ReceiveAsset'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
 import $ from 'jquery'
+import './Employee.css'
 import './ListPage.css'
 import './Asset.css'
 
@@ -134,7 +135,7 @@ class Assets extends Component{
         return(
             <div  style={{marginLeft : '1%', marginRight : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <p className="adminDashboardTitle">Assets</p>
+                <h3 className="heading">List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={3} label="Search" onChange = {this.setSearch} />
                 </Row>
@@ -157,18 +158,14 @@ class Assets extends Component{
                 {this.state.loading ? <ProgressBar /> :
                 (this.state.assetList.length === 0 ? <h3 style={{left : '40%'}}>No Records</h3> :
                 <div>
-                <Table centered hoverable className="assetTable">
+                <Table  hoverable className="assetTable">
                     <thead>
                         <tr>
                             <th data-field="serial_number">Serial No.</th>
                             <th data-field="asset_name">Asset Name</th>
                             <th data-field="purchase_date">Purchase date</th>
-                            <th data-field="Description">Description</th>
                             <th data-field="invoice_number">Invoice No.</th>
                             <th data-field="vendor">Vendor</th>
-                            <th data-field="amount">Amount</th>
-                            <th data-field="gst">GST</th>
-                            <th data-field="total">Total</th>
                             <th data-field="current_status">Current Status</th>
                             <th data-field="condition">Condition</th>
                             <th data-field="location">Location</th>
@@ -182,12 +179,8 @@ class Assets extends Component{
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
                             <td>{moment(item.purchase_date).format('DD MMM YYYY')}</td>
-                            <td>{item.description}</td>
                             <td>{item.invoice_number}</td>
                             <td>{item.vendor}</td>
-                            <td>{item.amount}</td>
-                            <td>{item.gst}</td>
-                            <td>{item.total}</td>
                             <td>{item.current_status}</td>
                             <td>{item.condition}</td>
                             <td>{item.location}</td>
