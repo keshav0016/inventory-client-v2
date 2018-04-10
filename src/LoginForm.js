@@ -8,6 +8,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Row from 'react-materialize/lib/Row';
+import $ from 'jquery'
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
 // import AdminHomepage from './AdminHomepage';
@@ -42,7 +43,9 @@ class LoginForm extends Component {
       password: event.target.value
     })
   }
-
+  componentDidMount(){
+    $('label').addClass('active')
+  }
   //function to check the credentials provided  by the user
   verifyCredentials() {
       axios({

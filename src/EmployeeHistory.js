@@ -59,7 +59,7 @@ class EmployeeHistory extends Component {
                 data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
             })
             if(this.state.data.length === 0){
-                window.Materialize.toast('There is no history to show',3000)
+                window.Materialize.toast('There are no items for the user',3000)
 
             }
         })

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
+import $ from 'jquery'
 
 class EmployeeUpdate extends Component{
     constructor(props){
@@ -69,6 +70,9 @@ class EmployeeUpdate extends Component{
         this.setState({
             gender: e.target.value
         })
+    }
+    componentDidMount(){
+        $('label').addClass('active')
     }
    handleUpdate(){
        axios({

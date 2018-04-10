@@ -52,12 +52,16 @@ class Assets extends Component{
         this.setState({
             handleListRequest : true
         })
-        $(".modal-close").trigger('click')
+        $(".modal-overlay").click()
+
+        // $(".modal-close").trigger('click')
         if(itemAdded){
             this.setPage(this.state.pagination.totalPage)
         }
     }
-
+    componentDidMount(){
+        $('label').addClass('active')
+    }
 
     setPage(e){
         this.setState({

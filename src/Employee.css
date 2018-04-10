@@ -84,3 +84,7 @@
 .btnalign{
   left: 50%  
 }
+.addbtn{
+  position: fixed;
+  right: 100px;
+}
