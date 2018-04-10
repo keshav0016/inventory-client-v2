@@ -186,7 +186,7 @@ class Assets extends Component{
                             <td>{item.location}</td>
                             <td>{item.category}</td>
                             <Dropdown trigger={
-                                    <Button ><Icon tiny>more_vert</Icon></Button>
+                                    <Button style={{marginTop:'7%'}} ><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
                                         header='Edit Asset'

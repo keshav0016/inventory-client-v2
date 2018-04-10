@@ -59,7 +59,6 @@ class TicketsList extends Component{
         this.setState({
             handleListRequest : true
         })
-        $(".modal-overlay").click()
         
     }
 
@@ -133,6 +132,7 @@ class TicketsList extends Component{
             }
             else{
                 window.Materialize.toast('Ticket Accepted', 4000)
+                $(".modal-overlay").click()        
             }
             console.log('success')
         })
@@ -165,7 +165,7 @@ class TicketsList extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <p className="adminDashboardTitle">Tickets List</p>
+                <h3 className ='heading'>Tickets list</h3>
                 {this.state.ticketsList.length === 0
                     ?
                     <div className="noRecordsScreen">
@@ -200,8 +200,9 @@ class TicketsList extends Component{
                             <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
-                            <td>{ticket.item_type === 'assets' ? <Modal
+                            <td>{ticket.status === 'Pending' ? (ticket.item_type === 'assets' ? <Modal
                                 header='expected date of recovery'
+                                fixedFooter
                                 trigger={ <Button >Accept</Button> }>
                                 <Row>
                                 <Input name='on' type='date' onChange={this.handleExpected} />
@@ -211,7 +212,7 @@ class TicketsList extends Component{
                                 <br/>
                                 <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> 
                                 </Row>
-                                </Modal>    : <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> }</td>
+                            </Modal>    : <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button>): null }</td>
                             <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             </tr>
                             )

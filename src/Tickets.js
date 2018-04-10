@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button, Badge} from 'react-materialize'
 import './Employee.css'
 import './adminDash.css'
+import $ from 'jquery'
 //CHANGE THE USER ID IN CLIENT AS WELL AS SERVER
 
 class Tickets extends Component{
@@ -31,12 +32,14 @@ class Tickets extends Component{
                 quantity:1,
                 item:this.state.availableItems[e.target.value]
             })
+            $('label').addClass('active')
         }
         else{
             this.setState({
                 item_type:'consumables',
                 item:this.state.availableItems[e.target.value]
             })
+            $('label').addClass('active')
         }
     }
 
@@ -49,13 +52,19 @@ class Tickets extends Component{
     }
 
     checkForValidation(){
-        if(this.state.quantity <= 0){
+        if(Number(this.state.quantity) < 0){
             window.Materialize.toast(`requested quantity cannot be negative`, 4000)
         }
         else{
-            this.setState({
-                requestResource : true 
-            })
+            if(Number(this.state.quantity) === 0){
+                window.Materialize.toast(`requested quantity cannot be zero`, 4000)
+            }
+            else{
+
+                this.setState({
+                    requestResource : true 
+                })
+            }
         }
     }
 
@@ -84,7 +93,6 @@ class Tickets extends Component{
             this.setState({
                 requestResource:false,
                 quantity:'',
-                assets: '',
                 item_type: '',
                 item:'',
 
@@ -117,6 +125,7 @@ class Tickets extends Component{
        .catch(error => {
         window.Materialize.toast('Sorry, there are no resources available', 4000)
     })
+    $('label').addClass('active')
    }
 
    render(){

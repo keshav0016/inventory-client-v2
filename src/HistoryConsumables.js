@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Col, CardPanel} from 'react-materialize'
 import moment from 'moment'
+import './Employee.css'
 
 class HistoryConsumables extends Component{
    constructor(props){
@@ -38,7 +39,7 @@ class HistoryConsumables extends Component{
        return(
            <div style={{marginLeft : '1%',marginRight : '1%'}}>
             {this.state.fetchHistory ? this.getHistory() : null}
-            <p className="adminDashboardTitle">Consumable Details</p>
+            <h3 className='heading'>Consumable Details</h3>
             {this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                         <CardPanel className='z-depth-2'>

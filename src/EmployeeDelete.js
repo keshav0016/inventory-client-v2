@@ -33,7 +33,7 @@ class EmployeeDelete extends Component {
         return(
             <div>
              <Icon large>delete forever</Icon>
-            <p>Are you sure you want to delete {this.props.user.first_name} ?</p>
+            <h4>Are you sure you want to delete {this.props.user.first_name} ?</h4>
             <Button waves='light' onClick={this.handleDelete}>Delete</Button>
             </div>
 

@@ -179,14 +179,13 @@ class AddAsset extends Component{
                     purchase_date : '',
                     description : '',
                     invoice_number : '',
-                    vendor : '',
                     amount : 0,
                     gst : 0,
                     total : 0,
-                    category : ''
                 })
                 window.Materialize.toast('Asset Added', 4000)                
                 this.props.setHandleListRequest(true)
+                $('label').addClass('active')
             }
         })
         .catch(error => {

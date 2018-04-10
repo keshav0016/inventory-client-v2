@@ -11,6 +11,7 @@ import {
     Link
   } from 'react-router-dom';
 import './ListPage.css'
+import './Employee.css'
 import $ from 'jquery'
 
 
@@ -149,7 +150,7 @@ class Consumables extends Component{
         return(
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <p className="adminDashboardTitle">Consumables</p>
+                <h3 className='heading'>List of Consumables</h3>
                 <Row>
                 <Input s={2} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By Quantity</option>
@@ -168,7 +169,7 @@ class Consumables extends Component{
                     :
 
                     <div>
-                    <Table centered striped className="consumableTable">
+                    <Table centered hoverable className="consumableTable">
                     <thead>
                         <tr>
                             <th style={{paddingLeft:'20px'}} data-field="consumable_id">Id</th>
