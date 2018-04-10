@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
 import './Employee.css'
+import $ from 'jquery'
 
 class EmployeeAdd extends Component {
   constructor(props) {
@@ -26,6 +27,9 @@ class EmployeeAdd extends Component {
     this.handleUser_Id = this.handleUser_Id.bind(this)
      
   }
+  componentDidMount(){
+    $('label').addClass('active')
+}
   handleCreate(){
     if(!this.state.user_id || !this.state.first_name || !this.state.last_name || !this.state.age || !this.state.gender || !this.state.designation || !this.state.department){
       window.Materialize.toast('All the * marked fields are required', 4000)
@@ -35,6 +39,7 @@ class EmployeeAdd extends Component {
         method: 'post',
         url: 'http://localhost:3001/employees/create',
         data:{
+          user_id: this.state.user_id,
           first_name:this.state.first_name,
           last_name:this.state.last_name,
           password:this.state.password,
@@ -42,22 +47,21 @@ class EmployeeAdd extends Component {
           gender: this.state.gender,
           department:this.state.department,
           designation:this.state.designation,
-          user_id: this.state.user_id
         },
         withCredentials: true
       })
       .then((res)=>{
         if(res.data.message === 'employee created'){
-          window.Materialize.toast('Employee added', 4000)
           this.setState({
+            user_id: '',
             first_name: '',
             last_name: '',
             age: '',
             gender: '',
             department: '',
             designation: '',
-            user_id: ''
           })
+          window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
         }else if(res.data.error[0].message ==='first name should be alphabets'){
           window.Materialize.toast('firstname should be filled and should be only letters',3000)
@@ -122,25 +126,25 @@ class EmployeeAdd extends Component {
       <div style={{marginLeft : '1%', marginRight : '1%'}} >
       <h3 className='heading'>Add a Employee</h3>
         <Row>
-        <Input  onChange={this.handleUser_Id}s={6}  label="* Employee Id" />
-          <Input  onChange={this.handleFirstname}s={6}  label="* First Name" />
-          <Input  onChange={this.handleLastname} s={6} label="* Last Name" />
-          <Input type="number" min='0'label="* age" onChange={this.handleAge}s={6} />
-          <Input s={6} type='select' label="* gender" onChange={this.handleGender}defaultValue='Other'>
+        <Input  onChange={this.handleUser_Id}s={6} value={this.state.user_id} label="* Employee Id" />
+          <Input  onChange={this.handleFirstname}s={6} value={this.state.first_name} label="* First Name" />
+          <Input  onChange={this.handleLastname} s={6} value={this.state.last_name} label="* Last Name" />
+          <Input type="number" min='0'label="* age"value={this.state.age} onChange={this.handleAge}s={6} />
+          <Input s={6} type='select' label="* gender"value={this.state.gender} onChange={this.handleGender}defaultValue='Other'>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>
           </Input>
-          <Input s={6} type='select' label="* Department" onChange={this.handleDepartment}defaultValue='Other'>
+          <Input s={6} type='select' label="* Department" defaultValue='Other'onChange={this.handleDepartment}defaultValue='Other'>
             <option value='Hr'>HR</option>
             <option value='Delivery'>Delivery</option>
             <option value='Developer'>Developer</option>
             <option value='Other'>Other</option>
             
           </Input>
-          <Input type="text" label="* Designation"onChange={this.handleDesignation} s={6} />
+          <Input type="text" value={this.state.designation}label="* Designation"onChange={this.handleDesignation} s={6} />
         </Row>
-          <Button  onClick={this.handleCreate}>Add</Button>
+          <Button className='addbtn' onClick={this.handleCreate}>Add</Button>
       </div>
 
     )

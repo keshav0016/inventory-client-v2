@@ -195,8 +195,6 @@ class TicketsList extends Component{
                             <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
                             <td>{ticket.status}</td>
-                            <td>{ticket.status === 'Pending' ? <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> : null}</td>
-                            <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             <td>{ticket.status === 'Pending' ? <Modal
                                 header='expected date of recovery'
                                 trigger={ <Button >Accept</Button> }>
@@ -209,7 +207,7 @@ class TicketsList extends Component{
                                 <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> 
                                 </Row>
                                 </Modal>    : null}</td>
-                            <td>{ticket.status === 'Pending' ? <Button onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
+                            <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
                             </tr>
                             )
                         })}
