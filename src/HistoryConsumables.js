@@ -69,11 +69,11 @@ class HistoryConsumables extends Component{
                            <td>{consumable.vendor_name ? consumable.vendor_name : '-'}</td>
                            <td>{consumable.purchase_date ? moment(consumable.purchase_date).format('DD MMM YYYY') : '-'}</td>
                            <td>{consumable.purchase_date ? consumable.quantity : '-'}</td>
-                           <td>{consumable.item_price ? consumable.item_price : '-'}</td>
-                           <td>{consumable.whole_price ? consumable.whole_price : '-'}</td>
+                           <td>{consumable.item_price ? consumable.item_price.toFixed(2) : '-'}</td>
+                           <td>{consumable.whole_price ? consumable.whole_price.toFixed(2) : '-'}</td>
                            <td>{consumable.discount ? consumable.discount : '-'}</td>
                            <td>{consumable.gst ? consumable.gst : '-'}</td>
-                           <td>{consumable.total ? consumable.total : '-'}</td>
+                           <td>{consumable.total ? consumable.total.toFixed(2) : '-'}</td>
                            {/* <td>{consumable.purchase_date ? <Button>Edit</Button> : null}</td>
                            <td>{consumable.purchase_date ? <Button>Submit</Button> : null}</td> */}
                            </tr>
