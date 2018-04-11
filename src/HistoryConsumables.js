@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Col, CardPanel} from 'react-materialize'
+import {Col, CardPanel} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 

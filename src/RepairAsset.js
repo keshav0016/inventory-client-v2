@@ -66,7 +66,7 @@ class RepairAsset extends Component{
             method : 'post',
             url : 'http://localhost:3001/asset/repair',
             data : {
-                asset_id : this.props.location.asset,
+                asset_id : this.props.match.params.asset,
                 vendor : this.state.vendor,
                 from : this.state.from,
                 expected_delivery : this.state.expected_delivery
@@ -127,7 +127,7 @@ class RepairAsset extends Component{
 
         axios({
             method : 'get',
-            url : `http://localhost:3001/asset/history?asset_id=${this.props.location.asset}`,
+            url : `http://localhost:3001/asset/history?asset_id=${this.props.match.params.asset}`,
             withCredentials : true
         })
         .then(res => {

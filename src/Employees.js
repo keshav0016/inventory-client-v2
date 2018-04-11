@@ -105,7 +105,7 @@ class EmployeesList extends Component {
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <Link to={{ pathname : '/adminhomepage/employees/details', user : item.user_id}}><NavItem>Details</NavItem></Link>
+                  <Link to={{ pathname : '/admin/employees/details', user : item.user_id}}><NavItem>Details</NavItem></Link>
                 </Dropdown></td>
               </tr>
               )
@@ -113,7 +113,7 @@ class EmployeesList extends Component {
             </tbody>
           </Table>
           <div className = 'Addbtn'>
-          <Link to={{ pathname : '/adminhomepage/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
+          <Link to={{ pathname : '/admin/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
           </div>
           <div>
             <Pagination items = {this.state.pagination.totalPage} activePage = {this.state.page } maxButton = {5} onSelect = {this.setPage}/> 

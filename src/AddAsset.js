@@ -18,7 +18,7 @@ class AddAsset extends Component{
             amount : 0,
             gst : 0,
             total : 0,
-            category : '',
+            category : 'Select',
             condition : '',
             location : '',
             vendorList : [],
@@ -45,7 +45,7 @@ class AddAsset extends Component{
     }
 
     checkForValidation(){
-        if(!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || this.state.vendor === 'Select' || !this.state.amount || !this.state.condition || !this.state.location){
+        if(!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || this.state.vendor === 'Select' || !this.state.amount || !this.state.condition || !this.state.location || this.state.category ==='Select'){
             window.Materialize.toast('All the * marked fields are required', 4000)
         }
         else{
@@ -179,6 +179,10 @@ class AddAsset extends Component{
                     purchase_date : '',
                     description : '',
                     invoice_number : '',
+                    vendor : 'Select',
+                    category : 'Select',
+                    condition : '',
+                    location : '',
                     amount : 0,
                     gst : 0,
                     total : 0,
@@ -238,7 +242,8 @@ class AddAsset extends Component{
                     <Input s={6} label="Condition *" value = {this.state.condition} onChange = {this.setCondition}/>
                     <Input s={6} label="Location *" value = {this.state.location} onChange = {this.setLocation}/>
                     <br />
-                    <Input s={6} type='select' label="Category" onChange = {this.setCategory} defaultValue='Other'>
+                    <Input s={6} type='select' label="Category*" onChange = {this.setCategory} value={this.state.category}>
+                        <option value='Select'>Select</option>
                         <option value='Electronics'>Electronics</option>
                         <option value='Non-Electronics'>Non-Electronics</option>
                         <option value='Other'>Other</option>

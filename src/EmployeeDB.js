@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem, Modal, Button, Table} from 'react-materialize'
+import {Navbar, NavItem, Modal, Button} from 'react-materialize'
 import './MasterComponent.css';
 import {
    BrowserRouter as Router,

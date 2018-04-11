@@ -132,7 +132,7 @@ class EmployeeTicketsList extends Component{
                             return (<tr key={ticket.ticket_number}>
                             <td>{ticket.ticket_number}</td>
                             <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                            <td>{ticket.requested_asset_item ? ticket.requested_asset_item + " " + "[" + ticket.item_type + "]" : ticket.requested_consumable_item + " " + "[ "+ticket.item_type+" ]"}</td>
+                            <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                             {/* <td>{ticket.requested_consumable_item}</td> */}
                             {/* <td>{ticket.item_type}</td> */}
                             <td>{ticket.quantity}</td>
