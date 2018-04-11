@@ -31,7 +31,7 @@ class Assets extends Component{
                 assetDetails : res.data.assetDetails,
                 historyAssigned : res.data.historyAssigned,
                 historyRepair : res.data.historyRepair,
-                history : res.data.historyAssigned.concat(res.data.historyRepair).sort((a,b) => b.id - a.id),
+                history : res.data.historyAssigned.concat(res.data.historyRepair).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)),
                 assignedEmployee : res.data.employeeDetails,
                 repairDetails : res.data.repairDetails,
                 handleListRequest : false
