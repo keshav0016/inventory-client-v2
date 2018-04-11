@@ -105,7 +105,7 @@ class EmployeesList extends Component {
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <Link to={{ pathname : '/admin/employees/details', user : item.user_id}}><NavItem>Details</NavItem></Link>
+                  <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
                 </Dropdown></td>
               </tr>
               )

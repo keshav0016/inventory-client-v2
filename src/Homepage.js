@@ -48,9 +48,9 @@ class Homepage extends Component{
                     <Route exact path="/admin/consumables" component={Consumables} />
                     <Route exact path="/admin/employees" component={EmployeesList} />
                     <Route exact path="/admin/tickets" component={TicketsList} />
-                    <Route exact path="/admin/consumables/history" component={HistoryConsumables}/>
+                    <Route exact path="/admin/consumables/history/:consumable" component={HistoryConsumables}/>
                     <Route exact path ='/admin/consumables/add' component={AddConsumables}/>
-                    <Route  exact path ='/admin/employees/details' component={EmployeeHistory}/>
+                    <Route  exact path ='/admin/employees/details/:employee' component={EmployeeHistory}/>
                     <Route  exact path ='/admin/vendor' component={Vendor}/>
                     <Route  exact path ='/admin/assets/history/:asset' component={History}/>
                     <Route  exact path ='/admin/assets/create' component={AddAsset}/>

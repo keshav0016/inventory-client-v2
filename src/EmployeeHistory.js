@@ -7,7 +7,7 @@ class EmployeeHistory extends Component {
     constructor(props){
         super(props)
         this.state = {
-            user_id: this.props.location.user,
+            user_id: this.props.match.params.employee,
             data : [],
             history : [],
             historyAssets :[],

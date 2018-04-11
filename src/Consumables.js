@@ -5,10 +5,7 @@ import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} f
 import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
-import {
-    BrowserRouter as 
-    Link
-  } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './ListPage.css'
 import './Employee.css'
 import $ from 'jquery'
@@ -204,7 +201,7 @@ class Consumables extends Component{
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <Link to={{ pathname : '/admin/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/admin/consumables/history'>Details</NavItem ></Link>
+                                <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>Details</NavItem >
                                 </Dropdown></td>
                             </tr>
                             )

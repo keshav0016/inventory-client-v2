@@ -64,7 +64,18 @@ class TicketsList extends Component{
 
     setCheckAll(){
         this.setPage(1)
-        $('input:checkbox').not('.pendingCheckbox').click()
+        if(!this.state.checkAll){
+            $('input:checkbox:not(:checked)').click()
+            this.setState({
+                checkAll : true
+            })
+        }
+        else{
+            $('input:checkbox').click()
+            this.setState({
+                checkAll : false
+            })
+        }
 
     }
 
