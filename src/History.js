@@ -48,9 +48,9 @@ class Assets extends Component{
             <div  style={{marginLeft : '1%', marginRight : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className='heading'>Asset Details</h3>
-                {this.state.assetDetails.current_status === 'Available' ? <h4>Current Status : {this.state.assetDetails.current_status}</h4> : null }
-                {this.state.assetDetails.current_status === 'Assigned' ? <h4>Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
-                {this.state.assetDetails.current_status === 'Service' ? <h4>Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
+                {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
+                {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
+                {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
                 <div>
                     <Row>
                         <Col s={12} m={12}>
