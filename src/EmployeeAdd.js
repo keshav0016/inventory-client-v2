@@ -63,6 +63,10 @@ class EmployeeAdd extends Component {
           })
           window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
+        }else if(res.data.message ==='user exists'){
+          window.Materialize.toast('user already exists',3000)
+
+        
         }else if(res.data.error[0].message ==='first name should be alphabets'){
           window.Materialize.toast('firstname should be filled and should be only letters',3000)
         }else if(res.data.error[0].message ==='last name should be alphabets'){
