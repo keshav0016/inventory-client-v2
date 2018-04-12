@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Button} from 'react-materialize'
+import {Col, CardPanel, Button, Modal} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
+import UpdateConsumablePurchase from './UpdateConsumablePurchase'
 
 class HistoryConsumables extends Component{
    constructor(props){
@@ -59,7 +60,12 @@ class HistoryConsumables extends Component{
                                         <h6><b>Discount</b> : {consumable.discount}%</h6>
                                         <h6><b>GST</b> : {consumable.gst}%</h6>
                                         <h6><b>Total</b> : ₹{consumable.total.toFixed(2)}</h6>
-                                        <Button>Edit</Button>
+                                        <Modal
+                                            header='Update Consumable Purchase Detail'
+                                            fixedFooter
+                                            trigger={<Button>Edit</Button>}>
+                                            <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
+                                        </Modal>
                                     </div>
                                 </div>
                             </div>
