@@ -43,9 +43,9 @@ class LoginForm extends Component {
       password: event.target.value
     })
   }
-  componentDidMount(){
-    $('label').addClass('active')
-  }
+  // componentDidMount(){
+  //   $('label').addClass('active')
+  // }
   //function to check the credentials provided  by the user
   verifyCredentials() {
       axios({
