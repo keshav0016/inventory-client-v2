@@ -148,10 +148,12 @@ class Consumables extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className='heading'>List of Consumables</h3>
                 <Row>
-                <Input s={2} type='select' onChange={this.sortBy}>
-                    <option value='default'>Sort By Quantity</option>
-                    <option value='asc'>Low - High</option>
-                    <option value='desc'>High - Low</option> 
+                <Input s={3} type='select' onChange={this.sortBy}>
+                    <option value='default'>Sort By</option>
+                    <option value='quantityAsc'>Quantity [Low - High]</option>
+                    <option value='quantityDesc'>Quantity [High - Low]</option>
+                    <option value='purchasedAsc'>Purchase Date [New - Old]</option>
+                    <option value='purchasedDesc'>Purchase Date [Old - New]</option> 
                 </Input>
                 <Input s={4} type='text' label="Search ( Case Sensitive )" onChange={this.searchKeyword}></Input>
                 </Row>
@@ -177,9 +179,9 @@ class Consumables extends Component{
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
                             return (<tr key={consumable.consumable_id}>
-                            <td style={{textAlign:'left',paddingLeft:'60px'}}>{consumable.consumable_id}</td>
+                            <td style={{textAlign:'right',paddingRight:'40px'}}>{consumable.consumable_id}</td>
                             <td style={{textAlign:'left',paddingLeft:'160px'}}>{consumable.name}</td>
-                            <td style={{textAlign:'left',paddingLeft:'160px'}}>{consumable.quantity}</td>
+                            <td style={{textAlign:'right', paddingRight:'160px'}}>{consumable.quantity}</td>
                             <td><Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
                                 }>
@@ -189,9 +191,8 @@ class Consumables extends Component{
                                     trigger={<NavItem>Edit</NavItem >}>
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <Modal
+                                <Modal style={{width:'70%'}}
                                         header='Delete Consumable'
-                                        bottomSheet
                                         trigger={<NavItem>Delete</NavItem>}>
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
                                 </Modal>
@@ -222,7 +223,6 @@ class Consumables extends Component{
                         <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
                 </div>                
                 <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
-                    {/* <AddConsumables setHandleListRequest={this.setHandleListRequest}/> */}
             </div>
         )
     }

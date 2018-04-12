@@ -73,7 +73,7 @@ class DeleteConsumable extends Component{
         return(
             <div>
                 <Icon large>delete forever</Icon>
-                <h4>Do you really want to delete this consumable ?</h4>
+                <h4>{`Do you really want to delete `}<b style={{color:'teal'}}>{`${this.props.consumable.name} `}</b>{`?`}</h4>
                 <Button onClick = {this.setDeleteConsumableRequest}>Delete</Button>
                 {this.state.deleteConsumableRequest ? this.deleteConsumableFroDb() : null}
             </div>
