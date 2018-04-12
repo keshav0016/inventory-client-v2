@@ -21,7 +21,6 @@ class EmployeeUpdate extends Component{
         this.handleDesignation = this.handleDesignation.bind(this)
         this.handleFirstname = this.handleFirstname.bind(this)
         this.handleLastname = this.handleLastname.bind(this)
-        this.handlePassword = this.handlePassword.bind(this)
         this.handleGender = this.handleGender.bind(this)
         this.handleUserid = this.handleUserid.bind(this)
          
@@ -47,11 +46,6 @@ class EmployeeUpdate extends Component{
         this.setState({
         age: e.target.value
             
-        })
-    }
-    handlePassword(e){
-        this.setState({
-            password: e.target.value
         })
     }
     handleDepartment(e){
