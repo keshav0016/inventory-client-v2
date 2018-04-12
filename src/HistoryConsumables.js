@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel} from 'react-materialize'
+import {Col, CardPanel, Button} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 
@@ -54,11 +54,12 @@ class HistoryConsumables extends Component{
                                         {consumable.purchase_date ? <h6><b>Purchased Quantity</b> : {consumable.quantity}</h6> : null}
                                     </div>
                                     <div style={{float: 'right', width : '50%'}} >
-                                        <h6><b>Individual Price</b> : {consumable.item_price.toFixed(2)}</h6>
-                                        <h6><b>Collective Price</b> : {consumable.whole_price.toFixed(2)}</h6>
-                                        <h6><b>Discount</b> : {consumable.discount}</h6>
-                                        <h6><b>GST</b> : {consumable.gst}</h6>
-                                        <h6><b>Total</b> : {consumable.total.toFixed(2)}</h6>
+                                        <h6><b>Individual Price</b> : ₹{consumable.item_price.toFixed(2)}</h6>
+                                        <h6><b>Collective Price</b> : ₹{consumable.whole_price.toFixed(2)}</h6>
+                                        <h6><b>Discount</b> : {consumable.discount}%</h6>
+                                        <h6><b>GST</b> : {consumable.gst}%</h6>
+                                        <h6><b>Total</b> : ₹{consumable.total.toFixed(2)}</h6>
+                                        <Button>Edit</Button>
                                     </div>
                                 </div>
                             </div>
