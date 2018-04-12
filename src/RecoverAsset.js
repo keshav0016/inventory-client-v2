@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Button, Input} from 'react-materialize'
+import {Button} from 'react-materialize'
 import $ from 'jquery'
 
 class DeleteAsset extends Component{

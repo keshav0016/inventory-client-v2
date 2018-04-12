@@ -139,7 +139,7 @@ class EmployeeAdd extends Component {
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>
           </Input>
-          <Input s={6} type='select' label="* Department" defaultValue='Other'onChange={this.handleDepartment}defaultValue='Other'>
+          <Input s={6} type='select' label="* Department" defaultValue='Other'onChange={this.handleDepartment}>
             <option value='HR'>HR</option>
             <option value='Delivery'>Delivery</option>
             <option value='Developer'>Developer</option>

@@ -64,7 +64,18 @@ class TicketsList extends Component{
 
     setCheckAll(){
         this.setPage(1)
-        $('input:checkbox').not('.pendingCheckbox').click()
+        if(!this.state.checkAll){
+            $('input:checkbox:not(:checked)').click()
+            this.setState({
+                checkAll : true
+            })
+        }
+        else{
+            $('input:checkbox').click()
+            this.setState({
+                checkAll : false
+            })
+        }
 
     }
 
@@ -166,6 +177,10 @@ class TicketsList extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className ='heading'>Tickets list</h3>
+                {/* <Tabs className='z-depth-1'>
+                    <Tab className='teal-text' title="Assets" active>Assets</Tab>
+                    <Tab className='teal-text' title="Consumables">Consumables</Tab>
+                </Tabs> */}
                 {this.state.ticketsList.length === 0
                     ?
                     <div className="noRecordsScreen">
@@ -194,7 +209,7 @@ class TicketsList extends Component{
                             <td>{ticket.ticket_number}</td>
                             <td>{ticket.user.first_name + " " + ticket.user.last_name}</td>
                             <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                            <td>{ticket.requested_asset_item ? ticket.requested_asset_item + " " + "[" + ticket.item_type + "]" : ticket.requested_consumable_item + " " + "[ "+ticket.item_type+" ]"}</td>
+                            <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                             {/* <td>{ticket.requested_asset_id}</td>
                             <td>{ticket.requested_consumable_id}</td>
                             <td>{ticket.item_type}</td> */}

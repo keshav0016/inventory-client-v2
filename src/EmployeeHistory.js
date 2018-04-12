@@ -7,7 +7,7 @@ class EmployeeHistory extends Component {
     constructor(props){
         super(props)
         this.state = {
-            user_id: this.props.location.user,
+            user_id: this.props.match.params.employee,
             data : [],
             history : [],
             historyAssets :[],
@@ -31,7 +31,7 @@ class EmployeeHistory extends Component {
         <tbody>
             {this.state.data.map((item, index) => {
                 return <tr key={index}>
-                    <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
+                    <td>{item.asset_id ? `${item.asset_name} [Asset]`: `${item.name} [consumable]`}</td>
                     <td>{item.asset_id ? "1": item.quantity}</td>
                 </tr>
             })}

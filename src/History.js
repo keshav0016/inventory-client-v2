@@ -23,7 +23,7 @@ class Assets extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/asset/history?asset_id=${this.props.location.asset}`,
+            url : `http://localhost:3001/asset/history?asset_id=${this.props.match.params.asset}`,
             withCredentials : true
         })
         .then(res => {
@@ -31,7 +31,7 @@ class Assets extends Component{
                 assetDetails : res.data.assetDetails,
                 historyAssigned : res.data.historyAssigned,
                 historyRepair : res.data.historyRepair,
-                history : res.data.historyAssigned.concat(res.data.historyRepair).sort((a,b) => b.id - a.id),
+                history : res.data.historyAssigned.concat(res.data.historyRepair).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)),
                 assignedEmployee : res.data.employeeDetails,
                 repairDetails : res.data.repairDetails,
                 handleListRequest : false
@@ -47,11 +47,11 @@ class Assets extends Component{
         return(
             <div  style={{marginLeft : '1%', marginRight : '1%'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
+                {this.state.assetDetails ? <div>
                 <h3 className='heading'>Asset Details</h3>
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
-                <div>
                     <Row>
                         <Col s={12} m={12}>
                         <CardPanel className="z-depth-2" >
@@ -109,9 +109,7 @@ class Assets extends Component{
                         </Col>
                     })}
                     </Row>
-                </div>
-                <div>
-                </div> 
+                </div> : <h4 className = 'heading'>No such Asset</h4>}
             </div>
         )
     }

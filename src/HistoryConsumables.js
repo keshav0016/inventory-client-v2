@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Col, CardPanel} from 'react-materialize'
+import {Col, CardPanel} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 
@@ -19,7 +19,7 @@ class HistoryConsumables extends Component{
            method : 'post',
            url : `http://localhost:3001/consumables/history`,
            data: {
-               consumable_id : this.props.location.consumable
+               consumable_id : this.props.match.params.consumable
            },
            withCredentials : true
        })

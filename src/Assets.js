@@ -185,8 +185,8 @@ class Assets extends Component{
                             <td>{item.condition}</td>
                             <td>{item.location}</td>
                             <td>{item.category}</td>
-                            <Dropdown trigger={
-                                    <Button style={{marginTop:'7%'}} ><Icon tiny>more_vert</Icon></Button>
+                            <td><Dropdown trigger={
+                                    <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
                                         header='Edit Asset'
@@ -214,7 +214,7 @@ class Assets extends Component{
                                         trigger={item.current_status === 'Assigned' ? <NavItem>Recover</NavItem> : null}>
                                         {item.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
-                                    {item.current_status === 'Available' ? <Link to={{ pathname : '/adminhomepage/assets/repair', asset : item.asset_id}}><NavItem>Repair</NavItem></Link> : null}
+                                    {item.current_status === 'Available' ? <NavItem href={ `/admin/assets/repair/${item.asset_id}`}>Repair</NavItem> : null}
                                     <Modal
                                         header='Recover from Service'
                                         fixedFooter
@@ -222,15 +222,15 @@ class Assets extends Component{
                                         trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
                                         {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
-                                    <Link to={{ pathname : '/adminhomepage/assets/history', asset : item.asset_id}}><NavItem>Details</NavItem></Link>
-                                </Dropdown>
+                                    <NavItem href={`/admin/assets/history/${item.asset_id}`}>Details</NavItem>
+                                </Dropdown></td>
                             </tr>
                         })}
                     </tbody>
                     </Table>
                     </div> )}
                 
-                <Link to={{ pathname : '/adminhomepage/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
                 
                 <div>
                     {this.state.assetList.length === 0 ? null : <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
