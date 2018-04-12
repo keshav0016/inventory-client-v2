@@ -97,7 +97,7 @@ class ReceiveAsset extends Component{
                     total : 0,
                 })
                 window.Materialize.toast('Asset Received', 4000)                
-                this.props.setHandleListRequest(true)
+                this.props.setHandleListRequest()
             }
         })
         .catch(error => {

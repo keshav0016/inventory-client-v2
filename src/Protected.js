@@ -25,7 +25,7 @@ class AdminProtected extends Component{
         if(this.state.admin){                              // admin login authentication
             return <div>
                 <HomePage />
-                <Redirect push to ='/adminhomepage'/>
+                <Redirect push to ='/admin'/>
             </div>
         }
         else{

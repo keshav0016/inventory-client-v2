@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} from 'react-materialize'
-import AddConsumables from './AddConsumables'
+// import AddConsumables from './AddConsumables'
 import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
-import {
-    BrowserRouter as Router,
-    Route,
-    Link
-  } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './ListPage.css'
 import './Employee.css'
 import $ from 'jquery'
@@ -205,7 +201,7 @@ class Consumables extends Component{
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
-                                <Link to={{ pathname : '/adminhomepage/consumables/history', consumable : consumable.consumable_id}}><NavItem href='/adminhomepage/consumables/history'>Details</NavItem ></Link>
+                                <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>Details</NavItem >
                                 </Dropdown></td>
                             </tr>
                             )
@@ -225,7 +221,7 @@ class Consumables extends Component{
                         <br />
                         <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
                 </div>                
-                <Link to={{ pathname : '/adminhomepage/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
                     {/* <AddConsumables setHandleListRequest={this.setHandleListRequest}/> */}
             </div>
         )
