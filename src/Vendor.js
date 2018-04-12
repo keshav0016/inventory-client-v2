@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Pagination} from 'react-materialize'
 import AddVendor from './AddVendor'
+import VendorUpdate from './VendorUpdate'
 import $ from 'jquery'
 import './ListPage.css'
 import './Employee.css'
@@ -89,13 +90,17 @@ class Assets extends Component{
                     </thead>
 
                     <tbody>
-                        {this.state.vendorList.map((item, index) => {
+                        {this.state.vendorList.map((item, key) => {
                             return <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.name}</td>
                             <td>{item.address}</td>
                             <td>{item.contact}</td>
-                            
+                            <td><Modal
+                                header='Update the Vendor'
+                                trigger={<Button>Edit</Button>}>
+                                <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest}/>
+                                </Modal></td>
                             </tr>
                         })}
                     </tbody>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem, Modal, Button} from 'react-materialize'
+import {Navbar, NavItem, Button, SideNav, SideNavItem, Icon} from 'react-materialize'
 import './MasterComponent.css';
 import {
    BrowserRouter as Router,
@@ -37,37 +37,24 @@ class EmployeeDB extends Component {
                    <Navbar className="teal lighten-1 masterComponentNavBar">
                        <NavItem href='/logout' className="masterComponentLogoutButton">LOGOUT</NavItem>
                    </Navbar>
-                 
-                   <Redirect to="/employeehomepage/list" />
-                   <div className = 'profilebtn'> 
-                <Modal 
-                    header='Profile'
-                    trigger={<Button className = 'black' onClick={this.handleList}  icon='person' >User Profile</Button>}>
-                    <p>Name: {this.state.profile.first_name} {this.state.profile.last_name} </p>
-                    <p>User Id: {this.state.profile.user_id}</p> 
-                    <p>No of Assets held: {this.state.assetsCount}</p>
-                    <p>No of Consumables held: {this.state.consumablesCount}</p>
-                    {/* <Table >
-                        <thead>
-                            <tr>
-                                <th data-field="item"> Item</th>
-                                <th data-field="quantity">Quantity</th>
-                            
-                            </tr>
-                        </thead>
+                   <SideNav
+                        trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>}
+                        options={{ closeOnClick: true }}
+                        >
+                        <SideNavItem userView
+                            user={{
+                            background: 'img/office.jpg',
+                            name : this.state.profile.first_name + this.state.profile.last_name,
+                            // UserId : this.state.user_id,
+                            }}
+                        />
+                        <SideNavItem >User Id : {this.state.profile.user_id}</SideNavItem>
+                        <SideNavItem >No of Assets held: {this.state.assetsCount}</SideNavItem>
+                        <SideNavItem >No of Consumables held: {this.state.consumablesCount}</SideNavItem>
 
-                        <tbody>
-                            {this.state.data.map((item, index) => {
-                                return <tr key={index}>
-                                    <td>{item.asset_id ? item.asset_name + " " + "[" + "Asset" + "]" : item.name + " " + "[ "+"consumable"+" ]"}</td>
-                                    <td>{item.asset_id ? "1": item.quantity}</td>
-                                </tr>
-                            })}
-                        </tbody>
-                    </Table> */}
-                    
-                </Modal>
-               </div>
+
+                    </SideNav>
+                   <Redirect to="/employeehomepage/list" />
                </div>
                <div>
                    <Route exact path="/employeehomepage/list" component={EmployeeTicketsList} />

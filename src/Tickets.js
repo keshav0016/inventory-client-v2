@@ -146,7 +146,7 @@ class Tickets extends Component{
                     <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity}/>
                 </Row>
                     <Badge>Resource Type : {this.state.item_type}</Badge>
-                <Button waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request Resource</Button>
+                <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request</Button>
                 {this.state.requestResource ? this.confirmRequest() : null} 
                 </div>
                    
