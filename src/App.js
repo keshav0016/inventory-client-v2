@@ -9,7 +9,8 @@ import Homepage from './Homepage';
 import Tickets from './Tickets'
 import PasswordChange from './PwdChange'
 import EmployeeDB from './EmployeeDB';
-import StartPage from './StartPage'
+import StartPage from './StartPage';
+import './materialize-overrides.css';
 
 class App extends Component {
   render() {
