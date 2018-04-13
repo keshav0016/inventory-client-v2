@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 import './Employee.css'
 import './ListPage.css'
 import $ from 'jquery'
+import './TicketsList.css'
 
 
 class EmployeeTicketsList extends Component{
@@ -135,7 +136,7 @@ class EmployeeTicketsList extends Component{
                
                <Tabs className='tabs' tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
-                        {this.state. AssetsticketsList.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> :
+                        {this.state.AssetsticketsList.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> :
                         <div>
                             <Table style={{marginLeft:'1%'}}  className="consumableTable">
                                 <thead>
@@ -203,21 +204,6 @@ class EmployeeTicketsList extends Component{
 
                     {/* <Tab title="" disabled></Tab> */}
                 </Tabs>
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-               
-              
             </div>
         )
     }
@@ -267,34 +253,3 @@ class Tab extends Component {
 
 export default EmployeeTicketsList
 
-
-{/* <Table >
-<thead>
-    <tr>
-        <th data-field="ticket_number">Ticket Number</th>
-        <th data-field="date">Requested Date</th>
-        <th data-field="requestedItem">Requested Item</th>
-        <th data-field="quantity">Quantity</th>
-        <th data-field="status">Status</th>
-    </tr>
-</thead>
-<tbody>
-    {this.state.AssetsticketsList.map((ticket, index) => {
-        return (<tr key={ticket.ticket_number}>
-        <td>{ticket.ticket_number}</td>
-        <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
-        <td>{ticket.quantity}</td>
-        <td>{ticket.status}</td>
-
-        </tr>
-        )
-    })}
-</tbody>
-</Table>}
-<Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
-
-
-<div>
-<Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
-</div> */}
