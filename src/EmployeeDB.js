@@ -39,7 +39,7 @@ class EmployeeDB extends Component {
                     <Link to={`/employeehomepage/list`}>Tickets List</Link>
 
                     </SideNav>
-                   {/* <Redirect to="/employeehomepage/list" /> */}
+                   <Redirect to={`/employeehomepage/Profile/${this.state.profile.user_id}` }/>
                </div>
                <div>
                    <Route exact path="/employeehomepage/list" component={EmployeeTicketsList} />
