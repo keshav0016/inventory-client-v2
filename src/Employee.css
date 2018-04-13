@@ -92,3 +92,8 @@
   position: relative;
   left: 90px;
 }
+.tabs {
+  position: relative;
+  width: 1050px;
+  right: 105px
+}
