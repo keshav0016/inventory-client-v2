@@ -1,5 +1,6 @@
 .activeTab{
     background-color:#ee6e73;
     color : white;
-    border-bottom-style: outset
+    border-bottom-style: outset;
+    transition-duration: 0.4s
 }
