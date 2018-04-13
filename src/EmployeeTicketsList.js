@@ -113,7 +113,7 @@ class EmployeeTicketsList extends Component{
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
                     </Row>
                 </div>
-                {this.state.ticketsList.length === 0 ? <h3>No Records</h3>:
+                {this.state.ticketsList.length === 0 ? <h4 style={{left : '50%'}}>No Records</h4>:
                 <Table >
                     <thead>
                         <tr>
