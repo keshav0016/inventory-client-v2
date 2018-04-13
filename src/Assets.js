@@ -50,7 +50,7 @@ class Assets extends Component{
         })
         .then(res => {
             this.setState({
-                assetList : res.data.assets.sort((a, b) => a.asset_id - b.asset_id),
+                assetList : res.data.assets,
                 pagination : res.data.pagination,
                 handleListRequest : false,
                 loading : false
@@ -118,7 +118,7 @@ class Assets extends Component{
         })
         $(".modal-overlay").click()
         if(itemAdded){
-            this.setPage(this.state.pagination.totalPage)
+            this.setPage(1)
         }
     }
 
