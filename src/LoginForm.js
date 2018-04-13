@@ -8,7 +8,6 @@ import {
   Redirect
 } from 'react-router-dom';
 import Row from 'react-materialize/lib/Row';
-import $ from 'jquery'
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
 // import AdminHomepage from './AdminHomepage';

@@ -24,7 +24,6 @@ class Tickets extends Component{
         this.confirmRequest = this.confirmRequest.bind(this)
         this.requestUser = this.requestUser.bind(this)
     }
-
     requestResourceType(e){
         if(e.target.value <= this.state.assets){
             this.setState({
@@ -42,7 +41,6 @@ class Tickets extends Component{
             $('label').addClass('active')
         }
     }
-
     requestQuantity(e){
         if(this.state.item_type === 'consumables'){
             this.setState({
@@ -50,7 +48,6 @@ class Tickets extends Component{
             })
         }
     }
-
     checkForValidation(){
         if(Number(this.state.quantity) < 0){
             window.Materialize.toast(`requested quantity cannot be negative`, 4000)
@@ -134,7 +131,7 @@ class Tickets extends Component{
                 <h3 className='heading'>Ticket RequestForm</h3>
                 <div className ='RequestForm'>
                 <Row>
-                    <Input s={6} type='select' onChange={this.requestResourceType}>
+                    <Input s={6} label='Items'type='select' onChange={this.requestResourceType}>
                         {this.state.availableItems.map((element,index)=>{
                             return( 
                                 <option key={index} value={index}>{element}</option>

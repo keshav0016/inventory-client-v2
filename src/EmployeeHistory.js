@@ -46,7 +46,7 @@ class EmployeeHistory extends Component {
     handleList(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/employees/history',
+            url : `http://localhost:3001/employees/history`,
             data : {
                 user_id : this.state.user_id
             },
