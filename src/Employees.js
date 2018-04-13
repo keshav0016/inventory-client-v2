@@ -101,7 +101,8 @@ class EmployeesList extends Component {
                     <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
                   <Modal
-                    header='Delete the Employee' bottomSheet
+                    header='Delete the Employee' 
+                    fixedFotter
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
