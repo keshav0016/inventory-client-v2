@@ -22,6 +22,7 @@ class TicketsList extends Component{
             isRejectedChecked : false,
             checkAll : false,
             expected_recovery : ''
+            ,reason : ''
         }
         this.setAssetPage = this.setAssetPage.bind(this)
         this.setConsumablePage = this.setConsumablePage.bind(this)
@@ -32,6 +33,7 @@ class TicketsList extends Component{
         this.setRejectedChecked = this.setRejectedChecked.bind(this)
         this.setCheckAll = this.setCheckAll.bind(this)
         this.handleExpected = this.handleExpected.bind(this)
+        this.setReason = this.setReason.bind(this)
     }
 
     setPendingChecked(){
@@ -100,6 +102,12 @@ class TicketsList extends Component{
         })
     }
 
+    setReason(e){
+        this.setState({
+            reason : e.target.value
+        })
+    }
+
     handleList(){
         axios({
             method : 'get',
@@ -127,12 +135,14 @@ class TicketsList extends Component{
             data:{
                 ticket_number:ticket_number,
                 expected_recovery : this.state.expected_recovery
+                ,reason : this.state.reason
             },
             withCredentials:true
         })
         .then(res =>{
             this.setState({
                 handleListRequest:true
+                ,reason : ''
             })
             if(res.data.message === 'Requested Quantity greater than available'){
                 window.Materialize.toast('Requested Quantity greater than available', 4000)
@@ -154,14 +164,18 @@ class TicketsList extends Component{
             url:'http://localhost:3001/admin/ticket/reject',
             data:{
                 ticket_number:ticket_number
+                ,reason : this.state.reason
             },
             withCredentials:true
         })
         .then(res =>{
             this.setState({
                 handleListRequest:true
+                ,reason : ''
             })
             window.Materialize.toast(res.data.message,4000)
+            $(".modal-overlay").click()        
+
         })
         .catch(error =>{
             window.Materialize.toast(error.data.error,4000)
@@ -198,23 +212,27 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{ticket.status === 'Pending' ? (ticket.item_type === 'assets' ? <Modal
-                                            header='expected date of recovery'
+                                        <td>{ticket.status === 'Pending' ?  <Modal
+                                            header='Accepting Ticket'
                                             fixedFooter
                                             trigger={ <Button >Accept</Button> }>
                                             <Row>
-                                            <Input name='on' type='date' onChange={this.handleExpected} />
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> 
+                                            <Input s={12} name='on' type='date' label="Expected Recovery" onChange={this.handleExpected} />
+                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                                            <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button> 
                                             </Row>
-                                        </Modal>    : <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button>): null }</td>
-                                        <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
+                                        </Modal> : null }</td>
+                                        <td>{ticket.status === 'Pending' ? <Modal
+                                            header='Remarks for rejection'
+                                            trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
+                                            <Row>
+                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                                            <Button  onClick={this.rejectTicket.bind(this,ticket.ticket_number)} >Submit</Button> 
+                                            </Row>
+                                        </Modal> : null}</td>
                                         </tr>
                                         )
-                                    })}
+                                    })} 
                                 </tbody>
                             </Table>
                             <Pagination items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
@@ -245,20 +263,22 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{ticket.status === 'Pending' ? (ticket.item_type === 'assets' ? <Modal
-                                            header='expected date of recovery'
-                                            fixedFooter
-                                            trigger={ <Button >Accept</Button> }>
+                                        <td>{ticket.status === 'Pending' ? <Modal
+                                            header='Remarks'
+                                            trigger={ <Button>Accept</Button> }>
                                             <Row>
-                                            <Input name='on' type='date' onChange={this.handleExpected} />
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <br/>
-                                            <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button> 
+                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                                            <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
                                             </Row>
-                                        </Modal>    : <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Accept</Button>): null }</td>
-                                        <td>{ticket.status === 'Pending' ? <Button style={{backgroundColor:'#212121'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Reject</Button> : null}</td>
+                                        </Modal> : null }</td>
+                                        <td>{ticket.status === 'Pending' ? <Modal
+                                            header='Remarks for rejection'
+                                            trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
+                                            <Row>
+                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                                            <Button onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                            </Row>
+                                        </Modal> : null}</td>
                                         </tr>
                                         )
                                     })}
@@ -268,7 +288,6 @@ class TicketsList extends Component{
                         </div>}
                     </div>
 
-                    {/* <Tab title="" disabled></Tab> */}
                 </Tabs>
                 <div className="filterContainer">
                 <p style={{color:'white'}} className="adminDashboardTitle">Status Filters</p>
@@ -282,16 +301,6 @@ class TicketsList extends Component{
             </div>
         )
     }
-
-    // render(){
-    //     return (
-    //         <Tabs tabHeaders={["Assets", "Consumables"]} selectedIndex={1}>
-    //             <div>Asset Content</div>
-    //             <div>Consumable Content</div>
-    //         </Tabs>
-    //     )
-    // }
-
 }
 
 class Tabs extends Component {
