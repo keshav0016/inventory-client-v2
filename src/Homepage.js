@@ -21,6 +21,7 @@ import RepairAsset from './RepairAsset'
 import Tickets from './Tickets'
 import LoginForm from './LoginForm';
 import EmployeeAdd from './EmployeeAdd';
+import AcceptAssetTicket from './AcceptAssetTicket'
 
 class Homepage extends Component{
     render(){
@@ -30,7 +31,7 @@ class Homepage extends Component{
                 <div className="masterComponentBackground">
                 <div>
                     <Navbar className="teal lighten-1">
-                        <NavItem ><img width="60px" height="60px" style={{marginLeft : '70px', marginTop : '2px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" /></NavItem>                        
+                        <NavItem style={{height : '64px'}} ><img width="60px" height="60px" style={{marginLeft : '70px', marginTop : '2px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" /></NavItem>                        
                         <NavItem href="/" className="masterComponentLogoutButton"><b>LOGOUT</b></NavItem>
                     </Navbar>
                     <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
@@ -57,7 +58,7 @@ class Homepage extends Component{
                     <Route  exact path ='/admin/assets/repair/:asset' component={RepairAsset}/>
                     <Route  exact path ='/employee/RequestTicket' component={Tickets}/>
                     <Route  exact path ='/admin/employees/create' component={EmployeeAdd}/>
-
+                    <Route exact path = '/admin/tickets/asset/accept/:ticket' component={AcceptAssetTicket} />
                     
                     
                 </div>

@@ -57,7 +57,6 @@ class LoginForm extends Component {
         withCredentials: true
       })
       .then((res) => {
-        console.log(res)
         if(res.data.passwordSame === true){
           this.setState({
             change: true,
