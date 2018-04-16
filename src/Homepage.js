@@ -55,7 +55,7 @@ class Homepage extends Component{
                     <Route  exact path ='/admin/assets/history/:asset' component={History}/>
                     <Route  exact path ='/admin/assets/create' component={AddAsset}/>
                     <Route  exact path ='/admin/assets/repair/:asset' component={RepairAsset}/>
-                    <Route  exact path ='/employeehomepage/RequestTicket' component={Tickets}/>
+                    <Route  exact path ='/employee/RequestTicket' component={Tickets}/>
                     <Route  exact path ='/admin/employees/create' component={EmployeeAdd}/>
 
                     

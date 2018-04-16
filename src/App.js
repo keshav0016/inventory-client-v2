@@ -22,7 +22,7 @@ class App extends Component {
             <Route path = '/login' component = {LoginForm}/>
             <Route path = '/logout' component = {Logout}/>            
             <Route path="/user/passwordchange" component={PasswordChange} />
-            <Route path ='/employeehomepage' component={EmployeeDB}/>
+            <Route path ='/employee' component={EmployeeDB}/>
             <Route  exact path ='/' component={StartPage}/>
           </div>
       </Router>
