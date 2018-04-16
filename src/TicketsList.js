@@ -5,6 +5,7 @@ import moment from 'moment'
 import './ListPage.css'
 import './TicketsList.css'
 import $ from 'jquery'
+import {Link} from 'react-router-dom'
 
 class TicketsList extends Component{
     constructor(props){
@@ -212,16 +213,7 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{ticket.status === 'Pending' ?  <Modal
-                                            header='Accepting Ticket'
-                                            fixedFooter
-                                            trigger={ <Button >Accept</Button> }>
-                                            <Row>
-                                            <Input s={12} name='on' type='date' label="Expected Recovery" onChange={this.handleExpected} />
-                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                                            <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button> 
-                                            </Row>
-                                        </Modal> : null }</td>
+                                        <td>{ticket.status === 'Pending' ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button>Accept</Button></Link> : null }</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
                                             header='Remarks for rejection'
                                             trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>

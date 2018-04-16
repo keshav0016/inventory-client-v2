@@ -26,20 +26,22 @@ class EmployeesList extends Component {
     this.handleList = this.handleList.bind(this)
     this.setPage = this.setPage.bind(this)
     this.setHandleListRequest = this.setHandleListRequest.bind(this)
-    this.handleUpdate = this.handleUpdate.bind(this)
-    
+    this.handleUpdate = this.handleUpdate.bind(this) 
   }
+
   handleUpdate(){
     this.setState({
       update: true
     })
   }
+
   setHandleListRequest(){
     this.setState({
       handleListRequest : true
     })
     $(".modal-overlay").click()
   }
+
   handleList(){
     axios({
       method: 'get',
@@ -57,12 +59,14 @@ class EmployeesList extends Component {
       window.Materialize.toast('list not found',3000)
     })
   }
+
   setPage(e){
     this.setState({
       page : e,
       handleListRequest : true
     })
   }
+  
   render() {
     var employeelist = (
       <div style={{marginLeft : '1%', marginRight : '1%'}}>
@@ -102,7 +106,6 @@ class EmployeesList extends Component {
                   </Modal>
                   <Modal
                     header='Delete the Employee' 
-                    fixedFotter
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
