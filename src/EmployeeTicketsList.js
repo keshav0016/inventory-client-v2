@@ -247,7 +247,7 @@ class Tab extends Component {
         $(`.tabs div:nth-child(${this.props.index+1})`).addClass('activeTab')
     }
     render(){
-        return <div style={{width : '30%', paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
+        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{width : '30%', paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
     }
 }
 

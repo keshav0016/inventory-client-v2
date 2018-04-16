@@ -4,3 +4,9 @@
     border-bottom-style: outset;
     transition-duration: 0.4s
 }
+
+.tabs {
+    position: relative;
+    width: 1050px;
+    right: 105px
+}
