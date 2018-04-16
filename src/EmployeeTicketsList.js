@@ -166,7 +166,7 @@ class EmployeeTicketsList extends Component{
                             
                             <Pagination items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
                         </div>}
-                            <Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
+                            <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
 
                     <div className = "consumableTab">
@@ -199,7 +199,7 @@ class EmployeeTicketsList extends Component{
                             </Table>
                             <Pagination items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} />
                         </div>}
-                            <Link to={{ pathname : '/employeehomepage/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
+                            <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
 
                     {/* <Tab title="" disabled></Tab> */}

@@ -198,9 +198,8 @@ class Assets extends Component{
                                     <Modal
                                         header='Delete Asset'
                                         actions={<div></div>}
-                                        bottomSheet
-                                        trigger={<NavItem>Delete</NavItem>}>
-                                        <DeleteAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                        trigger={item.current_status === 'Available' ? <NavItem>Delete</NavItem> : null}>
+                                        {item.current_status === 'Available' ? <DeleteAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
                                         header='Assign'
@@ -230,7 +229,7 @@ class Assets extends Component{
                     </Table>
                     </div> )}
                 
-                <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                 
                 <div>
                     {this.state.assetList.length === 0 ? null : <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}

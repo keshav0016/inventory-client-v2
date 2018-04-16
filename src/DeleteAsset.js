@@ -24,7 +24,7 @@ class DeleteAsset extends Component{
             method : 'post',
             url : 'http://localhost:3001/asset/delete',
             data : {
-                asset_id : this.props.asset
+                asset_id : this.props.asset.asset_id
             }
             ,withCredentials : true
         })
@@ -53,7 +53,7 @@ class DeleteAsset extends Component{
         return(
             <div>
                 <Icon large>delete forever</Icon>
-                <h4>Do you really want to delete this asset?</h4>
+                <h4>{`Do you really want to delete `}<b style={{color:'teal'}}>{`${this.props.asset.asset_name} `}</b>{`?`}</h4>
                 <Button onClick = {this.setDeleteAssetRequest}>Delete</Button>
                 {this.state.deleteAssetRequest ? this.deleteAssetFromDb() : null}
             </div>

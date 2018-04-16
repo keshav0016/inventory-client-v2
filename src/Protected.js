@@ -32,7 +32,7 @@ class AdminProtected extends Component{
             if(this.state.employee){                          // employee login auth
                 return <div>
                     <EmployeeDB />
-                    <Redirect push to ='/employeehomepage'  user_id={this.state.user_id}/>
+                    <Redirect push to ='/employee'  user_id={this.state.user_id}/>
                     </div>
             }
             else{

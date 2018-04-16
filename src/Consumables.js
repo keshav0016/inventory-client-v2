@@ -222,7 +222,7 @@ class Consumables extends Component{
                         <br />
                         <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
                 </div>                
-                <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
             </div>
         )
     }
