@@ -13,18 +13,43 @@ class AddConsumables extends Component{
                 showError: false,
                 error: "",
             },
-            vendor_name : '',
-            purchase_date : '',
-            purchased_quantity : 0,
-            item_price : 0,
+            vendor_name : {
+                value: "",
+                showError: false,
+                error: "",
+            },
+            purchase_date : {
+                value: "",
+                showError: false,
+                error: "",
+            },
+            purchased_quantity : {
+                value: 0,
+                showError: false,
+                error: ""
+            },
+            item_price : {
+                value: 0,
+                showError: false,
+                error: ""
+            },
             whole_price : 0,
-            discount : 0,
-            gst : 0,
+            discount : {
+                value: 0,
+                showError: false,
+                error: ""
+            },
+            gst : {
+                value: 0,
+                showError: false,
+                error: ""
+            },
             total : 0,
             vendorList : [],
             addVendor : false,
             vendorListRequest : true,
-            addConsumableRequest : false
+            addConsumableRequest : false,
+            calculateTotal : false
         }
         this.setConsumableName = this.setConsumableName.bind(this)
         this.setVendorName = this.setVendorName.bind(this)
@@ -39,6 +64,8 @@ class AddConsumables extends Component{
         this.setAddVendor = this.setAddVendor.bind(this)
         this.handleVendorList = this.handleVendorList.bind(this)
         this.vendorListDropdown = this.vendorListDropdown.bind(this)
+        this.calculateWholePrice = this.calculateWholePrice.bind(this)
+        this.calculateTotal = this.calculateTotal.bind(this)
     }
     componentDidMount(){
         $('label').addClass('active')
@@ -53,26 +80,134 @@ class AddConsumables extends Component{
                 })
             })
         }
-        // if(!this.state.name || !this.state.vendor_name || !this.state.purchase_date){
-        //     window.Materialize.toast('All the fields are required', 4000)
-        // }
-        // else if(this.state.purchased_quantity <= 0){
-        //     window.Materialize.toast('The quantity cannot be negative', 4000)
-        // }
-        // else if(this.state.item_price <= 0){
-        //     window.Materialize.toast('The Consumable price cannot be negative', 4000)
-        // }
-        // else if(this.state.gst < 0){
-        //     window.Materialize.toast('The Consumable gst cannot be negative', 4000)
-        // }
-        // else if(this.state.discount < 0){
-        //     window.Materialize.toast('The Consumable discount cannot be negative', 4000)
-        // }
-        // else{
-        //     this.setState({
-        //         addConsumableRequest : true
-        //     })
-        // }
+        if (this.state.name.value) {
+            this.setState({
+                name: Object.assign(this.state.name, {
+                    error: "",
+                    showError: false,
+                })
+            })
+        }
+        if(Number(this.state.purchased_quantity.value) === 0){
+            this.setState({
+                purchased_quantity: Object.assign(this.state.purchased_quantity, {
+                    error: "The purchased quantity should not be empty",
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.purchased_quantity.value) < 0){
+            this.setState({
+                purchased_quantity: Object.assign(this.state.purchased_quantity, {
+                    error: "The purchased quantity should not be negative",
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.purchased_quantity.value) > 0){
+            this.setState({
+                purchased_quantity: Object.assign(this.state.purchased_quantity, {
+                    error: "",
+                    showError: false
+                })
+            })
+        }
+        if(Number(this.state.item_price.value) === 0){
+            this.setState({
+                item_price: Object.assign(this.state.item_price, {
+                    error: "The item price should not be zero",
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.item_price.value) < 0){
+            this.setState({
+                item_price: Object.assign(this.state.item_price, {
+                    error: "The item price should not be negative",
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.item_price.value) > 0){
+            this.setState({
+                item_price: Object.assign(this.state.item_price, {
+                    error: "",
+                    showError: false
+                })
+            })
+        }
+        if(Number(this.state.gst.value) < 0){
+            this.setState({
+                gst: Object.assign(this.state.gst, {
+                    error: "The gst should not be negative",
+                    showError: true
+                })
+            })    
+        }
+        if(Number(this.state.gst.value) > 0){
+            this.setState({
+                gst: Object.assign(this.state.gst, {
+                    error: "",
+                    showError: false
+                })
+            })    
+        }
+        if(Number(this.state.discount.value) < 0){
+            this.setState({
+                discount: Object.assign(this.state.discount, {
+                    error: "The discount cannot be negative",
+                    showError: true
+                })
+            })  
+        }
+        if(Number(this.state.discount.value) > 0){
+            this.setState({
+                discount: Object.assign(this.state.discount, {
+                    error: "",
+                    showError: false
+                })
+            })  
+        }
+        if(!this.state.purchase_date.value){
+            this.setState({
+                purchase_date: Object.assign(this.state.purchase_date, {
+                    error: "Select the purchase date",
+                    showError: true
+                })
+            })  
+        }
+        if(this.state.purchase_date.value){
+            this.setState({
+                purchase_date: Object.assign(this.state.purchase_date, {
+                    error: "",
+                    showError: false
+                })
+            })  
+        }
+        if(!this.state.vendor_name.value){
+            this.setState({
+                vendor_name: Object.assign(this.state.vendor_name, {
+                    error: "The vendor name cannot be empty",
+                    showError: true
+                })
+            })  
+        }
+        if(this.state.vendor_name.value){
+            this.setState({
+                vendor_name: Object.assign(this.state.vendor_name, {
+                    error: "",
+                    showError: false
+                })
+            })  
+        }
+        if(!this.state.name.value||!this.state.purchase_date.value||!this.state.purchased_quantity.value||!this.state.item_price.value||!this.state.gst.value||!this.state.discount.value){
+                console.log('error')
+            }
+        else{
+            this.setState({
+                    addConsumableRequest : true
+                })
+            }
     }
 
     setConsumableName(e){
@@ -85,38 +220,54 @@ class AddConsumables extends Component{
 
     setVendorName(e){
         this.setState({
-            vendor_name : e.target.value
+            vendor_name : Object.assign(this.state.vendor_name, {
+                value: e.target.value
+            })
         })
     }
 
     setPurchaseDate(e){
         this.setState({
-            purchase_date : e.target.value
+            purchase_date : Object.assign(this.state.purchase_date, {
+                value: e.target.value
+            })
         })
     }
 
     setPurchaseQuantity(e){
         this.setState({
-            purchased_quantity : e.target.value
+            purchased_quantity : Object.assign(this.state.purchased_quantity, {
+                value: e.target.value
+            })
         })
+        this.calculateWholePrice()
     }
 
     setItemPrice(e){
         this.setState({
-            item_price : e.target.value
+            item_price: Object.assign(this.state.item_price, {
+                value: e.target.value
+            })
         })
+        this.calculateWholePrice()
     }
 
     setDiscount(e){
         this.setState({
-            discount : e.target.value
+            discount : Object.assign(this.state.discount, {
+                value: e.target.value
+            })
         })
+        this.calculateWholePrice()
     }
 
     setGst(e){
         this.setState({
-            gst : e.target.value
+            gst : Object.assign(this.state.gst, {
+                value: e.target.value
+            })
         })
+        this.calculateWholePrice()
     }
 
     addConsumable(){
@@ -124,28 +275,56 @@ class AddConsumables extends Component{
             method :'post',
             url :'http://localhost:3001/consumables/create',
             data : {
-                name : this.state.name,
-                vendor_name : this.state.vendor_name,
-                purchase_date : this.state.purchase_date,
-                purchased_quantity : this.state.purchased_quantity,
-                item_price : this.state.item_price,
+                name : this.state.name.value,
+                vendor_name : this.state.vendor_name.value,
+                purchase_date : this.state.purchase_date.value,
+                purchased_quantity : this.state.purchased_quantity.value,
+                item_price : this.state.item_price.value,
                 whole_price : this.state.whole_price,
-                discount : this.state.discount,
-                gst : this.state.gst,
+                discount : this.state.discount.value,
+                gst : this.state.gst.value,
                 total : this.state.total
             },
             withCredentials:true
         })
         .then(obj => {
             this.setState({
-                name : '',
-                vendor_name : '',
-                purchase_date : '',
-                purchased_quantity : 0,
-                item_price : 0,
+                name : {
+                    value: "",
+                    showError: false,   
+                    error: "",
+                },
+                vendor_name : {
+                    value: "",
+                    showError: false,
+                    error: "",
+                },
+                purchase_date : {
+                    value: "",
+                    showError: false,
+                    error: "",
+                },
+                purchased_quantity : {
+                    value: 0,
+                    showError: false,
+                    error: ""
+                },
+                item_price : {
+                    value: 0,
+                    showError: false,
+                    error: ""
+                },
                 whole_price : 0,
-                discount : 0,
-                gst : 0,
+                discount : {
+                    value: 0,
+                    showError: false,
+                    error: ""
+                },
+                gst : {
+                    value: 0,
+                    showError: false,
+                    error: ""
+                },
                 total : 0,
                 addConsumableRequest : false
             })
@@ -197,17 +376,20 @@ class AddConsumables extends Component{
         })
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.item_price !== this.state.item_price  || prevState.purchased_quantity !== this.state.purchased_quantity){
+
+
+    calculateWholePrice(){
             this.setState({
-                whole_price : this.state.item_price * this.state.purchased_quantity
+                whole_price : this.state.item_price.value * this.state.purchased_quantity.value,
+                calculateTotal : true
             })
-        }
-        if(prevState.whole_price !== this.state.whole_price || prevState.gst !== this.state.gst || prevState.discount !== this.state.discount){
-            this.setState({
-                total : ((this.state.whole_price)+((this.state.whole_price * this.state.gst)/100))-((this.state.whole_price * this.state.discount)/100)
-            })
-        }
+    }
+
+    calculateTotal(){
+        this.setState({
+            total : ((this.state.whole_price)+((this.state.whole_price * this.state.gst.value)/100))-((this.state.whole_price * this.state.discount.value)/100),
+            calculateTotal : false
+        })
     }
 
 
@@ -217,11 +399,11 @@ class AddConsumables extends Component{
                 <h3>Add Consumable</h3>
                 <Row>
                     <Input s={6} label="Consumable" value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
-                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date} />
-                    <Input s={6} label="Purchased Quantity" type="number" min={0} value={this.state.purchased_quantity} onChange = {this.setPurchaseQuantity}/>
-                    <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price} onChange = {this.setItemPrice}/>
-                    <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst} onChange = {this.setGst}/>
-                    <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount} onChange = {this.setDiscount}/>
+                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <Input s={6} label="Purchased Quantity" type="number" min={0} value={this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null}/>
+                    <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null}/>
+                    <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
+                    <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null}/>
                     <Input s={6} label="Vendor" type='select' onChange = {this.setVendorName}>{this.vendorListDropdown()}</Input>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
@@ -235,6 +417,7 @@ class AddConsumables extends Component{
                     <Button style={{position:'absolute', right:'3%', bottom:'3%'}} waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
                     {this.state.addConsumableRequest ? this.addConsumable () : null}
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
+                    {this.state.calculateTotal ? this.calculateTotal() : null}
                     <br />
                     <br />
             </div>  
