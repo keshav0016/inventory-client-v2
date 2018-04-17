@@ -8,6 +8,7 @@ import TicketsList from './TicketsList';
 import HistoryConsumables from './HistoryConsumables';
 import Admindashboard from './Admindashboard';
 import AddConsumables from './AddConsumables';
+import EntireHistoryConsumables from './EntireHistoryConsumables'
 import {
     BrowserRouter as Router,
     Route,
@@ -41,6 +42,7 @@ class Homepage extends Component{
                     <Link to="/admin/employees">Employees</Link>
                     <Link to="/admin/tickets">Tickets</Link>
                     <Link to="/admin/vendor">Vendor</Link>
+                    <Link to="/admin/consumables/history">Consumable History</Link>
                     </SideNav>
                 </div>
                 <div>
@@ -59,8 +61,8 @@ class Homepage extends Component{
                     <Route  exact path ='/employee/RequestTicket' component={Tickets}/>
                     <Route  exact path ='/admin/employees/create' component={EmployeeAdd}/>
                     <Route exact path = '/admin/tickets/asset/accept/:ticket' component={AcceptAssetTicket} />
-                    
-                    
+                    <Route exact path="/admin/consumables/history" component={EntireHistoryConsumables}/>                    
+
                 </div>
                 </div>
                 <Route  path ='/login' component={LoginForm}/>

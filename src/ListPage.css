@@ -80,3 +80,12 @@
 .ticketListCheckbox label{
   color: white;
 }
+
+.filterContainerConsumableHistory {
+  position: absolute;
+  width: 255px;
+  left: 80%;
+  top: 64px;
+  height: 765%;
+  background-color: #212121;
+}
