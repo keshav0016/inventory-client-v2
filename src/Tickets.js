@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Badge} from 'react-materialize'
+import {Row, Input, Button} from 'react-materialize'
 import './Employee.css'
 import './adminDash.css'
 import $ from 'jquery'
@@ -15,32 +15,32 @@ class Tickets extends Component{
             requestResource: false,
             quantity:'',
             assets: '',
-            item_type: '',
-            item:'',
+            item_type: 'Select',
+            item:'Select',
+            disableItems : true
         }
         this.requestQuantity = this.requestQuantity.bind(this)
         this.requestResourceType = this.requestResourceType.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.confirmRequest = this.confirmRequest.bind(this)
         this.requestUser = this.requestUser.bind(this)
+        this.itemTypeDropdown = this.itemTypeDropdown.bind(this)
     }
     requestResourceType(e){
         if(e.target.value <= this.state.assets){
             this.setState({
-                item_type:'assets',
-                quantity:1,
                 item:this.state.availableItems[e.target.value]
             })
             $('label').addClass('active')
         }
         else{
             this.setState({
-                item_type:'consumables',
                 item:this.state.availableItems[e.target.value]
             })
             $('label').addClass('active')
         }
     }
+
     requestQuantity(e){
         if(this.state.item_type === 'consumables'){
             this.setState({
@@ -48,6 +48,47 @@ class Tickets extends Component{
             })
         }
     }
+
+    itemTypeDropdown(e){
+        if(e.target.value === 'Select'){
+            this.setState({
+                disableItems : true
+            })
+        }
+        else{
+            if(e.target.value === 'assets'){
+                this.setState({
+                    item_type : 'assets',
+                    quantity : 1,
+                    disableItems : false
+                })
+            }
+            else{
+                this.setState({
+                    item_type : 'consumables',
+                    disableItems : false
+                })
+            }
+        }
+        $('label').addClass('active')
+    }
+
+    itemDropdown(){
+        var itemArr = []
+        itemArr.push(<option key='Select' value='Select'>Select</option>)
+        if(this.state.item_type === 'assets'){
+            for(let index = 0; index <= this.state.assets; index++){
+                itemArr.push(<option key={index} value={index}>{this.state.availableItems[index]}</option>)
+            }
+        }
+        else{
+            for(let index = this.state.assets + 1; index < this.state.availableItems.length; index++){
+                itemArr.push(<option key={index} value={index}>{this.state.availableItems[index]}</option>)
+            }
+        }
+        return itemArr
+    }
+
     checkForValidation(){
         if(Number(this.state.quantity) < 0){
             window.Materialize.toast(`requested quantity cannot be negative`, 4000)
@@ -57,10 +98,14 @@ class Tickets extends Component{
                 window.Materialize.toast(`requested quantity cannot be zero`, 4000)
             }
             else{
-
-                this.setState({
-                    requestResource : true 
-                })
+                if(this.state.item === 'Select'){
+                    window.Materialize.toast(`Please select any item`, 4000)
+                }
+                else{
+                    this.setState({
+                        requestResource : true 
+                    })
+                }
             }
         }
     }
@@ -90,13 +135,13 @@ class Tickets extends Component{
             this.setState({
                 requestResource:false,
                 quantity:'',
-                item_type: '',
-                item:'',
-
+                item_type: 'Select',
+                item:'Select',
+                disableItems : true
             })
             if(res.data.message === 'ticket created'){
                 window.Materialize.toast('Success', 4000)
-            }else if(res.data.error === 'ticket can not br created'){
+            }else if(res.data.error === 'ticket can not be created'){
                 window.Materialize.toast('sorry, request can not be made', 4000)
 
             }
@@ -128,22 +173,24 @@ class Tickets extends Component{
    render(){
         return(
             <div >
-                <h3 className='heading'>Ticket RequestForm</h3>
+                <h3 className='heading'>Ticket Request Form</h3>
                 <div className ='RequestForm'>
                 <Row>
-                    <Input s={6} label='Items'type='select' onChange={this.requestResourceType}>
-                        {this.state.availableItems.map((element,index)=>{
-                            return( 
-                                <option key={index} value={index}>{element}</option>
-                            )
-                        })}
+                    <Input s={6} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>
+                        <option value='Select'>Select</option>
+                        <option value='assets'>Assets</option>
+                        <option value='consumables'>Consumables</option>                        
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity}/>
+                    <Input s={6} label='Items'type='select' onChange={this.requestResourceType} disabled={this.state.disableItems}>
+                        {this.itemDropdown()}
+                    </Input>
                 </Row>
-                    <Badge>Resource Type : {this.state.item_type}</Badge>
-                <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Request</Button>
+                <Row>
+                    <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity} disabled={this.state.disableItems}/>
+                </Row>
+                <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation} disabled={this.state.disableItems}>Request</Button>
                 {this.state.requestResource ? this.confirmRequest() : null} 
                 </div>
                    

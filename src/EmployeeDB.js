@@ -4,7 +4,6 @@ import './MasterComponent.css';
 import {
    BrowserRouter as Router,
    Route,
-   Redirect,
    Link
  } from 'react-router-dom';
 import EmployeeTicketsList from './EmployeeTicketsList';
@@ -35,16 +34,15 @@ class EmployeeDB extends Component {
                <NavItem href="/logout" className="masterComponentLogoutButton"><b>LOGOUT</b></NavItem>
            </Navbar>
            <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
-                    <Link to={`/employeehomepage/profile/${this.state.profile.user_id}`}>Profile</Link>
-                    <Link to={`/employeehomepage/list`}>Tickets List</Link>
+                    <Link to={`/employee/Profile/${this.state.profile.user_id}`}>Profile</Link>
+                    <Link to={`/employee/list`}>Tickets List</Link>
 
                     </SideNav>
-                   <Redirect to={`/employeehomepage/Profile/${this.state.profile.user_id}` }/>
                </div>
                <div>
-                   <Route exact path="/employeehomepage/list" component={EmployeeTicketsList} />
-                   <Route exact path="/employeehomepage/RequestTicket" component={Tickets} />
-                   <Route exact path="/employeehomepage/Profile/:employee" component={Profile} />
+                   <Route exact path="/employee/list" component={EmployeeTicketsList} />
+                   <Route exact path="/employee/RequestTicket" component={Tickets} />
+                   <Route exact path="/employee/Profile/:employee" component={Profile} />
                    
 
                </div>

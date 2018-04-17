@@ -50,7 +50,7 @@ class Assets extends Component{
         })
         .then(res => {
             this.setState({
-                assetList : res.data.assets.sort((a, b) => a.asset_id - b.asset_id),
+                assetList : res.data.assets,
                 pagination : res.data.pagination,
                 handleListRequest : false,
                 loading : false
@@ -118,7 +118,7 @@ class Assets extends Component{
         })
         $(".modal-overlay").click()
         if(itemAdded){
-            this.setPage(this.state.pagination.totalPage)
+            this.setPage(1)
         }
     }
 
@@ -198,9 +198,8 @@ class Assets extends Component{
                                     <Modal
                                         header='Delete Asset'
                                         actions={<div></div>}
-                                        bottomSheet
-                                        trigger={<NavItem>Delete</NavItem>}>
-                                        <DeleteAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} />
+                                        trigger={item.current_status === 'Available' ? <NavItem>Delete</NavItem> : null}>
+                                        {item.current_status === 'Available' ? <DeleteAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
                                         header='Assign'
@@ -230,7 +229,7 @@ class Assets extends Component{
                     </Table>
                     </div> )}
                 
-                <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addResourceButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                 
                 <div>
                     {this.state.assetList.length === 0 ? null : <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}

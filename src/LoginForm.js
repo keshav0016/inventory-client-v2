@@ -57,7 +57,6 @@ class LoginForm extends Component {
         withCredentials: true
       })
       .then((res) => {
-        console.log(res)
         if(res.data.passwordSame === true){
           this.setState({
             change: true,
@@ -87,7 +86,7 @@ class LoginForm extends Component {
           <div className ='header1 white-text'>
               <h4>Inventory Management System </h4>
           </div> 
-      <div class='passwordchangeform'>
+      <div className='passwordchangeform'>
           <Row>
             <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon>
             <div className='fields'>
@@ -103,7 +102,7 @@ class LoginForm extends Component {
       <div>
         {this.state.login ? loginform : null}
         {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange' , user:{user_id:this.state.user_id}}}/>) : null}
-        {this.state.employee ? (<Redirect  to ={{pathname:'/employeehomepage' , user:{user_id:this.state.user_id}}}/>) : null}
+        {this.state.employee ? (<Redirect  to ={{pathname:`/employee/Profile/${this.state.user_id}` , user:{user_id:this.state.user_id}}}/>) : null}
         {this.state.admin ? (<Redirect push to ='/admin'/>): null}
       </div>
 
