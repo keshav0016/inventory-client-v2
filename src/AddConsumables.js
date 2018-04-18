@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Badge, Modal} from 'react-materialize'
+import {Row, Input, Button, Badge, Modal, Autocomplete} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 
@@ -44,6 +44,8 @@ class AddConsumables extends Component{
                 showError: false,
                 error: ""
             },
+            vendorNames : {
+            },
             total : 0,
             vendorList : [],
             addVendor : false,
@@ -66,9 +68,12 @@ class AddConsumables extends Component{
         this.vendorListDropdown = this.vendorListDropdown.bind(this)
         this.calculateWholePrice = this.calculateWholePrice.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
+        this.getVendorName = this.getVendorName.bind(this)
     }
     componentDidMount(){
-        $('label').addClass('active')
+        $(document).ready(function(){
+            $('label').addClass('active');
+        })
     }
 
     checkForValidation(){
@@ -328,7 +333,6 @@ class AddConsumables extends Component{
                 total : 0,
                 addConsumableRequest : false
             })
-            $('label').addClass('active')
             this.props.location.setHandleListRequest()
             window.Materialize.toast('Consumable Added Successfully', 4000)
         })
@@ -370,6 +374,7 @@ class AddConsumables extends Component{
                 vendorList : res.data.vendors,
                 vendorListRequest : false
             })
+            this.getVendorName()
         })
         .catch(error => {
             console.error(error)
@@ -392,19 +397,42 @@ class AddConsumables extends Component{
         })
     }
 
+    getVendorName(){
+        this.state.vendorList.map((obj)=>{
+            this.state.vendorNames[obj.name]=null
+        })
+    }
+
 
     render(){
+
         return(
             <div style={{marginLeft:'1%',marginRight:'1%'}}>
                 <h3>Add Consumable</h3>
                 <Row>
                     <Input s={6} label="Consumable" value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
                     <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <br/>
+                    <br/>
+                    <br/>
                     <Input s={6} label="Purchased Quantity" type="number" min={0} value={this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null}/>
                     <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null}/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
                     <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null}/>
-                    <Input s={6} label="Vendor" type='select' onChange = {this.setVendorName}>{this.vendorListDropdown()}</Input>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Row>
+                        <Autocomplete
+                            title='Vendor'
+                            data={
+                                this.state.vendorNames
+                            }
+                        />
+                    </Row>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
