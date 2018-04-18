@@ -163,6 +163,7 @@ class Assets extends Component{
                         <tr>
                             <th data-field="serial_number">Serial No.</th>
                             <th data-field="asset_name">Asset Name</th>
+                            <th data-field="asset_type">Asset Type</th>
                             <th data-field="purchase_date">Purchase date</th>
                             <th data-field="invoice_number">Invoice No.</th>
                             <th data-field="vendor">Vendor</th>
@@ -178,6 +179,7 @@ class Assets extends Component{
                             return <tr key={item.asset_id}>
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
+                            <td>{item.assetType}</td>
                             <td>{moment(item.purchase_date).format('DD MMM YYYY')}</td>
                             <td>{item.invoice_number}</td>
                             <td>{item.vendor}</td>

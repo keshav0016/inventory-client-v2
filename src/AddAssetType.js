@@ -43,10 +43,23 @@ class AddAssetType extends Component{
             if(res.data.message){
                 this.setState({
                     createAssetRequest : false
+                    ,assetType : ''
+                    ,maxRequest : 1
                 })
                 $('.modal-overlay').click()
                 window.Materialize.toast(res.data.message, 4000)
-                this.props.setAssetTypeListRequest()
+                if(this.props.setAssetTypeListRequest){
+                    this.props.setAssetTypeListRequest()
+                }
+                else{
+                    this.props.setHandleListRequest()
+                }
+            }
+            else{
+                window.Materialize.toast('This Asset Type already exists', 4000)
+                this.setState({
+                    createAssetRequest :false
+                })
             }
         })
         .catch(error => {
