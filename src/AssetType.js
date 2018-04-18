@@ -1,37 +1,35 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Pagination} from 'react-materialize'
-import AddVendor from './AddVendor'
-import VendorUpdate from './VendorUpdate'
+import AddAssetType from './AddAssetType'
+import UpdateAssetType from './UpdateAssetType'
 import $ from 'jquery'
 import './ListPage.css'
 import './Employee.css'
 
-class Vendor extends Component{
+class AssetType extends Component{
     constructor(props){
         super(props)
         this.state = {
-            vendorList : [],
+            assetTypeList : [],
             pagination : {totalPage : 1, currentPage : 1},
             page : 1,
             handleListRequest : true,
-            search : '',
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
         this.setPage = this.setPage.bind(this)
-        this.setSearch = this.setSearch.bind(this)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/vendor/list?page=${this.state.page}&search=%${this.state.search}%`,
+            url : `http://localhost:3001/assetType/list?page=${this.state.page}`,
             withCredentials : true
         })
         .then(res => {
             this.setState({
-                vendorList : res.data.vendors.sort((a, b) => a.asset_id - b.asset_id),
+                assetTypeList : res.data.assetTypes,
                 pagination : res.data.pagination,
                 handleListRequest : false
             })
@@ -41,13 +39,6 @@ class Vendor extends Component{
         })
     }
 
-    setSearch(e){
-        this.setState({
-            search : e.target.value,
-        })
-        this.setPage(1)
-    }
-
 
     setHandleListRequest(itemAdded){
         this.setState({
@@ -55,11 +46,11 @@ class Vendor extends Component{
         })
         $(".modal-overlay").click()
 
-        // $(".modal-close").trigger('click')
         if(itemAdded){
             this.setPage(this.state.pagination.totalPage)
         }
     }
+
     componentDidMount(){
         $('label').addClass('active')
     }
@@ -77,41 +68,37 @@ class Vendor extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                <h3 className='heading' >Vendors</h3 >
+                <h3 className='heading' >Asset Types</h3 >
                 <Table centered>
                     <thead>
                         <tr>
-                            <th data-field="id">Id</th>
-                            <th data-field="name">Vendor Name</th>
-                            <th data-field="address">Address</th>
-                            <th data-field="contact">Contact No</th>
+                            <th data-field="id">S. No</th>
+                            <th data-field="name">Asset Type</th>
+                            <th data-field="maxRequest">Max. Request</th>
                             
                         </tr>
                     </thead>
 
                     <tbody>
-                        {this.state.vendorList.map((item, key) => {
-                            return <tr key={item.id}>
+                        {this.state.assetTypeList.map((item, index) => {
+                            return <tr key={index+1}>
                             <td>{item.id}</td>
-                            <td>{item.name}</td>
-                            <td>{item.address}</td>
-                            <td>{item.contact}</td>
+                            <td>{item.assetType}</td>
+                            <td>{item.maxRequest}</td>
                             <td><Modal
-                                header='Update the Vendor'
+                                header={`Update the ${item.assetType}'s Max Request`}
                                 trigger={<Button>Edit</Button>}>
-                                <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest}/>
+                                <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal></td>
                             </tr>
                         })}
                     </tbody>
                 </Table>
                 <Modal
-                    header='Add Vendor'
-                    id="addVendor"
+                    header='Add Asset Type'
                     actions ={<div></div>}
-                    // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
                     trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
-                    <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
+                    <AddAssetType setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
@@ -125,4 +112,4 @@ class Vendor extends Component{
 
 
 
-export default Vendor
+export default AssetType

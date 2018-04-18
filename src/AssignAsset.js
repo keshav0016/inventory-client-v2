@@ -14,6 +14,7 @@ class AssignAsset extends Component{
             expected_recovery : '',
             employees : [],
             assets : []
+            ,assignForce : false
         }
         this.assignAssetIntoDb = this.assignAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
@@ -47,6 +48,7 @@ class AssignAsset extends Component{
                 user_id : this.state.user_id,
                 from : this.state.from,
                 expected_recovery : this.state.expected_recovery
+                ,assignForce : this.state.assignForce
             },
             withCredentials : true
         })
@@ -55,7 +57,14 @@ class AssignAsset extends Component{
                 assignAssetRequest : false
             })
             window.Materialize.toast(res.data.message, 4000)
-            this.props.setHandleListRequest()
+            if(res.data.requireAssignForce){
+                this.setState({
+                    assignForce : true
+                })
+            }
+            else{
+                this.props.setHandleListRequest()
+            }
         })
     }
 
@@ -111,7 +120,8 @@ class AssignAsset extends Component{
                     <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
                     <Input s={12} type='date' label="Expected Recovery*" value = {this.state.expected_recovery} onChange = {this.setExpectedRecovery} />
                 </Row>
-                <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"} <Icon small right>send</Icon></Button>
+                {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}
             </div>
         )
     }
