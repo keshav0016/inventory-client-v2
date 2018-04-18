@@ -223,10 +223,10 @@ class AddConsumables extends Component{
         })
     }
 
-    setVendorName(e){
+    setVendorName(e, value){
         this.setState({
             vendor_name : Object.assign(this.state.vendor_name, {
-                value: e.target.value
+                value: value
             })
         })
     }
@@ -431,6 +431,7 @@ class AddConsumables extends Component{
                             data={
                                 this.state.vendorNames
                             }
+                            onChange = {this.setVendorName}
                         />
                     </Row>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>

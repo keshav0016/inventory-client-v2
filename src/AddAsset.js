@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Badge, Icon, Modal} from 'react-materialize'
+import {Row, Input, Button, Badge, Icon, Modal, Autocomplete} from 'react-materialize'
 import AddVendor from './AddVendor'
 import AddAssetType from './AddAssetType'
 import $ from 'jquery'
@@ -58,6 +58,7 @@ class AddAsset extends Component{
                 error: '',
                 showError: false
             },
+            vendorNames:{},
             vendorList : [],
             assetTypeList : [],
             assetType : 'Select',
@@ -84,17 +85,24 @@ class AddAsset extends Component{
         this.fetchAssetTypeList = this.fetchAssetTypeList.bind(this)
         this.setAssetType = this.setAssetType.bind(this)
         this.setAssetTypeListRequest = this.setAssetTypeListRequest.bind(this)
+        this.calculateTotal = this.calculateTotal.bind(this)
+        this.getVendorName = this.getVendorName.bind(this)
     }
 
     checkForValidation(){
-        // if(!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || this.state.vendor === 'Select' || !this.state.amount || !this.state.condition || !this.state.location || this.state.category ==='Select'){
-        //     window.Materialize.toast('All the * marked fields are required', 4000)
-        // }
         if(!this.state.serial_number.value){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: 'The serial number is required',
                     showError : true
+                })
+            })
+        }
+        if(this.state.serial_number.value){
+            this.setState({
+                serial_number:Object.assign(this.state.serial_number, {
+                    error: '',
+                    showError : false
                 })
             })
         }
@@ -106,6 +114,14 @@ class AddAsset extends Component{
                 })
             })
         }
+        if(this.state.asset_name.value){
+            this.setState({
+                asset_name:Object.assign(this.state.asset_name, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
         if(!this.state.purchase_date.value){
             this.setState({
                 purchase_date:Object.assign(this.state.purchase_date, {
@@ -114,11 +130,27 @@ class AddAsset extends Component{
                 })
             })
         }
+        if(this.state.purchase_date.value){
+            this.setState({
+                purchase_date:Object.assign(this.state.purchase_date, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
         if(!this.state.invoice_number.value){
             this.setState({
                 invoice_number:Object.assign(this.state.invoice_number, {
                     error: 'The Invoice number is required',
                     showError : true
+                })
+            })
+        }
+        if(this.state.invoice_number.value){
+            this.setState({
+                invoice_number:Object.assign(this.state.invoice_number, {
+                    error: '',
+                    showError : false
                 })
             })
         }
@@ -170,11 +202,27 @@ class AddAsset extends Component{
                 })
             })
         }
+        if(this.state.condition.value){
+            this.setState({
+                condition:Object.assign(this.state.condition, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
         if(!this.state.location.value){
             this.setState({
                 location:Object.assign(this.state.location, {
                     error:'The location is required',
                     showError: true
+                })
+            })
+        }
+        if(this.state.location.value){
+            this.setState({
+                location:Object.assign(this.state.location, {
+                    error:'',
+                    showError: false
                 })
             })
         }
@@ -185,6 +233,10 @@ class AddAsset extends Component{
                     showError:true
                 })
             })
+        }
+        if(!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || this.state.vendor === 'Select' || !this.state.amount || !this.state.condition || !this.state.location || this.state.category ==='Select'){
+            // window.Materialize.toast('All the * marked fields are required', 4000)
+            console.log('error')
         }
         else{
             this.setState({
@@ -238,10 +290,10 @@ class AddAsset extends Component{
         })
     }
 
-    setVendor(e){
+    setVendor(e,value){
         this.setState({
             vendor : Object.assign(this.state.vendor, {
-                value : e.target.value
+                value : value
             })
         })
     }
@@ -252,6 +304,7 @@ class AddAsset extends Component{
                 value : Number(e.target.value)
             })
         })
+        this.calculateTotal()
     }
 
     setGst(e){
@@ -260,6 +313,7 @@ class AddAsset extends Component{
                 value: Number(e.target.value)
             })
         })
+        this.calculateTotal()
     }
 
     setCategory(e){
@@ -429,12 +483,24 @@ class AddAsset extends Component{
         })
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.amount !== this.state.amount  || prevState.gst !== this.state.gst){
-            this.setState({
-                total : this.state.amount + ((this.state.amount * this.state.gst)/100)
-            })
-        }
+    // componentDidUpdate(prevProps, prevState){
+    //     if(prevState.amount !== this.state.amount  || prevState.gst !== this.state.gst){
+    //         this.setState({
+    //             total : this.state.amount + ((this.state.amount * this.state.gst)/100)
+    //         })
+    //     }
+    // }
+
+    calculateTotal(){
+        this.setState({
+            total : this.state.amount.value + ((this.state.amount.value * this.state.gst.value)/100)
+        })
+    }
+
+    getVendorName(){
+        this.state.vendorList.map((obj)=>{
+            this.state.vendorNames[obj.name]=null
+        })
     }
 
     componentDidMount(){
@@ -452,6 +518,7 @@ class AddAsset extends Component{
                 vendorList : res.data.vendors.sort((a, b) => a.asset_id - b.asset_id),
                 vendorListRequest : false
             })
+            this.getVendorName()
         })
         .catch(error => {
             console.error(error)
@@ -482,7 +549,16 @@ class AddAsset extends Component{
                     </Input>
                     <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
-                    <Input s={6} label="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input>
+                    {/* <Input s={6} label="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
+                    <Row>
+                        <Autocomplete
+                            title='Vendor'
+                            data={
+                                this.state.vendorNames
+                            }
+                            onChange = {this.setVendor}
+                        />
+                    </Row>
                     <Input s={6} label="Asset Type*" type='select' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <br /> <br />

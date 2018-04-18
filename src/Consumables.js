@@ -20,8 +20,16 @@ class Consumables extends Component{
             page : 1,
             handleListRequest : true,
             sort : 'default',
-            minQuantity : '',
-            maxQuantity : '',
+            minQuantity : {
+                value:'',
+                error:'',
+                showError:false
+            },
+            maxQuantity : {
+                value:'',
+                error:'',
+                showError:false
+            },
             keyword : ''
         }
         this.handleList = this.handleList.bind(this)
@@ -36,25 +44,67 @@ class Consumables extends Component{
     }
 
     checkForValidation(){
-        if(Number(this.state.minQuantity) < 0){
-            window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
+        if(Number(this.state.minQuantity.value) < 0){
+            // window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
             this.setState({
+                minQuantity: Object.assign(this.state.minQuantity, {
+                    error:'The Minimum Quantity should not be negative',
+                    showError:true
+                }),
                 handleListRequest : true
             })
         }
-        else if(Number(this.state.maxQuantity) < 0){
-            window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
+        if(Number(this.state.minQuantity.value) >= 0){
+            // window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
             this.setState({
+                minQuantity: Object.assign(this.state.minQuantity, {
+                    error:'',
+                    showError:false
+                }),
                 handleListRequest : true
             })
         }
-        else if(Number(this.state.minQuantity) > Number(this.state.maxQuantity)){
-            window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+        if(Number(this.state.maxQuantity.value) < 0){
+            // window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
             this.setState({
+                maxQuantity: Object.assign(this.state.maxQuantity, {
+                    error:'The Maximum Quantity should not be negative',
+                    showError:true
+                }),
                 handleListRequest : true
             })
         }
-        else{
+        if(Number(this.state.maxQuantity.value) >= 0){
+            // window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
+            this.setState({
+                maxQuantity: Object.assign(this.state.maxQuantity, {
+                    error:'',
+                    showError:false
+                }),
+                handleListRequest : true
+            })
+        }
+        if(Number(this.state.minQuantity) > Number(this.state.maxQuantity)){
+            // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+            this.setState({
+                minQuantity: Object.assign(this.state.minQuantity, {
+                    error:'The Minimum Quantity should not be greater than the Maximum Quantity',
+                    showError:true
+                }),
+                handleListRequest : true
+            })
+        }
+        if(Number(this.state.minQuantity) <= Number(this.state.maxQuantity)){
+            // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+            this.setState({
+                minQuantity: Object.assign(this.state.minQuantity, {
+                    error:'',
+                    showError:false
+                }),
+                handleListRequest : true
+            })
+        }
+        if(Number(this.state.minQuantity) >= 0 && Number(this.state.maxQuantity) >= 0 && Number(this.state.minQuantity) <= Number(this.state.maxQuantity)){
             this.setState({
                 handleListRequest : true
             })
@@ -64,7 +114,7 @@ class Consumables extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity}&max=${this.state.maxQuantity}`,
+            url : `http://localhost:3001/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity.value}&max=${this.state.maxQuantity.value}`,
             withCredentials : true
         })
         .then(res => {
@@ -117,13 +167,17 @@ class Consumables extends Component{
 
     minQuantity(e){
             this.setState({
-                minQuantity: e.target.value,
+                minQuantity: Object.assign(this.state.minQuantity, {
+                    value:e.target.value
+                })
             })
     }
 
     maxQuantity(e){
             this.setState({
-                maxQuantity: e.target.value,
+                maxQuantity: Object.assign(this.state.maxQuantity, {
+                    value: e.target.value
+                }),
             })
     }
 
@@ -136,8 +190,16 @@ class Consumables extends Component{
 
     resetFilter(){
         this.setState({
-            minQuantity:'',
-            maxQuantity:'',
+            minQuantity:{
+                value:'',
+                error:'',
+                showError:false
+            },
+            maxQuantity:{
+                value:'',
+                error:'',
+                showError:false
+            },
             handleListRequest:true
         })
     }
@@ -214,8 +276,8 @@ class Consumables extends Component{
                 }
                 <div className="filterContainer">
                     <Row>
-                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity} onChange={this.minQuantity}></Input>
-                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity} onChange={this.maxQuantity}></Input>
+                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
+                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
                     </Row>
                         <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
                         <br />
