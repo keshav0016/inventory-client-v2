@@ -11,7 +11,7 @@ class EntireHistoryConsumables extends Component{
        this.state = {
            history : [],
            fetchHistory : true,
-           isPurchased : true,
+           isPurchased : false,
            isAssigned : false
        }
        this.getHistory = this.getHistory.bind(this)
