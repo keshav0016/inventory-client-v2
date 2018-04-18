@@ -23,6 +23,7 @@ import Tickets from './Tickets'
 import LoginForm from './LoginForm';
 import EmployeeAdd from './EmployeeAdd';
 import AcceptAssetTicket from './AcceptAssetTicket'
+import AssetType from './AssetType'
 
 class Homepage extends Component{
     render(){
@@ -38,11 +39,12 @@ class Homepage extends Component{
                     <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                     <Link to="/admin">Dashboard</Link>
                     <Link to="/admin/assets">Assets</Link>
+                    <Link to="/admin/assetType">Asset Types</Link>
                     <Link to="/admin/consumables">Consumables</Link>
+                    <Link to="/admin/consumables/history">Consumable History</Link>
                     <Link to="/admin/employees">Employees</Link>
                     <Link to="/admin/tickets">Tickets</Link>
                     <Link to="/admin/vendor">Vendor</Link>
-                    <Link to="/admin/consumables/history">Consumable History</Link>
                     </SideNav>
                 </div>
                 <div>
@@ -62,7 +64,7 @@ class Homepage extends Component{
                     <Route  exact path ='/admin/employees/create' component={EmployeeAdd}/>
                     <Route exact path = '/admin/tickets/asset/accept/:ticket' component={AcceptAssetTicket} />
                     <Route exact path="/admin/consumables/history" component={EntireHistoryConsumables}/>                    
-
+                    <Route exact path="/admin/assetType" component={AssetType} />
                 </div>
                 </div>
                 <Route  path ='/login' component={LoginForm}/>

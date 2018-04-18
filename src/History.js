@@ -97,7 +97,8 @@ class Assets extends Component{
                                     <h5><u>Assigned</u></h5>
                                     <div style={{display : 'flex'}} >
                                         <div style={{float: 'left', width : '50%'}} >
-                                            <h6><b>User Id</b> : {element.user_id}</h6>
+                                            <h6><b>Employee Id</b> : {element.user_id}</h6>
+                                            <h6><b>Employee Name</b> : {element.user.first_name} {element.user.last_name}</h6>
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
                                         </div>
                                         <div style={{float: 'right', width : '50%'}} >
