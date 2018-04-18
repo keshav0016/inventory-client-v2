@@ -54,7 +54,7 @@ class AssignAsset extends Component{
             this.setState({
                 assignAssetRequest : false
             })
-            window.Materialize.toast('Asset Assigned', 4000)
+            window.Materialize.toast(res.data.message, 4000)
             this.props.setHandleListRequest()
         })
     }

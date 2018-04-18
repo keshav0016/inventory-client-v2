@@ -63,6 +63,7 @@ class Assets extends Component{
                                     <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
                                     <h6><b>Vendor</b> : {this.state.assetDetails.vendor}</h6>
                                     <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
+                                    <h6><b>Asset Type</b> : {this.state.assetDetails.assetType}</h6>
                                 </div>
                                 <div style={{float: 'right', width : '50%'}} >
                                     <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
