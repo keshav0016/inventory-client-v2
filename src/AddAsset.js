@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Badge, Icon, Modal} from 'react-materialize'
 import AddVendor from './AddVendor'
+import AddAssetType from './AddAssetType'
 import $ from 'jquery'
 import './Employee.css'
 
@@ -22,9 +23,12 @@ class AddAsset extends Component{
             condition : '',
             location : '',
             vendorList : [],
+            assetTypeList : [],
+            assetType : 'Select',
             addVendor : false,
             vendorListRequest : true,
             addAssetRequest : false
+            ,assetTypeListRequest : true
         }
         this.setSerialNumber = this.setSerialNumber.bind(this)
         this.setAssetName = this.setAssetName.bind(this)
@@ -41,7 +45,9 @@ class AddAsset extends Component{
         this.setLocation = this.setLocation.bind(this)
         this.handleVendorList = this.handleVendorList.bind(this)
         this.setVendorListRequest = this.setVendorListRequest.bind(this)
-        // this.setAddVendor = this.setAddVendor.bind(this)
+        this.fetchAssetTypeList = this.fetchAssetTypeList.bind(this)
+        this.setAssetType = this.setAssetType.bind(this)
+        this.setAssetTypeListRequest = this.setAssetTypeListRequest.bind(this)
     }
 
     checkForValidation(){
@@ -144,6 +150,27 @@ class AddAsset extends Component{
         return vendorArr
     }
 
+    assetTypeDropdown(){
+        var assetTypeArr = []
+        assetTypeArr.push(<option key='Select' value='Select'>Select</option>)
+        this.state.assetTypeList.forEach(assetType => {
+            assetTypeArr.push(<option key={assetType.id} value={assetType.assetType}>{assetType.assetType}</option>)
+        });
+        return assetTypeArr
+    }
+
+    setAssetType(e){
+        this.setState({
+            assetType : e.target.value
+        })
+    }
+
+    setAssetTypeListRequest(){
+        this.setState({
+            assetTypeListRequest : true
+        })
+    }
+
     addAssetIntoDb(){
         axios({
             method : 'post',
@@ -162,6 +189,7 @@ class AddAsset extends Component{
                 category : this.state.category,
                 condition : this.state.condition,
                 location : this.state.location
+                ,assetType : this.state.assetType
             }
         })
         .then(res => {
@@ -186,11 +214,29 @@ class AddAsset extends Component{
                     amount : 0,
                     gst : 0,
                     total : 0,
+                    assetType : 'Select'
                 })
                 window.Materialize.toast('Asset Added', 4000)                
                 this.props.setHandleListRequest(true)
                 $('label').addClass('active')
             }
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
+    fetchAssetTypeList(){
+        axios({
+            method: 'get',
+            url : 'http://localhost:3001/assetType/list'
+            ,withCredentials : true
+        })
+        .then(res => {
+            this.setState({
+                assetTypeList : res.data.assetTypes
+                ,assetTypeListRequest : false
+            })
         })
         .catch(error => {
             console.error(error)
@@ -250,8 +296,9 @@ class AddAsset extends Component{
                     </Input>
                     <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
                     <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
-                    <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Input s={6} label="Vendor *" type='select' value={this.state.vendor} onChange = {this.setVendor}>{this.vendorListDropdown()}</Input>
+                    <Input s={6} label="Asset Type*" type='select' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
+                    <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <br /> <br />
                 </Row>
                 <Modal
@@ -260,9 +307,15 @@ class AddAsset extends Component{
                     trigger={<Button>Add Vendor</Button>}>
                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                 </Modal>
+                <Modal
+                    header='Add Asset Type'
+                    trigger={<Button style={{float : 'right', marginRight : '2%'}}>Add Asset Type</Button>}>
+                    <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
+                </Modal>
                 <Button style={{position : 'absolute', bottom : '3%', right : '3%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                 {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
+                {this.state.assetTypeListRequest ? this.fetchAssetTypeList() : null}
                 <br /><br />
             </div>
         )

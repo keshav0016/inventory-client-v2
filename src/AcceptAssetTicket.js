@@ -137,7 +137,7 @@ class AcceptAssetTicket extends Component{
                         <h5>Description : {this.state.currentAssetSelected.description}</h5>
                         <h5>Invoice number : {this.state.currentAssetSelected.invoice_number}</h5>
                         <h5>Vendor : {this.state.currentAssetSelected.vendor}</h5>
-                    </div> : null}
+                    </div> : (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : null)}
                 </Row>
                 <Button style={{position : 'fixed', right : '3%', bottom : '3%'}} onClick={this.checkForValidation}>Submit</Button>
                 {this.state.redirect ? <Redirect push to="/admin/tickets"/> : null}

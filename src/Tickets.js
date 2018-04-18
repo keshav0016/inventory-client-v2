@@ -139,8 +139,8 @@ class Tickets extends Component{
                 item:'Select',
                 disableItems : true
             })
-            if(res.data.message === 'ticket created'){
-                window.Materialize.toast('Success', 4000)
+            if(res.data.message){
+                window.Materialize.toast(res.data.message, 4000)
             }else if(res.data.error === 'ticket can not be created'){
                 window.Materialize.toast('sorry, request can not be made', 4000)
 
