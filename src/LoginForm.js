@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Icon, Input, Button,Col } from 'react-materialize';
+import { Icon, Input, Button,Col, Card } from 'react-materialize';
 import './Login.css';
 import './Employee.css'
 import {
@@ -96,8 +96,8 @@ class LoginForm extends Component {
           </Col>
           <Col s={4}>
             <form onSubmit={this.verifyCredentials}>
-              <div className="card z-depth-2" style={{padding: "30px",}}>
-                <h4>Login</h4>
+              <Card className="z-depth-2" title="Login" style={{padding: "30px",}}>
+                {/* <h4>Login</h4> */}
                 <Row>
                   {/* <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon> */}
                   {/* <div className='fields'> */}
@@ -116,7 +116,7 @@ class LoginForm extends Component {
                 </Row>
                 
                 <Link to='/forgotpassword' className='loginFormForgotLink'>Forgot Password</Link>
-            </div>
+              </Card>
 
             </form>
           </Col>

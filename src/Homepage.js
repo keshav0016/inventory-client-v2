@@ -27,24 +27,28 @@ import AssetType from './AssetType'
 
 class Homepage extends Component{
     render(){
+        let menuButton = <Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>;
         return(
             <Router>
             <div>
                 <div className="masterComponentBackground">
                 <div>
-                    <Navbar className="teal lighten-1">
-                        <NavItem style={{height : '64px'}} ><img width="60px" height="60px" style={{marginLeft : '70px', marginTop : '2px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" /></NavItem>                        
+                    <Navbar fixed className="teal lighten-1" style={{overflow: 'hidden'}}>
+                        <NavItem href="/admin">
+                            <img style={{height: '64px', width: '64px', marginLeft: '65px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" />
+                        </NavItem>                        
                         <NavItem href="/" className="masterComponentLogoutButton"><b>LOGOUT</b></NavItem>
+
                     </Navbar>
-                    <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
-                    <Link to="/admin">Dashboard</Link>
-                    <Link to="/admin/assets">Assets</Link>
-                    <Link to="/admin/assetType">Asset Types</Link>
-                    <Link to="/admin/consumables">Consumables</Link>
-                    <Link to="/admin/consumables/history">Consumable History</Link>
-                    <Link to="/admin/employees">Employees</Link>
-                    <Link to="/admin/tickets">Tickets</Link>
-                    <Link to="/admin/vendor">Vendor</Link>
+                    <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>
+                        <Link to="/admin">Dashboard</Link>
+                        <Link to="/admin/assets">Assets</Link>
+                        <Link to="/admin/assetType">Asset Types</Link>
+                        <Link to="/admin/consumables">Consumables</Link>
+                        <Link to="/admin/consumables/history">Consumable History</Link>
+                        <Link to="/admin/employees">Employees</Link>
+                        <Link to="/admin/tickets">Tickets</Link>
+                        <Link to="/admin/vendor">Vendor</Link>
                     </SideNav>
                 </div>
                 <div>

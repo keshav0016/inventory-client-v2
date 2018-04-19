@@ -4,10 +4,14 @@
 }
 
 .filterContainer{
-    position: absolute;
-    width: 17%;
-    top:64px;
-    left: 83%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    padding-top: 64px;
+    /* width: 235px; */
+    /* top:64px; */
+    /* left: 83%; */
     /* text-decoration-style: black */
     /* height: 50%; */
     /* background-color: darkturquoise */
