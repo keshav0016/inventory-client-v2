@@ -11,9 +11,21 @@ class RepairAsset extends Component{
         super(props)
         this.state = {
             repairAssetRequest : false,
-            vendor : 'Select',
-            from : '',
-            expected_delivery : '',
+            vendor : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            from : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            expected_delivery : {
+                value: '',
+                error: '',
+                showError: false
+            },
             vendorList : [],
             addVendor : false,
             assetDetails : {},
@@ -32,18 +44,87 @@ class RepairAsset extends Component{
     }
 
     checkForValidation(){
-        if(this.state.vendor === 'Select' || !this.state.from || !this.state.expected_delivery){
-            window.Materialize.toast('All the * marked fields are required', 4000)
-        }
-        else{
-            if(new Date(this.state.from) > new Date(this.state.expected_delivery)){
-                window.Materialize.toast('Expected Delivery cannot be less than FROM', 4000)
-            }
-            else{
-                this.setState({
-                    repairAssetRequest : true
+        // if(this.state.vendor === 'Select' || !this.state.from || !this.state.expected_delivery){
+        //     window.Materialize.toast('All the * marked fields are required', 4000)
+        // }
+        // else{
+        //     if(new Date(this.state.from) > new Date(this.state.expected_delivery)){
+        //         window.Materialize.toast('Expected Delivery cannot be less than FROM', 4000)
+        //     }
+        //     else{
+        //         this.setState({
+        //             repairAssetRequest : true
+        //         })
+        //     }
+        // }
+        if(!this.state.vendor.value){
+            this.setState({
+                vendor:Object.assign(this.state.vendor, {
+                    error: 'The vendor name is required',
+                    showError: true
                 })
-            }
+            })
+        }
+        if(this.state.vendor.value){
+            this.setState({
+                vendor:Object.assign(this.state.vendor, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.from.value){
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: 'The from date is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.from.value){
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.expected_delivery.value){
+            this.setState({
+                expected_delivery:Object.assign(this.state.expected_delivery, {
+                    error: 'The expected delivery date is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.expected_delivery.value){
+            this.setState({
+                expected_delivery:Object.assign(this.state.expected_delivery, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(new Date(this.state.from.value) > new Date(this.state.expected_delivery.value)) {
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: 'The delivery date cannot be before the from date',
+                    showError: true
+                })
+            })
+        }
+        if(new Date(this.state.from.value) < new Date(this.state.expected_delivery.value)) {
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.vendor.value && this.state.from.value && this.state.expected_delivery.value && new Date(this.state.from.value) < new Date(this.state.expected_delivery.value)) {
+            this.setState({
+                repairAssetRequest : true
+            })
         }
     }
 
@@ -75,16 +156,21 @@ class RepairAsset extends Component{
             url : 'http://localhost:3001/asset/repair',
             data : {
                 asset_id : this.props.match.params.asset,
-                vendor : this.state.vendor,
-                from : this.state.from,
-                expected_delivery : this.state.expected_delivery
+                vendor : this.state.vendor.value,
+                from : this.state.from.value,
+                expected_delivery : this.state.expected_delivery.value
             },
             withCredentials : true
         })
         .then(res => {
             this.setState({
                 repairAssetRequest : false,
-                isDisabled : true
+                isDisabled : true,
+                vendor: Object.assign(this.state.vendor, {
+                    value: '',
+                    error: '',
+                    showError: false
+                })
             })
             window.Materialize.toast('Repair information has been stored', 4000)
             // this.props.setHandleListRequest()
@@ -101,19 +187,25 @@ class RepairAsset extends Component{
 
     setVendor(e,value){
         this.setState({
-            vendor : value
+            vendor : Object.assign(this.state.vendor, {
+                value: value
+            })
         })
     }
 
     setFrom(e){
         this.setState({
-            from : e.target.value
+            from : Object.assign(this.state.from, {
+                value: e.target.value
+            })
         })
     }
 
     setExpectedDelivery(e){
         this.setState({
-            expected_delivery : e.target.value
+            expected_delivery : Object.assign(this.state.expected_delivery, {
+                value: e.target.value
+            })
         })
     }
 
@@ -169,15 +261,17 @@ class RepairAsset extends Component{
                         {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
                         <Row>
                             <Autocomplete s={12}
+                                error={this.state.vendor.showError ? this.state.vendor.error : null}
                                 title='Service Provider'
                                 data={
                                     this.state.vendorNames
                                 }
+                                value={this.state.vendor.value}
                                 onChange = {this.setVendor}
                             />
                         </Row>
-                        <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from} onChange = {this.setFrom} disabled = {this.state.isDisabled}/>
-                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled}/>
+                        <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
+                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                     </Row>
                     <Modal
                         header='Add Vendor'

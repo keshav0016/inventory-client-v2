@@ -10,13 +10,17 @@ class AssignConsumables extends Component {
         this.state = {
             consumable_id : this.props.consumable.consumable_id,
             quantity : {
-                value : '',
+                value : 0,
                 error: '',
                 showError: false
             },
             employeesList: [],
             fetchEmployeeList: true,
-            user_id:'',
+            user_id:{
+                value : '',
+                error: '',
+                showError: false
+            },
             assignConsumableRequest : false
         }
 
@@ -46,7 +50,9 @@ class AssignConsumables extends Component {
     
        assignedEmployee(e){
            this.setState({
-               user_id:this.state.employeesList[e.target.value].user_id
+               user_id:Object.assign(this.state.user_id, {
+                   value: this.state.employeesList[e.target.value].user_id
+               })
            })
        }
 
@@ -87,7 +93,16 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
+        if(Number(this.props.consumable.quantity) === Number(this.state.quantity.value)){
+            // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: 'Assign quantity = Available quantity',
+                    showError:true
+                })
+            })
+        }
+        if(Number(this.props.consumable.quantity) > Number(this.state.quantity.value) && Number(this.state.quantity.value) > 0){
             // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
             this.setState({
                 quantity:Object.assign(this.state.quantity, {
@@ -96,8 +111,21 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(!this.state.user_id){
-            window.Materialize.toast('The Employee Id field cannot be empty', 4000)
+        if(!this.state.user_id.value){
+            this.setState({
+                user_id: Object.assign(this.state.user_id, {
+                    error: 'Select an Employee',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.user_id.value){
+            this.setState({
+                user_id: Object.assign(this.state.user_id, {
+                    error: '',
+                    showError: false
+                })
+            })
         }
         if(this.state.user_id && Number(this.state.quantity.value) > 0 && Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
             this.setState({
@@ -121,7 +149,7 @@ class AssignConsumables extends Component {
             url: 'http://localhost:3001/consumables/assign',
             data: {
                 consumable_id : this.state.consumable_id,
-                user_id: this.state.user_id,
+                user_id: this.state.user_id.value,
                 assigned_date:Date.now(),
                 quantity : this.state.quantity.value
             },
@@ -129,7 +157,11 @@ class AssignConsumables extends Component {
         })
         .then(obj => {
             this.setState({
-                user_id:'',
+                user_id:{
+                    value:'',
+                    error:'',
+                    showError:false
+                },
                 quantity:{
                     value:'',
                     error:'',
@@ -149,7 +181,7 @@ class AssignConsumables extends Component {
         return (
             <div>
                 <Row>
-                    <Input s={5} type='select' onChange={this.assignedEmployee}>
+                    <Input s={5} type='select' onChange={this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null} >
                         {this.state.employeesList.map((element,index)=>{
                             return( 
                                 <option key={index} value={index}>{element.first_name + " " + element.last_name}</option>

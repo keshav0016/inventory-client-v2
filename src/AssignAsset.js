@@ -9,9 +9,21 @@ class AssignAsset extends Component{
         this.state = {
             assignAssetRequest : false,
             assignAssetFormRequest : false,
-            user_id : 'Select',
-            from : '',
-            expected_recovery : '',
+            user_id : {
+                value: 'Select',
+                error: '',
+                showError: false
+            },
+            from : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            expected_recovery : {
+                value: '',
+                error: '',
+                showError: false
+            },
             employees : [],
             assets : []
             ,assignForce : false
@@ -24,18 +36,87 @@ class AssignAsset extends Component{
     }
 
     checkForValidation(){
-        if(this.state.user_id === 'Select' || !this.state.from || !this.state.expected_recovery){
-            window.Materialize.toast('All the * marked fields are required', 4000)
-        }
-        else{
-            if(new Date(this.state.from) > new Date(this.state.expected_recovery)){
-                window.Materialize.toast('Expected Recovery cannot be less than FROM', 4000)
-            }
-            else{
-                this.setState({
-                    assignAssetRequest : true
+        // if(this.state.user_id === 'Select' || !this.state.from || !this.state.expected_recovery){
+        //     window.Materialize.toast('All the * marked fields are required', 4000)
+        // }
+        // else{
+        //     if(new Date(this.state.from) > new Date(this.state.expected_recovery)){
+        //         window.Materialize.toast('Expected Recovery cannot be less than FROM', 4000)
+        //     }
+        //     else{
+        //         this.setState({
+        //             assignAssetRequest : true
+        //         })
+        //     }
+        // }
+        if(this.state.user_id.value === 'Select'){
+            this.setState({
+                user_id:Object.assign(this.state.user_id, {
+                    error: 'Select an Employee',
+                    showError: true
                 })
-            }
+            })
+        }
+        if(this.state.user_id.value !== 'Select'){
+            this.setState({
+                user_id:Object.assign(this.state.user_id, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.from.value){
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: 'The from date is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.from.value){
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.expected_recovery.value){
+            this.setState({
+                expected_recovery:Object.assign(this.state.expected_recovery, {
+                    error: 'The expected delivery date is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.expected_recovery.value){
+            this.setState({
+                expected_recovery:Object.assign(this.state.expected_recovery, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(new Date(this.state.from.value) > new Date(this.state.expected_recovery.value)) {
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: 'The delivery date cannot be before the from date',
+                    showError: true
+                })
+            })
+        }
+        if(new Date(this.state.from.value) < new Date(this.state.expected_recovery.value)) {
+            this.setState({
+                from:Object.assign(this.state.from, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.user_id.value!=='Select' && this.state.from.value && this.state.expected_recovery.value && new Date(this.state.from.value) < new Date(this.state.expected_recovery.value)) {
+            this.setState({
+                assignAssetRequest : true
+            })
         }
     }
 
@@ -45,9 +126,9 @@ class AssignAsset extends Component{
             url : 'http://localhost:3001/asset/assign',
             data : {
                 asset_id : this.props.asset,
-                user_id : this.state.user_id,
-                from : this.state.from,
-                expected_recovery : this.state.expected_recovery
+                user_id : this.state.user_id.value,
+                from : this.state.from.value,
+                expected_recovery : this.state.expected_recovery.value
                 ,assignForce : this.state.assignForce
             },
             withCredentials : true
@@ -79,19 +160,25 @@ class AssignAsset extends Component{
 
     setEmployee(e){
         this.setState({
-            user_id : e.target.value
+            user_id : Object.assign(this.state.user_id, {
+                value: e.target.value
+            })
         })
     }
 
     setFrom(e){
         this.setState({
-            from : e.target.value
+            from : Object.assign(this.state.from, {
+                value: e.target.value
+            })
         })
     }
 
     setExpectedRecovery(e){
         this.setState({
-            expected_recovery : e.target.value
+            expected_recovery : Object.assign(this.state.expected_recovery, {
+                value: e.target.value
+            })
         })
     }
 
@@ -116,9 +203,9 @@ class AssignAsset extends Component{
                 <Row>
                     <br />
                     <br />
-                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee}>{this.setEmployeeDropdown()}</Input>
-                    <Input s={12} type='date' label="From *" value = {this.state.from} onChange = {this.setFrom} />
-                    <Input s={12} type='date' label="Expected Recovery*" value = {this.state.expected_recovery} onChange = {this.setExpectedRecovery} />
+                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
+                    <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
+                    <Input s={12} type='date' label="Expected Recovery*" value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"} <Icon small right>send</Icon></Button>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}

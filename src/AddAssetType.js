@@ -8,8 +8,16 @@ class AddAssetType extends Component{
     constructor(props){
         super(props)
         this.state = {
-            assetType : ''
-            ,maxRequest : 1
+            assetType : {
+                value: '',
+                error: '',
+                showError: false
+            }
+            ,maxRequest : {
+                value: 1,
+                error: '',
+                showError: false
+            }
             ,createAssetRequest : false
         }
         this.checkForValidation = this.checkForValidation.bind(this)
@@ -19,10 +27,55 @@ class AddAssetType extends Component{
     }
 
     checkForValidation(){
-        if(!this.state.assetType){
-            window.Materialize.toast('All the * marked fields are required', 4000)
+        // if(!this.state.assetType){
+        //     window.Materialize.toast('All the * marked fields are required', 4000)
+        // }
+        // else{
+        //     this.setState({
+        //         createAssetRequest : true
+        //     })
+        // }
+        if(!this.state.assetType.value){
+            this.setState({
+                assetType: Object.assign(this.state.assetType, {
+                    error: 'The Asset Type is required',
+                    showError: true
+                })
+            })
         }
-        else{
+        if(this.state.assetType.value){
+            this.setState({
+                assetType: Object.assign(this.state.assetType, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(Number(this.state.maxRequest.value) < 0) {
+            this.setState({
+                maxRequest: Object.assign(this.state.maxRequest, {
+                    error: 'The Maximum request cannot be negative',
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.maxRequest.value) === 0) {
+            this.setState({
+                maxRequest: Object.assign(this.state.maxRequest, {
+                    error: 'The Maximum request cannot be zero',
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.maxRequest.value) > 0) {
+            this.setState({
+                maxRequest: Object.assign(this.state.maxRequest, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.assetType.value && Number(this.state.maxRequest.value) > 0) {
             this.setState({
                 createAssetRequest : true
             })
@@ -35,16 +88,24 @@ class AddAssetType extends Component{
             ,url : 'http://localhost:3001/assetType/create'
             ,withCredentials : true
             ,data : {
-                assetType : this.state.assetType
-                ,maxRequest : this.state.maxRequest
+                assetType : this.state.assetType.value
+                ,maxRequest : this.state.maxRequest.value
             }
         })
         .then(res => {
             if(res.data.message){
                 this.setState({
                     createAssetRequest : false
-                    ,assetType : ''
-                    ,maxRequest : 1
+                    ,assetType : {
+                        value: '',
+                        error: '',
+                        showError: false
+                    }
+                    ,maxRequest : {
+                        value: 1,
+                        error: '',
+                        showError: false
+                    }
                 })
                 $('.modal-overlay').click()
                 window.Materialize.toast(res.data.message, 4000)
@@ -56,8 +117,12 @@ class AddAssetType extends Component{
                 }
             }
             else{
-                window.Materialize.toast('This Asset Type already exists', 4000)
+                // window.Materialize.toast('This Asset Type already exists', 4000)
                 this.setState({
+                    assetType:Object.assign(this.state.assetType, {
+                        error: 'The given Asset type exists.',
+                        showError: true
+                    }),
                     createAssetRequest :false
                 })
             }
@@ -69,13 +134,17 @@ class AddAssetType extends Component{
 
     setAssetType(e){
         this.setState({
-            assetType : e.target.value
+            assetType : Object.assign(this.state.assetType, {
+                value : e.target.value
+            })
         })
     }
 
     setMaxRequest(e){
         this.setState({
-            maxRequest : e.target.value
+            maxRequest : Object.assign(this.state.maxRequest, {
+                value : e.target.value
+            })
         })
     }
     
@@ -83,8 +152,8 @@ class AddAssetType extends Component{
         return(
             <div>
                 <Row>
-                    <Input s={6} value={this.state.assetType} label="Asset Type*" onChange={this.setAssetType} />
-                    <Input s={6} value={this.state.maxRequest} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} />
+                    <Input s={6} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
+                    <Input s={6} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                 <Button onClick={this.checkForValidation}>Submit</Button>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}

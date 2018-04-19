@@ -73,10 +73,7 @@ class UpdateConsumables extends Component {
                 })
             })
         }
-        if(!this.state.name.value || !this.state.quantity.value){
-            console.log('error')
-        }
-        if(this.state.name.value && (Number(this.state.quantity.value) > 0)){
+        if(this.state.name.value && Number(this.state.quantity.value) > 0){
             this.setState({
                 updateConsumableRequest : true
             })
@@ -119,12 +116,12 @@ class UpdateConsumables extends Component {
         .then(obj => {
             this.setState({
                 name:{
-                    value:'',
+                    value:this.props.consumable.name,
                     error:'',
                     showError:false
                 },
                 quantity:{
-                    value:'',
+                    value:this.props.consumable.quantity,
                     error:'',
                     showError:false
                 },

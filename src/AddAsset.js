@@ -32,7 +32,7 @@ class AddAsset extends Component{
                 showError: false
             },
             vendor : {
-                value: 'Select',
+                value: '',
                 error: '',
                 showError: false
             },
@@ -178,7 +178,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.gst < 0){
+        if(this.state.gst.value < 0){
             this.setState({
                 gst:Object.assign(this.state.gst, {
                     error: 'The gst should not be negative',
@@ -186,7 +186,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.gst > 0){
+        if(this.state.gst.value >= 0){
             this.setState({
                 gst:Object.assign(this.state.gst, {
                     error: '',
@@ -226,7 +226,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.vendor.value === 'Select'){
+        if(!this.state.vendor.value){
             this.setState({
                 vendor:Object.assign(this.state.vendor, {
                     error:'Select the Vendor',
@@ -234,11 +234,8 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || this.state.vendor === 'Select' || !this.state.amount || !this.state.condition || !this.state.location || this.state.category ==='Select'){
+        if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.gst.value >= 0){
             // window.Materialize.toast('All the * marked fields are required', 4000)
-            console.log('error')
-        }
-        else{
             this.setState({
                 addAssetRequest : true
             })
@@ -428,7 +425,7 @@ class AddAsset extends Component{
                         showError: false
                     },
                     vendor : {
-                        value: 'Select',
+                        value: '',
                         error: '',
                         showError: false
                     },
@@ -557,6 +554,7 @@ class AddAsset extends Component{
                                 this.state.vendorNames
                             }
                             onChange = {this.setVendor}
+                            value = {this.state.vendor.value}
                         />
                     </Row>
                     <Input s={6} label="Asset Type*" type='select' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>

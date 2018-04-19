@@ -432,6 +432,7 @@ class AddConsumables extends Component{
                                 this.state.vendorNames
                             }
                             onChange = {this.setVendorName}
+                            value={this.state.vendor_name.value}
                         />
                     </Row>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
