@@ -4,7 +4,7 @@ import { Icon, Input, Button } from 'react-materialize';
 import './Login.css';
 import './Employee.css'
 import {
- 
+  Link,
   Redirect
 } from 'react-router-dom';
 import Row from 'react-materialize/lib/Row';
@@ -95,6 +95,7 @@ class LoginForm extends Component {
             <Button className ='submitbtn'onClick={this.verifyCredentials}>LOGIN</Button>
             </div>
           </Row>
+            <Link to = '/forgotpassword'>Forgot Password</Link>
       </div>
       </div>
     );

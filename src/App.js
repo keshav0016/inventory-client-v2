@@ -11,6 +11,7 @@ import PasswordChange from './PwdChange'
 import EmployeeDB from './EmployeeDB';
 import StartPage from './StartPage';
 import ForgotPasswordForm from './ForgotPassword'
+import ResetPassword from './ResetPassword'
 import './materialize-overrides.css';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
             <Route path ='/employee' component={EmployeeDB}/>
             <Route  exact path ='/' component={StartPage}/>
             <Route  exact path ='/forgotpassword' component={ForgotPasswordForm}/>
+            <Route  exact path ='/user/reset/:user' component={ResetPassword}/>            
           </div>
       </Router>
     );

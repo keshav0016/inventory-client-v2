@@ -7,21 +7,22 @@ import {
 import './Employee.css'
 import $ from 'jquery'
 
-class PasswordChange extends Component {
+class ResetPassword extends Component {
     constructor(props){
         super(props)
         this.state = {
             Confirm_Password : '',
             New_Password : '',
-            user_id: this.props.location.user,
+            user_id: this.props.match.params.user,
+            emailPassword : '',
             change: true
-            ,email : ''
+            ,employee : false
         }
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this)
         this.handleNewPassword = this.handleNewPassword.bind(this)
+        this.setEmailPassword = this.setEmailPassword.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleUserid = this.handleUserid.bind(this)
-        this.setEmail = this.setEmail.bind(this)
     }
     render(){
         var change =(
@@ -32,8 +33,7 @@ class PasswordChange extends Component {
                         <h4>Reset Password</h4>
                     </div>
                     <div className='fields1'>
-                    <Input s={12}  label="User Id" onChange={this.handleUserid}><Icon>account_circle</Icon></Input>
-                    <Input s={12}  label="Email*" type = "email" onChange={this.setEmail} icon='email'/>
+                    <Input s={12}  label="email Password*" type='password' onChange={this.setEmailPassword} icon='lock' />
                     <Input s={12}  type='password'onChange={this.handleNewPassword} label="New Password" ><Icon>lock</Icon></Input>
                     <Input s={12} type='password' onChange={this.handleConfirmPassword} label="Confirm Password"><Icon>lock</Icon></Input>
                     <Button className='submitbtn'onClick={this.handleSubmit}>Submit</Button>
@@ -51,9 +51,9 @@ class PasswordChange extends Component {
         )
     }
 
-    setEmail(e){
+    setEmailPassword(e){
         this.setState({
-            email : e.target.value
+            emailPassword : e.target.value
         })
     }
 
@@ -79,11 +79,11 @@ class PasswordChange extends Component {
         if(this.state.Confirm_Password === this.state.New_Password){
             axios({
                 method: 'post',
-                url: 'http://localhost:3001/employee/ticket/changepassword',
+                url: 'http://localhost:3001/employees/reset',
                 data: {
                     user_id: this.state.user_id,
                     password: this.state.New_Password
-                    ,email : this.state.email
+                    ,emailPassword : this.state.emailPassword
                 },
                 withCredentials : true
             })
@@ -102,4 +102,4 @@ class PasswordChange extends Component {
     }
  
 }
-export default PasswordChange
+export default ResetPassword
