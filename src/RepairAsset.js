@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Icon, Modal} from 'react-materialize'
+import {Row, Input, Button, Icon, Modal, Autocomplete} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import moment from 'moment'
@@ -17,6 +17,7 @@ class RepairAsset extends Component{
             vendorList : [],
             addVendor : false,
             assetDetails : {},
+            vendorNames:{},
             vendorListRequest : true,
             isDisabled : false
         }
@@ -27,6 +28,7 @@ class RepairAsset extends Component{
         this.setVendor = this.setVendor.bind(this)
         this.handleVendorList = this.handleVendorList.bind(this)
         this.setVendorListRequest = this.setVendorListRequest.bind(this)
+        this.getVendorName = this.getVendorName.bind(this)
     }
 
     checkForValidation(){
@@ -43,6 +45,12 @@ class RepairAsset extends Component{
                 })
             }
         }
+    }
+
+    getVendorName(){
+        this.state.vendorList.map((obj)=>{
+            this.state.vendorNames[obj.name]=null
+        })
     }
 
     setVendorListRequest(){
@@ -91,9 +99,9 @@ class RepairAsset extends Component{
     //     return employeesArr
     // }
 
-    setVendor(e){
+    setVendor(e,value){
         this.setState({
-            vendor : e.target.value
+            vendor : value
         })
     }
 
@@ -120,6 +128,7 @@ class RepairAsset extends Component{
                 vendorList : res.data.vendors.sort((a, b) => a.asset_id - b.asset_id),
                 vendorListRequest : false
             })
+            this.getVendorName()
         })
         .catch(error => {
             console.error(error)
@@ -157,7 +166,16 @@ class RepairAsset extends Component{
                     <h6>Total : {this.state.assetDetails.total}</h6>
                     <br /><br />
                     <Row>
-                        <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input>
+                        {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
+                        <Row>
+                            <Autocomplete s={12}
+                                title='Service Provider'
+                                data={
+                                    this.state.vendorNames
+                                }
+                                onChange = {this.setVendor}
+                            />
+                        </Row>
                         <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from} onChange = {this.setFrom} disabled = {this.state.isDisabled}/>
                         <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled}/>
                     </Row>

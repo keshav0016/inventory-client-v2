@@ -9,7 +9,11 @@ class AssignConsumables extends Component {
         super(props)
         this.state = {
             consumable_id : this.props.consumable.consumable_id,
-            quantity : '',
+            quantity : {
+                value : '',
+                error: '',
+                showError: false
+            },
             employeesList: [],
             fetchEmployeeList: true,
             user_id:'',
@@ -47,16 +51,55 @@ class AssignConsumables extends Component {
        }
 
     checkForValidation(){
-        if(this.state.quantity <= 0){
-            window.Materialize.toast('The quantity cannot be negative', 4000)
+        if(Number(this.state.quantity.value) === 0){
+            // window.Materialize.toast('The quantity cannot be negative', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: 'The Assigning quantity should not be zero',
+                    showError: true
+                })
+            })
         }
-        else if(this.props.consumable.quantity < this.state.quantity){
-            window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
+        if(Number(this.state.quantity.value) < 0){
+            // window.Materialize.toast('The quantity cannot be negative', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: 'The Assigning quantity should not be negative',
+                    showError: true
+                })
+            })
         }
-        else if(!this.state.user_id){
+        if(Number(this.state.quantity.value) > 0){
+            // window.Materialize.toast('The quantity cannot be negative', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(Number(this.props.consumable.quantity) < Number(this.state.quantity.value)){
+            // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: 'Cannot Assign quantity greater than Available quantity',
+                    showError:true
+                })
+            })
+        }
+        if(Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
+            // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: '',
+                    showError:false
+                })
+            })
+        }
+        if(!this.state.user_id){
             window.Materialize.toast('The Employee Id field cannot be empty', 4000)
         }
-        else{
+        if(this.state.user_id && Number(this.state.quantity.value) > 0 && Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
             this.setState({
                 assignConsumableRequest : true
             })
@@ -66,7 +109,9 @@ class AssignConsumables extends Component {
 
     setConsumableQuantity(e) {
         this.setState({
-            quantity : e.target.value
+            quantity : Object.assign(this.state.quantity, {
+                value: e.target.value
+            })
         })
     }
 
@@ -78,14 +123,18 @@ class AssignConsumables extends Component {
                 consumable_id : this.state.consumable_id,
                 user_id: this.state.user_id,
                 assigned_date:Date.now(),
-                quantity : this.state.quantity
+                quantity : this.state.quantity.value
             },
             withCredentials:true
         })
         .then(obj => {
             this.setState({
                 user_id:'',
-                quantity:'',
+                quantity:{
+                    value:'',
+                    error:'',
+                    showError:false
+                },
                 assignConsumableRequest : false
             })
             this.props.setHandleListRequest()
@@ -107,7 +156,7 @@ class AssignConsumables extends Component {
                             )
                         })}
                     </Input>
-                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity} onChange={this.setConsumableQuantity} />
+                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}

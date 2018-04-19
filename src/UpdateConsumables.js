@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
+import $ from 'jquery'
 
 
 
@@ -9,8 +10,16 @@ class UpdateConsumables extends Component {
         super(props)
         this.state = {
             consumable_id : this.props.consumable.consumable_id,
-            name : this.props.consumable.name,
-            quantity : this.props.consumable.quantity,
+            name : {
+                value:this.props.consumable.name,
+                error:'',
+                showError:false
+            },
+            quantity : {
+                value:this.props.consumable.quantity,
+                error:'',
+                showError:false
+            },
             updateConsumableRequest : false
         }
 
@@ -21,26 +30,78 @@ class UpdateConsumables extends Component {
     }
 
     checkForValidation(){
-        if(this.state.quantity <= 0){
-            window.Materialize.toast('The quantity cannot be negative', 4000)
+        if(!this.state.name.value){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error:'The Consumable name is required',
+                    showError:true
+                })
+            })
         }
-        else{
+        if(this.state.name.value){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error:'',
+                    showError:false
+                })
+            })
+        }
+        if(Number(this.state.quantity.value) === 0){
+            // window.Materialize.toast('The quantity cannot be negative', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error:'The Consumable quantity should not be zero',
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.quantity.value) < 0){
+            // window.Materialize.toast('The quantity cannot be negative', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error:'The Consumable quantity should not be negative',
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.quantity.value) > 0){
+            // window.Materialize.toast('The quantity cannot be negative', 4000)
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error:'',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.name.value || !this.state.quantity.value){
+            console.log('error')
+        }
+        if(this.state.name.value && (Number(this.state.quantity.value) > 0)){
             this.setState({
                 updateConsumableRequest : true
             })
         }
     }
 
+    componentDidMount(){
+        $(document).ready(function(){
+            $('label').addClass('active');
+        })
+    }    
 
     setConsumableName(e) {
         this.setState({
-            name : e.target.value
+            name : Object.assign(this.state.name, {
+                value: e.target.value
+            })
         })
     }
 
     setConsumableQuantity(e) {
         this.setState({
-            quantity : e.target.value
+            quantity : Object.assign(this.state.quantity, {
+                value: e.target.value
+            })
         })
     }
 
@@ -50,13 +111,23 @@ class UpdateConsumables extends Component {
             url: 'http://localhost:3001/consumables/update',
             data: {
                 consumable_id : this.state.consumable_id,
-                name : this.state.name,
-                quantity : this.state.quantity
+                name : this.state.name.value,
+                quantity : this.state.quantity.value
             },
             withCredentials:true
         })
         .then(obj => {
             this.setState({
+                name:{
+                    value:'',
+                    error:'',
+                    showError:false
+                },
+                quantity:{
+                    value:'',
+                    error:'',
+                    showError:false
+                },
                 updateConsumableRequest : false
             })
             window.Materialize.toast('Consumable Updated Successfully', 4000)
@@ -71,8 +142,8 @@ class UpdateConsumables extends Component {
         return (
             <div>
                 <Row>
-                    <Input s={6} label="Consumable Name" value={this.state.name} onChange={this.setConsumableName} />
-                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity} onChange={this.setConsumableQuantity} />
+                    <Input s={6} label="Consumable Name" value={this.state.name.value} onChange={this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Update</Button>
                 {this.state.updateConsumableRequest ? this.UpdateConsumable () : null}
