@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {CardPanel, Col, Row} from 'react-materialize'
+import {CardPanel, Col, Row, Button} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 import './Employee.css'
+import {Parser} from 'json2csv';
+import fileSaver from 'file-saver'
 
 class Assets extends Component{
     constructor(props){
@@ -18,6 +20,7 @@ class Assets extends Component{
             handleListRequest : true,
         }
         this.handleList = this.handleList.bind(this)
+        this.parsingDataToCsv = this.parsingDataToCsv.bind(this)
     }
 
     handleList(){
@@ -42,6 +45,33 @@ class Assets extends Component{
         })
     }
 
+    parsingDataToCsv(){
+        const fields = ['id', 'type', 'name', 'category', 'amount', 'gst', 'total', 'purchaseVendor', 'assignedEmployee', 'assignedFrom', 'assignedTo', 'serviceVendor', 'serviceFrom', 'serviceTo']
+        const assetsExport = []
+        this.state.history.forEach(assetDetail => {
+            return assetsExport.push({
+                "id" : this.state.assetDetails.asset_id,
+                "type" : this.state.assetDetails.assetType,
+                "name" : this.state.assetDetails.asset_name,
+                "category" : this.state.assetDetails.category,
+                "amount" : this.state.assetDetails.amount,
+                "gst" : this.state.assetDetails.gst,
+                "total" : this.state.assetDetails.total,
+                "purchaseVendor" : this.state.assetDetails.vendor,
+                "assignedEmployee" : assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : '-',
+                "assignedFrom" : assetDetail.user ? assetDetail.from : '-',
+                "assignedTo" : assetDetail.user ? assetDetail.to : '-',
+                "serviceVendor" : assetDetail.vendor ? assetDetail.vendor : '-',
+                "serviceFrom" : assetDetail.vendor ? assetDetail.from : '-',
+                "serviceTo" : assetDetail.vendor ? assetDetail.to : '-',
+            })
+        })
+        
+        const json2csvParser = new Parser({fields, quote: '\''})
+        const csv = json2csvParser.parse(assetsExport)
+        const blob = new Blob([csv], {type : 'text/csv'})
+        fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
+    }
 
     render(){
         return(
@@ -52,6 +82,7 @@ class Assets extends Component{
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
+                    <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
                     <Row>
                         <Col s={12} m={12}>
                         <CardPanel className="z-depth-2" >
