@@ -4,6 +4,8 @@ import {Col, CardPanel, Button, Modal} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import UpdateConsumablePurchase from './UpdateConsumablePurchase'
+import {Parser} from 'json2csv';
+import fileSaver from 'file-saver'
 
 class HistoryConsumables extends Component{
    constructor(props){
@@ -13,7 +15,8 @@ class HistoryConsumables extends Component{
            fetchHistory : true,
        }
        this.getHistory = this.getHistory.bind(this)
-   }
+       this.parsingDataToCsv = this.parsingDataToCsv.bind(this)
+    }
 
    getHistory(){
        axios({
@@ -36,9 +39,36 @@ class HistoryConsumables extends Component{
    }
 
 
+   parsingDataToCsv(){
+    const fields = ['id', 'name', 'purchaseQuantity', 'vendor', 'purchaseDate', 'individualPrice', 'collectivePrice', 'gst', 'total', 'assignedEmployee', 'assignedDate', 'assignedQuantity']
+    const consumablesExport = []
+    this.state.history.forEach(consumableDetail => {
+        return consumablesExport.push({
+            "id" : this.props.match.params.consumable,
+            "name" : consumableDetail.consumable.name,
+            "purchaseQuantity" : consumableDetail.vendor_name ? consumableDetail.quantity : '-',
+            "vendor" : consumableDetail.vendor_name ? consumableDetail.vendor_name : '-',
+            "purchaseDate" : consumableDetail.vendor_name ? consumableDetail.purchase_date : '-',
+            "individualPrice" : consumableDetail.vendor_name ? consumableDetail.item_price : '-',
+            "collectivePrice" : consumableDetail.vendor_name ? consumableDetail.whole_price : '-',
+            "gst" : consumableDetail.vendor_name ? consumableDetail.gst : '-',
+            "total" : consumableDetail.vendor_name ? consumableDetail.total : '-',
+            "assignedEmployee" : consumableDetail.vendor_name ? '-' : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
+            "assignedDate" : consumableDetail.vendor_name ? '-' : consumableDetail.assigned_date,
+            "assignedQuantity" : consumableDetail.vendor_name ? '-' : consumableDetail.quantity,
+        })
+    })
+    
+    const json2csvParser = new Parser({fields, quote: '\''})
+    const csv = json2csvParser.parse(consumablesExport)
+    const blob = new Blob([csv], {type : 'text/csv'})
+    fileSaver.saveAs(blob, `Consumable-${this.props.match.params.asset}.csv`)
+}
+
    render(){
        return(
            <div style={{marginLeft : '1%',marginRight : '1%'}}>
+            <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className='heading'>Consumable Details</h3>
             {this.state.history.map((consumable, index) => {
