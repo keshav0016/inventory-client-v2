@@ -7,38 +7,134 @@ class VendorUpdate extends Component{
     constructor(props){
         super(props)
         this.state = {
-            id : this.props.user.id,
-            name: this.props.user.name,
-            contact: this.props.user.contact,
-            address: this.props.user.address,
+            id : {
+                value:this.props.user.id,
+                error:'',
+                showError:false
+            },
+            name: {
+                value:this.props.user.name,
+                error:'',
+                showError:false
+            },
+            contact: {
+                value:this.props.user.contact,
+                error:'',
+                showError:false
+            },
+            address: {
+                value:this.props.user.address,
+                error:'',
+                showError:false
+            },
+            update: false
         }
         this.handleId = this.handleId.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
         this.handleName = this.handleName.bind(this)
         this.handleContact = this.handleContact.bind(this)
         this.handleAddress = this.handleAddress.bind(this)    
+        this.checkForValidation = this.checkForValidation.bind(this)
     }
     handleId(e){
-        this.setHandleListRequest({
-            id : e.target.value
+        this.setState({
+            id : Object.assign(this.state.id, {
+                value: e.target.value
+            })
         })
     }
     handleName(e){
         this.setState({
-            name: e.target.value
+            name: Object.assign(this.state.name, {
+                value: e.target.value
+            })
         })
     }
     handleContact(e){
         this.setState({
-        contact: e.target.value
-            
+        contact: Object.assign(this.state.contact, {
+            value: e.target.value
+            })  
         })
     }
     handleAddress(e){
         this.setState({
-        address: e.target.value
-            
+        address: Object.assign(this.state.address, {
+            value: e.target.value
+            }) 
         })
+    }
+
+    checkForValidation(){
+        if(!this.state.id.value){
+            this.setState({
+                id:Object.assign(this.state.id, {
+                    error: 'The vendor id is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.id.value){
+            this.setState({
+                id:Object.assign(this.state.id, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.name.value){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.name.value){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.address.value){
+            this.setState({
+                address:Object.assign(this.state.address, {
+                    error: 'The vendor address is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.address.value){
+            this.setState({
+                address:Object.assign(this.state.address, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.contact.value.length !== 10){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: 'Enter a Phone number',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.contact.value.length === 10){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.id.value && this.state.name.value && this.state.address.value && this.state.contact.value.length === 10){
+            this.setState({
+                update: true
+            })
+        }
     }
     
     componentDidMount(){
@@ -49,27 +145,34 @@ class VendorUpdate extends Component{
            method: 'post',
            url: 'http://localhost:3001/vendor/update',
            data:{
-               id: this.state.id,
-               name: this.state.name,
-               contact:this.state.contact,
-                address:this.state.address,
+               id: this.state.id.value,
+               name: this.state.name.value,
+               contact:this.state.contact.value,
+                address:this.state.address.value,
            },
            withCredentials: true
        })
        .then((res) => {
         if(res.data.message === 'vendor has been updated'){
             window.Materialize.toast('Vendor has been Edited', 4000)
-           this.props.setHandleListRequest()
+            this.setState({
+                update : false
+            })
+            this.props.setHandleListRequest()
             
         }else{
             window.Materialize.toast(res.data.error, 4000)
-
+            this.setState({
+                update : false
+            })
         }
           
        })
        .catch(error => {
          window.Materialize.toast('can not edit vendor', 4000)
-
+         this.setState({
+            update : false
+        })
        })
    }
     render() {
@@ -77,12 +180,13 @@ class VendorUpdate extends Component{
         return (           
             <div>           
                 <Row>
-                    <Input  defaultValue={this.state.id} onChange={this.handleId}s={6} label="Id" />      
-                    <Input  defaultValue={this.state.name} onChange={this.handleName}s={6} label="Name" />
-                    <Input  defaultValue={this.state.contact} onChange={this.handleContact}s={6} label="Contact" />    
-                    <Input  defaultValue={this.state.address}onChange={this.handleAddress} s={6}label="Address" />
+                    <Input  value={this.state.id.value} onChange={this.handleId}s={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />      
+                    <Input  value={this.state.name.value} onChange={this.handleName}s={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input  value={this.state.contact.value} onChange={this.handleContact}s={6} label="Contact" error={this.state.contact.showError ? this.state.contact.error : null} />    
+                    <Input  value={this.state.address.value} onChange={this.handleAddress} s={6}label="Address" error={this.state.address.showError ? this.state.address.error : null} />
                 </Row>
-                 <Button onClick={this.handleUpdate}>Edit</Button>
+                 <Button onClick={this.checkForValidation}>Edit</Button>
+                 {this.state.update ? this.handleUpdate() : null}
             </div>
         )
     }

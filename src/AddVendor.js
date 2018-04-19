@@ -8,10 +8,22 @@ class AddVendor extends Component{
     constructor(props){
         super(props)
         this.state = {
-            name : '',
-            address : '',
+            name : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            address : {
+                value: '',
+                error: '',
+                showError: false
+            },
             addVendorRequest : false,
-            contact : ''
+            contact : {
+                value: '',
+                error: '',
+                showError: false
+            }
         }
         this.checkForValidation = this.checkForValidation.bind(this)
         this.addVendorIntoDb = this.addVendorIntoDb.bind(this)
@@ -21,29 +33,80 @@ class AddVendor extends Component{
     }
 
     checkForValidation(){
-        if(!this.state.name || !this.state.address){
-            window.Materialize.toast('All the * marked fields are required', 4000)
-        }
-        else{
+        if(!this.state.name.value){
             this.setState({
-                addVendorRequest : true
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.name.value){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.address.value){
+            this.setState({
+                address:Object.assign(this.state.address, {
+                    error: 'The vendor address is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.address.value){
+            this.setState({
+                address:Object.assign(this.state.address, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.contact.value.length !== 10){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: 'Enter a Phone number',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.contact.value && this.state.contact.value.length === 10){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.name.value && this.state.address.value && this.state.contact.value.length === 10){
+            this.setState({
+                addVendorRequest: true
             })
         }
     }
 
     setName(e){
         this.setState({
-            name : e.target.value
+            name : Object.assign(this.state.name, {
+                value: e.target.value
+            })
         })
     }
     setContact(e){
         this.setState({
-            contact : e.target.value
+            contact : Object.assign(this.state.contact, {
+                value: e.target.value
+            })
         })
     }
     setAddress(e){
         this.setState({
-            address : e.target.value
+            address : Object.assign(this.state.address, {
+                value: e.target.value
+            })
         })
     }
 
@@ -53,9 +116,9 @@ class AddVendor extends Component{
             url : 'http://localhost:3001/vendor/create',
             withCredentials : true,
             data : {
-                name: this.state.name,
-                address : this.state.address,
-                contact : this.state.contact
+                name: this.state.name.value,
+                address : this.state.address.value,
+                contact : this.state.contact.value
             }
         })
         .then(res => {
@@ -67,9 +130,21 @@ class AddVendor extends Component{
             }
             else{
                 this.setState({
-                    name: '',
-                    address : '',
-                    contact : '',
+                    name: {
+                        value: '',
+                        error: '',
+                        showError: false
+                    },
+                    address : {
+                        value: '',
+                        error: '',
+                        showError: false
+                    },
+                    contact : {
+                        value: '',
+                        error: '',
+                        showError: false
+                    },
                     addVendorRequest : false
                 })
                 window.Materialize.toast('Vendor Added', 4000)
@@ -94,10 +169,10 @@ class AddVendor extends Component{
         return(
             <div>
                 <Row>
-                    <Input s={6} label="Name *" value = {this.state.name} onChange = {this.setName} />
-                    <Input s={6} label="Contact "value = {this.state.contact} onChange ={this.setContact} ><Icon>phone</Icon></Input>
+                    <Input s={6} label="Name *" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input s={6} label="Contact "value = {this.state.contact.value} onChange ={this.setContact} error={this.state.contact.showError ? this.state.contact.error : null} ><Icon>phone</Icon></Input>
 
-                    <Input s={12} label="Address *" value = {this.state.address} onChange = {this.setAddress} />
+                    <Input s={12} label="Address *" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 
                 </Row>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>

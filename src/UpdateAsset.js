@@ -9,18 +9,50 @@ class UpdateAsset extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            serial_number: this.props.asset.serial_number,
-            asset_name: this.props.asset.asset_name,
+            serial_number: {
+                value: this.props.asset.serial_number,
+                error: '',
+                showError: false
+            },
+            asset_name: {
+                value: this.props.asset.asset_name,
+                error: '',
+                showError: false
+            },
             purchase_date: this.props.asset.purchase_date,
             description: this.props.asset.description,
-            invoice_number: this.props.asset.invoice_number,
-            vendor: this.props.asset.vendor,
-            amount: this.props.asset.amount,
-            gst: this.props.asset.gst,
+            invoice_number:{
+                value: this.props.asset.invoice_number,
+                error: '',
+                showError: false
+            },
+            vendor:{
+                value: this.props.asset.vendor,
+                error: '',
+                showError: false
+            },
+            amount:{
+                value: this.props.asset.amount,
+                error: '',
+                showError: false
+            },
+            gst:{
+                value: this.props.asset.gst,
+                error: '',
+                showError: false
+            },
             total: this.props.asset.total,
             category: this.props.asset.category,
-            condition : this.props.asset.condition,
-            location : this.props.asset.location,
+            condition :{
+                value: this.props.asset.condition,
+                error: '',
+                showError: false
+            },
+            location :{
+                value: this.props.asset.location,
+                error: '',
+                showError: false
+            },
             updateAssetRequest: false
         }
 
@@ -37,28 +69,180 @@ class UpdateAsset extends Component {
         this.updateAssetIntoDb = this.updateAssetIntoDb.bind(this)
         this.setCondition = this.setCondition.bind(this)
         this.setLocation = this.setLocation.bind(this)
+        this.calculateTotal = this.calculateTotal.bind(this)
+    }
+
+    calculateTotal(){
+        this.setState({
+            total : this.state.amount.value + ((this.state.amount.value * this.state.gst.value)/100)
+        })
     }
 
     checkForValidation() {
-        if (!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || !this.state.vendor || !this.state.amount) {
-            window.Materialize.toast('All the * marked fields are required', 4000)
-        }
-        else {
+        // if (!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || !this.state.vendor || !this.state.amount) {
+        //     window.Materialize.toast('All the * marked fields are required', 4000)
+        // }
+        // else {
+        //     this.setState({
+        //         updateAssetRequest: true
+        //     })
+        // }
+        if(!this.state.serial_number.value){
             this.setState({
-                updateAssetRequest: true
+                serial_number:Object.assign(this.state.serial_number, {
+                    error: 'The serial number is required',
+                    showError : true
+                })
             })
+        }
+        if(this.state.serial_number.value){
+            this.setState({
+                serial_number:Object.assign(this.state.serial_number, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
+        if(!this.state.asset_name.value){
+            this.setState({
+                asset_name:Object.assign(this.state.asset_name, {
+                    error: 'The Asset name is required',
+                    showError : true
+                })
+            })
+        }
+        if(this.state.asset_name.value){
+            this.setState({
+                asset_name:Object.assign(this.state.asset_name, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
+        if(!this.state.invoice_number.value){
+            this.setState({
+                invoice_number:Object.assign(this.state.invoice_number, {
+                    error: 'The Invoice number is required',
+                    showError : true
+                })
+            })
+        }
+        if(this.state.invoice_number.value){
+            this.setState({
+                invoice_number:Object.assign(this.state.invoice_number, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
+        if(this.state.amount.value === 0){
+            this.setState({
+                amount:Object.assign(this.state.amount, {
+                    error: 'The Amount should not be zero.',
+                    showError : true
+                })
+            })
+        }
+        if(this.state.amount.value < 0){
+            this.setState({
+                amount:Object.assign(this.state.amount, {
+                    error: 'The Amount should not be neagtive.',
+                    showError : true
+                })
+            })
+        }
+        if(this.state.amount.value > 0){
+            this.setState({
+                amount:Object.assign(this.state.amount, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
+        if(this.state.gst < 0){
+            this.setState({
+                gst:Object.assign(this.state.gst, {
+                    error: 'The gst should not be negative',
+                    showError : true
+                })
+            })
+        }
+        if(this.state.gst >= 0){
+            this.setState({
+                gst:Object.assign(this.state.gst, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
+        if(!this.state.condition.value){
+            this.setState({
+                condition:Object.assign(this.state.condition, {
+                    error: 'The condition of the asset is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.condition.value){
+            this.setState({
+                condition:Object.assign(this.state.condition, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.location.value){
+            this.setState({
+                location:Object.assign(this.state.location, {
+                    error:'The location is required',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.location.value){
+            this.setState({
+                location:Object.assign(this.state.location, {
+                    error:'',
+                    showError: false
+                })
+            })
+        }
+        if(!this.state.vendor.value){
+            this.setState({
+                vendor:Object.assign(this.state.vendor, {
+                    error:'Select the Vendor',
+                    showError:true
+                })
+            })
+        }
+        if(this.state.vendor.value){
+            this.setState({
+                vendor:Object.assign(this.state.vendor, {
+                    error:'',
+                    showError:false
+                })
+            })
+        }
+        if(this.state.serial_number.value && this.state.asset_name.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && Number(this.state.gst.value) >= 0){
+            this.setState({
+                        updateAssetRequest: true
+                    }) 
         }
     }
     
     setSerialNumber(e) {
         this.setState({
-            serial_number: e.target.value
+            serial_number: Object.assign(this.state.serial_number, {
+                value: e.target.value
+            })
         })
     }
     
     setAssetName(e) {
         this.setState({
-            asset_name: e.target.value
+            asset_name: Object.assign(this.state.asset_name, {
+                value: e.target.value
+            })
         })
     }
     
@@ -76,26 +260,36 @@ class UpdateAsset extends Component {
     
     setInvoiceNumber(e) {
         this.setState({
-            invoice_number: e.target.value
+            invoice_number: Object.assign(this.state.invoice_number, {
+                value: e.target.value
+            })
         })
     }
     
     setVendor(e) {
         this.setState({
-            vendor: e.target.value
+            vendor: Object.assign(this.state.vendor, {
+                value: e.target.value
+            })
         })
     }
     
     setAmount(e) {
         this.setState({
-            amount: Number(e.target.value),
+            amount: Object.assign(this.state.amount, {
+                value: Number(e.target.value)
+            }),
         })
+        this.calculateTotal()
     }
     
     setGst(e) {
         this.setState({
-            gst: Number(e.target.value),
+            gst: Object.assign(this.state.gst, {
+                value: Number(e.target.value)
+            }),
         })
+        this.calculateTotal()
     }
     
     setCategory(e) {
@@ -106,13 +300,17 @@ class UpdateAsset extends Component {
     
     setCondition(e){
         this.setState({
-            condition : e.target.value
+            condition : Object.assign(this.state.condition, {
+                value: e.target.value
+            })
         })
     }
     
     setLocation(e){
         this.setState({
-            location : e.target.value
+            location : Object.assign(this.state.location, {
+                value: e.target.value
+            })
         })
     }
     
@@ -123,14 +321,14 @@ class UpdateAsset extends Component {
             withCredentials: true,
             data: {
                 asset_id : this.props.asset.asset_id,
-                serial_number: this.state.serial_number,
-                asset_name: this.state.asset_name,
+                serial_number: this.state.serial_number.value,
+                asset_name: this.state.asset_name.value,
                 purchase_date: this.state.purchase_date,
                 description: this.state.description,
-                invoice_number: this.state.invoice_number,
-                vendor: this.state.vendor,
-                amount: this.state.amount,
-                gst: this.state.gst,
+                invoice_number: this.state.invoice_number.value,
+                vendor: this.state.vendor.value,
+                amount: this.state.amount.value,
+                gst: this.state.gst.value,
                 total: this.state.total,
                 category: this.state.category
             }
@@ -155,13 +353,13 @@ class UpdateAsset extends Component {
         })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.amount !== this.state.amount || prevState.gst !== this.state.gst) {
-            this.setState({
-                total: this.state.amount + ((this.state.amount * this.state.gst) / 100)
-            })
-        }
-    }
+    // componentDidUpdate(prevProps, prevState) {
+    //     if (prevState.amount !== this.state.amount || prevState.gst !== this.state.gst) {
+    //         this.setState({
+    //             total: this.state.amount + ((this.state.amount * this.state.gst) / 100)
+    //         })
+    //     }
+    // }
 
 
 
@@ -169,16 +367,16 @@ class UpdateAsset extends Component {
         return (
             <div>
                 <Row>
-                    <Input s={3} label="Serial Number *" defaultValue={this.state.serial_number} onChange={this.setSerialNumber} />
-                    <Input s={3} label="Asset Name *" defaultValue={this.state.asset_name} onChange={this.setAssetName} />
+                    <Input s={3} label="Serial Number *" defaultValue={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
+                    <Input s={3} label="Asset Name *" defaultValue={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
                     <Input s={3} name='on' type='date' label="Purchase Date" onChange={this.setPurchaseDate} placeholder={moment(this.state.purchase_date).format('D MMMM, YYYY')} />
                     <Input s={6} label="Description" defaultValue={this.state.description} onChange={this.setDescription} />
-                    <Input s={3} label="Invoice Number *" defaultValue={this.state.invoice_number} onChange={this.setInvoiceNumber} />
-                    <Input s={3} label="Vendor *" defaultValue={this.state.vendor} onChange={this.setVendor} />
-                    <Input s={3} label="Condition *" defaultValue = {this.state.condition} onChange = {this.setCondition}/>
-                    <Input s={3} label="Location *" defaultValue = {this.state.location} onChange = {this.setLocation}/>
-                    <Input s={3} label="Amount *" type="number" min={0} defaultValue={this.state.amount} onChange={this.setAmount} />
-                    <Input s={3} label="GST" type="number" min={0} defaultValue={this.state.gst} onChange={this.setGst} />
+                    <Input s={3} label="Invoice Number *" defaultValue={this.state.invoice_number.value} onChange={this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
+                    <Input s={3} label="Vendor *" defaultValue={this.state.vendor.value} onChange={this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error : null} />
+                    <Input s={3} label="Condition *" defaultValue = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null}/>
+                    <Input s={3} label="Location *" defaultValue = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
+                    <Input s={3} label="Amount *" type="number" min={0} defaultValue={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
+                    <Input s={3} label="GST" type="number" min={0} defaultValue={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     <br />
                     <Badge>Total : ₹{this.state.total}</Badge>
                     <Input s={6} type='select' label="Category" onChange={this.setCategory} defaultValue={this.state.category}>

@@ -48,7 +48,7 @@ class Consumables extends Component{
             // window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
             this.setState({
                 minQuantity: Object.assign(this.state.minQuantity, {
-                    error:'The Minimum Quantity should not be negative',
+                    error:'The Min Quantity is -ve',
                     showError:true
                 }),
                 handleListRequest : true
@@ -68,7 +68,7 @@ class Consumables extends Component{
             // window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
             this.setState({
                 maxQuantity: Object.assign(this.state.maxQuantity, {
-                    error:'The Maximum Quantity should not be negative',
+                    error:'The Max Quantity is -ve',
                     showError:true
                 }),
                 handleListRequest : true
@@ -84,17 +84,17 @@ class Consumables extends Component{
                 handleListRequest : true
             })
         }
-        if(Number(this.state.minQuantity) > Number(this.state.maxQuantity)){
+        if(Number(this.state.minQuantity.value) > Number(this.state.maxQuantity.value)){
             // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
             this.setState({
                 minQuantity: Object.assign(this.state.minQuantity, {
-                    error:'The Minimum Quantity should not be greater than the Maximum Quantity',
+                    error:'The Min Quantity > the Max Quantity',
                     showError:true
                 }),
                 handleListRequest : true
             })
         }
-        if(Number(this.state.minQuantity) <= Number(this.state.maxQuantity)){
+        if(Number(this.state.minQuantity.value) <= Number(this.state.maxQuantity.value) && Number(this.state.minQuantity.value)>0){
             // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
             this.setState({
                 minQuantity: Object.assign(this.state.minQuantity, {
@@ -104,7 +104,7 @@ class Consumables extends Component{
                 handleListRequest : true
             })
         }
-        if(Number(this.state.minQuantity) >= 0 && Number(this.state.maxQuantity) >= 0 && Number(this.state.minQuantity) <= Number(this.state.maxQuantity)){
+        if(Number(this.state.minQuantity.value) >= 0 && Number(this.state.maxQuantity.value) >= 0 && Number(this.state.minQuantity.value) <= Number(this.state.maxQuantity.value)){
             this.setState({
                 handleListRequest : true
             })
@@ -247,12 +247,12 @@ class Consumables extends Component{
                             <td><Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
                                 }>
-                                <Modal
+                                {/* <Modal
                                     header='Edit Consumable'
                                     fixedFooter
                                     trigger={<NavItem>Edit</NavItem >}>
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
-                                </Modal>
+                                </Modal> */}
                                 <Modal style={{width:'70%'}}
                                         header='Delete Consumable'
                                         trigger={<NavItem>Delete</NavItem>}>

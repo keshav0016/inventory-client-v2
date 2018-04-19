@@ -9,7 +9,11 @@ class UpdateAssetType extends Component{
         this.state = {
             updateAssetTypeRequest : false
             // ,assetType : this.props.assetType
-            ,maxRequest : this.props.maxRequest
+            ,maxRequest : {
+                value: this.props.maxRequest,
+                error: '',
+                showError: false
+            }
         }
         // this.setAssetType = this.setAssetType.bind(this)
         this.setMaxRequest = this.setMaxRequest.bind(this)
@@ -18,10 +22,31 @@ class UpdateAssetType extends Component{
     }
 
     checkForValidation(){
-        if(this.state.maxRequest <= 0 ){
-            window.Materialize.toast('Max request should be atleast 1', 4000)
+        // if(this.state.maxRequest <= 0 ){
+        //     window.Materialize.toast('Max request should be atleast 1', 4000)
+        // }
+        // else{
+        //     this.setState({
+        //         updateAssetTypeRequest : true
+        //     })
+        // }
+        if(Number(this.state.maxRequest.value) < 0) {
+            this.setState({
+                maxRequest: Object.assign(this.state.maxRequest, {
+                    error: 'The Maximum request cannot be negative',
+                    showError: true
+                })
+            })
         }
-        else{
+        if(Number(this.state.maxRequest.value) === 0) {
+            this.setState({
+                maxRequest: Object.assign(this.state.maxRequest, {
+                    error: 'The Maximum request cannot be zero',
+                    showError: true
+                })
+            })
+        }
+        if(Number(this.state.maxRequest.value > 0)) {
             this.setState({
                 updateAssetTypeRequest : true
             })
@@ -35,7 +60,7 @@ class UpdateAssetType extends Component{
             ,withCredentials : true
             ,data : {
                 // assetType : this.state.assetType
-                maxRequest : this.state.maxRequest
+                maxRequest : this.state.maxRequest.value
                 ,id : this.props.id
             }
         })
@@ -64,7 +89,9 @@ class UpdateAssetType extends Component{
 
     setMaxRequest(e){
         this.setState({
-            maxRequest : e.target.value
+            maxRequest : Object.assign(this.state.maxRequest, {
+                value : e.target.value
+            })
         })
     }
 
@@ -77,7 +104,7 @@ class UpdateAssetType extends Component{
             <div>
                 <Row>
                     {/* <Input  value={this.state.assetType} onChange={this.setAssetType} s={6} label="Asset Type" />       */}
-                    <Input  value={this.state.maxRequest} onChange={this.setMaxRequest}s={6} label="Max Request" type="number" />
+                    <Input  value={this.state.maxRequest.value} onChange={this.setMaxRequest}s={6} label="Max Request" type="number" error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                  <Button onClick={this.checkForValidation}>Edit</Button>
                  {this.state.updateAssetTypeRequest ? this.updateAssetTypeInDb() : null}
