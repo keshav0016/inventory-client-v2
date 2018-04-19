@@ -136,7 +136,6 @@ class Tickets extends Component{
                 requestResource:false,
                 quantity:'',
                 item_type: 'Select',
-                item:'Select',
                 disableItems : true
             })
             if(res.data.message){
