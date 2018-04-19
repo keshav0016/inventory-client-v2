@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
+import moment from 'moment'
 import {Row, Col, CardPanel} from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
@@ -15,6 +16,7 @@ class Admindashboard extends Component{
             consumablesLowStock:'',
             assetPendingCount:'',
             assetAcceptedCount:''
+            ,repairDateNear : []
         }
         this.handleList = this.handleList.bind(this)
     }
@@ -34,6 +36,7 @@ class Admindashboard extends Component{
                 assetPendingCount:res.data.pendingAsset,
                 assetAcceptedCount:res.data.acceptedAsset,
                 handleListRequest:false
+                ,repairDateNear : res.data.repairDateNear
             })
         })
         .catch(error => {
@@ -77,6 +80,14 @@ class Admindashboard extends Component{
                             <span>Accepted Requests: {this.state.assetAcceptedCount}</span>
                         </CardPanel>
                     </Col>
+                    {this.state.repairDateNear.length !== 0 ? <Col m={4}>
+                        <CardPanel className=" grey darken-3 white-text ">
+                            <label className="adminDashCardTitle">Asset Repair Recover Notification</label>
+                            {this.state.repairDateNear.map((repair, index) => {
+                                return <p style={{display : 'list-item'}} key={repair.aseet_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
+                            })}
+                        </CardPanel>
+                    </Col> : null}
                 </Row>
             </div>
         )
