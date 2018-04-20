@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Icon, Button} from 'react-materialize'
+import { Button} from 'react-materialize'
 import { baseUrl } from './config';
 
 
@@ -72,12 +72,18 @@ class DeleteConsumable extends Component{
 
     render(){
         return(
-            <div>
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Delete Consumable</h3>                            
-                <Icon large>delete forever</Icon>
-                <h4>{`Do you really want to delete `}<b style={{color:'teal'}}>{`${this.props.consumable.name} `}</b>{`?`}</h4>
-                <Button onClick = {this.setDeleteConsumableRequest}>Delete</Button>
-                {this.state.deleteConsumableRequest ? this.deleteConsumableFroDb() : null}
+            <div style={{padding: '20px'}} className="no-footer">
+                <h5>Delete Consumable</h5>                            
+                <p>{`Do you really want to delete `}
+                    <b style={{color:'teal'}}>
+                        {`${this.props.consumable.name} `}
+                    </b>
+                    {`?`}
+                </p>
+                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                        <Button onClick = {this.setDeleteConsumableRequest} style={{margin: '0 20px'}}>Delete</Button>
+                        <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                </div>
             </div>
         )
     }

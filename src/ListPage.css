@@ -22,7 +22,7 @@
 .filterContainer {
   position: absolute;
   width: 260px;
-  left: 80%;
+  /* left: 80%; */
   top: 64px;
   height: 900px;
   background-color: #212121;

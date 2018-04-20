@@ -103,7 +103,8 @@ class EmployeesList extends Component {
                     trigger={<NavItem >Edit</NavItem >}>
                     <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <Modal style={{width:'70%'}} 
+                  <Modal style={{width:'70%'}}
+                    actions={null} 
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>

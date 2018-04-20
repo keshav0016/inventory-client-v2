@@ -199,17 +199,16 @@ class AssignAsset extends Component{
 
     render(){
         return(
-            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+            <div style={{padding: '20px'}} className="no-footer">
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign</h3>
+                <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Assign Asset</h5>
                 <Row>
-                    <br />
-                    <br />
                     <Input s={12} type="select" label=' ' placeholder="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} type='date' label=' ' placeholder="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
                     <Input s={12} type='date' label=' ' placeholder="Expected Recovery*" value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"} <Icon small right>send</Icon></Button>
+                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}
             </div>
         )

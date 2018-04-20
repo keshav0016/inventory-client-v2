@@ -12,3 +12,16 @@ html {
 body {
     font-family: "Roboto";
 }
+
+.heading-icon{
+    font-size: large;
+}
+
+.modal-content+.modal-footer:empty,.modal-content h4:empty{
+    display: none;
+}
+
+.modal {
+    max-height: 100%;
+}
+

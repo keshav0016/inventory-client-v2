@@ -254,6 +254,7 @@ class Consumables extends Component{
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal> */}
                                 <Modal style={{width:'70%'}}
+                                        actions={null}
                                         trigger={<NavItem>Delete</NavItem>}>
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
                                 </Modal>
@@ -274,8 +275,8 @@ class Consumables extends Component{
                 }
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
                     <Row>
-                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
-                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
+                        <Input style={{color:'white'}} s={12} type='number' min={0} label=" " placeholder="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
+                        <Input style={{color:'white'}} s={12} type='number' min={0} label=" " placeholder="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
                     </Row>
                         <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
                         <br />
