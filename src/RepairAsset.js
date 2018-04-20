@@ -5,6 +5,7 @@ import AddVendor from './AddVendor'
 import $ from 'jquery'
 import moment from 'moment'
 import './Employee.css'
+import { baseUrl } from './config';
 
 class RepairAsset extends Component{
     constructor(props){
@@ -153,7 +154,7 @@ class RepairAsset extends Component{
     repairAssetIntoDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/repair',
+            url : `${baseUrl}/asset/repair`,
             data : {
                 asset_id : this.props.match.params.asset,
                 vendor : this.state.vendor.value,
@@ -212,7 +213,7 @@ class RepairAsset extends Component{
     handleVendorList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/vendor/list`,
+            url : `${baseUrl}/vendor/list`,
             withCredentials : true
         })
         .then(res => {
@@ -228,7 +229,7 @@ class RepairAsset extends Component{
 
         axios({
             method : 'get',
-            url : `http://localhost:3001/asset/history?asset_id=${this.props.match.params.asset}`,
+            url : `${baseUrl}/asset/history?asset_id=${this.props.match.params.asset}`,
             withCredentials : true
         })
         .then(res => {

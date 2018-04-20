@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class UpdateAssetType extends Component{
     constructor(props){
@@ -56,7 +57,7 @@ class UpdateAssetType extends Component{
     updateAssetTypeInDb(){
         axios({
             method :'post'
-            ,url : 'http://localhost:3001/assetType/update'
+            ,url : `${baseUrl}/assetType/update`
             ,withCredentials : true
             ,data : {
                 // assetType : this.state.assetType

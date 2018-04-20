@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
+import { baseUrl } from './config';
 
 
 
@@ -34,7 +35,7 @@ class AssignConsumables extends Component {
     getEmployeeList(){
         axios({
             method:'get',
-            url:'http://localhost:3001/admin/ticket/listEmployee',
+            url:`${baseUrl}/admin/ticket/listEmployee`,
             withCredentials:true
         })
         .then(employeeList => {
@@ -146,7 +147,7 @@ class AssignConsumables extends Component {
     AssignConsumable() {
         axios({
             method: 'post',
-            url: 'http://localhost:3001/consumables/assign',
+            url: `${baseUrl}/consumables/assign`,
             data: {
                 consumable_id : this.state.consumable_id,
                 user_id: this.state.user_id.value,

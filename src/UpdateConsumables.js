@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 
 
@@ -105,7 +106,7 @@ class UpdateConsumables extends Component {
     UpdateConsumable() {
         axios({
             method: 'post',
-            url: 'http://localhost:3001/consumables/update',
+            url: `${baseUrl}/consumables/update`,
             data: {
                 consumable_id : this.state.consumable_id,
                 name : this.state.name.value,

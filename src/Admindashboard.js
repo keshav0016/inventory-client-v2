@@ -4,6 +4,7 @@ import moment from 'moment'
 import {Row, Col, CardPanel} from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
+import { baseUrl } from './config';
 
 
 class Admindashboard extends Component{
@@ -25,7 +26,7 @@ class Admindashboard extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/admin/ticket/dashboard`,
+            url : `${baseUrl}/admin/ticket/dashboard`,
             withCredentials : true
         })
         .then(res => {

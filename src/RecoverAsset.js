@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Button} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class DeleteAsset extends Component{
     constructor(props){
@@ -23,7 +24,7 @@ class DeleteAsset extends Component{
     recoverAssetFromDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/recover',
+            url : `${baseUrl}/asset/recover`,
             data : {
                 asset_id : this.props.asset,
                 to : new Date()
@@ -53,7 +54,7 @@ class DeleteAsset extends Component{
     componentDidMount(){
         axios({
             method :'get',
-            url : `http://localhost:3001/asset/recover-info?asset_id=${this.props.asset}`,
+            url : `${baseUrl}/asset/recover-info?asset_id=${this.props.asset}`,
             withCredentials : true
         })
         .then(res => {

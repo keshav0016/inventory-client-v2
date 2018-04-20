@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button, Badge, Modal, Autocomplete} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class AddConsumables extends Component{
     constructor(props){
@@ -278,7 +279,7 @@ class AddConsumables extends Component{
     addConsumable(){
         axios({
             method :'post',
-            url :'http://localhost:3001/consumables/create',
+            url :`${baseUrl}/consumables/create`,
             data : {
                 name : this.state.name.value,
                 vendor_name : this.state.vendor_name.value,
@@ -366,7 +367,7 @@ class AddConsumables extends Component{
     handleVendorList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/vendor/list`,
+            url : `${baseUrl}/vendor/list`,
             withCredentials : true
         })
         .then(res => {

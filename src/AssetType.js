@@ -6,6 +6,7 @@ import UpdateAssetType from './UpdateAssetType'
 import $ from 'jquery'
 import './ListPage.css'
 import './Employee.css'
+import { baseUrl } from './config';
 
 class AssetType extends Component{
     constructor(props){
@@ -24,7 +25,7 @@ class AssetType extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/assetType/list?page=${this.state.page}`,
+            url : `${baseUrl}/assetType/list?page=${this.state.page}`,
             withCredentials : true
         })
         .then(res => {

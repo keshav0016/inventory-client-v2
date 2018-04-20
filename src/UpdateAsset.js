@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Badge, Icon} from 'react-materialize'
 import moment from 'moment'
+import { baseUrl } from './config';
 
 
 
@@ -317,7 +318,7 @@ class UpdateAsset extends Component {
     updateAssetIntoDb() {
         axios({
             method: 'post',
-            url: 'http://localhost:3001/asset/update',
+            url: `${baseUrl}/asset/update`,
             withCredentials: true,
             data: {
                 asset_id : this.props.asset.asset_id,

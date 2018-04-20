@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
 import './Employee.css'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class EmployeeAdd extends Component {
   constructor(props) {
@@ -112,7 +113,7 @@ class EmployeeAdd extends Component {
     else{
       axios({
         method: 'post',
-        url: 'http://localhost:3001/employees/create',
+        url: `${baseUrl}/employees/create`,
         data:{
           user_id: this.state.user_id.value,
           first_name:this.state.first_name.value,

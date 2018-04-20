@@ -6,6 +6,7 @@ import './ListPage.css'
 import './Employee.css'
 import {Parser} from 'json2csv';
 import fileSaver from 'file-saver'
+import { baseUrl } from './config';
 
 class Assets extends Component{
     constructor(props){
@@ -26,7 +27,7 @@ class Assets extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/asset/history?asset_id=${this.props.match.params.asset}`,
+            url : `${baseUrl}/asset/history?asset_id=${this.props.match.params.asset}`,
             withCredentials : true
         })
         .then(res => {

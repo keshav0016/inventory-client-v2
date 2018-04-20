@@ -10,6 +10,7 @@ import EmployeeTicketsList from './EmployeeTicketsList';
 import axios from 'axios'
 import Tickets from './Tickets'
 import Profile from './Profile.js'
+import { baseUrl } from './config';
 
 
 class EmployeeDB extends Component {
@@ -54,7 +55,7 @@ class EmployeeDB extends Component {
    componentDidMount(){
     axios({
         method: 'get',
-        url: 'http://localhost:3001/employee/ticket/current',
+        url: `${baseUrl}/employee/ticket/current`,
         withCredentials: true
     })
     .then((res) => {

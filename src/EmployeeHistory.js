@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Table} from 'react-materialize'
 import './Employee.css'
+import { baseUrl } from './config';
 
 class EmployeeHistory extends Component {
     constructor(props){
@@ -46,7 +47,7 @@ class EmployeeHistory extends Component {
     handleList(){
         axios({
             method : 'post',
-            url : `http://localhost:3001/employees/history`,
+            url : `${baseUrl}/employees/history`,
             data : {
                 user_id : this.state.user_id
             },

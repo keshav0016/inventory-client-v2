@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button, Badge} from 'react-materialize'
 import $ from 'jquery'
 import moment from 'moment'
+import { baseUrl } from './config';
 
 class UpdateConsumablePurchase extends Component{
     constructor(props){
@@ -209,7 +210,7 @@ class UpdateConsumablePurchase extends Component{
     updateConsumablePurchase(){
         axios({
             method :'post',
-            url :'http://localhost:3001/consumables/editPurchase',
+            url :`${baseUrl}/consumables/editPurchase`,
             data : {
                 consumable_id : this.state.consumable_id,
                 name : this.state.name,

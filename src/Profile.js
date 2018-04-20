@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Table} from 'react-materialize'
+import { baseUrl } from './config';
 
 
 class Profile extends Component{
@@ -18,7 +19,7 @@ class Profile extends Component{
     componentDidMount(){
         axios({
             method:'get',
-            url : `http://localhost:3001/employee/ticket/count`,
+            url : `${baseUrl}/employee/ticket/count`,
             withCredentials:true
         })
         .then(res => {
@@ -34,7 +35,7 @@ class Profile extends Component{
         })
         axios({
             method: 'get',
-            url: 'http://localhost:3001/employee/ticket/current',
+            url: `${baseUrl}/employee/ticket/current`,
             withCredentials: true
         })
         .then(res => {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Icon, Button} from 'react-materialize'
+import { baseUrl } from './config';
 
 
 class DeleteConsumable extends Component{
@@ -42,7 +43,7 @@ class DeleteConsumable extends Component{
     deleteConsumableFroDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/consumables/delete',
+            url : `${baseUrl}/consumables/delete`,
             data : {
                 consumable_id : this.props.consumable.consumable_id
             }

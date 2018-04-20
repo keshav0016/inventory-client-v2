@@ -2,7 +2,8 @@ import React,{Component} from 'react'
 import axios from 'axios'
 import {
     Redirect
-  } from 'react-router-dom';
+} from 'react-router-dom';
+import { baseUrl } from './config';
 
 
 class Logout extends Component{
@@ -28,7 +29,7 @@ class Logout extends Component{
     handleLogout(){
         axios({
             method:'post',
-            url:'http://localhost:3001/user/logout',
+            url:`${baseUrl}/user/logout`,
             withCredentials: true
         })
         .then((res)=>{

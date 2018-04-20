@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class VendorUpdate extends Component{
     constructor(props){
@@ -143,7 +144,7 @@ class VendorUpdate extends Component{
    handleUpdate(){
        axios({
            method: 'post',
-           url: 'http://localhost:3001/vendor/update',
+           url: `${baseUrl}/vendor/update`,
            data:{
                id: this.state.id.value,
                name: this.state.name.value,

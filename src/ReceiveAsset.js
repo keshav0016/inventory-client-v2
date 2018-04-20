@@ -3,6 +3,7 @@ import axios from 'axios'
 import moment from 'moment'
 import {Row, Input, Button, Badge, Icon} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class ReceiveAsset extends Component{
     constructor(props){
@@ -69,7 +70,7 @@ class ReceiveAsset extends Component{
     receiveAssetIntoDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/recover-repair',
+            url : `${baseUrl}/asset/recover-repair`,
             withCredentials : true,
             data : {
                 asset_id : this.props.asset,
@@ -116,7 +117,7 @@ class ReceiveAsset extends Component{
     componentDidMount(){
         axios({
             method : 'get', 
-            url : `http://localhost:3001/asset/repair-info?asset_id=${this.props.asset}`
+            url : `${baseUrl}/asset/repair-info?asset_id=${this.props.asset}`
             ,withCredentials : true
         })
         .then(res => {

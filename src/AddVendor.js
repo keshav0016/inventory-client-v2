@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Icon} from 'react-materialize'
 // import $ from 'jquery'
+import { baseUrl } from './config';
 
 
 class AddVendor extends Component{
@@ -113,7 +114,7 @@ class AddVendor extends Component{
     addVendorIntoDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/vendor/create',
+            url : `${baseUrl}/vendor/create`,
             withCredentials : true,
             data : {
                 name: this.state.name.value,

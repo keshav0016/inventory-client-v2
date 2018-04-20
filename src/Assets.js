@@ -12,6 +12,7 @@ import $ from 'jquery'
 import './Employee.css'
 import './ListPage.css'
 import './Asset.css'
+import { baseUrl } from './config';
 
 class Assets extends Component{
     constructor(props){
@@ -45,7 +46,7 @@ class Assets extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%`,
+            url : `${baseUrl}/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%`,
             withCredentials : true
         })
         .then(res => {

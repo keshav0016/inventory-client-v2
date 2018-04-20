@@ -7,6 +7,7 @@ import './Employee.css'
 import './ListPage.css'
 import $ from 'jquery'
 import './TicketsList.css'
+import { baseUrl } from './config';
 
 
 class EmployeeTicketsList extends Component{
@@ -75,7 +76,7 @@ class EmployeeTicketsList extends Component{
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){
             axios({
                 method : 'get',
-                url : `http://localhost:3001/employee/ticket/list?page=${this.state.page}`,
+                url : `${baseUrl}/employee/ticket/list?page=${this.state.page}`,
                 withCredentials : true
             })
             .then(res => {
@@ -97,7 +98,7 @@ class EmployeeTicketsList extends Component{
         else{
             axios({
                 method : 'get',
-                url : `http://localhost:3001/employee/ticket/list?page=${this.state.page}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
+                url : `${baseUrl}/employee/ticket/list?page=${this.state.page}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
                 withCredentials : true
             })
             .then(res => {
