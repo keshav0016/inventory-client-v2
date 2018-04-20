@@ -66,11 +66,11 @@ class AssetType extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{marginLeft: '30px',marginRight: '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                <h3 className='heading' >Asset Types</h3 >
-                <Table centered>
+                <h3 style={{fontFamily: 'Roboto', fontWeight: 250}} >Asset Types</h3 >
+                <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
                             <th data-field="id">S. No</th>
@@ -87,7 +87,6 @@ class AssetType extends Component{
                             <td>{item.assetType}</td>
                             <td>{item.maxRequest}</td>
                             <td><Modal
-                                header={`Update the ${item.assetType}'s Max Request`}
                                 trigger={<Button>Edit</Button>}>
                                 <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal></td>
@@ -96,7 +95,6 @@ class AssetType extends Component{
                     </tbody>
                 </Table>
                 <Modal
-                    header='Add Asset Type'
                     actions ={<div></div>}
                     trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
                     <AddAssetType setHandleListRequest = {this.setHandleListRequest}/>

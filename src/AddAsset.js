@@ -532,29 +532,30 @@ class AddAsset extends Component{
 
     render(){
         return(
-            <div style={{marginLeft : '1%', marginRight : '1%'}} >
-                <h3 className='heading'>Add Asset</h3>
+            <div style={{marginLeft : '30px', marginRight : '30px'}} >
+                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Asset</h3>
                 <Row>
-                    <Input s={6} label="Serial Number *" value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null}/>
-                    <Input s={6} label="Asset Name *" value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
-                    <Input s={6} name='on' type='date' label="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
-                    <Input s={6} label="Description" value = {this.state.description} onChange = {this.setDescription}/>
-                    <Input s={6} label="Invoice Number *" value = {this.state.invoice_number.value} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
-                    <Input s={6} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
-                    <Input s={6} label="Location *" value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
+                    <Input s={6} placeholder="Serial Number *" label=' ' value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null}/>
+                    <Input s={6} placeholder="Asset Name *" label=' ' value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
+                    <Input s={6} name='on' type='date' label=' ' placeholder="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <Input s={6} placeholder="Description" label=' ' value = {this.state.description} onChange = {this.setDescription}/>
+                    <Input s={6} placeholder="Invoice Number *" label=' ' value = {this.state.invoice_number.value} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
+                    <Input s={6} placeholder="Condition *" label=' ' value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
+                    <Input s={6} placeholder="Location *" label=' ' value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
                     <br />
-                    <Input s={6} type='select' label="Category*" onChange = {this.setCategory} value={this.state.category}>
+                    <Input s={6} type='select' placeholder="Category*" label=' ' onChange = {this.setCategory} value={this.state.category}>
                         <option value='Select'>Select</option>
                         <option value='Electronics'>Electronics</option>
                         <option value='Non-Electronics'>Non-Electronics</option>
                         <option value='Other'>Other</option>
                     </Input>
-                    <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
-                    <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
-                    {/* <Input s={6} label="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
+                    <Input s={6} placeholder="Amount *" type = "number" min={0} label=' ' value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
+                    <Input s={6} placeholder="GST" type = "number" min={0} label=' ' value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
+                    {/* <Input s={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
                     <Row>
                         <Autocomplete
-                            title='Vendor'
+                            title=' '
+                            placeholder='Vendor'
                             data={
                                 this.state.vendorNames
                             }
@@ -562,7 +563,7 @@ class AddAsset extends Component{
                             value = {this.state.vendor.value}
                         />
                     </Row>
-                    <Input s={6} label="Asset Type*" type='select' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
+                    <Input s={6} placeholder="Asset Type*" type='select' label=' ' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <br /> <br />
                 </Row>

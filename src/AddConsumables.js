@@ -412,27 +412,28 @@ class AddConsumables extends Component{
     render(){
 
         return(
-            <div style={{marginLeft:'1%',marginRight:'1%'}}>
-                <h3>Add Consumable</h3>
+            <div style={{marginLeft:'30px',marginRight:'30px'}}>
+                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
                 <Row>
-                    <Input s={6} label="Consumable" value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
-                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <Input s={6} placeholder="Consumable" label=' ' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
+                    <Input s={6} name='on' type='date' label=' ' placeholder="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
                     <br/>
                     <br/>
                     <br/>
-                    <Input s={6} label="Purchased Quantity" type="number" min={0} value={this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null}/>
-                    <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null}/>
+                    <Input s={6} placeholder="Purchased Quantity" label=' ' type="number" min={0} value={this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null}/>
+                    <Input s={6} placeholder="Price" type='number' min={0} label=' ' value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null}/>
                     <br/>
                     <br/>
                     <br/>
-                    <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
-                    <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null}/>
+                    <Input s={6} placeholder="GST %" type='number' min={0} label=' ' value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
+                    <Input s={6} placeholder="Discount %" type='number' label=' ' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null}/>
                     <br/>
                     <br/>
                     <br/>
                     <Row>
                         <Autocomplete
-                            title='Vendor'
+                            title=' '
+                            placeholder='Vendor'
                             data={
                                 this.state.vendorNames
                             }

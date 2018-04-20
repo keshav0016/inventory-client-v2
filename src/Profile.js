@@ -52,11 +52,12 @@ class Profile extends Component{
    
     render(){
         return (
-            <div style={{marginLeft : '1%', marginRight : '1%'}}>
+            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Profile</h3>
             <h6>Name : <b style={{color : 'teal'}}>{this.state.profile.first_name} {this.state.profile.last_name}</b></h6>
             <h6>No of Assets held : <b style={{color : 'teal'}}>{this.state.assetsCount}</b></h6>
             <h6>No of Consumables held : <b style={{color: 'teal'}}>{this.state.consumablesCount}</b> </h6>
-            <Table >
+            <Table hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
               <thead>
                   <tr>
                       <th data-field="item"> Item</th>

@@ -246,8 +246,8 @@ class RepairAsset extends Component{
 
     render(){
         return(
-            <div style={{marginLeft : '1%'}} >
-                <h3 className="heading">Repair Asset</h3>
+            <div style={{marginLeft : '30px', marginRight : '30px'}} >
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Repair Asset</h3>
                 <br /><br />
                 {this.state.assetDetails ? 
                 <div>
@@ -267,7 +267,8 @@ class RepairAsset extends Component{
                         <Row>
                             <Autocomplete s={12}
                                 error={this.state.vendor.showError ? this.state.vendor.error : null}
-                                title='Service Provider'
+                                title=' '
+                                placeholder='Service Provider'
                                 data={
                                     this.state.vendorNames
                                 }
@@ -275,8 +276,8 @@ class RepairAsset extends Component{
                                 onChange = {this.setVendor}
                             />
                         </Row>
-                        <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
-                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                        <Input s={12} type='date' label=' ' placeholder="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
+                        <Input s={12} type='date' label=' ' placeholder="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                     </Row>
                     <Modal
                         header='Add Vendor'

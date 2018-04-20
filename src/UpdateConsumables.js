@@ -138,10 +138,11 @@ class UpdateConsumables extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}} >Update Consumable</h3>
                 <Row>
-                    <Input s={6} label="Consumable Name" value={this.state.name.value} onChange={this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
+                    <Input s={6} label=' ' placeholder="Consumable Name" value={this.state.name.value} onChange={this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input s={6} label=' ' placeholder="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Update</Button>
                 {this.state.updateConsumableRequest ? this.UpdateConsumable () : null}

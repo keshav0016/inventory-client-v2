@@ -53,6 +53,7 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Delet Asset</h3>                            
                 <Icon large>delete forever</Icon>
                 <h4>{`Do you really want to delete `}<b style={{color:'teal'}}>{`${this.props.asset.asset_name} `}</b>{`?`}</h4>
                 <Button onClick = {this.setDeleteAssetRequest}>Delete</Button>

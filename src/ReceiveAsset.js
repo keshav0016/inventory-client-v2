@@ -132,7 +132,8 @@ class ReceiveAsset extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{marginLeft: '30px',marginRight: '30px'}}>
+            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Receive Asset</h3>
                 <Row><br /><br />
                     {this.state.repairInfo.asset ? <div>
                         <h6><b>Asset Name</b> : {this.state.repairInfo.asset.asset_name}</h6>
@@ -141,10 +142,10 @@ class ReceiveAsset extends Component{
                         <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
                         </div> : null}
                     <br /><br />
-                    <Input s={6} name='on' type='date' label="Received from Service *" onChange={this.setTo} value = {this.state.to} />
-                    <Input s={6} label="Repair Invoice *" value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
-                    <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
-                    <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} name='on' type='date' label=' ' placeholder="Received from Service *" onChange={this.setTo} value = {this.state.to} />
+                    <Input s={6} placeholder="Repair Invoice *" label=' ' value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
+                    <Input s={6} placeholder="Amount *" type = "number" label=' ' min={0} value = {this.state.amount} onChange = {this.setAmount}/>
+                    <Input s={6} placeholder="GST" type = "number" min={0} label=' ' value = {this.state.gst} onChange = {this.setGst}/>
                     <br />
                     <Badge>Total : {this.state.total}</Badge>
                 </Row>

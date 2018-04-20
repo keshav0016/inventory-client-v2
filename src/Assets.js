@@ -134,13 +134,13 @@ class Assets extends Component{
 
     render(){
         return(
-            <div  style={{marginLeft : '1%', marginRight : '1%'}}>
+            <div style={{marginLeft : '30px', marginRight : '30px'}} >
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3 className="heading">List Of Assets</h3>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={3} label="Search" onChange = {this.setSearch} />
                 </Row>
-                <div className="filterContainer">
+                <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
                     <h5 style={{color:'white',fontSize:'20px',textAlign:'center'}}>Filter by Current Status</h5>
                     <div className="assetCheckbox">
                     <Input name='filter' type='checkbox' value='red' label='Available' onClick = {this.setAvailableChecked} checked={this.state.isAvailableChecked} />
@@ -159,7 +159,7 @@ class Assets extends Component{
                 {this.state.loading ? <ProgressBar /> :
                 (this.state.assetList.length === 0 ? <h3 style={{left : '40%'}}>No Records</h3> :
                 <div>
-                <Table  hoverable className="assetTable">
+                <Table className="assetTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
                             <th data-field="serial_number">Serial No.</th>
@@ -192,20 +192,18 @@ class Assets extends Component{
                                     <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
-                                        header='Edit Asset'
                                         fixedFooter
                                         actions={<div></div>}
                                         trigger={<NavItem>Edit</NavItem>}>
                                         <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
                                     </Modal>
                                     <Modal
-                                        header='Delete Asset'
+                                        style={{width : '70%'}}
                                         actions={<div></div>}
                                         trigger={item.current_status === 'Available' ? <NavItem>Delete</NavItem> : null}>
                                         {item.current_status === 'Available' ? <DeleteAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
-                                        header='Assign'
                                         fixedFooter
                                         actions={<div></div>}
                                         trigger={item.current_status === 'Available' ? <NavItem>Assign</NavItem> : null}>
@@ -218,7 +216,6 @@ class Assets extends Component{
                                     </Modal>
                                     {item.current_status === 'Available' ? <NavItem href={ `/admin/assets/repair/${item.asset_id}`}>Repair</NavItem> : null}
                                     <Modal
-                                        header='Recover from Service'
                                         fixedFooter
                                         actions={<div></div>}
                                         trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
