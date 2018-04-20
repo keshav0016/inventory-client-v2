@@ -132,24 +132,25 @@ class ReceiveAsset extends Component{
 
     render(){
         return(
-            <div style={{marginLeft: '30px',marginRight: '30px'}}>
-            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Receive Asset</h3>
-                <Row><br /><br />
+            <div style={{padding: '20px'}} className="no-footer">
+            <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Receive Asset</h5>
+                <Row>
                     {this.state.repairInfo.asset ? <div>
                         <h6><b>Asset Name</b> : {this.state.repairInfo.asset.asset_name}</h6>
                         <h6><b>Service Provider</b> : {this.state.repairInfo.vendor}</h6>
                         <h6><b>Given for service on</b> : {moment(this.state.repairInfo.from).format('DD MMM YYYY')}</h6>
                         <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
                         </div> : null}
-                    <br /><br />
+                   
                     <Input s={6} name='on' type='date' label=' ' placeholder="Received from Service *" onChange={this.setTo} value = {this.state.to} />
                     <Input s={6} placeholder="Repair Invoice *" label=' ' value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
                     <Input s={6} placeholder="Amount *" type = "number" label=' ' min={0} value = {this.state.amount} onChange = {this.setAmount}/>
                     <Input s={6} placeholder="GST" type = "number" min={0} label=' ' value = {this.state.gst} onChange = {this.setGst}/>
-                    <br />
+                    
                     <Badge>Total : {this.state.total}</Badge>
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
+                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}
             </div>
         )

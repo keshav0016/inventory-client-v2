@@ -366,8 +366,8 @@ class UpdateAsset extends Component {
 
     render() {
         return (
-            <div style={{marginLeft : '30px', marginRight : '30px'}}>
-            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}} >Update</h3>
+            <div className="no-footer" style={{padding: '20px'}}>
+            <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Update Asset</h5> 
                 <Row>
                     <Input s={3} label="Serial Number *" defaultValue={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
                     <Input s={3} label="Asset Name *" defaultValue={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
@@ -388,6 +388,7 @@ class UpdateAsset extends Component {
                     </Input>
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Submit <Icon small right>send</Icon></Button>
+                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 {this.state.updateAssetRequest ? this.updateAssetIntoDb() : null}
             </div>
         )

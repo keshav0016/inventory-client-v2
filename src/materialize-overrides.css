@@ -21,3 +21,7 @@ body {
     display: none;
 }
 
+.modal {
+    max-height: 100%;
+}
+
