@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './forgotpassword.css'
 import axios from 'axios';
-import { Icon, Input, Button, Row } from 'react-materialize';
+import { Icon, Input, Button, Row, Col, Card } from 'react-materialize';
+// import './Login.css';
+// import './Employee.css'
 import {
 
   Redirect
@@ -36,7 +38,8 @@ class ForgotPasswordForm extends Component {
         })
     }
 
-    verifyCredentials() {
+    verifyCredentials(e) {
+        e.preventDefault();
         axios({
             method: 'post',
             url: `${baseUrl}/user/forgotPassword`,
@@ -61,19 +64,27 @@ class ForgotPasswordForm extends Component {
 
     render() {
         return (
-            <div className="forgotPasswordContainer">
-                <form className="formContainer">
-                    <p className="resetPasswordTitle"><b>Reset  Your  Password</b></p>
-                    <p className="resetPasswordMessage">It is often forgotten that password thing.
-                Enter your email address below and click on the <b>'Request password Reset'</b> Button.
-                We will contact you shortly.</p>
-                    <Row>
-                        <Input style={{ marginLeft: '45px' }} s={10} onChange={this.getUserid} className="resetPasswordEmailField" placeholder="Employee ID" />
-                        <Input s={11} type="email" onChange={this.getEmail} className="resetPasswordEmailField" placeholder="Email"><Icon tiny left>email</Icon></Input>
-                    </Row>
-                    <Button className="resetPassword" type="button" onClick={this.verifyCredentials}>Request Password Reset</Button>
-                </form>
-                {this.state.redirect ? <Redirect push to={`/user/reset/${this.state.user_id}`} /> : null}
+            <div className="teal" style={{height: '100vh', position: 'relative'}}>
+                <Row>
+                    <Col s={4} offset={'s4'} style={{marginTop:'90.67px'}}>
+                        <form onSubmit={this.verifyCredentials}>
+                            <Card className="z-depth-2" title="Reset your password" style={{padding: "30px",height:'450.5px'}}>
+                            <Row>
+                                <Input s={12} onChange={this.getUserid} placeholder="Employee ID" icon="account_box" />
+                            </Row>
+                            <Row>
+                                <Input s={12} type="email" onChange={this.getEmail} placeholder="Email" icon="email"></Input>
+                            </Row>
+                            <Row>
+                                <Col s={6} offset={'s3'}>
+                                    <Button className="teal" type="submit" style={{width:'100%'}}>Reset</Button>
+                                </Col>
+                            </Row>
+                            {this.state.redirect ? <Redirect push to={`/user/reset/${this.state.user_id}`} /> : null}
+                            </Card>
+                        </form>
+                    </Col>
+                </Row>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Icon, Input, Button } from 'react-materialize';
+import { Icon, Input, Button,Col, Card } from 'react-materialize';
 import './Login.css';
 import './Employee.css'
 import {
@@ -47,7 +47,8 @@ class LoginForm extends Component {
   //   $('label').addClass('active')
   // }
   //function to check the credentials provided  by the user
-  verifyCredentials() {
+  verifyCredentials(e) {
+    e.preventDefault();
       axios({
         method: 'post',
         url: `${baseUrl}/user/login`,
@@ -58,24 +59,27 @@ class LoginForm extends Component {
         withCredentials: true
       })
       .then((res) => {
-        if(res.data.passwordSame === true){
+        if(res.data.message == 'user not found'){
+          return Promise.reject('Wrong credentials');
+        }
+        if (res.data.passwordSame === true) {
           this.setState({
             change: true,
             admin: false
           })
-        }else if(res.data.passwordSame === false && res.data.user.role === 'Admin'){
+        } else if (res.data.passwordSame === false && res.data.user.role === 'Admin') {
           this.setState({
             admin: true
 
           })
-        }else {
+        } else {
           this.setState({
-            employee : true
+            employee: true
           })
         }
       })
-      .catch(() =>{
-        window.Materialize.toast('wrong password',3000)
+      .catch(() => {
+        window.Materialize.toast('wrong password', 3000)
 
       })
   }
@@ -83,21 +87,41 @@ class LoginForm extends Component {
 
   render() {
     var loginform = (
-      <div className='background'>
-          <div className ='header1 white-text'>
-              <h4>Inventory Management System </h4>
-          </div> 
-      <div className='passwordchangeform'>
-          <Row>
-            <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon>
-            <div className='fields'>
-            <Input s={10} onChange={this.getUserid} label="User Id" icon='account_box' />
-            <Input type="password" s={10} onChange={this.getPassword} label="password" icon='lock' />
-            <Button className ='submitbtn'onClick={this.verifyCredentials}>LOGIN</Button>
-            </div>
+      <div className='background teal' style={{height: '100vh', position: 'relative'}}>
+        <div className='header1' style={{padding: '20px 0', color: 'white'}}>
+          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: 300}}>Inventory Management System </h4>
+        </div> 
+        <Row>
+          <Col s={2} offset={"m2"}>
+            <img s={2} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274"/>
+          </Col>
+          <Col s={4}>
+            <form onSubmit={this.verifyCredentials}>
+              <Card className="z-depth-2" title="Login" style={{padding: "30px",}}>
+                {/* <h4>Login</h4> */}
+                <Row>
+                  {/* <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon> */}
+                  {/* <div className='fields'> */}
+                    <Input s={12} onChange={this.getUserid} placeholder="User Id" icon='account_box' />
+                    {/* <Button className='submitbtn' onClick={this.verifyCredentials}>LOGIN</Button> */}
+                  {/* </div> */}
+                </Row>
+                <Row>
+                    <Input type="password" s={12} onChange={this.getPassword} placeholder="Password" icon='lock' />
+
+                </Row>
+                <Row>
+                    <Col s={3} offset={"m8"}>
+                      <Button className='submitbtn' type="submit">LOGIN</Button>
+                    </Col>
+                </Row>
+                
+                <Link to='/forgotpassword' className='loginFormForgotLink'>Forgot Password</Link>
+              </Card>
+
+            </form>
+          </Col>
           </Row>
-            <Link to = '/forgotpassword'>Forgot Password</Link>
-      </div>
       </div>
     );
     return (

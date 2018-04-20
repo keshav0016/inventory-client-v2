@@ -275,7 +275,7 @@ class Consumables extends Component{
                 <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div>
                 }
-                <div className="filterContainer">
+                <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
                     <Row>
                         <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
                         <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
@@ -285,7 +285,7 @@ class Consumables extends Component{
                         <br />
                         <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
                 </div>                
-                <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating fab="vertical" large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
             </div>
         )
     }

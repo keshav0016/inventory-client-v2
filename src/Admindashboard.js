@@ -50,12 +50,12 @@ class Admindashboard extends Component{
             <div>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className='heading'>Inventory Mangement System</h3>
-                <h5 className='heading'>West Agile Labs</h5>
+                {/* <h5 className='heading'>West Agile Labs</h5> */}
                 <Row>
-                    <Col m={4}>
+                    {/* <Col m={4}>
                     <img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" className="adminDasboardLogo" />
 
-                    </Col >
+                    </Col > */}
 
                     <Col m={4}>
                         <CardPanel className=" grey darken-3 white-text ">

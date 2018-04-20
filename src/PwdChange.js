@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Input, Button, Row, Icon} from 'react-materialize'
+import {Input, Button, Row, Icon, Col, Card} from 'react-materialize'
 import {
    Redirect
   } from 'react-router-dom';
@@ -26,22 +26,32 @@ class PasswordChange extends Component {
     }
     render(){
         var change =(
-            <div className='background'>
-            <div class='passwordchangeform1'>
+            <div className='teal' style={{height: '100%', position: 'relative'}}>
                 <Row>
-                    <div className ='header'>
-                        <h4>Reset Password</h4>
-                    </div>
-                    <div className='fields1'>
-                    <Input s={12}  label="User Id" onChange={this.handleUserid}><Icon>account_circle</Icon></Input>
-                    <Input s={12}  label="Email*" type = "email" onChange={this.setEmail} icon='email'/>
-                    <Input s={12}  type='password'onChange={this.handleNewPassword} label="New Password" ><Icon>lock</Icon></Input>
-                    <Input s={12} type='password' onChange={this.handleConfirmPassword} label="Confirm Password"><Icon>lock</Icon></Input>
-                    <Button className='submitbtn'onClick={this.handleSubmit}>Submit</Button>
-                    </div>
-
+                    <Col s={4} offset={'s4'} style={{marginTop:'90.67px'}}>
+                    <form onSubmit={this.handleSubmit}>
+                        <Card className="z-depth-2" title="Reset your password" style={{padding: "30px"}}>
+                        <Row>
+                            <Input s={12}  placeholder="User Id" onChange={this.handleUserid} icon="account_box"></Input>
+                        </Row>
+                        <Row>
+                            <Input s={12}  placeholder="Email*" type = "email" onChange={this.setEmail} icon='email'/>
+                        </Row>
+                        <Row>
+                            <Input s={12}  type='password'onChange={this.handleNewPassword} placeholder="New Password" icon="lock"></Input>
+                        </Row>
+                        <Row>
+                            <Input s={12} type='password' onChange={this.handleConfirmPassword} placeholder="Confirm Password" icon="lock"></Input>
+                        </Row>
+                        <Row>
+                            <Col s={6} offset={'s3'}>
+                                <Button className='submitbtn' type="submit">Submit</Button>
+                            </Col>
+                        </Row>
+                        </Card>
+                    </form>
+                    </Col>
                 </Row>
-            </div>
             </div>
         );
         return ( 
@@ -76,7 +86,8 @@ class PasswordChange extends Component {
     componentDidMount(){
         $('label').addClass('active')
     }
-    handleSubmit(){
+    handleSubmit(e){
+        e.preventDefault()
         if(this.state.Confirm_Password === this.state.New_Password){
             axios({
                 method: 'post',
