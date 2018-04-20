@@ -88,7 +88,7 @@ class LoginForm extends Component {
     var loginform = (
       <div className='background teal' style={{height: '100vh', position: 'relative'}}>
         <div className='header1' style={{padding: '20px 0', color: 'white'}}>
-          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: '300'}}>Inventory Management System </h4>
+          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: 300}}>Inventory Management System </h4>
         </div> 
         <Row>
           <Col s={2} offset={"m2"}>
