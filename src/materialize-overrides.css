@@ -3,3 +3,12 @@ input:not([type])+label:after, input[type=text]+label:after, input[type=password
      position: absolute;
      white-space: nowrap;
 }
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Roboto";
+}
