@@ -100,6 +100,7 @@ class EmployeesList extends Component {
                    <Button className = 'btn-mini'> <Icon>more_vert</Icon></Button>
                   }>
                    <Modal
+                    actions={null}
                     trigger={<NavItem >Edit</NavItem >}>
                     <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>

@@ -100,7 +100,7 @@ class EmployeeUpdate extends Component{
     render() {
         
         return (           
-            <div>           
+            <div className="no-footer" style={{padding: '20px'}}>           
                 <Row>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update Employee</h3 >
                 <Input  defaultValue={this.state.user_id} onChange={this.handleUserid}s={6} label="User Id" />
@@ -123,6 +123,7 @@ class EmployeeUpdate extends Component{
                     <Input type="text"  defaultValue={this.state.designation}label="Designation"onChange={this.handleDesignation} s={6} />
                 </Row>
                  <Button onClick={this.handleUpdate}>Edit</Button>
+                 <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
             </div>
         )
     }

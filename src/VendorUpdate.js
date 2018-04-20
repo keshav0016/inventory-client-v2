@@ -179,7 +179,7 @@ class VendorUpdate extends Component{
     render() {
         
         return (           
-            <div>           
+            <div className="no-footer" style={{padding: '20px'}}>           
                 <Row>
                     <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update Vendor</h3 >
                     <Input  value={this.state.id.value} onChange={this.handleId}s={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />      
@@ -188,6 +188,7 @@ class VendorUpdate extends Component{
                     <Input  value={this.state.address.value} onChange={this.handleAddress} s={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
                 </Row>
                  <Button onClick={this.checkForValidation}>Edit</Button>
+                 <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                  {this.state.update ? this.handleUpdate() : null}
             </div>
         )
