@@ -54,9 +54,9 @@ class EntireHistoryConsumables extends Component{
 
    render(){
        return(
-           <div style={{marginLeft : '1%',marginRight : '1%'}}>
+           <div style={{marginLeft: '30px',marginRight: '30px'}}>
             {this.state.fetchHistory ? this.getHistory() : null}
-            <h3 className='heading'>Consumable History</h3>
+            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Consumable History</h3>
             {this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                             {consumable.vendor_name ? 
@@ -64,7 +64,7 @@ class EntireHistoryConsumables extends Component{
                             (
                                 <CardPanel className='z-depth-2 consumableTable'>
                             <div> 
-                                <h5><u>Purchased</u></h5>
+                                <h5 style={{fontFamily: 'Roboto',fontWeight: 300}}>Purchased</h5>
                                 <div style={{display : 'flex'}} >
                                     <div style={{float : 'left', width : '50%'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
@@ -92,7 +92,7 @@ class EntireHistoryConsumables extends Component{
                              (
                                 <CardPanel className='z-depth-2 consumableTable'>
                              <div>
-                                <h5><u>Assigned</u></h5>
+                                <h5 style={{fontFamily: 'Roboto',fontWeight: 300}}>Assigned</h5>
                                 <div style={{display : 'flex'}} >
                                     <div style={{float: 'left', width : '50%'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
@@ -110,8 +110,8 @@ class EntireHistoryConsumables extends Component{
                             null )}
                     </Col>
                        })}
-                <div className="filterContainerConsumableHistory">
-                <p style={{color:'white'}} className="adminDashboardTitle">History Filters</p>
+                <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
+                <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white'}} className="adminDashboardTitle">History Filters</p>
                     <Row className="ticketListCheckbox">
                         <Input name='filter' type='checkbox' value='red' label='Purchased' onClick = {this.setPurchased} checked={this.state.isPurchased} />
                         <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssigned} checked={this.state.isAssigned} />

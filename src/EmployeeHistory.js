@@ -18,8 +18,8 @@ class EmployeeHistory extends Component {
     render(){
         return (
            
-        <div style={{marginLeft : '1%', marginRight : '1%'}}>
-      <h3 className='heading'>Items held by Employee</h3>
+        <div style={{marginLeft: '30px',marginRight: '30px'}}>
+      <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Items held by Employee</h3>
       <Table >
         <thead>
             <tr>
@@ -32,7 +32,7 @@ class EmployeeHistory extends Component {
         <tbody>
             {this.state.data.map((item, index) => {
                 return <tr key={index}>
-                    <td>{item.asset_id ? `${item.asset.asset_name} [Asset]`: `${item.consumable.name} [consumable]`}</td>
+                    <td>{item.asset_id ? `${item.asset.asset_name} [Asset]`: `${item.consumable.name} [Consumable]`}</td>
                     <td>{item.asset_id ? "1": item.quantity}</td>
                 </tr>
             })}
