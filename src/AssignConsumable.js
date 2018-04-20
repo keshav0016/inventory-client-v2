@@ -190,7 +190,7 @@ class AssignConsumables extends Component {
                             )
                         })}
                     </Input>
-                    <Input s={6} placeholder="Consumable Quantity" label=' ' type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
+                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}

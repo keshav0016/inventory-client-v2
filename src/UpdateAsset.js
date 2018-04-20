@@ -369,16 +369,16 @@ class UpdateAsset extends Component {
             <div style={{marginLeft : '30px', marginRight : '30px'}}>
             <h3 style={{fontFamily : 'Roboto', fontWeight : 250}} >Update</h3>
                 <Row>
-                    <Input s={3} label=' ' placeholder="Serial Number *" defaultValue={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
-                    <Input s={3} label=' ' placeholder="Asset Name *" defaultValue={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
-                    <Input s={3} label=' ' name='on' type='date' onChange={this.setPurchaseDate} placeholder={`Purchase Date ${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
-                    <Input s={6} label=' ' placeholder="Description" defaultValue={this.state.description} onChange={this.setDescription} />
-                    <Input s={3} label=' ' placeholder="Invoice Number *" defaultValue={this.state.invoice_number.value} onChange={this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
-                    <Input s={3} label=' ' placeholder="Vendor *" defaultValue={this.state.vendor.value} onChange={this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error : null} />
-                    <Input s={3} label=' ' placeholder="Condition *" defaultValue = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null}/>
-                    <Input s={3} label=' ' placeholder="Location *" defaultValue = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
-                    <Input s={3} label=' ' placeholder="Amount *" type="number" min={0} defaultValue={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
-                    <Input s={3} label=' ' placeholder="GST" type="number" min={0} defaultValue={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
+                    <Input s={3} label="Serial Number *" defaultValue={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
+                    <Input s={3} label="Asset Name *" defaultValue={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
+                    <Input s={3} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
+                    <Input s={6} label="Description" defaultValue={this.state.description} onChange={this.setDescription} />
+                    <Input s={3} label="Invoice Number *" defaultValue={this.state.invoice_number.value} onChange={this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
+                    <Input s={3} label="Vendor *" defaultValue={this.state.vendor.value} onChange={this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error : null} />
+                    <Input s={3} label="Condition *" defaultValue = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null}/>
+                    <Input s={3} label="Location *" defaultValue = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
+                    <Input s={3} label="Amount *" type="number" min={0} defaultValue={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
+                    <Input s={3} label="GST" type="number" min={0} defaultValue={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     <br />
                     <Badge>Total : ₹{this.state.total}</Badge>
                     <Input s={6} type='select' label="Category" onChange={this.setCategory} defaultValue={this.state.category}>
