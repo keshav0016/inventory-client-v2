@@ -130,8 +130,12 @@ class RepairAsset extends Component{
     }
 
     getVendorName(){
-        this.state.vendorList.map((obj)=>{
-            this.state.vendorNames[obj.name]=null
+        let vendorListObj = {}
+        this.state.vendorList.map(function(obj){
+            return vendorListObj[obj.name] = null
+        })
+        this.setState({
+            vendorNames : vendorListObj
         })
     }
 

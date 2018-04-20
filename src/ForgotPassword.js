@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './forgotpassword.css'
 import axios from 'axios';
-import { Icon, Input, Button, Row, Col, Card } from 'react-materialize';
+import { Input, Button, Row, Col, Card } from 'react-materialize';
 // import './Login.css';
 // import './Employee.css'
 import {
