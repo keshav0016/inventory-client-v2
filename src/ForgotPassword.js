@@ -8,11 +8,7 @@ import {
 
   Redirect
 } from 'react-router-dom';
-// import Row from 'react-materialize/lib/Row';
-// import PasswordChange from './PwdChange';
-// import EmplooyeeDB from './EmplooyeeDB';
-// import AdminHomepage from './AdminHomepage';
-// import Homepage from './Homepage';
+import { baseUrl } from './config';
 
 class ForgotPasswordForm extends Component {
 
@@ -46,7 +42,7 @@ class ForgotPasswordForm extends Component {
         e.preventDefault();
         axios({
             method: 'post',
-            url: 'http://localhost:3001/user/forgotPassword',
+            url: `${baseUrl}/user/forgotPassword`,
             data: {
                 user_id: this.state.user_id,
                 email: this.state.email

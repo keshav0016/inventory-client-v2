@@ -6,6 +6,7 @@ import './Employee.css'
 import UpdateConsumablePurchase from './UpdateConsumablePurchase'
 import {Parser} from 'json2csv';
 import fileSaver from 'file-saver'
+import { baseUrl } from './config';
 
 class HistoryConsumables extends Component{
    constructor(props){
@@ -21,7 +22,7 @@ class HistoryConsumables extends Component{
    getHistory(){
        axios({
            method : 'post',
-           url : `http://localhost:3001/consumables/history`,
+           url : `${baseUrl}/consumables/history`,
            data: {
                consumable_id : this.props.match.params.consumable
            },

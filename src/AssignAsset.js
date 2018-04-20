@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button, Icon} from 'react-materialize'
+import { baseUrl } from './config';
 
 
 class AssignAsset extends Component{
@@ -123,7 +124,7 @@ class AssignAsset extends Component{
     assignAssetIntoDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/assign',
+            url : `${baseUrl}/asset/assign`,
             data : {
                 asset_id : this.props.asset,
                 user_id : this.state.user_id.value,
@@ -185,7 +186,7 @@ class AssignAsset extends Component{
     componentDidMount(){
         axios({
             method : 'get',
-            url : 'http://localhost:3001/asset/assign-form',
+            url : `${baseUrl}/asset/assign-form`,
             withCredentials : true
         })
         .then(res => {

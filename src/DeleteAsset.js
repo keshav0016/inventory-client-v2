@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import {Icon, Button} from 'react-materialize'
+import { baseUrl } from './config';
 
 
 class DeleteAsset extends Component{
@@ -22,7 +23,7 @@ class DeleteAsset extends Component{
     deleteAssetFromDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/delete',
+            url : `${baseUrl}/asset/delete`,
             data : {
                 asset_id : this.props.asset.asset_id
             }

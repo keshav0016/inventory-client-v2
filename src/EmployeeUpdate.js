@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class EmployeeUpdate extends Component{
     constructor(props){
@@ -71,7 +72,7 @@ class EmployeeUpdate extends Component{
    handleUpdate(){
        axios({
            method: 'post',
-           url: 'http://localhost:3001/employees/update',
+           url: `${baseUrl}/employees/update`,
            data:{
                user_id: this.state.user_id,
                first_name:this.state.first_name,

@@ -5,6 +5,7 @@ import AddVendor from './AddVendor'
 import AddAssetType from './AddAssetType'
 import $ from 'jquery'
 import './Employee.css'
+import { baseUrl } from './config';
 
 class AddAsset extends Component{
     constructor(props){
@@ -375,7 +376,7 @@ class AddAsset extends Component{
     addAssetIntoDb(){
         axios({
             method : 'post',
-            url : 'http://localhost:3001/asset/create',
+            url : `${baseUrl}/asset/create`,
             withCredentials : true,
             data : {
                 serial_number : this.state.serial_number.value ,
@@ -466,7 +467,7 @@ class AddAsset extends Component{
     fetchAssetTypeList(){
         axios({
             method: 'get',
-            url : 'http://localhost:3001/assetType/list'
+            url : `${baseUrl}/assetType/list`
             ,withCredentials : true
         })
         .then(res => {
@@ -507,7 +508,7 @@ class AddAsset extends Component{
     handleVendorList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/vendor/list`,
+            url : `${baseUrl}/vendor/list`,
             withCredentials : true
         })
         .then(res => {

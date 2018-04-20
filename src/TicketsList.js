@@ -6,6 +6,7 @@ import './ListPage.css'
 import './TicketsList.css'
 import $ from 'jquery'
 import {Link} from 'react-router-dom'
+import { baseUrl } from './config';
 
 class TicketsList extends Component{
     constructor(props){
@@ -112,7 +113,7 @@ class TicketsList extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/admin/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
+            url : `${baseUrl}/admin/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
             withCredentials : true
         })
         .then(res => {
@@ -132,7 +133,7 @@ class TicketsList extends Component{
     acceptTicket(ticket_number){
         axios({
             method:'post',
-            url:'http://localhost:3001/admin/ticket/accept',
+            url:`${baseUrl}/admin/ticket/accept`,
             data:{
                 ticket_number:ticket_number,
                 expected_recovery : this.state.expected_recovery
@@ -162,7 +163,7 @@ class TicketsList extends Component{
     rejectTicket(ticket_number){
         axios({
             method:'post',
-            url:'http://localhost:3001/admin/ticket/reject',
+            url:`${baseUrl}/admin/ticket/reject`,
             data:{
                 ticket_number:ticket_number
                 ,reason : this.state.reason

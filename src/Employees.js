@@ -10,6 +10,7 @@ import {
 
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination } from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class EmployeesList extends Component {
   constructor(props){
@@ -45,7 +46,7 @@ class EmployeesList extends Component {
   handleList(){
     axios({
       method: 'get',
-      url: `http://localhost:3001/employees/list?page=${this.state.page}`,
+      url: `${baseUrl}/employees/list?page=${this.state.page}`,
       withCredentials: true
     })
     .then((res) => {

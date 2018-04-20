@@ -4,6 +4,7 @@ import {Col, CardPanel, Row, Input} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import './ListPage.css'
+import { baseUrl } from './config';
 
 class EntireHistoryConsumables extends Component{
    constructor(props){
@@ -22,7 +23,7 @@ class EntireHistoryConsumables extends Component{
    getHistory(){
        axios({
            method : 'get',
-           url : `http://localhost:3001/consumables/entirehistory?purchased=${this.state.isPurchased}&assigned=${this.state.isAssigned}`,
+           url : `${baseUrl}/consumables/entirehistory?purchased=${this.state.isPurchased}&assigned=${this.state.isAssigned}`,
            withCredentials : true
        })
        .then(res => {

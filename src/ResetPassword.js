@@ -6,6 +6,7 @@ import {
   } from 'react-router-dom';
 import './Employee.css'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class ResetPassword extends Component {
     constructor(props){
@@ -88,7 +89,7 @@ class ResetPassword extends Component {
         if(this.state.Confirm_Password === this.state.New_Password){
             axios({
                 method: 'post',
-                url: 'http://localhost:3001/employees/reset',
+                url: `${baseUrl}/employees/reset`,
                 data: {
                     user_id: this.state.user_id,
                     password: this.state.New_Password

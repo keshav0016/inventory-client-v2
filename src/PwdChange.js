@@ -6,6 +6,7 @@ import {
   } from 'react-router-dom';
 import './Employee.css'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 class PasswordChange extends Component {
     constructor(props){
@@ -90,7 +91,7 @@ class PasswordChange extends Component {
         if(this.state.Confirm_Password === this.state.New_Password){
             axios({
                 method: 'post',
-                url: 'http://localhost:3001/employee/ticket/changepassword',
+                url: `${baseUrl}/employee/ticket/changepassword`,
                 data: {
                     user_id: this.state.user_id,
                     password: this.state.New_Password

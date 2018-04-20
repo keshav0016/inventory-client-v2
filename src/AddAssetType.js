@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 
 class AddAssetType extends Component{
@@ -85,7 +86,7 @@ class AddAssetType extends Component{
     createAssetTypeInDb(){
         axios({
             method: 'post'
-            ,url : 'http://localhost:3001/assetType/create'
+            ,url : `${baseUrl}/assetType/create`
             ,withCredentials : true
             ,data : {
                 assetType : this.state.assetType.value

@@ -6,6 +6,7 @@ import VendorUpdate from './VendorUpdate'
 import $ from 'jquery'
 import './ListPage.css'
 import './Employee.css'
+import { baseUrl } from './config';
 
 class Vendor extends Component{
     constructor(props){
@@ -26,7 +27,7 @@ class Vendor extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/vendor/list?page=${this.state.page}&search=%${this.state.search}%`,
+            url : `${baseUrl}/vendor/list?page=${this.state.page}&search=%${this.state.search}%`,
             withCredentials : true
         })
         .then(res => {

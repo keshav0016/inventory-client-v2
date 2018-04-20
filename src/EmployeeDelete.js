@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Button , Icon} from 'react-materialize';
+import { baseUrl } from './config';
 
 class EmployeeDelete extends Component {
     constructor(props){
@@ -11,7 +12,7 @@ class EmployeeDelete extends Component {
     handleDelete(){
         axios({
           method: 'post',
-          url: 'http://localhost:3001/employees/delete',
+          url: `${baseUrl}/employees/delete`,
           data:{
             user_id: this.props.user.user_id
           },

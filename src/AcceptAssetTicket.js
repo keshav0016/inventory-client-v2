@@ -3,6 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import {Redirect} from 'react-router-dom'
 import './Employee.css'
+import { baseUrl } from './config';
 
 
 class AcceptAssetTicket extends Component{
@@ -37,7 +38,7 @@ class AcceptAssetTicket extends Component{
     fetchAvailableAssets(){
         axios({
             method : 'get'
-            ,url : `http://localhost:3001/admin/ticket/available?ticket=${this.props.match.params.ticket}`
+            ,url : `${baseUrl}/admin/ticket/available?ticket=${this.props.match.params.ticket}`
             ,withCredentials : true
         })
         .then(res => {
@@ -77,7 +78,7 @@ class AcceptAssetTicket extends Component{
     acceptTicket(){
         axios({
             method:'post',
-            url:'http://localhost:3001/admin/ticket/accept',
+            url:`${baseUrl}/admin/ticket/accept`,
             data:{
                 ticket_number:this.props.match.params.ticket,
                 expected_recovery : this.state.expected_recovery

@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 import './ListPage.css'
 import './Employee.css'
 import $ from 'jquery'
+import { baseUrl } from './config';
 
 
 class Consumables extends Component{
@@ -114,7 +115,7 @@ class Consumables extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `http://localhost:3001/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity.value}&max=${this.state.maxQuantity.value}`,
+            url : `${baseUrl}/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity.value}&max=${this.state.maxQuantity.value}`,
             withCredentials : true
         })
         .then(res => {

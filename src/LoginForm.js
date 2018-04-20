@@ -8,6 +8,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Row from 'react-materialize/lib/Row';
+import { baseUrl } from './config';
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
 // import AdminHomepage from './AdminHomepage';
@@ -50,7 +51,7 @@ class LoginForm extends Component {
     e.preventDefault();
       axios({
         method: 'post',
-        url: 'http://localhost:3001/user/login',
+        url: `${baseUrl}/user/login`,
         data: {
           user_id: this.state.user_id,
           password: this.state.password
