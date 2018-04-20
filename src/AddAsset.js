@@ -496,8 +496,12 @@ class AddAsset extends Component{
     }
 
     getVendorName(){
+        let vendorListObj = {}
         this.state.vendorList.map((obj)=>{
-            this.state.vendorNames[obj.name]=null
+            return vendorListObj[obj.name] = null
+        })
+        this.setState({
+            vendorNames : vendorListObj
         })
     }
 

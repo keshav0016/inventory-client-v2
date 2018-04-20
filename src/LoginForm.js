@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Icon, Input, Button,Col, Card } from 'react-materialize';
+import { Input, Button,Col, Card } from 'react-materialize';
 import './Login.css';
 import './Employee.css'
 import {
@@ -59,7 +59,7 @@ class LoginForm extends Component {
         withCredentials: true
       })
       .then((res) => {
-        if(res.data.message == 'user not found'){
+        if(res.data.message === 'user not found'){
           return Promise.reject('Wrong credentials');
         }
         if (res.data.passwordSame === true) {
@@ -93,7 +93,7 @@ class LoginForm extends Component {
         </div> 
         <Row>
           <Col s={2} offset={"m2"}>
-            <img s={2} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274"/>
+            <img s={2} alt="wal" src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274"/>
           </Col>
           <Col s={4}>
             <form onSubmit={this.verifyCredentials}>
