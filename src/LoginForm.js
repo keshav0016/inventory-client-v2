@@ -88,8 +88,8 @@ class LoginForm extends Component {
     var loginform = (
       <div className='background teal' style={{height: '100vh', position: 'relative'}}>
         <div className='header1' style={{padding: '20px 0', color: 'white'}}>
-          <h4 style={{marginTop: 0, textAlign: 'center'}}>Inventory Management System </h4>
-          </div> 
+          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: '300'}}>Inventory Management System </h4>
+        </div> 
         <Row>
           <Col s={2} offset={"m2"}>
             <img s={2} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274"/>
@@ -101,12 +101,12 @@ class LoginForm extends Component {
                 <Row>
                   {/* <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon> */}
                   {/* <div className='fields'> */}
-                    <Input s={12} onChange={this.getUserid} label="User Id" icon='account_box' />
+                    <Input s={12} onChange={this.getUserid} placeholder="User Id" icon='account_box' />
                     {/* <Button className='submitbtn' onClick={this.verifyCredentials}>LOGIN</Button> */}
                   {/* </div> */}
                 </Row>
                 <Row>
-                    <Input type="password" s={12} onChange={this.getPassword} label="Password" icon='lock' />
+                    <Input type="password" s={12} onChange={this.getPassword} placeholder="Password" icon='lock' />
 
                 </Row>
                 <Row>
