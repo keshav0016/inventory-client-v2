@@ -32,13 +32,19 @@ class EmployeeDelete extends Component {
     }
     render(){
         return(
-            <div>
-            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Delete Employee</h3 >
-             <Icon large>delete forever</Icon>
-            <h4>Are you sure you want to delete <b style ={{color:'teal'}}>{this.props.user.first_name}</b> ?</h4>
-            <Button waves='light' onClick={this.handleDelete}>Delete</Button>
+            <div style={{padding: '20px'}} className="no-footer">
+            <h5>Delete Employee</h5>                            
+            <p>{`Do you really want to delete `}
+                <b style={{color:'teal'}}>
+                    {`${this.props.user.first_name} `}
+                </b>
+                {`?`}
+            </p>
+            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Button onClick = {this.handleDelete} style={{margin: '0 20px'}}>Delete</Button>
+                    <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
             </div>
-
+        </div>
         )
     }
 

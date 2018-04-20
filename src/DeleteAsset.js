@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Icon, Button} from 'react-materialize'
+import {Row, Col, Card, Icon, Button} from 'react-materialize'
 import { baseUrl } from './config';
 
 
@@ -15,9 +15,11 @@ class DeleteAsset extends Component{
     }
 
     setDeleteAssetRequest(){
-        this.setState({
-            deleteAssetRequest : true
-        })
+        // this.setState({
+        //     deleteAssetRequest : true
+        // })
+
+        this.deleteAssetFromDb();
     }
 
     deleteAssetFromDb(){
@@ -52,12 +54,18 @@ class DeleteAsset extends Component{
 
     render(){
         return(
-            <div>
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Delet Asset</h3>                            
-                <Icon large>delete forever</Icon>
-                <h4>{`Do you really want to delete `}<b style={{color:'teal'}}>{`${this.props.asset.asset_name} `}</b>{`?`}</h4>
-                <Button onClick = {this.setDeleteAssetRequest}>Delete</Button>
-                {this.state.deleteAssetRequest ? this.deleteAssetFromDb() : null}
+            <div style={{padding: '20px'}} className="no-footer">
+                <h5>Delete Asset</h5>                            
+                <p>{`Do you really want to delete `}
+                    <b style={{color:'teal'}}>
+                        {`${this.props.asset.asset_name} `}
+                    </b>
+                    {`?`}
+                </p>
+                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                        <Button onClick = {this.setDeleteAssetRequest} style={{margin: '0 20px'}}>Delete</Button>
+                        <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                </div>
             </div>
         )
     }

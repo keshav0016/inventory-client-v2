@@ -199,7 +199,7 @@ class Assets extends Component{
                                     </Modal>
                                     <Modal
                                         style={{width : '70%'}}
-                                        actions={<div></div>}
+                                        actions={null}
                                         trigger={item.current_status === 'Available' ? <NavItem>Delete</NavItem> : null}>
                                         {item.current_status === 'Available' ? <DeleteAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
