@@ -259,7 +259,7 @@ class Consumables extends Component{
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
                                 </Modal>
                                 <Modal
-                                    fixedFooter
+                                    actions={null}
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>

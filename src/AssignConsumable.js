@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import { baseUrl } from './config';
+import $ from 'jquery'
 
 
 
@@ -30,6 +31,10 @@ class AssignConsumables extends Component {
         this.checkForValidation = this.checkForValidation.bind(this)
         this.getEmployeeList = this.getEmployeeList.bind(this)
         this.assignedEmployee = this.assignedEmployee.bind(this)
+    }
+
+    componentDidMount(){
+        $('label').addClass('active')
     }
 
     getEmployeeList(){
@@ -180,8 +185,8 @@ class AssignConsumables extends Component {
 
     render() {
         return (
-            <div style={{marginLeft : '30px', marginRight : '30px'}}>
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign Consumable</h3>            
+            <div style={{padding: '20px'}} className="no-footer">
+                <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign Consumable</h5>            
                 <Row>
                     <Input s={5} type='select' onChange={this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null} >
                         {this.state.employeesList.map((element,index)=>{
@@ -193,6 +198,7 @@ class AssignConsumables extends Component {
                     <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
+                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}
             </div>

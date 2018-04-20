@@ -4,6 +4,10 @@ input:not([type])+label:after, input[type=text]+label:after, input[type=password
      white-space: nowrap;
 }
 
+label.active::after{
+    top: 60px;
+}
+
 html {
     margin: 0;
     padding: 0;
