@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} from 'react-materialize'
 // import AddConsumables from './AddConsumables'
-import UpdateConsumables from './UpdateConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
 import {Link} from 'react-router-dom';

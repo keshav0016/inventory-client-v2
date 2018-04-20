@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Input, Button, Row, Icon, Col, Card} from 'react-materialize'
+import {Input, Button, Row, Col, Card} from 'react-materialize'
 import {
    Redirect
   } from 'react-router-dom';
