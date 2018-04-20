@@ -68,10 +68,10 @@ class HistoryConsumables extends Component{
 
    render(){
        return(
-           <div style={{marginLeft : '1%',marginRight : '1%'}}>
+           <div style={{marginLeft : '30px',marginRight : '30px'}}>
             <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
             {this.state.fetchHistory ? this.getHistory() : null}
-            <h3 className='heading'>Consumable Details</h3>
+            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Consumable Details</h3>
             {this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                         <CardPanel className='z-depth-2'>

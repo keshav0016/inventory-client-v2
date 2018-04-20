@@ -172,8 +172,8 @@ class Tickets extends Component{
 
    render(){
         return(
-            <div >
-                <h3 className='heading'>Ticket Request Form</h3>
+            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+                <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Ticket Request Form</h3>
                 <div className ='RequestForm'>
                 <Row>
                     <Input s={6} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>
@@ -188,7 +188,7 @@ class Tickets extends Component{
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity} disabled={this.state.disableItems}/>
+                    <Input  s={6} label=' ' placeholder="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity} disabled={this.state.disableItems}/>
                 </Row>
                 <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation} disabled={this.state.disableItems}>Request</Button>
                 {this.state.requestResource ? this.confirmRequest() : null} 

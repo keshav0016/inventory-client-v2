@@ -206,9 +206,9 @@ class Consumables extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{marginLeft: '30px',marginRight: '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3 className='heading'>List of Consumables</h3>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List of Consumables</h3>
                 <Row>
                 <Input s={3} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
@@ -229,7 +229,7 @@ class Consumables extends Component{
                     :
 
                     <div>
-                    <Table centered hoverable className="consumableTable">
+                    <Table className="consumableTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}} >
                     <thead>
                         <tr>
                             <th style={{paddingLeft:'20px'}} data-field="consumable_id">Id</th>
@@ -254,12 +254,10 @@ class Consumables extends Component{
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal> */}
                                 <Modal style={{width:'70%'}}
-                                        header='Delete Consumable'
                                         trigger={<NavItem>Delete</NavItem>}>
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
                                 </Modal>
                                 <Modal
-                                    header='Assign Consumable'
                                     fixedFooter
                                     trigger={<NavItem>Assign</NavItem >}>
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>

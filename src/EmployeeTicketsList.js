@@ -122,8 +122,8 @@ class EmployeeTicketsList extends Component{
     
     render(){
         return(
-            <div style={{marginLeft : '1%', marginRight : '1%'}}>
-                <h3 className='heading'>Employee Tickets List</h3>
+            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+                <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
 
                 <div className="filterContainer">
@@ -139,7 +139,7 @@ class EmployeeTicketsList extends Component{
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> :
                         <div>
-                            <Table style={{marginLeft:'1%'}}  className="consumableTable">
+                            <Table className="consumableTable" style={{fontFamily : 'Roboto', fontWeight : 350}} >
                                 <thead>
                                     <tr>
                                     <th data-field="ticket_number">Ticket Number</th>

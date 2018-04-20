@@ -71,7 +71,7 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div>
-                <h4>Do you really want to recover this asset?</h4>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Do you really want to recover this asset?</h3>
                 <br /><br />
                 {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <div>
                     <p><b>Asset Name</b> : {this.state.recoverInfo.asset.asset_name}<br /><b>Assigned Employee</b> : {this.state.recoverInfo.user.first_name} {this.state.recoverInfo.user.last_name}</p>

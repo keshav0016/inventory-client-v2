@@ -180,7 +180,8 @@ class AssignConsumables extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign Consumable</h3>            
                 <Row>
                     <Input s={5} type='select' onChange={this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null} >
                         {this.state.employeesList.map((element,index)=>{
@@ -189,7 +190,7 @@ class AssignConsumables extends Component {
                             )
                         })}
                     </Input>
-                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
+                    <Input s={6} placeholder="Consumable Quantity" label=' ' type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}

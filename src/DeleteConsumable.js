@@ -73,6 +73,7 @@ class DeleteConsumable extends Component{
     render(){
         return(
             <div>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Delete Consumable</h3>                            
                 <Icon large>delete forever</Icon>
                 <h4>{`Do you really want to delete `}<b style={{color:'teal'}}>{`${this.props.consumable.name} `}</b>{`?`}</h4>
                 <Button onClick = {this.setDeleteConsumableRequest}>Delete</Button>

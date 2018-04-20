@@ -76,10 +76,10 @@ class Assets extends Component{
 
     render(){
         return(
-            <div  style={{marginLeft : '1%', marginRight : '1%'}}>
+            <div  style={{marginLeft : '30px', marginRight : '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 {this.state.assetDetails ? <div>
-                <h3 className='heading'>Asset Details</h3>
+                <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Asset Details</h3>
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
