@@ -261,10 +261,10 @@ class UpdateConsumablePurchase extends Component{
                     <p><b>Consumable: </b>{this.props.consumable.consumable.name}</p>
                     <p><b>Vendor: </b>{this.props.consumable.vendor_name}</p>
                     <p><b>Purchase Date: </b>{moment(this.props.consumable.purchase_date).format('DD MMM YYYY')}</p>
-                    <Input s={6} label=' ' placeholder="Purchased Quantity" type='number' min={0} value = {this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null} />
-                    <Input s={6} label=' ' placeholder="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null} />
-                    <Input s={6} label=' ' placeholder="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
-                    <Input s={6} label=' ' placeholder="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null} />
+                    <Input s={6} label="Purchased Quantity" type='number' min={0} value = {this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null} />
+                    <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null} />
+                    <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
+                    <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null} />
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>

@@ -128,7 +128,7 @@ class AcceptAssetTicket extends Component{
                 <Row>
                     <Input s={11} name='on' type='date' label=' ' placeholder="Expected Recovery*" onChange={this.handleExpected} />
                     <Input s={11} onChange = {this.setReason} label=' ' placeholder="Remarks" value={this.state.reason} />
-                    <Input s={11} placeholder = "Asset Id*" label=' ' type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id}>{this.availableAssetsDropdown()}</Input>
+                    <Input s={11} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id}>{this.availableAssetsDropdown()}</Input>
                 </Row>
                 <br />
                 <Row>
