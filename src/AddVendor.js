@@ -168,7 +168,7 @@ class AddVendor extends Component{
 
     render(){
         return(
-            <div>
+            <div className="no-footer" style={{padding: '20px'}}>
                 <Row>
                     <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Vendor</h3 >
                     <Input s={6} label=" " placeholder="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
@@ -177,6 +177,7 @@ class AddVendor extends Component{
 
                 </Row>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}
             </div>
