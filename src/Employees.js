@@ -70,11 +70,10 @@ class EmployeesList extends Component {
   
   render() {
     var employeelist = (
-      <div style={{marginLeft : '1%', marginRight : '1%'}}>
+      <div style={{marginLeft: '30px',marginRight: '30px'}}>
         {this.state.handleListRequest ? this.handleList() : null}
-        <h3 className='heading'>List of Employees</h3>
-         
-          <Table>
+        <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>List of Employees</h3>
+          <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
             <thead>
               <tr>
                 <th data-field="user_id">User Id</th>
@@ -101,12 +100,10 @@ class EmployeesList extends Component {
                    <Button className = 'btn-mini'> <Icon>more_vert</Icon></Button>
                   }>
                    <Modal
-                    header='Update the Employee'
                     trigger={<NavItem >Edit</NavItem >}>
                     <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>
-                  <Modal
-                    header='Delete the Employee' 
+                  <Modal style={{width:'70%'}} 
                     trigger={<NavItem >Delete</NavItem >}>
                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                   </Modal>

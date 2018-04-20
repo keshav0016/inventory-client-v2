@@ -102,6 +102,7 @@ class EmployeeUpdate extends Component{
         return (           
             <div>           
                 <Row>
+                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update Employee</h3 >
                 <Input  defaultValue={this.state.user_id} onChange={this.handleUserid}s={6} label="User Id" />
                  <Input  defaultValue={this.state.first_name} onChange={this.handleFirstname}s={6} label="First Name" />
                     <Input  defaultValue={this.state.last_name}onChange={this.handleLastname} s={6}label="Last Name" />

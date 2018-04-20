@@ -186,8 +186,8 @@ class TicketsList extends Component{
 
     render(){
         return(
-            <div>
-                <h3 className = "heading">Ticket list</h3>
+            <div style={{marginLeft: '30px',marginRight: '30px'}}>
+                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Ticket list</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
@@ -283,7 +283,7 @@ class TicketsList extends Component{
 
                 </Tabs>
                 <div className="filterContainer">
-                <p style={{color:'white'}} className="adminDashboardTitle">Status Filters</p>
+                <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white'}} className="adminDashboardTitle">Status Filters</p>
                     <Row className="ticketListCheckbox">
                         <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
                         <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
