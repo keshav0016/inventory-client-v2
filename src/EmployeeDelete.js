@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button , Icon} from 'react-materialize';
+import { Button} from 'react-materialize';
 import { baseUrl } from './config';
 
 class EmployeeDelete extends Component {
