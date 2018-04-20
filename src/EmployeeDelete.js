@@ -33,6 +33,7 @@ class EmployeeDelete extends Component {
     render(){
         return(
             <div>
+            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Delete Employee</h3 >
              <Icon large>delete forever</Icon>
             <h4>Are you sure you want to delete <b style ={{color:'teal'}}>{this.props.user.first_name}</b> ?</h4>
             <Button waves='light' onClick={this.handleDelete}>Delete</Button>

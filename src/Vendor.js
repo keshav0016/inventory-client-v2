@@ -75,12 +75,11 @@ class Vendor extends Component{
 
     render(){
         return(
-            <div>
+            <div style={{marginLeft: '30px',marginRight: '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
-                <br />
-                <h3 className='heading' >Vendors</h3 >
-                <Table centered>
-                    <thead>
+                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Vendors</h3 >
+                <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                    <thead >
                         <tr>
                             <th data-field="id">Id</th>
                             <th data-field="name">Vendor Name</th>
@@ -98,7 +97,6 @@ class Vendor extends Component{
                             <td>{item.address}</td>
                             <td>{item.contact}</td>
                             <td><Modal
-                                header='Update the Vendor'
                                 trigger={<Button>Edit</Button>}>
                                 <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal></td>
@@ -107,7 +105,6 @@ class Vendor extends Component{
                     </tbody>
                 </Table>
                 <Modal
-                    header='Add Vendor'
                     id="addVendor"
                     actions ={<div></div>}
                     // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
