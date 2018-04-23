@@ -279,14 +279,15 @@ class RepairAsset extends Component{
                         <Input s={12} type='date' label=' ' placeholder="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
                         <Input s={12} type='date' label=' ' placeholder="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                     </Row>
-                    <Modal
-                        header='Add Vendor'
-                        id="addVendor"
-                        trigger={<Button>Add Vendor</Button>}>
-                        <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                    </Modal> 
-                    <br /><br />
-                    <Button waves='light' style={{position : 'fixed', bottom : '3%', right : '3%'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    <div>
+                        <Modal
+                            header='Add Vendor'
+                            id="addVendor"
+                            trigger={<Button>Add Vendor</Button>}>
+                            <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                        </Modal> 
+                        <Button onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    </div>
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>
