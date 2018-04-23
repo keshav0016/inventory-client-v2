@@ -34,7 +34,7 @@ class ResetPassword extends Component {
                             <Card className="z-depth-2" title="Reset your password" style={{padding: "30px"}}>
                                 <p>Check Your Email For Secret Password</p>
                                 <Row>
-                                    <Input s={12}  placeholder="Secret Password*" type='password' onChange={this.setEmailPassword} icon='lock' />
+                                    <Input autoFocus s={12}  placeholder="Secret Password*" type='password' onChange={this.setEmailPassword} icon='lock' />
                                 </Row>
                                 <Row>
                                     <Input s={12}  type='password'onChange={this.handleNewPassword} placeholder="New Password" ><Icon>lock</Icon></Input>

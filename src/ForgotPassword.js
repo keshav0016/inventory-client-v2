@@ -70,7 +70,7 @@ class ForgotPasswordForm extends Component {
                         <form onSubmit={this.verifyCredentials}>
                             <Card className="z-depth-2" title="Reset your password" style={{padding: "30px",height:'450.5px'}}>
                             <Row>
-                                <Input s={12} onChange={this.getUserid} placeholder="Employee ID" icon="account_box" />
+                                <Input autoFocus s={12} onChange={this.getUserid} placeholder="Employee ID" icon="account_box" />
                             </Row>
                             <Row>
                                 <Input s={12} type="email" onChange={this.getEmail} placeholder="Email" icon="email"></Input>

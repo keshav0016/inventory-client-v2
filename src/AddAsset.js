@@ -535,7 +535,7 @@ class AddAsset extends Component{
             <div style={{marginLeft : '30px', marginRight : '30px'}} >
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Asset</h3>
                 <Row>
-                    <Input s={6} placeholder="Serial Number *" label=' ' value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null}/>
+                    <Input s={6} placeholder="Serial Number *" label=' ' value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
                     <Input s={6} placeholder="Asset Name *" label=' ' value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
                     <Input s={6} name='on' type='date' label=' ' placeholder="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
                     <Input s={6} placeholder="Description" label=' ' value = {this.state.description} onChange = {this.setDescription}/>
