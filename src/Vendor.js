@@ -107,7 +107,6 @@ class Vendor extends Component{
                 </Table>
                 <Modal
                     id="addVendor"
-                    actions ={<div></div>}
                     actions={null}
                     // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
                     trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>

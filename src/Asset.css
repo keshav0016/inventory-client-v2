@@ -5,7 +5,7 @@
 
 .filterContainer{
     position: fixed;
-    top: 0;
+    top: 64px;
     right: 0;
     padding: 10px;
     padding-top: 64px;
