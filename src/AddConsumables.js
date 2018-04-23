@@ -150,7 +150,7 @@ class AddConsumables extends Component{
                 })
             })    
         }
-        if(Number(this.state.gst.value) > 0){
+        if(Number(this.state.gst.value) >= 0){
             this.setState({
                 gst: Object.assign(this.state.gst, {
                     error: "",
@@ -166,7 +166,7 @@ class AddConsumables extends Component{
                 })
             })  
         }
-        if(Number(this.state.discount.value) > 0){
+        if(Number(this.state.discount.value) >= 0){
             this.setState({
                 discount: Object.assign(this.state.discount, {
                     error: "",
@@ -206,15 +206,12 @@ class AddConsumables extends Component{
                 })
             })  
         }
-        if(!this.state.name.value||!this.state.purchase_date.value||!this.state.purchased_quantity.value||!this.state.item_price.value||!this.state.gst.value||!this.state.discount.value){
-                console.log('error')
-            }
-        else{
+        if(this.state.name.value && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value){
             this.setState({
-                    addConsumableRequest : true
-                })
+                addConsumableRequest : true
+            })
+        }
             }
-    }
 
     setConsumableName(e){
         this.setState({
@@ -445,7 +442,7 @@ class AddConsumables extends Component{
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
                     <Modal
-                        header='Add Vendor'
+                        actions={null}
                         id="addVendor"
                         trigger={<Button style={{marginLeft:'1%'}} id="triggerAddVendor">Add Vendor</Button>}>
                         <AddVendor setVendorListRequest = {this.setVendorListRequest}/>

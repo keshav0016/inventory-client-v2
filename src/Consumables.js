@@ -112,31 +112,40 @@ class Consumables extends Component{
     }
 
     handleList(){
-        axios({
-            method : 'get',
-            url : `${baseUrl}/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity.value}&max=${this.state.maxQuantity.value}`,
-            withCredentials : true
-        })
-        .then(res => {
-            if(res.data.consumables.length !== 0)
-            {
-                this.setState({
-                    consumableList : res.data.consumables,
-                    pagination : res.data.pagination,
-                    handleListRequest : false
-                })
-            }
-            else{
-                this.setState({
-                    consumableList : res.data.consumables,
-                    pagination : res.data.pagination,
-                    handleListRequest : false
-                })
-            }
-        })
-        .catch(error => {
-            console.error(error)
-        })
+        if(this.state.minQuantity.value >= 0){
+            axios({
+                method : 'get',
+                url : `${baseUrl}/consumables/list?page=${this.state.page}&keyword=${this.state.keyword}&sort=${this.state.sort}&min=${this.state.minQuantity.value}&max=${this.state.maxQuantity.value}`,
+                withCredentials : true
+            })
+            .then(res => {
+                if(res.data.consumables.length !== 0)
+                {
+                    this.setState({
+                        consumableList : res.data.consumables,
+                        pagination : res.data.pagination,
+                        handleListRequest : false
+                    })
+                }
+                else{
+                    this.setState({
+                        consumableList : res.data.consumables,
+                        pagination : res.data.pagination,
+                        handleListRequest : false
+                    })
+                }
+            })
+            .catch(error => {
+                console.error(error)
+            })
+        }
+        else{
+            this.setState({
+                consumableList:[],
+                pagination : {totalPage : 1, currentPage : 1},
+                handleListRequest : false
+            })
+        }
     }
 
     setHandleListRequest(){

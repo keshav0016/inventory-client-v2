@@ -279,7 +279,7 @@ class RepairAsset extends Component{
                         <Input s={12} type='date' label=' ' placeholder="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
                         <Input s={12} type='date' label=' ' placeholder="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                         <Modal
-                            header='Add Vendor'
+                            actions={null}
                             id="addVendor"
                             trigger={<Button>Add Vendor</Button>}>
                             <AddVendor setVendorListRequest = {this.setVendorListRequest}/>

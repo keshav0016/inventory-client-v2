@@ -567,7 +567,7 @@ class AddAsset extends Component{
                         <Row>
                             <Col s={6}>
                                 <Modal
-                                    header='Add Vendor'
+                                    actions={null}
                                     id="addVendor"
                                     trigger={<Button>Add Vendor</Button>}>
                                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
@@ -575,7 +575,7 @@ class AddAsset extends Component{
                             </Col>
                             <Col>
                                 <Modal
-                                header='Add Asset Type'
+                                actions={null}
                                 trigger={<Button>Add Asset Type</Button>}>
                                 <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
                                 </Modal>
