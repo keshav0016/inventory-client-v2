@@ -65,7 +65,6 @@ class DeleteConsumable extends Component{
                         <Button onClick = {this.setDeleteConsumableRequest} style={{margin: '0 20px'}}>Delete</Button>
                         <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 </div>
-                {this.state.deleteConsumableRequest ? this.deleteConsumableFroDb : null}
             </div>
         )
     }
