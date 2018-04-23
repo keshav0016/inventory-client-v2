@@ -88,6 +88,7 @@ class AssetType extends Component{
                             <td>{item.assetType}</td>
                             <td>{item.maxRequest}</td>
                             <td><Modal
+                            actions={null}
                                 trigger={<Button>Edit</Button>}>
                                 <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal></td>
@@ -96,8 +97,8 @@ class AssetType extends Component{
                     </tbody>
                 </Table>
                 <Modal
-                    actions ={<div></div>}
-                    trigger={<Button floating fab="vertical" large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
+                    actions ={null}
+                    trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' style={{position: 'fixed'}} />}>
                     <AddAssetType setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
