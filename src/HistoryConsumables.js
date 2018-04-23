@@ -77,7 +77,7 @@ class HistoryConsumables extends Component{
                         <CardPanel className='z-depth-2'>
                             {consumable.vendor_name ? 
                             <div> 
-                                <h5><u>Purchased</u></h5>
+                                <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchased</h5>
                                 <div style={{display : 'flex'}} >
                                     <div style={{float : 'left', width : '50%'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
@@ -101,7 +101,7 @@ class HistoryConsumables extends Component{
                             </div>
                              : 
                              <div>
-                                <h5><u>Assigned</u></h5>
+                                <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Assigned</h5>
                                 <div style={{display : 'flex'}} >
                                     <div style={{float: 'left', width : '50%'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
