@@ -157,7 +157,7 @@ class Assets extends Component{
                     </div>
                 </div>
                 {this.state.loading ? <ProgressBar /> :
-                (this.state.assetList.length === 0 ? <div className = 'noRecordScreen'>No Records</div> :
+                (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
                 <Table className="assetTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>

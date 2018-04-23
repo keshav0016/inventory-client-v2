@@ -78,6 +78,7 @@ class Vendor extends Component{
             <div style={{marginLeft: '30px',marginRight: '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Vendors</h3 >
+                {this.state.vendorList.length === 0 ? <div>No Records</div> : <div>
                 <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
@@ -114,7 +115,8 @@ class Vendor extends Component{
                 </Modal>
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
-                </div> 
+                </div>
+                    </div>} 
             </div>
         )
     }
