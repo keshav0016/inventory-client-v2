@@ -582,9 +582,6 @@ class AddAsset extends Component{
                             </Col>
                         </Row>
                         <Row></Row>
-                        <Row></Row>
-                        <Row></Row>
-                        <Row></Row>
                         <Row>
                             <Col offset={'s6'}>
                                 <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
