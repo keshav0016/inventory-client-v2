@@ -97,7 +97,7 @@ class AssetType extends Component{
                 </Table>
                 <Modal
                     actions ={<div></div>}
-                    trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
+                    trigger={<Button floating fab="vertical" large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
                     <AddAssetType setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
