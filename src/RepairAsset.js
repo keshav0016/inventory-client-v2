@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Icon, Modal, Autocomplete} from 'react-materialize'
+import {Row, Input, Button, Icon, Modal, Autocomplete, Col} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import moment from 'moment'
@@ -278,16 +278,16 @@ class RepairAsset extends Component{
                         </Row>
                         <Input s={12} type='date' label=' ' placeholder="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
                         <Input s={12} type='date' label=' ' placeholder="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
-                    </Row>
-                    <div>
                         <Modal
                             header='Add Vendor'
                             id="addVendor"
                             trigger={<Button>Add Vendor</Button>}>
                             <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                        </Modal> 
-                        <Button onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                    </div>
+                        </Modal>
+                        <Col offset={'s2'}>
+                        <Button style={{marginTop:"-60px", marginLeft: '-50px'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                        </Col>
+                    </Row>
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>
