@@ -15,30 +15,11 @@ class DeleteConsumable extends Component{
     }
 
     setDeleteConsumableRequest(){
-        this.setState({
-            deleteConsumableRequest : true
-        })
+        // this.setState({
+        //     deleteConsumableRequest : true
+        // })
+        this.deleteConsumableFroDb();
     }
-
-        // handleDelete(index){
-    //     axios({
-    //         method : 'post',
-    //         url : 'http://localhost:3001/consumables/delete',
-    //         data : {
-    //             consumable_id : this.state.consumableList[index].consumable_id
-    //         },
-    //         withCredentials:true
-    //     })
-    //     .then(obj => {
-    //         this.setState({
-    //             handleListRequest:true
-    //         })
-    //         window.Materialize.toast('Consumable Deleted Successfully', 4000)
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //     })
-    // }
 
     deleteConsumableFroDb(){
         axios({
@@ -84,7 +65,7 @@ class DeleteConsumable extends Component{
                         <Button onClick = {this.setDeleteConsumableRequest} style={{margin: '0 20px'}}>Delete</Button>
                         <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 </div>
-                        {this.state.deleteConsumableRequest ? this.deleteConsumableFroDb : null}
+                {this.state.deleteConsumableRequest ? this.deleteConsumableFroDb : null}
             </div>
         )
     }

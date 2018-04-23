@@ -97,17 +97,17 @@ class LoginForm extends Component {
           </Col>
           <Col s={4}>
             <form onSubmit={this.verifyCredentials}>
-              <Card className="z-depth-2" title="Login" style={{padding: "30px",}}>
+              <Card className="z-depth-2" title="Login" style={{padding: "30px", marginTop: 0}}>
                 {/* <h4>Login</h4> */}
                 <Row>
                   {/* <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon> */}
                   {/* <div className='fields'> */}
-                    <Input s={12} onChange={this.getUserid} placeholder="User Id" icon='account_box' />
+                    <Input s={12} onChange={this.getUserid} placeholder="User Id" icon='account_box'  autoFocus/>
                     {/* <Button className='submitbtn' onClick={this.verifyCredentials}>LOGIN</Button> */}
                   {/* </div> */}
                 </Row>
                 <Row>
-                    <Input type="password" s={12} onChange={this.getPassword} placeholder="Password" icon='lock' />
+                    <Input type="password" s={12} onChange={this.getPassword} placeholder="Password" icon='lock'/>
 
                 </Row>
                 <Row>
