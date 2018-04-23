@@ -70,6 +70,7 @@ class AssetType extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
                 <h3 style={{fontFamily: 'Roboto', fontWeight: 250}} >Asset Types</h3 >
+                {this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
                 <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
@@ -102,6 +103,7 @@ class AssetType extends Component{
                 <div>
                     <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
                 </div> 
+                </div>}
             </div>
         )
     }
