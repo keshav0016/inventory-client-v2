@@ -415,7 +415,7 @@ class AddConsumables extends Component{
             <div style={{marginLeft:'30px',marginRight:'30px'}}>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
                 <Row>
-                    <Input s={6} placeholder="Consumable" label=' ' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
+                    <Input autoFocus s={6} placeholder="Consumable" label=' ' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
                     <Input s={6} name='on' type='date' label=' ' placeholder="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
                     <br/>
                     <br/>
