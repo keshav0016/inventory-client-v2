@@ -581,8 +581,12 @@ class AddAsset extends Component{
                                 </Modal>
                             </Col>
                         </Row>
+                        <Row></Row>
+                        <Row></Row>
+                        <Row></Row>
+                        <Row></Row>
                         <Row>
-                            <Col style={{position:'absolute',width: '15%',left:'85%', bottom:'-16%'}}>
+                            <Col offset={'s6'}>
                                 <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
                             </Col>
                         </Row>
