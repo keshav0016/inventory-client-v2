@@ -232,7 +232,7 @@ class Consumables extends Component{
                     <Table className="consumableTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}} >
                     <thead>
                         <tr>
-                            <th style={{paddingLeft:'20px'}} data-field="consumable_id">Id</th>
+                            <th data-field="consumable_id">Id</th>
                             <th data-field="name">Consumable Name</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
                         </tr>
@@ -241,9 +241,9 @@ class Consumables extends Component{
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
                             return (<tr key={consumable.consumable_id}>
-                            <td style={{textAlign:'right',paddingRight:'40px'}}>{consumable.consumable_id}</td>
-                            <td style={{textAlign:'left',paddingLeft:'160px'}}>{consumable.name}</td>
-                            <td style={{textAlign:'right', paddingRight:'160px'}}>{consumable.quantity}</td>
+                            <td >{consumable.consumable_id}</td>
+                            <td >{consumable.name}</td>
+                            <td >{consumable.quantity}</td>
                             <td><Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
                                 }>
