@@ -97,6 +97,7 @@ class Vendor extends Component{
                             <td>{item.address}</td>
                             <td>{item.contact}</td>
                             <td><Modal
+                                actions={null}
                                 trigger={<Button>Edit</Button>}>
                                 <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal></td>
@@ -106,7 +107,7 @@ class Vendor extends Component{
                 </Table>
                 <Modal
                     id="addVendor"
-                    actions ={<div></div>}
+                    actions={null}
                     // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
                     trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
                     <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
