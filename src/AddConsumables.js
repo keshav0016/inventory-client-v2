@@ -442,7 +442,7 @@ class AddConsumables extends Component{
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
                     <Modal
-                        header='Add Vendor'
+                        actions={null}
                         id="addVendor"
                         trigger={<Button style={{marginLeft:'1%'}} id="triggerAddVendor">Add Vendor</Button>}>
                         <AddVendor setVendorListRequest = {this.setVendorListRequest}/>

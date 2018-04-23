@@ -216,11 +216,13 @@ class TicketsList extends Component{
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status === 'Pending' ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button>Accept</Button></Link> : null }</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
-                                            header='Remarks for rejection'
+                                            header={<h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>}
+                                            actions={null}
                                             trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
                                             <Row>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                                            <Button  onClick={this.rejectTicket.bind(this,ticket.ticket_number)} >Submit</Button> 
+                                            <Button style={{margin: '0 20px'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)} >Submit</Button> 
+                                            <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                                             </Row>
                                         </Modal> : null}</td>
                                         </tr>
@@ -257,19 +259,23 @@ class TicketsList extends Component{
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
-                                            header='Remarks'
+                                            header={<h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for acceptance</h4>}
+                                            actions={null}
                                             trigger={ <Button>Accept</Button> }>
                                             <Row>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                                            <Button onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                            <Button style={{margin: '0 20px'}} onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                            <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                                             </Row>
                                         </Modal> : null }</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
-                                            header='Remarks for rejection'
+                                            header={<h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>}
+                                            actions={null}
                                             trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
                                             <Row>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                                            <Button onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                            <Button style={{margin: '0 20px'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                            <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                                             </Row>
                                         </Modal> : null}</td>
                                         </tr>
