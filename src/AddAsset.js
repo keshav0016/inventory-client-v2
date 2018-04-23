@@ -552,8 +552,8 @@ class AddAsset extends Component{
                     <Input s={6}  type = "number" min={0} label='Amount' value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={6}  type = "number" min={0} label='GST' value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     {/* <Input s={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
-                    <Col>
                         <Autocomplete
+                            s={6}
                             title=' '
                             placeholder='Vendor'
                             data={
@@ -562,24 +562,30 @@ class AddAsset extends Component{
                             onChange = {this.setVendor}
                             value = {this.state.vendor.value}
                         />
-                        <Modal
-                            header='Add Vendor'
-                            id="addVendor"
-                            trigger={<Button>Add Vendor</Button>}>
-                            <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                        </Modal>
-                    </Col>
-                    <Col>
-                        <Input s={12} type='select' label='Asset Type' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
-                        <Modal
-                        header='Add Asset Type'
-                        trigger={<Button style={{float : 'right', marginRight : '2%'}}>Add Asset Type</Button>}>
-                        <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
-                        </Modal>
-                    </Col>
-                    <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
-                    <br /> <br />
-                <Button style={{position : 'absolute', bottom : '-3%', right : '2%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                        <Input s={6} type='select' label='Asset Type' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
+                        <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
+                        <Row>
+                            <Col s={6}>
+                                <Modal
+                                    header='Add Vendor'
+                                    id="addVendor"
+                                    trigger={<Button>Add Vendor</Button>}>
+                                    <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                                </Modal>
+                            </Col>
+                            <Col>
+                                <Modal
+                                header='Add Asset Type'
+                                trigger={<Button>Add Asset Type</Button>}>
+                                <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
+                                </Modal>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col style={{position:'absolute',width: '15%',left:'85%', bottom:'-16%'}}>
+                                <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                            </Col>
+                        </Row>
                 </Row>
                 {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
