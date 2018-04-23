@@ -63,7 +63,7 @@ class HistoryConsumables extends Component{
     const json2csvParser = new Parser({fields, quote: '\''})
     const csv = json2csvParser.parse(consumablesExport)
     const blob = new Blob([csv], {type : 'text/csv'})
-    fileSaver.saveAs(blob, `Consumable-${this.props.match.params.asset}.csv`)
+    fileSaver.saveAs(blob, `Consumable-${this.props.match.params.consumable}.csv`)
 }
 
    render(){
