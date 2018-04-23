@@ -111,12 +111,13 @@ class LoginForm extends Component {
 
                 </Row>
                 <Row>
-                    <Col s={3} offset={"m8"}>
+                    <Col s={3} offset={"m7"}>
                       <Button className='submitbtn' type="submit">LOGIN</Button>
                     </Col>
                 </Row>
-                
-                <Link to='/forgotpassword' className='loginFormForgotLink'>Forgot Password</Link>
+                <Col s={6} offset={'s7'}>
+                  <Link to='/forgotpassword' className='loginFormForgotLink'>Forgot Password ?</Link>
+                </Col>
               </Card>
 
             </form>
