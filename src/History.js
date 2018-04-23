@@ -87,7 +87,7 @@ class Assets extends Component{
                     <Row>
                         <Col s={12} m={12}>
                         <CardPanel className="z-depth-2" >
-                            <h5><u>Purchase</u></h5>
+                            <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
                             <div style = {{display : 'flex'}} >
                                 <div style={{float : 'left', width : '50%'}} >
                                     <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
@@ -111,7 +111,7 @@ class Assets extends Component{
                         return <Col s={12} m={12} key={index}>
                             <CardPanel className="z-depth-2" >
                                 {element.vendor ? <div>
-                                    <h5><u>Repair</u></h5>
+                                    <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Repair</h5>
                                     <div style={{display : 'flex'}} >
                                         <div style={{float : 'left', width : '50%'}} >
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
@@ -126,7 +126,7 @@ class Assets extends Component{
                                         </div>
                                     </div>
                                 </div> : <div>
-                                    <h5><u>Assigned</u></h5>
+                                    <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Assigned</h5>
                                     <div style={{display : 'flex'}} >
                                         <div style={{float: 'left', width : '50%'}} >
                                             <h6><b>Employee Id</b> : {element.user_id}</h6>
