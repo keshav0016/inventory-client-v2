@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Badge, Modal, Autocomplete} from 'react-materialize'
+import {Row, Input, Button, Badge, Modal, Autocomplete, Col} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import { baseUrl } from './config';
@@ -72,9 +72,9 @@ class AddConsumables extends Component{
         this.getVendorName = this.getVendorName.bind(this)
     }
     componentDidMount(){
-        $(document).ready(function(){
-            $('label').addClass('active');
-        })
+        // $(document).ready(function(){
+        //     $('label').addClass('active');
+        // })
     }
 
     checkForValidation(){
@@ -412,8 +412,10 @@ class AddConsumables extends Component{
             <div style={{marginLeft:'30px',marginRight:'30px'}}>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
                 <Row>
-                    <Input autoFocus s={6} placeholder="Consumable" label=' ' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
-                    <Input s={6} name='on' type='date' label=' ' placeholder="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <Input autoFocus s={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
+                    <Col s={6} className={this.state.purchase_date.showError ? 'date-input-wrap-invalid' : 'date-input-wrap'}>
+                        <Input name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    </Col>
                     <br/>
                     <br/>
                     <br/>
