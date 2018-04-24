@@ -263,7 +263,7 @@ class TicketsList extends Component{
                                             actions={null}
                                             trigger={ <Button>Accept</Button> }>
                                             <Row>
-                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                                            <Input s={12} onChange = {this.setReason} label="Remarks" />
                                             <Button style={{margin: '0 20px'}} onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
                                             <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                                             </Row>
@@ -273,7 +273,7 @@ class TicketsList extends Component{
                                             actions={null}
                                             trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
                                             <Row>
-                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                                            <Input s={12} onChange = {this.setReason} label="Remarks" />
                                             <Button style={{margin: '0 20px'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
                                             <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                                             </Row>
