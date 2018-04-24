@@ -535,13 +535,13 @@ class AddAsset extends Component{
             <div style={{marginLeft : '30px', marginRight : '30px'}} >
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Asset</h3>
                 <Row>
-                    <Input s={6} placeholder="Serial Number *" label=' ' value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
-                    <Input s={6} placeholder="Asset Name *" label=' ' value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
-                    <Input s={6} name='on' type='date' label=' ' placeholder="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
-                    <Input s={6} placeholder="Description" label=' ' value = {this.state.description} onChange = {this.setDescription}/>
-                    <Input s={6} placeholder="Invoice Number *" label=' ' value = {this.state.invoice_number.value} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
-                    <Input s={6} placeholder="Condition *" label=' ' value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
-                    <Input s={6} placeholder="Location *" label=' ' value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
+                    <Input s={6} label="Serial Number *" value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
+                    <Input s={6} label="Asset Name *" value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
+                    <Input s={6} name='on' type='date' label="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <Input s={6} label="Description" value = {this.state.description} onChange = {this.setDescription}/>
+                    <Input s={6} label="Invoice Number *" value = {this.state.invoice_number.value} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
+                    <Input s={6} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
+                    <Input s={6} label="Location *" value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
                     <br />
                     <Input s={6} type='select' label='Category' onChange = {this.setCategory} value={this.state.category}>
                         <option value='Select'>Select</option>
