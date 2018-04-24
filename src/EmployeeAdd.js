@@ -240,10 +240,10 @@ class EmployeeAdd extends Component {
       <div style={{marginLeft: '30px',marginRight: '30px'}} >
       <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Employee</h3>
         <Row>
-        <Input  onChange={this.handleUser_Id}s={6} value={this.state.user_id.value} label=" " placeholder="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
-          <Input  onChange={this.handleFirstname}s={6} value={this.state.first_name.value} label=" " placeholder="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
-          <Input  onChange={this.handleLastname} s={6} value={this.state.last_name.value} label=" " placeholder="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
-          <Input type="number" min='0'label=" " placeholder="Age" value={this.state.age.value} onChange={this.handleAge}s={6} error={this.state.age.showError ? this.state.age.error : null}/>
+        <Input  onChange={this.handleUser_Id}s={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
+          <Input  onChange={this.handleFirstname}s={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
+          <Input  onChange={this.handleLastname} s={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
+          <Input type="number" min='0'label="Age" value={this.state.age.value} onChange={this.handleAge}s={6} error={this.state.age.showError ? this.state.age.error : null}/>
           <Input s={6} type='select'  label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>

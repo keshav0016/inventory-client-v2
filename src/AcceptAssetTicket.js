@@ -126,8 +126,8 @@ class AcceptAssetTicket extends Component{
             <Row>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Accept Asset</h3>
                 <Row>
-                    <Input s={11} name='on' type='date' label=' ' placeholder="Expected Recovery*" onChange={this.handleExpected} />
-                    <Input s={11} onChange = {this.setReason} label=' ' placeholder="Remarks" value={this.state.reason} />
+                    <Input s={11} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} />
+                    <Input s={11} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
                     <Input s={11} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id}>{this.availableAssetsDropdown()}</Input>
                 </Row>
                 <br />

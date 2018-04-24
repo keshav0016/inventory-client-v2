@@ -203,9 +203,9 @@ class AssignAsset extends Component{
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
                 <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Assign Asset</h5>
                 <Row>
-                    <Input s={12} type="select" label=' ' placeholder="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
-                    <Input s={12} type='date' label=' ' placeholder="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
-                    <Input s={12} type='date' label=' ' placeholder="Expected Recovery*" value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
+                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
+                    <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
+                    <Input s={12} type='date' label="Expected Recovery*" value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"} <Icon small right>send</Icon></Button>
                 <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
