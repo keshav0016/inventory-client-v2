@@ -171,9 +171,9 @@ class AddVendor extends Component{
             <div className="no-footer" style={{padding: '20px'}}>
                 <Row>
                     <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Vendor</h3 >
-                    <Input s={6} label=" " placeholder="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input s={6} label=" " placeholder="Contact" value = {this.state.contact.value} onChange ={this.setContact} icon="phone" error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
-                    <Input s={12} label=" " placeholder="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
+                    <Input s={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input s={6} label="Contact" value = {this.state.contact.value} onChange ={this.setContact} icon="phone" error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
+                    <Input s={12} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 
                 </Row>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>

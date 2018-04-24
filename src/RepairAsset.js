@@ -267,8 +267,7 @@ class RepairAsset extends Component{
                         <Row>
                             <Autocomplete s={12}
                                 error={this.state.vendor.showError ? this.state.vendor.error : null}
-                                title=' '
-                                placeholder='Service Provider'
+                                title='Service Provider'
                                 data={
                                     this.state.vendorNames
                                 }
@@ -276,8 +275,8 @@ class RepairAsset extends Component{
                                 onChange = {this.setVendor}
                             />
                         </Row>
-                        <Input s={12} type='date' label=' ' placeholder="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
-                        <Input s={12} type='date' label=' ' placeholder="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                        <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
+                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                         <Modal
                             actions={null}
                             id="addVendor"
