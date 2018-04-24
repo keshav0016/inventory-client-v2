@@ -28,7 +28,7 @@ label.active::after{
     top: 60px;
 }
 
-div.col.input-field.s6 label:after
+div.col.input-field.s6 label:after,div.col.input-field.s11 label:after 
 {
     content: attr(data-error);
     color: #F44336;
@@ -41,7 +41,7 @@ div.col.input-field.s6 label:after
     left: 0;
 }
 
-div.col.input-field.s6 label.active:after
+div.col.input-field.s6 label.active:after, div.col.input-field.s11 label.active:after
 {
     content: attr(data-error);
     color: #F44336;
