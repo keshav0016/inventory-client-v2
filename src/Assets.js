@@ -30,6 +30,11 @@ class Assets extends Component{
             isNonElectronicsChecked : false,
             isOtherChecked : false,
             search : '',
+            searchAssetId : {
+                value:'',
+                error:'',
+                showError:false
+            }
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -41,12 +46,14 @@ class Assets extends Component{
         this.setNonElectronicsChecked = this.setNonElectronicsChecked.bind(this)
         this.setOtherChecked = this.setOtherChecked.bind(this)
         this.setSearch = this.setSearch.bind(this)
+        this.setSearchAssetId = this.setSearchAssetId.bind(this)
+        this.checkForValidation = this.checkForValidation.bind(this)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : `${baseUrl}/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%`,
+            url : `${baseUrl}/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%&searchAsset=${this.state.searchAssetId.value}`,
             withCredentials : true
         })
         .then(res => {
@@ -69,7 +76,16 @@ class Assets extends Component{
         this.setPage(1)
     }
 
-
+    setSearchAssetId(e){
+        this.setState({
+            searchAssetId : Object.assign(this.state.searchAssetId, {
+                value:e.target.value
+            })
+        })
+        if(!e.target.value){
+            this.setPage(1)
+        }
+    }
 
     setAvailableChecked(){
         this.setPage(1)
@@ -131,6 +147,25 @@ class Assets extends Component{
         })
     }
 
+    checkForValidation(){
+        if(Number(this.state.searchAssetId.value) < 1){
+            this.setState({
+                searchAssetId: Object.assign(this.state.searchAssetId, {
+                    error:'The Id cannot be less than 1',
+                    showError:true
+                }),
+            })
+        }
+        else{
+            this.setState({
+                searchAssetId: Object.assign(this.state.searchAssetId, {
+                    error : '',
+                    showError : false
+                })
+            })
+            this.setPage(1)
+        }
+    }
 
     render(){
         return(
@@ -138,7 +173,9 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
-                    <Input s={3} label="Search" onChange = {this.setSearch} />
+                    <Input s={3} placeholder="Search" onChange = {this.setSearch} />
+                    <Input s={3} type='number' min={1} placeholder="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
+                    <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button>
                 </Row>
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
                     <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Current Status</p>
@@ -160,6 +197,7 @@ class Assets extends Component{
                 <Table className="assetTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
+                            <th data-field="asset_id">Asset ID</th>
                             <th data-field="serial_number">Serial No.</th>
                             <th data-field="asset_name">Asset Name</th>
                             <th data-field="asset_type">Asset Type</th>
@@ -176,6 +214,7 @@ class Assets extends Component{
                     <tbody>
                         {this.state.assetList.map((item, index) => {
                             return <tr key={item.asset_id}>
+                            <td>{item.asset_id}</td>
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
                             <td>{item.assetType}</td>
