@@ -12,8 +12,13 @@ class AcceptAssetTicket extends Component{
         this.state = {
             availableAssetsList : []
             ,currentAssetSelected : {}
+            ,currentAssetSelectedError : false
             ,reason : ''
-            ,expected_recovery : ''
+            ,expected_recovery : {
+                value: '',
+                error: '',
+                showError: false
+            }
             ,redirect : false
             ,acceptTicketRequest : false
         }
@@ -25,10 +30,31 @@ class AcceptAssetTicket extends Component{
     }
 
     checkForValidation(){
-        if(!this.state.expected_recovery || !this.state.currentAssetSelected.serial_number){
-            window.Materialize.toast('All the * marked fields are required', 4000)
+        if(!this.state.expected_recovery.value){
+            this.setState({
+                expected_recovery : Object.assign(this.state.expected_recovery, {
+                    showError : true,
+                    error : 'Expected Recovery date is Required'
+                })
+            })
         }
         else{
+            this.setState({
+                expected_recovery : Object.assign(this.state.expected_recovery, {
+                    showError : false,
+                    error : ''
+                })
+            })
+        }
+
+        if(!this.state.currentAssetSelected.serial_number){
+            window.Materialize.toast('Select any asset if available', 4000)
+            this.setState({
+                currentAssetSelectedError : true
+            })
+        }
+        
+        if(!this.state.expected_recovery.showError && !this.state.currentAssetSelectedError){
             this.setState({
                 acceptTicketRequest : true
             })
@@ -70,6 +96,7 @@ class AcceptAssetTicket extends Component{
             if(asset.asset_id === Number(e.target.value)){
                 this.setState({
                     currentAssetSelected : asset
+                    ,currentAssetSelectedError : false
                 })
             }
         })
@@ -81,7 +108,7 @@ class AcceptAssetTicket extends Component{
             url:`${baseUrl}/admin/ticket/accept`,
             data:{
                 ticket_number:this.props.match.params.ticket,
-                expected_recovery : this.state.expected_recovery
+                expected_recovery : this.state.expected_recovery.value
                 ,reason : this.state.reason
                 ,requested_asset_id : this.state.currentAssetSelected.asset_id
             },
@@ -110,7 +137,9 @@ class AcceptAssetTicket extends Component{
 
     handleExpected(e){
         this.setState({
-            expected_recovery : e.target.value
+            expected_recovery : Object.assign(this.state.expected_recovery, {
+                value: e.target.value
+            })
         })
     }
 
@@ -126,9 +155,9 @@ class AcceptAssetTicket extends Component{
             <Row>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Accept Asset</h3>
                 <Row>
-                    <Input s={11} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} />
+                    <Input s={11} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
                     <Input s={11} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                    <Input s={11} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id}>{this.availableAssetsDropdown()}</Input>
+                    <Input s={11} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} >{this.availableAssetsDropdown()}</Input>
                 </Row>
                 <br />
                 <Row>

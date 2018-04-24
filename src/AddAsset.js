@@ -549,7 +549,7 @@ class AddAsset extends Component{
                         <option value='Non-Electronics'>Non-Electronics</option>
                         <option value='Other'>Other</option>
                     </Input>
-                    <Input s={6}  type = "number" min={0} label='Amount' value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
+                    <Input s={6}  type = "number" min={0} label='Amount*' value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={6}  type = "number" min={0} label='GST' value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     {/* <Input s={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
                         <Autocomplete
