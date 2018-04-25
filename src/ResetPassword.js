@@ -47,13 +47,13 @@ class ResetPassword extends Component {
                             <Card className="z-depth-2" title="Reset your password" style={{padding: "30px"}}>
                                 <p>Check Your Email For Secret Password</p>
                                 <Row>
-                                    <Input autoFocus s={12} error={this.state.emailPassword.showError ? this.state.emailPassword.error : null}  placeholder="Secret Password*" type='password' onChange={this.setEmailPassword} icon='lock' />
+                                    <Input autoFocus s={12} error={this.state.emailPassword.showError ? this.state.emailPassword.error : null}  label="Secret Password*" type='password' onChange={this.setEmailPassword} icon='lock' />
                                 </Row>
                                 <Row>
-                                    <Input s={12} error={this.state.New_Password.showError ? this.state.New_Password.error : null}  type='password'onChange={this.handleNewPassword} placeholder="New Password" ><Icon>lock</Icon></Input>
+                                    <Input s={12} error={this.state.New_Password.showError ? this.state.New_Password.error : null}  type='password'onChange={this.handleNewPassword} label="New Password" ><Icon>lock</Icon></Input>
                                 </Row>
                                 <Row>
-                                    <Input s={12} error={this.state.Confirm_Password.showError ? this.state.Confirm_Password.error : null} type='password' onChange={this.handleConfirmPassword} placeholder="Confirm Password"><Icon>lock</Icon></Input>
+                                    <Input s={12} error={this.state.Confirm_Password.showError ? this.state.Confirm_Password.error : null} type='password' onChange={this.handleConfirmPassword} label="Confirm Password"><Icon>lock</Icon></Input>
                                 </Row>
                                 <Row>
                                     <Col offset={'s3'}>
@@ -124,7 +124,23 @@ class ResetPassword extends Component {
                 })
             })
         }
-        if(this.state.Confirm_Password.value&&this.state.New_Password.value&&this.state.emailPassword.value){
+        if(this.state.New_Password.value !== this.state.Confirm_Password.value){
+            this.setState({
+                Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                    error: 'The passwords does not match',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.New_Password.value === this.state.Confirm_Password.value){
+            this.setState({
+                Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.Confirm_Password.value&&this.state.New_Password.value&&this.state.emailPassword.value&&this.state.New_Password.value === this.state.Confirm_Password.value){
             this.handleSubmit()
         }
     }
@@ -167,7 +183,7 @@ class ResetPassword extends Component {
                 method: 'post',
                 url: `${baseUrl}/employees/reset`,
                 data: {
-                    user_id: this.state.user_id.value,
+                    user_id: this.state.user_id,
                     password: this.state.New_Password.value
                     ,emailPassword : this.state.emailPassword.value
                 },

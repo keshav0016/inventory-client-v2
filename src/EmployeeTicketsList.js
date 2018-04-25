@@ -126,7 +126,7 @@ class EmployeeTicketsList extends Component{
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
 
-                <div className="filterContainer">
+                <div className="filterContainer" style={{zIndex:1}}>
                 <p style={{fontFamily : 'Roboto', fontWeight : 300, color:'white'}} className="adminDashboardTitle">Status Filters</p>
                     <Row className="ticketListCheckbox">
                         <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
