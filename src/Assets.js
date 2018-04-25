@@ -82,6 +82,15 @@ class Assets extends Component{
                 value:e.target.value
             })
         })
+
+        if(Number(e.target.value) > 0){
+            this.setState({
+                searchAssetId : Object.assign(this.state.searchAssetId, {
+                    showError : false,
+                    error : ''
+                })
+            })
+        }
         if(!e.target.value){
             this.setPage(1)
         }
@@ -174,7 +183,7 @@ class Assets extends Component{
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={3} placeholder="Search" onChange = {this.setSearch} />
-                    <Input s={3} type='number' min={1} placeholder="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
+                    <Input s={3} type='number' min={1} placeholder="Search Asset ID" label=' ' onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
                     <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button>
                 </Row>
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
