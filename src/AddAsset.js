@@ -295,7 +295,7 @@ class AddAsset extends Component{
         this.setState({
             vendorListRequest : true
         })
-        $('#addVendor .modal-footer button').click()
+        $('.modal-overlay').click()
     }
 
     setSerialNumber(e){
