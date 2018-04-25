@@ -235,6 +235,14 @@ class AddAsset extends Component{
                 })
             })
         }
+        if(this.state.vendor.value){
+            this.setState({
+                vendor:Object.assign(this.state.vendor, {
+                    error:'',
+                    showError:false
+                })
+            })
+        }
         if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.gst.value >= 0){
             // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
@@ -554,6 +562,7 @@ class AddAsset extends Component{
                     {/* <Input s={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
                         <Autocomplete
                             s={6}
+                            className={this.state.vendor.showError ? 'no-vendor-error' : 'no-error'}
                             title=' '
                             placeholder='Vendor'
                             data={

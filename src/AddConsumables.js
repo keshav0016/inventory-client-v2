@@ -429,6 +429,7 @@ class AddConsumables extends Component{
                     <br/>
                     <Row>
                         <Autocomplete
+                            className={this.state.vendor_name.showError ? 'no-vendor-error' : 'no-error'}
                             title=' '
                             placeholder='Vendor'
                             data={

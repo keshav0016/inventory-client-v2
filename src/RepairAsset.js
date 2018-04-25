@@ -266,8 +266,8 @@ class RepairAsset extends Component{
                         {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
                         <Row>
                             <Autocomplete s={12}
-                                error={this.state.vendor.showError ? this.state.vendor.error : null}
-                                title='Service Provider'
+                                className={this.state.vendor.showError ? 'no-vendor-error' : 'no-error'}
+                                title='Service Provider*'
                                 data={
                                     this.state.vendorNames
                                 }
