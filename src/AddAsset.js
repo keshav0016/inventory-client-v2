@@ -48,7 +48,11 @@ class AddAsset extends Component{
                 showError: false
             },
             total : 0,
-            category : 'Select',
+            category : {
+                value: 'Select',
+                error: '',
+                showError: false
+            },
             condition : {
                 value: '',
                 error: '',
@@ -62,7 +66,11 @@ class AddAsset extends Component{
             vendorNames:{},
             vendorList : [],
             assetTypeList : [],
-            assetType : 'Select',
+            assetType : {
+                value: 'Select',
+                error: '',
+                showError: false
+            },
             addVendor : false,
             vendorListRequest : true,
             addAssetRequest : false
@@ -243,7 +251,39 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.gst.value >= 0){
+        if(this.state.category.value === 'Select'){
+            this.setState({
+                category:Object.assign(this.state.category, {
+                    error:'Select a Category',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.category.value !== 'Select'){
+            this.setState({
+                category:Object.assign(this.state.category, {
+                    error:'',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.assetType.value === 'Select'){
+            this.setState({
+                assetType:Object.assign(this.state.assetType, {
+                    error:'Select an Asset Type ',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.assetType.value !== 'Select'){
+            this.setState({
+                assetType:Object.assign(this.state.assetType, {
+                    error:'',
+                    showError: false
+                })
+            })
+        }
+        if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && this.state.gst.value >= 0){
             // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
                 addAssetRequest : true
@@ -324,7 +364,9 @@ class AddAsset extends Component{
 
     setCategory(e){
         this.setState({
-            category : e.target.value
+            category : Object.assign(this.state.category, {
+                value: e.target.value
+            })
         })
     }
 
@@ -371,7 +413,9 @@ class AddAsset extends Component{
 
     setAssetType(e){
         this.setState({
-            assetType : e.target.value
+            assetType : Object.assign(this.state.assetType, {
+                value: e.target.value
+            })
         })
     }
 
@@ -396,10 +440,10 @@ class AddAsset extends Component{
                 amount : this.state.amount.value,
                 gst : this.state.gst.value,
                 total : this.state.total,
-                category : this.state.category,
+                category : this.state.category.value,
                 condition : this.state.condition.value,
                 location : this.state.location.value
-                ,assetType : this.state.assetType
+                ,assetType : this.state.assetType.value
             }
         })
         .then(res => {
@@ -438,7 +482,11 @@ class AddAsset extends Component{
                         error: '',
                         showError: false
                     },
-                    category : 'Select',
+                    category : {
+                        value: 'Select',
+                        error: '',
+                        showError: false
+                    },
                     condition : {
                         value: '',
                         error: '',
@@ -460,7 +508,11 @@ class AddAsset extends Component{
                         showError: false
                     },
                     total : 0,
-                    assetType : 'Select'
+                    assetType : {
+                        value: 'Select',
+                        error: '',
+                        showError: false
+                    }
                 })
                 window.Materialize.toast('Asset Added', 4000)                
                 this.props.setHandleListRequest(true)
@@ -551,12 +603,14 @@ class AddAsset extends Component{
                     <Input s={6} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
                     <Input s={6} label="Location *" value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
                     <br />
-                    <Input s={6} type='select' label='Category' onChange = {this.setCategory} value={this.state.category}>
+                    <div className={this.state.category.showError ? 'category-error': 'no-error'}>
+                    <Input s={6} type='select' label='Category' onChange = {this.setCategory} value={this.state.category.value} error={this.state.category.showError ? this.state.category.error : null}>
                         <option value='Select'>Select</option>
                         <option value='Electronics'>Electronics</option>
                         <option value='Non-Electronics'>Non-Electronics</option>
                         <option value='Other'>Other</option>
                     </Input>
+                    </div>
                     <Input s={6}  type = "number" min={0} label='Amount*' value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={6}  type = "number" min={0} label='GST' value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     {/* <Input s={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
@@ -571,7 +625,9 @@ class AddAsset extends Component{
                             onChange = {this.setVendor}
                             value = {this.state.vendor.value}
                         />
-                        <Input s={6} type='select' label='Asset Type*' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
+                        <div className={this.state.assetType.showError ? 'assetType-error' : 'no-error'}>
+                        <Input s={6} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
+                        </div>
                         <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                         <Row>
                             <Col s={6}>

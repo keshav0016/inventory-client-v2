@@ -97,3 +97,15 @@ div.input-field.no-vendor-error.col label.active:after
     transition: none !important;
     left: 0;
 }
+
+div.category-error input[type=text].select-dropdown
+{
+    border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;   
+}
+
+div.assetType-error input[type=text].select-dropdown
+{
+    border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;   
+}
