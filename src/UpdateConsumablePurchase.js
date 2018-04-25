@@ -255,7 +255,7 @@ class UpdateConsumablePurchase extends Component{
 
     render(){
         return(
-            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+            <div className="no-footer" style={{padding: '20px'}}>
                 <h3 style={{fontWeight : 250, fontFamily : 'Roboto'}}>Update Purchase</h3>
                 <Row>
                     <p><b>Consumable: </b>{this.props.consumable.consumable.name}</p>
@@ -268,7 +268,8 @@ class UpdateConsumablePurchase extends Component{
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
-                    <Button onClick={this.checkForValidation}>Submit</Button>
+                    <Button style={{margin: '0 20px'}} onClick={this.checkForValidation}>Submit</Button>
+                    <Button style={{margin: '0 20px'}} className="modal-close">Cancel</Button>
                     {this.state.updateConsumable ? this.updateConsumablePurchase() : null}
                     {this.state.calculateTotal ? this.calculateTotal() : null}
             </div>  
