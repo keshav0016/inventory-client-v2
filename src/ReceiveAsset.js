@@ -9,10 +9,26 @@ class ReceiveAsset extends Component{
     constructor(props){
         super(props)
         this.state = {
-            to : '',
-            repair_invoice : '',
-            amount : 0,
-            gst : 0,
+            to : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            repair_invoice : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            amount : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            gst : {
+                value : '',
+                showError : false,
+                error : ''
+            },
             total : 0,
             repairInfo : {asset_id : '' , from : '', to : '', expected_delivery : ''},
             receiveAssetRequest : false
@@ -26,44 +42,112 @@ class ReceiveAsset extends Component{
     }
 
     checkForValidation(){
-        if(!this.state.repair_invoice || !this.state.to){
-            window.Materialize.toast('All the * marked fields are required', 4000)
+        if(!this.state.to.value){
+            this.setState({
+                to : Object.assign(this.state.to, {
+                    showError : true,
+                    error : 'Received from service date is required'
+                })
+            })
         }
         else{
-            if(new Date(this.state.repairInfo.from) > new Date(this.state.to)){
-                window.Materialize.toast('TO cannot be less than FROM', 4000)
-            }
-            else{
-                this.setState({
-                    receiveAssetRequest : true
+            this.setState({
+                to : Object.assign(this.state.to, {
+                    showError : false,
+                    error : ''
                 })
-            }
+            })
+        }
+
+        if(!this.state.repair_invoice.value){
+            this.setState({
+                repair_invoice : Object.assign(this.state.repair_invoice, {
+                    showError : true,
+                    error : 'Repair Invoice is required'
+                })
+            })
+        }
+        else{
+            this.setState({
+                repair_invoice : Object.assign(this.state.repair_invoice, {
+                    showError : false,
+                    error : ''
+                })
+            })
+        }
+
+        if(Number(this.state.amount.value) < 0){
+            this.setState({
+                amount : Object.assign(this.state.amount, {
+                    showError : true,
+                    error : 'Amount can not be negative'
+                })
+            })
+        }
+        else{
+            this.setState({
+                amount : Object.assign(this.state.amount, {
+                    showError : false,
+                    error : ''
+                })
+            })
+        }
+
+        if(Number(this.state.gst.value) < 0){
+            this.setState({
+                gst : Object.assign(this.state.gst, {
+                    showError : true,
+                    error : 'GST cannot be negative'
+                })
+            })
+        }
+        else{
+            this.setState({
+                gst : Object.assign(this.state.gst, {
+                    showError : false,
+                    error : ''
+                })
+            })
+        }
+
+        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError){
+            this.setState({
+                receiveAssetRequest : true
+            })
         }
     }
 
 
     setTo(e){
         this.setState({
-            to : e.target.value
+            to : Object.assign(this.state.to, {
+                value : e.target.value
+            })
         })
     }
 
     setRepairInvoice(e){
         this.setState({
-            repair_invoice : e.target.value
+            repair_invoice : Object.assign(this.state.repair_invoice, {
+                value : e.target.value
+            })
         })
     }
 
 
     setAmount(e){
         this.setState({
-            amount : Number(e.target.value),
+            amount : Object.assign(this.state.amount, {
+                value : Number(e.target.value)
+            })
         })
     }
 
     setGst(e){
         this.setState({
-            gst : Number(e.target.value),
+            gst : Object.assign(this.state.gst, {
+                value : Number(e.target.value)
+            }),
         })
     }
 
@@ -74,10 +158,10 @@ class ReceiveAsset extends Component{
             withCredentials : true,
             data : {
                 asset_id : this.props.asset,
-                to : this.state.to,
-                repair_invoice : this.state.repair_invoice,
-                amount : this.state.amount,
-                gst : this.state.gst,
+                to : this.state.to.value,
+                repair_invoice : this.state.repair_invoice.value,
+                amount : this.state.amount.value,
+                gst : this.state.gst.value,
                 total : this.state.total,
             }
         })
@@ -91,10 +175,26 @@ class ReceiveAsset extends Component{
             else{
                 this.setState({
                     receiveAssetRequest : false,
-                    to : '',
-                    repair_invoice : '',
-                    amount : 0,
-                    gst : 0,
+                    to : Object.assign(this.state.to, {
+                        value : '',
+                        showError : false,
+                        error : ''
+                    }),
+                    repair_invoice : Object.assign(this.state.repair_invoice, {
+                        value : '',
+                        showError : false,
+                        error : ''
+                    }),
+                    amount : Object.assign(this.state.amount, {
+                        value : 0,
+                        showError : false,
+                        error : ''
+                    }),
+                    gst : Object.assign(this.state.to, {
+                        value : 0,
+                        showError : false,
+                        error : ''
+                    }),
                     total : 0,
                 })
                 window.Materialize.toast('Asset Received', 4000)                
@@ -142,10 +242,10 @@ class ReceiveAsset extends Component{
                         <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
                         </div> : null}
                    
-                    <Input s={6} name='on' type='date' label="Received from Service *" onChange={this.setTo} value = {this.state.to} />
-                    <Input s={6} label="Repair Invoice *" value = {this.state.repair_invoice} onChange = {this.setRepairInvoice}/>
-                    <Input s={6} label="Amount *" type = "number" min={0} value = {this.state.amount} onChange = {this.setAmount}/>
-                    <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst} onChange = {this.setGst}/>
+                    <Input s={6} name='on' type='date' label="Received from Service *" onChange={this.setTo} value = {this.state.to.value} error={this.state.to.showError ? this.state.to.error : null}/>
+                    <Input s={6} label="Repair Invoice *" value = {this.state.repair_invoice.value} onChange = {this.setRepairInvoice} error={this.state.repair_invoice.showError ? this.state.repair_invoice.error : null}/>
+                    <Input s={6} label="Amount" type = "number" min={0} value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null}/>
+                    <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
                     
                     <Badge>Total : {this.state.total}</Badge>
                 </Row>
