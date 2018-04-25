@@ -267,10 +267,10 @@ class RepairAsset extends Component{
                         <Row>
                             <Autocomplete s={12}
                                 className={this.state.vendor.showError ? 'no-vendor-error' : 'no-error'}
-                                title='Service Provider*'
                                 data={
                                     this.state.vendorNames
                                 }
+                                placeholder='Service Provider'
                                 value={this.state.vendor.value}
                                 onChange = {this.setVendor}
                             />
