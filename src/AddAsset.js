@@ -564,14 +564,14 @@ class AddAsset extends Component{
                             s={6}
                             className={this.state.vendor.showError ? 'no-vendor-error' : 'no-error'}
                             title=' '
-                            placeholder='Vendor'
+                            placeholder='Vendor*'
                             data={
                                 this.state.vendorNames
                             }
                             onChange = {this.setVendor}
                             value = {this.state.vendor.value}
                         />
-                        <Input s={6} type='select' label='Asset Type' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
+                        <Input s={6} type='select' label='Asset Type*' value={this.state.assetType} onChange = {this.setAssetType}>{this.assetTypeDropdown()}</Input>
                         <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                         <Row>
                             <Col s={6}>
