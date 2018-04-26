@@ -37,7 +37,7 @@ class Homepage extends Component{
                         <NavItem href="/admin">
                             <img style={{height: '64px', width: '64px', marginLeft: '65px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" />
                         </NavItem>                        
-                        <NavItem href="/" className="masterComponentLogoutButton" style={{fontFamily: 'Roboto',fontWeight: 400}}><b>LOGOUT</b></NavItem>
+                        <NavItem href="/logout" className="masterComponentLogoutButton" style={{fontFamily: 'Roboto',fontWeight: 400}}><b>LOGOUT</b></NavItem>
 
                     </Navbar>
                     <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>

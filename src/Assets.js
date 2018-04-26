@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, ProgressBar} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader} from 'react-materialize'
 import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
-import DeleteAsset from './DeleteAsset'
+// import DeleteAsset from './DeleteAsset'
 import RecoverAsset from './RecoverAsset'
 import ReceiveAsset from './ReceiveAsset'
+import DisableAsset from './DisableAsset'
+import EnableAsset from './EnableAsset'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
 import $ from 'jquery'
@@ -183,7 +185,7 @@ class Assets extends Component{
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={3} placeholder="Search by Asset Name" onChange = {this.setSearch} />
-                    <Input s={3} type='number' min={1} placeholder="Search Asset ID" label=' ' onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
+                    <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
                     <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button>
                 </Row>
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
@@ -200,7 +202,7 @@ class Assets extends Component{
                     <Input name='filter' type='checkbox' value='red' label='Other' onClick = {this.setOtherChecked} checked={this.state.isOtherChecked} />
                     </div>
                 </div>
-                {this.state.loading ? <ProgressBar /> :
+                {this.state.loading ? <Preloader size='small' /> :
                 (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
                 <Table className="assetTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
@@ -234,7 +236,18 @@ class Assets extends Component{
                             <td>{item.condition}</td>
                             <td>{item.location}</td>
                             <td>{item.category}</td>
-                            <td><Dropdown trigger={
+                            <td>{item.disabled === 1 ? 
+                                <Dropdown trigger={
+                                    <Button><Icon tiny>more_vert</Icon></Button>
+                                }>
+                                <Modal
+                                    style={{width : '70%'}}
+                                    actions={null}
+                                    trigger={<NavItem>Enable</NavItem> }>
+                                    {<EnableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />}
+                                </Modal>
+                                </Dropdown>
+                                :<Dropdown trigger={
                                     <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
@@ -245,8 +258,8 @@ class Assets extends Component{
                                     <Modal
                                         style={{width : '70%'}}
                                         actions={null}
-                                        trigger={item.current_status === 'Available' ? <NavItem>Delete</NavItem> : null}>
-                                        {item.current_status === 'Available' ? <DeleteAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
+                                        trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
+                                        {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <Modal
                                         actions={null}
@@ -265,7 +278,7 @@ class Assets extends Component{
                                         {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
                                     </Modal>
                                     <NavItem href={`/admin/assets/history/${item.asset_id}`}>Details</NavItem>
-                                </Dropdown></td>
+                            </Dropdown>}</td>
                             </tr>
                         })}
                     </tbody>

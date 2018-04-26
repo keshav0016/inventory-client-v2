@@ -78,7 +78,7 @@ class Vendor extends Component{
             <div style={{marginLeft: '30px',marginRight: '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Vendors</h3 >
-                {this.state.vendorList.length === 0 ? <div>No Records</div> : <div>
+                {this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
                 <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
