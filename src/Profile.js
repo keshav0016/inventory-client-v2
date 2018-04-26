@@ -69,7 +69,7 @@ class Profile extends Component{
               <tbody>
                   {this.state.data.map((item, index) => {
                       return <tr key={index}>
-                          <td>{item.asset_id ? `${item.asset.asset_name} [Asset]`: `${item.consumable.name} [consumable]`}</td>
+                          <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable ? `${item.consumable.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
                           <td>{item.asset_id ? "1": item.quantity}</td>
                       </tr>
                   })}
