@@ -106,7 +106,7 @@ class UpdateAssetType extends Component{
                 <h5 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update the {this.props.assetType}'s Max Request</h5>
                 <Row>
                     {/* <Input  value={this.state.assetType} onChange={this.setAssetType} s={6} label="Asset Type" />       */}
-                    <Input  value={this.state.maxRequest.value} onChange={this.setMaxRequest}s={6} label=' ' placeholder="Max Request" type="number" error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
+                    <Input  value={this.state.maxRequest.value} onChange={this.setMaxRequest}s={6} label="Max Request" type="number" error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                  <Button onClick={this.checkForValidation} style={{margin: '0 20px'}}>Edit</Button>
                  <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>

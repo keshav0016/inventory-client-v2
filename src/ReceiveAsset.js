@@ -20,12 +20,12 @@ class ReceiveAsset extends Component{
                 showError: false
             },
             amount : {
-                value: '',
+                value: 0,
                 error: '',
                 showError: false
             },
             gst : {
-                value : '',
+                value : 0,
                 showError : false,
                 error : ''
             },
