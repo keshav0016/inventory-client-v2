@@ -4,6 +4,10 @@ import {Row, Input, Button} from 'react-materialize'
 import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
+import {
+  Link,
+  Redirect
+} from 'react-router-dom';
 
 class EmployeeAdd extends Component {
   constructor(props) {
@@ -44,7 +48,8 @@ class EmployeeAdd extends Component {
         showError: false,
         error: "",
       },
-    
+      addEmployee: true,
+      redirect: false
     }
     this.handleCreate = this.handleCreate.bind(this)
     this.handleAge = this.handleAge.bind(this)
@@ -163,6 +168,8 @@ class EmployeeAdd extends Component {
               showError: false,
               error: "",
             },
+            addEmployee: false,
+            redirect: true
           })
           window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
@@ -236,7 +243,7 @@ class EmployeeAdd extends Component {
   }
 
   render() {
-    return (
+    var addEmployeeForm = (
       <div style={{marginLeft: '30px',marginRight: '30px'}} >
       <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Employee</h3>
         <Row>
@@ -294,6 +301,13 @@ class EmployeeAdd extends Component {
           <Button className='addbtn' onClick={this.handleCreate}>Add</Button>
       </div>
 
+    );
+
+    return(
+      <div>
+      {this.state.addEmployee ? addEmployeeForm : null}
+      {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/employees'}}/>) : null}
+      </div>
     )
   }
 }

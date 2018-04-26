@@ -6,6 +6,10 @@ import $ from 'jquery'
 import moment from 'moment'
 import './Employee.css'
 import { baseUrl } from './config';
+import {
+    Link,
+    Redirect
+  } from 'react-router-dom';
 
 class RepairAsset extends Component{
     constructor(props){
@@ -15,7 +19,9 @@ class RepairAsset extends Component{
             vendor : {
                 value: '',
                 error: '',
-                showError: false
+                showError: false,
+                availabilityError: false,
+                availabilityMessage: ""
             },
             from : {
                 value: '',
@@ -32,7 +38,9 @@ class RepairAsset extends Component{
             assetDetails : {},
             vendorNames:{},
             vendorListRequest : true,
-            isDisabled : false
+            isDisabled : false,
+            repairAsset: true,
+            redirect: false
         }
         this.repairAssetIntoDb = this.repairAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
@@ -122,7 +130,23 @@ class RepairAsset extends Component{
                 })
             })
         }
-        if(this.state.vendor.value && this.state.from.value && this.state.expected_delivery.value && new Date(this.state.from.value) < new Date(this.state.expected_delivery.value)) {
+        if(this.state.vendor.value in this.state.vendorNames){
+            this.setState({
+                vendor: Object.assign(this.state.vendor, {
+                    availabilityMessage: "",
+                    availabilityError: false
+                })
+            })
+        }
+        if(!(this.state.vendor.value in this.state.vendorNames)){
+            this.setState({
+                vendor: Object.assign(this.state.vendor, {
+                    availabilityMessage: "The vendor is not in the list",
+                    availabilityError: true
+                })
+            })
+        }
+        if(this.state.vendor.value && this.state.from.value && this.state.expected_delivery.value && new Date(this.state.from.value) < new Date(this.state.expected_delivery.value) && this.state.vendor.value in this.state.vendorNames) {
             this.setState({
                 repairAssetRequest : true
             })
@@ -174,8 +198,12 @@ class RepairAsset extends Component{
                 vendor: Object.assign(this.state.vendor, {
                     value: '',
                     error: '',
-                    showError: false
-                })
+                    showError: false,
+                    availabilityError: false,
+                    availabilityMessage: ''
+                }),
+                repairAsset: false,
+                redirect: true
             })
             window.Materialize.toast('Repair information has been stored', 4000)
             // this.props.setHandleListRequest()
@@ -245,7 +273,7 @@ class RepairAsset extends Component{
 
 
     render(){
-        return(
+        var repairAssetForm = (
             <div style={{marginLeft : '30px', marginRight : '30px'}} >
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Repair Asset</h3>
                 <br /><br />
@@ -266,7 +294,7 @@ class RepairAsset extends Component{
                         {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
                         <Row>
                             <Autocomplete s={12}
-                                className={this.state.vendor.showError ? 'no-vendor-error' : 'no-error'}
+                                className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
                                 data={
                                     this.state.vendorNames
                                 }
@@ -291,6 +319,13 @@ class RepairAsset extends Component{
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>
                 :null}
+            </div>
+        );
+
+        return(
+            <div>
+            {this.state.repairAsset ? repairAssetForm : null}
+            {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/assets'}}/>) : null}
             </div>
         )
     }

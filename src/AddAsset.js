@@ -6,6 +6,10 @@ import AddAssetType from './AddAssetType'
 import $ from 'jquery'
 import './Employee.css'
 import { baseUrl } from './config';
+import {
+    Link,
+    Redirect
+  } from 'react-router-dom';
 
 class AddAsset extends Component{
     constructor(props){
@@ -35,7 +39,9 @@ class AddAsset extends Component{
             vendor : {
                 value: '',
                 error: '',
-                showError: false
+                showError: false,
+                availabilityError: false,
+                availabilityMessage: ""
             },
             amount : {
                 value: 0,
@@ -74,7 +80,9 @@ class AddAsset extends Component{
             addVendor : false,
             vendorListRequest : true,
             addAssetRequest : false
-            ,assetTypeListRequest : true
+            ,assetTypeListRequest : true,
+            addAsset: true,
+            redirect: false
         }
         this.setSerialNumber = this.setSerialNumber.bind(this)
         this.setAssetName = this.setAssetName.bind(this)
@@ -283,7 +291,23 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && this.state.gst.value >= 0){
+        if(this.state.vendor.value in this.state.vendorNames){
+            this.setState({
+                vendor: Object.assign(this.state.vendor, {
+                    availabilityMessage: "",
+                    availabilityError: false
+                })
+            })
+        }
+        if(!(this.state.vendor.value in this.state.vendorNames)){
+            this.setState({
+                vendor: Object.assign(this.state.vendor, {
+                    availabilityMessage: "The vendor is not in the list",
+                    availabilityError: true
+                })
+            })
+        }
+        if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && this.state.gst.value >= 0 && this.state.vendor.value in this.state.vendorNames ){
             // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
                 addAssetRequest : true
@@ -480,7 +504,9 @@ class AddAsset extends Component{
                     vendor : {
                         value: '',
                         error: '',
-                        showError: false
+                        showError: false,
+                        availabilityError: false,
+                        availabilityMessage: ''
                     },
                     category : {
                         value: 'Select',
@@ -512,7 +538,9 @@ class AddAsset extends Component{
                         value: 'Select',
                         error: '',
                         showError: false
-                    }
+                    },
+                    addAsset: false,
+                    redirect: true
                 })
                 window.Materialize.toast('Asset Added', 4000)                
                 this.props.setHandleListRequest(true)
@@ -591,7 +619,7 @@ class AddAsset extends Component{
 
 
     render(){
-        return(
+        var addAssetForm=(
             <div style={{marginLeft : '30px', marginRight : '30px'}} >
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Asset</h3>
                 <Row>
@@ -616,7 +644,7 @@ class AddAsset extends Component{
                     {/* <Input s={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
                         <Autocomplete
                             s={6}
-                            className={this.state.vendor.showError ? 'no-vendor-error' : 'no-error'}
+                            className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
                             title=' '
                             placeholder='Vendor*'
                             data={
@@ -657,6 +685,13 @@ class AddAsset extends Component{
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
                 {this.state.assetTypeListRequest ? this.fetchAssetTypeList() : null}
                 <br /><br />
+            </div>
+        );
+
+        return (
+            <div>
+            {this.state.addAsset ? addAssetForm : null}
+            {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/assets'}}/>) : null}
             </div>
         )
     }
