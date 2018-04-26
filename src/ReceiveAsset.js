@@ -20,12 +20,12 @@ class ReceiveAsset extends Component{
                 showError: false
             },
             amount : {
-                value: '',
+                value: 0,
                 error: '',
                 showError: false
             },
             gst : {
-                value : '',
+                value : 0,
                 showError : false,
                 error : ''
             },
@@ -39,6 +39,13 @@ class ReceiveAsset extends Component{
         this.setGst = this.setGst.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.receiveAssetIntoDb = this.receiveAssetIntoDb.bind(this)
+        this.calculateTotal = this.calculateTotal.bind(this)
+    }
+
+    calculateTotal(){
+        this.setState({
+            total : this.state.amount.value + ((this.state.amount.value * this.state.gst.value)/100)
+        })
     }
 
     checkForValidation(){
@@ -109,8 +116,31 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-
-        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError){
+        if(this.state.to.value < this.state.repairInfo.from){
+            this.setState({
+                to: Object.assign(this.state.to, {
+                    showError : true,
+                    error: 'Recieve from service < Given for service'
+                })
+            })
+        }
+        if(this.state.to.value === this.state.repairInfo.from){
+            this.setState({
+                to: Object.assign(this.state.to, {
+                    showError : true,
+                    error: 'Recieve from service = Given for service'
+                })
+            })
+        }
+        if(this.state.to.value > this.state.repairInfo.from){
+            this.setState({
+                to: Object.assign(this.state.to, {
+                    showError : false,
+                    error: ''
+                })
+            })
+        }
+        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && this.state.to.value > this.state.repairInfo.from){
             this.setState({
                 receiveAssetRequest : true
             })
@@ -141,6 +171,7 @@ class ReceiveAsset extends Component{
                 value : Number(e.target.value)
             })
         })
+        this.calculateTotal()
     }
 
     setGst(e){
@@ -149,6 +180,7 @@ class ReceiveAsset extends Component{
                 value : Number(e.target.value)
             }),
         })
+        this.calculateTotal()
     }
 
     receiveAssetIntoDb(){
@@ -204,14 +236,6 @@ class ReceiveAsset extends Component{
         .catch(error => {
             console.error(error)
         })
-    }
-
-    componentDidUpdate(prevProps, prevState){
-        if(prevState.amount !== this.state.amount  || prevState.gst !== this.state.gst){
-            this.setState({
-                total : this.state.amount + ((this.state.amount * this.state.gst)/100)
-            })
-        }
     }
 
     componentDidMount(){

@@ -4,6 +4,10 @@ import {Row, Input, Button, Badge, Modal, Autocomplete} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import { baseUrl } from './config';
+import {
+    Link,
+    Redirect
+  } from 'react-router-dom';
 
 class AddConsumables extends Component{
     constructor(props){
@@ -18,6 +22,8 @@ class AddConsumables extends Component{
                 value: "",
                 showError: false,
                 error: "",
+                availabilityError: false,
+                availabilityMessage: ""
             },
             purchase_date : {
                 value: "",
@@ -52,7 +58,9 @@ class AddConsumables extends Component{
             addVendor : false,
             vendorListRequest : true,
             addConsumableRequest : false,
-            calculateTotal : false
+            calculateTotal : false,
+            redirect: false,
+            addConsumable: true
         }
         this.setConsumableName = this.setConsumableName.bind(this)
         this.setVendorName = this.setVendorName.bind(this)
@@ -206,7 +214,23 @@ class AddConsumables extends Component{
                 })
             })  
         }
-        if(this.state.name.value && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value){
+        if(this.state.vendor_name.value in this.state.vendorNames){
+            this.setState({
+                vendor_name: Object.assign(this.state.vendor_name, {
+                    availabilityMessage: "",
+                    availabilityError: false
+                })
+            })
+        }
+        if(!(this.state.vendor_name.value in this.state.vendorNames)){
+            this.setState({
+                vendor_name: Object.assign(this.state.vendor_name, {
+                    availabilityMessage: "The vendor is not in the list",
+                    availabilityError: true
+                })
+            })
+        }
+        if(this.state.name.value && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
             this.setState({
                 addConsumableRequest : true
             })
@@ -301,6 +325,8 @@ class AddConsumables extends Component{
                     value: "",
                     showError: false,
                     error: "",
+                    availabilityError: false,
+                    availabilityMessage: ""
                 },
                 purchase_date : {
                     value: "",
@@ -329,7 +355,9 @@ class AddConsumables extends Component{
                     error: ""
                 },
                 total : 0,
-                addConsumableRequest : false
+                addConsumableRequest : false,
+                addConsumable: false,
+                redirect: true
             })
             this.props.location.setHandleListRequest()
             window.Materialize.toast('Consumable Added Successfully', 4000)
@@ -408,7 +436,7 @@ class AddConsumables extends Component{
 
     render(){
 
-        return(
+        var addConsumableForm=(
             <div style={{marginLeft:'30px',marginRight:'30px'}}>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
                 <Row>
@@ -429,7 +457,7 @@ class AddConsumables extends Component{
                     <br/>
                     <Row>
                         <Autocomplete
-                            className={this.state.vendor_name.showError ? 'no-vendor-error' : 'no-error'}
+                            className={this.state.vendor_name.showError ? 'no-vendor-error' : (this.state.vendor_name.availabilityError ? 'no-vendor-available' : 'no-error')}
                             title=' '
                             placeholder='Vendor'
                             data={
@@ -455,6 +483,13 @@ class AddConsumables extends Component{
                     <br />
                     <br />
             </div>  
+        );
+
+        return(
+            <div>
+            {this.state.addConsumable ? addConsumableForm : null}
+            {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/consumables'}}/>) : null}
+            </div>
         )
     }
 

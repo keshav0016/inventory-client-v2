@@ -182,7 +182,7 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
-                    <Input s={3} placeholder="Search" onChange = {this.setSearch} />
+                    <Input s={3} placeholder="Search by Asset Name" onChange = {this.setSearch} />
                     <Input s={3} type='number' min={1} placeholder="Search Asset ID" label=' ' onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
                     <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button>
                 </Row>
