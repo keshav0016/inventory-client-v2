@@ -470,13 +470,7 @@ class AddAsset extends Component{
             }
         })
         .then(res => {
-            if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
-                this.setState({
-                    addAssetRequest : false
-                })                
-            }
-            else{
+            if(res.data.message === 'Asset added successfully'){
                 this.setState({
                     addAssetRequest : false,
                     serial_number : {
@@ -542,8 +536,12 @@ class AddAsset extends Component{
                     redirect: true
                 })
                 window.Materialize.toast('Asset Added', 4000)                
-                this.props.setHandleListRequest(true)
-                $('label').addClass('active')
+                // this.props.setHandleListRequest(true)
+                $('label').addClass('active')     
+            }else if(res.data.message === 'asset is already there'){
+                window.Materialize.toast('asset is already there', 4000)
+            }else if(res.data.errors){
+                window.Materialize.toast(res.data.errors[0].message, 4000)
             }
         })
         .catch(error => {
