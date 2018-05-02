@@ -5,7 +5,6 @@ import AddVendor from './AddVendor'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import {
-    Link,
     Redirect
   } from 'react-router-dom';
 

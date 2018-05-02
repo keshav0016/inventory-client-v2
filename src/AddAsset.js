@@ -7,7 +7,6 @@ import $ from 'jquery'
 import './Employee.css'
 import { baseUrl } from './config';
 import {
-    Link,
     Redirect
   } from 'react-router-dom';
 
