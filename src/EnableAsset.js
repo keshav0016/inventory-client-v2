@@ -38,14 +38,14 @@ class EnableAsset extends Component{
         return(
             <div style={{padding: '20px'}} className="no-footer">
                 <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Enable Asset</h5>                            
-                <p>{`Do you really want to disable `}
+                <p>{`Do you really want to enable `}
                     <b style={{color:'teal'}}>
                         {`${this.props.asset.asset_name} `}
                     </b>
                     {`?`}
                 </p>
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <Button onClick = {this.disableAssetFromDb} style={{margin: '0 20px'}}>Enable</Button>
+                        <Button onClick = {this.enableAssetFromDb} style={{margin: '0 20px'}}>Enable</Button>
                         <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 </div>
             </div>
