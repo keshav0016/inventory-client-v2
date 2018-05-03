@@ -36,20 +36,24 @@ class Admindashboard extends Component{
                 consumablesLowStock:res.data.lowConsumable,
                 assetPendingCount:res.data.pendingAsset,
                 assetAcceptedCount:res.data.acceptedAsset,
-                handleListRequest:false
-                ,repairDateNear : res.data.repairDateNear
+                handleListRequest:false,
+                repairDateNear : res.data.repairDateNear
             })
+            
         })
         .catch(error => {
-            console.error(error)
+            window.Materialize.toast('details not found', 4000)
+
         })
+    }
+
+    componentWillMount(){
+        this.handleList()
     }
 
     render(){
         return(
             <div>
-                {this.state.handleListRequest ? this.handleList() : null}
-                {/* <h5 className='heading'>West Agile Labs</h5> */}
                 <Row>
                     <Col s={9} offset={'s3'}>
                         <Card className="z-depth-0">
@@ -65,7 +69,7 @@ class Admindashboard extends Component{
                                     <p>Pending Requests: {this.state.assetPendingCount}</p>
                                     <p>Accepted Requests: {this.state.assetAcceptedCount}</p>
                                 </Card>
-                            {this.state.repairDateNear.length !== 0 ?
+                            {this.state.repairDateNear.length > 0 ?
                                 <Card className="z-depth-2 teal-text" title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
                                     <Icon>build</Icon>
                                     {this.state.repairDateNear.map((repair, index) => {

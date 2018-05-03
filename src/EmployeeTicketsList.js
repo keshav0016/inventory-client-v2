@@ -76,7 +76,7 @@ class EmployeeTicketsList extends Component{
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){
             axios({
                 method : 'get',
-                url : `${baseUrl}/employee/ticket/list?page=${this.state.page}`,
+                url : `${baseUrl}/employee/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}`,
                 withCredentials : true
             })
             .then(res => {
@@ -98,7 +98,7 @@ class EmployeeTicketsList extends Component{
         else{
             axios({
                 method : 'get',
-                url : `${baseUrl}/employee/ticket/list?page=${this.state.page}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
+                url : `${baseUrl}/employee/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
                 withCredentials : true
             })
             .then(res => {
@@ -109,9 +109,7 @@ class EmployeeTicketsList extends Component{
                     ConsumablesticketsList : res.data.ticketsConsumableListing,
                     handleListRequest : false
                 })
-                // if(this.state.ticketsList.length === 0){
-                //     window.Materialize.toast("no tickets to show", 4000)
-                // }
+                
             })
             .catch(error => {
                 console.error(error)
@@ -164,8 +162,7 @@ class EmployeeTicketsList extends Component{
                                     })}
                                 </tbody>
                             </Table>
-                            
-                            <Pagination items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
+                            <Pagination  items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
                         </div>}
                             <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
@@ -202,8 +199,6 @@ class EmployeeTicketsList extends Component{
                         </div>}
                             <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
-
-                    {/* <Tab title="" disabled></Tab> */}
                 </Tabs>
             </div>
         )
@@ -253,4 +248,3 @@ class Tab extends Component {
 }
 
 export default EmployeeTicketsList
-

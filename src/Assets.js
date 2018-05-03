@@ -74,8 +74,10 @@ class Assets extends Component{
     setSearch(e){
         this.setState({
             search : e.target.value,
+            handleListRequest : true
+            
         })
-        this.setPage(1)
+        // this.setPage(1)
     }
 
     setSearchAssetId(e){
@@ -150,7 +152,6 @@ class Assets extends Component{
         }
     }
 
-
     setPage(e){
         this.setState({
             page : e,
@@ -172,7 +173,8 @@ class Assets extends Component{
                 searchAssetId: Object.assign(this.state.searchAssetId, {
                     error : '',
                     showError : false
-                })
+                }),
+                handleListRequest : true
             })
             this.setPage(1)
         }
@@ -184,8 +186,8 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
-                    <Input s={3} placeholder="Search by Asset Name" onChange = {this.setSearch} />
-                    <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.vale} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
+                    <Input s={3} placeholder="Search by Asset Name( Case Sensitive )" onChange = {this.setSearch} />
+                    <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
                     <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button>
                 </Row>
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
