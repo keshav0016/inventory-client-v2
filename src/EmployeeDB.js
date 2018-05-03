@@ -28,12 +28,14 @@ class EmployeeDB extends Component {
        return(
            <Router>
            <div>
-               <div className="masterComponentBackground">
-               <div>
-               <Navbar className="teal lighten-1">
-               <NavItem style={{height:'60px',width:'60px'}} ><img width="60px" height="60px" style={{marginLeft : '70px', marginTop : '2px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" /></NavItem>                        
-               <NavItem href="/logout" className="masterComponentLogoutButton"><b>LOGOUT</b></NavItem>
-           </Navbar>
+           <div className="masterComponentBackground">
+           <div>
+               <Navbar fixed className="teal lighten-1" style={{overflow: 'hidden'}}>
+                   <NavItem href="/admin">
+                       <img style={{height: '64px', width: '64px', marginLeft: '65px'}} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" />
+                   </NavItem>                        
+                   <NavItem href="/logout" className="masterComponentLogoutButton" style={{fontFamily: 'Roboto',fontWeight: 400}}><b>LOGOUT</b></NavItem>
+               </Navbar>
            <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                     <Link to={`/employee/Profile/${this.state.profile.user_id}`}>Profile</Link>
                     <Link to={`/employee/list`}>Tickets List</Link>
