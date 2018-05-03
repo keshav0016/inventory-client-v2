@@ -115,8 +115,8 @@ class RepairAsset extends Component{
         }
         if(new Date(this.state.from.value) > new Date(this.state.expected_delivery.value)) {
             this.setState({
-                from:Object.assign(this.state.from, {
-                    error: 'The delivery date cannot be before the from date',
+                expected_delivery:Object.assign(this.state.expected_delivery, {
+                    error: 'The expected date should be after the from date',
                     showError: true
                 })
             })
@@ -283,7 +283,7 @@ class RepairAsset extends Component{
                     <h6>Invoice Number : {this.state.assetDetails.invoice_number}</h6>
                     <h6>Vendor : {this.state.assetDetails.vendor}</h6>
                     <h6>Category : {this.state.assetDetails.category}</h6>
-                    <h6>Purchase Date : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
+                    <h6>Purchase Date : {moment(this.state.assetDetails.purchase_date).format('DD MM YYYY')}</h6>
                     <h6>Description : {this.state.assetDetails.description}</h6>
                     <h6>Amount : {this.state.assetDetails.amount}</h6>
                     <h6>GST : {this.state.assetDetails.gst}</h6>
@@ -303,7 +303,7 @@ class RepairAsset extends Component{
                             />
                         </Row>
                         <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
-                        <Input s={12} type='date' label="Expected Delivery*" value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                        <Input s={12} type='date' label="Expected Delivery*" min={moment(this.state.from.value).format('DD MM YYYY')} value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                         <Modal
                             actions={null}
                             id="addVendor"

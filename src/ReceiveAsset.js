@@ -288,8 +288,8 @@ class ReceiveAsset extends Component{
                     {this.state.repairInfo.asset ? <div>
                         <h6><b>Asset Name</b> : {this.state.repairInfo.asset.asset_name}</h6>
                         <h6><b>Service Provider</b> : {this.state.repairInfo.vendor}</h6>
-                        <h6><b>Given for service on</b> : {moment(this.state.repairInfo.from).format('DD MMM YYYY')}</h6>
-                        <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
+                        <h6><b>Given for service on</b> : {moment(this.state.repairInfo.from).format('DD MM YYYY')}</h6>
+                        <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MM YYYY')}</h6>
                         </div> : null}
                    
                     <Input s={6} name='on' type='date' label="Received from Service *" onChange={this.setTo} value = {this.state.to.value} error={this.state.to.showError ? this.state.to.error : null}/>

@@ -62,13 +62,13 @@ class EmployeeTicketsList extends Component{
     }
     setAssetPage(e){
         this.setState({
-            assetpage : e,
+            assetPage : e,
             handleListRequest : true
         })
     }
     setConsumablePage(e){
         this.setState({
-            consumablepage : e,
+            consumablePage : e,
             handleListRequest : true
         })
     }
@@ -147,7 +147,6 @@ class EmployeeTicketsList extends Component{
                                     <th data-field="status">Status</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
                                     {this.state.AssetsticketsList.map((ticket, index) => {
                                         return (<tr key={ticket.ticket_number}>
@@ -156,7 +155,6 @@ class EmployeeTicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                
                                         </tr>
                                         )
                                     })}
