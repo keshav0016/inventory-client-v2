@@ -55,7 +55,7 @@ class Assets extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `${baseUrl}/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=%${this.state.search}%&searchAsset=${this.state.searchAssetId.value}`,
+            url : `${baseUrl}/asset/list?page=${this.state.page}&Available=${this.state.isAvailableChecked}&Assigned=${this.state.isAssignedChecked}&Service=${this.state.isServiceChecked}&Electronics=${this.state.isElectronicsChecked}&Non-Electronics=${this.state.isNonElectronicsChecked}&Other=${this.state.isOtherChecked}&search=${this.state.search}&searchAsset=${this.state.searchAssetId.value}`,
             withCredentials : true
         })
         .then(res => {

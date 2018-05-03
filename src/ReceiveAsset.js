@@ -30,8 +30,8 @@ class ReceiveAsset extends Component{
                 error : ''
             },
             total : 0,
-            repairInfo : {asset_id : '' , from : '', to : '', expected_delivery : ''},
-            receiveAssetRequest : false
+            receiveAssetRequest : false,
+            repairInfo : {asset_id : '' , from : '', to : '', expected_delivery : ''}
         }
         this.setTo = this.setTo.bind(this)
         this.setRepairInvoice = this.setRepairInvoice.bind(this)
@@ -40,6 +40,7 @@ class ReceiveAsset extends Component{
         this.checkForValidation = this.checkForValidation.bind(this)
         this.receiveAssetIntoDb = this.receiveAssetIntoDb.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
+        this.clearFields = this.clearFields.bind(this)
     }
 
     calculateTotal(){
@@ -251,7 +252,32 @@ class ReceiveAsset extends Component{
         })
         $('label').addClass('active')
     }
-
+    clearFields(){
+        this.setState({
+            to : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            repair_invoice : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            amount : {
+                value: 0,
+                error: '',
+                showError: false
+            },
+            gst : {
+                value : 0,
+                showError : false,
+                error : ''
+            },
+            total : 0,
+            receiveAssetRequest : false,
+        })
+    }
 
 
     render(){
@@ -274,7 +300,7 @@ class ReceiveAsset extends Component{
                     <Badge>Total : {this.state.total}</Badge>
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <Button className="modal-close" onClick = {this.clearFields} style={{margin: '0 20px'}}>Cancel</Button>
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}
             </div>
         )
