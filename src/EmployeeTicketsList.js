@@ -162,7 +162,7 @@ class EmployeeTicketsList extends Component{
                                     })}
                                 </tbody>
                             </Table>
-                            <Pagination items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
+                            <Pagination  items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
                         </div>}
                             <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
@@ -248,4 +248,3 @@ class Tab extends Component {
 }
 
 export default EmployeeTicketsList
-
