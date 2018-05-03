@@ -3,7 +3,6 @@ import axios from 'axios'
 import {Row, Input, Button, Icon} from 'react-materialize'
 import { baseUrl } from './config';
 
-
 class AssignAsset extends Component{
     constructor(props){
         super(props)
@@ -34,6 +33,7 @@ class AssignAsset extends Component{
         this.setExpectedRecovery = this.setExpectedRecovery.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.setEmployee = this.setEmployee.bind(this)
+        this.clearFields = this.clearFields.bind(this)
     }
 
     checkForValidation(){
@@ -196,6 +196,25 @@ class AssignAsset extends Component{
             })
         })
     }
+    clearFields(){
+        this.setState({
+            user_id : {
+                value: 'Select',
+                error: '',
+                showError: false
+            },
+            from : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            expected_recovery : {
+                value: '',
+                error: '',
+                showError: false
+            }
+        })
+    }
 
     render(){
         return(
@@ -205,10 +224,10 @@ class AssignAsset extends Component{
                 <Row>
                     <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
-                    <Input s={12} type='date' label="Expected Recovery*" value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
+                    <Input s={12} type='date' label="Expected Recovery*"  className='datepicker' value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
                 </Row>
                 <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"} <Icon small right>send</Icon></Button>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <Button className="modal-close" onClick ={this.clearFields} style={{margin: '0 20px'}}>Cancel</Button>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}
             </div>
         )

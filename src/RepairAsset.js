@@ -7,7 +7,6 @@ import moment from 'moment'
 import './Employee.css'
 import { baseUrl } from './config';
 import {
-    Link,
     Redirect
   } from 'react-router-dom';
 

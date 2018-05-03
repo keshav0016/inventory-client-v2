@@ -5,7 +5,6 @@ import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import {
-  Link,
   Redirect
 } from 'react-router-dom';
 
@@ -173,16 +172,15 @@ class EmployeeAdd extends Component {
           })
           window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
-        }else if(res.data.message ==='user exists'){
-          window.Materialize.toast('user already exists',3000)
-  
-        
         }else if(res.data.error[0].message ==='first name should be alphabets'){
-          window.Materialize.toast('firstname should be filled and should be only letters',3000)
+          window.Materialize.toast('firstname should be only letters',3000)
         }else if(res.data.error[0].message ==='last name should be alphabets'){
-          window.Materialize.toast('lastname should be filled and should be only letters',3000)
+          window.Materialize.toast('lastname should be only letters',3000)
         }else if(res.data.error[0].message ==='designation should be alphabets'){
-          window.Materialize.toast('designation should be filled and should be only letters',3000)
+          window.Materialize.toast('designation should be only letters',3000)
+        }else if(res.data.error[0].message === 'user_id must be unique'){
+          window.Materialize.toast('user id is already given to another user',3000)
+
         }
       })
     }

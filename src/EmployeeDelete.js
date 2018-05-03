@@ -19,11 +19,9 @@ class EmployeeDelete extends Component {
           withCredentials: true
         })
         .then((res) => {
-          if(res.data.message === 'employee deleted'){
-          this.props.setHandleListRequest()
-              
+            if(res.data.message === 'employee deleted'){
             window.Materialize.toast('Employee deleted', 4000)
-
+            this.props.setHandleListRequest()
           }
         })
         .catch(error => {
