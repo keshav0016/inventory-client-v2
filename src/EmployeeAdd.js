@@ -220,7 +220,7 @@ class EmployeeAdd extends Component {
   handleDesignation(e){
     this.setState({
       designation: Object.assign(this.state.designation, {
-        value: e.target.value
+        value: e.target.value 
       })  
       
     })
@@ -284,7 +284,9 @@ class EmployeeAdd extends Component {
             <option value='Sr.Project Manager'>Sr.Project Manager</option>
             <option value='Project Manager'>Project Manager</option>
           </Input> : null }
-          {this.state.department.value === 'Finance/Accounting' ?   <Input s={6}  label="Designation" defaultValue='Finance Director' /> : null }
+          {this.state.department.value === 'Finance/Accounting' ?<Input s={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
+          <option value='select'>select</option>
+          <option value='Finance Director'>Finance Director</option></Input>: null }
           {this.state.department.value === 'Pre sales' ? <Input s={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='Lead Presales'>Lead Presales</option>
