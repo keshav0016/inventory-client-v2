@@ -134,7 +134,7 @@ class EmployeeUpdate extends Component{
                     <option value='Testing'>Testing</option>
                         
                     </Input>
-                    <Input type="text"  defaultValue={this.state.designation}label="Designation"onChange={this.handleDesignation} s={6} />
+                    <Input type="text"  defaultValue={this.state.designation}label="Current Designation"onChange={this.handleDesignation} s={6} disabled/>
                 </Row>
                  <Button onClick={this.handleUpdate}>Edit</Button>
                  <Button className="modal-close" onClick={this.setFields} style={{margin: '0 20px'}}>Cancel</Button>
