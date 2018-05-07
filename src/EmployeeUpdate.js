@@ -105,13 +105,13 @@ class EmployeeUpdate extends Component{
     }
     setFields(){
         this.setState({
-            user_id: this.props.user.user_id,
-            first_name: this.props.user.first_name,
-            last_name: this.props.user.last_name,
-            age: this.props.user.age,
-            gender: this.props.user.gender,
-            department: this.props.user.department,
-            designation: this.props.user.designation
+            user_id: this.state.user_id,
+            first_name: this.state.first_name,
+            last_name: this.state.last_name,
+            age: this.state.age,
+            gender: this.state.gender,
+            department: this.state.department,
+            designation: this.state.designation
         })
     }
     render() {
