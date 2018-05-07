@@ -178,6 +178,8 @@ class EmployeeTicketsList extends Component{
                                     <th data-field="requestedItem">Requested Item</th>
                                     <th data-field="quantity">Quantity</th>
                                     <th data-field="status">Status</th>
+                                    <th data-field='remarks'>Remarks</th>
+
                                     </tr>
                                 </thead>
 
@@ -189,7 +191,8 @@ class EmployeeTicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                
+                                        <td>{ticket.status !== 'Pending' ? `${ticket.reason}` : '-'}</td>
+
                                         </tr>
                                         )
                                     })}
