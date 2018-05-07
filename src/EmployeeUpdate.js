@@ -24,6 +24,7 @@ class EmployeeUpdate extends Component{
         this.handleLastname = this.handleLastname.bind(this)
         this.handleGender = this.handleGender.bind(this)
         this.handleUserid = this.handleUserid.bind(this)
+        this.setFields = this.setFields.bind(this)
          
     }
     handleUserid(e){
@@ -96,7 +97,18 @@ class EmployeeUpdate extends Component{
          window.Materialize.toast('can not edit employee', 4000)
 
        })
-   }
+    }
+    setFields(){
+        this.setState({
+            user_id: this.props.user.user_id,
+            first_name: this.props.user.first_name,
+            last_name: this.props.user.last_name,
+            age: this.props.user.age,
+            gender: this.props.user.gender,
+            department: this.props.user.department,
+            designation: this.props.user.designation
+        })
+    }
     render() {
         
         return (           
@@ -114,16 +126,18 @@ class EmployeeUpdate extends Component{
                         
                     </Input>
                     <Input s={6} type='select' label="Department" onChange={this.handleDepartment}defaultValue={this.state.department}>
-                        <option value='Hr'>HR</option>
-                        <option value='Delivery'>Delivery</option>
-                        <option value='Developer'>Developer</option>
-                        <option value='Other'>Other</option>
+                    <option value='HR'>HR</option>
+                    <option value='Delivery'>Delivery</option>
+                    <option value='Finance/Accounting'>Finance/Accounting</option>
+                    <option value='Pre sales'>Pre sales</option>
+                    <option value='Developer/Designer'>Developer/Designer</option>
+                    <option value='Testing'>Testing</option>
                         
                     </Input>
                     <Input type="text"  defaultValue={this.state.designation}label="Designation"onChange={this.handleDesignation} s={6} />
                 </Row>
                  <Button onClick={this.handleUpdate}>Edit</Button>
-                 <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                 <Button className="modal-close" onClick={this.setFields} style={{margin: '0 20px'}}>Cancel</Button>
             </div>
         )
     }
