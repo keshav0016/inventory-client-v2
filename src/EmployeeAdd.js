@@ -250,6 +250,7 @@ class EmployeeAdd extends Component {
           <Input  onChange={this.handleLastname} s={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
           <Input type="number" min='0'label="Age" value={this.state.age.value} onChange={this.handleAge}s={6} error={this.state.age.showError ? this.state.age.error : null}/>
           <Input s={6} type='select'  label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
+            <option value='select'>select</option>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>
