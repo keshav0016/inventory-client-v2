@@ -73,7 +73,7 @@ class Admindashboard extends Component{
                                 <Card className="z-depth-2 teal-text" title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
                                     <Icon>build</Icon>
                                     {this.state.repairDateNear.map((repair, index) => {
-                                        return <p style={{display : 'list-item'}} key={repair.aseet_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
+                                        return <p style={{display : 'list-item'}} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
                                     })}
                                 </Card>
                             : null}
