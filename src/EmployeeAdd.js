@@ -173,13 +173,33 @@ class EmployeeAdd extends Component {
           window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
         }else if(res.data.error[0].message ==='first name should be alphabets'){
-          window.Materialize.toast('firstname should be only letters',3000)
+          this.setState({
+            first_name: Object.assign(this.state.first_name, {
+              error: "First name should be only letters",
+              showError: true,
+            })
+          })
         }else if(res.data.error[0].message ==='last name should be alphabets'){
-          window.Materialize.toast('lastname should be only letters',3000)
+          this.setState({
+            last_name: Object.assign(this.state.last_name, {
+              error: "Last name  should be only letters",
+              showError: true,
+            }),
+          })
         }else if(res.data.error[0].message ==='designation should be alphabets'){
-          window.Materialize.toast('designation should be only letters',3000)
+          this.setState({
+            designation: Object.assign(this.state.designation, {
+              error: "Designation should be only letters",
+              showError: true,
+            }),
+          })
         }else if(res.data.error[0].message === 'user_id must be unique'){
-          window.Materialize.toast('user id is already given to another user',3000)
+          this.setState({
+            user_id: Object.assign(this.state.user_id, {
+              error: "Employee Id is is already given to another Employee",
+              showError: true,
+            })
+          })
 
         }
       })
