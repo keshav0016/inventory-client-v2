@@ -22,12 +22,14 @@ class EmployeeDelete extends Component {
             if(res.data.message === 'employee deleted'){
                 this.props.setHandleListRequest(true)
                 window.Materialize.toast('Employee deleted', 4000)
-
-          }
+            }else if(res.data.message === 'can not delete employee'){
+                window.Materialize.toast(res.data.message, 4000)
+            }
         })
         .catch(error => {
             window.Materialize.toast('can not delete employee', 4000)
         })
+        
     }
     render(){
         return(
