@@ -226,7 +226,7 @@ class Consumables extends Component{
                     <option value='purchasedAsc'>Purchase Date [New - Old]</option>
                     <option value='purchasedDesc'>Purchase Date [Old - New]</option> 
                 </Input>
-                <Input s={4} type='text' label="Search ( Case Sensitive )" onChange={this.searchKeyword}></Input>
+                <Input s={4} type='text' label="Search" onChange={this.searchKeyword}></Input>
                 </Row>
                 {this.state.consumableList.length === 0 
                     ?
