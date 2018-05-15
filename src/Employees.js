@@ -4,6 +4,7 @@ import './Employee.css';
 import './adminDash.css'
 import EmployeeUpdate from './EmployeeUpdate';
 import EmployeeDelete from './EmployeeDelete';
+import EnableEmployee from './EnableEmployee'
 import {
   Link,
 } from 'react-router-dom';
@@ -96,21 +97,31 @@ class EmployeesList extends Component {
                 <td>{item.gender}</td>
                 <td>{item.department}</td>
                 <td>{item.designation}</td>
-                <td><Dropdown trigger={
-                   <Button className = 'btn-mini'> <Icon>more_vert</Icon></Button>
-                  }>
-                   <Modal
-                    actions={null}
-                    trigger={<NavItem >Edit</NavItem >}>
-                    <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
-                  </Modal>
-                  <Modal style={{width:'70%'}}
-                    actions={null} 
-                    trigger={<NavItem >Delete</NavItem >}>
-                    <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
-                  </Modal>
-                  <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
-                </Dropdown></td>
+                <td>{item.disable=== 1 ? <Dropdown trigger={
+                                    <Button><Icon tiny>more_vert</Icon></Button>
+                                }>
+                                <Modal
+                                    style={{width : '70%'}}
+                                    actions={null}
+                                    trigger={<NavItem>Enable</NavItem> }>
+                                    {<EnableEmployee user = {this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
+                                </Modal>
+                                </Dropdown>
+                                : <Dropdown trigger={
+                                  <Button className = 'btn-mini'> <Icon>more_vert</Icon></Button>
+                                 }>
+                                  <Modal
+                                   actions={null}
+                                   trigger={<NavItem >Edit</NavItem >}>
+                                   <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
+                                 </Modal>
+                                 <Modal style={{width:'70%'}}
+                                   actions={null} 
+                                   trigger={<NavItem >Disable</NavItem >}>
+                                   <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
+                                 </Modal>
+                                 <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
+                               </Dropdown>}</td>
               </tr>
               )
             },this)}
