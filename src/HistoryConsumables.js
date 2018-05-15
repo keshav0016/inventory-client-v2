@@ -105,7 +105,7 @@ class HistoryConsumables extends Component{
                                 <div style={{display : 'flex'}} >
                                     <div style={{float: 'left', width : '50%'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
-                                        <h6><b>User Name</b> : {consumable.user.first_name + " " + consumable.user.last_name}</h6>
+                                        <h6><b>User Name</b> : {consumable.user !== null ? consumable.user.first_name + " " + consumable.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</h6>
                                         <h6><b>Assigned Date</b> : {moment(consumable.assigned_date).format('DD MMM YYYY')}</h6>
                                     </div>
                                     <div style={{float: 'right', width : '50%'}} >
