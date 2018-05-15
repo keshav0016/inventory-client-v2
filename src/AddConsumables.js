@@ -52,14 +52,19 @@ class AddConsumables extends Component{
             },
             vendorNames : {
             },
+            consumableNamesListObj : {
+
+            },
             total : 0,
             vendorList : [],
+            consumableNameList : [],
             addVendor : false,
             vendorListRequest : true,
             addConsumableRequest : false,
             calculateTotal : false,
             redirect: false,
-            addConsumable: true
+            addConsumable: true,
+            getConsumableName: true
         }
         this.setConsumableName = this.setConsumableName.bind(this)
         this.setVendorName = this.setVendorName.bind(this)
@@ -77,6 +82,8 @@ class AddConsumables extends Component{
         this.calculateWholePrice = this.calculateWholePrice.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
         this.getVendorName = this.getVendorName.bind(this)
+        this.handleConsumableNameList = this.handleConsumableNameList.bind(this)
+        this.getConsumableNameList = this.getConsumableNameList.bind(this)
     }
     componentDidMount(){
         $(document).ready(function(){
@@ -236,10 +243,10 @@ class AddConsumables extends Component{
         }
             }
 
-    setConsumableName(e){
+    setConsumableName(e,value){
         this.setState({
             name: Object.assign(this.state.name, {
-                value: e.target.value
+                value: value,
             })
         })
     }
@@ -432,6 +439,33 @@ class AddConsumables extends Component{
         })
     }
 
+    handleConsumableNameList(){
+        axios({
+            method : 'get',
+            url : `${baseUrl}/consumables/listNames`,
+            withCredentials : true
+        })
+        .then(res => {
+            this.setState({
+                consumableNameList : res.data.consumablesNames,
+                getConsumableName : false
+            })
+            this.getConsumableNameList()
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
+    getConsumableNameList(){
+        let consumableNamesObj = {}
+        this.state.consumableNameList.map((obj)=>{
+            return consumableNamesObj[obj.name] = null
+        })
+        this.setState({
+            consumableNamesListObj : consumableNamesObj,
+        })
+    }
 
     render(){
 
@@ -439,7 +473,18 @@ class AddConsumables extends Component{
             <div style={{marginLeft:'30px',marginRight:'30px'}}>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
                 <Row>
-                    <Input autoFocus s={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/>
+                    {/* <Input autoFocus s={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/> */}
+                        <Autocomplete s={6}
+                            className={this.state.name.showError ? 'consumable-empty-error': null}
+                            title=' '
+                            autoFocus
+                            placeholder='Consumable'
+                            data={
+                                this.state.consumableNamesListObj
+                            }
+                            onChange = {this.setConsumableName}
+                            value={this.state.name.value}
+                        />
                     <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
                     <br/>
                     <br/>
@@ -478,6 +523,7 @@ class AddConsumables extends Component{
                     <Button style={{position:'absolute', right:'3%', bottom:'3%'}} waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
                     {this.state.addConsumableRequest ? this.addConsumable () : null}
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
+                    {this.state.getConsumableName ? this.handleConsumableNameList() : null}
                     {this.state.calculateTotal ? this.calculateTotal() : null}
                     <br />
                     <br />
