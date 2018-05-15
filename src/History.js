@@ -81,7 +81,7 @@ class Assets extends Component{
                 {this.state.assetDetails ? <div>
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Asset Details</h3>
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
-                {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee.first_name} {this.state.assignedEmployee.last_name} ({this.state.assignedEmployee.user_id})</h4> : null}
+                {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
                     <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
@@ -131,7 +131,7 @@ class Assets extends Component{
                                     <div style={{display : 'flex'}} >
                                         <div style={{float: 'left', width : '50%'}} >
                                             <h6><b>Employee Id</b> : {element.user_id}</h6>
-                                            <h6><b>Employee Name</b> : {element.user.first_name} {element.user.last_name}</h6>
+                                            <h6><b>Employee Name</b> : {element.user!== null ? element.user.first_name +""+ element.user.last_name: <b style={{color:'teal'}}>Employee has left</b>}</h6>
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
                                         </div>
                                         <div style={{float: 'right', width : '50%'}} >
