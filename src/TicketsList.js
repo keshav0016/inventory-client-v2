@@ -253,7 +253,7 @@ class TicketsList extends Component{
                                     {this.state.consumableTicket.map((ticket, index) => {
                                         return (<tr key={ticket.ticket_number}>
                                         <td>{ticket.ticket_number}</td>
-                                        <td>{ticket.user.first_name + " " + ticket.user.last_name}</td>
+                                        <td>{ticket.user !== null ? ticket.user.first_name + " " + ticket.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</td>
                                         <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
                                         <td>{ticket.quantity}</td>
