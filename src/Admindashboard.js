@@ -89,8 +89,8 @@ class Admindashboard extends Component{
 
                     </Col > */}
                 </Row>
-                {this.state.redirect === 403 ? <Redirect to = '/employee/Profile/' /> : null}
-                {this.state.redirect === 401 ? <Redirect  to = '/login' /> : null}
+                {this.state.redirect === 403 ? <Redirect from='/admin' to = '/employee/Profile/' /> : null}
+                {this.state.redirect === 401 ? <Redirect from='/admin' to = '/login' /> : null}
             </div>
         )
     }
