@@ -5,7 +5,7 @@ import {Row, Col, Card, Icon} from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
 import { baseUrl } from './config';
-
+import { Redirect } from "react-router-dom";
 
 class Admindashboard extends Component{
     constructor(props){
@@ -18,6 +18,7 @@ class Admindashboard extends Component{
             assetPendingCount:'',
             assetAcceptedCount:''
             ,repairDateNear : []
+            ,redirect : 0
         }
         this.handleList = this.handleList.bind(this)
     }
@@ -42,8 +43,12 @@ class Admindashboard extends Component{
             
         })
         .catch(error => {
-            window.Materialize.toast('details not found', 4000)
-
+            // window.Materialize.toast('details not found', 4000)
+            if(error.response.status){
+                this.setState({
+                    redirect : error.response.status
+                })
+            }
         })
     }
 
@@ -84,6 +89,8 @@ class Admindashboard extends Component{
 
                     </Col > */}
                 </Row>
+                {this.state.redirect === 403 ? <Redirect to = '/employee/Profile/' /> : null}
+                {this.state.redirect === 401 ? <Redirect  to = '/login' /> : null}
             </div>
         )
     }
