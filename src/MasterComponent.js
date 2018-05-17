@@ -10,7 +10,6 @@ import Admindashboard from './Admindashboard';
 import AddConsumables from './AddConsumables';
 import EntireHistoryConsumables from './EntireHistoryConsumables'
 import {
-    BrowserRouter as Router,
     Route, Redirect,
     Link
 } from 'react-router-dom';
@@ -20,7 +19,6 @@ import History from './History'
 import AddAsset from './AddAsset'
 import RepairAsset from './RepairAsset'
 import Tickets from './Tickets'
-import LoginForm from './LoginForm';
 import EmployeeAdd from './EmployeeAdd';
 import AcceptAssetTicket from './AcceptAssetTicket'
 import AssetType from './AssetType'
@@ -43,7 +41,7 @@ class MasterComponent extends Component {
         })
         .catch(error=>{
             this.setState({
-                unauth: error.response.status == 401 || error.response.status == 403
+                unauth: error.response.status === 401 || error.response.status === 403
             })
         })
     }
