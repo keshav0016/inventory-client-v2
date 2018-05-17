@@ -78,8 +78,8 @@ class EmployeeUpdate extends Component{
             method: 'post',
             url: `${baseUrl}/employees/update`,
             data:{
-                user_id: this.state.user_id,
-                first_name:this.state.first_name,
+                 user_id: this.state.user_id,
+                 first_name:this.state.first_name,
                  last_name:this.state.last_name,
                  age:this.state.age,
                  gender: this.state.gender,
@@ -93,6 +93,9 @@ class EmployeeUpdate extends Component{
              window.Materialize.toast('Employee Edited', 4000)
             this.props.setHandleListRequest()
              
+         }else if(res.data.error[0].message){
+            window.Materialize.toast(res.data.error[0].message, 4000)
+
          }
            
         })
