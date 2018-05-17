@@ -131,7 +131,7 @@ class Assets extends Component{
                                     <div style={{display : 'flex'}} >
                                         <div style={{float: 'left', width : '50%'}} >
                                             <h6><b>Employee Id</b> : {element.user_id}</h6>
-                                            <h6><b>Employee Name</b> : {element.user!== null ? element.user.first_name +""+ element.user.last_name: <b style={{color:'teal'}}>Employee has left</b>}</h6>
+                                            <h6><b>Employee Name</b> : {element.user!== null ? element.user.first_name +" "+ element.user.last_name: <b style={{color:'teal'}}>Employee has left</b>}</h6>
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
                                         </div>
                                         <div style={{float: 'right', width : '50%'}} >
