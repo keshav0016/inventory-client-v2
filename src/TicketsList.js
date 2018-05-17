@@ -150,8 +150,13 @@ class TicketsList extends Component{
                 window.Materialize.toast('Requested Quantity greater than available', 4000)
             }
             else{
-                window.Materialize.toast('Ticket Accepted', 4000)
-                $(".modal-overlay").click()        
+                if(res.data.message === 'Requested item is disabled'){
+                    window.Materialize.toast('Requested item is disabled', 4000)
+                }
+                else{
+                    window.Materialize.toast('Ticket Accepted', 4000)
+                    $(".modal-overlay").click()        
+                }
             }
             console.log('success')
         })
