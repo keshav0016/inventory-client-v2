@@ -14,7 +14,8 @@ class EmployeeUpdate extends Component{
             age: this.props.user.age,
             gender: this.props.user.gender,
             department: this.props.user.department,
-            designation: this.props.user.designation
+            designation: this.props.user.designation,
+            email: this.props.user.email
         }
         this.handleUpdate = this.handleUpdate.bind(this)
         this.handleAge = this.handleAge.bind(this)
@@ -25,6 +26,7 @@ class EmployeeUpdate extends Component{
         this.handleGender = this.handleGender.bind(this)
         this.handleUserid = this.handleUserid.bind(this)
         this.setFields = this.setFields.bind(this)
+        this.handleEmail = this.handleEmail.bind(this)
          
     }
     handleUserid(e){
@@ -48,6 +50,11 @@ class EmployeeUpdate extends Component{
         this.setState({
         age: e.target.value
             
+        })
+    }
+    handleEmail(e){
+        this.setState({
+            email: e.target.value
         })
     }
     handleDepartment(e){
@@ -84,7 +91,8 @@ class EmployeeUpdate extends Component{
                  age:this.state.age,
                  gender: this.state.gender,
                  department:this.state.department,
-                 designation:this.state.designation
+                 designation:this.state.designation,
+                 email:this.state.email 
             },
             withCredentials: true
         })
@@ -114,7 +122,8 @@ class EmployeeUpdate extends Component{
             age: this.state.age,
             gender: this.state.gender,
             department: this.state.department,
-            designation: this.state.designation
+            designation: this.state.designation,
+            email: this.state.email
         })
     }
     render() {
@@ -133,6 +142,7 @@ class EmployeeUpdate extends Component{
                         <option value='Other'>Other</option>
                         
                     </Input>
+                    <Input s={6}  label="Email*" type = "email" onChange={this.setEmail} defaultValue={this.state.email} />
                     <Input s={6} type='select' label="Department" onChange={this.handleDepartment}defaultValue={this.state.department}>
                     <option value='HR'>HR</option>
                     <option value='Delivery'>Delivery</option>

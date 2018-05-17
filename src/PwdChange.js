@@ -16,13 +16,11 @@ class PasswordChange extends Component {
             New_Password : '',
             user_id: this.props.location.user,
             change: true
-            ,email : ''
         }
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this)
         this.handleNewPassword = this.handleNewPassword.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleUserid = this.handleUserid.bind(this)
-        this.setEmail = this.setEmail.bind(this)
     }
     render(){
         var change =(
@@ -33,9 +31,6 @@ class PasswordChange extends Component {
                         <Card className="z-depth-2" title="Reset your password" style={{padding: "30px"}}>
                         <Row>
                             <Input s={12}  placeholder="User Id" onChange={this.handleUserid} icon="account_box"></Input>
-                        </Row>
-                        <Row>
-                            <Input s={12}  placeholder="Email*" type = "email" onChange={this.setEmail} icon='email'/>
                         </Row>
                         <Row>
                             <Input s={12}  type='password'onChange={this.handleNewPassword} placeholder="New Password" icon="lock"></Input>
@@ -61,13 +56,6 @@ class PasswordChange extends Component {
             </div>
         )
     }
-
-    setEmail(e){
-        this.setState({
-            email : e.target.value
-        })
-    }
-
     handleUserid(e){
         this.setState({
             user_id : e.target.value

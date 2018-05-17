@@ -47,6 +47,7 @@ class EmployeeAdd extends Component {
         showError: false,
         error: "",
       },
+      email : '',
       addEmployee: true,
       redirect: false
     }
@@ -58,7 +59,8 @@ class EmployeeAdd extends Component {
     this.handleLastname = this.handleLastname.bind(this)
     this.handleGender = this.handleGender.bind(this)
     this.handleUser_Id = this.handleUser_Id.bind(this)
-     
+    this.setEmail = this.setEmail.bind(this)
+
   }
   componentDidMount(){
     $('label').addClass('active')
@@ -259,7 +261,11 @@ class EmployeeAdd extends Component {
       })  
     })
   }
-
+  setEmail(e){
+    this.setState({
+        email : e.target.value
+    })
+  }
   render() {
     var addEmployeeForm = (
       <div style={{marginLeft: '30px',marginRight: '30px'}} >
@@ -275,6 +281,7 @@ class EmployeeAdd extends Component {
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>
           </Input>
+          <Input s={6}  label="Email*" type = "email" onChange={this.setEmail} />
           <Input s={6} type='select' label="Department" defaultValue='HR'onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
             <option value='select'>select</option>
             <option value='HR'>HR</option>
