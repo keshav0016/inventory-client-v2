@@ -19,25 +19,30 @@ class EmployeeHistory extends Component {
         return (
            
         <div style={{marginLeft: '30px',marginRight: '30px'}}>
-      <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Items held by Employee</h3>
-      <Table >
-        <thead>
-            <tr>
-                <th data-field="item"> Item</th>
-                <th data-field="quantity">Quantity</th>
-             
-            </tr>
-        </thead>
+            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Items held by Employee</h3>
+            {this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
+            <div>
+                <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <thead>
+                    <tr>
+                        <th data-field="item"> Item</th>
+                        <th data-field="quantity">Quantity</th>
+                    
+                    </tr>
+                </thead>
 
-        <tbody>
-            {this.state.data.map((item, index) => {
-                return <tr key={index}>
-                    <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable ? `${item.consumable.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
-                    <td>{item.asset_id ? "1": item.quantity}</td>
-                </tr>
-            })}
-        </tbody>
-    </Table>
+                <tbody>
+                    {this.state.data.map((item, index) => {
+                        return <tr key={index}>
+                            <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable ? `${item.consumable.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
+                            <td>{item.asset_id ? "1": item.quantity}</td>
+                        </tr>
+                    })}
+                </tbody>
+                </Table>
+
+            </div>   }
+            
         </div>
         )
     }
