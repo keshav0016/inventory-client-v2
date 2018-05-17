@@ -55,14 +55,14 @@ class DeleteConsumable extends Component{
         return(
             <div style={{padding: '20px'}} className="no-footer">
                 <h5>Delete Consumable</h5>                            
-                <p>{`Do you really want to delete `}
+                <p>{`Do you really want to disable `}
                     <b style={{color:'teal'}}>
                         {`${this.props.consumable.name} `}
                     </b>
                     {`?`}
                 </p>
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <Button onClick = {this.setDeleteConsumableRequest} style={{margin: '0 20px'}}>Delete</Button>
+                        <Button onClick = {this.setDeleteConsumableRequest} style={{margin: '0 20px'}}>Disable</Button>
                         <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 </div>
             </div>

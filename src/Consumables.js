@@ -9,6 +9,7 @@ import './ListPage.css'
 import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
+import EnableConsumable from './EnableConsumable';
 
 
 class Consumables extends Component{
@@ -253,8 +254,17 @@ class Consumables extends Component{
                             <td >{consumable.consumable_id}</td>
                             <td >{consumable.name}</td>
                             <td >{consumable.quantity}</td>
-                            <td><Dropdown trigger={
+                            <td>{consumable.disable === 1 ? 
+                            <Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
+                                }><Modal
+                                style={{width : '70%'}}
+                                actions={null}
+                                trigger={<NavItem>Enable</NavItem> }>
+                                {<EnableConsumable  consumable={consumable} setHandleListRequest={this.setHandleListRequest} />}
+                            </Modal>
+                            </Dropdown>:<Dropdown trigger={
+                                    <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                 {/* <Modal
                                     header='Edit Consumable'
@@ -264,7 +274,7 @@ class Consumables extends Component{
                                 </Modal> */}
                                 <Modal style={{width:'70%'}}
                                         actions={null}
-                                        trigger={<NavItem>Delete</NavItem>}>
+                                        trigger={<NavItem>Disable</NavItem>}>
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
                                 </Modal>
                                 <Modal
@@ -273,7 +283,7 @@ class Consumables extends Component{
                                     <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal>
                                 <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>Details</NavItem >
-                                </Dropdown></td>
+                            </Dropdown>}</td>
                             </tr>
                             )
                         },this)}
