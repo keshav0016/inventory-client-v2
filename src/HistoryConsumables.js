@@ -117,6 +117,7 @@ class HistoryConsumables extends Component{
                         </CardPanel>
                     </Col>
                        })}
+                       <a href='/admin/consumables'><Button>Go Back</Button></a>
            </div>
        )
    }
