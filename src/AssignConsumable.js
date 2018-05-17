@@ -19,7 +19,7 @@ class AssignConsumables extends Component {
             employeesList: [],
             fetchEmployeeList: true,
             user_id:{
-                value : '',
+                value : 'Select',
                 error: '',
                 showError: false
             },
@@ -31,6 +31,7 @@ class AssignConsumables extends Component {
         this.checkForValidation = this.checkForValidation.bind(this)
         this.getEmployeeList = this.getEmployeeList.bind(this)
         this.assignedEmployee = this.assignedEmployee.bind(this)
+        this.setEmployeeDropdown = this.setEmployeeDropdown.bind(this)
     }
 
     componentDidMount(){
@@ -57,7 +58,7 @@ class AssignConsumables extends Component {
        assignedEmployee(e){
            this.setState({
                user_id:Object.assign(this.state.user_id, {
-                   value: this.state.employeesList[e.target.value].user_id
+                   value: e.target.value
                })
            })
        }
@@ -117,7 +118,7 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(!this.state.user_id.value){
+        if(this.state.user_id.value === 'Select'){
             this.setState({
                 user_id: Object.assign(this.state.user_id, {
                     error: 'Select an Employee',
@@ -125,7 +126,7 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(this.state.user_id.value){
+        if(this.state.user_id.value !== 'Select'){
             this.setState({
                 user_id: Object.assign(this.state.user_id, {
                     error: '',
@@ -133,7 +134,7 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(this.state.user_id && Number(this.state.quantity.value) > 0 && Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
+        if(this.state.user_id.value !== 'Select' && Number(this.state.quantity.value) > 0 && Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
             this.setState({
                 assignConsumableRequest : true
             })
@@ -164,12 +165,12 @@ class AssignConsumables extends Component {
         .then(obj => {
             this.setState({
                 user_id:{
-                    value:'',
+                    value:'Select',
                     error:'',
                     showError:false
                 },
                 quantity:{
-                    value:'',
+                    value:'0',
                     error:'',
                     showError:false
                 },
@@ -183,18 +184,21 @@ class AssignConsumables extends Component {
         })
     }
 
+    setEmployeeDropdown(){
+        var employeesArr = []
+        employeesArr.push(<option key='Select' value='Select'>Select</option>)
+        this.state.employeesList.forEach(employee => {
+            employeesArr.push(<option key={employee.user_id} value={employee.user_id}>{`${employee.first_name} ${employee.last_name}`}</option>)
+        });
+        return employeesArr
+    }
+
     render() {
         return (
             <div style={{padding: '20px'}} className="no-footer">
                 <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign Consumable</h5>            
                 <Row>
-                    <Input s={5} type='select' onChange={this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null} >
-                        {this.state.employeesList.map((element,index)=>{
-                            return( 
-                                <option key={index} value={index}>{element.first_name + " " + element.last_name}</option>
-                            )
-                        })}
-                    </Input>
+                    <Input s={6} type="select" label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
