@@ -24,7 +24,7 @@ class PasswordChange extends Component {
     }
     render(){
         var change =(
-            <div className='teal' style={{height: '100%', position: 'relative'}}>
+            <div className='teal' style={{height: '100vh', position: 'relative'}}>
                 <Row>
                     <Col s={4} offset={'s4'} style={{marginTop:'90.67px'}}>
                     <form onSubmit={this.handleSubmit}>
