@@ -182,7 +182,7 @@ class VendorUpdate extends Component{
             <div className="no-footer" style={{padding: '20px'}}>           
                 <Row>
                     <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update Vendor</h3 >
-                    <Input  value={this.state.id.value} onChange={this.handleId}s={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />      
+                    {/* <Input  value={this.state.id.value} onChange={this.handleId}s={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />       */}
                     <Input  value={this.state.name.value} onChange={this.handleName}s={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
                     <Input  value={this.state.contact.value} onChange={this.handleContact}s={6} label="Contact" error={this.state.contact.showError ? this.state.contact.error : null} />    
                     <Input  value={this.state.address.value} onChange={this.handleAddress} s={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
