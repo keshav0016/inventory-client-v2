@@ -92,11 +92,11 @@ class Tickets extends Component{
 
     checkForValidation(){
         if(Number(this.state.quantity) < 0){
-            window.Materialize.toast(`requested quantity cannot be negative`, 4000)
+            window.Materialize.toast(`Requested quantity cannot be negative`, 4000)
         }
         else{
             if(Number(this.state.quantity) === 0){
-                window.Materialize.toast(`requested quantity cannot be zero`, 4000)
+                window.Materialize.toast(`Requested quantity cannot be zero`, 4000)
             }
             else{
                 if(this.state.item === 'Select'){
