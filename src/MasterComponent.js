@@ -25,6 +25,7 @@ import AssetType from './AssetType'
 import axios from 'axios';
 import { baseUrl } from './config';
 import NotFound from './NotFound';
+import logo from './LOGO.png'
 
 class MasterComponent extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ class MasterComponent extends Component {
                         <div>
                             <Navbar fixed className="teal lighten-1" style={{ overflow: 'hidden' }}>
                                 <NavItem href="/admin">
-                                    <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" />
+                                    <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src={logo} alt="WAL Logo" />
                                 </NavItem>
                                 <NavItem href="/logout" className="masterComponentLogoutButton" style={{ fontFamily: 'Roboto', fontWeight: 400 }}><b>LOGOUT</b></NavItem>
 
