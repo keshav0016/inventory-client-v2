@@ -122,6 +122,14 @@ class AddAsset extends Component{
                 })
             })
         }
+        if(this.state.serial_number.value.length > 20){
+            this.setState({
+                serial_number:Object.assign(this.state.serial_number, {
+                    error: 'The serial number cannot be too long',
+                    showError : true
+                })
+            })
+        }
         if(!this.state.asset_name.value){
             this.setState({
                 asset_name:Object.assign(this.state.asset_name, {
@@ -306,7 +314,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.serial_number.value && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && this.state.gst.value >= 0 && this.state.vendor.value in this.state.vendorNames ){
+        if(!this.state.serial_number.value.showError && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && this.state.gst.value >= 0 && this.state.vendor.value in this.state.vendorNames ){
             // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
                 addAssetRequest : true

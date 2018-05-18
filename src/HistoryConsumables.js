@@ -41,26 +41,26 @@ class HistoryConsumables extends Component{
 
 
    parsingDataToCsv(){
-    const fields = ['id', 'name', 'purchaseQuantity', 'vendor', 'purchaseDate', 'individualPrice', 'collectivePrice', 'gst', 'total', 'assignedEmployee', 'assignedDate', 'assignedQuantity']
+    const fields = ['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']
     const consumablesExport = []
     this.state.history.forEach(consumableDetail => {
         return consumablesExport.push({
-            "id" : this.props.match.params.consumable,
-            "name" : consumableDetail.consumable.name,
-            "purchaseQuantity" : consumableDetail.vendor_name ? consumableDetail.quantity : '-',
-            "vendor" : consumableDetail.vendor_name ? consumableDetail.vendor_name : '-',
-            "purchaseDate" : consumableDetail.vendor_name ? consumableDetail.purchase_date : '-',
-            "individualPrice" : consumableDetail.vendor_name ? consumableDetail.item_price : '-',
-            "collectivePrice" : consumableDetail.vendor_name ? consumableDetail.whole_price : '-',
-            "gst" : consumableDetail.vendor_name ? consumableDetail.gst : '-',
-            "total" : consumableDetail.vendor_name ? consumableDetail.total : '-',
-            "assignedEmployee" : consumableDetail.vendor_name ? '-' : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
-            "assignedDate" : consumableDetail.vendor_name ? '-' : consumableDetail.assigned_date,
-            "assignedQuantity" : consumableDetail.vendor_name ? '-' : consumableDetail.quantity,
+            "Id" : this.props.match.params.consumable,
+            "Name" : consumableDetail.consumable.name,
+            "Purchase Quantity" : consumableDetail.vendor_name ? consumableDetail.quantity : null,
+            "Vendor" : consumableDetail.vendor_name ? consumableDetail.vendor_name : null,
+            "Purchase Date" : consumableDetail.vendor_name ? moment(consumableDetail.purchase_date).format('DD MMM YYYY') : null,
+            "Individual Price" : consumableDetail.vendor_name ? consumableDetail.item_price : null,
+            "Collective Price" : consumableDetail.vendor_name ? consumableDetail.whole_price : null,
+            "GST" : consumableDetail.vendor_name ? consumableDetail.gst : null,
+            "Total" : consumableDetail.vendor_name ? consumableDetail.total : null,
+            "Assigned Employee" : consumableDetail.vendor_name ? null : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
+            "Assigned Date" : consumableDetail.vendor_name ? null : moment(consumableDetail.assigned_date).format('DD MMM YYYY'),
+            "Assigned Quantity" : consumableDetail.vendor_name ? null : consumableDetail.quantity,
         })
     })
     
-    const json2csvParser = new Parser({fields, quote: '\''})
+    const json2csvParser = new Parser({fields})
     const csv = json2csvParser.parse(consumablesExport)
     const blob = new Blob([csv], {type : 'text/csv'})
     fileSaver.saveAs(blob, `Consumable-${this.props.match.params.consumable}.csv`)
