@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Row from 'react-materialize/lib/Row';
 import { baseUrl } from './config';
+import logo from './LOGO.png'
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
 // import AdminHomepage from './AdminHomepage';
@@ -138,15 +139,16 @@ class LoginForm extends Component {
 
   render() {
     var loginform = (
-      <div className='background teal' style={{height: '100vh', position: 'relative'}}>
-        <div className='header1' style={{padding: '20px 0', color: 'white'}}>
-          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: 300}}>Inventory Management System </h4>
-        </div> 
-        <Row>
+      <div className='background white' style={{height: '100vh', position: 'relative'}}>
+        <div className='header1' style={{padding: '20px 0', color: 'white', textAlign : 'center'}}>
+          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: 300, color : 'black'}}>Inventory Management System </h4>
           <Col s={2} offset={"m2"}>
-            <img s={2} alt="wal" src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274"/>
+            <img height='200px' width='200px' s={2} alt="wal" src={logo}/>
           </Col>
-          <Col s={4}>
+        </div> 
+        <div>
+        <Row>
+          <Col s={4} offset={"m4"}>
             <form onSubmit={this.checkForValidation}>
               <Card className="z-depth-2" title="Login" style={{padding: "30px", marginTop: 0}}>
                 {/* <h4>Login</h4> */}
@@ -174,6 +176,7 @@ class LoginForm extends Component {
             </form>
           </Col>
           </Row>
+        </div>
       </div>
     );
     return (

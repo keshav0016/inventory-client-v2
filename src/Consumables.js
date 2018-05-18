@@ -10,7 +10,7 @@ import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import EnableConsumable from './EnableConsumable';
-
+import moment from 'moment'
 
 class Consumables extends Component{
     constructor(props){
@@ -245,7 +245,11 @@ class Consumables extends Component{
                             <th data-field="consumable_id">Id</th>
                             <th data-field="name">Consumable Name</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
+<<<<<<< HEAD
+                            <th data-field="purchaseDate">Purchase Date</th>
+=======
                             <th data-field="date">Purchased Date</th>                            
+>>>>>>> 99e66ea5d89f1d73337c7794b0339d84c1427498
                         </tr>
                     </thead>
 
@@ -255,7 +259,7 @@ class Consumables extends Component{
                             <td >{consumable.consumable_id}</td>
                             <td >{consumable.name}</td>
                             <td >{consumable.quantity}</td>
-                            <td >{consumable.quantity}</td>                            
+                            <td>{moment(consumable.createdAt).format('DD MMM YYYY')}</td>
                             <td>{consumable.disable === 1 ? 
                             <Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
