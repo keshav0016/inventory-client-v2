@@ -235,7 +235,7 @@ class TicketsList extends Component{
                                     })} 
                                 </tbody>
                             </Table>
-                            <Pagination items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} />
+                            {this.state.assetPagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} /> : null}
                         </div>}
                     </div>
 
@@ -288,7 +288,7 @@ class TicketsList extends Component{
                                     })}
                                 </tbody>
                             </Table>
-                            <Pagination items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} />
+                            {this.state.consumablePagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} /> : null}
                         </div>}
                     </div>
 

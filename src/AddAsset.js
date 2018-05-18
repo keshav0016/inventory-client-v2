@@ -7,7 +7,7 @@ import $ from 'jquery'
 import './Employee.css'
 import { baseUrl } from './config';
 import {
-    Redirect
+    Redirect, Link
   } from 'react-router-dom';
 
 class AddAsset extends Component{
@@ -674,6 +674,7 @@ class AddAsset extends Component{
                         <Row></Row>
                         <Row>
                             <Col offset={'s6'}>
+                                <Link to='/admin/assets'><Button style={{marginRight : '5px'}}>Cancel</Button></Link>                            
                                 <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
                             </Col>
                         </Row>
