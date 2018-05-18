@@ -47,28 +47,28 @@ class Assets extends Component{
     }
 
     parsingDataToCsv(){
-        const fields = ['id', 'type', 'name', 'category', 'amount', 'gst', 'total', 'purchaseVendor', 'assignedEmployee', 'assignedFrom', 'assignedTo', 'serviceVendor', 'serviceFrom', 'serviceTo']
+        const fields = ['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']
         const assetsExport = []
         this.state.history.forEach(assetDetail => {
             return assetsExport.push({
-                "id" : this.state.assetDetails.asset_id,
-                "type" : this.state.assetDetails.assetType,
-                "name" : this.state.assetDetails.asset_name,
-                "category" : this.state.assetDetails.category,
-                "amount" : this.state.assetDetails.amount,
-                "gst" : this.state.assetDetails.gst,
-                "total" : this.state.assetDetails.total,
-                "purchaseVendor" : this.state.assetDetails.vendor,
-                "assignedEmployee" : assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : '-',
-                "assignedFrom" : assetDetail.user ? assetDetail.from : '-',
-                "assignedTo" : assetDetail.user ? assetDetail.to : '-',
-                "serviceVendor" : assetDetail.vendor ? assetDetail.vendor : '-',
-                "serviceFrom" : assetDetail.vendor ? assetDetail.from : '-',
-                "serviceTo" : assetDetail.vendor ? assetDetail.to : '-',
+                "Id" : this.state.assetDetails.asset_id,
+                "Type" : this.state.assetDetails.assetType,
+                "Name" : this.state.assetDetails.asset_name,
+                "Category" : this.state.assetDetails.category,
+                "Amount" : this.state.assetDetails.amount,
+                "GST" : this.state.assetDetails.gst,
+                "Total" : this.state.assetDetails.total,
+                "Purchase Vendor" : this.state.assetDetails.vendor,
+                "Assigned Employee" : assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : null,
+                "Assigned From" : assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : null,
+                "Assigned To" : assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : null,
+                "Service Vendor" : assetDetail.vendor ? assetDetail.vendor : null,
+                "Service From" : assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : null,
+                "Service To" : assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : null,
             })
         })
         
-        const json2csvParser = new Parser({fields, quote: '\''})
+        const json2csvParser = new Parser({fields})
         const csv = json2csvParser.parse(assetsExport)
         const blob = new Blob([csv], {type : 'text/csv'})
         fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
