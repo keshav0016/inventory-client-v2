@@ -114,7 +114,7 @@ class Vendor extends Component{
                     <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
-                    <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
+                    {this.state.pagination.totalPage > 1 ? <Pagination className='pagination' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null}
                 </div>
                     </div>} 
             </div>

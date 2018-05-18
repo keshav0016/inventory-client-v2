@@ -7,7 +7,7 @@ import moment from 'moment'
 import './Employee.css'
 import { baseUrl } from './config';
 import {
-    Redirect
+    Redirect, Link
   } from 'react-router-dom';
 
 class RepairAsset extends Component{
@@ -116,12 +116,12 @@ class RepairAsset extends Component{
         if(new Date(this.state.from.value) > new Date(this.state.expected_delivery.value)) {
             this.setState({
                 expected_delivery:Object.assign(this.state.expected_delivery, {
-                    error: 'The expected date should be after the from date',
+                    error: 'The expected date should be after the repair-on date',
                     showError: true
                 })
             })
         }
-        if(new Date(this.state.from.value) < new Date(this.state.expected_delivery.value)) {
+        if(new Date(this.state.from.value) <= new Date(this.state.expected_delivery.value)) {
             this.setState({
                 from:Object.assign(this.state.from, {
                     error: '',
@@ -145,7 +145,7 @@ class RepairAsset extends Component{
                 })
             })
         }
-        if(this.state.vendor.value && this.state.from.value && this.state.expected_delivery.value && new Date(this.state.from.value) < new Date(this.state.expected_delivery.value) && this.state.vendor.value in this.state.vendorNames) {
+        if(this.state.vendor.value && this.state.from.value && this.state.expected_delivery.value && new Date(this.state.from.value) <= new Date(this.state.expected_delivery.value) && this.state.vendor.value in this.state.vendorNames) {
             this.setState({
                 repairAssetRequest : true
             })
@@ -283,16 +283,16 @@ class RepairAsset extends Component{
                     <h6>Invoice Number : {this.state.assetDetails.invoice_number}</h6>
                     <h6>Vendor : {this.state.assetDetails.vendor}</h6>
                     <h6>Category : {this.state.assetDetails.category}</h6>
-                    <h6>Purchase Date : {moment(this.state.assetDetails.purchase_date).format('DD MM YYYY')}</h6>
+                    <h6>Purchase Date : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
                     <h6>Description : {this.state.assetDetails.description}</h6>
                     <h6>Amount : {this.state.assetDetails.amount}</h6>
                     <h6>GST : {this.state.assetDetails.gst}</h6>
                     <h6>Total : {this.state.assetDetails.total}</h6>
-                    <br /><br />
-                    <Row>
+                    <br />
+                    {this.state.assetDetails.disabled ? <div><h5 style={{color : 'red'}}>Asset is disabled</h5></div> :<Row>
                         {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
                         <Row>
-                            <Autocomplete s={12}
+                            <Autocomplete s={6}
                                 className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
                                 data={
                                     this.state.vendorNames
@@ -302,8 +302,12 @@ class RepairAsset extends Component{
                                 onChange = {this.setVendor}
                             />
                         </Row>
-                        <Input s={12} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
-                        <Input s={12} type='date' label="Expected Delivery*" min={moment(this.state.from.value).format('DD MM YYYY')} value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                        <Row>
+                            <Input s={6} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
+                        </Row>
+                        <Row>
+                            <Input s={6} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                        </Row>
                         <Modal
                             actions={null}
                             id="addVendor"
@@ -311,9 +315,10 @@ class RepairAsset extends Component{
                             <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                         </Modal>
                         <Col offset={'s2'}>
-                        <Button style={{marginTop:"-60px", marginLeft: '-50px'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                        <Link to='/admin/assets'><Button style={{marginRight : '5px', marginTop:"-60px", marginLeft: '-50px'}}>Cancel</Button></Link>                                                    
+                        <Button style={{marginTop:"-60px", marginLeft: '20px'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                         </Col>
-                    </Row>
+                    </Row>}
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>

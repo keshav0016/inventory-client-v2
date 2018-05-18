@@ -289,7 +289,7 @@ class Consumables extends Component{
                         },this)}
                     </tbody>
                 </Table>
-                <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />
+                {this.state.pagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null }
                 </div>
                 }
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>

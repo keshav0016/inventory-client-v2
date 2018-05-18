@@ -186,9 +186,9 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
-                    <Input s={3} placeholder="Search by Asset Name" onChange = {this.setSearch} />
-                    <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/>
-                    <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button>
+                    <Input s={3} placeholder="Search by Asset Name or Asset ID" onChange = {this.setSearch} />
+                    {/* <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/> */}
+                    {/* <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button> */}
                 </Row>
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
                     <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Current Status</p>
@@ -290,7 +290,7 @@ class Assets extends Component{
                 <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                 
                 <div>
-                    {this.state.assetList.length === 0 ? null : <Pagination items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
+                    {this.state.assetList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
                 </div> 
             </div>
         )
