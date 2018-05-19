@@ -14,6 +14,7 @@ import Profile from './Profile.js'
 import { baseUrl } from './config';
 import NotFound from './NotFound';
 import { parse as parseCookie } from 'cookie'
+import logo from './LOGO.png'
 
 class EmployeeDB extends Component {
     constructor(props) {
@@ -43,13 +44,13 @@ class EmployeeDB extends Component {
                                     this.state.redirect === 0 ? (
                                         <React.Fragment>
                                             <div>
-                                                <Navbar fixed className="teal lighten-1" style={{ overflow: 'hidden' }}>
-                                                    <NavItem href="/admin">
-                                                        <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" />
+                                                <Navbar fixed className="white lighten-1" style={{ overflow: 'hidden' }}>
+                                                    <NavItem className='logo' href="/employee/Profile/">
+                                                        <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src={logo} alt="WAL Logo" />
                                                     </NavItem>
                                                     <NavItem href="/logout" className="masterComponentLogoutButton" style={{ fontFamily: 'Roboto', fontWeight: 400 }}><b>LOGOUT</b></NavItem>
                                                 </Navbar>
-                                                <SideNav className="masterComponentSideBar" trigger={<Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
+                                                <SideNav className="masterComponentSideBar" trigger={<Button className="white lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                                                     <Link to={`/employee/Profile/`}>Profile</Link>
                                                     <Link to={`/employee/list`}>Tickets List</Link>
                                                 </SideNav>
