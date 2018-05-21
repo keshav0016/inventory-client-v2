@@ -157,3 +157,7 @@ div.input-field.consumable-empty-error.col label.active:after
 .picker__date-display{
     display: none;
 }
+
+.modal{
+    overflow: visible;
+}
