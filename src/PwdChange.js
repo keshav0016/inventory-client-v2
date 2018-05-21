@@ -119,10 +119,10 @@ class PasswordChange extends Component {
             })
         }
         if(this.state.New_Password.value.length === 0){
-        this.setState({
-            New_Password: Object.assign(this.state.New_Password, {
-                error: 'New Password is Required',
-                showError: true
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    error: 'New Password is Required',
+                    showError: true
             }),
         })
         }else{
