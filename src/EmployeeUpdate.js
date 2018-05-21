@@ -496,7 +496,7 @@ class EmployeeUpdate extends Component {
                         <option value='Other'>Other</option>
                     </Input>
                     <Input s={6} label="Email*" type="email" value={this.state.email.value} onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null} />
-                    <Input s={6} type='select' label="Department" defaultValue='HR' onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
+                    <Input s={6} type='select' label="Department" defaultValue={this.state.department.value} onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
                         <option value='select'>select</option>
                         <option value='HR'>HR</option>
                         <option value='Delivery'>Delivery</option>
@@ -505,7 +505,7 @@ class EmployeeUpdate extends Component {
                         <option value='Developer/Designer'>Developer/Designer</option>
                         <option value='Testing'>Testing</option>
                     </Input>
-                    {this.state.department.value === 'Developer/Designer' ? <Input s={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Developer/Designer' ? <Input s={6} type='select' label="Designation" defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Team Lead'>Team Lead</option>
                         <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>
