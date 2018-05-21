@@ -216,7 +216,7 @@ class TicketsList extends Component{
                                         <td>{ticket.ticket_number}</td>
                                         <td>{ticket.user !== null? ticket.user.first_name + " " + ticket.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</td>
                                         <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
+                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button>Accept</Button></Link> : null }</td>
@@ -260,7 +260,7 @@ class TicketsList extends Component{
                                         <td>{ticket.ticket_number}</td>
                                         <td>{ticket.user !== null ? ticket.user.first_name + " " + ticket.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</td>
                                         <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
+                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
