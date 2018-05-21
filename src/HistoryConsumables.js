@@ -41,7 +41,7 @@ class HistoryConsumables extends Component{
 
 
    parsingDataToCsv(){
-    const fields = ['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']
+    const fields = ['Id'.bold(), 'Name'.bold(), 'Purchase Quantity'.bold(), 'Vendor'.bold(), 'Purchase Date'.bold(), 'Individual Price'.bold(), 'Collective Price'.bold(), 'GST'.bold(), 'Total'.bold(), 'Assigned Employee'.bold(), 'Assigned Date'.bold(), 'Assigned Quantity'.bold()]
     const consumablesExport = []
     this.state.history.forEach(consumableDetail => {
         return consumablesExport.push({
