@@ -245,7 +245,7 @@ class Consumables extends Component{
                             <th data-field="consumable_id">Id</th>
                             <th data-field="name">Consumable Name</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
-                            <th data-field="date">Purchased Date</th>                            
+                            <th data-field="purchaseDate">Purchase Date</th>
                         </tr>
                     </thead>
 
