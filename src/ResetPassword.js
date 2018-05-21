@@ -91,7 +91,7 @@ class ResetPassword extends Component {
                 })
             })
         }
-        if (this.state.Confirm_Password.value) {
+        if (this.state.Confirm_Password.value && this.state.Confirm_Password.value === this.state.New_Password.value) {
             this.setState({
                 Confirm_Password: Object.assign(this.state.Confirm_Password, {
                     error: '',
@@ -99,15 +99,15 @@ class ResetPassword extends Component {
                 })
             })
         }
-        if (!this.state.New_Password.value) {
+        if (this.state.New_Password.value.length < 6) {
             this.setState({
                 New_Password: Object.assign(this.state.New_Password, {
-                    error: 'The new password should not be empty',
+                    error: 'The new password should be minimum 6 letters',
                     showError: true
                 })
             })
         }
-        if (this.state.New_Password.value) {
+        if (this.state.New_Password.value.length >= 6) {
             this.setState({
                 New_Password: Object.assign(this.state.New_Password, {
                     error: '',
@@ -139,14 +139,14 @@ class ResetPassword extends Component {
                 })
             })
         }
-        if (this.state.New_Password.value === this.state.Confirm_Password.value) {
-            this.setState({
-                Confirm_Password: Object.assign(this.state.Confirm_Password, {
-                    error: '',
-                    showError: false
-                })
-            })
-        }
+        // if (this.state.New_Password.value === this.state.Confirm_Password.value) {
+        //     this.setState({
+        //         Confirm_Password: Object.assign(this.state.Confirm_Password, {
+        //             error: '',
+        //             showError: false
+        //         })
+        //     })
+        // }
         if (this.state.Confirm_Password.value && this.state.New_Password.value && this.state.emailPassword.value && this.state.New_Password.value === this.state.Confirm_Password.value) {
             this.handleSubmit()
         }

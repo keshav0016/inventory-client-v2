@@ -118,7 +118,7 @@ class PasswordChange extends Component {
                 }),
             })
         }
-        if(!this.state.New_Password.value){
+        if(this.state.New_Password.value.length === 0){
         this.setState({
             New_Password: Object.assign(this.state.New_Password, {
                 error: 'New Password is Required',
@@ -132,7 +132,7 @@ class PasswordChange extends Component {
                     showError: false
                 }),
             })
-        }if(!this.state.Confirm_Password.value){
+        }if(this.state.Confirm_Password.value.length === 0){
             this.setState({
                 Confirm_Password: Object.assign(this.state.Confirm_Password, {
                     error: 'Confirm Password is Required',
@@ -147,7 +147,39 @@ class PasswordChange extends Component {
                 }),
             })
         }
-        if (this.state.Confirm_Password.value === this.state.New_Password.value) {
+        if(this.state.New_Password.value.length < 6){
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    error: 'Minimum 6 letters password required',
+                    showError: true
+                }),
+            })
+        }else{
+                this.setState({
+                    New_Password: Object.assign(this.state.New_Password, {
+                        error: '',
+                        showError: false
+                    }),
+                })
+        }
+            
+        if(this.state.New_Password.value !== this.state.Confirm_Password.value){
+            this.setState({
+                Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                    error: 'Passwords do not match',
+                    showError: true
+                }),
+            })
+        }
+        // else{
+        //     this.setState({
+        //         Confirm_Password: Object.assign(this.state.Confirm_Password, {
+        //             error: '',
+        //             showError: false
+        //         }),
+        //     })
+        // }
+        if (this.state.Confirm_Password.value === this.state.New_Password.value && this.state.Confirm_Password.value) {
             axios({
                 method: 'post',
                 url: `${baseUrl}/employee/ticket/changepassword`,
@@ -166,18 +198,19 @@ class PasswordChange extends Component {
                         })
                     }
                 })
-        } else {
-            this.setState({
-                Confirm_Password: Object.assign(this.state.Confirm_Password, {
-                    error: 'Passwords does not match',
-                    showError: true
-                }),
-                New_Password:Object.assign(this.state.New_Password, {
-                    error: 'Passwords does not match',
-                    showError: true
-                })
-            })
-        }
+        } 
+        // else {
+        //     this.setState({
+        //         Confirm_Password: Object.assign(this.state.Confirm_Password, {
+        //             error: 'Passwords does not match',
+        //             showError: true
+        //         }),
+        //         New_Password:Object.assign(this.state.New_Password, {
+        //             error: 'Passwords does not match',
+        //             showError: true
+        //         })
+        //     })
+        // }
 
     }
 
