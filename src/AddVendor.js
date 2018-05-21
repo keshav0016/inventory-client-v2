@@ -124,7 +124,17 @@ class AddVendor extends Component{
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
+                if(res.data.error === 'Validation isNumeric failed'){
+                    this.setState({
+                        contact:Object.assign(this.state.contact, {
+                            showError: true,
+                            error: 'The contact should be numbers.'
+                        })
+                    })
+                }
+                else{
+                    window.Materialize.toast(res.data.error, 4000)
+                }
                 this.setState({
                     addVendorRequest : false
                 })                
