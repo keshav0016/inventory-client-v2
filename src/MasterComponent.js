@@ -47,7 +47,7 @@ class MasterComponent extends Component {
         })
     }
     render() {
-        let menuButton = <Button className="teal lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>;
+        let menuButton = <Button className="white lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>;
         
         return (
             <React.Fragment>
@@ -56,8 +56,8 @@ class MasterComponent extends Component {
                 {this.state.unauth ? <Redirect to="/unauthorized" /> : (
                     <div className="masterComponentBackground">
                         <div>
-                            <Navbar fixed className="teal lighten-1" style={{ overflow: 'hidden' }}>
-                                <NavItem href="/admin">
+                            <Navbar fixed className="white lighten-1" style={{ overflow: 'hidden' }}>
+                                <NavItem className='logo' href="/admin">
                                     <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src={logo} alt="WAL Logo" />
                                 </NavItem>
                                 <NavItem href="/logout" className="masterComponentLogoutButton" style={{ fontFamily: 'Roboto', fontWeight: 400 }}><b>LOGOUT</b></NavItem>
