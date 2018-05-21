@@ -352,7 +352,7 @@ class EmployeeAdd extends Component {
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>
           </Input>
-          <Input s={6}  label="Email*" type = "email" onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null}/>
+          <Input s={6}  label="Email*" type = "email" value={this.state.email.value} onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null}/>
           <Input s={6} type='select' label="Department" defaultValue='HR'onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
             <option value='select'>select</option>
             <option value='HR'>HR</option>
