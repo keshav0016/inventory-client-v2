@@ -15,7 +15,3 @@ body {
 tbody{
   word-break: break-all;
 }
-
-.modal{
-  overflow: visible;
-}
