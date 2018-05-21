@@ -13,9 +13,21 @@ class PasswordChange extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            Confirm_Password: '',
-            New_Password: '',
-            user_id: this.props.location.user,
+            Confirm_Password: { 
+                value: '',
+                showError: false,
+                error: ""
+            },
+            New_Password:  { 
+                value: '',
+                showError: false,
+                error: ""
+            },
+            user_id:  { 
+                value: '',
+                showError: false,
+                error: ""
+            },
             change: true
         }
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this)
@@ -37,13 +49,13 @@ class PasswordChange extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <Card className="z-depth-2" title="Reset your password" style={{ padding: '15px' }}>
                                 <Row>
-                                    <Input s={12} label="User Id" onChange={this.handleUserid} icon="account_box" autoFocus></Input>
+                                    <Input s={12} label="User Id" onChange={this.handleUserid} error={this.state.user_id.showError ? this.state.user_id.error : null}icon="account_box" autoFocus></Input>
                                 </Row>
                                 <Row>
-                                    <Input s={12} type='password' onChange={this.handleNewPassword} label="New Password" icon="lock"></Input>
+                                    <Input s={12} type='password' onChange={this.handleNewPassword} error={this.state.New_Password.showError ? this.state.New_Password.error : null}label="New Password" icon="lock"></Input>
                                 </Row>
                                 <Row>
-                                    <Input s={12} type='password' onChange={this.handleConfirmPassword} label="Confirm Password" icon="lock"></Input>
+                                    <Input s={12} type='password' onChange={this.handleConfirmPassword} error={this.state.Confirm_Password.showError ? this.state.Confirm_Password.error : null}label="Confirm Password" icon="lock"></Input>
                                 </Row>
                                 <Row>
                                     <Col s={6} offset={'s3'}>
@@ -65,17 +77,24 @@ class PasswordChange extends Component {
     }
     handleUserid(e) {
         this.setState({
-            user_id: e.target.value
+            user_id: Object.assign(this.state.user_id, {
+                value: e.target.value
+            })
         })
+        
     }
     handleConfirmPassword(e) {
         this.setState({
-            Confirm_Password: e.target.value
+            Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                value: e.target.value
+            })
         })
     }
     handleNewPassword(e) {
         this.setState({
-            New_Password: e.target.value
+            New_Password: Object.assign(this.state.New_Password, {
+                value: e.target.value
+            })
         })
     }
     componentDidMount() {
@@ -83,13 +102,58 @@ class PasswordChange extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        if (this.state.Confirm_Password === this.state.New_Password) {
+        if(!this.state.user_id.value){
+            this.setState({
+                user_id: Object.assign(this.state.user_id, {
+                    error: 'User Id is Required',
+                    showError: true
+                }),
+            })
+           
+        }else{
+            this.setState({
+                user_id: Object.assign(this.state.user_id, {
+                    error: '',
+                    showError: false
+                }),
+            })
+        }
+        if(!this.state.New_Password.value){
+        this.setState({
+            New_Password: Object.assign(this.state.New_Password, {
+                error: 'New Password is Required',
+                showError: true
+            }),
+        })
+        }else{
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    error: '',
+                    showError: false
+                }),
+            })
+        }if(!this.state.Confirm_Password.value){
+            this.setState({
+                Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                    error: 'Confirm Password is Required',
+                    showError: true
+                }),
+            })
+        }else{
+            this.setState({
+                Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                    error: '',
+                    showError: false
+                }),
+            })
+        }
+        if (this.state.Confirm_Password.value === this.state.New_Password.value) {
             axios({
                 method: 'post',
                 url: `${baseUrl}/employee/ticket/changepassword`,
                 data: {
-                    user_id: this.state.user_id,
-                    password: this.state.New_Password
+                    user_id: this.state.user_id.value,
+                    password: this.state.New_Password.value
                     , email: this.state.email
                 },
                 withCredentials: true
@@ -103,7 +167,16 @@ class PasswordChange extends Component {
                     }
                 })
         } else {
-            window.Materialize.toast('passwords does not match', 4000)
+            this.setState({
+                Confirm_Password: Object.assign(this.state.Confirm_Password, {
+                    error: 'Passwords does not match',
+                    showError: true
+                }),
+                New_Password:Object.assign(this.state.New_Password, {
+                    error: 'Passwords does not match',
+                    showError: true
+                })
+            })
         }
 
     }
