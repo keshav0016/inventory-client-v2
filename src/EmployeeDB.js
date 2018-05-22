@@ -72,6 +72,7 @@ class EmployeeDB extends Component {
                             <Redirect
                                 to={{
                                     pathname: "/login",
+                                    search: '?sessionExpired=true'
                                 }}
                             />
                         )
