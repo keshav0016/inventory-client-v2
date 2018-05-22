@@ -10,6 +10,7 @@ import {
 import Row from 'react-materialize/lib/Row';
 import { baseUrl } from './config';
 import logo from './LOGO.png'
+// import querystring from "querystring";
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
 // import AdminHomepage from './AdminHomepage';
@@ -136,6 +137,12 @@ class LoginForm extends Component {
       })
   }
 
+  componentDidMount(){
+    // console.log(querystring.parse())
+    if(this.props.location.search ==="?sessionExpired=true"){
+      window.Materialize.toast("Session expired", 4000)
+    }
+  }
 
   render() {
     var loginform = (

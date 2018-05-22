@@ -16,7 +16,6 @@ class Homepage extends Component {
                 <div>
                     <ProtectedRoute/>
                     <Route exact path='/login' component={LoginForm} />
-
                 </div>
             </Router>
         )
@@ -32,11 +31,15 @@ class ProtectedRoute extends Component {
                     ck.token ? (
                         <MasterComponent/>
                     ) : (
-                            <Redirect
-                                to={{
-                                    pathname: "/login",
-                                }}
-                            />
+                            <React.Fragment>
+                                <Redirect
+                                    to={{
+                                        pathname: "/login",
+                                        search: '?sessionExpired=true'
+                                    }}
+                                />
+                            </React.Fragment>
+                            
                         )
                 }
             />
