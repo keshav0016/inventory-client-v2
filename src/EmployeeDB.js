@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Navbar, NavItem, Button, SideNav, Icon } from 'react-materialize'
 import './MasterComponent.css';
 import {
-    BrowserRouter as Router,
     Route,
     Link,
     Redirect
@@ -32,7 +31,7 @@ class EmployeeDB extends Component {
         let ck = parseCookie(document.cookie);        
         return (
             ck.token ? 
-            (<Router>
+            (
                 <React.Fragment>
                     {this.state.redirect === 403 ? <Redirect to="/unauthorized" /> : null}
                     {this.state.redirect === 401 ? <Redirect to="/unauthorized" /> : null}
@@ -68,7 +67,7 @@ class EmployeeDB extends Component {
                     </div>
 
                 </React.Fragment>
-            </Router>) : (
+            ) : (
                             <Redirect
                                 to={{
                                     pathname: "/login",
