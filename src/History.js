@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {CardPanel, Col, Row, Button} from 'react-materialize'
+import {CardPanel, Col, Row, Button, Preloader} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 import './Employee.css'
@@ -80,6 +80,7 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 {this.state.assetDetails ? <div>
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Asset Details</h3>
+                {this.state.handleListRequest ? <Preloader size='small' /> :<div>
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
@@ -144,7 +145,8 @@ class Assets extends Component{
                         </Col>
                     })}
                     </Row>
-                </div> : <h4 className = 'heading'>No such Asset</h4>}
+                </div>} 
+                </div>: <h4 className = 'heading'>No such Asset</h4>}
             </div>
         )
     }

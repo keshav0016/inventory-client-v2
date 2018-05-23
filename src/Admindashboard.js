@@ -1,68 +1,69 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'
 import moment from 'moment'
-import {Row, Col, Card, Icon} from 'react-materialize'
+import { Row, Col, Card, Icon, Preloader } from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
 import { baseUrl } from './config';
 import { Redirect } from "react-router-dom";
 
-class Admindashboard extends Component{
-    constructor(props){
+class Admindashboard extends Component {
+    constructor(props) {
         super(props)
         this.state = {
-            handleListRequest:true,
-            consumablesPendingCount:'',
-            consumablesAcceptedCount:'',
-            consumablesLowStock:'',
-            assetPendingCount:'',
-            assetAcceptedCount:''
-            ,repairDateNear : []
-            ,redirect : 0
+            handleListRequest: true,
+            consumablesPendingCount: '',
+            consumablesAcceptedCount: '',
+            consumablesLowStock: '',
+            assetPendingCount: '',
+            assetAcceptedCount: ''
+            , repairDateNear: []
+            , redirect: 0
         }
         this.handleList = this.handleList.bind(this)
     }
 
 
-    handleList(){
+    handleList() {
         axios({
-            method : 'get',
-            url : `${baseUrl}/admin/ticket/dashboard`,
-            withCredentials : true
+            method: 'get',
+            url: `${baseUrl}/admin/ticket/dashboard`,
+            withCredentials: true
         })
-        .then(res => {
-            this.setState({
-                consumablesPendingCount:res.data.pendingConsumable,
-                consumablesAcceptedCount:res.data.acceptedConsumable,
-                consumablesLowStock:res.data.lowConsumable,
-                assetPendingCount:res.data.pendingAsset,
-                assetAcceptedCount:res.data.acceptedAsset,
-                handleListRequest:false,
-                repairDateNear : res.data.repairDateNear
-            })
-            
-        })
-        .catch(error => {
-            // window.Materialize.toast('details not found', 4000)
-            if(error.response.status){
+            .then(res => {
                 this.setState({
-                    redirect : error.response.status
+                    consumablesPendingCount: res.data.pendingConsumable,
+                    consumablesAcceptedCount: res.data.acceptedConsumable,
+                    consumablesLowStock: res.data.lowConsumable,
+                    assetPendingCount: res.data.pendingAsset,
+                    assetAcceptedCount: res.data.acceptedAsset,
+                    handleListRequest: false,
+                    repairDateNear: res.data.repairDateNear
                 })
-            }
-        })
+
+            })
+            .catch(error => {
+                // window.Materialize.toast('details not found', 4000)
+                if (error.response.status) {
+                    this.setState({
+                        redirect: error.response.status
+                    })
+                }
+            })
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.handleList()
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <Row>
                     <Col s={9} offset={'s3'}>
                         <Card className="z-depth-0">
-                            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Dashboard</h3 >
+                            <h3 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Dashboard</h3 >
+                            {this.state.handleListRequest ? <Preloader size='small' /> :<div>
                                 <Card className="z-depth-2 teal-text" title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
                                     <Icon>developer_board</Icon>
                                     <p>Pending Requests: {this.state.consumablesPendingCount}</p>
@@ -74,14 +75,15 @@ class Admindashboard extends Component{
                                     <p>Pending Requests: {this.state.assetPendingCount}</p>
                                     <p>Accepted Requests: {this.state.assetAcceptedCount}</p>
                                 </Card>
-                            {this.state.repairDateNear.length > 0 ?
-                                <Card className="z-depth-2 teal-text" title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
-                                    <Icon>build</Icon>
-                                    {this.state.repairDateNear.map((repair, index) => {
-                                        return <p style={{display : 'list-item'}} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
-                                    })}
-                                </Card>
-                            : null}
+                                {this.state.repairDateNear.length > 0 ?
+                                    <Card className="z-depth-2 teal-text" title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
+                                        <Icon>build</Icon>
+                                        {this.state.repairDateNear.map((repair, index) => {
+                                            return <p style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
+                                        })}
+                                    </Card>
+                                    : null}
+                            </div> }
                         </Card>
                     </Col>
                     {/* <Col m={4}>
@@ -89,8 +91,8 @@ class Admindashboard extends Component{
 
                     </Col > */}
                 </Row>
-                {this.state.redirect === 403 ? <Redirect from='/admin' to = '/employee/Profile/' /> : null}
-                {this.state.redirect === 401 ? <Redirect from='/admin' to = '/login' /> : null}
+                {this.state.redirect === 403 ? <Redirect from='/admin' to='/employee/Profile/' /> : null}
+                {this.state.redirect === 401 ? <Redirect from='/admin' to='/login' /> : null}
             </div>
         )
     }

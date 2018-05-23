@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, Preloader} from 'react-materialize'
 // import AddConsumables from './AddConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
@@ -229,7 +229,7 @@ class Consumables extends Component{
                 </Input>
                 <Input s={4} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
                 </Row>
-                {this.state.consumableList.length === 0 
+                {this.state.handleListRequest ? <Preloader size='small' /> : (this.state.consumableList.length === 0 
                     ?
 
                     <div className="noRecordsScreen">
@@ -292,7 +292,7 @@ class Consumables extends Component{
                     </tbody>
                 </Table>
                 {this.state.pagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null }
-                </div>
+                </div>)
                 }
                 <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
                     <Row>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input, Modal} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, Modal, Preloader} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 import './TicketsList.css'
@@ -196,7 +196,8 @@ class TicketsList extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
-                        {this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> :
+                        { this.state.handleListRequest ? <Preloader size='small' /> :
+                        (this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
                         <div>
                             <Table style={{marginLeft:'1%'}}  className="consumableTable">
                                 <thead>
@@ -236,11 +237,12 @@ class TicketsList extends Component{
                                 </tbody>
                             </Table>
                             {this.state.assetPagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} /> : null}
-                        </div>}
+                        </div>)}
                     </div>
 
                     <div className = "consumableTab">
-                        {this.state.consumableTicket.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> :
+                        {this.state.handleListRequest ? <Preloader size='small' /> :
+                        (this.state.consumableTicket.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> : 
                         <div>
                             <Table style={{marginLeft:'1%'}}  className="consumableTable">
                                 <thead>
@@ -289,7 +291,7 @@ class TicketsList extends Component{
                                 </tbody>
                             </Table>
                             {this.state.consumablePagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} /> : null}
-                        </div>}
+                        </div>)}
                     </div>
 
                 </Tabs>
