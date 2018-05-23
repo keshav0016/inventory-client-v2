@@ -162,7 +162,7 @@ class LoginForm extends Component {
                 <Row>
                   {/* <Icon className="medium material-icons white-text loginFormIcon">account_circle</Icon> */}
                   {/* <div className='fields'> */}
-                    <Input s={12} onChange={this.getUserid} label="User Id" icon='account_box' autoFocus error={this.state.user_id.showError ? this.state.user_id.error : null} />
+                    <Input s={12} onChange={this.getUserid} label="Employee Id" icon='account_box' autoFocus error={this.state.user_id.showError ? this.state.user_id.error : null} />
                     {/* <Button className='submitbtn' onClick={this.verifyCredentials}>LOGIN</Button> */}
                   {/* </div> */}
                 </Row>
