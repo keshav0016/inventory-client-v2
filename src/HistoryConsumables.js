@@ -72,7 +72,8 @@ class HistoryConsumables extends Component{
             <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Consumable Details</h3>
-            {this.state.fetchHistory ? <div><Preloader size='small' /></div> : this.state.history.map((consumable, index) => {
+            {this.state.fetchHistory ? <div><Preloader size='small' /></div> : 
+            (this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                         <CardPanel className='z-depth-2'>
                             {consumable.vendor_name ? 
@@ -116,7 +117,10 @@ class HistoryConsumables extends Component{
                             </div>}
                         </CardPanel>
                     </Col>
-                       })}
+                       }) : 
+                       <div>
+                           <h4>No such Consumable found</h4>
+                       </div>)}
                        <a href='/admin/consumables'><Button>Go Back</Button></a>
            </div>
        )

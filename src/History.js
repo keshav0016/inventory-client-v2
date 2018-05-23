@@ -78,8 +78,8 @@ class Assets extends Component{
         return(
             <div  style={{marginLeft : '30px', marginRight : '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
-                {this.state.assetDetails ? <div>
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Asset Details</h3>
+                {this.state.assetDetails ? <div>
                 {this.state.handleListRequest ? <Preloader size='small' /> :<div>
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</h4> : null}
