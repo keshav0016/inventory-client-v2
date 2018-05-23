@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Icon, Modal, Autocomplete, Col} from 'react-materialize'
+import {Row, Input, Button, Icon, Modal, Autocomplete, Col, Preloader} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import moment from 'moment'
@@ -40,6 +40,7 @@ class RepairAsset extends Component{
             isDisabled : false,
             repairAsset: true,
             redirect: false
+            ,loading : true
         }
         this.repairAssetIntoDb = this.repairAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
@@ -266,6 +267,7 @@ class RepairAsset extends Component{
         .then(res => {
             this.setState({
                 assetDetails : res.data.assetDetails,
+                loading : false
             })
         })
     }
@@ -276,7 +278,8 @@ class RepairAsset extends Component{
             <div style={{marginLeft : '30px', marginRight : '30px'}} >
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Repair Asset</h3>
                 <br /><br />
-                {this.state.assetDetails ? 
+                {this.state.loading ?  <Preloader size='small' /> : 
+                    (this.state.assetDetails ? 
                 <div>
                     <h6>Asset Name : {this.state.assetDetails.asset_name}</h6>
                     <h6>Serial Number : {this.state.assetDetails.serial_number}</h6>
@@ -319,10 +322,13 @@ class RepairAsset extends Component{
                         <Button style={{marginTop:"-60px", marginLeft: '20px'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
                         </Col>
                     </Row>}
-                    {this.state.vendorListRequest ? this.handleVendorList() : null}
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>
-                :null}
+                :
+                <div>
+                    <h4>No such asset found</h4>
+                </div>)}
+                {this.state.vendorListRequest ? this.handleVendorList() : null}
             </div>
         );
 

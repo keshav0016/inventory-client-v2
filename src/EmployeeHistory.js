@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table} from 'react-materialize'
+import {Table, Preloader} from 'react-materialize'
 import './Employee.css'
 import { baseUrl } from './config';
 
@@ -12,6 +12,7 @@ class EmployeeHistory extends Component {
             data : [],
             history : [],
             historyAssets :[],
+            loading : true
         }
         this.handleList = this.handleList.bind(this)
     }
@@ -20,7 +21,8 @@ class EmployeeHistory extends Component {
            
         <div style={{marginLeft: '30px',marginRight: '30px'}}>
             <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Items held by Employee</h3>
-            {this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
+            {this.state.loading ? <Preloader size='small' /> :
+                (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
             <div>
                 <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                 <thead>
@@ -41,7 +43,7 @@ class EmployeeHistory extends Component {
                 </tbody>
                 </Table>
 
-            </div>   }
+            </div>   )}
             
         </div>
         )
@@ -49,6 +51,7 @@ class EmployeeHistory extends Component {
     componentWillMount(){
         this.handleList()
     }
+
     handleList(){
         axios({
             method : 'post',
@@ -63,6 +66,7 @@ class EmployeeHistory extends Component {
                 history : res.data.history,
                 historyAssets : res.data.historyAssets,
                 data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
+                loading : false
             })
             if(this.state.data.length === 0){
                 window.Materialize.toast('There are no items for the user',3000)
