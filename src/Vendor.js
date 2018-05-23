@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Preloader} from 'react-materialize'
 import AddVendor from './AddVendor'
 import VendorUpdate from './VendorUpdate'
 import $ from 'jquery'
@@ -78,7 +78,8 @@ class Vendor extends Component{
             <div style={{marginLeft: '30px',marginRight: '30px'}}>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Vendors</h3 >
-                {this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
+                {this.state.handleListRequest ? <Preloader size='small' /> : 
+                    (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
                 <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
@@ -116,7 +117,7 @@ class Vendor extends Component{
                 <div>
                     {this.state.pagination.totalPage > 1 ? <Pagination className='pagination' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null}
                 </div>
-                    </div>} 
+                    </div>)} 
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Row, Input} from 'react-materialize'
+import {Col, CardPanel, Row, Input, Preloader} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import './ListPage.css'
@@ -57,7 +57,7 @@ class EntireHistoryConsumables extends Component{
            <div style={{marginLeft: '30px',marginRight: '30px'}}>
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Consumable History</h3>
-            {this.state.history.map((consumable, index) => {
+            {this.state.fetchHistory ? <Preloader size='small' /> : this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                             {consumable.vendor_name ? 
                             ( consumable.consumable ?
