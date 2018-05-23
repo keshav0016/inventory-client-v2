@@ -482,8 +482,8 @@ class EmployeeUpdate extends Component {
     }
     render() {
         var addEmployeeForm = (
-            <div style={{ marginLeft: '30px', marginRight: '30px' }} >
-                <h3 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Add Employee</h3>
+            <div className="no-footer" style={{padding: '20px'}}>
+                <h5 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Edit Employee</h5>
                 <Row>
                     <Input onChange={this.handleUser_Id} s={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
                     <Input onChange={this.handleFirstname} s={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null} />
@@ -540,7 +540,8 @@ class EmployeeUpdate extends Component {
                         <option value='Software Test Development Engineer'>Software Test Development Engineer</option>
                     </Input> : null}
                 </Row>
-                <Button className='addbtn' onClick={this.handleCreate}>Add</Button>
+                <Button className='addbtn' onClick={this.handleCreate}>Edit</Button>
+                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>                
             </div>
 
         );
