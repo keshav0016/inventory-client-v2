@@ -55,12 +55,12 @@ class Admindashboard extends Component {
     componentWillMount() {
         this.handleList()
     }
-
+    
     render() {
         return (
             <div>
                 <Row>
-                    <Col s={9} offset={'s3'}>
+                    <Col s={12} m={10} l={9} offset={'m1 l3'}>
                         <Card className="z-depth-0">
                             <h3 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Dashboard</h3 >
                             {this.state.handleListRequest ? <Preloader size='small' /> :<div>
