@@ -155,7 +155,7 @@ class LoginForm extends Component {
         </div> 
         <div>
         <Row>
-          <Col s={4} offset={"m4"}>
+          <Col s={12} m={6} l={4} offset={'m3 l4'}>
             <form onSubmit={this.checkForValidation}>
               <Card className="z-depth-2" title="Login" style={{padding: "30px", marginTop: 0}}>
                 {/* <h4>Login</h4> */}
@@ -171,12 +171,12 @@ class LoginForm extends Component {
 
                 </Row>
                 <Row>
-                    <Col s={3} offset={"m7"}>
+                    <Col s={3} offset={"s8"}>
                       <Button className='submitbtn' type="submit">LOGIN</Button>
                     </Col>
                 </Row>
                 <Col s={6} offset={'s7'}>
-                  <Link to='/forgotpassword' className='loginFormForgotLink'>Forgot Password ?</Link>
+                  <Link to='/forgotpassword' className='loginFormForgotLink' style={{whiteSpace:'nowrap'}}>Forgot Password ?</Link>
                 </Col>
               </Card>
 

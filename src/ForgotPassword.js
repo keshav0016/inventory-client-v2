@@ -123,7 +123,7 @@ class ForgotPasswordForm extends Component {
                     <h4 style={{ marginTop: 0, textAlign: 'center', fontWeight: 300, color: 'black' }}>Inventory Management System </h4>
                 </div>
                 <Row>
-                    <Col s={4} offset={'s4'} style={{ marginTop: 0 }}>
+                    <Col s={12} m={6} l={4} offset={'m3 l4'} style={{ marginTop: 0 }}>
                         <form onSubmit={this.verifyCredentials}>
                             <Card className="z-depth-2" title="Reset your password" style={{ padding: "30px", marginTop : 0 }}>
                                 <Row>
@@ -133,7 +133,7 @@ class ForgotPasswordForm extends Component {
                                     <Input s={12} type="email" onChange={this.getEmail} label="Email" icon="email" error={this.state.email.showError ? this.state.email.error : null}></Input>
                                 </Row>
                                 <Row>
-                                    <Col s={6} offset={'s3'}>
+                                    <Col s={8} m={6} l={8} offset={'s2 m3 l2'}>
                                         <Button className="teal" type="submit" style={{ width: '100%' }}>Reset</Button>
                                     </Col>
                                 </Row>

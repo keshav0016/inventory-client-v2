@@ -45,7 +45,7 @@ class PasswordChange extends Component {
                     <h4 style={{ marginTop: 0, textAlign: 'center', fontWeight: 300, color: 'black' }}>Inventory Management System </h4>
                 </div>
                 <Row>
-                    <Col s={4} offset={'s4'} style={{ marginTop: 0 }}>
+                    <Col s={12} m={6} l={4} offset={'m3 l4'} style={{ marginTop: 0 }}>
                         <form onSubmit={this.handleSubmit}>
                             <Card className="z-depth-2" title="Reset your password" style={{ padding: '15px' }}>
                                 <Row>
@@ -58,8 +58,8 @@ class PasswordChange extends Component {
                                     <Input s={12} type='password' onChange={this.handleConfirmPassword} error={this.state.Confirm_Password.showError ? this.state.Confirm_Password.error : null}label="Confirm Password" icon="lock"></Input>
                                 </Row>
                                 <Row>
-                                    <Col s={6} offset={'s3'}>
-                                        <Button className='submitbtn' type="submit">Submit</Button>
+                                    <Col s={6} m={6} l={4} offset={'s3 m3 l4'}>
+                                        <Button type="submit">Submit</Button>
                                     </Col>
                                 </Row>
                             </Card>
