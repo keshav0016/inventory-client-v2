@@ -91,7 +91,26 @@
   background-color: #212121;
 }
 
+.moreVert{
+  padding: 0
+}
+
 /* th {
   font-family: 'Roboto'; 
   font-weight: 400;
 } */
+@media only screen and (max-width: 1200px) {
+  .filterContainer{
+    display: none;
+  }
+
+  .extraFields{
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .tabView{
+    display: none;
+  }
+}
