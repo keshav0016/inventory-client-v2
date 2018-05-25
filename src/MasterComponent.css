@@ -15,8 +15,14 @@
     top:0;
     left: 0;
     z-index: 998;
-    height:64px;
+    height:56px;
     color: white;
+}
+
+@media only screen and (min-height: 824px) {
+    .masterComponentMenuButton {
+        height: 64px;
+    }
 }
 
 .masterComponentSideBar {
