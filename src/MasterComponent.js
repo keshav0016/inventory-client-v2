@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, Icon, SideNav, Button } from 'react-materialize'
+import { Navbar, NavItem, Icon, SideNav, Button, Row, Col } from 'react-materialize'
 import './MasterComponent.css';
 import Assets from './Assets';
 import Consumables from './Consumables';
@@ -26,6 +26,7 @@ import axios from 'axios';
 import { baseUrl } from './config';
 import NotFound from './NotFound';
 import logo from './LOGO.png'
+import './MasterComponent.css'
 
 class MasterComponent extends Component {
     constructor(props) {
@@ -56,13 +57,12 @@ class MasterComponent extends Component {
                 {this.state.unauth ? <Redirect to="/unauthorized" /> : (
                     <div className="masterComponentBackground">
                         <div>
-                            <Navbar fixed className="white lighten-1" style={{ overflow: 'hidden' }}>
-                                <NavItem className='logo' href="/admin">
-                                    <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src={logo} alt="WAL Logo" />
-                                </NavItem>
-                                <NavItem href="/logout" className="masterComponentLogoutButton" style={{ fontFamily: 'Roboto', fontWeight: 400 }}><b>LOGOUT</b></NavItem>
-
-                            </Navbar>
+                            <Row>
+                            <div fixed className="white lighten-1 z-depth-2 navbar" style={{ overflow: 'hidden' }}>
+                                    <a href="/admin"><Col s={2} m={2} l={2} offset={"s5 m5 l6"} ><img className="navbarImage" src={logo} alt="WAL Logo" /></Col></a>
+                                    <div><a href="/logout"><b className="masterComponentLogoutButton">LOGOUT</b></a></div>
+                            </div>
+                            </Row>
                             <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>
                                 <Link to="/admin">Dashboard</Link>
                                 <Link to="/admin/assets">Assets</Link>
