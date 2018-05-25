@@ -99,6 +99,7 @@
   font-family: 'Roboto'; 
   font-weight: 400;
 } */
+
 @media only screen and (max-width: 1200px) {
   .filterContainer{
     display: none;
@@ -107,10 +108,20 @@
   .extraFields{
     display: none;
   }
+
+  .dropdown-button{
+    padding: 0 2rem;
+  }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .tabView{
     display: none;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .dropdown-button{
+    padding: 0 0;
   }
 }

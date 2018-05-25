@@ -44,9 +44,9 @@ class DisableAsset extends Component{
                     </b>
                     {`?`}
                 </p>
-                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <Button onClick = {this.disableAssetFromDb} style={{margin: '0 20px'}}>Disable</Button>
-                        <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className="splitModalButtons">
+                        <Button onClick = {this.disableAssetFromDb} >Disable</Button>
+                        <Button className="modal-close" >Cancel</Button>
                 </div>
             </div>
         )

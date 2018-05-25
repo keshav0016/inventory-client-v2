@@ -76,8 +76,10 @@ class DeleteAsset extends Component{
                     <p><b>Asset Name</b> : {this.state.recoverInfo.asset.asset_name}<br /><b>Assigned Employee</b> : {this.state.recoverInfo.user.first_name} {this.state.recoverInfo.user.last_name}</p>
                 </div> : null}
                 <br /><br />
-                <Button onClick = {this.setRecoverAssetRequest}>Recover</Button>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className="splitModalButtons">
+                    <Button onClick = {this.setRecoverAssetRequest}>Recover</Button>
+                    <Button className="modal-close">Cancel</Button>
+                </div>
                 {this.state.recoverAssetRequest ? this.recoverAssetFromDb() : null}
             </div>
         )

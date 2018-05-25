@@ -240,7 +240,7 @@ class Assets extends Component{
                             <td className='extraFields'>{item.category}</td>
                             <td>{item.disabled === 1 ? 
                                 <Dropdown trigger={
-                                    <Button className="btn-flat"><Icon tiny>more_vert</Icon></Button>
+                                    <Button ><Icon tiny>more_vert</Icon></Button>
                                 }>
                                 <Modal
                                     style={{width : '70%'}}
@@ -250,7 +250,7 @@ class Assets extends Component{
                                 </Modal>
                                 </Dropdown>
                                 :<Dropdown trigger={
-                                    <Button className="btn-flat"><Icon tiny>more_vert</Icon></Button>
+                                    <Button><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
                                         actions={null}

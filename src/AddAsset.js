@@ -662,6 +662,7 @@ class AddAsset extends Component{
                         <Input s={6} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
                         </div>
                         <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
+                        <Row><br /></Row>
                         <Row>
                             <Col s={6}>
                                 <Modal
@@ -671,7 +672,7 @@ class AddAsset extends Component{
                                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                                 </Modal>
                             </Col>
-                            <Col>
+                            <Col s={6} l=''>
                                 <Modal
                                 actions={null}
                                 trigger={<Button>Add Asset Type</Button>}>
@@ -681,7 +682,7 @@ class AddAsset extends Component{
                         </Row>
                         <Row></Row>
                         <Row>
-                            <Col offset={'s6'}>
+                            <Col offset={'l6 m6'}>
                                 <Link to='/admin/assets'><Button style={{marginRight : '5px'}}>Cancel</Button></Link>                            
                                 <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
                             </Col>
