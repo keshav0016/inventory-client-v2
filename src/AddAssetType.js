@@ -157,8 +157,10 @@ class AddAssetType extends Component{
                     <Input s={6} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
                     <Input s={6} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
-                <Button onClick={this.checkForValidation} style={{margin: '0 20px'}}>Submit</Button>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className="splitModalButtons">
+                    <Button onClick={this.checkForValidation} >Submit</Button>
+                    <Button className="modal-close" >Cancel</Button>
+                </div>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}
             </div>
 
