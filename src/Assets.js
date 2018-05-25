@@ -77,7 +77,7 @@ class Assets extends Component{
             handleListRequest : true
             
         })
-        // this.setPage(1)
+        this.setPage(1)
     }
 
     setSearchAssetId(e){
@@ -186,7 +186,7 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
-                    <Input s={3} placeholder="Search by Asset Name or Asset ID" onChange = {this.setSearch} />
+                    <Input s={12} m={6} l={4} placeholder="Search by Asset Name or Asset ID" onChange = {this.setSearch} />
                     {/* <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/> */}
                     {/* <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button> */}
                 </Row>
@@ -207,20 +207,20 @@ class Assets extends Component{
                 {this.state.loading ? <Preloader size='small' /> :
                 (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-                <Table className="assetTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table className="assetTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
                             <th data-field="asset_id">Asset ID</th>
                             <th data-field="serial_number">Serial No.</th>
                             <th data-field="asset_name">Asset Name</th>
                             <th data-field="asset_type">Asset Type</th>
-                            <th data-field="purchase_date">Purchase date</th>
-                            <th data-field="invoice_number">Invoice No.</th>
-                            <th data-field="vendor">Vendor</th>
+                            <th className='extraFields' data-field="purchase_date">Purchase date</th>
+                            <th className='extraFields' data-field="invoice_number">Invoice No.</th>
+                            <th className='tabView' data-field="vendor">Vendor</th>
                             <th data-field="current_status">Current Status</th>
-                            <th data-field="condition">Condition</th>
-                            <th data-field="location">Location</th>
-                            <th data-field="category">Category</th>
+                            <th className='extraFields' data-field="condition">Condition</th>
+                            <th className='extraFields' data-field="location">Location</th>
+                            <th className='extraFields' data-field="category">Category</th>
                         </tr>
                     </thead>
 
@@ -231,16 +231,16 @@ class Assets extends Component{
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
                             <td>{item.assetType}</td>
-                            <td>{moment(item.purchase_date).format('DD MMM YYYY')}</td>
-                            <td>{item.invoice_number}</td>
-                            <td>{item.vendor}</td>
+                            <td className='extraFields'>{moment(item.purchase_date).format('DD MMM YYYY')}</td>
+                            <td className='extraFields'>{item.invoice_number}</td>
+                            <td className='tabView'>{item.vendor}</td>
                             <td>{item.current_status}</td>
-                            <td>{item.condition}</td>
-                            <td>{item.location}</td>
-                            <td>{item.category}</td>
+                            <td className='extraFields'>{item.condition}</td>
+                            <td className='extraFields'>{item.location}</td>
+                            <td className='extraFields'>{item.category}</td>
                             <td>{item.disabled === 1 ? 
                                 <Dropdown trigger={
-                                    <Button><Icon tiny>more_vert</Icon></Button>
+                                    <Button className="btn-flat"><Icon tiny>more_vert</Icon></Button>
                                 }>
                                 <Modal
                                     style={{width : '70%'}}
@@ -250,7 +250,7 @@ class Assets extends Component{
                                 </Modal>
                                 </Dropdown>
                                 :<Dropdown trigger={
-                                    <Button><Icon tiny>more_vert</Icon></Button>
+                                    <Button className="btn-flat"><Icon tiny>more_vert</Icon></Button>
                                 }>
                                     <Modal
                                         actions={null}
@@ -286,10 +286,14 @@ class Assets extends Component{
                     </tbody>
                     </Table>
                     </div> )}
-                
+                    {/* <div className="fixed-action-btn">
+                        <a className="btn-floating btn-large red" href='/admin/assets/create'>
+                        <i className="large material-icons">add</i>
+                        </a>
+                    </div> */}
                 <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                 
-                <div>
+                <div style={{width : '100vw'}}>
                     {this.state.assetList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
                 </div> 
             </div>
