@@ -663,30 +663,32 @@ class AddAsset extends Component{
                         </div>
                         <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                         <Row><br /></Row>
-                        <Row>
-                            <Col s={6}>
-                                <Modal
+                            <Row>
+                                <Col s={6}>
+                                    <Modal
+                                        actions={null}
+                                        id="addVendor"
+                                        trigger={<Button>Add Vendor</Button>}>
+                                        <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                                    </Modal>
+                                </Col>
+                                <Col s={6} l=''>
+                                    <Modal
                                     actions={null}
-                                    id="addVendor"
-                                    trigger={<Button>Add Vendor</Button>}>
-                                    <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                                </Modal>
-                            </Col>
-                            <Col s={6} l=''>
-                                <Modal
-                                actions={null}
-                                trigger={<Button>Add Asset Type</Button>}>
-                                <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
-                                </Modal>
-                            </Col>
-                        </Row>
-                        <Row></Row>
-                        <Row>
-                            <Col offset={'l6 m6'}>
-                                <Link to='/admin/assets'><Button style={{marginRight : '5px'}}>Cancel</Button></Link>                            
-                                <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
-                            </Col>
-                        </Row>
+                                    trigger={<Button>Add Asset Type</Button>}>
+                                    <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
+                                    </Modal>
+                                </Col>
+                            </Row>
+                            <Row></Row>
+                        <div className="splitModalButtons"> 
+                            <Row>
+                                <Col offset={'l6 m6'}>
+                                    <Link to='/admin/assets'><Button>Cancel</Button></Link>                            
+                                    <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                                </Col>
+                            </Row>
+                        </div>
                 </Row>
                 {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
