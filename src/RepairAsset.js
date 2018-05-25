@@ -295,7 +295,7 @@ class RepairAsset extends Component{
                     {this.state.assetDetails.disabled ? <div><h5 style={{color : 'red'}}>Asset is disabled</h5></div> :<Row>
                         {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
                         <Row>
-                            <Autocomplete s={6}
+                            <Autocomplete l={6} s={10} m={8}
                                 className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
                                 data={
                                     this.state.vendorNames
@@ -306,21 +306,27 @@ class RepairAsset extends Component{
                             />
                         </Row>
                         <Row>
-                            <Input s={6} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
+                            <Input l={6} s={10} m={8} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
                         </Row>
                         <Row>
-                            <Input s={6} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                            <Input l={6} s={10} m={8} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                         </Row>
-                        <Modal
-                            actions={null}
-                            id="addVendor"
-                            trigger={<Button>Add Vendor</Button>}>
-                            <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                        </Modal>
-                        <Col offset={'s2'}>
-                        <Link to='/admin/assets'><Button style={{marginRight : '5px', marginTop:"-60px", marginLeft: '-50px'}}>Cancel</Button></Link>                                                    
-                        <Button style={{marginTop:"-60px", marginLeft: '20px'}} onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                        </Col>
+                        <div className="splitModalButtons">
+                                <Col>
+                                <Modal
+                                    actions={null}
+                                    // id="addVendor"
+                                    trigger={<Button>Add Vendor</Button>}>
+                                    <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                                </Modal>
+                                </Col>
+                                <Col>
+                            {/* </Row>
+                            <Row style={{float : 'right'}}> */}
+                                    <Link to='/admin/assets'><Button >Cancel</Button></Link>                                                    
+                                    <Button  onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                                </Col>
+                        </div>
                     </Row>}
                     {this.state.repairAssetRequest ? this.repairAssetIntoDb() : null}
                 </div>

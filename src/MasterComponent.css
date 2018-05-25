@@ -99,3 +99,16 @@
 .masterComponentMenuButton i{
     color : teal;
 }
+
+
+@media only screen and (max-width: 483px) {
+    .splitModalButtons button{
+        margin-top: 2%;
+        width: stretch;
+    }
+}
+
+
+.splitModalButtons button{
+    margin-right: 20px;
+}

@@ -387,8 +387,10 @@ class UpdateAsset extends Component {
                         <option value='Other'>Other</option>
                     </Input>
                 </Row>
-                <Button waves='light' onClick={this.checkForValidation}>Submit <Icon small right>send</Icon></Button>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className="splitModalButtons">
+                    <Button waves='light' onClick={this.checkForValidation}>Submit <Icon small right>send</Icon></Button>
+                    <Button className="modal-close">Cancel</Button>
+                </div>
                 {this.state.updateAssetRequest ? this.updateAssetIntoDb() : null}
             </div>
         )

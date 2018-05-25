@@ -16,11 +16,16 @@ tbody{
   word-break: break-all;
 }
 
+button{
+  white-space: nowrap;
+}
+
 @media only screen and (max-width: 1200px) {
   .filterPadding{
     padding-right: 0;
   }
   .pagination{
+    
     text-align: center;
     width: auto
   }

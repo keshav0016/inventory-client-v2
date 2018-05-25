@@ -1,7 +1,4 @@
-.assetTable{
-    position: relative;
-    width: 80%;
-}
+
 
 .filterContainer{
     position: fixed;
@@ -15,4 +12,11 @@
     /* text-decoration-style: black */
     /* height: 50%; */
     /* background-color: darkturquoise */
+}
+
+@media only screen and (min-width: 1200px) {
+    .assetTable{
+        position: relative;
+        width: 80%;
+    }
 }
