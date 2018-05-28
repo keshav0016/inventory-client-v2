@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, Preloader} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, Preloader, SideNav} from 'react-materialize'
 // import AddConsumables from './AddConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
@@ -11,6 +11,7 @@ import $ from 'jquery'
 import { baseUrl } from './config';
 import EnableConsumable from './EnableConsumable';
 import moment from 'moment'
+import './MasterComponent.css'
 
 class Consumables extends Component{
     constructor(props){
@@ -215,10 +216,25 @@ class Consumables extends Component{
     }
 
     render(){
+        let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list'></Button>;
+        let filterPane = <div className="filterContainer">
+            <Row>
+                <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
+                <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
+            </Row>
+                <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
+                <br />
+                <br />
+                <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
+        </div>
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List of Consumables</h3>
+                {filterSlideButton}
+                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
+                    {filterPane}
+                </SideNav>
                 <Row>
                 <Input s={6} l={3} m={5} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
@@ -294,16 +310,7 @@ class Consumables extends Component{
                 {this.state.pagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null }
                 </div>)
                 }
-                <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
-                    <Row>
-                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
-                        <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
-                    </Row>
-                        <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
-                        <br />
-                        <br />
-                        <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
-                </div>                
+                {filterPane}
                 <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating fab="vertical" large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
             </div>
         )

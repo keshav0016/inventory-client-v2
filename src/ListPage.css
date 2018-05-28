@@ -24,10 +24,20 @@
 
 .filterContainer {
   position: fixed;
+  height: 100%;
   width: 20%;
   right: 0px;
   top: 64px;
-  height: 900px;
+  background-color: #212121;
+}
+
+.side-nav.filterSliderPane .filterContainer {
+  display: none;
+  position: fixed;
+  width: 100%;
+  right: 0%;
+  top: 8px;
+  height: 100%;
   background-color: #212121;
 }
 
@@ -101,6 +111,12 @@
   background-color: #212121;
 }
 
+.filterContainerSliderButton {
+  display: none;
+  position: absolute;
+  right: 3%;
+}
+
 .moreVert{
   padding: 0
 }
@@ -127,11 +143,23 @@
   .listComponent {
     margin-top: 68px;
   }
+
+  .side-nav.filterSliderPane .filterContainer {
+    top:0px;
+  }
 }
 
 @media only screen and (max-width: 1023px) {
   .filterContainer{
     display: none;
+  }
+
+  .filterContainerSliderButton{
+    display: initial;
+  }
+
+  .side-nav.filterSliderPane .filterContainer{
+    display: initial;
   }
 
   .extraFields{
@@ -144,6 +172,16 @@
 
   .consumableTable{
     width: 100%
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .filterContainerSliderButton{
+    display: none;
+  }
+
+  .side-nav.filterSliderPane .filterContainer {
+    display: none;
   }
 }
 
