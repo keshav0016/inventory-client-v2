@@ -134,7 +134,7 @@ class Vendor extends Component{
                     id="addVendor"
                     actions={null}
                     // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
-                    trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
+                    trigger={<Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
                     <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
