@@ -67,7 +67,7 @@ class EmployeesList extends Component {
   
   render() {
     return (
-      <div style={{marginLeft: '30px',marginRight: '30px'}}>
+      <div className="listComponent">
         {this.state.handleListRequest ? this.handleList() : null}
         <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>List of Employees</h3>
         {this.state.loading ? <Preloader size='small' /> :

@@ -191,7 +191,7 @@ class TicketsList extends Component{
 
     render(){
         return(
-            <div style={{marginLeft: '30px',marginRight: '30px'}}>
+            <div className="listComponent" >
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Ticket list</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
