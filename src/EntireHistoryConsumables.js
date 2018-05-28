@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Row, Input, Preloader} from 'react-materialize'
+import {Col, CardPanel, Row, Input, Preloader, Button, SideNav} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import './ListPage.css'
@@ -53,10 +53,22 @@ class EntireHistoryConsumables extends Component{
 
 
    render(){
+    let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list' style={{top:'64px'}}></Button>;
+    let filterPane = <div className="filterContainer">
+    <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white'}} className="adminDashboardTitle">History Filters</p>
+        <Row className="ticketListCheckbox">
+            <Input name='filter' type='checkbox' value='red' label='Purchased' onClick = {this.setPurchased} checked={this.state.isPurchased} />
+            <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssigned} checked={this.state.isAssigned} />
+        </Row>
+    </div>     
        return(
            <div className="listComponent">
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Consumable History</h3>
+            {filterSlideButton}
+            <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
+                {filterPane}
+            </SideNav>
             {this.state.fetchHistory ? <Preloader size='small' /> : this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                             {consumable.vendor_name ? 
@@ -110,13 +122,7 @@ class EntireHistoryConsumables extends Component{
                             null )}
                     </Col>
                        })}
-                <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
-                <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white'}} className="adminDashboardTitle">History Filters</p>
-                    <Row className="ticketListCheckbox">
-                        <Input name='filter' type='checkbox' value='red' label='Purchased' onClick = {this.setPurchased} checked={this.state.isPurchased} />
-                        <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssigned} checked={this.state.isAssigned} />
-                    </Row>
-                </div>
+                       {filterPane}
            </div>
        )
    }
