@@ -151,7 +151,7 @@ class AcceptAssetTicket extends Component{
 
     render(){
         return(
-            <div style={{marginLeft: '30px',marginRight: '30px'}}>
+            <div className="listComponent" >
             <Row>
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Accept Asset</h3>
                 <Row>
