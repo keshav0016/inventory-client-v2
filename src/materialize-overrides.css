@@ -161,3 +161,9 @@ div.input-field.consumable-empty-error.col label.active:after
 .modal{
     overflow: visible;
 }
+
+@media only screen and (max-height : 600px) {
+    .modal{
+        overflow-y: scroll;
+    }
+}
