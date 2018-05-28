@@ -187,8 +187,10 @@ class VendorUpdate extends Component{
                     <Input  value={this.state.contact.value} onChange={this.handleContact}s={6} label="Contact" error={this.state.contact.showError ? this.state.contact.error : null} />    
                     <Input  value={this.state.address.value} onChange={this.handleAddress} s={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
                 </Row>
-                 <Button onClick={this.checkForValidation}>Edit</Button>
-                 <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className='splitModalButtons'>
+                    <Button onClick={this.checkForValidation}>Edit</Button>
+                    <Button className="modal-close" >Cancel</Button>
+                </div>
                  {this.state.update ? this.handleUpdate() : null}
             </div>
         )
