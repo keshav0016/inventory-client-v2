@@ -65,14 +65,14 @@ class EntireHistoryConsumables extends Component{
                                 <CardPanel className='z-depth-2 consumableTable'>
                             <div> 
                                 <h5 style={{fontFamily: 'Roboto',fontWeight: 300}}>Purchased</h5>
-                                <div style={{display : 'flex'}} >
-                                    <div style={{float : 'left', width : '50%'}} >
+                                <div className='historyCards'  >
+                                    <div style={{float : 'left'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
                                         <h6><b>Vendor Name</b> : {consumable.vendor_name}</h6>
                                         <h6><b>Purchase Date</b> : {moment(consumable.purchase_date).format('DD MMM YYYY')}</h6>
                                         {consumable.purchase_date ? <h6><b>Purchased Quantity</b> : {consumable.quantity}</h6> : null}
                                     </div>
-                                    <div style={{float: 'right', width : '50%'}} >
+                                    <div style={{float: 'right'}} >
                                         <h6><b>Individual Price</b> : ₹{consumable.item_price.toFixed(2)}</h6>
                                         <h6><b>Collective Price</b> : ₹{consumable.whole_price.toFixed(2)}</h6>
                                         <h6><b>Discount</b> : {consumable.discount}%</h6>
@@ -93,13 +93,13 @@ class EntireHistoryConsumables extends Component{
                                 <CardPanel className='z-depth-2 consumableTable'>
                              <div>
                                 <h5 style={{fontFamily: 'Roboto',fontWeight: 300}}>Assigned</h5>
-                                <div style={{display : 'flex'}} >
-                                    <div style={{float: 'left', width : '50%'}} >
+                                <div className='historyCards' >
+                                    <div style={{float: 'left'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
                                         <h6><b>Employee Name</b> : {consumable.user!==null?consumable.user.first_name + " " + consumable.user.last_name: <b style={{color:'teal'}}>Employee has left</b>}</h6>
                                         <h6><b>Assigned Date</b> : {moment(consumable.assigned_date).format('DD MMM YYYY')}</h6>
                                     </div>
-                                    <div style={{float: 'right', width : '50%'}} >
+                                    <div style={{float: 'right'}} >
                                         {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.quantity}</h6>) : 'Assigned by Admin'}
                                         {consumable.assigned_date ? (<h6><b>Assigned Quantity</b> : {consumable.quantity}</h6>) : null}
                                     </div>

@@ -119,6 +119,10 @@
   .dropdown-button{
     padding: 0 2rem;
   }
+
+  .consumableTable{
+    width: 100%
+  }
 }
 
 @media only screen and (max-width: 767px) {
