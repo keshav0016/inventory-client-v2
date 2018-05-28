@@ -5,6 +5,7 @@ import './Employee.css'
 import './adminDash.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
+import './ListPage.css'
 //CHANGE THE USER ID IN CLIENT AS WELL AS SERVER
 
 class Tickets extends Component{
@@ -172,7 +173,7 @@ class Tickets extends Component{
 
    render(){
         return(
-            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+            <div className="listComponent" >
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Ticket Request Form</h3>
                 <div className ='RequestForm'>
                 <Row>
