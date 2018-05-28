@@ -9,7 +9,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader } from 'react-materialize'
+import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel } from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
 
@@ -28,6 +28,7 @@ class EmployeesList extends Component {
     this.handleList = this.handleList.bind(this)
     this.setPage = this.setPage.bind(this)
     this.setHandleListRequest = this.setHandleListRequest.bind(this)
+    this.renderDropdown = this.renderDropdown.bind(this)
   }
 
  
@@ -64,6 +65,32 @@ class EmployeesList extends Component {
       handleListRequest : true
     })
   }
+  renderDropdown(item, key){
+    return item.disable === 1 ? <Dropdown trigger={
+      <Button><Icon tiny>more_vert</Icon></Button>
+    }>
+      <Modal
+        actions={null}
+        trigger={<NavItem>Enable</NavItem>}>
+        {<EnableEmployee user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
+      </Modal>
+    </Dropdown>
+      : <Dropdown trigger={
+        <Button className='btn-mini'> <Icon>more_vert</Icon></Button>
+      }>
+        <Modal
+          actions={null}
+          trigger={<NavItem >Edit</NavItem >}>
+          <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
+        </Modal>
+        <Modal
+          actions={null}
+          trigger={<NavItem >Disable</NavItem >}>
+          <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
+        </Modal>
+        <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
+      </Dropdown>
+  }
   
   render() {
     return (
@@ -73,7 +100,7 @@ class EmployeesList extends Component {
         {this.state.loading ? <Preloader size='small' /> :
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-            <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+            <Table hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>
                 <tr>
                   <th data-field="user_id">Emp. Id</th>
@@ -95,35 +122,32 @@ class EmployeesList extends Component {
                   <td className="extraFields">{item.gender}</td>
                   <td className="extraFields">{item.department}</td>
                   <td>{item.designation}</td>
-                  <td>{item.disable=== 1 ? <Dropdown trigger={
-                                      <Button><Icon tiny>more_vert</Icon></Button>
-                                  }>
-                                  <Modal
-                                      actions={null}
-                                      trigger={<NavItem>Enable</NavItem> }>
-                                      {<EnableEmployee user = {this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
-                                  </Modal>
-                                  </Dropdown>
-                                  : <Dropdown trigger={
-                                    <Button className = 'btn-mini'> <Icon>more_vert</Icon></Button>
-                                  }>
-                                    <Modal
-                                    actions={null}
-                                    trigger={<NavItem >Edit</NavItem >}>
-                                    <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
-                                  </Modal>
-                                  <Modal 
-                                    actions={null} 
-                                    trigger={<NavItem >Disable</NavItem >}>
-                                    <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
-                                  </Modal>
-                                  <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
-                                </Dropdown>}</td>
+                  <td>{this.renderDropdown(item, key)}</td>
                 </tr>
                 )
               },this)}
               </tbody>
             </Table>
+            <Col s={12} m={12} className='mobileView'>
+                        {this.state.data.map((item, index) => {
+                            return <CardPanel key = {index}>
+                                        <div style={{ float : 'right'}}>
+                                            {this.renderDropdown(item, index)}
+                                        </div>
+                                        <div className='historyCards'  >
+                                            <div style={{float : 'left'}} >                                
+                                                <h6><b>Employee Id</b> : {item.user_id}</h6>
+                                                <h6><b>First Name</b> : {item.first_name}</h6>
+                                                <h6><b>Last Name</b> : {item.last_name}</h6>  
+                                            </div>
+                                            <div style={{float : 'right'}}>
+                                                <h6><b>Department</b> : {item.department}</h6>
+                                                <h6><b>Designation</b> : {item.designation}</h6>                                                
+                                            </div>
+                                        </div>
+                                    </CardPanel>
+                        })}
+                    </Col>
           </div>)}
           <Link to={{ pathname : '/admin/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                 

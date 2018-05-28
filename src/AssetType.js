@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Preloader} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel} from 'react-materialize'
 import AddAssetType from './AddAssetType'
 import UpdateAssetType from './UpdateAssetType'
 import $ from 'jquery'
@@ -20,6 +20,7 @@ class AssetType extends Component{
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
         this.setPage = this.setPage.bind(this)
+        this.renderButton = this.renderButton.bind(this)
     }
 
     handleList(){
@@ -63,6 +64,13 @@ class AssetType extends Component{
         })
     }
 
+    renderButton(item){
+        return <Modal
+            actions={null}
+            trigger={<Button>Edit</Button>}>
+            <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
+            </Modal>
+    }
 
     render(){
         return(
@@ -71,7 +79,7 @@ class AssetType extends Component{
                 <br />
                 <h3 style={{fontFamily: 'Roboto', fontWeight: 250}} >Asset Types</h3 >
                 { this.state.handleListRequest ? <Preloader size='small' /> : ( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
-                <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
                             <th data-field="id">S. No</th>
@@ -87,15 +95,28 @@ class AssetType extends Component{
                             <td>{item.id}</td>
                             <td>{item.assetType}</td>
                             <td>{item.maxRequest}</td>
-                            <td><Modal
-                            actions={null}
-                                trigger={<Button>Edit</Button>}>
-                                <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
-                                </Modal></td>
+                            <td>{this.renderButton(item)}</td>
                             </tr>
                         })}
                     </tbody>
                 </Table>
+                <Col s={12} m={12} className='mobileView'>
+                        {this.state.assetTypeList.map((item, index) => {
+                            return <CardPanel key = {index}>
+                                        <div className='historyCards'  >
+                                            <div style={{float : 'left'}} >
+                                                <h6><b>Serial No.</b> : {item.id}</h6>
+                                                <h6><b>Asset Type</b> : {item.assetType}</h6>                                
+                                            </div>
+                                            <div style={{float : 'right'}}>
+                                                <h6><b>Max Request</b> : {item.maxRequest}</h6>                                                                                                                
+                                                {this.renderButton(item)}
+                                            </div>
+                                        </div>
+                                    </CardPanel>
+                        })}
+                    </Col>
+
                 <Modal
                     actions ={null}
                     trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' style={{position: 'fixed'}} />}>

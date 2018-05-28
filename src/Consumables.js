@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, Preloader, SideNav} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, Preloader, Col, CardPanel, SideNav} from 'react-materialize'
 // import AddConsumables from './AddConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
@@ -43,6 +43,7 @@ class Consumables extends Component{
         this.searchKeyword = this.searchKeyword.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.resetFilter = this.resetFilter.bind(this)
+        this.renderDropdown = this.renderDropdown.bind(this)
     }
 
     checkForValidation(){
@@ -215,6 +216,39 @@ class Consumables extends Component{
         })
     }
 
+    renderDropdown(consumable){
+        return consumable.disable === 1 ? 
+        <Dropdown trigger={
+            <Button> <Icon>more_vert</Icon></Button>
+            }><Modal
+            
+            actions={null}
+            trigger={<NavItem>Enable</NavItem> }>
+            {<EnableConsumable  consumable={consumable} setHandleListRequest={this.setHandleListRequest} />}
+        </Modal>
+        </Dropdown>:<Dropdown trigger={
+                <Button><Icon tiny>more_vert</Icon></Button>
+            }>
+            {/* <Modal
+                header='Edit Consumable'
+                fixedFooter
+                trigger={<NavItem>Edit</NavItem >}>
+                <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+            </Modal> */}
+            <Modal 
+                    actions={null}
+                    trigger={<NavItem>Disable</NavItem>}>
+                    <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
+            </Modal>
+            <Modal
+                actions={null}
+                trigger={<NavItem>Assign</NavItem >}>
+                <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+            </Modal>
+            <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>Details</NavItem >
+        </Dropdown>
+    }
+
     render(){
         let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list'></Button>;
         let filterPane = <div className="filterContainer">
@@ -255,7 +289,7 @@ class Consumables extends Component{
                     :
 
                     <div>
-                    <Table className="consumableTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}} >
+                    <Table className="consumableTable desktopView" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}} >
                     <thead>
                         <tr>
                             <th data-field="consumable_id">Cons. Id</th>
@@ -272,41 +306,33 @@ class Consumables extends Component{
                             <td >{consumable.name}</td>
                             <td >{consumable.quantity}</td>
                             <td>{moment(consumable.createdAt).format('DD MMM YYYY')}</td>
-                            <td>{consumable.disable === 1 ? 
-                            <Dropdown trigger={
-                                <Button> <Icon>more_vert</Icon></Button>
-                                }><Modal
-                                
-                                actions={null}
-                                trigger={<NavItem>Enable</NavItem> }>
-                                {<EnableConsumable  consumable={consumable} setHandleListRequest={this.setHandleListRequest} />}
-                            </Modal>
-                            </Dropdown>:<Dropdown trigger={
-                                    <Button><Icon tiny>more_vert</Icon></Button>
-                                }>
-                                {/* <Modal
-                                    header='Edit Consumable'
-                                    fixedFooter
-                                    trigger={<NavItem>Edit</NavItem >}>
-                                    <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
-                                </Modal> */}
-                                <Modal 
-                                        actions={null}
-                                        trigger={<NavItem>Disable</NavItem>}>
-                                        <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
-                                </Modal>
-                                <Modal
-                                    actions={null}
-                                    trigger={<NavItem>Assign</NavItem >}>
-                                    <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
-                                </Modal>
-                                <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>Details</NavItem >
-                            </Dropdown>}</td>
+                            <td>{this.renderDropdown(consumable)}</td>
                             </tr>
                             )
                         },this)}
                     </tbody>
                 </Table>
+
+                <Col s={12} m={12} className='mobileView'>
+                        {this.state.consumableList.map((item, index) => {
+                            return <CardPanel key = {index}>
+                                        <div style={{float : 'right'}}>
+                                            {this.renderDropdown(item)}
+                                        </div>
+                                        <div className='historyCards'  >
+                                            <div style={{float : 'left'}} >                                
+                                                <h6><b>Consumable Id</b> : {item.consumable_id}</h6>
+                                                <h6><b>Consumable Name</b> : {item.name}</h6>
+                                            </div>
+                                            <div style={{float : 'right'}}>
+                                                <h6><b>Quantity</b> : {item.quantity}</h6>
+                                                <h6><b>Purchase Date</b> : {moment(item.createdAt).format('DD MMM YYYY')}</h6>
+                                            </div>
+                                        </div>
+                                    </CardPanel>
+                        })}
+                    </Col>
+
                 {this.state.pagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null }
                 </div>)
                 }

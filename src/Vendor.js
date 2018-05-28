@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Preloader} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel} from 'react-materialize'
 import AddVendor from './AddVendor'
 import VendorUpdate from './VendorUpdate'
 import $ from 'jquery'
@@ -22,6 +22,7 @@ class Vendor extends Component{
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
         this.setPage = this.setPage.bind(this)
         this.setSearch = this.setSearch.bind(this)
+        this.renderButton = this.renderButton.bind(this)
     }
 
     handleList(){
@@ -72,6 +73,13 @@ class Vendor extends Component{
         })
     }
 
+    renderButton(key){
+        return <Modal
+            actions={null}
+            trigger={<Button>Edit</Button>}>
+            <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest} />
+        </Modal>
+    }
 
     render(){
         return(
@@ -80,7 +88,7 @@ class Vendor extends Component{
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Vendors</h3 >
                 {this.state.handleListRequest ? <Preloader size='small' /> : 
                     (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
-                <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
                             <th data-field="id">Id</th>
@@ -98,20 +106,35 @@ class Vendor extends Component{
                             <td>{item.name}</td>
                             <td>{item.address}</td>
                             <td>{item.contact}</td>
-                            <td><Modal
-                                actions={null}
-                                trigger={<Button>Edit</Button>}>
-                                <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest}/>
-                                </Modal></td>
+                            <td>{this.renderButton(key)}</td>
                             </tr>
                         })}
                     </tbody>
                 </Table>
+
+                <Col s={12} m={12} className='mobileView'>
+                        {this.state.vendorList.map((item, index) => {
+                            return <CardPanel key = {index}>
+                                        <div className='historyCards'  >
+                                            <div style={{float : 'left'}} >
+                                                <h6><b>Id</b> : {item.id}</h6>
+                                                <h6><b>Vendor Name</b> : {item.name}</h6>           
+                                                <h6><b>Address</b> : {item.address}</h6>                                                                                                     
+                                            </div>
+                                            <div style={{float : 'right'}}>
+                                                <h6><b>Contact No.</b> : {item.contact}</h6>                                                                                                                
+                                                {this.renderButton(index)}
+                                            </div>
+                                        </div>
+                                    </CardPanel>
+                        })}
+                    </Col>
+
                 <Modal
                     id="addVendor"
                     actions={null}
                     // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
-                    trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
+                    trigger={<Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
                     <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
