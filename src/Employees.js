@@ -76,7 +76,7 @@ class EmployeesList extends Component {
             <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>
                 <tr>
-                  <th data-field="user_id">Employee Id</th>
+                  <th data-field="user_id">Emp. Id</th>
                     <th data-field="first_name">First Name</th>
                     <th data-field="last_name">Last Name</th>
                     <th className="extraFields" data-field="age">Age</th>

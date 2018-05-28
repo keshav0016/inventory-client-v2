@@ -21,7 +21,7 @@
 }
 
 .filterContainer {
-  position: absolute;
+  position: fixed;
   width: 260px;
   right: 0px;
   top: 64px;
