@@ -7,6 +7,11 @@
 
 .tabs {
     position: relative;
-    width: 1205px;
-    right: 105px
+    width: 90%;
+    float: left;
+    /* right: 105px */
+}
+
+.tabs > div{
+    width: 40%
 }
