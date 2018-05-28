@@ -79,9 +79,9 @@ class EmployeesList extends Component {
                   <th data-field="user_id">Employee Id</th>
                     <th data-field="first_name">First Name</th>
                     <th data-field="last_name">Last Name</th>
-                    <th data-field="age">Age</th>
-                    <th data-field="gender">Gender</th>
-                    <th data-field="department">Department</th>
+                    <th className="extraFields" data-field="age">Age</th>
+                    <th className="extraFields" data-field="gender">Gender</th>
+                    <th className="extraFields" data-field="department">Department</th>
                     <th data-field="designation">Designation</th>
                   </tr>
               </thead>
@@ -91,15 +91,14 @@ class EmployeesList extends Component {
                   <td>{item.user_id}</td>
                   <td>{item.first_name}</td>
                   <td>{item.last_name}</td>
-                  <td>{item.age}</td>
-                  <td>{item.gender}</td>
-                  <td>{item.department}</td>
+                  <td className="extraFields">{item.age}</td>
+                  <td className="extraFields">{item.gender}</td>
+                  <td className="extraFields">{item.department}</td>
                   <td>{item.designation}</td>
                   <td>{item.disable=== 1 ? <Dropdown trigger={
                                       <Button><Icon tiny>more_vert</Icon></Button>
                                   }>
                                   <Modal
-                                      style={{width : '70%'}}
                                       actions={null}
                                       trigger={<NavItem>Enable</NavItem> }>
                                       {<EnableEmployee user = {this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
@@ -113,7 +112,7 @@ class EmployeesList extends Component {
                                     trigger={<NavItem >Edit</NavItem >}>
                                     <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>
                                   </Modal>
-                                  <Modal style={{width:'70%'}}
+                                  <Modal 
                                     actions={null} 
                                     trigger={<NavItem >Disable</NavItem >}>
                                     <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest}/>

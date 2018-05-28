@@ -242,7 +242,7 @@ class Consumables extends Component{
                     <Table className="consumableTable" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}} >
                     <thead>
                         <tr>
-                            <th data-field="consumable_id">Id</th>
+                            <th data-field="consumable_id">Cons. Id</th>
                             <th data-field="name">Consumable Name</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
                             <th data-field="purchaseDate">Purchase Date</th>
@@ -260,7 +260,7 @@ class Consumables extends Component{
                             <Dropdown trigger={
                                 <Button> <Icon>more_vert</Icon></Button>
                                 }><Modal
-                                style={{width : '70%'}}
+                                
                                 actions={null}
                                 trigger={<NavItem>Enable</NavItem> }>
                                 {<EnableConsumable  consumable={consumable} setHandleListRequest={this.setHandleListRequest} />}
@@ -274,7 +274,7 @@ class Consumables extends Component{
                                     trigger={<NavItem>Edit</NavItem >}>
                                     <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
                                 </Modal> */}
-                                <Modal style={{width:'70%'}}
+                                <Modal 
                                         actions={null}
                                         trigger={<NavItem>Disable</NavItem>}>
                                         <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
