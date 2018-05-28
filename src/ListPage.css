@@ -24,7 +24,7 @@
 
 .filterContainer {
   position: fixed;
-  width: 260px;
+  width: 20%;
   right: 0px;
   top: 64px;
   height: 900px;
@@ -129,7 +129,7 @@
   }
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1023px) {
   .filterContainer{
     display: none;
   }

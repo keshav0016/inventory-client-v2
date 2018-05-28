@@ -14,7 +14,7 @@
     /* background-color: darkturquoise */
 /* } */
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1024px) {
     .assetTable{
         position: relative;
         width: 80%;
