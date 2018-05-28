@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader, Col, CardPanel} from 'react-materialize'
 import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
 // import DeleteAsset from './DeleteAsset'
@@ -50,6 +50,7 @@ class Assets extends Component{
         this.setSearch = this.setSearch.bind(this)
         this.setSearchAssetId = this.setSearchAssetId.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
+        this.renderDropdown = this.renderDropdown.bind(this)
     }
 
     handleList(){
@@ -180,6 +181,52 @@ class Assets extends Component{
         }
     }
 
+    renderDropdown(item){
+        return (
+        item.disabled === 1 ? <Dropdown trigger={
+            <Button ><Icon tiny>more_vert</Icon></Button>
+        }>
+        <Modal
+            style={{width : '70%'}}
+            actions={null}
+            trigger={<NavItem>Enable</NavItem> }>
+            {<EnableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />}
+        </Modal>
+        </Dropdown>
+        :<Dropdown trigger={
+            <Button><Icon tiny>more_vert</Icon></Button>
+        }>
+            <Modal
+                actions={null}
+                trigger={<NavItem>Edit</NavItem>}>
+                <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
+            </Modal>
+            <Modal
+                style={{width : '70%'}}
+                actions={null}
+                trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
+                {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
+            </Modal>
+            <Modal
+                actions={null}
+                trigger={item.current_status === 'Available' ? <NavItem>Assign</NavItem> : null}>
+                {item.current_status === 'Available' ? <AssignAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
+            </Modal>
+            <Modal
+                actions={null}
+                trigger={item.current_status === 'Assigned' ? <NavItem>Recover</NavItem> : null}>
+                {item.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
+            </Modal>
+            {item.current_status === 'Available' ? <NavItem href={ `/admin/assets/repair/${item.asset_id}`}>Repair</NavItem> : null}
+            <Modal
+                actions={null}
+                trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
+                {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
+            </Modal>
+            <NavItem href={`/admin/assets/history/${item.asset_id}`}>Details</NavItem>
+    </Dropdown>
+        )}
+
     render(){
         return(
             <div className="listComponent">
@@ -207,7 +254,7 @@ class Assets extends Component{
                 {this.state.loading ? <Preloader size='small' /> :
                 (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-                <Table className="assetTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table className="assetTable desktopView" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
                             <th data-field="asset_id">Asset ID</th>
@@ -238,59 +285,36 @@ class Assets extends Component{
                             <td className='extraFields'>{item.condition}</td>
                             <td className='extraFields'>{item.location}</td>
                             <td className='extraFields'>{item.category}</td>
-                            <td>{item.disabled === 1 ? 
-                                <Dropdown trigger={
-                                    <Button ><Icon tiny>more_vert</Icon></Button>
-                                }>
-                                <Modal
-                                    style={{width : '70%'}}
-                                    actions={null}
-                                    trigger={<NavItem>Enable</NavItem> }>
-                                    {<EnableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />}
-                                </Modal>
-                                </Dropdown>
-                                :<Dropdown trigger={
-                                    <Button><Icon tiny>more_vert</Icon></Button>
-                                }>
-                                    <Modal
-                                        actions={null}
-                                        trigger={<NavItem>Edit</NavItem>}>
-                                        <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
-                                    </Modal>
-                                    <Modal
-                                        style={{width : '70%'}}
-                                        actions={null}
-                                        trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
-                                        {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
-                                    </Modal>
-                                    <Modal
-                                        actions={null}
-                                        trigger={item.current_status === 'Available' ? <NavItem>Assign</NavItem> : null}>
-                                        {item.current_status === 'Available' ? <AssignAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
-                                    </Modal>
-                                    <Modal
-                                        actions={null}
-                                        trigger={item.current_status === 'Assigned' ? <NavItem>Recover</NavItem> : null}>
-                                        {item.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
-                                    </Modal>
-                                    {item.current_status === 'Available' ? <NavItem href={ `/admin/assets/repair/${item.asset_id}`}>Repair</NavItem> : null}
-                                    <Modal
-                                        actions={null}
-                                        trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
-                                        {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
-                                    </Modal>
-                                    <NavItem href={`/admin/assets/history/${item.asset_id}`}>Details</NavItem>
-                            </Dropdown>}</td>
+                            <td>{this.renderDropdown(item)}</td>
                             </tr>
                         })}
                     </tbody>
                     </Table>
+
+                    <Col s={12} m={12} className='mobileView'>
+                        {this.state.assetList.map((item, index) => {
+                            return <CardPanel key = {index}>
+                                        <div style={{ float : 'right'}}>
+                                            {this.renderDropdown(item)}
+                                        </div>
+                                        <div className='historyCards'  >
+                                            <div style={{float : 'left'}} >                                
+                                                <h6><b>Asset Id</b> : {item.asset_id}</h6>
+                                                <h6><b>Serial No.</b> : {item.serial_number}</h6>
+                                                <h6><b>Asset Name</b> : {item.asset_name}</h6>
+                                            </div>
+                                            <div style={{float : 'right'}}>
+                                                <h6><b>Asset Type</b> : {item.assetType}</h6>
+                                                <h6><b>Vendor</b> : {item.vendor}</h6>
+                                                <h6><b>Current Status</b> : {item.current_status}</h6>
+                                            </div>
+                                        </div>
+                                    </CardPanel>
+                        })}
+                    </Col>
                     </div> )}
-                    {/* <div className="fixed-action-btn">
-                        <a className="btn-floating btn-large red" href='/admin/assets/create'>
-                        <i className="large material-icons">add</i>
-                        </a>
-                    </div> */}
+                
+                
                 <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                 
                 <div style={{width : '100vw'}}>

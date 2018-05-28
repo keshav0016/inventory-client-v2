@@ -148,15 +148,19 @@
 }
 
 @media only screen and (max-width: 767px) {
-  .tabView{
+  .desktopView{
     display: none;
+  }
+
+  .dropdown-button{
+    padding: 0 0;
+    background-color: white;
+    color: black;
   }
 }
 
 @media only screen and (max-width: 540px) {
-  .dropdown-button{
-    padding: 0 0;
-  }
+  
   .historyCards{
     display: grid;
   }
@@ -172,4 +176,8 @@
   }
 }
 
-
+@media only screen and (min-width: 768px) {
+  .mobileView{
+    display: none;
+  }
+}
