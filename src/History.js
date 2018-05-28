@@ -84,14 +84,16 @@ class Assets extends Component{
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
+                <div className="splitModalButtons">
                     <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
+                </div>
                     <Row>
                         <Col s={12} m={12}>
                         <CardPanel className="z-depth-2" >
                             <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
-                            <div style = {{display : 'flex'}} >
-                                <div style={{float : 'left', width : '50%'}} >
+                            <div className="historyCards" >
+                                <div style={{float : 'left'}} >
                                     <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
                                     <h6><b>Serial Number</b> : {this.state.assetDetails.serial_number}</h6>
                                     <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
@@ -99,7 +101,7 @@ class Assets extends Component{
                                     <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
                                     <h6><b>Asset Type</b> : {this.state.assetDetails.assetType}</h6>
                                 </div>
-                                <div style={{float: 'right', width : '50%'}} >
+                                <div style={{float: 'right'}} >
                                     <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
                                     <h6><b>Description</b> : {this.state.assetDetails.description}</h6>
                                     <h6><b>Amount</b> : {this.state.assetDetails.amount}</h6>
@@ -114,14 +116,14 @@ class Assets extends Component{
                             <CardPanel className="z-depth-2" >
                                 {element.vendor ? <div>
                                     <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Repair</h5>
-                                    <div style={{display : 'flex'}} >
-                                        <div style={{float : 'left', width : '50%'}} >
+                                    <div className="historyCards" >
+                                        <div style={{float : 'left'}} >
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
                                             {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6><b>Expected Delivery</b> : { moment(element.expected_delivery).format('DD MMM YYYY') }</h6>}
                                             {element.to ? <h6><b>Repair Invoice</b> : {element.repair_invoice}</h6> : null}
                                             <h6><b>Vendor</b> : {element.vendor}</h6>
                                         </div>
-                                        <div style={{float : 'right', width : '50%'}} >
+                                        <div style={{float : 'right'}} >
                                             {element.to ? <h6><b>Amount</b> : {element.amount}</h6> : null}
                                             {element.to ? <h6><b>GST</b> : {element.gst}</h6> : null}
                                             {element.to ? <h6><b>Total</b> : {element.total}</h6> : null}
@@ -129,13 +131,13 @@ class Assets extends Component{
                                     </div>
                                 </div> : <div>
                                     <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Assigned</h5>
-                                    <div style={{display : 'flex'}} >
-                                        <div style={{float: 'left', width : '50%'}} >
+                                    <div className="historyCards" >
+                                        <div style={{float: 'left'}} >
                                             <h6><b>Employee Id</b> : {element.user_id}</h6>
                                             <h6><b>Employee Name</b> : {element.user!== null ? element.user.first_name +" "+ element.user.last_name: <b style={{color:'teal'}}>Employee has left</b>}</h6>
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
                                         </div>
-                                        <div style={{float: 'right', width : '50%'}} >
+                                        <div style={{float: 'right'}} >
                                             {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6><b>Expected Recovery</b> : { moment(element.expected_recovery).format('DD MMM YYYY') }</h6>}
                                             {element.ticekt_number ? <h6><b>Ticket Number</b> : {element.ticekt_number}</h6> : <h6><b>Assigned by admin</b></h6>}
                                         </div>

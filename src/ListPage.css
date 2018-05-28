@@ -95,6 +95,13 @@
   padding: 0
 }
 
+.historyCards{
+  display: flex;
+}
+
+.historyCards div{
+  width: 50%;
+}
 /* th {
   font-family: 'Roboto'; 
   font-weight: 400;
@@ -123,5 +130,12 @@
 @media only screen and (max-width: 540px) {
   .dropdown-button{
     padding: 0 0;
+  }
+  .historyCards{
+    display: grid;
+  }
+
+  .historyCards div{
+    width: 100%
   }
 }
