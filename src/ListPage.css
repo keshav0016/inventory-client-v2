@@ -118,12 +118,12 @@
 .listComponent {
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 56px;
+  margin-top: 60px;
 }
 
 @media only screen and (min-height: 824px) {
   .listComponent {
-    margin-top: 64px;
+    margin-top: 68px;
   }
 }
 
