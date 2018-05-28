@@ -84,11 +84,11 @@ class Assets extends Component{
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }
                 {this.state.assetDetails.current_status === 'Assigned' ? <h4 className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</h4> : null}
                 {this.state.assetDetails.current_status === 'Service' ? <h4 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h4> : null}
-                <div className="splitModalButtons">
+                <Row className="splitModalButtons">
                     <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
-                </div>
-                    <Row>
+                </Row>
+                    {/* <Row> */}
                         <Col s={12} m={12}>
                         <CardPanel className="z-depth-2" >
                             <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
@@ -146,7 +146,7 @@ class Assets extends Component{
                             </CardPanel>
                         </Col>
                     })}
-                    </Row>
+                    {/* </Row> */}
                 </div>} 
                 </div>: <h4 className = 'heading'>No such Asset</h4>}
             </div>

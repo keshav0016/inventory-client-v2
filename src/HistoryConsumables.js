@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Button, Modal, Preloader} from 'react-materialize'
+import {Col, CardPanel, Button, Modal, Preloader, Row} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import UpdateConsumablePurchase from './UpdateConsumablePurchase'
@@ -69,9 +69,11 @@ class HistoryConsumables extends Component{
    render(){
        return(
            <div className="listComponent" >
-            <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Consumable Details</h3>
+           <Row className='splitModalButtons'>
+                <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
+           </Row>
             {this.state.fetchHistory ? <div><Preloader size='small' /></div> : 
             (this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
