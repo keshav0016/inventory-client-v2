@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, SideNav} from 'react-materialize'
 import moment from 'moment';
 import {Link} from 'react-router-dom'
 import './Employee.css'
@@ -119,19 +119,25 @@ class EmployeeTicketsList extends Component{
     }
     
     render(){
+        let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list' style={{top : '64px'}}></Button>;
+        let filterPane = <div className="filterContainer" style={{ zIndex: 1 }}>
+            <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white' }} className="adminDashboardTitle">Status Filters</p>
+            <Row className="ticketListCheckbox">
+                <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick={this.setPendingChecked} checked={this.state.isPendingChecked} />
+                <Input name='filter' type='checkbox' value='red' label='Accepted' onClick={this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
+                <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} checked={this.state.isRejectedChecked} />
+            </Row>
+        </div>
+
         return(
             <div className="listComponent" >
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
-
-                <div className="filterContainer" style={{zIndex:1}}>
-                <p style={{fontFamily : 'Roboto', fontWeight : 300, color:'white'}} className="adminDashboardTitle">Status Filters</p>
-                    <Row className="ticketListCheckbox">
-                        <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick = {this.setPendingChecked} checked={this.state.isPendingChecked} />
-                        <Input name='filter' type='checkbox' value='red' label='Accepted' onClick = {this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
-                        <Input name='filter' type='checkbox' value='red' label='Rejected' onClick = {this.setRejectedChecked} checked={this.state.isRejectedChecked} />
-                    </Row>
-                </div>
+                {filterSlideButton}
+                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
+                    {filterPane}
+                </SideNav>
+                {filterPane}                
                
                <Tabs className='tabs' tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
