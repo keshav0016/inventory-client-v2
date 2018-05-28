@@ -201,8 +201,10 @@ class AssignConsumables extends Component {
                     <Input s={6} type="select" label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
-                <Button waves='light' onClick={this.checkForValidation}>Assign Consumable</Button>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className='splitModalButtons'>
+                    <Button waves='light' onClick={this.checkForValidation}>Assign</Button>
+                    <Button className="modal-close">Cancel</Button>
+                </div>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}
             </div>

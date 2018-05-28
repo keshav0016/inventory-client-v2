@@ -44,9 +44,9 @@ class EnableEmployee extends Component{
                     </b>
                     {`?`}
                 </p>
-                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <Button onClick = {this.enableEmployeeFromDb} style={{margin: '0 20px'}}>Enable</Button>
-                        <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                <div className="splitModalButtons">
+                        <Button onClick = {this.enableEmployeeFromDb}>Enable</Button>
+                        <Button className="modal-close">Cancel</Button>
                 </div>
             </div>
         )

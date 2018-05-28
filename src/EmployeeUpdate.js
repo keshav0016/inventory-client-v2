@@ -540,8 +540,10 @@ class EmployeeUpdate extends Component {
                         <option value='Software Test Development Engineer'>Software Test Development Engineer</option>
                     </Input> : null}
                 </Row>
-                <Button className='addbtn' onClick={this.handleCreate}>Edit</Button>
-                <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>                
+                <div className="splitModalButtons">
+                    <Button className='addbtn' onClick={this.handleCreate}>Edit</Button>
+                    <Button className="modal-close">Cancel</Button>                
+                </div>
             </div>
 
         );
