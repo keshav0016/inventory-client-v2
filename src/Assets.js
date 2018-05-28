@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader, Col, CardPanel} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader, Col, CardPanel, SideNav} from 'react-materialize'
 import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
 // import DeleteAsset from './DeleteAsset'
@@ -14,6 +14,7 @@ import $ from 'jquery'
 import './Employee.css'
 import './ListPage.css'
 import './Asset.css'
+import './MasterComponent.css'
 import { baseUrl } from './config';
 
 class Assets extends Component{
@@ -228,29 +229,35 @@ class Assets extends Component{
         )}
 
     render(){
+        let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list'></Button>;
+        let filterPane = <div className="filterContainer">
+        <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Current Status</p>
+        <div className="assetCheckbox">
+        <Input name='filter' type='checkbox' value='red' label='Available' onClick = {this.setAvailableChecked} checked={this.state.isAvailableChecked} />
+        <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssignedChecked} checked={this.state.isAssignedChecked} />
+        <Input name='filter' type='checkbox' value='red' label='Service'  onClick = {this.setServiceChecked} checked={this.state.isServiceChecked} />
+        </div>
+        <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Category</p>
+        <div className="assetCheckbox">
+        <Input name='filter' type='checkbox' value='red' label='Electronics' onClick = {this.setElectronicsChecked} checked={this.state.isElectronicsChecked} />
+        <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick = {this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
+        <Input name='filter' type='checkbox' value='red' label='Other' onClick = {this.setOtherChecked} checked={this.state.isOtherChecked} />
+        </div>
+    </div>       
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
+                {filterSlideButton}
+                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
+                    {filterPane}
+                </SideNav>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={12} m={6} l={4} placeholder="Search by Asset Name or Asset ID" onChange = {this.setSearch} />
                     {/* <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/> */}
                     {/* <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button> */}
                 </Row>
-                <div className="filterContainer" style={{height: '100vh', position: 'fixed'}}>
-                    <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Current Status</p>
-                    <div className="assetCheckbox">
-                    <Input name='filter' type='checkbox' value='red' label='Available' onClick = {this.setAvailableChecked} checked={this.state.isAvailableChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssignedChecked} checked={this.state.isAssignedChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Service'  onClick = {this.setServiceChecked} checked={this.state.isServiceChecked} />
-                    </div>
-                    <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Category</p>
-                    <div className="assetCheckbox">
-                    <Input name='filter' type='checkbox' value='red' label='Electronics' onClick = {this.setElectronicsChecked} checked={this.state.isElectronicsChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick = {this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
-                    <Input name='filter' type='checkbox' value='red' label='Other' onClick = {this.setOtherChecked} checked={this.state.isOtherChecked} />
-                    </div>
-                </div>
+                {filterPane}
                 {this.state.loading ? <Preloader size='small' /> :
                 (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
