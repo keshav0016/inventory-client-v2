@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input, Modal, Preloader} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, Modal, Preloader, Col, CardPanel} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 import './TicketsList.css'
@@ -36,6 +36,8 @@ class TicketsList extends Component{
         this.setCheckAll = this.setCheckAll.bind(this)
         this.handleExpected = this.handleExpected.bind(this)
         this.setReason = this.setReason.bind(this)
+        this.renderAcceptAssetTicket = this.renderAcceptAssetTicket.bind(this)
+        this.renderRejectAssetTicket = this.renderRejectAssetTicket.bind(this)
     }
 
     setPendingChecked(){
@@ -189,6 +191,55 @@ class TicketsList extends Component{
         })
     }
 
+    renderAcceptAssetTicket(ticket){
+        return ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button floating  icon='done'></Button></Link> : null 
+    }
+
+    renderRejectAssetTicket(ticket){
+        return ticket.status === 'Pending' && ticket.user !== null ? <Modal
+            actions={null}
+            trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
+            <Row>
+                <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for rejection</h4>
+                <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
+                <div className='splitModalButtons'>
+                    <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Submit</Button>
+                    <Button className="modal-close" >Cancel</Button>
+                </div>
+            </Row>
+        </Modal> : null
+    }
+
+    renderAcceptConsumableTicket(ticket){
+        return ticket.status === 'Pending' ? <Modal
+            actions={null}
+            trigger={<Button floating icon='done'></Button>}>
+            <Row>
+                <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for acceptance</h4>
+                <Input s={12} onChange={this.setReason} label="Remarks" />
+                <div className='splitModalButtons'>
+                    <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Submit</Button>
+                    <Button className="modal-close" >Cancel</Button>
+                </div>
+            </Row>
+        </Modal> : null 
+    }
+
+    renderRejectConsumableTicket(ticket){
+        return ticket.status === 'Pending' ? <Modal
+            actions={null}
+            trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
+            <Row>
+                <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for rejection</h4>
+                <Input s={12} onChange={this.setReason} label="Remarks" />
+                <div className='splitModalButtons'>
+                    <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Submit</Button>
+                    <Button className="modal-close" >Cancel</Button>
+                </div>
+            </Row>
+        </Modal> : null
+    }
+
     render(){
         return(
             <div className="listComponent" >
@@ -199,7 +250,7 @@ class TicketsList extends Component{
                         { this.state.handleListRequest ? <Preloader size='small' /> :
                         (this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
                         <div>
-                            <Table style={{marginLeft:'1%'}}  className="consumableTable">
+                            <Table style={{marginLeft:'1%'}}  className="consumableTable desktopView">
                                 <thead>
                                     <tr>
                                         <th data-field="ticket_number">Ticket No.</th>
@@ -220,24 +271,40 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button floating  icon='done'></Button></Link> : null }</td>
-                                        <td>{ticket.status === 'Pending' && ticket.user !== null ? <Modal
-                                            actions={null}
-                                            trigger={ <Button style={{backgroundColor:'#212121'}} floating icon='clear'></Button> }>
-                                            <Row>
-                                            <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>
-                                            <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                                            <div className='splitModalButtons'>
-                                                <Button  onClick={this.rejectTicket.bind(this,ticket.ticket_number)} >Submit</Button> 
-                                                <Button className="modal-close" >Cancel</Button>
-                                            </div>
-                                            </Row>
-                                        </Modal> : null}</td>
+                                        <td>{this.renderAcceptAssetTicket(ticket)}</td>
+                                        <td>{this.renderRejectAssetTicket(ticket)}</td>
                                         </tr>
                                         )
                                     })} 
                                 </tbody>
                             </Table>
+                            <Row>
+                                {
+                                    // Had to make a empty row, otherwise abrupt behaviour of the custom tabs
+                                }
+                            </Row>
+                            <Col s={12} m={12} className='mobileView'>
+                                        {this.state.assetsTicket.map((item, index) => {
+                                            return <CardPanel key={index}>
+                                                <div style={{ float: 'right' }}>
+                                                    {this.renderAcceptAssetTicket(item)}
+                                                    {this.renderRejectAssetTicket(item)}
+                                                </div>
+                                                <div className='historyCards'  >
+                                                    <div style={{ float: 'left' }} >
+                                                        <h6><b>Ticket No.</b> : {item.ticket_number}</h6>
+                                                        <h6><b>Employee</b> : {item.user !== null ? item.user.first_name + " " + item.user.last_name : <b style={{ color: 'teal' }}>Employee has left</b>}</h6>
+                                                        <h6><b>Request Date</b> : {moment(item.date).format('DD MMM YYYY')}</h6>
+                                                        <h6><b>Item</b> : {item.requested_asset_item ? `${item.requested_asset_item} ` : `${item.requested_consumable_item} `}</h6>
+                                                    </div>
+                                                    <div style={{ float: 'right' }}>
+                                                        <h6><b>Quantity</b> : {item.quantity}</h6>
+                                                        <h6><b>Status</b> : {item.status}</h6>
+                                                    </div>
+                                                </div>
+                                            </CardPanel>
+                                        })}
+                            </Col>
                             {this.state.assetPagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} /> : null}
                         </div>)}
                     </div>
@@ -246,7 +313,7 @@ class TicketsList extends Component{
                         {this.state.handleListRequest ? <Preloader size='small' /> :
                         (this.state.consumableTicket.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> : 
                         <div>
-                            <Table style={{marginLeft:'1%'}}  className="consumableTable">
+                            <Table style={{marginLeft:'1%'}}  className="consumableTable desktopView">
                                 <thead>
                                     <tr>
                                         <th data-field="ticket_number">Ticket No.</th>
@@ -267,35 +334,42 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{ticket.status === 'Pending' ? <Modal
-                                            actions={null}
-                                            trigger={ <Button floating icon='done'></Button> }>
-                                            <Row>
-                                            <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for acceptance</h4>
-                                            <Input s={12} onChange = {this.setReason} label="Remarks" />
-                                            <div className='splitModalButtons'>
-                                                <Button  onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
-                                                <Button className="modal-close" >Cancel</Button>
-                                            </div>
-                                            </Row>
-                                        </Modal> : null }</td>
-                                        <td>{ticket.status === 'Pending' ? <Modal
-                                            actions={null}
-                                            trigger={ <Button style={{backgroundColor:'#212121'}} floating icon='clear' ></Button> }>
-                                            <Row>
-                                            <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>
-                                            <Input s={12} onChange = {this.setReason} label="Remarks" />
-                                            <div className='splitModalButtons'>
-                                                <Button  onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
-                                                <Button className="modal-close" >Cancel</Button>
-                                            </div>
-                                            </Row>
-                                        </Modal> : null}</td>
+                                        <td>{this.renderAcceptConsumableTicket(ticket)}</td>
+                                        <td>{this.renderRejectConsumableTicket(ticket)}</td>
                                         </tr>
                                         )
                                     })}
                                 </tbody>
                             </Table>
+
+
+                            <Row>
+                                {
+                                    // Had to make a empty row, otherwise abrupt behaviour of the custom tabs
+                                }
+                            </Row>
+                            <Col s={12} m={12} className='mobileView'>
+                                        {this.state.consumableTicket.map((item, index) => {
+                                            return <CardPanel key={index}>
+                                                <div style={{ float: 'right' }}>
+                                                    {this.renderAcceptConsumableTicket(item)}
+                                                    {this.renderRejectConsumableTicket(item)}
+                                                </div>
+                                                <div className='historyCards'  >
+                                                    <div style={{ float: 'left' }} >
+                                                        <h6><b>Ticket No.</b> : {item.ticket_number}</h6>
+                                                        <h6><b>Employee</b> : {item.user !== null ? item.user.first_name + " " + item.user.last_name : <b style={{ color: 'teal' }}>Employee has left</b>}</h6>
+                                                        <h6><b>Request Date</b> : {moment(item.date).format('DD MMM YYYY')}</h6>
+                                                        <h6><b>Item</b> : {item.requested_asset_item ? `${item.requested_asset_item} ` : `${item.requested_consumable_item} `}</h6>
+                                                    </div>
+                                                    <div style={{ float: 'right' }}>
+                                                        <h6><b>Quantity</b> : {item.quantity}</h6>
+                                                        <h6><b>Status</b> : {item.status}</h6>
+                                                    </div>
+                                                </div>
+                                            </CardPanel>
+                                        })}
+                            </Col>
                             {this.state.consumablePagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} /> : null}
                         </div>)}
                     </div>
