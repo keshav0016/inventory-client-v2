@@ -227,8 +227,10 @@ class TicketsList extends Component{
                                             <Row>
                                             <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                                            <Button style={{margin: '0 20px'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)} >Submit</Button> 
-                                            <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                                            <div className='splitModalButtons'>
+                                                <Button  onClick={this.rejectTicket.bind(this,ticket.ticket_number)} >Submit</Button> 
+                                                <Button className="modal-close" >Cancel</Button>
+                                            </div>
                                             </Row>
                                         </Modal> : null}</td>
                                         </tr>
@@ -271,8 +273,10 @@ class TicketsList extends Component{
                                             <Row>
                                             <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for acceptance</h4>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" />
-                                            <Button style={{margin: '0 20px'}} onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
-                                            <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                                            <div className='splitModalButtons'>
+                                                <Button  onClick={this.acceptTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                                <Button className="modal-close" >Cancel</Button>
+                                            </div>
                                             </Row>
                                         </Modal> : null }</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
@@ -281,8 +285,10 @@ class TicketsList extends Component{
                                             <Row>
                                             <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" />
-                                            <Button style={{margin: '0 20px'}} onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
-                                            <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+                                            <div className='splitModalButtons'>
+                                                <Button  onClick={this.rejectTicket.bind(this,ticket.ticket_number)}>Submit</Button>
+                                                <Button className="modal-close" >Cancel</Button>
+                                            </div>
                                             </Row>
                                         </Modal> : null}</td>
                                         </tr>
@@ -347,7 +353,7 @@ class Tab extends Component {
         $(`.tabs div:nth-child(${this.props.index+1})`).addClass('activeTab')
     }
     render(){
-        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{width : '30%', paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
+        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{ paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
     }
 }
 
