@@ -1,18 +1,18 @@
 
 
-.filterContainer{
+/* .filterContainer{
     position: fixed;
     top: 64px;
     right: 0;
     padding: 10px;
-    padding-top: 64px;
+    padding-top: 64px; */
     /* width: 235px; */
     /* top:64px; */
     /* left: 83%; */
     /* text-decoration-style: black */
     /* height: 50%; */
     /* background-color: darkturquoise */
-}
+/* } */
 
 @media only screen and (min-width: 1200px) {
     .assetTable{

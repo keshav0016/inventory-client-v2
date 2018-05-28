@@ -68,7 +68,7 @@ class HistoryConsumables extends Component{
 
    render(){
        return(
-           <div style={{marginLeft : '30px',marginRight : '30px'}}>
+           <div className="listComponent" >
             <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Consumable Details</h3>

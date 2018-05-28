@@ -54,7 +54,7 @@ class EntireHistoryConsumables extends Component{
 
    render(){
        return(
-           <div style={{marginLeft: '30px',marginRight: '30px'}}>
+           <div className="listComponent">
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Consumable History</h3>
             {this.state.fetchHistory ? <Preloader size='small' /> : this.state.history.map((consumable, index) => {
