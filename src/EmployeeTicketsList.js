@@ -120,7 +120,7 @@ class EmployeeTicketsList extends Component{
     
     render(){
         return(
-            <div style={{marginLeft : '30px', marginRight : '30px'}}>
+            <div className="listComponent" >
                 <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
 

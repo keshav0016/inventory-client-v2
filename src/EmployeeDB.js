@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, Button, SideNav, Icon } from 'react-materialize'
+import { Button, SideNav, Icon, Row, Col } from 'react-materialize'
 import './MasterComponent.css';
 import {
     Route,
@@ -43,12 +43,12 @@ class EmployeeDB extends Component {
                                     this.state.redirect === 0 ? (
                                         <React.Fragment>
                                             <div>
-                                                <Navbar fixed className="white lighten-1" style={{ overflow: 'hidden' }}>
-                                                    <NavItem className='logo' href="/employee/Profile/">
-                                                        <img style={{ height: '64px', width: '64px', marginLeft: '65px' }} src={logo} alt="WAL Logo" />
-                                                    </NavItem>
-                                                    <NavItem href="/logout" className="masterComponentLogoutButton" style={{ fontFamily: 'Roboto', fontWeight: 400 }}><b>LOGOUT</b></NavItem>
-                                                </Navbar>
+                                            <Row>
+                                            <div fixed className="white lighten-1 z-depth-2 navbar col s12" style={{ overflow: 'hidden',position: 'fixed', width:'100%', zIndex: 997}}>
+                                                    <a href="/admin"><Col s={2} m={2} l={2} offset={"s5 m5 l6"} ><img className="navbarImage" src={logo} alt="WAL Logo" /></Col></a>
+                                                    <div><a href="/logout"><b className="masterComponentLogoutButton">LOGOUT</b></a></div>
+                                            </div>
+                                            </Row>
                                                 <SideNav className="masterComponentSideBar" trigger={<Button className="white lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>
                                                     <Link to={`/employee/Profile/`}>Profile</Link>
                                                     <Link to={`/employee/list`}>Tickets List</Link>
