@@ -43,9 +43,9 @@ class EmployeeDelete extends Component {
                 </b>
                 {`?`}
             </p>
-            <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button onClick = {this.handleDelete} style={{margin: '0 20px'}}>Disable</Button>
-                    <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
+            <div className="splitModalButtons">
+                    <Button onClick = {this.handleDelete} >Disable</Button>
+                    <Button className="modal-close" >Cancel</Button>
             </div>
         </div>
         )
