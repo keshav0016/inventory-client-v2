@@ -5,13 +5,25 @@
     transition-duration: 0.4s
 }
 
+/* .tabs {
+    position: relative;
+    width: 80%;
+    float: left;
+    right: 105px
+} */
+
 .tabs {
     position: relative;
-    width: 90%;
+    width:80%;
     float: left;
-    /* right: 105px */
 }
 
 .tabs > div{
-    width: 40%
+    width: 50%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .tabs{
+        width: 100vw
+    }
 }

@@ -202,10 +202,10 @@ class TicketsList extends Component{
                             <Table style={{marginLeft:'1%'}}  className="consumableTable">
                                 <thead>
                                     <tr>
-                                        <th data-field="ticket_number">Ticket Number</th>
-                                        <th data-field="employeeName">Employee Name</th>
-                                        <th data-field="date">Requested Date</th>
-                                        <th data-field="requestedItem">Requested Item</th>
+                                        <th data-field="ticket_number">Ticket No.</th>
+                                        <th data-field="employeeName">Employee</th>
+                                        <th data-field="date">Request Date</th>
+                                        <th data-field="requestedItem">Item</th>
                                         <th data-field="quantity">Quantity</th>
                                         <th data-field="status">Status</th>
                                     </tr>
@@ -216,14 +216,14 @@ class TicketsList extends Component{
                                         return (<tr key={ticket.ticket_number}>
                                         <td>{ticket.ticket_number}</td>
                                         <td>{ticket.user !== null? ticket.user.first_name + " " + ticket.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</td>
-                                        <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
+                                        <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button>Accept</Button></Link> : null }</td>
+                                        <td>{ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button floating  icon='done'></Button></Link> : null }</td>
                                         <td>{ticket.status === 'Pending' && ticket.user !== null ? <Modal
                                             actions={null}
-                                            trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
+                                            trigger={ <Button style={{backgroundColor:'#212121'}} floating icon='clear'></Button> }>
                                             <Row>
                                             <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
@@ -249,10 +249,10 @@ class TicketsList extends Component{
                             <Table style={{marginLeft:'1%'}}  className="consumableTable">
                                 <thead>
                                     <tr>
-                                        <th data-field="ticket_number">Ticket Number</th>
-                                        <th data-field="employeeName">Employee Name</th>
-                                        <th data-field="date">Requested Date</th>
-                                        <th data-field="requestedItem">Requested Item</th>
+                                        <th data-field="ticket_number">Ticket No.</th>
+                                        <th data-field="employeeName">Employee</th>
+                                        <th data-field="date">Request Date</th>
+                                        <th data-field="requestedItem">Item</th>
                                         <th data-field="quantity">Quantity</th>
                                         <th data-field="status">Status</th>
                                     </tr>
@@ -263,13 +263,13 @@ class TicketsList extends Component{
                                         return (<tr key={ticket.ticket_number}>
                                         <td>{ticket.ticket_number}</td>
                                         <td>{ticket.user !== null ? ticket.user.first_name + " " + ticket.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</td>
-                                        <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
+                                        <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
                                             actions={null}
-                                            trigger={ <Button>Accept</Button> }>
+                                            trigger={ <Button floating icon='done'></Button> }>
                                             <Row>
                                             <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for acceptance</h4>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" />
@@ -281,7 +281,7 @@ class TicketsList extends Component{
                                         </Modal> : null }</td>
                                         <td>{ticket.status === 'Pending' ? <Modal
                                             actions={null}
-                                            trigger={ <Button style={{backgroundColor:'#212121'}} >Reject</Button> }>
+                                            trigger={ <Button style={{backgroundColor:'#212121'}} floating icon='clear' ></Button> }>
                                             <Row>
                                             <h4 style={{fontFamily : 'Roboto', fontWeight : 250}}>Remarks for rejection</h4>
                                             <Input s={12} onChange = {this.setReason} label="Remarks" />
