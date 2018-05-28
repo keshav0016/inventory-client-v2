@@ -118,7 +118,7 @@ class Vendor extends Component{
                                         <div className='historyCards'  >
                                             <div style={{float : 'left'}} >
                                                 <h6><b>Id</b> : {item.id}</h6>
-                                                <h6><b>Vendro Name</b> : {item.name}</h6>           
+                                                <h6><b>Vendor Name</b> : {item.name}</h6>           
                                                 <h6><b>Address</b> : {item.address}</h6>                                                                                                     
                                             </div>
                                             <div style={{float : 'right'}}>
