@@ -135,7 +135,7 @@ class EmployeeTicketsList extends Component{
                
                <Tabs className='tabs' tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
-                        {this.state.AssetsticketsList.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> :
+                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen">No Asset Tickets</Row> :
                         <div>
                             <Table className="consumableTable" style={{fontFamily : 'Roboto', fontWeight : 350}} >
                                 <thead>
@@ -246,7 +246,7 @@ class Tab extends Component {
         $(`.tabs div:nth-child(${this.props.index+1})`).addClass('activeTab')
     }
     render(){
-        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{width : '30%', paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
+        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{ paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
     }
 }
 
