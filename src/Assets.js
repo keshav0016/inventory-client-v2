@@ -199,6 +199,7 @@ class Assets extends Component{
         }>
             <Modal
                 actions={null}
+                id='editAssetBottomPadding'
                 trigger={<NavItem>Edit</NavItem>}>
                 <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
