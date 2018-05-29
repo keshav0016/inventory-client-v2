@@ -294,7 +294,7 @@ class TicketsList extends Component{
                                     })} 
                                 </tbody>
                             </Table>
-                            <Row>
+                            <Row className='mobileView'>
                                 {
                                     // Had to make a empty row, otherwise abrupt behaviour of the custom tabs
                                 }
@@ -359,7 +359,7 @@ class TicketsList extends Component{
                             </Table>
 
 
-                            <Row>
+                            <Row className='mobileView'>
                                 {
                                     // Had to make a empty row, otherwise abrupt behaviour of the custom tabs
                                 }

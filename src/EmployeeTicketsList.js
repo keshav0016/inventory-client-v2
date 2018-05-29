@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input, SideNav} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, SideNav, Col, CardPanel} from 'react-materialize'
 import moment from 'moment';
 import {Link} from 'react-router-dom'
 import './Employee.css'
@@ -143,7 +143,7 @@ class EmployeeTicketsList extends Component{
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen">No Asset Tickets</Row> :
                         <div>
-                            <Table className="consumableTable" style={{fontFamily : 'Roboto', fontWeight : 350}} >
+                            <Table className="consumableTable desktopView" style={{fontFamily : 'Roboto', fontWeight : 350}} >
                                 <thead>
                                     <tr>
                                     <th data-field="ticket_number">Ticket Number</th>
@@ -168,6 +168,32 @@ class EmployeeTicketsList extends Component{
                                     })}
                                 </tbody>
                             </Table>
+                            
+                            <Row className='mobileView'>
+                                {
+                                    // Had to make a empty row, otherwise abrupt behaviour of the custom tabs
+                                }
+                            </Row>
+                            <Col s={12} m={12} className='mobileView'>
+                                        {this.state.AssetsticketsList.map((item, index) => {
+                                            return <CardPanel key={index}>
+                                                <div style={{ float: 'right' }}>
+                                                </div>
+                                                <div className='historyCards'  >
+                                                    <div style={{ float: 'left' }} >
+                                                        <h6><b>Ticket No.</b> : {item.ticket_number}</h6>
+                                                        <h6><b>Request Date</b> : {moment(item.date).format('DD MMM YYYY')}</h6>
+                                                        <h6><b>Item</b> : {item.requested_asset_item ? `${item.requested_asset_item} ` : `${item.requested_consumable_item} `}</h6>
+                                                    </div>
+                                                    <div style={{ float: 'right' }}>
+                                                        <h6><b>Quantity</b> : {item.quantity}</h6>
+                                                        <h6><b>Status</b> : {item.status}</h6>
+                                                        <h6><b>Remarks</b> : {item.status !== 'Pending' ? `${item.reason}` : '-'}</h6>                                                        
+                                                    </div>
+                                                </div>
+                                            </CardPanel>
+                                        })}
+                            </Col>
                             {this.state.assetPagination.totalPage > 1 ? <Pagination  items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} /> : null}
                         </div>}
                             <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
@@ -176,7 +202,7 @@ class EmployeeTicketsList extends Component{
                     <div className = "consumableTab">
                         {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> :
                         <div>
-                            <Table style={{marginLeft:'1%'}}  className="consumableTable">
+                            <Table className="consumableTable desktopView">
                                 <thead>
                                     <tr>
                                     <th data-field="ticket_number">Ticket Number</th>
@@ -204,6 +230,32 @@ class EmployeeTicketsList extends Component{
                                     })}
                                 </tbody>
                             </Table>
+                                    
+                            <Row className='mobileView'>
+                                {
+                                    // Had to make a empty row, otherwise abrupt behaviour of the custom tabs
+                                }
+                            </Row>
+                            <Col s={12} m={12} className='mobileView'>
+                                        {this.state.ConsumablesticketsList.map((item, index) => {
+                                            return <CardPanel key={index}>
+                                                <div style={{ float: 'right' }}>
+                                                </div>
+                                                <div className='historyCards'  >
+                                                    <div style={{ float: 'left' }} >
+                                                        <h6><b>Ticket No.</b> : {item.ticket_number}</h6>
+                                                        <h6><b>Request Date</b> : {moment(item.date).format('DD MMM YYYY')}</h6>
+                                                        <h6><b>Item</b> : {item.requested_asset_item ? `${item.requested_asset_item} ` : `${item.requested_consumable_item} `}</h6>
+                                                    </div>
+                                                    <div style={{ float: 'right' }}>
+                                                        <h6><b>Quantity</b> : {item.quantity}</h6>
+                                                        <h6><b>Status</b> : {item.status}</h6>
+                                                        <h6><b>Remarks</b> : {item.status !== 'Pending' ? `${item.reason}` : '-'}</h6>                                                        
+                                                    </div>
+                                                </div>
+                                            </CardPanel>
+                                        })}
+                            </Col>
                             {this.state.consumablePagination.totalPage > 1 ? <Pagination items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} /> : null}
                         </div>}
                             <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
