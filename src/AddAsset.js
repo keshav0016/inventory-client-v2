@@ -672,6 +672,7 @@ class AddAsset extends Component{
                                         <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                                     </Modal>
                                 </Col>
+                                <Row className='breakLine'></Row>
                                 <Col s={6} l=''>
                                     <Modal
                                     actions={null}
@@ -683,7 +684,7 @@ class AddAsset extends Component{
                             <Row></Row>
                         <div className="splitModalButtons"> 
                             <Row>
-                                <Col offset={'l6 m6'}>
+                                <Col offset={'l6'}>
                                     <Link to='/admin/assets'><Button>Cancel</Button></Link>                            
                                     <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
                                 </Col>
