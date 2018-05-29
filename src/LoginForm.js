@@ -151,7 +151,7 @@ class LoginForm extends Component {
           <Col s={2} offset={"m2"}>
             <img height='200px' width='200px' s={2} alt="wal" src={logo}/>
           </Col>
-          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: 300, color : 'black'}} className="flow-text" >Inventory Management System </h4>
+          <h4 style={{marginTop: 0, textAlign: 'center', fontWeight: 300, color : 'black'}}>Inventory Management System </h4>
         </div> 
         <div>
         <Row>
