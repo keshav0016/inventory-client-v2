@@ -520,7 +520,9 @@ class AddConsumables extends Component{
                         trigger={<Button style={{marginLeft:'1%'}} id="triggerAddVendor">Add Vendor</Button>}>
                         <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                     </Modal> 
-                    <Button style={{position:'absolute', right:'3%', bottom:'3%'}} waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
+                    <div className="splitModalButtons" >
+                        <Button style={{float: 'right'}} waves='light' type = "submit" name = "action" onClick={this.checkForValidation}>Add Consumable</Button>
+                    </div>
                     {this.state.addConsumableRequest ? this.addConsumable () : null}
                     {this.state.vendorListRequest ? this.handleVendorList() : null}
                     {this.state.getConsumableName ? this.handleConsumableNameList() : null}
