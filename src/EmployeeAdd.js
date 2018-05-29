@@ -397,7 +397,9 @@ class EmployeeAdd extends Component {
             <option value='Software Test Development Engineer'>Software Test Development Engineer</option>
           </Input> : null}
         </Row>
+        <div className="splitModalButtons" >
           <Button className='addbtn' onClick={this.handleCreate}>Add</Button>
+        </div>
       </div>
 
     );
