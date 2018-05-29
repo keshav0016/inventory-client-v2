@@ -398,7 +398,9 @@ class EmployeeAdd extends Component {
           </Input> : null}
         </Row>
         <div className="splitModalButtons" >
+        <Row>
           <Button className='addbtn' onClick={this.handleCreate}>Add</Button>
+        </Row>
         </div>
       </div>
 
