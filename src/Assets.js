@@ -229,20 +229,20 @@ class Assets extends Component{
         )}
 
     render(){
-        let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list'></Button>;
+        let filterSlideButton = <Button floating large className='teal filterContainerSliderButton' waves='light' icon='filter_list'></Button>;
         let filterPane = <div className="filterContainer">
-        <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Current Status</p>
-        <div className="assetCheckbox">
-        <Input name='filter' type='checkbox' value='red' label='Available' onClick = {this.setAvailableChecked} checked={this.state.isAvailableChecked} />
-        <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssignedChecked} checked={this.state.isAssignedChecked} />
-        <Input name='filter' type='checkbox' value='red' label='Service'  onClick = {this.setServiceChecked} checked={this.state.isServiceChecked} />
-        </div>
-        <p style={{fontFamily: 'Roboto',fontWeight: 300, color:'white', fontSize:'20px', marginLeft:'30px'}}>Filter by Category</p>
-        <div className="assetCheckbox">
-        <Input name='filter' type='checkbox' value='red' label='Electronics' onClick = {this.setElectronicsChecked} checked={this.state.isElectronicsChecked} />
-        <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick = {this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
-        <Input name='filter' type='checkbox' value='red' label='Other' onClick = {this.setOtherChecked} checked={this.state.isOtherChecked} />
-        </div>
+            <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white', fontSize: '20px', marginLeft: '30px' }}>Filter by Current Status</p>
+            <div className="assetCheckbox">
+                <Input name='filter' type='checkbox' value='red' label='Available' onClick={this.setAvailableChecked} checked={this.state.isAvailableChecked} />
+                <Input name='filter' type='checkbox' value='red' label='Assigned' onClick={this.setAssignedChecked} checked={this.state.isAssignedChecked} />
+                <Input name='filter' type='checkbox' value='red' label='Service' onClick={this.setServiceChecked} checked={this.state.isServiceChecked} />
+            </div>
+            <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white', fontSize: '20px', marginLeft: '30px' }}>Filter by Category</p>
+            <div className="assetCheckbox">
+                <Input name='filter' type='checkbox' value='red' label='Electronics' onClick={this.setElectronicsChecked} checked={this.state.isElectronicsChecked} />
+                <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick={this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
+                <Input name='filter' type='checkbox' value='red' label='Other' onClick={this.setOtherChecked} checked={this.state.isOtherChecked} />
+            </div>
     </div>       
         return(
             <div className="listComponent">
