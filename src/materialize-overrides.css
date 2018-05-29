@@ -167,3 +167,10 @@ div.input-field.consumable-empty-error.col label.active:after
         overflow-y: scroll;
     }
 }
+
+@media only screen and (max-width : 600px) {
+    .model, .open{
+        overflow-y: scroll;
+        bottom : 10%;
+    }
+}
