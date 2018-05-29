@@ -342,18 +342,18 @@ class EmployeeAdd extends Component {
       <div className="listComponent" >
       <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Employee</h3>
         <Row>
-        <Input  onChange={this.handleUser_Id}s={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
-          <Input  onChange={this.handleFirstname}s={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
-          <Input  onChange={this.handleLastname} s={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
-          <Input type="number" min='0'label="Age" value={this.state.age.value} onChange={this.handleAge}s={6} error={this.state.age.showError ? this.state.age.error : null}/>
-          <Input s={6} type='select'  label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
+        <Input  onChange={this.handleUser_Id}s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
+          <Input  onChange={this.handleFirstname}s={12} m={6} l={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
+          <Input  onChange={this.handleLastname} s={12} m={6} l={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
+          <Input type="number" min='0'label="Age" value={this.state.age.value} onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
+          <Input s={12} m={6} l={6} type='select'  label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
             <option value='select'>select</option>
             <option value='Male'>Male</option>
             <option value='Female'>Female</option>
             <option value='Other'>Other</option>
           </Input>
-          <Input s={6}  label="Email*" type = "email" value={this.state.email.value} onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null}/>
-          <Input s={6} type='select' label="Department" defaultValue='HR'onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
+          <Input s={12} m={6} l={6}  label="Email*" type = "email" value={this.state.email.value} onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null}/>
+          <Input s={12} m={6} l={6} type='select' label="Department" defaultValue='HR'onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
             <option value='select'>select</option>
             <option value='HR'>HR</option>
             <option value='Delivery'>Delivery</option>
@@ -362,7 +362,7 @@ class EmployeeAdd extends Component {
             <option value='Developer/Designer'>Developer/Designer</option>
             <option value='Testing'>Testing</option>
           </Input>
-          {this.state.department.value === 'Developer/Designer' ? <Input s={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+          {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='Team Lead'>Team Lead</option>
             <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>
@@ -372,26 +372,26 @@ class EmployeeAdd extends Component {
             
             
           </Input> : null}
-          {this.state.department.value === 'HR' ? <Input s={6} type='select'  label="Designation" defaultValue='Select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+          {this.state.department.value === 'HR' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='Select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='Sr.HR Manager'>Sr.HR Manager</option>
             <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
           </Input> : null }
-          {this.state.department.value === 'Delivery' ? <Input s={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+          {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='Delivery Manager'>Delivery Manager</option>
             <option value='Sr.Project Manager'>Sr.Project Manager</option>
             <option value='Project Manager'>Project Manager</option>
           </Input> : null }
-          {this.state.department.value === 'Finance/Accounting' ?<Input s={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
+          {this.state.department.value === 'Finance/Accounting' ?<Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
           <option value='select'>select</option>
           <option value='Finance Director'>Finance Director</option></Input>: null }
-          {this.state.department.value === 'Pre sales' ? <Input s={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+          {this.state.department.value === 'Pre sales' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='Lead Presales'>Lead Presales</option>
             <option value='Presales Associate'>Presales Associate</option>
           </Input> : null }
-          {this.state.department.value === 'Testing' ? <Input s={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+          {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='QA Lead'>QA Lead</option>
             <option value='Software Test Development Engineer'>Software Test Development Engineer</option>
