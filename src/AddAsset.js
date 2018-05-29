@@ -673,7 +673,7 @@ class AddAsset extends Component{
                                     </Modal>
                                 </Col>
                                 <Row className='breakLine'></Row>
-                                <Col s={6} l=''>
+                                <Col s={6}>
                                     <Modal
                                     actions={null}
                                     trigger={<Button>Add Asset Type</Button>}>
