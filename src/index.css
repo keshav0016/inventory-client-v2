@@ -12,7 +12,7 @@ body {
   padding-right: 260px;
 }
 
-tbody{
+tbody, .card-panel{
   word-break: break-all;
 }
 
