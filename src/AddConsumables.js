@@ -473,8 +473,8 @@ class AddConsumables extends Component{
             <div className="listComponent" >
                 <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
                 <Row>
-                    {/* <Input autoFocus s={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/> */}
-                        <Autocomplete s={6}
+                    {/* <Input autoFocus s={12} m={6} l={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/> */}
+                        <Autocomplete s={12} m={6} l={6}
                             className={this.state.name.showError ? 'consumable-empty-error': null}
                             title=' '
                             autoFocus
@@ -485,22 +485,22 @@ class AddConsumables extends Component{
                             onChange = {this.setConsumableName}
                             value={this.state.name.value}
                         />
-                    <Input s={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    <Input s={12} m={6} l={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
                     <br/>
                     <br/>
                     <br/>
-                    <Input s={6} label="Purchased Quantity"  type="number" min={0} value={this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null}/>
-                    <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null}/>
+                    <Input s={12} m={6} l={6} label="Purchased Quantity"  type="number" min={0} value={this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null}/>
+                    <Input s={12} m={6} l={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null}/>
                     <br/>
                     <br/>
                     <br/>
-                    <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
-                    <Input s={6} label="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null}/>
+                    <Input s={12} m={6} l={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
+                    <Input s={12} m={6} l={6} label="Discount %" type='number' min={0} value = {this.state.discount.value} onChange = {this.setDiscount} error={this.state.discount.showError ? this.state.discount.error : null}/>
                     <br/>
                     <br/>
                     <br/>
                     <Row>
-                        <Autocomplete
+                        <Autocomplete s={12} m={6} l={6}
                             className={this.state.vendor_name.showError ? 'no-vendor-error' : (this.state.vendor_name.availabilityError ? 'no-vendor-available' : 'no-error')}
                             title=' '
                             placeholder='Vendor'

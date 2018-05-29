@@ -198,8 +198,8 @@ class AssignConsumables extends Component {
             <div style={{padding: '20px'}} className="no-footer">
                 <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign Consumable</h5>            
                 <Row>
-                    <Input s={6} type="select" label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
-                    <Input s={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
+                    <Input s={12} m={6} l={6} type="select" label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
+                    <Input s={12} m={6} l={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <div className='splitModalButtons'>
                     <Button waves='light' onClick={this.checkForValidation}>Assign</Button>

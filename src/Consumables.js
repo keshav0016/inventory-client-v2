@@ -264,20 +264,20 @@ class Consumables extends Component{
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List of Consumables</h3>
+                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}} className="flow-text" >List of Consumables</h3>
                 {filterSlideButton}
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                     {filterPane}
                 </SideNav>
                 <Row>
-                <Input s={6} l={3} m={5} type='select' onChange={this.sortBy}>
+                <Input s={12} l={4} m={5} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
                     <option value='quantityAsc'>Quantity [Low - High]</option>
                     <option value='quantityDesc'>Quantity [High - Low]</option>
                     <option value='purchasedAsc'>Purchase Date [New - Old]</option>
                     <option value='purchasedDesc'>Purchase Date [Old - New]</option> 
                 </Input>
-                <Input s={6} l={4} m={5} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
+                <Input s={12} l={4} m={5} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
                 </Row>
                 {this.state.handleListRequest ? <Preloader size='small' /> : (this.state.consumableList.length === 0 
                     ?

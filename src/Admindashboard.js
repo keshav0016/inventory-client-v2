@@ -64,7 +64,7 @@ class Admindashboard extends Component {
                         <Card className="z-depth-0">
                             <h3 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Dashboard</h3 >
                             {this.state.handleListRequest ? <Preloader size='small' /> :<div>
-                                <Card className="z-depth-2 teal-text" title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                <Card className="z-depth-2 teal-text flow-text" title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
                                     <Icon>developer_board</Icon>
                                     <p>Pending Requests: {this.state.consumablesPendingCount}</p>
                                     <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p>

@@ -103,7 +103,7 @@ class UpdateAssetType extends Component{
     render(){
         return(
             <div style={{marginLeft: '30px',marginRight: '30px'}}>
-                <h5 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update the {this.props.assetType}'s Max Request</h5>
+                <h5 style={{fontFamily: 'Roboto',fontWeight: 250}} className="flow-text" >Update the {this.props.assetType}'s Max Request</h5>
                 <Row>
                     {/* <Input  value={this.state.assetType} onChange={this.setAssetType} s={6} label="Asset Type" />       */}
                     <Input  value={this.state.maxRequest.value} onChange={this.setMaxRequest} l={6} s={8} m={6} label="Max Request" type="number" error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />

@@ -152,10 +152,10 @@ class AddAssetType extends Component{
     render(){
         return(
             <div style={{marginLeft: '30px',marginRight: '30px'}}>
-                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Asset Type</h3 >
+                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}} className="flow-text" >Add Asset Type</h3 >
                 <Row>
-                    <Input s={6} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
-                    <Input s={6} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
+                    <Input s={12} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
+                    <Input s={12} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                 <div className="splitModalButtons">
                     <Button onClick={this.checkForValidation} >Submit</Button>
