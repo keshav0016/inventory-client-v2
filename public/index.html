@@ -30,21 +30,15 @@
 <body>
   <!-- Import jQuery before materialize.js -->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <!-- And then your bundled js -->
   <!-- <script src="path/to/your/bundle.js"></script> -->
-  <!-- <script>
-    $(document).ready(function(){
-      $('select').change(function(){
-        $('select option:selected').each(function(){
-          if($(this).attr('value')==='Assets'){
-            $('#list').show()
-          }
-        });
-      }).change();
-    }) -->
+  <script>
+    $(document).ready(function() {
+     $('select').material_select();
+    });
 
-    <!-- // function yesnoCheck(that){
+    // function yesnoCheck(that){
     //   if(that.value === 'Assets'){
     //     document.getElementById('ifYes').style.display = 'block';
     //   }
