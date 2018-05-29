@@ -80,6 +80,7 @@ class EmployeesList extends Component {
       }>
         <Modal
           actions={null}
+          id='editAssetBottomPadding'
           trigger={<NavItem >Edit</NavItem >}>
           <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
