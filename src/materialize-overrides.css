@@ -166,4 +166,18 @@ div.input-field.consumable-empty-error.col label.active:after
     .modal{
         overflow-y: scroll;
     }
+
+    .modal-overlay{
+        top : 0
+    }
+}
+
+@media only screen and (max-width : 600px) {
+    .model, .open{
+        overflow-y: scroll;
+    }
+
+    #editAssetBottomPadding{
+        bottom: 10%
+    }
 }
