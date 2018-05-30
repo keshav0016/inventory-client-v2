@@ -118,6 +118,7 @@ class AcceptAssetTicket extends Component{
             this.setState({
                 handleListRequest:true
                 ,reason : ''
+                ,acceptTicketRequest : false
             })
             if(res.data.message === 'Requested Quantity greater than available'){
                 window.Materialize.toast('Requested Quantity greater than available', 4000)
