@@ -195,7 +195,7 @@ class AssignConsumables extends Component {
 
     render() {
         return (
-            <div style={{padding: '20px'}} className="no-footer">
+            <div className="no-footer">
                 <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Assign Consumable</h5>            
                 <Row>
                     <Input s={12} m={6} l={6} type="select" label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>

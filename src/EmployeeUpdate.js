@@ -482,7 +482,7 @@ class EmployeeUpdate extends Component {
     }
     render() {
         var addEmployeeForm = (
-            <div className="no-footer" style={{padding: '20px'}}>
+            <div className="no-footer">
                 <h5 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Edit Employee</h5>
                 <Row>
                     <Input onChange={this.handleUser_Id} s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />

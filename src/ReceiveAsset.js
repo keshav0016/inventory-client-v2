@@ -282,7 +282,7 @@ class ReceiveAsset extends Component{
 
     render(){
         return(
-            <div style={{padding: '20px'}} className="no-footer">
+            <div className="no-footer">
             <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Receive Asset</h5>
                 <Row>
                     {this.state.repairInfo.asset ? <div>

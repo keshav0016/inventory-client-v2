@@ -218,7 +218,7 @@ class AssignAsset extends Component{
 
     render(){
         return(
-            <div style={{padding: '20px'}} className="no-footer">
+            <div className="no-footer">
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
                 <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Assign Asset</h5>
                 <Row>

@@ -366,7 +366,7 @@ class UpdateAsset extends Component {
 
     render() {
         return (
-            <div className="no-footer" style={{padding: '20px'}}>
+            <div className="no-footer">
             <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Update Asset</h5> 
                 <Row>
                     <Input s={12} m={3} l={3} label="Serial Number *" defaultValue={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />

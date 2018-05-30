@@ -197,7 +197,7 @@ class TicketsList extends Component{
         return ticket.status === 'Pending' && ticket.user !== null ? <Modal
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
-            <Row>
+            <Row className="no-footer" >
                 <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for rejection</h4>
                 <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
                 <div className='splitModalButtons'>
@@ -212,7 +212,7 @@ class TicketsList extends Component{
         return ticket.status === 'Pending' ? <Modal
             actions={null}
             trigger={<Button floating icon='done'></Button>}>
-            <Row>
+            <Row className="no-footer" >
                 <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for acceptance</h4>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
@@ -227,7 +227,7 @@ class TicketsList extends Component{
         return ticket.status === 'Pending' ? <Modal
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
-            <Row>
+            <Row className="no-footer" >
                 <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for rejection</h4>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>

@@ -179,7 +179,7 @@ class VendorUpdate extends Component{
     render() {
         
         return (           
-            <div className="no-footer" style={{padding: '20px'}}>           
+            <div className="no-footer" >           
                 <Row>
                     <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update Vendor</h3 >
                     {/* <Input  value={this.state.id.value} onChange={this.handleId}s={12} m={6} l={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />       */}
