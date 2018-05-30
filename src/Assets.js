@@ -188,7 +188,6 @@ class Assets extends Component{
             <Button ><Icon tiny>more_vert</Icon></Button>
         }>
         <Modal
-            style={{width : '70%'}}
             actions={null}
             trigger={<NavItem>Enable</NavItem> }>
             {<EnableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />}
@@ -198,7 +197,6 @@ class Assets extends Component{
             <Button><Icon tiny>more_vert</Icon></Button>
         }>
             <Modal
-                style={{width : '70%'}}
                 actions={null}
                 trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
                 {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
