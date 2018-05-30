@@ -71,7 +71,7 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h5 style={{fontFamily : 'Roboto', fontWeight : 250}} className='flow-text' >Do you really want to recover this asset?</h5>
+                <h5 className='flow-text title' >Do you really want to recover this asset?</h5>
                 {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <div>
                     <p><b>Asset Name</b> : {this.state.recoverInfo.asset.asset_name}<br /><b>Assigned Employee</b> : {this.state.recoverInfo.user.first_name} {this.state.recoverInfo.user.last_name}</p>
                 </div> : null}

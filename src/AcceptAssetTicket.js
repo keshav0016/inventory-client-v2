@@ -153,7 +153,7 @@ class AcceptAssetTicket extends Component{
         return(
             <div className="listComponent" >
             <Row>
-                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Accept Asset</h3>
+                <h3 className='title'>Accept Asset</h3>
                 <Row>
                     <Input s={11} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
                     <Input s={11} onChange = {this.setReason} label="Remarks" value={this.state.reason} />

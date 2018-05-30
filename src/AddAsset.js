@@ -626,7 +626,7 @@ class AddAsset extends Component{
     render(){
         var addAssetForm=(
             <div className="listComponent" >
-                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Asset</h3>
+                <h3 className='title'>Add Asset</h3>
                 <Row>
                     <Input s={12} m={6} l={6} label="Serial Number *" value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
                     <Input s={12} m={6} l={6} label="Asset Name *" value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>

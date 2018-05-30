@@ -248,7 +248,7 @@ class Assets extends Component{
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List Of Assets</h3>
+                <h3 className='title'>List Of Assets</h3>
                 {filterSlideButton}
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                     {filterPane}

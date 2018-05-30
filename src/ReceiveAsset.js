@@ -283,7 +283,7 @@ class ReceiveAsset extends Component{
     render(){
         return(
             <div className="no-footer">
-            <h5 style={{fontFamily : 'Roboto', fontWeight : 250}}>Receive Asset</h5>
+            <h5 className="title">Receive Asset</h5>
                 <Row>
                     {this.state.repairInfo.asset ? <div>
                         <h6><b>Asset Name</b> : {this.state.repairInfo.asset.asset_name}</h6>

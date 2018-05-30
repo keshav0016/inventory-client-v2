@@ -70,7 +70,7 @@ class HistoryConsumables extends Component{
        return(
            <div className="listComponent" >
             {this.state.fetchHistory ? this.getHistory() : null}
-            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Consumable Details</h3>
+            <h3 className="title">Consumable Details</h3>
            <Row className='splitModalButtons'>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
            </Row>

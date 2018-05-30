@@ -276,7 +276,7 @@ class RepairAsset extends Component{
     render(){
         var repairAssetForm = (
             <div className="listComponent" >
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Repair Asset</h3>
+                <h3 className="title">Repair Asset</h3>
                 <br /><br />
                 {this.state.loading ?  <Preloader size='small' /> : 
                     (this.state.assetDetails ? 

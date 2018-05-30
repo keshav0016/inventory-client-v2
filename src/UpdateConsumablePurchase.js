@@ -256,7 +256,7 @@ class UpdateConsumablePurchase extends Component{
     render(){
         return(
             <div className="no-footer" >
-                <h3 style={{fontWeight : 250, fontFamily : 'Roboto'}}>Update Purchase</h3>
+                <h5 className="title">Update Purchase</h5>
                 <Row>
                     <p><b>Consumable: </b>{this.props.consumable.consumable.name}</p>
                     <p><b>Vendor: </b>{this.props.consumable.vendor_name}</p>

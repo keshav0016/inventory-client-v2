@@ -152,7 +152,7 @@ class AddAssetType extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}} >Add Asset Type</h3 >
+                <h5 className='title' >Add Asset Type</h5 >
                 <Row>
                     <Input s={12} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
                     <Input s={12} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />

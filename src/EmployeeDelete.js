@@ -36,7 +36,7 @@ class EmployeeDelete extends Component {
     render(){
         return(
             <div className="no-footer">
-            <h5>Disable Employee</h5>                            
+            <h5 className="title">Disable Employee</h5>                            
             <p>{`Do you really want to disable `}
                 <b style={{color:'teal'}}>
                     {`${this.props.user.first_name} `}

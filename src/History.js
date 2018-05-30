@@ -78,7 +78,7 @@ class Assets extends Component{
         return(
             <div  className="listComponent" >
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Asset Details</h3>
+                <h3 className="title">Asset Details</h3>
                 {this.state.assetDetails ? <div>
                 {this.state.handleListRequest ? <Preloader size='small' /> :<div>
                 {this.state.assetDetails.current_status === 'Available' ? <h4 className = "heading">Current Status : {this.state.assetDetails.current_status}</h4> : null }

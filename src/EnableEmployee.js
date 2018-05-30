@@ -37,7 +37,7 @@ class EnableEmployee extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Enable Asset</h5>                            
+                <h5 className="title">Enable Asset</h5>                            
                 <p>{`Do you really want to enable `}
                     <b style={{color:'teal'}}>
                         {`${this.props.user.first_name} `}

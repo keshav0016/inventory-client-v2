@@ -20,7 +20,7 @@ class EmployeeHistory extends Component {
         return (
            
         <div className="listComponent" >
-            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Items held by Employee</h3>
+            <h3 className="title">Items held by Employee</h3>
             {this.state.loading ? <Preloader size='small' /> :
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
             <div>
