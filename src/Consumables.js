@@ -155,6 +155,7 @@ class Consumables extends Component{
         this.setState({
             handleListRequest : true
         })
+        $(".modal-overlay").click()
     }
 
     setPage(e){
