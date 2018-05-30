@@ -180,8 +180,4 @@ div.input-field.consumable-empty-error.col label.active:after
     #editAssetBottomPadding{
         bottom: 10%
     }
-
-    .modal .modal-content{
-        padding: 0px
-    }
 }
