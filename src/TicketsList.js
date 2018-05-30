@@ -198,7 +198,7 @@ class TicketsList extends Component{
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
             <Row className="no-footer" >
-                <h4 className="title">Remarks for rejection</h4>
+                <h5 className="title">Remarks for rejection</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Submit</Button>
@@ -213,7 +213,7 @@ class TicketsList extends Component{
             actions={null}
             trigger={<Button floating icon='done'></Button>}>
             <Row className="no-footer" >
-                <h4 className="title">Remarks for acceptance</h4>
+                <h5 className="title">Remarks for acceptance</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Submit</Button>
@@ -228,7 +228,7 @@ class TicketsList extends Component{
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
             <Row className="no-footer" >
-                <h4 className="title">Remarks for rejection</h4>
+                <h5 className="title">Remarks for rejection</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Submit</Button>
