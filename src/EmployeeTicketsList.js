@@ -131,7 +131,7 @@ class EmployeeTicketsList extends Component{
 
         return(
             <div className="listComponent" >
-                <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Employee Tickets List</h3>
+                <h3 className="title">Employee Tickets List</h3>
                 {this.state.handleListRequest ? this.handleList() : null}
                 {filterSlideButton}
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>

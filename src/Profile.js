@@ -54,7 +54,7 @@ class Profile extends Component{
     render(){
         return (
             <div className="listComponent" >
-            <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>Profile</h3>
+            <h3 className="title">Profile</h3>
             <h6>Name : <b style={{color : 'teal'}}>{this.state.profile.first_name} {this.state.profile.last_name}</b></h6>
             <h6>No of Assets held : <b style={{color : 'teal'}}>{this.state.assetsCount}</b></h6>
             <h6>No of Consumables held : <b style={{color: 'teal'}}>{this.state.consumablesCount}</b> </h6>

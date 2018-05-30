@@ -265,7 +265,7 @@ class Consumables extends Component{
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
-                <h3 style={{fontFamily : 'Roboto', fontWeight : 250}}>List of Consumables</h3>
+                <h3 className="title">List of Consumables</h3>
                 {filterSlideButton}
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                     {filterPane}

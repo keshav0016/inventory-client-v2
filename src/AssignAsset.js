@@ -218,9 +218,9 @@ class AssignAsset extends Component{
 
     render(){
         return(
-            <div style={{padding: '20px'}} className="no-footer">
+            <div className="no-footer">
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
-                <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Assign Asset</h5>
+                <h5 className="title">Assign Asset</h5>
                 <Row>
                     <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />

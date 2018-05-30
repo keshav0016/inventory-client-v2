@@ -197,8 +197,8 @@ class TicketsList extends Component{
         return ticket.status === 'Pending' && ticket.user !== null ? <Modal
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
-            <Row>
-                <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for rejection</h4>
+            <Row className="no-footer" >
+                <h5 className="title">Remarks for rejection</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Submit</Button>
@@ -212,8 +212,8 @@ class TicketsList extends Component{
         return ticket.status === 'Pending' ? <Modal
             actions={null}
             trigger={<Button floating icon='done'></Button>}>
-            <Row>
-                <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for acceptance</h4>
+            <Row className="no-footer" >
+                <h5 className="title">Remarks for acceptance</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Submit</Button>
@@ -227,8 +227,8 @@ class TicketsList extends Component{
         return ticket.status === 'Pending' ? <Modal
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
-            <Row>
-                <h4 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Remarks for rejection</h4>
+            <Row className="no-footer" >
+                <h5 className="title">Remarks for rejection</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Submit</Button>
@@ -253,7 +253,7 @@ class TicketsList extends Component{
         
         return(
             <div className="listComponent" >
-                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Ticket list</h3>
+                <h3 className="title">Ticket list</h3>
                 {filterSlideButton}
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                     {filterPane}

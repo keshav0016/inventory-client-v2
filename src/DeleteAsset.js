@@ -54,8 +54,8 @@ class DeleteAsset extends Component{
 
     render(){
         return(
-            <div style={{padding: '20px'}} className="no-footer">
-                <h5 style={{fontFamily: 'Roboto', fontWeight: 300}}>Delete Asset</h5>                            
+            <div className="no-footer">
+                <h5 className="title">Delete Asset</h5>                            
                 <p>{`Do you really want to delete `}
                     <b style={{color:'teal'}}>
                         {`${this.props.asset.asset_name} `}

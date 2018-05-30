@@ -174,7 +174,7 @@ class Tickets extends Component{
    render(){
         return(
             <div className="listComponent" >
-                <h3 className='heading' style={{fontFamily : 'Roboto', fontWeight : 250}}>Ticket Request Form</h3>
+                <h3 className="title">Ticket Request Form</h3>
                 <div className ='RequestForm'>
                 <Row>
                     <Input s={6} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>

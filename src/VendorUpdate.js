@@ -179,9 +179,9 @@ class VendorUpdate extends Component{
     render() {
         
         return (           
-            <div className="no-footer" style={{padding: '20px'}}>           
+            <div className="no-footer" >           
                 <Row>
-                    <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Update Vendor</h3 >
+                    <h5 className="title">Update Vendor</h5 >
                     {/* <Input  value={this.state.id.value} onChange={this.handleId}s={12} m={6} l={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />       */}
                     <Input  value={this.state.name.value} onChange={this.handleName}s={12} m={6} l={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
                     <Input  value={this.state.contact.value} onChange={this.handleContact}s={12} m={6} l={6} label="Contact" error={this.state.contact.showError ? this.state.contact.error : null} />    

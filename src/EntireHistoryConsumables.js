@@ -64,7 +64,7 @@ class EntireHistoryConsumables extends Component{
        return(
            <div className="listComponent">
             {this.state.fetchHistory ? this.getHistory() : null}
-            <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Consumable History</h3>
+            <h3 className="title">Consumable History</h3>
             {filterSlideButton}
             <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                 {filterPane}

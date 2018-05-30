@@ -62,7 +62,7 @@ class Admindashboard extends Component {
                 <Row>
                     <Col s={12} m={10} l={9} offset={'m1 l3'}>
                         <Card className="z-depth-0">
-                            <h3 style={{ fontFamily: 'Roboto', fontWeight: 250 }}>Dashboard</h3 >
+                            <h3  className='title'>Dashboard</h3 >
                             {this.state.handleListRequest ? <Preloader size='small' /> :<div>
                                 <Card className="z-depth-2 teal-text" title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
                                     <Icon>developer_board</Icon>

@@ -53,8 +53,8 @@ class DeleteConsumable extends Component{
 
     render(){
         return(
-            <div style={{padding: '20px'}} className="no-footer">
-                <h5>Delete Consumable</h5>                            
+            <div className="no-footer">
+                <h5 className="title">Delete Consumable</h5>                            
                 <p>{`Do you really want to disable `}
                     <b style={{color:'teal'}}>
                         {`${this.props.consumable.name} `}

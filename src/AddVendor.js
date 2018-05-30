@@ -178,9 +178,9 @@ class AddVendor extends Component{
 
     render(){
         return(
-            <div className="no-footer" style={{padding: '20px'}}>
+            <div className="no-footer">
                 <Row>
-                    <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Vendor</h3 >
+                    <h5 className='title'>Add Vendor</h5 >
                     <Input s={12} m={6} l={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
                     <Input s={12} m={6} l={6} label="Contact" value = {this.state.contact.value} onChange ={this.setContact} error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
                     <Input s={12} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />

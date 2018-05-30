@@ -97,7 +97,7 @@ class EmployeesList extends Component {
     return (
       <div className="listComponent">
         {this.state.handleListRequest ? this.handleList() : null}
-        <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>List of Employees</h3>
+        <h3 className="title">List of Employees</h3>
         {this.state.loading ? <Preloader size='small' /> :
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>

@@ -340,7 +340,7 @@ class EmployeeAdd extends Component {
   render() {
     var addEmployeeForm = (
       <div className="listComponent" >
-      <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Employee</h3>
+      <h3 className="title">Add Employee</h3>
         <Row>
         <Input  onChange={this.handleUser_Id}s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
           <Input  onChange={this.handleFirstname}s={12} m={6} l={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>

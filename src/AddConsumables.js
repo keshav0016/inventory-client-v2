@@ -471,7 +471,7 @@ class AddConsumables extends Component{
 
         var addConsumableForm=(
             <div className="listComponent" >
-                <h3 style={{fontFamily: 'Roboto',fontWeight: 250}}>Add Consumable</h3>
+                <h3  className='title'>Add Consumable</h3>
                 <Row>
                     {/* <Input autoFocus s={12} m={6} l={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/> */}
                         <Autocomplete s={12} m={6} l={6}

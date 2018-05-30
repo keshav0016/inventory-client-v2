@@ -74,10 +74,10 @@ class AssetType extends Component{
 
     render(){
         return(
-            <div style={{marginLeft: '30px',marginRight: '30px'}}>
+            <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
-                <h3 style={{fontFamily: 'Roboto', fontWeight: 250}} >Asset Types</h3 >
+                <h3 className='title' >Asset Types</h3 >
                 { this.state.handleListRequest ? <Preloader size='small' /> : ( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
                 <Table className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
