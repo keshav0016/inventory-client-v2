@@ -80,14 +80,14 @@ class EmployeesList extends Component {
       }>
         <Modal
           actions={null}
-          id='editAssetBottomPadding'
-          trigger={<NavItem >Edit</NavItem >}>
-          <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
+          trigger={<NavItem >Disable</NavItem >}>
+          <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
         <Modal
           actions={null}
-          trigger={<NavItem >Disable</NavItem >}>
-          <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
+          id='editAssetBottomPadding'
+          trigger={<NavItem >Edit</NavItem >}>
+          <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
         <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
       </Dropdown>

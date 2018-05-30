@@ -198,16 +198,16 @@ class Assets extends Component{
             <Button><Icon tiny>more_vert</Icon></Button>
         }>
             <Modal
-                actions={null}
-                id='editAssetBottomPadding'
-                trigger={<NavItem>Edit</NavItem>}>
-                <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
-            </Modal>
-            <Modal
                 style={{width : '70%'}}
                 actions={null}
                 trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
                 {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
+            </Modal>
+            <Modal
+                actions={null}
+                id='editAssetBottomPadding'
+                trigger={<NavItem>Edit</NavItem>}>
+                <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
             <Modal
                 actions={null}

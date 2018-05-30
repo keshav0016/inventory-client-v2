@@ -79,13 +79,11 @@ class TicketsList extends Component{
         this.setAssetPage(1)
         this.setConsumablePage(1)
         if(!this.state.checkAll){
-            $('input:checkbox:not(:checked)').click()
             this.setState({
                 checkAll : true
             })
         }
         else{
-            $('input:checkbox').click()
             this.setState({
                 checkAll : false
             })
@@ -115,7 +113,7 @@ class TicketsList extends Component{
     handleList(){
         axios({
             method : 'get',
-            url : `${baseUrl}/admin/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
+            url : this.state.checkAll ? `${baseUrl}/admin/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}&Accepted=true&Pending=true&Rejected=true` :`${baseUrl}/admin/ticket/list?assetPage=${this.state.assetPage}&consumablePage=${this.state.consumablePage}&Accepted=${this.state.isAcceptedChecked}&Pending=${this.state.isPendingChecked}&Rejected=${this.state.isRejectedChecked}`,
             withCredentials : true
         })
         .then(res => {
@@ -244,11 +242,11 @@ class TicketsList extends Component{
         let filterPane = <div className="filterContainer">
             <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white' }} className="adminDashboardTitle">Status Filters</p>
             <Row className="ticketListCheckbox">
-                <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick={this.setPendingChecked} checked={this.state.isPendingChecked} />
-                <Input name='filter' type='checkbox' value='red' label='Accepted' onClick={this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
-                <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} checked={this.state.isRejectedChecked} />
-                <Input name='filter' type='checkbox' value='red' label='Select All' onClick={this.setCheckAll} checked={this.state.checkAll} />
-            </Row>
+                <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick={this.setPendingChecked} checked={this.state.isPendingChecked} disabled={this.state.checkAll}/>
+                <Input name='filter' type='checkbox' value='red' label='Accepted' onClick={this.setAcceptedChecked} disabled={this.state.checkAll} />
+                <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} disabled={this.state.checkAll} />
+                <Input name='filter' type='checkbox' value='red' label='Select All' onClick={this.setCheckAll}  />
+           </Row>
         </div>
 
         let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list' style={{top : '64px'}}></Button>;
@@ -261,10 +259,10 @@ class TicketsList extends Component{
                     {filterPane}
                 </SideNav>
                 {this.state.handleListRequest ? this.handleList() : null}
+                { this.state.handleListRequest ? <Preloader size='small' /> :                
                 <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
-                        { this.state.handleListRequest ? <Preloader size='small' /> :
-                        (this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
+                        {this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
                         <div>
                             <Table style={{marginLeft:'1%'}}  className="consumableTable desktopView">
                                 <thead>
@@ -322,12 +320,11 @@ class TicketsList extends Component{
                                         })}
                             </Col>
                             {this.state.assetPagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} /> : null}
-                        </div>)}
+                        </div>}
                     </div>
 
                     <div className = "consumableTab">
-                        {this.state.handleListRequest ? <Preloader size='small' /> :
-                        (this.state.consumableTicket.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> : 
+                        {this.state.consumableTicket.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> : 
                         <div>
                             <Table style={{marginLeft:'1%'}}  className="consumableTable desktopView">
                                 <thead>
@@ -387,10 +384,10 @@ class TicketsList extends Component{
                                         })}
                             </Col>
                             {this.state.consumablePagination.totalPage > 1 ? <Pagination className='pagination filterPadding' items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} /> : null}
-                        </div>)}
+                        </div>}
                     </div>
 
-                </Tabs>
+                </Tabs>}
                 {filterPane}
             </div>
         )

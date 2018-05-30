@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input, SideNav, Col, CardPanel} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, SideNav, Col, CardPanel, Preloader} from 'react-materialize'
 import moment from 'moment';
 import {Link} from 'react-router-dom'
 import './Employee.css'
@@ -138,7 +138,7 @@ class EmployeeTicketsList extends Component{
                     {filterPane}
                 </SideNav>
                 {filterPane}                
-               
+                { this.state.handleListRequest ? <Preloader size='small' /> :                               
                <Tabs className='tabs' tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen">No Asset Tickets</Row> :
@@ -260,7 +260,7 @@ class EmployeeTicketsList extends Component{
                         </div>}
                             <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
-                </Tabs>
+                </Tabs>}
             </div>
         )
     }
