@@ -9,7 +9,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel } from 'react-materialize'
+import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input } from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
 
@@ -20,6 +20,7 @@ class EmployeesList extends Component {
       data: [],
       pagination:{totalPage : 1, currentPage : 1},
       page: 1,
+      search: '',
       handleListRequest : true,
       loading : true,
 
@@ -29,6 +30,7 @@ class EmployeesList extends Component {
     this.setPage = this.setPage.bind(this)
     this.setHandleListRequest = this.setHandleListRequest.bind(this)
     this.renderDropdown = this.renderDropdown.bind(this)
+    this.setSearch = this.setSearch.bind(this)
   }
 
  
@@ -43,7 +45,7 @@ class EmployeesList extends Component {
   handleList(){
     axios({
       method: 'get',
-      url: `${baseUrl}/employees/list?page=${this.state.page}`,
+      url: `${baseUrl}/employees/list?page=${this.state.page}&search=${this.state.search}`,
       withCredentials: true
     })
     .then((res) => {
@@ -93,11 +95,21 @@ class EmployeesList extends Component {
       </Dropdown>
   }
   
+  setSearch(e){
+    this.setState({
+        search : e.target.value,
+        handleListRequest : true
+        
+    })
+    this.setPage(1)
+}
+
   render() {
     return (
       <div className="listComponent">
         {this.state.handleListRequest ? this.handleList() : null}
         <h3 className="title">List of Employees</h3>
+        <Input s={12} m={6} l={4} placeholder="Search by Employee ID or Employee Name" onChange = {this.setSearch} />
         {this.state.loading ? <Preloader size='small' /> :
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
