@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button} from 'react-materialize'
+import {Row, Input, Button, Preloader} from 'react-materialize'
 import {Redirect} from 'react-router-dom'
 import './Employee.css'
 import { baseUrl } from './config';
@@ -19,6 +19,7 @@ class AcceptAssetTicket extends Component{
                 error: '',
                 showError: false
             }
+            ,loading : true
             ,redirect : false
             ,acceptTicketRequest : false
         }
@@ -70,6 +71,7 @@ class AcceptAssetTicket extends Component{
         .then(res => {
             this.setState({
                 availableAssetsList : res.data.assets
+                ,loading : false
             })
         })
         .catch(error => {
@@ -161,6 +163,7 @@ class AcceptAssetTicket extends Component{
                     <Input s={11} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} >{this.availableAssetsDropdown()}</Input>
                 </Row>
                 <br />
+                {this.state.loading ? <Preloader size='small'/> :
                 <Row>
                     {this.state.currentAssetSelected.serial_number ? 
                     <div style={{marginLeft : '1%'}}>
@@ -170,7 +173,7 @@ class AcceptAssetTicket extends Component{
                         <h5>Invoice number : {this.state.currentAssetSelected.invoice_number}</h5>
                         <h5>Vendor : {this.state.currentAssetSelected.vendor}</h5>
                     </div> : (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : null)}
-                </Row>
+                </Row>}
                 <Button style={{position : 'fixed', right : '3%', bottom : '3%'}} onClick={this.checkForValidation}>Submit</Button>
                 {this.state.redirect ? <Redirect push to="/admin/tickets"/> : null}
                 {this.state.acceptTicketRequest ? this.acceptTicket() : null}
