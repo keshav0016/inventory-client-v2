@@ -268,8 +268,10 @@ class UpdateConsumablePurchase extends Component{
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
-                    <Button style={{margin: '0 20px'}} onClick={this.checkForValidation}>Submit</Button>
-                    <Button style={{margin: '0 20px'}} className="modal-close">Cancel</Button>
+                <div className="splitModalButtons">
+                    <Button  onClick={this.checkForValidation}>Submit</Button>
+                    <Button  className="modal-close">Cancel</Button>
+                </div>
                     {this.state.updateConsumable ? this.updateConsumablePurchase() : null}
                     {this.state.calculateTotal ? this.calculateTotal() : null}
             </div>  
