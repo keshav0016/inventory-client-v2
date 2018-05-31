@@ -177,7 +177,7 @@ div.input-field.consumable-empty-error.col label.active:after
         overflow-y: scroll;
     }
 
-    #editAssetBottomPadding{
+    .editAssetBottomPadding{
         bottom: 10%
     }
 }
