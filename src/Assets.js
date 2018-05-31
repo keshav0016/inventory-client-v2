@@ -203,7 +203,7 @@ class Assets extends Component{
             </Modal>
             <Modal
                 actions={null}
-                id='editAssetBottomPadding'
+                className='editAssetBottomPadding'
                 trigger={<NavItem>Edit</NavItem>}>
                 <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
