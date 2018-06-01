@@ -321,7 +321,7 @@ class Assets extends Component{
                     </div> )}
                 
                 
-                <Link to={{ pathname : '/admin/assets/create'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
+                <Link to={{ pathname : '/admin/assets/create'}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>
                 
                     {this.state.assetList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
             </div>

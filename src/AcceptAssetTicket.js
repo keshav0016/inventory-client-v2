@@ -11,14 +11,19 @@ class AcceptAssetTicket extends Component{
         super(props)
         this.state = {
             availableAssetsList : []
-            ,currentAssetSelected : {}
-            ,currentAssetSelectedError : false
+            ,currentAssetSelected : {
+                value : {}
+                ,error : ''
+                ,showError : false
+            }
+            // ,currentAssetSelectedError : false
             ,reason : ''
             ,expected_recovery : {
                 value: '',
                 error: '',
                 showError: false
             }
+            ,unAuth : false
             ,loading : true
             ,redirect : false
             ,acceptTicketRequest : false
@@ -48,14 +53,25 @@ class AcceptAssetTicket extends Component{
             })
         }
 
-        if(!this.state.currentAssetSelected.serial_number){
-            window.Materialize.toast('Select any asset ID if available', 4000)
+        if(!this.state.currentAssetSelected.value.serial_number){
+            // window.Materialize.toast('Select any asset ID if available', 4000)
             this.setState({
-                currentAssetSelectedError : true
+                currentAssetSelected : Object.assign(this.state.currentAssetSelected, {
+                    error : 'Select any asset ID if available'
+                    ,showError : true
+                })
             })
         }
-        
-        if(!this.state.expected_recovery.showError && !this.state.currentAssetSelectedError){
+        else{
+            this.setState({
+                currentAssetSelected : Object.assign(this.state.currentAssetSelected, {
+                    error : ''
+                    ,showError : false
+                })
+            })
+        }
+
+        if(!this.state.expected_recovery.showError && !this.state.currentAssetSelected.showError){
             this.setState({
                 acceptTicketRequest : true
             })
@@ -69,10 +85,18 @@ class AcceptAssetTicket extends Component{
             ,withCredentials : true
         })
         .then(res => {
-            this.setState({
-                availableAssetsList : res.data.assets
-                ,loading : false
-            })
+            if(res.data.error === 'Ticket is not in Pending state'){
+                this.setState({
+                    unAuth : true
+                    ,loading : false
+                })
+            }
+            else{
+                this.setState({
+                    availableAssetsList : res.data.assets
+                    ,loading : false
+                })
+            }
         })
         .catch(error => {
             console.error(error)
@@ -97,8 +121,10 @@ class AcceptAssetTicket extends Component{
         this.state.availableAssetsList.forEach(asset => {
             if(asset.asset_id === Number(e.target.value)){
                 this.setState({
-                    currentAssetSelected : asset
-                    ,currentAssetSelectedError : false
+                    currentAssetSelected : Object.assign(this.state.currentAssetSelected, {
+                        value : asset
+                    })
+                    // ,currentAssetSelectedError : false
                 })
             }
         })
@@ -112,7 +138,7 @@ class AcceptAssetTicket extends Component{
                 ticket_number:this.props.match.params.ticket,
                 expected_recovery : this.state.expected_recovery.value
                 ,reason : this.state.reason
-                ,requested_asset_id : this.state.currentAssetSelected.asset_id
+                ,requested_asset_id : this.state.currentAssetSelected.value.asset_id
             },
             withCredentials:true
         })
@@ -157,24 +183,35 @@ class AcceptAssetTicket extends Component{
             <div className="listComponent" >
             <Row>
                 <h3 className='title'>Accept Asset</h3>
-                <Row>
-                    <Input s={11} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
-                    <Input s={11} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
-                    <Input s={11} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} >{this.availableAssetsDropdown()}</Input>
-                </Row>
-                <br />
                 {this.state.loading ? <Preloader size='small'/> :
-                <Row>
-                    {this.state.currentAssetSelected.serial_number ? 
-                    <div style={{marginLeft : '1%'}}>
-                        <h5>Asset name : {this.state.currentAssetSelected.asset_name}</h5>
-                        <h5>Serial Number : {this.state.currentAssetSelected.serial_number}</h5>
-                        <h5>Description : {this.state.currentAssetSelected.description}</h5>
-                        <h5>Invoice number : {this.state.currentAssetSelected.invoice_number}</h5>
-                        <h5>Vendor : {this.state.currentAssetSelected.vendor}</h5>
-                    </div> : (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : null)}
-                </Row>}
-                <Button style={{position : 'fixed', right : '3%', bottom : '3%'}} onClick={this.checkForValidation}>Submit</Button>
+                (this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
+                <React.Fragment>
+                    <Row>
+                        <Row>
+                            <Input s={12} m={6} l={5} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
+                        </Row>
+                        <Row>
+                            <Input s={12} m={6} l={5} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                        </Row>
+                        <Row>
+                            <Input s={12} m={6} l={5} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>{this.availableAssetsDropdown()}</Input>
+                        </Row>
+                    </Row>
+                    <br />
+                    <Row>
+                        {this.state.currentAssetSelected.serial_number ? 
+                        <div>
+                            <h5>Asset name : {this.state.currentAssetSelected.asset_name}</h5>
+                            <h5>Serial Number : {this.state.currentAssetSelected.serial_number}</h5>
+                            <h5>Description : {this.state.currentAssetSelected.description}</h5>
+                            <h5>Invoice number : {this.state.currentAssetSelected.invoice_number}</h5>
+                            <h5>Vendor : {this.state.currentAssetSelected.vendor}</h5>
+                        </div> : (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : null)}
+                    </Row>
+                    <div className='splitModalButtons'>
+                        <Button onClick={this.checkForValidation}>Submit</Button>
+                    </div>
+                </React.Fragment>)}
                 {this.state.redirect ? <Redirect push to="/admin/tickets"/> : null}
                 {this.state.acceptTicketRequest ? this.acceptTicket() : null}
             </Row>
