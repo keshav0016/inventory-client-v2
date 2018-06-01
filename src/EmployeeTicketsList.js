@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Pagination, Row, Input, SideNav, Col, CardPanel, Preloader} from 'react-materialize'
+import {Table, Button, Pagination, Row, Input, SideNav, Col, CardPanel, Preloader, Modal, NavItem} from 'react-materialize'
 import moment from 'moment';
 import {Link} from 'react-router-dom'
 import './Employee.css'
@@ -8,6 +8,7 @@ import './ListPage.css'
 import $ from 'jquery'
 import './TicketsList.css'
 import { baseUrl } from './config';
+import Tickets from './Tickets'
 
 
 class EmployeeTicketsList extends Component{
@@ -259,7 +260,12 @@ class EmployeeTicketsList extends Component{
                         </div>}
                     </div>
                 </Tabs>}
-                <Link to={{ pathname : '/employee/RequestTicket'}}><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add' /></Link>                
+                <Modal 
+                    actions={null}
+                    trigger={<NavItem><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add'></Button></NavItem>}>
+                    <Tickets />
+                </Modal>
+                {/* <Link to={{ pathname : '/employee/RequestTicket'}}><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add' /></Link>                 */}
             </div>
         )
     }

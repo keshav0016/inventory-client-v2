@@ -154,6 +154,7 @@ class Tickets extends Component{
             this.setState({
                 requestResource : true
             })
+            $(".modal-overlay").click()
         }
 
 
