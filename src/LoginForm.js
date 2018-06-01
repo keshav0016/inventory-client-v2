@@ -132,7 +132,7 @@ class LoginForm extends Component {
         }
       })
       .catch(() => {
-        window.Materialize.toast('wrong password', 3000)
+        window.Materialize.toast('Wrong credentials', 3000)
 
       })
   }

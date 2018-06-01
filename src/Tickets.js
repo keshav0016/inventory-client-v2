@@ -15,10 +15,18 @@ class Tickets extends Component{
             availableItems: [],
             user_id: this.props.user_id,
             requestResource: false,
-            quantity:'',
+            quantity:{
+                value : ''
+                ,error : ''
+                ,showError : false
+            },
             assets: '',
             item_type: 'Select',
-            item:'Select',
+            item: {
+                value : 'Select'
+                ,error : ''
+                ,showError : false
+            },
             disableItems : true
         }
         this.requestQuantity = this.requestQuantity.bind(this)
@@ -29,24 +37,29 @@ class Tickets extends Component{
         this.itemTypeDropdown = this.itemTypeDropdown.bind(this)
     }
     requestResourceType(e){
-        if(e.target.value <= this.state.assets){
+        if(e.target.value !== 'Select'){
             this.setState({
-                item:this.state.availableItems[e.target.value]
+                item: Object.assign(this.state.item, {
+                    value : e.target.value
+                    ,showError : false
+                })
             })
-            $('label').addClass('active')
         }
         else{
             this.setState({
-                item:this.state.availableItems[e.target.value]
+                item: Object.assign(this.state.item, {
+                    value : 'Select'
+                })
             })
-            $('label').addClass('active')
         }
     }
 
     requestQuantity(e){
         if(this.state.item_type === 'consumables'){
             this.setState({
-                quantity:e.target.value
+                quantity: Object.assign(this.state.quantity, {
+                    value : e.target.value
+                })
             })
         }
     }
@@ -61,7 +74,10 @@ class Tickets extends Component{
             if(e.target.value === 'assets'){
                 this.setState({
                     item_type : 'assets',
-                    quantity : 1,
+                    quantity : Object.assign(this.state.quantity, {
+                        value : 1
+                        ,showError : false
+                    }),
                     disableItems : false
                 })
             }
@@ -80,37 +96,69 @@ class Tickets extends Component{
         itemArr.push(<option key='Select' value='Select'>Select</option>)
         if(this.state.item_type === 'assets'){
             for(let index = 0; index <= this.state.assets; index++){
-                itemArr.push(<option key={index} value={index}>{this.state.availableItems[index]}</option>)
+                itemArr.push(<option key={index} value={this.state.availableItems[index]}>{this.state.availableItems[index]}</option>)
             }
         }
         else{
             for(let index = this.state.assets + 1; index < this.state.availableItems.length; index++){
-                itemArr.push(<option key={index} value={index}>{this.state.availableItems[index]}</option>)
+                itemArr.push(<option key={index} value={this.state.availableItems[index]}>{this.state.availableItems[index]}</option>)
             }
         }
         return itemArr
     }
 
     checkForValidation(){
-        if(Number(this.state.quantity) < 0){
-            window.Materialize.toast(`Requested quantity cannot be negative`, 4000)
+        if(!this.state.quantity.value){
+            this.setState({
+                quantity : Object.assign(this.state.quantity, {
+                    error : 'Quantity is required',
+                    showError : true
+                })
+            })
         }
         else{
-            if(Number(this.state.quantity) === 0){
-                window.Materialize.toast(`Requested quantity cannot be zero`, 4000)
+            if(Number(this.state.quantity.value) < 1){
+                this.setState({
+                    quantity : Object.assign(this.state.quantity, {
+                        error : 'Quantity cannot be less than 1',
+                        showError : true
+                    })
+                })
             }
             else{
-                if(this.state.item === 'Select'){
-                    window.Materialize.toast(`Please select any item`, 4000)
-                }
-                else{
-                    this.setState({
-                        requestResource : true 
+                this.setState({
+                    quantity : Object.assign(this.state.quantity, {
+                        showError : false
                     })
-                }
+                })
             }
         }
+                
+        if (this.state.item.value === 'Select') {
+            this.setState({
+                item : Object.assign(this.state.item, {
+                    error : 'Item is required'
+                    ,showError: true
+                })
+            })
+        }
+        else{
+            this.setState({
+                item : Object.assign(this.state.item, {
+                    showError: false
+                })
+            })
+        }
+        
+        if(!this.state.quantity.showError && !this.state.item.showError){
+            this.setState({
+                requestResource : true
+            })
+        }
+
+
     }
+    
 
     requestUser(e){
         this.setState({
@@ -127,18 +175,23 @@ class Tickets extends Component{
             data:{
                 user_id:this.state.user_id,
                 date:Date.now(),
-                item:this.state.item,
+                item: this.state.item.value,
                 item_type:this.state.item_type,
-                quantity:this.state.quantity,
+                quantity:this.state.quantity.value,
             },
             withCredentials:true
         })
         .then(res => {
             this.setState({
                 requestResource:false,
-                quantity:'',
-                item_type: 'Select',
+                quantity : Object.assign(this.state.quantity, {
+                    value : ''
+                }),
+                item: Object.assign(this.state.item, {
+                    value : 'Select'
+                }),
                 disableItems : true
+                ,item_type : 'Select'
             })
             if(res.data.message){
                 window.Materialize.toast(res.data.message, 4000)
@@ -174,7 +227,7 @@ class Tickets extends Component{
    render(){
         return(
             <div className="listComponent" >
-                <h3 className="title">Ticket Request Form</h3>
+                <h3 className="title">Ticket Request</h3>
                 <div className ='RequestForm'>
                 <Row>
                     <Input s={6} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>
@@ -184,12 +237,12 @@ class Tickets extends Component{
                     </Input>
                 </Row>
                 <Row>
-                    <Input s={6} label='Items'type='select' onChange={this.requestResourceType} disabled={this.state.disableItems}>
+                    <Input s={6} label='Items' type='select' value={this.state.disableItems ? 'Select' : this.state.item.value} onChange={this.requestResourceType} disabled={this.state.disableItems} error={this.state.item.showError ? this.state.item.error : null}>
                         {this.itemDropdown()}
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={6} label=' ' placeholder="Quantity" type="number" min={0} value = {this.state.quantity} onChange = {this.requestQuantity} disabled={this.state.disableItems}/>
+                    <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity.value} onChange = {this.requestQuantity} disabled={this.state.disableItems} error={this.state.quantity.showError ? this.state.quantity.error : null}/>
                 </Row>
                 <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation} disabled={this.state.disableItems}>Request</Button>
                 {this.state.requestResource ? this.confirmRequest() : null} 

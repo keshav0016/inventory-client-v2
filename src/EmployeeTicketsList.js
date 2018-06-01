@@ -121,7 +121,7 @@ class EmployeeTicketsList extends Component{
     render(){
         let filterSlideButton = <Button floating large className = 'teal filterContainerSliderButton' waves = 'light' icon = 'filter_list' style={{top : '64px'}}></Button>;
         let filterPane = <div className="filterContainer" style={{ zIndex: 1 }}>
-            <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white' }} className="adminDashboardTitle">Status Filters</p>
+            <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white' }} className="adminDashboardTitle">Filter By Status</p>
             <Row className="ticketListCheckbox">
                 <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick={this.setPendingChecked} checked={this.state.isPendingChecked} />
                 <Input name='filter' type='checkbox' value='red' label='Accepted' onClick={this.setAcceptedChecked} checked={this.state.isAcceptedChecked} />
@@ -131,7 +131,7 @@ class EmployeeTicketsList extends Component{
 
         return(
             <div className="listComponent" >
-                <h3 className="title">Employee Tickets List</h3>
+                <h4 className="title">Employee Tickets List</h4>
                 {this.state.handleListRequest ? this.handleList() : null}
                 {filterSlideButton}
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
@@ -139,9 +139,9 @@ class EmployeeTicketsList extends Component{
                 </SideNav>
                 {filterPane}                
                 { this.state.handleListRequest ? <Preloader size='small' /> :                               
-               <Tabs className='tabs' tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
+               <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
-                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen">No Asset Tickets</Row> :
+                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You doesn't have any tickets for now</h4></Row> :
                         <div>
                             <Table className="consumableTable desktopView" style={{fontFamily : 'Roboto', fontWeight : 350}} >
                                 <thead>
@@ -158,8 +158,8 @@ class EmployeeTicketsList extends Component{
                                     {this.state.AssetsticketsList.map((ticket, index) => {
                                         return (<tr key={ticket.ticket_number}>
                                         <td>{ticket.ticket_number}</td>
-                                        <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
+                                        <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
+                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item}`: `${ticket.requested_consumable_item}`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status !== 'Pending' ? `${ticket.reason}` : '-'}</td>
@@ -199,7 +199,7 @@ class EmployeeTicketsList extends Component{
                     </div>
 
                     <div className = "consumableTab">
-                        {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> :
+                        {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen flow-text" ><h4>You doesn't have any tickets for now</h4></div> :
                         <div>
                             <Table className="consumableTable desktopView">
                                 <thead>
@@ -218,8 +218,8 @@ class EmployeeTicketsList extends Component{
                                     {this.state.ConsumablesticketsList.map((ticket, index) => {
                                         return (<tr key={ticket.ticket_number}>
                                         <td>{ticket.ticket_number}</td>
-                                        <td>{moment(ticket.date).format('DD - MM - YYYY')}</td>
-                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} [${ticket.item_type}]`: `${ticket.requested_consumable_item} [${ticket.item_type}]`}</td>
+                                        <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
+                                        <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item}`: `${ticket.requested_consumable_item}`}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status !== 'Pending' ? `${ticket.reason}` : '-'}</td>
