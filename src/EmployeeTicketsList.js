@@ -196,7 +196,6 @@ class EmployeeTicketsList extends Component{
                             </Col>
                             {this.state.assetPagination.totalPage > 1 ? <Pagination  items={this.state.assetPagination.totalPage} activePage={this.state.assetPage} maxButtons={5} onSelect = {this.setAssetPage} /> : null}
                         </div>}
-                            <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
 
                     <div className = "consumableTab">
@@ -258,9 +257,9 @@ class EmployeeTicketsList extends Component{
                             </Col>
                             {this.state.consumablePagination.totalPage > 1 ? <Pagination items={this.state.consumablePagination.totalPage} activePage={this.state.consumablePage} maxButtons={5} onSelect = {this.setConsumablePage} /> : null}
                         </div>}
-                            <Link to={{ pathname : '/employee/RequestTicket'}}><Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
                     </div>
                 </Tabs>}
+                <Link to={{ pathname : '/employee/RequestTicket'}}><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add' /></Link>                
             </div>
         )
     }
