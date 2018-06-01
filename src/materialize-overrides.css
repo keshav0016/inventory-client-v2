@@ -185,5 +185,7 @@ div.input-field.consumable-empty-error.col label.active:after
 
 .title{
     font-family: "Roboto";
-    font-weight: 250;
+    font-weight: 300;
+    display: inline-block;
+    font-size: 40px;
 }

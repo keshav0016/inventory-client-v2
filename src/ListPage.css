@@ -136,12 +136,12 @@
 .listComponent {
   margin-left: 30px;
   margin-right: 30px;
-  margin-top: 60px;
+  margin-top: 68px;
 }
 
 @media only screen and (min-height: 824px) {
   .listComponent {
-    margin-top: 68px;
+    margin-top: 76px;
   }
 
   .side-nav.filterSliderPane .filterContainer {
@@ -173,6 +173,19 @@
   .consumableTable{
     width: 100%
   }
+}
+
+.employeeProfile {
+  float: right;
+}
+
+.ticketRequestTitle {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.requestbtn {
+  width: 100%;
 }
 
 @media only screen and (max-width: 767px) {
