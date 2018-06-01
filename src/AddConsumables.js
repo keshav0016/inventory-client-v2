@@ -520,7 +520,7 @@ class AddConsumables extends Component{
                     <Modal
                         actions={null}
                         id="addVendor"
-                        trigger={<Button style={{marginLeft:'1%'}} id="triggerAddVendor">Add Vendor</Button>}>
+                        trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
                         <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                     </Modal> 
                             <Button style={{float: 'right'}} waves='light' type = "submit" onClick={this.checkForValidation}>Add Consumable</Button>
