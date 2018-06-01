@@ -9,7 +9,7 @@ import {
   Link,
 } from 'react-router-dom';
 
-import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input } from 'react-materialize'
+import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input, Row } from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
 
@@ -109,7 +109,9 @@ class EmployeesList extends Component {
       <div className="listComponent">
         {this.state.handleListRequest ? this.handleList() : null}
         <h3 className="title">List of Employees</h3>
+        <Row>
         <Input s={12} m={6} l={4} placeholder="Search by Employee ID or Employee Name" onChange = {this.setSearch} />
+        </Row>
         {this.state.loading ? <Preloader size='small' /> :
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
