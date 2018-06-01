@@ -6,11 +6,11 @@
 
 .masterComponentLogoutButton {
     position: absolute;
-    right:3px;
+    right:13px;
     top:30%;
     font-family: "Roboto";
     color:teal;
-    font-weight: 400;  
+    font-weight: bolder;  
 }
 
 .masterComponentMenuButton {
@@ -86,7 +86,7 @@
 }
 
 
-.splitModalButtons button{
+.splitModalButtons button, .row.splitModalButtons{
     margin-right: 20px;
     margin-top: 2%;
 }

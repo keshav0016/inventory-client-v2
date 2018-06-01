@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table} from 'react-materialize'
+import {Table, Row, Col} from 'react-materialize'
 import { baseUrl } from './config';
 import './ListPage.css'
-
+import './MasterComponent.css'
 
 class Profile extends Component{
     constructor(props){
@@ -54,10 +54,16 @@ class Profile extends Component{
     render(){
         return (
             <div className="listComponent" >
+            <Row className='splitModalButtons'>
             <h3 className="title">Profile</h3>
-            <h6>Name : <b style={{color : 'teal'}}>{this.state.profile.first_name} {this.state.profile.last_name}</b></h6>
-            <h6>No of Assets held : <b style={{color : 'teal'}}>{this.state.assetsCount}</b></h6>
-            <h6>No of Consumables held : <b style={{color: 'teal'}}>{this.state.consumablesCount}</b> </h6>
+            <div className='employeeProfile'>
+                <h6>Name : <b style={{color : 'teal'}}>{this.state.profile.first_name} {this.state.profile.last_name}</b></h6>
+                <h6>No of Assets held : <b style={{color : 'teal'}}>{this.state.assetsCount}</b></h6>
+                <h6>No of Consumables held : <b style={{color: 'teal'}}>{this.state.consumablesCount}</b> </h6>
+            </div>
+            </Row>
+            <Row>
+            <Col s={12} m={8} l={8} >
             <Table hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
               <thead>
                   <tr>
@@ -76,6 +82,8 @@ class Profile extends Component{
                   })}
               </tbody>
           </Table>
+            </Col>
+            </Row>
               </div>
         )
     }
