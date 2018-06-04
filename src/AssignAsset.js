@@ -222,7 +222,7 @@ class AssignAsset extends Component{
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
                 <h5 className="title">Assign Asset</h5>
                 <Row>
-                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
+                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} value={this.state.user_id.value} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
                     <Input s={12} type='date' label="Expected Recovery*"  className='datepicker' value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
                 </Row>

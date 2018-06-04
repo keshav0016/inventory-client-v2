@@ -29,7 +29,7 @@ class EmployeeDelete extends Component {
             }
         })
         .catch(error => {
-            window.Materialize.toast('can not delete employee', 4000)
+            window.Materialize.toast('can not disable employee', 4000)
         })
         
     }
