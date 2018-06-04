@@ -71,7 +71,7 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div className="no-footer">
-                {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <h5 className='title' >{`Do you really want to recover ${this.state.recoverInfo.asset.asset_name} from ${this.state.recoverInfo.user.first_name} ${this.state.recoverInfo.user.last_name} ?`}</h5> : null}
+                {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <h5 className='recoverTitle' >{`Do you really want to recover ${this.state.recoverInfo.asset.asset_name} from ${this.state.recoverInfo.user.first_name} ${this.state.recoverInfo.user.last_name} ?`}</h5> : null}
                 <br /><br />
                 <div className="splitModalButtons">
                     <Button onClick = {this.setRecoverAssetRequest}>OK</Button>
