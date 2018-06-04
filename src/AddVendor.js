@@ -69,7 +69,7 @@ class AddVendor extends Component{
         if(this.state.contact.value.length !== 10){
             this.setState({
                 contact:Object.assign(this.state.contact, {
-                    error: 'Enter a Phone number',
+                    error: 'Contact number should be 10 digits',
                     showError: true
                 })
             })
