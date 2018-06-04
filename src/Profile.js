@@ -63,7 +63,7 @@ class Profile extends Component{
             </div>
             </Row>
             <Row>
-            <Col s={12} m={8} l={8} >
+            <Col s={12} m={8} l={8} offset={'m2 l2'} >
             <Table hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
               <thead>
                   <tr>

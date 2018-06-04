@@ -154,7 +154,7 @@ div.input-field.consumable-empty-error.col label.active:after
     left: 0;
 }
 
-::placeholder {
+.assetUpdateForm ::placeholder {
     color: black;
     opacity: 1; 
 }
@@ -216,6 +216,10 @@ div.input-field.consumable-empty-error.col label.active:after
     font-weight: 300;
     display: inline-block;
     font-size: 20px;
+}
+
+a.selected {
+    background-color: #4db6ac;
 }
 
 .cancelButton {
