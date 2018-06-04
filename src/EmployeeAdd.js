@@ -38,7 +38,7 @@ class EmployeeAdd extends Component {
         error: "",
       },
       designation: {
-        value: "",
+        value: "select",
         showError: false,
         error: "",
       },
@@ -79,23 +79,26 @@ class EmployeeAdd extends Component {
         })
       })
     } 
-    else{
+    if (this.state.user_id.value){
       this.setState({
         user_id: Object.assign(this.state.user_id, {
+            error: '',
             showError: false,
         })
       })
     }
-    if( !this.state.first_name.value ){
+    if(!this.state.first_name.value ){
       this.setState({
         first_name: Object.assign(this.state.first_name, {
           error: "First name  is required",
           showError: true,
         })
       })
-    }else{
+    }
+    if(this.state.first_name.value ){
       this.setState({
         first_name: Object.assign(this.state.first_name, {
+            error: '',
             showError: false,
         })
       })
@@ -107,9 +110,11 @@ class EmployeeAdd extends Component {
           showError: true,
         }),
       })
-    }else{
+    }
+    if(this.state.last_name.value){
       this.setState({
         last_name: Object.assign(this.state.last_name, {
+            error: '',
             showError: false,
         })
       })
@@ -121,9 +126,11 @@ class EmployeeAdd extends Component {
           showError: true,
         }),
       })
-    }else{
+    }
+    if(this.state.gender.value){
       this.setState({
         gender: Object.assign(this.state.gender, {
+            error: '',
             showError: false,
         })
       })
@@ -135,7 +142,8 @@ class EmployeeAdd extends Component {
           showError: true,
         })
       })
-    }else{
+    }
+    if(this.state.age.value){
       if(this.state.age.value < 1 || this.state.age.value > 70){
         this.setState({
           age: Object.assign(this.state.age, {
@@ -147,6 +155,7 @@ class EmployeeAdd extends Component {
       else{
         this.setState({
           age: Object.assign(this.state.age, {
+              error: '',
               showError: false,
           })
         })
@@ -160,15 +169,30 @@ class EmployeeAdd extends Component {
         }),
       })
     }
-    if(!this.state.designation.value){
+    if(this.state.department.value){
       this.setState({
-        designation: Object.assign(this.state.designation, {
-          error: "Designation is required",
-          showError: true,
+        department: Object.assign(this.state.department, {
+          error: "",
+          showError: false,
         }),
       })
     }
-
+    if(this.state.designation.value === 'select'){
+        this.setState({
+          designation: Object.assign(this.state.designation, {
+            error: "Designation is required",
+            showError: true,
+          }),
+        })
+    }
+    if(this.state.designation.value !== 'select'){
+      this.setState({
+        designation: Object.assign(this.state.designation, {
+          error: "",
+          showError: false,
+        })
+      })
+    }
     if(!reg.test(this.state.email.value)){
         this.setState({
             email: Object.assign(this.state.email, {
@@ -177,14 +201,15 @@ class EmployeeAdd extends Component {
             }),
         })
     }
-    else{
+    if(reg.test(this.state.email.value)){
         this.setState({
             email: Object.assign(this.state.email, {
+                error: '',
                 showError:false
             }),
         })
     }
-    if(this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value && this.state.email.value){
+    if(this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value !== 'select' && this.state.email.value){
       axios({
         method: 'post',
         url: `${baseUrl}/employees/create`,

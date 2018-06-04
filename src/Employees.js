@@ -115,7 +115,7 @@ class EmployeesList extends Component {
         {this.state.loading ? <Preloader size='small' /> :
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-            <Table hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
+            <Table  className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>
                 <tr>
                   <th data-field="user_id">Emp. Id</th>
@@ -129,7 +129,7 @@ class EmployeesList extends Component {
               </thead>
               <tbody>{this.state.data.map(function (item,key){
                 return(
-                <tr key={item.user_id}>
+                <tr key={item.user_id} className={item.disable === 1 ? 'disabled' : 'enabled'}>
                   <td>{item.user_id}</td>
                   <td>{item.first_name}</td>
                   <td>{item.last_name}</td>
@@ -143,9 +143,9 @@ class EmployeesList extends Component {
               },this)}
               </tbody>
             </Table>
-            <Col s={12} m={12} className='mobileView'>
+            <Col s={12} m={12} className='mobileView listTable'>
                         {this.state.data.map((item, index) => {
-                            return <CardPanel key = {index}>
+                            return <CardPanel key = {index} className={item.disable === 1 ? 'disabled' : 'enabled' } >
                                         <div style={{ float : 'right'}}>
                                             {this.renderDropdown(item, index)}
                                         </div>

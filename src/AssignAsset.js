@@ -106,7 +106,7 @@ class AssignAsset extends Component{
                 })
             })
         }
-        if(new Date(this.state.from.value) < new Date(this.state.expected_recovery.value)) {
+        if(new Date(this.state.from.value) <= new Date(this.state.expected_recovery.value)) {
             this.setState({
                 from:Object.assign(this.state.from, {
                     error: '',
@@ -114,7 +114,7 @@ class AssignAsset extends Component{
                 })
             })
         }
-        if(this.state.user_id.value!=='Select' && this.state.from.value && this.state.expected_recovery.value && new Date(this.state.from.value) < new Date(this.state.expected_recovery.value)) {
+        if(this.state.user_id.value!=='Select' && this.state.from.value && this.state.expected_recovery.value && new Date(this.state.from.value) <= new Date(this.state.expected_recovery.value)) {
             this.setState({
                 assignAssetRequest : true
             })

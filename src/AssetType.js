@@ -82,7 +82,7 @@ class AssetType extends Component{
                 <Table className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
-                            <th data-field="id">S. No</th>
+                            {/* <th data-field="id">S. No</th> */}
                             <th data-field="name">Asset Type</th>
                             <th data-field="maxRequest">Max. Request</th>
                             
@@ -92,7 +92,7 @@ class AssetType extends Component{
                     <tbody>
                         {this.state.assetTypeList.map((item, index) => {
                             return <tr key={index+1}>
-                            <td>{item.id}</td>
+                            {/* <td>{item.id}</td> */}
                             <td>{item.assetType}</td>
                             <td>{item.maxRequest}</td>
                             <td>{this.renderButton(item)}</td>
@@ -105,7 +105,7 @@ class AssetType extends Component{
                             return <CardPanel key = {index}>
                                         <div className='historyCards'  >
                                             <div style={{float : 'left'}} >
-                                                <h6><b>Serial No.</b> : {item.id}</h6>
+                                                {/* <h6><b>Serial No.</b> : {item.id}</h6> */}
                                                 <h6><b>Asset Type</b> : {item.assetType}</h6>                                
                                             </div>
                                             <div style={{float : 'right'}}>

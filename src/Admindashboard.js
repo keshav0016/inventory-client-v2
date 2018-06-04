@@ -61,23 +61,21 @@ class Admindashboard extends Component {
             <div>
                 <Row>
                     <Col s={12} m={10} l={9} offset={'m1 l3'}>
-                        <Card className="z-depth-0">
+                        <Card className="z-depth-0" >
                             <h3  className='title'>Dashboard</h3 >
-                            {this.state.handleListRequest ? <Preloader size='small' /> :<div>
-                                <Card className="z-depth-2 teal-text" title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
-                                    <Icon>developer_board</Icon>
+                            {this.state.handleListRequest ? <Preloader size='small' /> :
+                            <div>
+                                <Card className="z-depth-2 teal-text dashboardContent" header={<div className="dashboardIcons" ><Icon>developer_board</Icon></div>} title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
                                     <p>Pending Requests: {this.state.consumablesPendingCount}</p>
-                                    <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p>
+                                    {/* <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p> */}
                                     <p>No of consumables running low on stock: {this.state.consumablesLowStock}</p>
                                 </Card>
-                                <Card className="z-depth-2 teal-text" title="Assets" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
-                                    <Icon>important_devices</Icon>
+                                <Card className="z-depth-2 teal-text dashboardContent" header={<div className="dashboardIcons" ><Icon>important_devices</Icon></div>} title="Assets" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
                                     <p>Pending Requests: {this.state.assetPendingCount}</p>
-                                    <p>Accepted Requests: {this.state.assetAcceptedCount}</p>
+                                    {/* <p>Accepted Requests: {this.state.assetAcceptedCount}</p> */}
                                 </Card>
                                 {this.state.repairDateNear.length > 0 ?
-                                    <Card className="z-depth-2 teal-text" title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
-                                        <Icon>build</Icon>
+                                    <Card className="z-depth-2 teal-text dashboardContent" header={<div className="dashboardIcons" ><Icon>build</Icon></div>} title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
                                         {this.state.repairDateNear.map((repair, index) => {
                                             return <p style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
                                         })}

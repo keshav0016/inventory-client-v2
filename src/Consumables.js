@@ -290,7 +290,7 @@ class Consumables extends Component{
                     :
 
                     <div>
-                    <Table className="consumableTable desktopView" hoverable style={{fontFamily: 'Roboto', fontWeight: 350}} >
+                    <Table className="consumableTable listTable desktopView" style={{fontFamily: 'Roboto', fontWeight: 350}} >
                     <thead>
                         <tr>
                             <th data-field="consumable_id">Cons. Id</th>
@@ -302,7 +302,7 @@ class Consumables extends Component{
 
                     <tbody>
                         {this.state.consumableList.map((consumable, index) => {
-                            return (<tr key={consumable.consumable_id}>
+                            return (<tr key={consumable.consumable_id} className={consumable.disable === 1 ? 'disabled' : 'enabled'} >
                             <td >{consumable.consumable_id}</td>
                             <td >{consumable.name}</td>
                             <td >{consumable.quantity}</td>
@@ -314,9 +314,9 @@ class Consumables extends Component{
                     </tbody>
                 </Table>
 
-                <Col s={12} m={12} className='mobileView'>
+                <Col s={12} m={12} className='mobileView listTable'>
                         {this.state.consumableList.map((item, index) => {
-                            return <CardPanel key = {index}>
+                            return <CardPanel key = {index} className={item.disable === 1 ? 'disabled' : 'enabled' } >
                                         <div style={{float : 'right'}}>
                                             {this.renderDropdown(item)}
                                         </div>

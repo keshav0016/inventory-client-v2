@@ -32,6 +32,7 @@ class AssignConsumables extends Component {
         this.getEmployeeList = this.getEmployeeList.bind(this)
         this.assignedEmployee = this.assignedEmployee.bind(this)
         this.setEmployeeDropdown = this.setEmployeeDropdown.bind(this)
+        this.cancelAll = this.cancelAll.bind(this)
     }
 
     componentDidMount(){
@@ -193,17 +194,29 @@ class AssignConsumables extends Component {
         return employeesArr
     }
 
+    cancelAll(){
+        this.setState({
+            user_id: Object.assign(this.state.user_id, {
+                value : 'Select'
+            }),
+            quantity: Object.assign(this.state.quantity, {
+                value : 0
+            })
+        })
+        $(".modal-overlay").trigger('click');
+    }
+
     render() {
         return (
             <div className="no-footer">
                 <h5 className="title">Assign Consumable</h5>            
                 <Row>
-                    <Input s={12} m={6} l={6} type="select" label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
+                    <Input s={12} m={6} l={6} type="select" value = {this.state.user_id.value} label="Assign to" onChange = {this.assignedEmployee} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} m={6} l={6} label="Consumable Quantity" type="number" min={0} value={this.state.quantity.value} onChange={this.setConsumableQuantity} error={this.state.quantity.showError ? this.state.quantity.error : null} />
                 </Row>
                 <div className='splitModalButtons'>
                     <Button waves='light' onClick={this.checkForValidation}>Assign</Button>
-                    <Button className="modal-close">Cancel</Button>
+                    <Button onClick={this.cancelAll} >Cancel</Button>
                 </div>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}

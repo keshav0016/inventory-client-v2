@@ -281,9 +281,10 @@ class EmployeeUpdate extends Component {
                 })
             })
         }
-        else {
+        if (this.state.user_id.value) {
             this.setState({
                 user_id: Object.assign(this.state.user_id, {
+                    error: '',
                     showError: false,
                 })
             })
@@ -295,9 +296,11 @@ class EmployeeUpdate extends Component {
                     showError: true,
                 })
             })
-        } else {
+        }
+        if (this.state.first_name.value) {
             this.setState({
                 first_name: Object.assign(this.state.first_name, {
+                    error: '',
                     showError: false,
                 })
             })
@@ -309,9 +312,11 @@ class EmployeeUpdate extends Component {
                     showError: true,
                 }),
             })
-        } else {
+        }
+        if (this.state.last_name.value) {
             this.setState({
                 last_name: Object.assign(this.state.last_name, {
+                    error: '',
                     showError: false,
                 })
             })
@@ -323,9 +328,11 @@ class EmployeeUpdate extends Component {
                     showError: true,
                 }),
             })
-        } else {
+        }
+        if (this.state.gender.value) {
             this.setState({
                 gender: Object.assign(this.state.gender, {
+                    error: '',
                     showError: false,
                 })
             })
@@ -337,7 +344,8 @@ class EmployeeUpdate extends Component {
                     showError: true,
                 })
             })
-        } else {
+        }
+        if (this.state.age.value) {
             if (this.state.age.value < 1 || this.state.age.value > 70) {
                 this.setState({
                     age: Object.assign(this.state.age, {
@@ -349,6 +357,7 @@ class EmployeeUpdate extends Component {
             else {
                 this.setState({
                     age: Object.assign(this.state.age, {
+                        error: '',
                         showError: false,
                     })
                 })
@@ -362,6 +371,14 @@ class EmployeeUpdate extends Component {
                 }),
             })
         }
+        if (this.state.department.value) {
+            this.setState({
+                department: Object.assign(this.state.department, {
+                    error: "",
+                    showError: false,
+                }),
+            })
+        }
         if (!this.state.designation.value) {
             this.setState({
                 designation: Object.assign(this.state.designation, {
@@ -370,7 +387,14 @@ class EmployeeUpdate extends Component {
                 }),
             })
         }
-
+        if (this.state.designation.value) {
+            this.setState({
+                designation: Object.assign(this.state.designation, {
+                    error: "",
+                    showError: false,
+                }),
+            })
+        }
         if (!reg.test(this.state.email.value)) {
             this.setState({
                 email: Object.assign(this.state.email, {
@@ -379,14 +403,15 @@ class EmployeeUpdate extends Component {
                 }),
             })
         }
-        else {
+        if (reg.test(this.state.email.value)) {
             this.setState({
                 email: Object.assign(this.state.email, {
+                    error: '',
                     showError: false
                 }),
             })
         }
-        if (this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value && this.state.email.value) {
+        if (this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value && this.state.email.value) {
             axios({
                 method: 'post',
                 url: `${baseUrl}/employees/update`,
@@ -485,7 +510,7 @@ class EmployeeUpdate extends Component {
             <div className="no-footer">
                 <h5 className="title">Edit Employee</h5>
                 <Row>
-                    <Input onChange={this.handleUser_Id} s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
+                    {/* <Input onChange={this.handleUser_Id} s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} /> */}
                     <Input onChange={this.handleFirstname} s={12} m={6} l={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null} />
                     <Input onChange={this.handleLastname} s={12} m={6} l={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null} />
                     <Input type="number" min='0' label="Age" value={this.state.age.value} onChange={this.handleAge} s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null} />
@@ -505,7 +530,7 @@ class EmployeeUpdate extends Component {
                         <option value='Developer/Designer'>Developer/Designer</option>
                         <option value='Testing'>Testing</option>
                     </Input>
-                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Team Lead'>Team Lead</option>
                         <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>
@@ -515,26 +540,26 @@ class EmployeeUpdate extends Component {
 
 
                     </Input> : null}
-                    {this.state.department.value === 'HR' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='Select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'HR' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Sr.HR Manager'>Sr.HR Manager</option>
                         <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
                     </Input> : null}
-                    {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Delivery Manager'>Delivery Manager</option>
                         <option value='Sr.Project Manager'>Sr.Project Manager</option>
                         <option value='Project Manager'>Project Manager</option>
                     </Input> : null}
-                    {this.state.department.value === 'Finance/Accounting' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
+                    {this.state.department.value === 'Finance/Accounting' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
                         <option value='select'>select</option>
                         <option value='Finance Director'>Finance Director</option></Input> : null}
-                    {this.state.department.value === 'Pre sales' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Pre sales' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Lead Presales'>Lead Presales</option>
                         <option value='Presales Associate'>Presales Associate</option>
                     </Input> : null}
-                    {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='QA Lead'>QA Lead</option>
                         <option value='Software Test Development Engineer'>Software Test Development Engineer</option>

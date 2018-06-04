@@ -260,9 +260,9 @@ class Assets extends Component{
                 {this.state.loading ? <Preloader size='small' /> :
                 (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-                <Table hoverable className="assetTable desktopView" style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table hoverable className="assetTable desktopView listTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
-                        <tr>
+                        <tr >
                             <th data-field="asset_id">Asset ID</th>
                             <th data-field="serial_number">Serial No.</th>
                             <th data-field="asset_name">Asset Name</th>
@@ -279,7 +279,7 @@ class Assets extends Component{
 
                     <tbody>
                         {this.state.assetList.map((item, index) => {
-                            return <tr key={item.asset_id}>
+                            return <tr key={item.asset_id} className={item.disabled === 1 ? 'disabled' : 'enabled' } >
                             <td>{item.asset_id}</td>
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
@@ -297,9 +297,9 @@ class Assets extends Component{
                     </tbody>
                     </Table>
 
-                    <Col s={12} m={12} className='mobileView'>
+                    <Col s={12} m={12} className='mobileView listTable'>
                         {this.state.assetList.map((item, index) => {
-                            return <CardPanel key = {index}>
+                            return <CardPanel key = {index} className={item.disabled === 1 ? 'disabled' : 'enabled' } >
                                         <div style={{ float : 'right'}}>
                                             {this.renderDropdown(item)}
                                         </div>
