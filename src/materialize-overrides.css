@@ -217,3 +217,7 @@ div.input-field.consumable-empty-error.col label.active:after
     display: inline-block;
     font-size: 20px;
 }
+
+.cancelButton {
+    background-color: #212121;
+}
