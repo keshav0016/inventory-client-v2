@@ -71,13 +71,10 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h5 className='flow-text title' >Do you really want to recover this asset?</h5>
-                {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <div>
-                    <p><b>Asset Name</b> : {this.state.recoverInfo.asset.asset_name}<br /><b>Assigned Employee</b> : {this.state.recoverInfo.user.first_name} {this.state.recoverInfo.user.last_name}</p>
-                </div> : null}
+                {this.state.recoverInfo.asset && this.state.recoverInfo.user ? <h5 className='title' >{`Do you really want to recover ${this.state.recoverInfo.asset.asset_name} from ${this.state.recoverInfo.user.first_name} ${this.state.recoverInfo.user.last_name} ?`}</h5> : null}
                 <br /><br />
                 <div className="splitModalButtons">
-                    <Button onClick = {this.setRecoverAssetRequest}>Recover</Button>
+                    <Button onClick = {this.setRecoverAssetRequest}>OK</Button>
                     <Button className="modal-close">Cancel</Button>
                 </div>
                 {this.state.recoverAssetRequest ? this.recoverAssetFromDb() : null}

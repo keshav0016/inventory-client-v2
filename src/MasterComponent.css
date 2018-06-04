@@ -82,11 +82,20 @@
     .splitModalButtons button{
         margin-top: 2%;
         width: stretch;
+        float: right;
+        margin-bottom: 3%;
     }
 }
 
 
-.splitModalButtons button, .row.splitModalButtons{
+.splitModalButtons button{
+    margin-right: 20px;
+    margin-top: 2%;
+    float: right;
+    margin-bottom: 3%;
+}
+
+.row.splitModalButtons {
     margin-right: 20px;
     margin-top: 2%;
 }

@@ -149,6 +149,7 @@ class Assets extends Component{
                     {/* </Row> */}
                 </div>} 
                 </div>: <h4 className = 'heading'>No such Asset</h4>}
+                <a href='/admin/assets'><Button>Go Back</Button></a>
             </div>
         )
     }

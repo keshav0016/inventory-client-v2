@@ -188,7 +188,7 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
   .filterContainerSliderButton{
     display: none;
   }
@@ -196,7 +196,7 @@
   .side-nav.filterSliderPane .filterContainer {
     display: none;
   }
-}
+} */
 
 @media only screen and (max-width: 767px) {
   .desktopView{

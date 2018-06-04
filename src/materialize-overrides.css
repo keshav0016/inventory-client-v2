@@ -154,12 +154,33 @@ div.input-field.consumable-empty-error.col label.active:after
     left: 0;
 }
 
+::placeholder {
+    color: black;
+    opacity: 1; 
+}
+
 .picker__date-display{
     display: none;
 }
 
 .modal{
     overflow: visible;
+}
+
+.dashboardIcons {
+    padding: 2% 0% 0% 2%;
+}
+
+.dashboardContent .card-content {
+    padding-top: 0%;
+}
+
+.listTable .disabled {
+    background-color: grey
+}
+
+.listTable .enabled {
+    background-color: white
 }
 
 @media only screen and (max-height : 600px) {
