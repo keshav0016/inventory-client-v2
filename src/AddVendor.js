@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button, Icon} from 'react-materialize'
 // import $ from 'jquery'
 import { baseUrl } from './config';
-
+import $ from 'jquery'
 
 class AddVendor extends Component{
     constructor(props){
@@ -86,6 +86,7 @@ class AddVendor extends Component{
             this.setState({
                 addVendorRequest: true
             })
+            $('.modal-overlay').trigger('click');
         }
     }
 
@@ -179,16 +180,16 @@ class AddVendor extends Component{
     render(){
         return(
             <div className="no-footer">
+                <h5 className='title'>Add Vendor</h5 >
                 <Row>
-                    <h5 className='title'>Add Vendor</h5 >
                     <Input s={12} m={6} l={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
                     <Input s={12} m={6} l={6} label="Contact" value = {this.state.contact.value} onChange ={this.setContact} error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
-                    <Input s={12} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
+                    <Input s={12} m={6} l={6} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 
                 </Row>
                 <div className='splitModalButtons'>
+                    <Button className="modal-close cancelButton" >Cancel</Button>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                    <Button className="modal-close" >Cancel</Button>
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}

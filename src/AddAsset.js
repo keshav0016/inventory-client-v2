@@ -685,8 +685,8 @@ class AddAsset extends Component{
                         <div className="splitModalButtons"> 
                             <Row>
                                 <Col offset={'l6'}>
-                                    <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
                                     <Link to='/admin/assets'><Button className="cancelButton">Cancel</Button></Link>                            
+                                    <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
                                 </Col>
                             </Row>
                         </div>

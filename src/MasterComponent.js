@@ -27,6 +27,7 @@ import { baseUrl } from './config';
 import NotFound from './NotFound';
 import logo from './LOGO.png'
 import './MasterComponent.css'
+import $ from 'jquery'
 
 class MasterComponent extends Component {
     constructor(props) {
@@ -46,7 +47,13 @@ class MasterComponent extends Component {
                 unauth: error.response.status === 401 || error.response.status === 403
             })
         })
+
+        var $a = $('.masterComponentSideBar a').click(function() {
+            $a.removeClass('selected');
+            $(this).addClass('selected');
+        })
     }
+
     render() {
         let menuButton = <Button className="white lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>;
         

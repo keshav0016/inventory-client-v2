@@ -368,7 +368,7 @@ class UpdateAsset extends Component {
         return (
             <div className="no-footer">
             <h5 className="title">Update Asset</h5> 
-                <Row>
+                <Row className="assetUpdateForm" >
                     <Input s={12} m={3} l={3} label="Serial Number *" defaultValue={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
                     <Input s={12} m={3} l={3} label="Asset Name *" defaultValue={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
                     <Input s={12} m={3} l={3} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
