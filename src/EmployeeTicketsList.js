@@ -142,7 +142,7 @@ class EmployeeTicketsList extends Component{
                 { this.state.handleListRequest ? <Preloader size='small' /> :                               
                <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
                     <div className = "assetTab">
-                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You doesn't have any tickets for now</h4></Row> :
+                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You don't have any tickets for now</h4></Row> :
                         <div>
                             <Table className="consumableTable desktopView" style={{fontFamily : 'Roboto', fontWeight : 350}} >
                                 <thead>

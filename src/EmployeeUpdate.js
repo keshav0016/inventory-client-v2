@@ -566,8 +566,8 @@ class EmployeeUpdate extends Component {
                     </Input> : null}
                 </Row>
                 <div className="splitModalButtons">
-                    <Button className='addbtn' onClick={this.handleCreate}>Edit</Button>
-                    <Button className="modal-close">Cancel</Button>                
+                    <Button className='addbtn' onClick={this.handleCreate}>Update</Button>
+                    <Button className="modal-close cancelButton">Cancel</Button>                
                 </div>
             </div>
 

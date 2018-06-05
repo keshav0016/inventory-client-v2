@@ -75,7 +75,7 @@ class DeleteAsset extends Component{
                 <br /><br />
                 <div className="splitModalButtons">
                     <Button onClick = {this.setRecoverAssetRequest}>OK</Button>
-                    <Button className="modal-close">Cancel</Button>
+                    <Button className="modal-close cancelButton">Cancel</Button>
                 </div>
                 {this.state.recoverAssetRequest ? this.recoverAssetFromDb() : null}
             </div>

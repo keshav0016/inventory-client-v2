@@ -178,7 +178,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.amount.value === 0){
+        if(Number(this.state.amount.value) === 0){
             this.setState({
                 amount:Object.assign(this.state.amount, {
                     error: 'The Amount should not be zero.',
@@ -186,7 +186,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.amount.value < 0){
+        if(Number(this.state.amount.value) < 0){
             this.setState({
                 amount:Object.assign(this.state.amount, {
                     error: 'The Amount should not be neagtive.',
@@ -194,7 +194,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.amount.value > 0){
+        if(Number(this.state.amount.value) > 0){
             this.setState({
                 amount:Object.assign(this.state.amount, {
                     error: '',
@@ -202,7 +202,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.gst.value < 0){
+        if(Number(this.state.gst.value) < 0){
             this.setState({
                 gst:Object.assign(this.state.gst, {
                     error: 'The gst should not be negative',
@@ -210,7 +210,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.gst.value >= 0){
+        if(Number(this.state.gst.value) >= 0){
             this.setState({
                 gst:Object.assign(this.state.gst, {
                     error: '',
@@ -314,7 +314,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!this.state.serial_number.value.showError && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && this.state.gst.value >= 0 && this.state.vendor.value in this.state.vendorNames ){
+        if(!this.state.serial_number.value.showError && this.state.asset_name.value && this.state.purchase_date.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && this.state.vendor.value in this.state.vendorNames ){
             // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
                 addAssetRequest : true
@@ -378,7 +378,7 @@ class AddAsset extends Component{
     setAmount(e){
         this.setState({
             amount : Object.assign(this.state.amount, {
-                value : Number(e.target.value)
+                value : e.target.value
             })
         })
         this.calculateTotal()
@@ -387,7 +387,7 @@ class AddAsset extends Component{
     setGst(e){
         this.setState({
             gst : Object.assign(this.state.gst, {
-                value: Number(e.target.value)
+                value: e.target.value
             })
         })
         this.calculateTotal()
@@ -584,7 +584,7 @@ class AddAsset extends Component{
 
     calculateTotal(){
         this.setState({
-            total : this.state.amount.value + ((this.state.amount.value * this.state.gst.value)/100)
+            total :(Number(this.state.amount.value) + (Number(this.state.amount.value) * ((Number(this.state.gst.value))/100)))
         })
     }
 
@@ -646,47 +646,46 @@ class AddAsset extends Component{
                     </div>
                     <Input s={12} m={6} l={6}  type = "number" min={0} label='Amount*' value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={12} m={6} l={6}  type = "number" min={0} label='GST' value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
+                    <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     {/* <Input s={12} m={6} l={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
+                        <Row>
                         <Autocomplete
                             s={12} m={6} l={6}
                             className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
-                            title=' '
-                            placeholder='Vendor*'
+                            // title=' '
+                            title='Vendor*'
                             data={
                                 this.state.vendorNames
                             }
                             onChange = {this.setVendor}
                             value = {this.state.vendor.value}
                         />
+                        <Col s={6} className="addAssetModalButtons1">
+                            <Modal
+                                actions={null}
+                                id="addVendor"
+                                trigger={<Button>Add Vendor</Button>}>
+                                <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                            </Modal>
+                        </Col>
+                        </Row>
                         <div className={this.state.assetType.showError ? 'assetType-error' : 'no-error'}>
+                        <Row>
                         <Input s={12} m={6} l={6} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
-                        </div>
-                        <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
-                        <Row><br /></Row>
-                            <Row>
-                                <Col s={6}>
-                                    <Modal
-                                        actions={null}
-                                        id="addVendor"
-                                        trigger={<Button>Add Vendor</Button>}>
-                                        <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                                    </Modal>
-                                </Col>
-                                <Row className='breakLine'></Row>
-                                <Col s={6}>
+                        <Col s={6} className="addAssetModalButtons2">
                                     <Modal
                                     actions={null}
                                     trigger={<Button>Add Asset Type</Button>}>
                                     <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
                                     </Modal>
                                 </Col>
-                            </Row>
-                            <Row></Row>
+                        </Row>
+                        </div>
                         <div className="splitModalButtons"> 
                             <Row>
-                                <Col offset={'l6'}>
-                                    <Link to='/admin/assets'><Button className="cancelButton">Cancel</Button></Link>                            
+                                <Col offset={'l6'} style={{float: 'right'}}>
                                     <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                                    <Link to='/admin/assets'><Button className="cancelButton">Cancel</Button></Link>                            
                                 </Col>
                             </Row>
                         </div>

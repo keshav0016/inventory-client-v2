@@ -476,9 +476,8 @@ class AddConsumables extends Component{
                     {/* <Input autoFocus s={12} m={6} l={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/> */}
                         <Autocomplete s={12} m={6} l={6}
                             className={this.state.name.showError ? 'consumable-empty-error': null}
-                            title=' '
                             autoFocus
-                            placeholder='Consumable'
+                            title='Consumable'
                             data={
                                 this.state.consumableNamesListObj
                             }
@@ -502,8 +501,7 @@ class AddConsumables extends Component{
                     <Row>
                         <Autocomplete s={12} m={6} l={6}
                             className={this.state.vendor_name.showError ? 'no-vendor-error' : (this.state.vendor_name.availabilityError ? 'no-vendor-available' : 'no-error')}
-                            title=' '
-                            placeholder='Vendor'
+                            title='Vendor'
                             data={
                                 this.state.vendorNames
                             }

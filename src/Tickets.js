@@ -231,19 +231,19 @@ class Tickets extends Component{
                 <h3 className="title">Ticket Request</h3>
                 <div className ='RequestForm'>
                 <Row>
-                    <Input s={6} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>
+                    <Input s={12} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>
                         <option value='Select'>Select</option>
                         <option value='assets'>Assets</option>
                         <option value='consumables'>Consumables</option>                        
                     </Input>
                 </Row>
                 <Row>
-                    <Input s={6} label='Items' type='select' value={this.state.disableItems ? 'Select' : this.state.item.value} onChange={this.requestResourceType} disabled={this.state.disableItems} error={this.state.item.showError ? this.state.item.error : null}>
+                    <Input s={12} label='Items' type='select' value={this.state.disableItems ? 'Select' : this.state.item.value} onChange={this.requestResourceType} disabled={this.state.disableItems} error={this.state.item.showError ? this.state.item.error : null}>
                         {this.itemDropdown()}
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={6} label="Quantity" type="number" min={0} value = {this.state.quantity.value} onChange = {this.requestQuantity} disabled={this.state.disableItems} error={this.state.quantity.showError ? this.state.quantity.error : null}/>
+                    <Input  s={12} label="Quantity" type="number" min={0} value = {this.state.quantity.value} onChange = {this.requestQuantity} disabled={this.state.disableItems} error={this.state.quantity.showError ? this.state.quantity.error : null}/>
                 </Row>
                 <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation} disabled={this.state.disableItems}>Request</Button>
                 {this.state.requestResource ? this.confirmRequest() : null} 
