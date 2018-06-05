@@ -185,7 +185,7 @@ class AcceptAssetTicket extends Component{
                 <h3 className='title'>Accept Asset</h3>
                 {this.state.loading ? <Preloader size='small'/> :
                 (this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
-                <React.Fragment>
+                (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : <React.Fragment>
                     <Row>
                         <Row>
                             <Input s={12} m={12} l={12} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
@@ -206,12 +206,13 @@ class AcceptAssetTicket extends Component{
                             <h5>Description : {this.state.currentAssetSelected.description}</h5>
                             <h5>Invoice number : {this.state.currentAssetSelected.invoice_number}</h5>
                             <h5>Vendor : {this.state.currentAssetSelected.vendor}</h5>
-                        </div> : (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : null)}
+                        </div> : null}
                     </Row>
                     <div className='splitModalButtons'>
                         <Button onClick={this.checkForValidation}>Submit</Button>
                     </div>
-                </React.Fragment>)}
+                </React.Fragment>))
+                }
                 {this.state.redirect ? <Redirect push to="/admin/tickets"/> : null}
                 {this.state.acceptTicketRequest ? this.acceptTicket() : null}
             </Row>
