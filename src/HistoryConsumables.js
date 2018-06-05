@@ -96,7 +96,7 @@ class HistoryConsumables extends Component{
                                         <h6><b>Total</b> : ₹{consumable.total.toFixed(2)}</h6>
                                         <Modal
                                             actions={null}
-                                            trigger={<Button>Edit</Button>}>
+                                            trigger={<Button>Update</Button>}>
                                             <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
                                         </Modal>
                                     </div>

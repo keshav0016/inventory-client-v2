@@ -188,8 +188,8 @@ class AddVendor extends Component{
 
                 </Row>
                 <div className='splitModalButtons'>
-                    <Button className="modal-close cancelButton" >Cancel</Button>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    <Button className="modal-close cancelButton" >Cancel</Button>
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}

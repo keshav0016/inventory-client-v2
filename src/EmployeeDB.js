@@ -14,6 +14,7 @@ import { baseUrl } from './config';
 import NotFound from './NotFound';
 import { parse as parseCookie } from 'cookie'
 import logo from './LOGO.png'
+import $ from 'jquery'
 
 class EmployeeDB extends Component {
     constructor(props) {
@@ -94,6 +95,11 @@ class EmployeeDB extends Component {
                 this.setState({
                     redirect: error.response.status
                 })
+            })
+
+            var $a = $('.masterComponentSideBar a').click(function() {
+                $a.removeClass('selected');
+                $(this).addClass('selected');
             })
     }
 }

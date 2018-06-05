@@ -109,8 +109,8 @@ class UpdateAssetType extends Component{
                     <Input  value={this.state.maxRequest.value} onChange={this.setMaxRequest} l={6} s={8} m={6} label="Max Request" type="number" error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                 <div className="splitModalButtons">
-                    <Button onClick={this.checkForValidation} >Edit</Button>
-                    <Button className="modal-close" >Cancel</Button>
+                    <Button onClick={this.checkForValidation} >Update</Button>
+                    <Button className="modal-close cancelButton" >Cancel</Button>
                 </div>
                  {this.state.updateAssetTypeRequest ? this.updateAssetTypeInDb() : null}
             </div>

@@ -227,8 +227,8 @@ class AssignAsset extends Component{
                     <Input s={12} type='date' label="Expected Recovery*"  className='datepicker' value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
                 </Row>
                 <div className="splitModalButtons">
+                    <Button className="modal-close cancelButton" onClick ={this.clearFields} >Cancel</Button>
                     <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"} <Icon small right>send</Icon></Button>
-                    <Button className="modal-close" onClick ={this.clearFields} >Cancel</Button>
                 </div>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}
             </div>

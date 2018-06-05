@@ -188,13 +188,13 @@ class AcceptAssetTicket extends Component{
                 <React.Fragment>
                     <Row>
                         <Row>
-                            <Input s={12} m={6} l={5} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
+                            <Input s={12} m={12} l={12} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
                         </Row>
                         <Row>
-                            <Input s={12} m={6} l={5} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                            <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
                         </Row>
                         <Row>
-                            <Input s={12} m={6} l={5} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>{this.availableAssetsDropdown()}</Input>
+                            <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>{this.availableAssetsDropdown()}</Input>
                         </Row>
                     </Row>
                     <br />

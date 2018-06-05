@@ -83,6 +83,14 @@ class AssignConsumables extends Component {
                 })
             })
         }
+        if(this.state.quantity.value === ''){
+            this.setState({
+                quantity:Object.assign(this.state.quantity, {
+                    error: 'The Assigning quantity should not be empty',
+                    showError: true
+                })
+            })
+        }
         if(Number(this.state.quantity.value) > 0){
             // window.Materialize.toast('The quantity cannot be negative', 4000)
             this.setState({
@@ -216,7 +224,7 @@ class AssignConsumables extends Component {
                 </Row>
                 <div className='splitModalButtons'>
                     <Button waves='light' onClick={this.checkForValidation}>Assign</Button>
-                    <Button onClick={this.cancelAll} >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}

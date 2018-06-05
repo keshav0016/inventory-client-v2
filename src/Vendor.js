@@ -76,7 +76,7 @@ class Vendor extends Component{
     renderButton(key){
         return <Modal
             actions={null}
-            trigger={<Button>Edit</Button>}>
+            trigger={<Button>Update</Button>}>
             <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
     }

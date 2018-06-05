@@ -45,7 +45,7 @@ class EmployeeDelete extends Component {
             </p>
             <div className="splitModalButtons">
                     <Button onClick = {this.handleDelete} >Disable</Button>
-                    <Button className="modal-close" >Cancel</Button>
+                    <Button className="modal-close cancelButton" >Cancel</Button>
             </div>
         </div>
         )

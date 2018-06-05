@@ -63,7 +63,7 @@ class DeleteConsumable extends Component{
                 </p>
                 <div className='splitModalButtons'>
                         <Button onClick = {this.setDeleteConsumableRequest}>Disable</Button>
-                        <Button className="modal-close">Cancel</Button>
+                        <Button className="modal-close cancelButton">Cancel</Button>
                 </div>
             </div>
         )
