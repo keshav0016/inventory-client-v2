@@ -273,145 +273,153 @@ class EmployeeUpdate extends Component {
     }
     handleCreate() {
         var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (!this.state.user_id.value) {
+        if (!this.state.user_id.value){
             this.setState({
-                user_id: Object.assign(this.state.user_id, {
-                    error: "Employee Id is required",
-                    showError: true,
-                })
+              user_id: Object.assign(this.state.user_id, {
+                  error: "Employee Id is required",
+                  showError: true,
+              })
             })
-        }
-        if (this.state.user_id.value) {
+          } 
+          if (this.state.user_id.value){
             this.setState({
-                user_id: Object.assign(this.state.user_id, {
-                    error: '',
-                    showError: false,
-                })
+              user_id: Object.assign(this.state.user_id, {
+                  error: '',
+                  showError: false,
+              })
             })
-        }
-        if (!this.state.first_name.value) {
+          }
+          if(!this.state.first_name.value ){
             this.setState({
-                first_name: Object.assign(this.state.first_name, {
-                    error: "First name  is required",
-                    showError: true,
-                })
+              first_name: Object.assign(this.state.first_name, {
+                error: "First name  is required",
+                showError: true,
+              })
             })
-        }
-        if (this.state.first_name.value) {
+          }
+          if(this.state.first_name.value ){
             this.setState({
-                first_name: Object.assign(this.state.first_name, {
-                    error: '',
-                    showError: false,
-                })
+              first_name: Object.assign(this.state.first_name, {
+                  error: '',
+                  showError: false,
+              })
             })
-        }
-        if (!this.state.last_name.value) {
+          }
+          if(!this.state.last_name.value){
             this.setState({
-                last_name: Object.assign(this.state.last_name, {
-                    error: "Last name  is required",
-                    showError: true,
-                }),
+              last_name: Object.assign(this.state.last_name, {
+                error: "Last name  is required",
+                showError: true,
+              }),
             })
-        }
-        if (this.state.last_name.value) {
+          }
+          if(this.state.last_name.value){
             this.setState({
-                last_name: Object.assign(this.state.last_name, {
-                    error: '',
-                    showError: false,
-                })
+              last_name: Object.assign(this.state.last_name, {
+                  error: '',
+                  showError: false,
+              })
             })
-        }
-        if (!this.state.gender.value) {
+          }
+          if(!this.state.gender.value){
             this.setState({
-                gender: Object.assign(this.state.gender, {
-                    error: "Gender  is required",
-                    showError: true,
-                }),
+              gender: Object.assign(this.state.gender, {
+                error: "Gender  is required",
+                showError: true,
+              }),
             })
-        }
-        if (this.state.gender.value) {
+          }
+          if(this.state.gender.value){
             this.setState({
-                gender: Object.assign(this.state.gender, {
-                    error: '',
-                    showError: false,
-                })
+              gender: Object.assign(this.state.gender, {
+                  error: '',
+                  showError: false,
+              })
             })
-        }
-        if (!this.state.age.value) {
+          }
+          if(!this.state.age.value) {
             this.setState({
+              age: Object.assign(this.state.age, {
+                error: "Age  is required",
+                showError: true,
+              })
+            })
+          }
+          if(this.state.age.value){
+            if(this.state.age.value < 1 || this.state.age.value > 70){
+              this.setState({
                 age: Object.assign(this.state.age, {
-                    error: "Age  is required",
-                    showError: true,
+                  error: "Invalid age",
+                  showError: true,
                 })
-            })
-        }
-        if (this.state.age.value) {
-            if (this.state.age.value < 1 || this.state.age.value > 70) {
-                this.setState({
-                    age: Object.assign(this.state.age, {
-                        error: "Invalid age",
-                        showError: true,
-                    })
-                })
+              })
             }
-            else {
-                this.setState({
-                    age: Object.assign(this.state.age, {
-                        error: '',
-                        showError: false,
-                    })
-                })
-            }
-        }
-        if (!this.state.department.value) {
-            this.setState({
-                department: Object.assign(this.state.department, {
-                    error: "Department is required",
-                    showError: true,
-                }),
-            })
-        }
-        if (this.state.department.value) {
-            this.setState({
-                department: Object.assign(this.state.department, {
-                    error: "",
-                    showError: false,
-                }),
-            })
-        }
-        if (!this.state.designation.value) {
-            this.setState({
-                designation: Object.assign(this.state.designation, {
-                    error: "Designation is required",
-                    showError: true,
-                }),
-            })
-        }
-        if (this.state.designation.value) {
-            this.setState({
-                designation: Object.assign(this.state.designation, {
-                    error: "",
-                    showError: false,
-                }),
-            })
-        }
-        if (!reg.test(this.state.email.value)) {
-            this.setState({
-                email: Object.assign(this.state.email, {
-                    error: 'Enter Valid Email',
-                    showError: true
-                }),
-            })
-        }
-        if (reg.test(this.state.email.value)) {
-            this.setState({
-                email: Object.assign(this.state.email, {
+            else{
+              this.setState({
+                age: Object.assign(this.state.age, {
                     error: '',
-                    showError: false
-                }),
+                    showError: false,
+                })
+              })
+            }
+          }
+          if(!this.state.department.value){
+            this.setState({
+              department: Object.assign(this.state.department, {
+                error: "Department is required",
+                showError: true,
+              }),
             })
-        }
-        if (this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value && this.state.email.value) {
+          }
+          if(this.state.department.value === 'select'){
+            this.setState({
+                department: Object.assign(this.state.department, {
+                  error: "Department is required",
+                  showError: true,
+                }),
+              })
+          }
+          if(this.state.department.value !== 'select'){
+            this.setState({
+              department: Object.assign(this.state.department, {
+                error: "",
+                showError: false,
+              }),
+            })
+          }
+          if(this.state.designation.value === 'select'){
+              this.setState({
+                designation: Object.assign(this.state.designation, {
+                  error: "Designation is required",
+                  showError: true,
+                }),
+              })
+          }
+          if(this.state.designation.value !== 'select'){
+            this.setState({
+              designation: Object.assign(this.state.designation, {
+                error: "",
+                showError: false,
+              })
+            })
+          }
+          if(!reg.test(this.state.email.value)){
+              this.setState({
+                  email: Object.assign(this.state.email, {
+                      error:'Enter Valid Email',
+                      showError:true
+                  }),
+              })
+          }
+          if(reg.test(this.state.email.value)){
+              this.setState({
+                  email: Object.assign(this.state.email, {
+                      error: '',
+                      showError:false
+                  }),
+              })
+          }
+          if(this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value !== 'select' && this.state.designation.value !== 'select' && this.state.email.value){
             axios({
                 method: 'post',
                 url: `${baseUrl}/employees/update`,
@@ -521,7 +529,7 @@ class EmployeeUpdate extends Component {
                         <option value='Other'>Other</option>
                     </Input>
                     <Input s={12} m={6} l={6} label="Email*" type="email" value={this.state.email.value} onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null} />
-                    <Input s={12} m={6} l={6} type='select' label="Department" defaultValue={this.state.department.value} onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
+                    <Input s={12} m={6} l={6} type='select' label="Department" value={this.state.department.value} onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
                         <option value='select'>select</option>
                         <option value='HR'>HR</option>
                         <option value='Delivery'>Delivery</option>
@@ -544,6 +552,7 @@ class EmployeeUpdate extends Component {
                         <option value='select'>select</option>
                         <option value='Sr.HR Manager'>Sr.HR Manager</option>
                         <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
+                        <option value='HR Recruitment Manager'>HR Admin</option>
                     </Input> : null}
                     {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
@@ -562,7 +571,7 @@ class EmployeeUpdate extends Component {
                     {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='QA Lead'>QA Lead</option>
-                        <option value='Software Test Development Engineer'>Software Test Development Engineer</option>
+                        <option value='Software Test Development Engineer'>Software Test Engineer</option>
                     </Input> : null}
                 </Row>
                 <div className="splitModalButtons">

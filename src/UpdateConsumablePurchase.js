@@ -46,6 +46,7 @@ class UpdateConsumablePurchase extends Component{
         this.setGst = this.setGst.bind(this)
         this.calculateWholePrice = this.calculateWholePrice.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
+        this.cancelAll = this.cancelAll.bind(this)
         }
     componentDidMount(){
         $('label').addClass('active')
@@ -252,6 +253,38 @@ class UpdateConsumablePurchase extends Component{
     //     }
     // }
 
+    cancelAll(){
+        this.setState({
+            consumable_id: this.props.consumable.consumable_id,
+            name : this.props.consumable.consumable.name,
+            vendor_name : this.props.consumable.vendor_name,
+            purchase_date : this.props.consumable.purchase_date,
+            purchased_quantity : {
+                value: this.props.consumable.quantity,
+                error: '',
+                showError: false
+            },
+            item_price : {
+                value: this.props.consumable.item_price,
+                error:'',
+                showError: false
+            },
+            whole_price : this.props.consumable.whole_price,
+            discount : {
+                value: this.props.consumable.discount,
+                error: '',
+                showError: false
+            },
+            gst : {
+                value: this.props.consumable.gst,
+                error:'',
+                showError: false
+            },
+            total : this.props.consumable.total  
+        })
+        $(".modal-overlay").trigger('click');
+    }
+
 
     render(){
         return(
@@ -270,7 +303,7 @@ class UpdateConsumablePurchase extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button  onClick={this.checkForValidation}>Update</Button>
-                    <Button  className="modal-close cancelButton">Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
                 </div>
                     {this.state.updateConsumable ? this.updateConsumablePurchase() : null}
                     {this.state.calculateTotal ? this.calculateTotal() : null}
