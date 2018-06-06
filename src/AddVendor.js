@@ -31,6 +31,7 @@ class AddVendor extends Component{
         this.setName = this.setName.bind(this)
         this.setAddress = this.setAddress.bind(this)
         this.setContact = this.setContact.bind(this)
+        this.cancelAll = this.cancelAll.bind(this)
     }
 
     checkForValidation(){
@@ -177,6 +178,28 @@ class AddVendor extends Component{
     //     $('#addVendor').click(this.checkForValidation)
     // }
 
+    cancelAll(){
+        this.setState({
+            name : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            address : {
+                value: '',
+                error: '',
+                showError: false
+            },
+            contact : {
+                value: '',
+                error: '',
+                showError: false
+            }
+        })
+        $(".modal-overlay").trigger('click');        
+    }
+
+
     render(){
         return(
             <div className="no-footer">
@@ -189,7 +212,7 @@ class AddVendor extends Component{
                 </Row>
                 <div className='splitModalButtons'>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                    <Button className="modal-close cancelButton" >Cancel</Button>
+                    <Button className="cancelButton" >Cancel</Button>
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}

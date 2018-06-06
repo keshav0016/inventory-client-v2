@@ -36,6 +36,7 @@ class VendorUpdate extends Component{
         this.handleContact = this.handleContact.bind(this)
         this.handleAddress = this.handleAddress.bind(this)    
         this.checkForValidation = this.checkForValidation.bind(this)
+        this.cancelAll = this.cancelAll.bind(this)
     }
     handleId(e){
         this.setState({
@@ -176,6 +177,29 @@ class VendorUpdate extends Component{
         })
        })
    }
+
+   cancelAll(){
+        this.setState({
+            name: {
+                value:this.props.user.name,
+                error:'',
+                showError:false
+            },
+            contact: {
+                value:this.props.user.contact,
+                error:'',
+                showError:false
+            },
+            address: {
+                value:this.props.user.address,
+                error:'',
+                showError:false
+            }
+        })
+        $(".modal-overlay").trigger('click');        
+   }
+   
+
     render() {
         
         return (           
@@ -189,7 +213,7 @@ class VendorUpdate extends Component{
                 </Row>
                 <div className='splitModalButtons'>
                     <Button onClick={this.checkForValidation}>Update</Button>
-                    <Button className="modal-close cancelButton" >Cancel</Button>
+                    <Button  onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                  {this.state.update ? this.handleUpdate() : null}
             </div>
