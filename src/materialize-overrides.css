@@ -189,11 +189,11 @@ div.input-field.consumable-empty-error.col label.active:after
 }
 
 .listTable .disabled {
-    background-color: grey
+    color: rgb(184, 177, 177)
 }
 
 .listTable .enabled {
-    background-color: white
+    color: black
 }
 
 @media only screen and (max-height : 600px) {
@@ -250,7 +250,11 @@ a.selected {
 }
 
 .cancelButton {
-    background-color: #212121;
+    background-color: gray;
+}
+
+.cancelButton:hover {
+    background-color: gray;
 }
 
 label {
