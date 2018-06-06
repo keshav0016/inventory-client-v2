@@ -599,7 +599,7 @@ class EmployeeUpdate extends Component {
                         <option value='select'>select</option>
                         <option value='Sr.HR Manager'>Sr.HR Manager</option>
                         <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
-                        <option value='HR Recruitment Manager'>HR Admin</option>
+                        <option value='HR Admin'>HR Admin</option>
                     </Input> : null}
                     {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select' label="Designation" value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>

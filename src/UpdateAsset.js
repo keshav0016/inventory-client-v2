@@ -343,7 +343,7 @@ class UpdateAsset extends Component {
                 })                
             }
             else{
-                window.Materialize.toast('Asset Edited', 4000)
+                window.Materialize.toast('Asset Updated', 4000)
                 this.setState({
                     updateAssetRequest: false
                 })

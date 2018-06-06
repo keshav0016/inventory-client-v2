@@ -304,6 +304,14 @@ class RepairAsset extends Component{
                                 value={this.state.vendor.value}
                                 onChange = {this.setVendor}
                             />
+                                <Col s={6} className='addAssetModalButtons2'>
+                                <Modal
+                                    actions={null}
+                                    // id="addVendor"
+                                    trigger={<Button>Add Vendor</Button>}>
+                                    <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                                </Modal>
+                                </Col>
                         </Row>
                         <Row>
                             <Input l={6} s={10} m={8} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
@@ -312,15 +320,7 @@ class RepairAsset extends Component{
                             <Input l={6} s={10} m={8} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                         </Row>
                         <div className="splitModalButtons">
-                                <Col>
-                                <Modal
-                                    actions={null}
-                                    // id="addVendor"
-                                    trigger={<Button>Add Vendor</Button>}>
-                                    <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                                </Modal>
-                                </Col>
-                                <Col>
+                                <Col style={{float:'right'}} >
                             {/* </Row>
                             <Row style={{float : 'right'}}> */}
                                     <Button  onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>

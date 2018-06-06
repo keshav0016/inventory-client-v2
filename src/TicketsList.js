@@ -38,6 +38,7 @@ class TicketsList extends Component{
         this.setReason = this.setReason.bind(this)
         this.renderAcceptAssetTicket = this.renderAcceptAssetTicket.bind(this)
         this.renderRejectAssetTicket = this.renderRejectAssetTicket.bind(this)
+        this.cancelReason = this.cancelReason.bind(this)
     }
 
     setPendingChecked(){
@@ -108,6 +109,13 @@ class TicketsList extends Component{
         this.setState({
             reason : e.target.value
         })
+    }
+
+    cancelReason(){
+        this.setState({
+            reason:''
+        })
+        $('.modal-overlay').trigger('click')
     }
 
     handleList(){
@@ -202,7 +210,7 @@ class TicketsList extends Component{
                 <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Submit</Button>
-                    <Button className="modal-close" >Cancel</Button>
+                    <Button onClick={this.cancelReason} className="cancelButton" >Cancel</Button>
                 </div>
             </Row>
         </Modal> : null

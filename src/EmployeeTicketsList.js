@@ -200,7 +200,7 @@ class EmployeeTicketsList extends Component{
                     </div>
 
                     <div className = "consumableTab">
-                        {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen flow-text" ><h4>You doesn't have any tickets for now</h4></div> :
+                        {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen flow-text" ><h4>You don't have any tickets for now</h4></div> :
                         <div>
                             <Table className="consumableTable desktopView">
                                 <thead>
