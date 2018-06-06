@@ -64,6 +64,7 @@ class Admindashboard extends Component {
                         <Card className="z-depth-0" >
                             <h3  className='title'>Dashboard</h3 >
                             <div>
+                                {(this.state.consumablesPendingCount || this.state.consumablesLowStock) ?
                                 <Col s={12} m={6} l={6} >
                                 <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
                                     <div style={{marginTop:'3%', marginBottom:'5%'}} >
@@ -74,18 +75,20 @@ class Admindashboard extends Component {
                                     {/* <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p> */}
                                     <p>No of consumables running low on stock: {this.state.consumablesLowStock}</p>
                                 </Card>
-                                </Col>
-                                <Col s={12} m={6} l={6} >
-                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
-                                <div style={{marginTop:'3%', marginBottom:'5%'}} >
-                                <Icon>important_devices</Icon>
-                                <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Assets</span>
-                                </div>
-                                    <p>Pending Requests: {this.state.assetPendingCount}</p>
-                                    {/* <p>Accepted Requests: {this.state.assetAcceptedCount}</p> */}
-                                </Card>
-                                </Col>
-                                {this.state.repairDateNear.length > 0 ?
+                                </Col> : null
+                                }
+                                {this.state.assetPendingCount ? 
+                                    <Col s={12} m={6} l={6} >
+                                        <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                            <div style={{marginTop:'3%', marginBottom:'5%'}} >
+                                                <Icon>important_devices</Icon>
+                                                <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Assets</span>
+                                            </div>
+                                            <p>Pending Requests: {this.state.assetPendingCount}</p>
+                                            {/* <p>Accepted Requests: {this.state.assetAcceptedCount}</p> */}
+                                        </Card>
+                                    </Col> : null}
+                                {this.state.repairDateNear ?
                                 <Col s={12} m={6} l={6} >
                                     <Card className="teal-text dashboardContent small"  actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
                                     <div style={{marginTop:'3%', marginBottom:'5%'}} >
