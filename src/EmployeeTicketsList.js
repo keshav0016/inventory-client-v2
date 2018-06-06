@@ -153,7 +153,7 @@ class EmployeeTicketsList extends Component{
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You don't have any tickets for now</h4></Row> :
                         <div>
-                            <Table className="consumableTable desktopView" style={{fontFamily : 'Roboto', fontWeight : 350}} >
+                            <Table className="consumableTable desktopView" >
                                 <thead>
                                     <tr>
                                     <th data-field="ticket_number">Ticket Number</th>
