@@ -95,6 +95,7 @@ class AddAssetType extends Component{
             }
         })
         .then(res => {
+            let assetTypeName = this.state.assetType.value.charAt(0).toUpperCase() + this.state.assetType.value.slice(1).toLowerCase()
             if(res.data.message){
                 this.setState({
                     createAssetRequest : false
@@ -112,7 +113,7 @@ class AddAssetType extends Component{
                 $('.modal-overlay').click()
                 window.Materialize.toast(res.data.message, 4000)
                 if(this.props.setAssetTypeListRequest){
-                    this.props.setAssetTypeListRequest()
+                    this.props.setAssetTypeListRequest(assetTypeName)
                 }
                 else{
                     this.props.setHandleListRequest()
