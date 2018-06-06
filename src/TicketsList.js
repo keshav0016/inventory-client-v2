@@ -227,7 +227,7 @@ class TicketsList extends Component{
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Submit</Button>
-                    <Button className="modal-close" >Cancel</Button>
+                    <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
                 </div>
             </Row>
         </Modal> : null 
@@ -242,7 +242,7 @@ class TicketsList extends Component{
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Submit</Button>
-                    <Button className="modal-close" >Cancel</Button>
+                    <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
                 </div>
             </Row>
         </Modal> : null
