@@ -260,6 +260,10 @@ class ReceiveAsset extends Component{
         })
         $('label').addClass('active')
     }
+
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
     clearFields(){
         this.setState({
             to : {

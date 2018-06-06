@@ -142,6 +142,11 @@ class VendorUpdate extends Component{
     componentDidMount(){
         $('label').addClass('active')
     }
+
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
    handleUpdate(){
        axios({
            method: 'post',

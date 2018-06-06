@@ -52,6 +52,10 @@ class UpdateConsumablePurchase extends Component{
         $('label').addClass('active')
     }
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     calculateWholePrice(){
         this.setState({
             whole_price : this.state.item_price.value * this.state.purchased_quantity.value,

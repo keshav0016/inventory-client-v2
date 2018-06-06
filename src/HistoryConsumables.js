@@ -73,9 +73,8 @@ class HistoryConsumables extends Component{
             <h3 className="title">Consumable Details</h3>
            <Row className='splitModalButtons'>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
-           </Row>
-            {this.state.fetchHistory ? <div><Preloader size='small' /></div> : 
-            (this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
+           </Row> 
+            {(this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
                         <CardPanel className='z-depth-2'>
                             {consumable.vendor_name ? 

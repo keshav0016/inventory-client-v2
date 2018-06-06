@@ -57,6 +57,10 @@ class AssetType extends Component{
         $('label').addClass('active')
     }
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     setPage(e){
         this.setState({
             page : e,
@@ -78,7 +82,7 @@ class AssetType extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
                 <h3 className='title' >Asset Types</h3 >
-                { this.state.handleListRequest ? <Preloader size='small' /> : ( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
+                {( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
                 <Table className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>

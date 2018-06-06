@@ -60,28 +60,45 @@ class Admindashboard extends Component {
         return (
             <div>
                 <Row>
-                    <Col s={12} m={10} l={9} offset={'m1 l3'}>
+                    <Col s={12} m={12} l={12}>
                         <Card className="z-depth-0" >
                             <h3  className='title'>Dashboard</h3 >
-                            {this.state.handleListRequest ? <Preloader size='small' /> :
                             <div>
-                                <Card className="z-depth-2 teal-text dashboardContent" header={<div className="dashboardIcons" ><Icon>developer_board</Icon></div>} title="Consumables" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                <Col s={12} m={6} l={6} >
+                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                    <div style={{marginTop:'3%', marginBottom:'5%'}} >
+                                    <Icon>developer_board</Icon>
+                                    <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Consumables</span>
+                                    </div>
                                     <p>Pending Requests: {this.state.consumablesPendingCount}</p>
                                     {/* <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p> */}
                                     <p>No of consumables running low on stock: {this.state.consumablesLowStock}</p>
                                 </Card>
-                                <Card className="z-depth-2 teal-text dashboardContent" header={<div className="dashboardIcons" ><Icon>important_devices</Icon></div>} title="Assets" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                </Col>
+                                <Col s={12} m={6} l={6} >
+                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                <div style={{marginTop:'3%', marginBottom:'5%'}} >
+                                <Icon>important_devices</Icon>
+                                <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Assets</span>
+                                </div>
                                     <p>Pending Requests: {this.state.assetPendingCount}</p>
                                     {/* <p>Accepted Requests: {this.state.assetAcceptedCount}</p> */}
                                 </Card>
+                                </Col>
                                 {this.state.repairDateNear.length > 0 ?
-                                    <Card className="z-depth-2 teal-text dashboardContent" header={<div className="dashboardIcons" ><Icon>build</Icon></div>} title="Asset repair recover notification" actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
+                                <Col s={12} m={6} l={6} >
+                                    <Card className="teal-text dashboardContent small"  actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
+                                    <div style={{marginTop:'3%', marginBottom:'5%'}} >
+                                    <Icon>build</Icon>
+                                    <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Asset repair recover notification</span>
+                                    </div>
                                         {this.state.repairDateNear.map((repair, index) => {
                                             return <p style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
                                         })}
                                     </Card>
+                                </Col>
                                     : null}
-                            </div> }
+                            </div> 
                         </Card>
                     </Col>
                     {/* <Col m={4}>

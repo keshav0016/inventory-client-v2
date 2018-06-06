@@ -280,7 +280,7 @@ class Consumables extends Component{
                 </Input>
                 <Input s={12} l={4} m={5} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
                 </Row>
-                {this.state.handleListRequest ? <Preloader size='small' /> : (this.state.consumableList.length === 0 
+                {(this.state.consumableList.length === 0 
                     ?
 
                     <div className="noRecordsScreen">

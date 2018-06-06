@@ -184,6 +184,11 @@ class ResetPassword extends Component {
     componentDidMount() {
         $('label').addClass('active')
     }
+
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     handleSubmit() {
         if (this.state.Confirm_Password.value === this.state.New_Password.value) {
             axios({

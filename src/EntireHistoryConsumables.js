@@ -69,7 +69,7 @@ class EntireHistoryConsumables extends Component{
             <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                 {filterPane}
             </SideNav>
-            {this.state.fetchHistory ? <Preloader size='small' /> : (this.state.history.length < 1 ? 
+            {(this.state.history.length < 1 ? 
             <div className = 'noRecordsScreen'>No Records</div>
             :this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>

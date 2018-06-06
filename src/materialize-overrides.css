@@ -227,7 +227,7 @@ div.input-field.consumable-empty-error.col label.active:after
     font-family: "Roboto";
     font-weight: 300;
     display: inline-block;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .recoverTitle {

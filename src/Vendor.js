@@ -66,6 +66,10 @@ class Vendor extends Component{
         $('label').addClass('active')
     }
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     setPage(e){
         this.setState({
             page : e,
@@ -86,8 +90,7 @@ class Vendor extends Component{
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className="title">Vendors</h3 >
-                {this.state.handleListRequest ? <Preloader size='small' /> : 
-                    (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
+                    {(this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
                 <Table hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>

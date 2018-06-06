@@ -100,6 +100,10 @@ class PasswordChange extends Component {
     componentDidMount() {
         $('label').addClass('active')
     }
+
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
     handleSubmit(e) {
         e.preventDefault()
         if(!this.state.user_id.value){
