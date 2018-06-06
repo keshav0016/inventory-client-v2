@@ -21,7 +21,11 @@ class Tickets extends Component{
                 ,showError : false
             },
             assets: '',
-            item_type: 'Select',
+            item_type: {
+                value : 'Select'
+                ,error : ''
+                ,showError : false
+            },
             item: {
                 value : 'Select'
                 ,error : ''
@@ -35,6 +39,7 @@ class Tickets extends Component{
         this.confirmRequest = this.confirmRequest.bind(this)
         this.requestUser = this.requestUser.bind(this)
         this.itemTypeDropdown = this.itemTypeDropdown.bind(this)
+        this.cancelAll = this.cancelAll.bind(this)
     }
     requestResourceType(e){
         if(e.target.value !== 'Select'){
@@ -150,7 +155,23 @@ class Tickets extends Component{
             })
         }
         
-        if(!this.state.quantity.showError && !this.state.item.showError){
+        if (this.state.item_type.value === 'Select') {
+            this.setState({
+                item_type : Object.assign(this.state.item_type, {
+                    error : 'Item type is required'
+                    ,showError: true
+                })
+            })
+        }
+        else{
+            this.setState({
+                item_type : Object.assign(this.state.item_type, {
+                    showError: false
+                })
+            })
+        }
+
+        if(!this.state.quantity.showError && !this.state.item.showError && !this.state.item_type.showError){
             this.setState({
                 requestResource : true
             })
@@ -177,7 +198,7 @@ class Tickets extends Component{
                 user_id:this.state.user_id,
                 date:Date.now(),
                 item: this.state.item.value,
-                item_type:this.state.item_type,
+                item_type:this.state.item_type.value,
                 quantity:this.state.quantity.value,
             },
             withCredentials:true
@@ -192,7 +213,9 @@ class Tickets extends Component{
                     value : 'Select'
                 }),
                 disableItems : true
-                ,item_type : 'Select'
+                ,item_type : Object.assign(this.state.item_type, {
+                    value : 'Select'
+                })
             })
             if(res.data.message){
                 window.Materialize.toast(res.data.message, 4000)
@@ -225,28 +248,54 @@ class Tickets extends Component{
     $('label').addClass('active')
    }
 
+   cancelAll(){
+       this.setState({
+            quantity:{
+                value : ''
+                ,error : ''
+                ,showError : false
+            },
+            assets: '',
+            item_type: {
+                value : 'Select'
+                ,error : ''
+                ,showError : false
+            },
+            item: {
+                value : 'Select'
+                ,error : ''
+                ,showError : false
+            }
+       })
+       $(".modal-overlay").trigger('click');        
+    }
+
+
    render(){
         return(
-            <div className="listComponent" >
+            <div className="" >
                 <h3 className="title">Ticket Request</h3>
                 <div className ='RequestForm'>
                 <Row>
-                    <Input s={12} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown}>
+                    <Input s={12} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown} error={this.state.item_type.showError ? this.state.item_type.error : null}>
                         <option value='Select'>Select</option>
                         <option value='assets'>Assets</option>
                         <option value='consumables'>Consumables</option>                        
                     </Input>
                 </Row>
                 <Row>
-                    <Input s={12} label='Items' type='select' value={this.state.disableItems ? 'Select' : this.state.item.value} onChange={this.requestResourceType} disabled={this.state.disableItems} error={this.state.item.showError ? this.state.item.error : null}>
+                    <Input s={12} label='Items' type='select' value={this.state.disableItems ? 'Select' : this.state.item.value} onChange={this.requestResourceType}  error={this.state.item.showError ? this.state.item.error : null}>
                         {this.itemDropdown()}
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={12} label="Quantity" type="number" min={0} value = {this.state.quantity.value} onChange = {this.requestQuantity} disabled={this.state.disableItems} error={this.state.quantity.showError ? this.state.quantity.error : null}/>
+                    <Input  s={12} label="Quantity" type="number" min={0} value = {this.state.quantity.value} onChange = {this.requestQuantity}  error={this.state.quantity.showError ? this.state.quantity.error : null}/>
                 </Row>
-                <Button className='requestbtn'waves='light' type = "submit" name = "action" onClick={this.checkForValidation} disabled={this.state.disableItems}>Request</Button>
                 {this.state.requestResource ? this.confirmRequest() : null} 
+                </div>
+                <div className='splitModalButtons'>
+                    <Button className=''waves='light' type = "submit" name = "action" onClick={this.checkForValidation} >Request</Button>
+                    <Button  onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                    
             </div>

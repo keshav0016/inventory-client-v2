@@ -266,7 +266,7 @@ class EmployeeUpdate extends Component {
         this.handleGender = this.handleGender.bind(this)
         this.handleUser_Id = this.handleUser_Id.bind(this)
         this.setEmail = this.setEmail.bind(this)
-
+        this.cancelAll = this.cancelAll.bind(this)
     }
     componentDidMount() {
         $('label').addClass('active')
@@ -513,6 +513,53 @@ class EmployeeUpdate extends Component {
             })
         })
     }
+
+    cancelAll(){
+        this.setState({
+            first_name: {
+                value: this.props.user.first_name,
+                showError: false,
+                error: "",
+            },
+            last_name: {
+                value: this.props.user.last_name,
+                showError: false,
+                error: "",
+            },
+            age: {
+                value: this.props.user.age,
+                showError: false,
+                error: "",
+            },
+            gender: {
+                value: this.props.user.gender,
+                showError: false,
+                error: "",
+            },
+            department: {
+                value: this.props.user.department,
+                showError: false,
+                error: "",
+            },
+            designation: {
+                value: this.props.user.designation,
+                showError: false,
+                error: "",
+            },
+            user_id: {
+                value: this.props.user.user_id,
+                showError: false,
+                error: "",
+            },
+            email: {
+                value: this.props.user.email,
+                showError: false,
+                error: "",
+            }
+        })
+        $(".modal-overlay").trigger('click');        
+    }
+
     render() {
         var addEmployeeForm = (
             <div className="no-footer">
@@ -576,7 +623,7 @@ class EmployeeUpdate extends Component {
                 </Row>
                 <div className="splitModalButtons">
                     <Button className='addbtn' onClick={this.handleCreate}>Update</Button>
-                    <Button className="modal-close cancelButton">Cancel</Button>                
+                    <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>                
                 </div>
             </div>
 
