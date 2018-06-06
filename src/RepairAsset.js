@@ -163,11 +163,14 @@ class RepairAsset extends Component{
         })
     }
 
-    setVendorListRequest(){
+    setVendorListRequest(vendorName){
         this.setState({
             vendorListRequest : true
+            ,vendor : Object.assign({
+                value : vendorName
+            })
         })
-        $('#addVendor .modal-footer button').click()
+        $('.modal-overlay').trigger('click')
     }
 
     vendorListDropdown(){
