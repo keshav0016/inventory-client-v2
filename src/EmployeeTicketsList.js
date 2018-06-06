@@ -272,7 +272,7 @@ class EmployeeTicketsList extends Component{
                 <Modal 
                     actions={null}
                     trigger={<NavItem><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add'></Button></NavItem>}>
-                    <Tickets />
+                    <Tickets setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
                 {/* <Link to={{ pathname : '/employee/RequestTicket'}}><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add' /></Link>                 */}
             </div>
