@@ -453,9 +453,12 @@ class AddAsset extends Component{
         })
     }
 
-    setAssetTypeListRequest(){
+    setAssetTypeListRequest(assetTypeName){
         this.setState({
             assetTypeListRequest : true
+            ,assetType : Object.assign({
+                value : assetTypeName
+            })
         })
     }
 
