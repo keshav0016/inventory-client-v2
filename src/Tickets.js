@@ -231,7 +231,7 @@ class Tickets extends Component{
                 window.Materialize.toast('sorry, request can not be made', 4000)
 
             }
-            // this.props.setHandleListRequest()
+            this.props.setHandleListRequest()
         })
         // .catch(error => {
         //     window.Materialize.toast('sorry, request can not be made', 4000)
