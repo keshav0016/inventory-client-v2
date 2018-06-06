@@ -108,10 +108,18 @@ class AddConsumables extends Component{
                 })
             })
         }
-        if(Number(this.state.purchased_quantity.value) === 0){
+        if(!this.state.purchased_quantity.value){
             this.setState({
                 purchased_quantity: Object.assign(this.state.purchased_quantity, {
                     error: "The purchased quantity should not be empty",
+                    showError: true
+                })
+            })
+        }
+        if(this.state.purchased_quantity.value === 0){
+            this.setState({
+                purchased_quantity: Object.assign(this.state.purchased_quantity, {
+                    error: "The purchased quantity should not be zero",
                     showError: true
                 })
             })
@@ -132,7 +140,15 @@ class AddConsumables extends Component{
                 })
             })
         }
-        if(Number(this.state.item_price.value) === 0){
+        if(!this.state.item_price.value){
+            this.setState({
+                item_price: Object.assign(this.state.item_price, {
+                    error: "The item price should not be empty",
+                    showError: true
+                })
+            })
+        }
+        if(this.state.item_price.value === 0){
             this.setState({
                 item_price: Object.assign(this.state.item_price, {
                     error: "The item price should not be zero",
