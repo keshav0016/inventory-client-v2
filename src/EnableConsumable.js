@@ -46,7 +46,7 @@ class EnableConsumable extends Component{
                 </p>
                 <div className='splitModalButtons'>
                         <Button onClick = {this.enableConsumableFromDb}>Enable</Button>
-                        <Button className="modal-close">Cancel</Button>
+                        <Button className="cancelButton modal-close">Cancel</Button>
                 </div>
             </div>
         )

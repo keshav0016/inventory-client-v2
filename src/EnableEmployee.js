@@ -37,7 +37,7 @@ class EnableEmployee extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h5 className="title">Enable Asset</h5>                            
+                <h5 className="title">Enable Employee</h5>                            
                 <p>{`Do you really want to enable `}
                     <b style={{color:'teal'}}>
                         {`${this.props.user.first_name} `}
@@ -46,7 +46,7 @@ class EnableEmployee extends Component{
                 </p>
                 <div className="splitModalButtons">
                         <Button onClick = {this.enableEmployeeFromDb}>Enable</Button>
-                        <Button className="modal-close">Cancel</Button>
+                        <Button className="cancelButton modal-close">Cancel</Button>
                 </div>
             </div>
         )

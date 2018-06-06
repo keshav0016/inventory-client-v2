@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Preloader} from 'react-materialize'
-import {Redirect} from 'react-router-dom'
+import {Row, Input, Button, Preloader, Col, Icon} from 'react-materialize'
+import {Redirect, Link} from 'react-router-dom'
 import './Employee.css'
 import { baseUrl } from './config';
 
@@ -209,7 +209,12 @@ class AcceptAssetTicket extends Component{
                         </div> : null}
                     </Row>
                     <div className='splitModalButtons'>
-                        <Button onClick={this.checkForValidation}>Submit</Button>
+                        <Row>
+                            <Col offset={'l6'} style={{float: 'right'}}>
+                                <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                                <Link to='/admin/tickets'><Button className="cancelButton">Cancel</Button></Link>                            
+                            </Col>
+                        </Row>
                     </div>
                 </React.Fragment>))
                 }
