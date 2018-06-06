@@ -257,8 +257,7 @@ class Assets extends Component{
                     {/* <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button> */}
                 </Row>
                 {filterPane}
-                {this.state.loading ? <Preloader size='small' /> :
-                (this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+                {(this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
                 <Table className="assetTable desktopView listTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>

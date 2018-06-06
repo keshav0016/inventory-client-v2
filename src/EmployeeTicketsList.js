@@ -147,9 +147,8 @@ class EmployeeTicketsList extends Component{
                 <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                     {filterPane}
                 </SideNav>
-                {filterPane}                
-                { this.state.handleListRequest ? <Preloader size='small' /> :                               
-               <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
+                {filterPane}                                               
+               {<Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You don't have any tickets for now</h4></Row> :
                         <div>

@@ -87,6 +87,10 @@ class UpdateConsumables extends Component {
         })
     }    
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     setConsumableName(e) {
         this.setState({
             name : Object.assign(this.state.name, {

@@ -256,6 +256,10 @@ class Tickets extends Component{
     $('label').addClass('active')
    }
 
+   componentDidUpdate(){
+    $('label').addClass('active')
+}
+
    cancelAll(){
        this.setState({
             quantity:{

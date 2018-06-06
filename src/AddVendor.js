@@ -212,7 +212,7 @@ class AddVendor extends Component{
 
                 </Row>
                 <div className='splitModalButtons'>
-                    <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
+                    <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit</Button>
                     <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}

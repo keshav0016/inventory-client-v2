@@ -439,7 +439,7 @@ class UpdateAsset extends Component {
                     </Input>
                 </Row>
                 <div className="splitModalButtons">
-                    <Button waves='light' onClick={this.checkForValidation}>Update <Icon small right>send</Icon></Button>
+                    <Button waves='light' onClick={this.checkForValidation}>Update</Button>
                     <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
                 </div>
                 {this.state.updateAssetRequest ? this.updateAssetIntoDb() : null}

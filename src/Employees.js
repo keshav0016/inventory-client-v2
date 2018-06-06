@@ -112,8 +112,7 @@ class EmployeesList extends Component {
         <Row>
         <Input s={12} m={6} l={4} placeholder="Search by Employee ID or Employee Name" onChange = {this.setSearch} />
         </Row>
-        {this.state.loading ? <Preloader size='small' /> :
-                (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+                {(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
             <Table  className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>

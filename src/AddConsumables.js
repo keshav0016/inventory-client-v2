@@ -91,6 +91,12 @@ class AddConsumables extends Component{
         })
     }
 
+    componentDidUpdate(){
+        $(document).ready(function(){
+            $('label').addClass('active');
+        })   
+    }
+
     checkForValidation(){
         if (!this.state.name.value) {
             this.setState({

@@ -183,8 +183,7 @@ class AcceptAssetTicket extends Component{
             <div className="listComponent" >
             <Row>
                 <h3 className='title'>Accept Asset</h3>
-                {this.state.loading ? <Preloader size='small'/> :
-                (this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
+                {(this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
                 (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : <React.Fragment>
                     <Row>
                         <Row>
@@ -216,8 +215,7 @@ class AcceptAssetTicket extends Component{
                             </Col>
                         </Row>
                     </div>
-                </React.Fragment>))
-                }
+                </React.Fragment>))}
                 {this.state.redirect ? <Redirect push to="/admin/tickets"/> : null}
                 {this.state.acceptTicketRequest ? this.acceptTicket() : null}
             </Row>

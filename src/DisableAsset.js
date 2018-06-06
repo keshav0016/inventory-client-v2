@@ -46,7 +46,7 @@ class DisableAsset extends Component{
                 </p>
                 <div className="splitModalButtons">
                         <Button onClick = {this.disableAssetFromDb} >OK</Button>
-                        <Button className="modal-close" >Cancel</Button>
+                        <Button className="cancelButton modal-close" >Cancel</Button>
                 </div>
             </div>
         )

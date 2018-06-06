@@ -271,6 +271,11 @@ class EmployeeUpdate extends Component {
     componentDidMount() {
         $('label').addClass('active')
     }
+
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     handleCreate() {
         var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         if (!this.state.user_id.value){

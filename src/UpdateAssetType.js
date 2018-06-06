@@ -112,6 +112,10 @@ class UpdateAssetType extends Component{
         $('label').addClass('active')
     }
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     render(){
         return(
             <div style={{marginLeft: '30px',marginRight: '30px'}}>

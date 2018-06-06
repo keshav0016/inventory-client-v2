@@ -605,6 +605,10 @@ class AddAsset extends Component{
         $('label').addClass('active')
     }
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     handleVendorList(){
         axios({
             method : 'get',
@@ -687,7 +691,7 @@ class AddAsset extends Component{
                         <div className="splitModalButtons"> 
                             <Row>
                                 <Col offset={'l6'} style={{float: 'right'}}>
-                                    <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                                    <Button onClick = {this.checkForValidation} >SUBMIT</Button>
                                     <Link to='/admin/assets'><Button className="cancelButton">Cancel</Button></Link>                            
                                 </Col>
                             </Row>

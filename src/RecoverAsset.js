@@ -68,6 +68,10 @@ class DeleteAsset extends Component{
         $('label').addClass('active')
     }
 
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     render(){
         return(
             <div className="no-footer">
