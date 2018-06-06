@@ -241,6 +241,10 @@ a.selected {
     background-color: #4db6ac;
 }
 
+a.selected:hover {
+    background-color: #4db6ac;
+}
+
 .addAssetModalButtons1 {
     margin-top: 5px;
 }
