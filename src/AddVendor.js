@@ -142,6 +142,7 @@ class AddVendor extends Component{
                 })                
             }
             else{
+                let vendorName = this.state.name.value
                 this.setState({
                     name: {
                         value: '',
@@ -162,7 +163,7 @@ class AddVendor extends Component{
                 })
                 window.Materialize.toast('Vendor Added', 4000)
                 if(this.props.setVendorListRequest){
-                    this.props.setVendorListRequest()
+                    this.props.setVendorListRequest(vendorName)
                 }                
                 else{
                     this.props.setHandleListRequest(true)

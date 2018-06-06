@@ -322,9 +322,12 @@ class AddAsset extends Component{
         }
     }
 
-    setVendorListRequest(){
+    setVendorListRequest(vendorName){
         this.setState({
             vendorListRequest : true
+            ,vendor : Object.assign({
+                value : vendorName
+            })
         })
         $('.modal-overlay').click()
     }
@@ -665,7 +668,7 @@ class AddAsset extends Component{
                                 actions={null}
                                 id="addVendor"
                                 trigger={<Button>Add Vendor</Button>}>
-                                <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                                <AddVendor  setVendorListRequest = {this.setVendorListRequest}/>
                             </Modal>
                         </Col>
                         </Row>
