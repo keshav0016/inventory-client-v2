@@ -25,6 +25,7 @@ class EmployeeTicketsList extends Component{
             isPendingChecked : true,
             isAcceptedChecked : false,
             isRejectedChecked : false,
+            selectedIndex : 0
         }
         this.setAssetPage = this.setAssetPage.bind(this)
         this.setConsumablePage = this.setConsumablePage.bind(this)
@@ -33,7 +34,13 @@ class EmployeeTicketsList extends Component{
         this.setPendingChecked = this.setPendingChecked.bind(this)
         this.setAcceptedChecked = this.setAcceptedChecked.bind(this)
         this.setRejectedChecked = this.setRejectedChecked.bind(this)
+        this.setActiveTab = this.setActiveTab.bind(this);
     }
+
+    setActiveTab(index) {
+        this.setState({selectedIndex: index})
+    }
+
     setPendingChecked(){
         this.setAssetPage(1)
         this.setConsumablePage(1)
@@ -64,12 +71,14 @@ class EmployeeTicketsList extends Component{
     setAssetPage(e){
         this.setState({
             assetPage : e,
+            selectedIndex : 0,
             handleListRequest : true
         })
     }
     setConsumablePage(e){
         this.setState({
             consumablePage : e,
+            selectedIndex : 1,
             handleListRequest : true
         })
     }
@@ -140,7 +149,7 @@ class EmployeeTicketsList extends Component{
                 </SideNav>
                 {filterPane}                
                 { this.state.handleListRequest ? <Preloader size='small' /> :                               
-               <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
+               <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You don't have any tickets for now</h4></Row> :
                         <div>
@@ -279,20 +288,17 @@ class Tabs extends Component {
             selectedIndex: this.props.selectedIndex || 0,
         }
 
-        this.setActiveTab = this.setActiveTab.bind(this);
     }
-    setActiveTab(index) {
-        this.setState({selectedIndex: index})
-    }
+   
     render(){
         return (<div>
             <div style={{display : 'flex'}} className="tabs z-depth-1 flow-text">
                 {
-                    this.props.tabHeaders.map((tab, index) => <Tab onClick={this.setActiveTab} key={index} index={index}>{tab}</Tab>)
+                    this.props.tabHeaders.map((tab, index) => <Tab onClick={this.props.setActiveTab} selectedIndex={this.props.selectedIndex} key={index} index={index}>{tab}</Tab>)
                 }
             </div>
             <div className="content">
-                {this.props.children[this.state.selectedIndex]}
+                {this.props.children[this.props.selectedIndex]}
             </div>
         </div>)
     }
@@ -309,7 +315,7 @@ class Tab extends Component {
         $(`.tabs div:nth-child(${this.props.index+1})`).addClass('activeTab')
     }
     render(){
-        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{ paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
+        return <div className={this.props.index === this.props.selectedIndex ? 'activeTab' : ''} style={{ paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
     }
 }
 
