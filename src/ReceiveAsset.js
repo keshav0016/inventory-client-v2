@@ -45,7 +45,7 @@ class ReceiveAsset extends Component{
 
     calculateTotal(){
         this.setState({
-            total : this.state.amount.value + ((this.state.amount.value * this.state.gst.value)/100)
+            total :(Number(this.state.amount.value) + (Number(this.state.amount.value) * ((Number(this.state.gst.value))/100)))
         })
     }
 
@@ -58,7 +58,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        else{
+        if(this.state.to.value){
             this.setState({
                 to : Object.assign(this.state.to, {
                     showError : false,
@@ -75,7 +75,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        else{
+        if(this.state.repair_invoice.value){
             this.setState({
                 repair_invoice : Object.assign(this.state.repair_invoice, {
                     showError : false,
@@ -88,11 +88,19 @@ class ReceiveAsset extends Component{
             this.setState({
                 amount : Object.assign(this.state.amount, {
                     showError : true,
-                    error : 'Amount can not be negative'
+                    error : 'Amount cannot be negative'
                 })
             })
         }
-        else{
+        if(Number(this.state.amount.value) === 0){
+            this.setState({
+                amount : Object.assign(this.state.amount, {
+                    showError : true,
+                    error : 'Amount cannot be zero'
+                })
+            })
+        }
+        if(Number(this.state.amount.value) > 0){
             this.setState({
                 amount : Object.assign(this.state.amount, {
                     showError : false,
@@ -109,7 +117,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        else{
+        if(Number(this.state.gst.value) >= 0){
             this.setState({
                 gst : Object.assign(this.state.gst, {
                     showError : false,
@@ -169,7 +177,7 @@ class ReceiveAsset extends Component{
     setAmount(e){
         this.setState({
             amount : Object.assign(this.state.amount, {
-                value : Number(e.target.value)
+                value : e.target.value
             })
         })
         this.calculateTotal()
@@ -178,7 +186,7 @@ class ReceiveAsset extends Component{
     setGst(e){
         this.setState({
             gst : Object.assign(this.state.gst, {
-                value : Number(e.target.value)
+                value : e.target.value
             }),
         })
         this.calculateTotal()
@@ -277,6 +285,7 @@ class ReceiveAsset extends Component{
             total : 0,
             receiveAssetRequest : false,
         })
+        $(".modal-overlay").trigger('click');
     }
 
 
@@ -297,11 +306,11 @@ class ReceiveAsset extends Component{
                     <Input s={6} label="Amount" type = "number" min={0} value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null}/>
                     <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>
                     
-                    <Badge>Total : {this.state.total}</Badge>
+                    <Badge>Total : {this.state.total.toFixed(2)}</Badge>
                 </Row>
                 <div className="splitModalButtons">
                     <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
-                    <Button className="modal-close" onClick = {this.clearFields}>Cancel</Button>
+                    <Button className="cancelButton" onClick = {this.clearFields}>Cancel</Button>
                 </div>
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}
             </div>
