@@ -67,7 +67,7 @@ class AssetType extends Component{
     renderButton(item){
         return <Modal
             actions={null}
-            trigger={<Button>Update</Button>}>
+            trigger={<Button>Edit</Button>}>
             <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
             </Modal>
     }
