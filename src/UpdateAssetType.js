@@ -20,6 +20,7 @@ class UpdateAssetType extends Component{
         this.setMaxRequest = this.setMaxRequest.bind(this)
         this.updateAssetTypeInDb = this.updateAssetTypeInDb.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
+        this.cancelAll = this.cancelAll.bind(this)
     }
 
     checkForValidation(){
@@ -96,6 +97,17 @@ class UpdateAssetType extends Component{
         })
     }
 
+    cancelAll(){
+        this.setState({
+            maxRequest : {
+                value: this.props.maxRequest,
+                error: '',
+                showError: false
+            }
+        })
+        $(".modal-overlay").trigger('click');
+    }
+
     componentDidMount(){
         $('label').addClass('active')
     }
@@ -110,7 +122,7 @@ class UpdateAssetType extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button onClick={this.checkForValidation} >Update</Button>
-                    <Button className="modal-close cancelButton" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                  {this.state.updateAssetTypeRequest ? this.updateAssetTypeInDb() : null}
             </div>

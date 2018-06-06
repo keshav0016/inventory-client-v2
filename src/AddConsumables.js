@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Badge, Modal, Autocomplete, Col} from 'react-materialize'
+import {Row, Input, Button, Badge, Modal, Autocomplete, Col, Icon} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import {
-    Redirect
+    Redirect, Link
   } from 'react-router-dom';
 
 class AddConsumables extends Component{
@@ -508,22 +508,32 @@ class AddConsumables extends Component{
                             onChange = {this.setVendorName}
                             value={this.state.vendor_name.value}
                         />
+                        <Col s={6} className='addAssetModalButtons2' >
+                            <Modal
+                            actions={null}
+                            id="addVendor"
+                            trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
+                            <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
+                            </Modal> 
+                        </Col>
                     </Row>
                     <Badge>Total : ₹{this.state.total.toFixed(2)}</Badge>
                     <Badge>Total Price : ₹{this.state.whole_price.toFixed(2)}</Badge>
                 </Row>
                     <div className="splitModalButtons" >
-                    <Row>
-                        <Col s={12}>
-                    <Modal
-                        actions={null}
-                        id="addVendor"
-                        trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
-                        <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
-                    </Modal> 
-                            <Button style={{float: 'right'}} waves='light' type = "submit" onClick={this.checkForValidation}>Add Consumable</Button>
-                        </Col>
-                    </Row>
+                    {/* <Row> */}
+                    {/* <Col s={12}>
+                    
+                    <Button style={{float: 'right'}} waves='light' type = "submit" onClick={this.checkForValidation}>Add Consumable</Button>
+                    </Col> */}
+                        <Row>
+                            <Col offset={'l6'} style={{float: 'right'}}>
+                                <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                                <Link to='/admin/consumables'><Button className="cancelButton">Cancel</Button></Link>                            
+                            </Col>
+                        </Row>
+                    {/* </Row> */}
+
                     </div>
                     {this.state.addConsumableRequest ? this.addConsumable () : null}
                     {this.state.vendorListRequest ? this.handleVendorList() : null}

@@ -169,7 +169,15 @@ class EmployeeAdd extends Component {
         }),
       })
     }
-    if(this.state.department.value){
+    if(this.state.department.value === 'select'){
+      this.setState({
+        department: Object.assign(this.state.department, {
+          error: "Department is required",
+          showError: true,
+        }),
+      })
+    }
+    if(this.state.department.value !== 'select'){
       this.setState({
         department: Object.assign(this.state.department, {
           error: "",
@@ -401,6 +409,7 @@ class EmployeeAdd extends Component {
             <option value='select'>select</option>
             <option value='Sr.HR Manager'>Sr.HR Manager</option>
             <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
+            <option value='HR Admin'>HR Admin</option>
           </Input> : null }
           {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
@@ -419,7 +428,7 @@ class EmployeeAdd extends Component {
           {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='QA Lead'>QA Lead</option>
-            <option value='Software Test Development Engineer'>Software Test Development Engineer</option>
+            <option value='Software Test Development Engineer'>Software Test Engineer</option>
           </Input> : null}
         </Row>
         <div className="splitModalButtons" >
