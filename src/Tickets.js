@@ -60,7 +60,7 @@ class Tickets extends Component{
     }
 
     requestQuantity(e){
-        if(this.state.item_type === 'consumables'){
+        if(this.state.item_type.value === 'consumables'){
             this.setState({
                 quantity: Object.assign(this.state.quantity, {
                     value : e.target.value
@@ -78,7 +78,12 @@ class Tickets extends Component{
         else{
             if(e.target.value === 'assets'){
                 this.setState({
-                    item_type : 'assets',
+
+                    item_type : Object.assign(this.state.item_type, {
+                        value : 'assets'
+                        ,showError : false
+                    }),
+
                     quantity : Object.assign(this.state.quantity, {
                         value : 1
                         ,showError : false
@@ -88,7 +93,10 @@ class Tickets extends Component{
             }
             else{
                 this.setState({
-                    item_type : 'consumables',
+                    item_type : Object.assign(this.state.item_type, {
+                        value : 'consumables'
+                        ,showError : false
+                    }),
                     disableItems : false
                 })
             }
@@ -99,7 +107,7 @@ class Tickets extends Component{
     itemDropdown(){
         var itemArr = []
         itemArr.push(<option key='Select' value='Select'>Select</option>)
-        if(this.state.item_type === 'assets'){
+        if(this.state.item_type.value === 'assets'){
             for(let index = 0; index <= this.state.assets; index++){
                 itemArr.push(<option key={index} value={this.state.availableItems[index]}>{this.state.availableItems[index]}</option>)
             }
@@ -277,7 +285,7 @@ class Tickets extends Component{
                 <h3 className="title">Ticket Request</h3>
                 <div className ='RequestForm'>
                 <Row>
-                    <Input s={12} label='Item Type' type = 'select' value={this.state.item_type} onChange={this.itemTypeDropdown} error={this.state.item_type.showError ? this.state.item_type.error : null}>
+                    <Input s={12} label='Item Type' type = 'select' value={this.state.item_type.value} onChange={this.itemTypeDropdown} error={this.state.item_type.showError ? this.state.item_type.error : null}>
                         <option value='Select'>Select</option>
                         <option value='assets'>Assets</option>
                         <option value='consumables'>Consumables</option>                        

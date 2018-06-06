@@ -25,6 +25,7 @@ class TicketsList extends Component{
             checkAll : false,
             expected_recovery : ''
             ,reason : ''
+            ,selectedIndex : 0
         }
         this.setAssetPage = this.setAssetPage.bind(this)
         this.setConsumablePage = this.setConsumablePage.bind(this)
@@ -38,6 +39,11 @@ class TicketsList extends Component{
         this.setReason = this.setReason.bind(this)
         this.renderAcceptAssetTicket = this.renderAcceptAssetTicket.bind(this)
         this.renderRejectAssetTicket = this.renderRejectAssetTicket.bind(this)
+        this.setActiveTab = this.setActiveTab.bind(this);
+    }
+
+    setActiveTab(index) {
+        this.setState({selectedIndex: index})
     }
 
     setPendingChecked(){
@@ -76,24 +82,19 @@ class TicketsList extends Component{
     }
 
     setCheckAll(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
-        if(!this.state.checkAll){
-            this.setState({
-                checkAll : true
-            })
-        }
-        else{
-            this.setState({
-                checkAll : false
-            })
-        }
+        this.setState({
+            checkAll : !this.state.checkAll
+            ,assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
+        })
     }
 
     setAssetPage(e){
         this.setState({
             assetPage : e,
             handleListRequest : true
+            ,selectedIndex : 0
         })
     }
 
@@ -101,6 +102,7 @@ class TicketsList extends Component{
         this.setState({
             consumablePage : e,
             handleListRequest : true
+            ,selectedIndex : 1
         })
     }
 
@@ -260,7 +262,7 @@ class TicketsList extends Component{
                 </SideNav>
                 {this.state.handleListRequest ? this.handleList() : null}
                 { this.state.handleListRequest ? <Preloader size='small' /> :                
-                <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={0}>
+                <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">
                         {this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
                         <div>
@@ -402,20 +404,17 @@ class Tabs extends Component {
             selectedIndex: this.props.selectedIndex || 0,
         }
 
-        this.setActiveTab = this.setActiveTab.bind(this);
     }
-    setActiveTab(index) {
-        this.setState({selectedIndex: index})
-    }
+    
     render(){
         return (<div>
             <div style={{display : 'flex'}} className="tabs z-depth-1 flow-text">
                 {
-                    this.props.tabHeaders.map((tab, index) => <Tab onClick={this.setActiveTab} key={index} index={index}>{tab}</Tab>)
+                    this.props.tabHeaders.map((tab, index) => <Tab onClick={this.props.setActiveTab} selectedIndex={this.props.selectedIndex} key={index} index={index}>{tab}</Tab>)
                 }
             </div>
             <div className="content">
-                {this.props.children[this.state.selectedIndex]}
+                {this.props.children[this.props.selectedIndex]}
             </div>
         </div>)
     }
@@ -432,7 +431,7 @@ class Tab extends Component {
         $(`.tabs div:nth-child(${this.props.index+1})`).addClass('activeTab')
     }
     render(){
-        return <div className={this.props.index === 0 ? 'activeTab' : ''} style={{ paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
+        return <div className={this.props.index === this.props.selectedIndex ? 'activeTab' : ''} style={{ paddingLeft : '1%', cursor : 'pointer'}} onClick={this.handleClick}>{this.props.children}</div>
     }
 }
 
