@@ -41,7 +41,9 @@ class Logout extends Component{
             
         })
         .catch(error=>{
-            alert('error logging out')
+            this.setState({
+                home : true
+            })
         })
     }
 }
