@@ -605,11 +605,15 @@ class AddAsset extends Component{
     }
 
     componentDidMount(){
-        $('label').addClass('active')
+        $(document).ready(function(){
+            $('label').addClass('active');
+        })   
     }
 
     componentDidUpdate(){
-        $('label').addClass('active')
+        $(document).ready(function(){
+            $('label').addClass('active');
+        })   
     }
 
     handleVendorList(){
