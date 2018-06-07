@@ -88,7 +88,9 @@ class UpdateConsumables extends Component {
     }    
 
     componentDidUpdate(){
-        $('label').addClass('active')
+        $(document).ready(function(){
+            $('label').addClass('active');
+        }) 
     }
 
     setConsumableName(e) {

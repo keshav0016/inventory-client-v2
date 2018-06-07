@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Row, Input, Button} from 'react-materialize'
+import {Row, Input, Button, Col} from 'react-materialize'
 import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import {
-  Redirect
+  Redirect, Link
 } from 'react-router-dom';
 
 class EmployeeAdd extends Component {
@@ -67,11 +67,15 @@ class EmployeeAdd extends Component {
 
   }
   componentDidMount(){
-    $('label').addClass('active')
+    $(document).ready(function(){
+      $('label').addClass('active');
+  }) 
   }
 
   componentDidUpdate(){
-    $('label').addClass('active')
+    $(document).ready(function(){
+      $('label').addClass('active');
+  }) 
 }
   handleCreate(){
     var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -435,10 +439,18 @@ class EmployeeAdd extends Component {
             <option value='Software Test Development Engineer'>Software Test Engineer</option>
           </Input> : null}
         </Row>
-        <div className="splitModalButtons" >
+        {/* <div className="splitModalButtons" >
         <Row>
           <Button className='addbtn' onClick={this.handleCreate}>Add</Button>
         </Row>
+        </div> */}
+        <div className="splitModalButtons" >
+            <Row>
+                <Col offset={'l6'} style={{float: 'right'}}>
+                    <Button onClick = {this.handleCreate} >SUBMIT</Button>
+                    <Link to='/admin/employees'><Button className="cancelButton">Cancel</Button></Link>                            
+                </Col>
+            </Row>
         </div>
       </div>
 

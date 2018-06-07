@@ -313,7 +313,7 @@ class ReceiveAsset extends Component{
                     <Badge>Total : {this.state.total.toFixed(2)}</Badge>
                 </Row>
                 <div className="splitModalButtons">
-                    <Button waves='light' onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button><span> </span>
+                    <Button waves='light' onClick = {this.checkForValidation} >Submit</Button><span> </span>
                     <Button className="cancelButton" onClick = {this.clearFields}>Cancel</Button>
                 </div>
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}

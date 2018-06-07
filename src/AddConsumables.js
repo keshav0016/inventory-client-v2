@@ -553,7 +553,7 @@ class AddConsumables extends Component{
                     </Col> */}
                         <Row>
                             <Col offset={'l6'} style={{float: 'right'}}>
-                                <Button onClick = {this.checkForValidation} >SUBMIT <Icon small right>send</Icon></Button>
+                                <Button onClick = {this.checkForValidation} >SUBMIT</Button>
                                 <Link to='/admin/consumables'><Button className="cancelButton">Cancel</Button></Link>                            
                             </Col>
                         </Row>
