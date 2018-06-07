@@ -177,7 +177,7 @@ class AddVendor extends Component{
                     },
                     addVendorRequest : false
                 })
-                window.Materialize.toast('Vendor Added', 4000)
+                window.Materialize.toast(res.data.message, 4000)
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
                 }                
