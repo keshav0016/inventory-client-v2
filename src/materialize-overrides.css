@@ -225,9 +225,9 @@ div.input-field.consumable-empty-error.col label.active:after
 
 .title{
     font-family: "Roboto";
-    font-weight: 300;
+    font-weight: 400;
     display: inline-block;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .recoverTitle {
@@ -239,10 +239,12 @@ div.input-field.consumable-empty-error.col label.active:after
 
 a.selected {
     background-color: #4db6ac;
+    color: white;
 }
 
 a.selected:hover {
     background-color: #4db6ac;
+    color: white;
 }
 
 .addAssetModalButtons1 {

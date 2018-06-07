@@ -86,7 +86,7 @@ class Admindashboard extends Component {
                                 </Card>
                                 </Col>
                                 {this.state.repairDateNear.length > 0 ?
-                                <Col s={12} m={6} l={6} >
+                                <Col s={12} m={6} l={6} offset={'m3 l3'} >
                                     <Card className="teal-text dashboardContent small"  actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
                                     <div style={{marginTop:'3%', marginBottom:'5%'}} >
                                     <Icon>build</Icon>

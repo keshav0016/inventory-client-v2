@@ -257,7 +257,7 @@ class Consumables extends Component{
                 <Input style={{color:'white'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
                 <Input style={{color:'white'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
             </Row>
-                <Button onClick={this.checkForValidation} className="filterButton">Filter</Button>
+                <Button onClick={this.checkForValidation} className="filterButton">Apply</Button>
                 <br />
                 <br />
                 <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
@@ -271,14 +271,14 @@ class Consumables extends Component{
                     {filterPane}
                 </SideNav>
                 <Row>
-                <Input s={12} l={4} m={5} type='select' onChange={this.sortBy}>
+                <Input label='Sorting filter' s={12} l={3} m={3} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
                     <option value='quantityAsc'>Quantity [Low - High]</option>
                     <option value='quantityDesc'>Quantity [High - Low]</option>
                     <option value='purchasedAsc'>Purchase Date [New - Old]</option>
                     <option value='purchasedDesc'>Purchase Date [Old - New]</option> 
                 </Input>
-                <Input s={12} l={4} m={5} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
+                <Input s={12} l={3} m={3} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
                 </Row>
                 {(this.state.consumableList.length === 0 
                     ?
