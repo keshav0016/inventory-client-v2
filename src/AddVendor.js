@@ -67,10 +67,26 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.contact.value.length !== 10){
+        if(!this.state.contact.value){
             this.setState({
                 contact:Object.assign(this.state.contact, {
-                    error: 'Contact number should be 10 digits',
+                    error: 'Contact number should not be empty',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.contact.value.length < 10 && this.state.contact.value.length > 0 ){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: 'Contact number less than 10 digits',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.contact.value.length > 10){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: 'Contact number greater than 10 digits',
                     showError: true
                 })
             })

@@ -235,7 +235,7 @@ class TicketsList extends Component{
                 <h5 className="title">Remarks for rejection</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
                 <div className='splitModalButtons'>
-                    <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Submit</Button>
+                    <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Reject</Button>
                     <Button onClick={this.cancelReason} className="cancelButton" >Cancel</Button>
                 </div>
             </Row>
@@ -250,7 +250,7 @@ class TicketsList extends Component{
                 <h5 className="title">Remarks for acceptance</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
-                    <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Submit</Button>
+                    <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Accept</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
                 </div>
             </Row>
@@ -265,7 +265,7 @@ class TicketsList extends Component{
                 <h5 className="title">Remarks for rejection</h5>
                 <Input s={12} onChange={this.setReason} label="Remarks" />
                 <div className='splitModalButtons'>
-                    <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Submit</Button>
+                    <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Reject</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
                 </div>
             </Row>
