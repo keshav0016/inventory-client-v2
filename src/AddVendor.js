@@ -142,7 +142,7 @@ class AddVendor extends Component{
                 })                
             }
             else{
-                let vendorName = this.state.name.value
+                let vendorName = this.state.name.value.charAt(0).toUpperCase() + this.state.name.value.slice(1).toLowerCase()
                 this.setState({
                     name: {
                         value: '',
