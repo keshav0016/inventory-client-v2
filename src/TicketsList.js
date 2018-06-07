@@ -202,7 +202,7 @@ class TicketsList extends Component{
     fetchAvailableAssets(ticket){
         axios({
             method : 'get'
-            ,url : `${baseUrl}/admin/ticket/available?ticket=${ticket}`
+            ,url : `${baseUrl}/admin/ticket/available?ticket=${ticket.ticket_number}`
             ,withCredentials : true
         })
         .then(res => {
@@ -219,12 +219,12 @@ class TicketsList extends Component{
     }
 
     renderAcceptAssetTicket(ticket){
-        if(this.fetchAvailableAssets(ticket)){
-            return ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button floating  icon='done'></Button></Link> : null 
-        }
-        else{
-            return <Button floating onClick={() => {window.Materialize.toast('No available Asset for this Type', 4000)}} icon='done'></Button>
-        }
+        //if(this.fetchAvailableAssets(ticket)){
+            return ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button floating icon='done'></Button></Link> : null 
+        //}
+        //else{
+        //    return ticket.status === 'Pending' && ticket.user !== null ? <Button floating onClick={() => {window.Materialize.toast('No available Asset for this Type', 4000)}} icon='done'></Button> : null
+        //}
     }
 
     renderRejectAssetTicket(ticket){
