@@ -42,24 +42,27 @@ class EmployeeTicketsList extends Component{
     }
 
     setPendingChecked(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
         this.setState({
             isPendingChecked : !this.state.isPendingChecked,
+            assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
         })
     }
     setAcceptedChecked(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
         this.setState({
             isAcceptedChecked : !this.state.isAcceptedChecked,
+            assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
         })
     }
     setRejectedChecked(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
         this.setState({
             isRejectedChecked : !this.state.isRejectedChecked,
+            assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
         })
     }
     setHandleListRequest(){
@@ -144,9 +147,25 @@ class EmployeeTicketsList extends Component{
                 <h4 className="title">Employee Tickets List</h4>
                 {this.state.handleListRequest ? this.handleList() : null}
                 {filterSlideButton}
-                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
+                {/* <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                     {filterPane}
-                </SideNav>
+                </SideNav> */}
+                <Modal 
+                id='mobileAssetFilters'
+                actions={null}
+                trigger={filterSlideButton}>
+                <div>
+                    <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'black' }} className="adminDashboardTitle">Status Filters</p>
+                    <Row className="miniTicketListCheckbox">
+                        <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick={this.setPendingChecked} checked={this.state.isPendingChecked} disabled={this.state.checkAll}/>
+                        <Input name='filter' type='checkbox' value='red' label='Accepted' onClick={this.setAcceptedChecked} disabled={this.state.checkAll} />
+                        <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} disabled={this.state.checkAll} />
+                    </Row>
+                    <div className="splitModalButtons">
+                        <Button  className='modal-close' >Close</Button>
+                    </div>
+                </div>
+                </Modal>
                 {filterPane}                                               
                {<Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">

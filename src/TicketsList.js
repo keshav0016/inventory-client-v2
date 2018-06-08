@@ -48,10 +48,11 @@ class TicketsList extends Component{
     }
 
     setPendingChecked(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
         this.setState({
-            isPendingChecked : !this.state.isPendingChecked,
+            isPendingChecked : !this.state.isPendingChecked
+            ,assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
         })
     }
     handleExpected(e){
@@ -61,18 +62,20 @@ class TicketsList extends Component{
     }
 
     setAcceptedChecked(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
         this.setState({
             isAcceptedChecked : !this.state.isAcceptedChecked,
+            assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
         })
     }
 
     setRejectedChecked(){
-        this.setAssetPage(1)
-        this.setConsumablePage(1)
         this.setState({
             isRejectedChecked : !this.state.isRejectedChecked,
+            assetPage : 1
+            ,consumablePage : 1
+            ,handleListRequest : true
         })
     }
 
@@ -300,7 +303,9 @@ class TicketsList extends Component{
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} disabled={this.state.checkAll} />
                         <Input name='filter' type='checkbox' value='red' label='Select All' onClick={this.setCheckAll}  />
                     </Row>
-                    <Button style={{width:'100%'}} className='modal-close' >Close</Button>
+                    <div className='splitModalButtons'>
+                        <Button className='modal-close' >Close</Button>
+                    </div>
                 </div>
                 </Modal>
                 {this.state.handleListRequest ? this.handleList() : null}                
