@@ -297,7 +297,7 @@ class RepairAsset extends Component{
                     {this.state.assetDetails.disabled ? <div><h5 style={{color : 'red'}}>Asset is disabled</h5></div> :<Row>
                         {/* <Input s={12} type="select" label="Service Provider*" value={this.state.vendor} onChange = {this.setVendor} disabled = {this.state.isDisabled}>{this.vendorListDropdown()}</Input> */}
                         <Row>
-                            <Autocomplete l={6} s={10} m={8}
+                            <Autocomplete l={5} s={8} m={6}
                                 className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
                                 data={
                                     this.state.vendorNames
@@ -306,11 +306,11 @@ class RepairAsset extends Component{
                                 value={this.state.vendor.value}
                                 onChange = {this.setVendor}
                             />
-                                <Col s={6} className='addAssetModalButtons2'>
+                                <Col s={2} l={1} m={2} className='addAssetModalButtons2'>
                                 <Modal
                                     actions={null}
                                     // id="addVendor"
-                                    trigger={<Button>Add Vendor</Button>}>
+                                    trigger={<Button icon='add' floating></Button>}>
                                     <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                                 </Modal>
                                 </Col>
@@ -322,7 +322,7 @@ class RepairAsset extends Component{
                             <Input l={6} s={10} m={8} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
                         </Row>
                         <div className="splitModalButtons">
-                                <Col style={{float:'right'}} >
+                                <Col  >
                             {/* </Row>
                             <Row style={{float : 'right'}}> */}
                                     <Button  onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>

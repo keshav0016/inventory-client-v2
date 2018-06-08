@@ -524,7 +524,7 @@ class AddConsumables extends Component{
                     <br/>
                     <br/>
                     <Row>
-                        <Autocomplete s={12} m={6} l={6}
+                        <Autocomplete s={11} m={4} l={5}
                             className={this.state.vendor_name.showError ? 'no-vendor-error' : (this.state.vendor_name.availabilityError ? 'no-vendor-available' : 'no-error')}
                             title='Vendor'
                             data={
@@ -533,11 +533,11 @@ class AddConsumables extends Component{
                             onChange = {this.setVendorName}
                             value={this.state.vendor_name.value}
                         />
-                        <Col s={6} className='addAssetModalButtons2' >
+                        <Col s={1} m={2} l={1} className='addAssetModalButtons2' >
                             <Modal
                             actions={null}
                             id="addVendor"
-                            trigger={<Button id="triggerAddVendor">Add Vendor</Button>}>
+                            trigger={<Button id="triggerAddVendor" floating icon="add"></Button>}>
                             <AddVendor setVendorListRequest = {this.setVendorListRequest}/>
                             </Modal> 
                         </Col>
