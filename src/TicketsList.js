@@ -297,7 +297,7 @@ class TicketsList extends Component{
                     <div className = "assetTab">
                         {this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
                         <div>
-                            <Table hoverable style={{marginLeft:'1%'}}  className="consumableTable desktopView">
+                            <Table  centered hoverable style={{marginLeft:'1%'}}  className="consumableTable desktopView">
                                 <thead>
                                     <tr>
                                         <th data-field="ticket_number">Ticket No.</th>
@@ -359,7 +359,7 @@ class TicketsList extends Component{
                     <div className = "consumableTab">
                         {this.state.consumableTicket.length === 0 ? <div className="noRecordsScreen">No Consumable Tickets</div> : 
                         <div>
-                            <Table hoverable style={{marginLeft:'1%'}}  className="consumableTable desktopView">
+                            <Table centered hoverable style={{marginLeft:'1%'}}  className="consumableTable desktopView">
                                 <thead>
                                     <tr>
                                         <th data-field="ticket_number">Ticket No.</th>

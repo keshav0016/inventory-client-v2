@@ -114,7 +114,7 @@ class EmployeesList extends Component {
         </Row>
                 {(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-            <Table  className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
+            <Table centered className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>
                 <tr>
                   <th data-field="user_id">Emp. Id</th>

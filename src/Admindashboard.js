@@ -65,7 +65,7 @@ class Admindashboard extends Component {
                             <h3  className='title'>Dashboard</h3 >
                             <div>
                                 <Col s={12} m={6} l={6} >
-                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Consumables request list</a>]}>
                                     <div style={{marginTop:'3%', marginBottom:'5%'}} >
                                     <Icon>developer_board</Icon>
                                     <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Consumables</span>
@@ -76,7 +76,7 @@ class Admindashboard extends Component {
                                 </Card>
                                 </Col>
                                 <Col s={12} m={6} l={6} >
-                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Ticket List</a>]}>
+                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to assets request list</a>]}>
                                 <div style={{marginTop:'3%', marginBottom:'5%'}} >
                                 <Icon>important_devices</Icon>
                                 <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Assets</span>

@@ -6,7 +6,7 @@ import { Input, Button, Row, Col, Card } from 'react-materialize';
 // import './Employee.css'
 import {
 
-    Redirect
+    Redirect, Link
 } from 'react-router-dom';
 import { baseUrl } from './config';
 import logo from './LOGO.png'
@@ -133,10 +133,18 @@ class ForgotPasswordForm extends Component {
                                     <Input s={12} type="email" onChange={this.getEmail} label="Email" icon="email" error={this.state.email.showError ? this.state.email.error : null}></Input>
                                 </Row>
                                 <Row>
-                                    <Col s={8} m={6} l={8} offset={'s2 m3 l2'}>
-                                        <Button className="teal" type="submit" style={{ width: '100%' }}>Reset</Button>
+                                <Col s={3}>
+                                <Link to='/login' className='loginFormForgotLink' style={{whiteSpace:'nowrap'}}>Go back to Login ?</Link>
+                                </Col>
+                                    <Col s={3} offset={"s5"}>
+                                    <Button className='submitbtn' type="submit">Reset</Button>
                                     </Col>
                                 </Row>
+                                {/* <Row> */}
+                                    {/* <Col s={8} m={6} l={8} offset={'s2 m3 l2'}>
+                                        <Button className="teal" type="submit" style={{ width: '100%' }}>Reset</Button>
+                                    </Col> */}
+                                {/* </Row> */}
                                 {this.state.redirect ? <Redirect push to={`/user/reset/${this.state.user_id.value}`} /> : null}
                             </Card>
                         </form>
