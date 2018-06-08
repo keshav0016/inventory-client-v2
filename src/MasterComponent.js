@@ -71,7 +71,7 @@ class MasterComponent extends Component {
                             </div>
                             </Row>
                             <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>
-                                <Link className='selected' to="/admin">Dashboard</Link>
+                                <Link className="selected" to="/admin">Dashboard</Link>
                                 <Link to="/admin/assets">Assets</Link>
                                 <Link to="/admin/assetType">Asset Types</Link>
                                 <Link to="/admin/consumables">Consumables</Link>
