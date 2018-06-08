@@ -171,13 +171,13 @@ class LoginForm extends Component {
 
                 </Row>
                 <Row>
-                    <Col s={3} offset={"s8"}>
+                <Col s={3} offset={''}>
+                  <Link to='/forgotpassword' className='loginFormForgotLink' style={{whiteSpace:'nowrap'}}>Forgot Password ?</Link>
+                </Col>
+                    <Col s={3} offset={"s5"}>
                       <Button className='submitbtn' type="submit">LOGIN</Button>
                     </Col>
                 </Row>
-                <Col s={6} offset={'s7'}>
-                  <Link to='/forgotpassword' className='loginFormForgotLink' style={{whiteSpace:'nowrap'}}>Forgot Password ?</Link>
-                </Col>
               </Card>
 
             </form>
