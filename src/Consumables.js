@@ -291,13 +291,13 @@ class Consumables extends Component{
                 trigger={filterSlideButton}>
                 <div>
                 <Row>
-                <Input style={{color:'black'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
-                <Input style={{color:'black'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
+                <Input style={{color:'black'}} s={6} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
+                <Input style={{color:'black'}} s={6} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
                 </Row>
-                <Button onClick={this.checkForValidation} className="filterButton">Apply</Button>
-                <br />
-                <br />
-                <Button className="filterButton modal-close">Cancel</Button>
+                <div className='splitModalButtons' >
+                <Button onClick={this.checkForValidation}>Apply</Button>
+                <Button className="modal-close">Cancel</Button>
+                </div>
                 </div>
                 </Modal>
                 <h3 className="title">List of Consumables</h3>
