@@ -66,8 +66,12 @@ class MasterComponent extends Component {
                         <div>
                             <Row>
                             <div className="white lighten-1 z-depth-2 navbar col s12" style={{ overflow: 'hidden',position: 'fixed', width:'100%', zIndex: 997}}>
-                                    <a href="/admin"><Col s={2} m={2} l={2} offset={"s5 m5 l6"} ><img className="navbarImage" src={logo} alt="WAL Logo" /></Col></a>
-                                    <div><a href="/logout"><Icon className="masterComponentLogoutButton">power_settings_new</Icon></a></div>
+                                <a className="logo-wrapper" href="/admin">
+                                    <img className="navbarImage" src={logo} alt="WAL Logo" />
+                                </a>
+                                <div>
+                                    <a href="/logout"><Icon className="masterComponentLogoutButton">power_settings_new</Icon></a>
+                                </div>
                             </div>
                             </Row>
                             <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>
