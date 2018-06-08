@@ -81,6 +81,11 @@ class HistoryConsumables extends Component{
                             {consumable.vendor_name ? 
                             <div> 
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchased</h5>
+                                <Modal
+                                    actions={null}
+                                    trigger={<Button style={{float : 'right'}}>Edit</Button>}>
+                                    <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
+                                </Modal>
                                 <div className='historyCards' >
                                     <div style={{float : 'left'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
@@ -94,11 +99,7 @@ class HistoryConsumables extends Component{
                                         <h6><b>Discount</b> : {consumable.discount}%</h6>
                                         <h6><b>GST</b> : {consumable.gst}%</h6>
                                         <h6><b>Total</b> : ₹{consumable.total.toFixed(2)}</h6>
-                                        <Modal
-                                            actions={null}
-                                            trigger={<Button>Edit</Button>}>
-                                            <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
-                                        </Modal>
+                                        
                                     </div>
                                 </div>
                             </div>
