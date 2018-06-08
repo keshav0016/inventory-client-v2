@@ -152,7 +152,7 @@ class EmployeeTicketsList extends Component{
                     <div className = "assetTab">
                         {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You don't have any tickets for now</h4></Row> :
                         <div>
-                            <Table className="consumableTable desktopView" >
+                            <Table centered className="consumableTable desktopView" >
                                 <thead>
                                     <tr>
                                     <th data-field="ticket_number">Ticket Number</th>
@@ -210,7 +210,7 @@ class EmployeeTicketsList extends Component{
                     <div className = "consumableTab">
                         {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen flow-text" ><h4>You don't have any tickets for now</h4></div> :
                         <div>
-                            <Table className="consumableTable desktopView">
+                            <Table centered className="consumableTable desktopView">
                                 <thead>
                                     <tr>
                                     <th data-field="ticket_number">Ticket Number</th>
