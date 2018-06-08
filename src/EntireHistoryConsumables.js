@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Row, Input, Preloader, Button, SideNav} from 'react-materialize'
+import {Col, CardPanel, Row, Input, Preloader, Button, SideNav, Modal} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import './ListPage.css'
@@ -66,9 +66,21 @@ class EntireHistoryConsumables extends Component{
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable History</h3>
             {filterSlideButton}
-            <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
+            {/* <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                 {filterPane}
-            </SideNav>
+            </SideNav> */}
+            <Modal
+                actions={null}
+                trigger={filterSlideButton}>
+                <p style={{fontFamily: 'Roboto',fontWeight: 300}} className="adminDashboardTitle">History Filters</p>
+                <Row className="">
+                    <Input name='filter' type='checkbox' value='red' label='Purchased' onClick = {this.setPurchased} checked={this.state.isPurchased} />
+                    <Input name='filter' type='checkbox' value='red' label='Assigned' onClick = {this.setAssigned} checked={this.state.isAssigned} />
+                </Row>
+                <div className='splitModalButtons'>
+                    <Button className="modal-close">Close</Button>
+                </div>         
+            </Modal>
             <Row className='splitModalButtons'>
                 <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
            </Row>
