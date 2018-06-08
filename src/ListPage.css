@@ -80,14 +80,14 @@
   right: 3%;
 }
 
-.assetCheckbox{
+.assetCheckbox, .miniAssetCheckbox{
   position: relative;
   left: 14%;
   height: 100px;
   width: 150px;
 }
 
-.ticketListCheckbox{
+.ticketListCheckbox, .miniTicketListCheckbox{
   position: relative;
   left: 1%;
   height: 100px;
@@ -98,8 +98,16 @@
   color: white;
 }
 
+.miniAssetCheckbox label{
+  color: black
+}
+
 .ticketListCheckbox label{
   color: white;
+}
+
+.miniTicketListCheckbox label{
+  color: black
 }
 
 .filterContainerConsumableHistory {

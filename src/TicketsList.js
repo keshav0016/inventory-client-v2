@@ -288,10 +288,21 @@ class TicketsList extends Component{
         return(
             <div className="listComponent" >
                 <h3 className="title">Ticket list</h3>
-                {filterSlideButton}
-                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
-                    {filterPane}
-                </SideNav>
+                <Modal 
+                id='mobileAssetFilters'
+                actions={null}
+                trigger={filterSlideButton}>
+                <div>
+                    <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'black' }} className="adminDashboardTitle">Status Filters</p>
+                    <Row className="miniTicketListCheckbox">
+                        <Input className="pendingCheckbox" name='filter' type='checkbox' value='red' label='Pending' onClick={this.setPendingChecked} checked={this.state.isPendingChecked} disabled={this.state.checkAll}/>
+                        <Input name='filter' type='checkbox' value='red' label='Accepted' onClick={this.setAcceptedChecked} disabled={this.state.checkAll} />
+                        <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} disabled={this.state.checkAll} />
+                        <Input name='filter' type='checkbox' value='red' label='Select All' onClick={this.setCheckAll}  />
+                    </Row>
+                    <Button style={{width:'100%'}} className='modal-close' >Close</Button>
+                </div>
+                </Modal>
                 {this.state.handleListRequest ? this.handleList() : null}                
                 {<Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">

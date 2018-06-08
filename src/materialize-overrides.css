@@ -266,3 +266,44 @@ a.selected:hover {
 label {
     font-weight: bold;
 }
+
+/* #mobileAssetFilters {
+    width: 30vw
+} */
+
+@media only screen and (min-width : 300px) {
+    #mobileAssetFilters {
+        width: 90%
+    }
+}
+
+@media only screen and (min-width : 450px) {
+    #mobileAssetFilters {
+        width: 80%
+    }
+}
+@media only screen and (min-width : 500px) {
+    #mobileAssetFilters {
+        width: 70%
+    }
+}
+@media only screen and (min-width : 600px) {
+    #mobileAssetFilters {
+        width: 60%
+    }
+}
+@media only screen and (min-width : 700px) {
+    #mobileAssetFilters {
+        width: 50%
+    }
+}
+@media only screen and (min-width : 800px) {
+    #mobileAssetFilters {
+        width: 40%
+    }
+}
+@media only screen and (min-width : 900px) {
+    #mobileAssetFilters {
+        width: 30%
+    }
+}
