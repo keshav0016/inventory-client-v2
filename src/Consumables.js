@@ -290,7 +290,7 @@ class Consumables extends Component{
                     :
 
                     <div>
-                    <Table className="consumableTable listTable desktopView" style={{fontFamily: 'Roboto', fontWeight: 350}} >
+                    <Table centered className="consumableTable listTable desktopView" style={{fontFamily: 'Roboto', fontWeight: 350}} >
                     <thead>
                         <tr>
                             <th data-field="consumable_id">Cons. Id</th>

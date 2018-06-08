@@ -23,7 +23,7 @@ class EmployeeHistory extends Component {
             <h3 className="title">Items held by Employee</h3>
                 {(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
             <div>
-                <Table hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table centered hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                 <thead>
                     <tr>
                         <th data-field="item"> Item</th>

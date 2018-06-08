@@ -259,7 +259,7 @@ class Assets extends Component{
                 {filterPane}
                 {(this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
-                <Table className="assetTable desktopView listTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table centered className="assetTable desktopView listTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr >
                             <th data-field="asset_id">Asset ID</th>

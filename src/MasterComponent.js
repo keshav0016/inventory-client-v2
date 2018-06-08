@@ -67,11 +67,11 @@ class MasterComponent extends Component {
                             <Row>
                             <div className="white lighten-1 z-depth-2 navbar col s12" style={{ overflow: 'hidden',position: 'fixed', width:'100%', zIndex: 997}}>
                                     <a href="/admin"><Col s={2} m={2} l={2} offset={"s5 m5 l6"} ><img className="navbarImage" src={logo} alt="WAL Logo" /></Col></a>
-                                    <div><a href="/logout"><b className="masterComponentLogoutButton">LOGOUT</b></a></div>
+                                    <div><a href="/logout"><Icon className="masterComponentLogoutButton">power_settings_new</Icon></a></div>
                             </div>
                             </Row>
                             <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>
-                                <Link to="/admin">Dashboard</Link>
+                                <Link className='selected' to="/admin">Dashboard</Link>
                                 <Link to="/admin/assets">Assets</Link>
                                 <Link to="/admin/assetType">Asset Types</Link>
                                 <Link to="/admin/consumables">Consumables</Link>

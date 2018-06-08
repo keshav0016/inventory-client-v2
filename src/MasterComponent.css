@@ -8,9 +8,7 @@
     position: absolute;
     right:13px;
     top:30%;
-    font-family: "Roboto";
-    color:teal;
-    font-weight: bolder;  
+    color:teal; 
 }
 
 .masterComponentMenuButton {

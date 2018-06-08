@@ -83,7 +83,7 @@ class AssetType extends Component{
                 <br />
                 <h3 className='title' >Asset Types</h3 >
                 {( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
-                <Table className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table centered className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>
                             {/* <th data-field="id">S. No</th> */}
