@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel, Row} from 'react-materialize'
 import AddVendor from './AddVendor'
 import VendorUpdate from './VendorUpdate'
 import $ from 'jquery'
@@ -90,7 +90,8 @@ class Vendor extends Component{
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className="title">Vendors</h3 >
-                    {(this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
+                    {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : 
+                    (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
                 <Table centered hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>

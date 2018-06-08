@@ -64,7 +64,8 @@ class EmployeesList extends Component {
   setPage(e){
     this.setState({
       page : e,
-      handleListRequest : true
+      handleListRequest : true,
+      loading : true
     })
   }
   renderDropdown(item, key){
@@ -112,7 +113,8 @@ class EmployeesList extends Component {
         <Row>
         <Input s={12} m={6} l={4} placeholder="Search by Employee ID or Employee Name" onChange = {this.setSearch} />
         </Row>
-                {(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+                {this.state.loading ? <Row><Preloader size='small' /></Row> :
+                (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
             <Table centered className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>

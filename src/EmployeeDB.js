@@ -46,8 +46,12 @@ class EmployeeDB extends Component {
                                             <div>
                                             <Row>
                                             <div fixed className="white lighten-1 z-depth-2 navbar col s12" style={{ overflow: 'hidden',position: 'fixed', width:'100%', zIndex: 997}}>
-                                                    <a href="/employee/Profile"><Col s={2} m={2} l={2} offset={"s5 m5 l6"} ><img className="navbarImage" src={logo} alt="WAL Logo" /></Col></a>
-                                                    <div><a href="/logout"><Icon className="masterComponentLogoutButton">power_settings_new</Icon></a></div>
+                                                    <a className="logo-wrapper" href="/employee/Profile">
+                                                        <img className="navbarImage" src={logo} alt="WAL Logo" />
+                                                    </a>
+                                                    <div>
+                                                        <a href="/logout"><Icon className="masterComponentLogoutButton">power_settings_new</Icon></a>
+                                                    </div>
                                             </div>
                                             </Row>
                                                 <SideNav className="masterComponentSideBar" trigger={<Button className="white lighten-1 btn-flat masterComponentMenuButton"><Icon>menu</Icon></Button>} options={{ closeOnClick: true }}>

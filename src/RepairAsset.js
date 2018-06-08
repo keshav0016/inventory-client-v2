@@ -281,7 +281,8 @@ class RepairAsset extends Component{
             <div className="listComponent" >
                 <h3 className="title">Repair Asset</h3>
                 <br /><br />
-                    {(this.state.assetDetails ? 
+                    {this.state.loading ? <Row><Preloader size='small' /></Row> :
+                    (this.state.assetDetails ? 
                 <div>
                     <h6>Asset Name : {this.state.assetDetails.asset_name}</h6>
                     <h6>Serial Number : {this.state.assetDetails.serial_number}</h6>

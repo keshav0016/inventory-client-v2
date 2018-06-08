@@ -80,11 +80,12 @@ class Assets extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className="title">Asset Details</h3>
                 {this.state.assetDetails ? <div>
-                {<div>
-                    {this.state.assetDetails.disabled === 1 ? <h5 className = "heading">Current Status : Unavailable </h5> : <React.Fragment>
-                {this.state.assetDetails.current_status === 'Available' ? <h5 className = "heading">Current Status : {this.state.assetDetails.current_status}</h5> : null }
-                {this.state.assetDetails.current_status === 'Assigned' ? <h5 className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</h5> : null}
-                {this.state.assetDetails.current_status === 'Service' ? <h5 className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</h5> : null}
+                {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> :
+                <div>
+                    {this.state.assetDetails.disabled === 1 ? <b><p className = "heading">Current Status : Unavailable </p></b> : <React.Fragment>
+                {this.state.assetDetails.current_status === 'Available' ? <b><p className = "heading">Current Status : {this.state.assetDetails.current_status}</p></b> : null }
+                {this.state.assetDetails.current_status === 'Assigned' ? <b><p className = "heading">Currently Assigned to {this.state.assignedEmployee !== null ?this.state.assignedEmployee.first_name+""+ this.state.assignedEmployee.last_name: <b style={{color:'teal'}}>Employee has left</b>} ({this.state.assignedEmployee !== null ?this.state.assignedEmployee.user_id: null})</p></b> : null}
+                {this.state.assetDetails.current_status === 'Service' ? <b><p className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</p></b> : null}
                 </React.Fragment>}
                 <Row className="splitModalButtons">
                     <a href='/admin/assets'><Button style={{float : 'left'}}>Go Back</Button></a>

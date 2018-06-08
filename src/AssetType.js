@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel, Row} from 'react-materialize'
 import AddAssetType from './AddAssetType'
 import UpdateAssetType from './UpdateAssetType'
 import $ from 'jquery'
@@ -82,7 +82,7 @@ class AssetType extends Component{
                 {this.state.handleListRequest ? this.handleList() : null}
                 <br />
                 <h3 className='title' >Asset Types</h3 >
-                {( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
+                {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : ( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>
                 <Table centered className='desktopView' hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr>

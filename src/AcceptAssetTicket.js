@@ -183,7 +183,8 @@ class AcceptAssetTicket extends Component{
             <div className="listComponent" >
             <Row>
                 <h3 className='title'>Accept Asset</h3>
-                {(this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
+                {this.state.loading ? <Row><Preloader size='small' /></Row> :
+                (this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
                 (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : <React.Fragment>
                     <Row>
                         <Row>
