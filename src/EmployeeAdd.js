@@ -79,6 +79,7 @@ class EmployeeAdd extends Component {
 }
   handleCreate(){
     var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    var nameReg = /^[a-zA-Z ]+$/;
     if (!this.state.user_id.value){
       this.setState({
         user_id: Object.assign(this.state.user_id, {
@@ -103,7 +104,15 @@ class EmployeeAdd extends Component {
         })
       })
     }
-    if(this.state.first_name.value ){
+    if(!nameReg.test(this.state.first_name.value)){
+      this.setState({
+        first_name: Object.assign(this.state.first_name, {
+          error: "First name should be alphabets",
+          showError: true,
+        })
+      })
+    }
+    if(nameReg.test(this.state.first_name.value)){
       this.setState({
         first_name: Object.assign(this.state.first_name, {
             error: '',
@@ -119,7 +128,15 @@ class EmployeeAdd extends Component {
         }),
       })
     }
-    if(this.state.last_name.value){
+    if(!nameReg.test(this.state.last_name.value)){
+      this.setState({
+        last_name: Object.assign(this.state.last_name, {
+          error: "Last name should be alphabets",
+          showError: true,
+        }),
+      })
+    }
+    if(nameReg.test(this.state.last_name.value)){
       this.setState({
         last_name: Object.assign(this.state.last_name, {
             error: '',
@@ -225,7 +242,7 @@ class EmployeeAdd extends Component {
             }),
         })
     }
-    if(this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value !== 'select' && this.state.email.value){
+    if(this.state.user_id.value && !this.state.first_name.showError && !this.state.last_name.showError && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value !== 'select' && this.state.email.value){
       axios({
         method: 'post',
         url: `${baseUrl}/employees/create`,
