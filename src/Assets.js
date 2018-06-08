@@ -246,11 +246,25 @@ class Assets extends Component{
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
+                <Modal
+                actions={null}
+                trigger={filterSlideButton}>
+                <div>
+                <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'black', fontSize: '20px', marginLeft: '30px' }}>Filter by Current Status</p>
+                <div className="assetCheckbox">
+                    <Input name='filter' type='checkbox' value='red' label='Available' onClick={this.setAvailableChecked} checked={this.state.isAvailableChecked} />
+                    <Input name='filter' type='checkbox' value='red' label='Assigned' onClick={this.setAssignedChecked} checked={this.state.isAssignedChecked} />
+                    <Input name='filter' type='checkbox' value='red' label='Service' onClick={this.setServiceChecked} checked={this.state.isServiceChecked} />
+                </div>
+                <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'black', fontSize: '20px', marginLeft: '30px' }}>Filter by Category</p>
+                <div className="assetCheckbox">
+                    <Input name='filter' type='checkbox' value='red' label='Electronics' onClick={this.setElectronicsChecked} checked={this.state.isElectronicsChecked} />
+                    <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick={this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
+                    <Input name='filter' type='checkbox' value='red' label='Other' onClick={this.setOtherChecked} checked={this.state.isOtherChecked} />
+                </div>
+                </div>
+                </Modal>
                 <h3 className='title'>List Of Assets</h3>
-                {filterSlideButton}
-                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
-                    {filterPane}
-                </SideNav>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={12} m={6} l={4} placeholder="Search by name, ID or serial No:" style={{textAlign:'center'}} onChange = {this.setSearch} />
                     {/* <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/> */}
