@@ -111,6 +111,7 @@ class Consumables extends Component{
             this.setState({
                 handleListRequest : true
             })
+            $('.modal-overlay').trigger('click')
         }
     }
 
@@ -127,14 +128,34 @@ class Consumables extends Component{
                     this.setState({
                         consumableList : res.data.consumables,
                         pagination : res.data.pagination,
-                        handleListRequest : false
+                        handleListRequest : false,
+                        minQuantity : {
+                            value:'',
+                            error:'',
+                            showError:false
+                        },
+                        maxQuantity : {
+                            value:'',
+                            error:'',
+                            showError:false
+                        }
                     })
                 }
                 else{
                     this.setState({
                         consumableList : res.data.consumables,
                         pagination : res.data.pagination,
-                        handleListRequest : false
+                        handleListRequest : false,
+                        minQuantity : {
+                            value:'',
+                            error:'',
+                            showError:false
+                        },
+                        maxQuantity : {
+                            value:'',
+                            error:'',
+                            showError:false
+                        }
                     })
                 }
             })
@@ -265,11 +286,21 @@ class Consumables extends Component{
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
+                <Modal
+                actions={null}
+                trigger={filterSlideButton}>
+                <div>
+                <Row>
+                <Input style={{color:'black'}} s={12} type='number' min={0} label="Minimum Quantity" value={this.state.minQuantity.value} onChange={this.minQuantity} error={this.state.minQuantity.showError ? this.state.minQuantity.error : null} ></Input>
+                <Input style={{color:'black'}} s={12} type='number' min={0} label="Maximum Quantity" value={this.state.maxQuantity.value} onChange={this.maxQuantity} error={this.state.maxQuantity.showError ? this.state.maxQuantity.error : null} ></Input>
+                </Row>
+                <Button onClick={this.checkForValidation} className="filterButton">Apply</Button>
+                <br />
+                <br />
+                <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
+                </div>
+                </Modal>
                 <h3 className="title">List of Consumables</h3>
-                {filterSlideButton}
-                <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
-                    {filterPane}
-                </SideNav>
                 <Row>
                 <Input label='Sorting filter' s={12} l={3} m={3} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
