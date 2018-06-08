@@ -97,3 +97,15 @@
     margin-right: 20px;
     margin-top: 2%;
 }
+/**/
+.logo-wrapper{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+.logo-wrapper .navbarImage{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
