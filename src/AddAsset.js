@@ -664,7 +664,7 @@ class AddAsset extends Component{
                     {/* <Input s={12} m={6} l={6} placeholder="Vendor *" type='select' value={this.state.vendor.value} onChange = {this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error :null} >{this.vendorListDropdown()}</Input> */}
                         <Row>
                         <Autocomplete
-                            s={12} m={6} l={6}
+                            s={11} m={4} l={5}
                             className={this.state.vendor.showError ? 'no-vendor-error' : (this.state.vendor.availabilityError ? 'no-vendor-available' : 'no-error')}
                             // title=' '
                             title='Vendor*'
@@ -674,22 +674,22 @@ class AddAsset extends Component{
                             onChange = {this.setVendor}
                             value = {this.state.vendor.value}
                         />
-                        <Col s={6} className="addAssetModalButtons1">
+                        <Col s={1} m={2} l={1} className="addAssetModalButtons1">
                             <Modal
                                 actions={null}
                                 id="addVendor"
-                                trigger={<Button>Add Vendor</Button>}>
+                                trigger={<Button floating icon='add' ></Button>}>
                                 <AddVendor  setVendorListRequest = {this.setVendorListRequest}/>
                             </Modal>
                         </Col>
                         </Row>
                         <div className={this.state.assetType.showError ? 'assetType-error' : 'no-error'}>
                         <Row>
-                        <Input s={12} m={6} l={6} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
-                        <Col s={6} className="addAssetModalButtons2">
+                        <Input s={11} m={4} l={5} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
+                        <Col s={1} m={2} l={1} className="addAssetModalButtons2">
                                     <Modal
                                     actions={null}
-                                    trigger={<Button>Add Asset Type</Button>}>
+                                    trigger={<Button floating icon='add'></Button>}>
                                     <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>
                                     </Modal>
                                 </Col>

@@ -69,6 +69,9 @@ class EntireHistoryConsumables extends Component{
             <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>
                 {filterPane}
             </SideNav>
+            <Row className='splitModalButtons'>
+                <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
+           </Row>
             {(this.state.history.length < 1 ? 
             <div className = 'noRecordsScreen'>No Records</div>
             :this.state.history.map((consumable, index) => {

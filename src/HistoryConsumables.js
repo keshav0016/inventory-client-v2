@@ -72,6 +72,7 @@ class HistoryConsumables extends Component{
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable Details</h3>
            <Row className='splitModalButtons'>
+                <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
            </Row> 
             {(this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
@@ -80,6 +81,11 @@ class HistoryConsumables extends Component{
                             {consumable.vendor_name ? 
                             <div> 
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchased</h5>
+                                <Modal
+                                    actions={null}
+                                    trigger={<Button style={{float : 'right'}}>Edit</Button>}>
+                                    <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
+                                </Modal>
                                 <div className='historyCards' >
                                     <div style={{float : 'left'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
@@ -93,11 +99,7 @@ class HistoryConsumables extends Component{
                                         <h6><b>Discount</b> : {consumable.discount}%</h6>
                                         <h6><b>GST</b> : {consumable.gst}%</h6>
                                         <h6><b>Total</b> : ₹{consumable.total.toFixed(2)}</h6>
-                                        <Modal
-                                            actions={null}
-                                            trigger={<Button>Edit</Button>}>
-                                            <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
-                                        </Modal>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +124,6 @@ class HistoryConsumables extends Component{
                        <div>
                            <h4>No such Consumable found</h4>
                        </div>)}
-                       <a href='/admin/consumables'><Button>Go Back</Button></a>
            </div>
        )
    }

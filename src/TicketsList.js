@@ -335,6 +335,7 @@ class TicketsList extends Component{
                                             return <CardPanel key={index}>
                                                 <div style={{ float: 'right' }}>
                                                     {this.renderAcceptAssetTicket(item)}
+                                                    <Row></Row>
                                                     {this.renderRejectAssetTicket(item)}
                                                 </div>
                                                 <div className='historyCards'  >
