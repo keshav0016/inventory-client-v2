@@ -166,10 +166,11 @@ class EmployeeTicketsList extends Component{
                     </div>
                 </div>
                 </Modal>
-                {filterPane}                                               
-               {<Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
+                {filterPane}
+               {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> :
+               <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">
-                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You don't have any tickets for now</h4></Row> :
+                        {this.state.AssetsticketsList.length === 0 ? <Row className="noRecordsScreen"><h4>You do not have any tickets for now</h4></Row> :
                         <div>
                             <Table centered className="consumableTable desktopView" >
                                 <thead>
@@ -227,7 +228,7 @@ class EmployeeTicketsList extends Component{
                     </div>
 
                     <div className = "consumableTab">
-                        {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen flow-text" ><h4>You don't have any tickets for now</h4></div> :
+                        {this.state.ConsumablesticketsList.length === 0 ? <div className="noRecordsScreen flow-text" ><h4>You do not have any tickets for now</h4></div> :
                         <div>
                             <Table centered className="consumableTable desktopView">
                                 <thead>

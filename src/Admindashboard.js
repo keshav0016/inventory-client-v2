@@ -63,6 +63,7 @@ class Admindashboard extends Component {
                     <Col s={12} m={12} l={12}>
                         <Card className="z-depth-0" >
                             <h3  className='title'>Dashboard</h3 >
+                            {   this.state.handleListRequest ? <Row><Preloader size='small' /></Row> :
                             <div>
                                 <Col s={12} m={6} l={6} >
                                 <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Consumables request list</a>]}>
@@ -98,7 +99,7 @@ class Admindashboard extends Component {
                                     </Card>
                                 </Col>
                                     : null}
-                            </div> 
+                            </div>}
                         </Card>
                     </Col>
                     {/* <Col m={4}>

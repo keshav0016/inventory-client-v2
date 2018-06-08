@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Preloader} from 'react-materialize'
+import {Table, Preloader, Row} from 'react-materialize'
 import './Employee.css'
 import { baseUrl } from './config';
 
@@ -21,7 +21,8 @@ class EmployeeHistory extends Component {
            
         <div className="listComponent" >
             <h3 className="title">Items held by Employee</h3>
-                {(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
+                {this.state.loading ? <Row><Preloader size='small' /></Row> : 
+                (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
             <div>
                 <Table centered hoverable style={{fontFamily: 'Roboto', fontWeight: 350}}>
                 <thead>

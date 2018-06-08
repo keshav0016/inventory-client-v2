@@ -309,7 +309,8 @@ class TicketsList extends Component{
                 </div>
                 </Modal>
                 {this.state.handleListRequest ? this.handleList() : null}                
-                {<Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
+                {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> :
+                <Tabs tabHeaders={['Assets', 'Consumables']} selectedIndex={this.state.selectedIndex} setActiveTab={this.setActiveTab}>
                     <div className = "assetTab">
                         {this.state.assetsTicket.length === 0 ? <div className="noRecordsScreen">No Asset Tickets</div> : 
                         <div>

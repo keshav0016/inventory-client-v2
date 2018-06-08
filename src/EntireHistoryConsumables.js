@@ -84,7 +84,8 @@ class EntireHistoryConsumables extends Component{
             <Row className='splitModalButtons'>
                 <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
            </Row>
-            {(this.state.history.length < 1 ? 
+            {this.state.fetchHistory ? <Row><Preloader size='small' /></Row> :
+            (this.state.history.length < 1 ? 
             <div className = 'noRecordsScreen'>No Records</div>
             :this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
