@@ -297,7 +297,7 @@ class Consumables extends Component{
                 <Button onClick={this.checkForValidation} className="filterButton">Apply</Button>
                 <br />
                 <br />
-                <Button onClick={this.resetFilter} className="filterButton">Reset</Button>
+                <Button className="filterButton modal-close">Cancel</Button>
                 </div>
                 </Modal>
                 <h3 className="title">List of Consumables</h3>
