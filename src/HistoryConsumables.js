@@ -72,6 +72,7 @@ class HistoryConsumables extends Component{
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable Details</h3>
            <Row className='splitModalButtons'>
+                <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
            </Row> 
             {(this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
@@ -122,7 +123,6 @@ class HistoryConsumables extends Component{
                        <div>
                            <h4>No such Consumable found</h4>
                        </div>)}
-                       <a href='/admin/consumables'><Button>Go Back</Button></a>
            </div>
        )
    }
