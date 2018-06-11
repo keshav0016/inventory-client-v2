@@ -95,7 +95,7 @@ class Vendor extends Component{
                 <Table centered hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
-                            <th data-field="id">Id</th>
+                            <th data-field="id">Vendor Id</th>
                             <th data-field="name">Vendor Name</th>
                             <th data-field="address">Address</th>
                             <th data-field="contact">Contact No</th>
