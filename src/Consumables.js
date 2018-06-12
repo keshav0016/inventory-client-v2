@@ -89,6 +89,16 @@ class Consumables extends Component{
         }
         if(Number(this.state.minQuantity.value) > Number(this.state.maxQuantity.value)){
             // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
+            if(this.state.maxQuantity.value === ''){
+                this.setState({
+                    minQuantity: Object.assign(this.state.minQuantity, {
+                        error:'',
+                        showError:false
+                    }),
+                    handleListRequest : true
+                })
+            }
+            if(this.state.maxQuantity.value !== ''){
                 this.setState({
                     minQuantity: Object.assign(this.state.minQuantity, {
                         error:'The Min Quantity > the Max Quantity',
@@ -96,6 +106,7 @@ class Consumables extends Component{
                     }),
                     handleListRequest : true
                 })
+            }
             }
         if(Number(this.state.minQuantity.value) <= Number(this.state.maxQuantity.value) && Number(this.state.minQuantity.value)>0){
             // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
