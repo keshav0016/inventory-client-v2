@@ -424,7 +424,7 @@ class EmployeeUpdate extends Component {
                   }),
               })
           }
-          if(this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value !== 'select' && this.state.designation.value !== 'select' && this.state.email.value){
+          if(this.state.user_id.value && this.state.first_name.value && this.state.last_name.value && this.state.age.value && this.state.gender.value && this.state.department.value !== 'select' && this.state.designation.value !== 'select' && !this.state.email.showError){
             axios({
                 method: 'post',
                 url: `${baseUrl}/employees/update`,
