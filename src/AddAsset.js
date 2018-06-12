@@ -486,7 +486,6 @@ class AddAsset extends Component{
         .then(res => {
             if(res.data.message === 'Asset added successfully'){
                 this.setState({
-                    addAssetRequest : false,
                     serial_number : {
                         value: '',
                         error: '',
@@ -557,6 +556,9 @@ class AddAsset extends Component{
             }else if(res.data.errors){
                 window.Materialize.toast(res.data.errors[0].message, 4000)
             }
+            this.setState({
+                addAssetRequest : false
+            })
         })
         .catch(error => {
             console.error(error)
