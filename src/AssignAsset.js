@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Icon} from 'react-materialize'
+import {Row, Input, Button} from 'react-materialize'
 import { baseUrl } from './config';
 import $ from 'jquery'
 

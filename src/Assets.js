@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader, Col, CardPanel, SideNav} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader, Col, CardPanel} from 'react-materialize'
 import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
 // import DeleteAsset from './DeleteAsset'
@@ -338,12 +338,12 @@ class Assets extends Component{
                                     </CardPanel>
                         })}
                     </Col>
+                    {this.state.assetList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
                     </div> )}
                 
                 
                 <Link to={{ pathname : '/admin/assets/create'}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>
                 
-                    {this.state.assetList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
             </div>
         )
     }

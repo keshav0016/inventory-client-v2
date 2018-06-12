@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Row, Input, Preloader, Button, SideNav, Modal} from 'react-materialize'
+import {Col, CardPanel, Row, Input, Preloader, Button, Modal} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import './ListPage.css'
