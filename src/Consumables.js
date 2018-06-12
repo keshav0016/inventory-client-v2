@@ -89,14 +89,14 @@ class Consumables extends Component{
         }
         if(Number(this.state.minQuantity.value) > Number(this.state.maxQuantity.value)){
             // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
-            this.setState({
-                minQuantity: Object.assign(this.state.minQuantity, {
-                    error:'The Min Quantity > the Max Quantity',
-                    showError:true
-                }),
-                handleListRequest : true
-            })
-        }
+                this.setState({
+                    minQuantity: Object.assign(this.state.minQuantity, {
+                        error:'The Min Quantity > the Max Quantity',
+                        showError:true
+                    }),
+                    handleListRequest : true
+                })
+            }
         if(Number(this.state.minQuantity.value) <= Number(this.state.maxQuantity.value) && Number(this.state.minQuantity.value)>0){
             // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
             this.setState({
@@ -124,22 +124,31 @@ class Consumables extends Component{
             })
             .then(res => {
                 if(res.data.consumables.length !== 0)
-                {
-                    this.setState({
-                        consumableList : res.data.consumables,
-                        pagination : res.data.pagination,
-                        handleListRequest : false,
-                        minQuantity : {
-                            value:'',
-                            error:'',
-                            showError:false
-                        },
-                        maxQuantity : {
-                            value:'',
-                            error:'',
-                            showError:false
-                        }
-                    })
+                {   
+                    if(res.data.consumables !== 'No Consumables'){
+                        this.setState({
+                            consumableList : res.data.consumables,
+                            pagination : res.data.pagination,
+                            handleListRequest : false,
+                            minQuantity : {
+                                value:'',
+                                error:'',
+                                showError:false
+                            },
+                            maxQuantity : {
+                                value:'',
+                                error:'',
+                                showError:false
+                            }
+                        })
+                    }
+                    if(res.data.consumables === 'No Consumables'){
+                        this.setState({
+                            consumableList:[],
+                            pagination : {totalPage : 1, currentPage : 1},
+                            handleListRequest : false
+                        })
+                    }
                 }
                 else{
                     this.setState({
@@ -302,7 +311,7 @@ class Consumables extends Component{
                 </Modal>
                 <h3 className="title">List of Consumables</h3>
                 <Row>
-                <Input label='Sorting filter' s={12} l={3} m={3} type='select' onChange={this.sortBy}>
+                <Input className='consumableSorting' label='Sort By' s={12} l={2} m={2} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
                     <option value='quantityAsc'>Quantity [Low - High]</option>
                     <option value='quantityDesc'>Quantity [High - Low]</option>
