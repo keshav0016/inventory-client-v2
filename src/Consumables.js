@@ -99,13 +99,24 @@ class Consumables extends Component{
                 })
             }
             if(this.state.maxQuantity.value !== ''){
-                this.setState({
-                    minQuantity: Object.assign(this.state.minQuantity, {
-                        error:'The Min Quantity > the Max Quantity',
-                        showError:true
-                    }),
-                    handleListRequest : true
-                })
+                if(this.state.minQuantity.value === ''){
+                    this.setState({
+                        minQuantity: Object.assign(this.state.minQuantity, {
+                            error:'',
+                            showError:false
+                        }),
+                        handleListRequest : true
+                    })
+                }
+                if(this.state.minQuantity.value !== ''){
+                    this.setState({
+                        minQuantity: Object.assign(this.state.minQuantity, {
+                            error:'The Min Quantity > the Max Quantity',
+                            showError:true
+                        }),
+                        handleListRequest : true
+                    })
+                }
             }
             }
         if(Number(this.state.minQuantity.value) <= Number(this.state.maxQuantity.value) && Number(this.state.minQuantity.value)>0){
@@ -141,16 +152,6 @@ class Consumables extends Component{
                             consumableList : res.data.consumables,
                             pagination : res.data.pagination,
                             handleListRequest : false,
-                            minQuantity : {
-                                value:'',
-                                error:'',
-                                showError:false
-                            },
-                            maxQuantity : {
-                                value:'',
-                                error:'',
-                                showError:false
-                            }
                         })
                     }
                     if(res.data.consumables === 'No Consumables'){
@@ -166,16 +167,6 @@ class Consumables extends Component{
                         consumableList : res.data.consumables,
                         pagination : res.data.pagination,
                         handleListRequest : false,
-                        minQuantity : {
-                            value:'',
-                            error:'',
-                            showError:false
-                        },
-                        maxQuantity : {
-                            value:'',
-                            error:'',
-                            showError:false
-                        }
                     })
                 }
             })
