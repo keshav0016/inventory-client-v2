@@ -10,7 +10,8 @@
   font-family: "Roboto";
   font-size: 40px;
   font-weight: 300;
-  width: calc(100vw - 30px);
+  /* width: calc(100vw - 30px); */
+  width: 80%;
   height: 169px;
   top:64px;
   /* white-space: nowrap; */

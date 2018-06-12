@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Icon} from 'react-materialize'
+import {Row, Input, Button} from 'react-materialize'
 // import $ from 'jquery'
 import { baseUrl } from './config';
 import $ from 'jquery'
@@ -108,7 +108,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.name.value && this.state.address.value && this.state.contact.value.length === 10){
+        if(this.state.name.value && this.state.address.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 addVendorRequest: true
             })
