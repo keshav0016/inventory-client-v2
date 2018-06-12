@@ -267,6 +267,10 @@ label {
     font-weight: bold;
 }
 
+.consumableSorting .dropdown-content.select-dropdown span{
+    font-size: 14px;
+}
+
 /* #mobileAssetFilters {
     width: 30vw
 } */
