@@ -278,7 +278,7 @@ class Consumables extends Component{
                 trigger={<NavItem>Assign</NavItem >}>
                 <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
             </Modal>
-            <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>Details</NavItem >
+            <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>History</NavItem >
         </Dropdown>
     }
 
