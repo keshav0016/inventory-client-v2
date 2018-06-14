@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button} from 'react-materialize';
 import { baseUrl } from './config';
+import $ from 'jquery'
 
 class EmployeeDelete extends Component {
     constructor(props){
@@ -27,9 +28,11 @@ class EmployeeDelete extends Component {
             }else if(res.data.message === 'can not disable employee'){
                 window.Materialize.toast(res.data.message, 4000)
             }
+            $('.modal-overlay').trigger('click')
         })
         .catch(error => {
             window.Materialize.toast('can not disable employee', 4000)
+            $('.modal-overlay').trigger('click')
         })
         
     }
