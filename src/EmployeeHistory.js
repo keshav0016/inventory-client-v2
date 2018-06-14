@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Preloader, Row} from 'react-materialize'
+import {Table, Preloader, Row, Button, Modal} from 'react-materialize'
 import './Employee.css'
 import { baseUrl } from './config';
+import RecoverAsset from "./RecoverAsset";
+import $ from 'jquery'
 
 class EmployeeHistory extends Component {
     constructor(props){
@@ -15,7 +17,14 @@ class EmployeeHistory extends Component {
             loading : true
         }
         this.handleList = this.handleList.bind(this)
+        this.setHandleListRequest = this.setHandleListRequest.bind(this)
     }
+
+    setHandleListRequest(){
+        $('.modal-overlay').trigger('click')
+        this.handleList();
+    }
+
     render(){
         return (
            
@@ -29,7 +38,7 @@ class EmployeeHistory extends Component {
                     <tr>
                         <th data-field="item"> Item</th>
                         <th data-field="quantity">Quantity</th>
-                    
+                        <th data-field="recover">Recover</th>
                     </tr>
                 </thead>
 
@@ -38,6 +47,11 @@ class EmployeeHistory extends Component {
                         return <tr key={index}>
                             <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable ? `${item.consumable.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
                             <td>{item.asset_id ? "1": item.quantity}</td>
+                            <td><Modal
+                                actions={null}
+                                trigger={item.asset && item.to === null && item.asset.current_status === 'Assigned' ? <Button>Recover</Button> : null}>
+                                {item.asset && item.to === null && item.asset.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
+                            </Modal></td>
                         </tr>
                     })}
                 </tbody>
