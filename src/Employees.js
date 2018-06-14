@@ -78,7 +78,7 @@ class EmployeesList extends Component {
         {<EnableEmployee user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
       </Modal>
     </Dropdown>
-      : <Dropdown trigger={
+      : <Dropdown className='employeeListDropdown' trigger={
         <Button className='btn-mini'> <Icon>more_vert</Icon></Button>
       }>
         <Modal
@@ -92,7 +92,7 @@ class EmployeesList extends Component {
           trigger={<NavItem >Edit</NavItem >}>
           <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
-        <NavItem href={`/admin/employees/details/${item.user_id}`}>Details</NavItem>
+        <NavItem href={`/admin/employees/details/${item.user_id}`}>Items Held</NavItem>
       </Dropdown>
   }
   
