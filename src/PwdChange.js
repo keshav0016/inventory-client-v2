@@ -196,7 +196,7 @@ class PasswordChange extends Component {
             })
                 .then((res) => {
                     if (res.data.message === 'password has been changed') {
-                        window.Materialize.toast('password has been changed', 4000)
+                        window.Materialize.toast('Password has been changed', 4000)
                         this.setState({
                             employee: true
                         })
