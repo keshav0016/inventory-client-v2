@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import moment from 'moment'
-import { Row, Col, Card, Icon, Preloader, Link } from 'react-materialize'
+import { Row, Col, Card, Icon, Preloader } from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
 import { baseUrl } from './config';
