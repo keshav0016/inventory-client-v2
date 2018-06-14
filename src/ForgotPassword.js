@@ -54,12 +54,12 @@ class ForgotPasswordForm extends Component {
     verifyCredentials(e) {
         e.preventDefault();
 
-        var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
 
         if (!reg.test(this.state.email.value)) {
             this.setState({
                 email: Object.assign(this.state.email, {
-                    error: 'Enter Valid Email',
+                    error: "Enter Valid West Agile labs' Email",
                     showError: true
                 }),
             })

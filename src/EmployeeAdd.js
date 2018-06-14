@@ -78,7 +78,7 @@ class EmployeeAdd extends Component {
   }) 
 }
   handleCreate(){
-    var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
     var nameReg = /^[a-zA-Z ]+$/;
     if (!this.state.user_id.value){
       this.setState({
@@ -229,7 +229,7 @@ class EmployeeAdd extends Component {
     if(!reg.test(this.state.email.value)){
         this.setState({
             email: Object.assign(this.state.email, {
-                error:'Enter Valid Email',
+                error:"Enter Valid West Agile labs' Email",
                 showError:true
             }),
         })
@@ -242,7 +242,7 @@ class EmployeeAdd extends Component {
             }),
         })
     }
-    if(this.state.user_id.value && !this.state.first_name.showError && !this.state.last_name.showError && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value !== 'select' && this.state.email.value){
+    if(this.state.user_id.value && !this.state.first_name.showError && !this.state.last_name.showError && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
       axios({
         method: 'post',
         url: `${baseUrl}/employees/create`,
