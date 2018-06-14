@@ -92,7 +92,7 @@ class Vendor extends Component{
                 <h3 className="title">Vendors</h3 >
                     {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : 
                     (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
-                <Table centered hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                <Table hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
                             <th data-field="id">Vendor Id</th>
@@ -109,7 +109,7 @@ class Vendor extends Component{
                             <td>{item.id}</td>
                             <td>{item.name}</td>
                             <td>{item.address}</td>
-                            <td>{item.contact}</td>
+                            <td className='vendorContact' >{item.contact}</td>
                             <td>{this.renderButton(key)}</td>
                             </tr>
                         })}
