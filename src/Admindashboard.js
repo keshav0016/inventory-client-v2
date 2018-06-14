@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import moment from 'moment'
-import { Row, Col, Card, Icon, Preloader } from 'react-materialize'
+import { Row, Col, Card, Icon, Preloader, Link } from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
 import { baseUrl } from './config';
@@ -66,7 +66,7 @@ class Admindashboard extends Component {
                             {   this.state.handleListRequest ? <Row><Preloader size='small' /></Row> :
                             <div>
                                 <Col s={12} m={6} l={6} >
-                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to Consumables request list</a>]}>
+                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets#consumable'>Go to Consumables request list</a>]}>
                                     <div style={{marginTop:'3%', marginBottom:'5%'}} >
                                     <Icon>developer_board</Icon>
                                     <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Consumables</span>
@@ -77,7 +77,7 @@ class Admindashboard extends Component {
                                 </Card>
                                 </Col>
                                 <Col s={12} m={6} l={6} >
-                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets'>Go to assets request list</a>]}>
+                                <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets#asset'>Go to assets request list</a>]}>
                                 <div style={{marginTop:'3%', marginBottom:'5%'}} >
                                 <Icon>important_devices</Icon>
                                 <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Assets</span>

@@ -25,7 +25,7 @@ class TicketsList extends Component{
             checkAll : false,
             expected_recovery : ''
             ,reason : ''
-            ,selectedIndex : 0
+            ,selectedIndex : this.props.location.hash ? (this.props.location.hash === '#asset' ? 0 : 1) : 0
         }
         this.setAssetPage = this.setAssetPage.bind(this)
         this.setConsumablePage = this.setConsumablePage.bind(this)
