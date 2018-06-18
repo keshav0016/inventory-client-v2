@@ -347,6 +347,14 @@ class EmployeeAdd extends Component {
             })
           })
   
+        }else if(res.data.error[0].message === 'email must be unique'){
+          this.setState({
+            email: Object.assign(this.state.email, {
+              error: "Email is already taken by an another Employee",
+              showError: true,
+            })
+          })
+  
         }
       })
     }
