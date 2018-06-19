@@ -7,11 +7,12 @@ import { baseUrl } from './config';
 import {
     Redirect, Link
   } from 'react-router-dom';
-
+import swal from 'sweetalert';
 class AddConsumables extends Component{
     constructor(props){
         super(props)
         this.state = {
+            login: false,
             name : {
                 value: "",
                 showError: false,
@@ -388,7 +389,12 @@ class AddConsumables extends Component{
                 redirect: true
             })
             this.props.location.setHandleListRequest()
-            window.Materialize.toast('Consumable Added Successfully', 4000)
+            swal("Consumable is Added Successfully!", {
+                buttons: false,
+                timer: 2000,
+              });
+
+            // window.Materialize.toast('Consumable Added Successfully', 4000)
         })
         .catch(error => {
             console.log(error)
@@ -478,6 +484,11 @@ class AddConsumables extends Component{
             this.getConsumableNameList()
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login : true
+                })
+            }
             console.error(error)
         })
     }
@@ -573,6 +584,12 @@ class AddConsumables extends Component{
             <div>
             {this.state.addConsumable ? addConsumableForm : null}
             {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/consumables'}}/>) : null}
+            {this.state.login ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
             </div>
         )
     }

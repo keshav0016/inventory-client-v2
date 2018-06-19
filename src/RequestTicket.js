@@ -11,7 +11,8 @@ class RequestTicket extends Component {
             item_type: '',
             quantity: '',
             department:'HR/Admin',
-            status: 'pending'
+            status: 'pending',
+            redirect: false
         }
         // this.handleDate = this.handleDate.bind(this)
         // this.handleItemType = this.handleItemType.bind(this)
@@ -22,6 +23,12 @@ class RequestTicket extends Component {
     render(){
         return(
             <div >
+            {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
                 <Row>
                     <Input label='Id' s={6} defaultValue=''/>
                     <Input name='on' type='date' label = 'Date'onChange={this.handleDate} />

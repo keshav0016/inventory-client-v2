@@ -35,7 +35,7 @@ class EmployeeDB extends Component {
             (
                 <React.Fragment>
                     {this.state.redirect === 403 ? <Redirect to="/unauthorized" /> : null}
-                    {this.state.redirect === 401 ? <Redirect to="/unauthorized" /> : null}
+                    {/* {this.state.redirect === 401 ? <Redirect to="/unauthorized" /> : null} */}
                     <Route path='/unauthorized' component={NotFound} />
                     <div>
                         <div className="masterComponentBackground">
@@ -83,6 +83,15 @@ class EmployeeDB extends Component {
         )
     }
     componentDidMount() {
+        axios.interceptors.response.use(function(res){
+            if(res.status === 401){
+              this.setState({
+                redirect : 1,
+                // routes: false
+              })
+            }
+            return res;
+        })
         axios({
             method: 'get',
             url: `${baseUrl}/employee/ticket/current`,

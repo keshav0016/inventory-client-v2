@@ -12,6 +12,7 @@ import {
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input, Row } from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
+import swal from 'sweetalert';
 
 class EmployeesList extends Component {
   constructor(props){
@@ -57,7 +58,11 @@ class EmployeesList extends Component {
       })
     })
     .catch(error => {
-      window.Materialize.toast('list not found',3000)
+      // window.Materialize.toast('list not found',3000)
+      swal("List not Found",{
+        buttons: false,
+        timer: 2000,
+      })
     })
   }
 

@@ -209,7 +209,7 @@ import { baseUrl } from './config';
 import {
     Redirect
 } from 'react-router-dom';
-
+import swal from 'sweetalert';
 class EmployeeUpdate extends Component {
     constructor(props) {
         super(props)
@@ -255,7 +255,8 @@ class EmployeeUpdate extends Component {
                 error: "",
             },
             addEmployee: true,
-            redirect: false
+            redirect: false,
+            login: false
         }
         this.handleCreate = this.handleCreate.bind(this)
         this.handleAge = this.handleAge.bind(this)
@@ -442,17 +443,36 @@ class EmployeeUpdate extends Component {
             })
                 .then((res) => {
                     if (res.data.message === 'employee has been updated') {
-                        window.Materialize.toast('Employee Edited', 4000)
+                        // window.Materialize.toast('Employee Edited', 4000)
+                        swal("Employee is Edited",{
+                            buttons: false,
+                            timer: 2000,
+                          })
                         this.props.setHandleListRequest()
 
                     } else if (res.data.error[0].message) {
-                        window.Materialize.toast(res.data.error[0].message, 4000)
+                        // window.Materialize.toast(res.data.error[0].message, 4000)
+                        swal(res.data.error[0].message,{
+                            buttons: false,
+                            timer: 2000,
+                          })
 
                     }
 
                 })
                 .catch(error => {
-                    window.Materialize.toast('can not edit employee', 4000)
+                    if(error.response.status === 401){
+                        this.setState({
+                            login : true
+                        })
+                    }else{
+
+                        swal("can not Edit the Employee",{
+                            buttons: false,
+                            timer: 2000,
+                          })
+                    }
+                    // window.Materialize.toast('can not edit employee', 4000)
 
                 })
         }
@@ -638,6 +658,12 @@ class EmployeeUpdate extends Component {
             <div>
                 {this.state.addEmployee ? addEmployeeForm : null}
                 {this.state.redirect ? (<Redirect to={{ pathname: '/admin/employees' }} />) : null}
+                {this.state.login ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

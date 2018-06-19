@@ -9,7 +9,8 @@ import {
     Redirect, Link
 } from 'react-router-dom';
 import { baseUrl } from './config';
-import logo from './LOGO.png'
+import logo from './LOGO.png';
+import swal from 'sweetalert';
 
 class ForgotPasswordForm extends Component {
 
@@ -99,7 +100,11 @@ class ForgotPasswordForm extends Component {
                 withCredentials: true
             })
                 .then((res) => {
-                    window.Materialize.toast(res.data.message, 4000)
+                    // window.Materialize.toast(res.data.message, 4000)
+                    swal(res.data.message,{
+                        buttons: false,
+                        timer: 2000,
+                      })
                     if (res.data.message === 'Check Your Email') {
                         this.setState({
                             redirect: true

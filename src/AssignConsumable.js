@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import { baseUrl } from './config';
-import $ from 'jquery'
-
+import $ from 'jquery';
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
 
 
 class AssignConsumables extends Component {
@@ -23,7 +26,8 @@ class AssignConsumables extends Component {
                 error: '',
                 showError: false
             },
-            assignConsumableRequest : false
+            assignConsumableRequest : false,
+            redirect : false
         }
 
         this.setConsumableQuantity=this.setConsumableQuantity.bind(this)
@@ -186,9 +190,18 @@ class AssignConsumables extends Component {
                 assignConsumableRequest : false
             })
             this.props.setHandleListRequest()
-            window.Materialize.toast('Consumable Assigned Successfully', 4000)
+            // window.Materialize.toast('Consumable Assigned Successfully', 4000)
+            swal("Consumable Assigned Successfully",{
+                buttons: false,
+                timer: 2000,
+              })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -228,6 +241,12 @@ class AssignConsumables extends Component {
                 </div>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}
+                {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
             </div>
         )
     }

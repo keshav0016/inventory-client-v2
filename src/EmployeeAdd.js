@@ -7,6 +7,8 @@ import { baseUrl } from './config';
 import {
   Redirect, Link
 } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 class EmployeeAdd extends Component {
   constructor(props) {
@@ -53,7 +55,8 @@ class EmployeeAdd extends Component {
         error: "",
       },
       addEmployee: true,
-      redirect: false
+      redirect: false,
+      login : false
     }
     this.handleCreate = this.handleCreate.bind(this)
     this.handleAge = this.handleAge.bind(this)
@@ -316,7 +319,12 @@ class EmployeeAdd extends Component {
             addEmployee: false,
             redirect: true
           })
-          window.Materialize.toast('Employee added', 4000)
+          swal("Employee has been added",{
+            buttons: false,
+            timer: 2000,
+          });
+
+          // window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
         }else if(res.data.error[0].message ==='first name should be alphabets'){
           this.setState({
@@ -355,6 +363,13 @@ class EmployeeAdd extends Component {
             })
           })
   
+        }
+      })
+      .catch(error => {
+        if(error.response.status === 401){
+          this.setState({
+            login: true
+          })
         }
       })
     }
@@ -502,6 +517,12 @@ class EmployeeAdd extends Component {
       <div>
       {this.state.addEmployee ? addEmployeeForm : null}
       {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/employees'}}/>) : null}
+      {this.state.login ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
       </div>
     )
   }

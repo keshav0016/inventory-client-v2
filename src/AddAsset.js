@@ -9,6 +9,8 @@ import { baseUrl } from './config';
 import {
     Redirect, Link
   } from 'react-router-dom';
+import swal from 'sweetalert';
+  
 
 class AddAsset extends Component{
     constructor(props){
@@ -81,7 +83,8 @@ class AddAsset extends Component{
             addAssetRequest : false
             ,assetTypeListRequest : true,
             addAsset: true,
-            redirect: false
+            redirect: false,
+            login: false
         }
         this.setSerialNumber = this.setSerialNumber.bind(this)
         this.setAssetName = this.setAssetName.bind(this)
@@ -548,19 +551,36 @@ class AddAsset extends Component{
                     addAsset: false,
                     redirect: true
                 })
-                window.Materialize.toast('Asset Added', 4000)                
+                swal("Asset has been added",{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast('Asset Added', 4000)                
                 // this.props.setHandleListRequest(true)
                 $('label').addClass('active')     
             }else if(res.data.message === 'asset is already there'){
-                window.Materialize.toast('asset is already there', 4000)
+                swal("Asset is already there",{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast('asset is already there', 4000)
             }else if(res.data.errors){
-                window.Materialize.toast(res.data.errors[0].message, 4000)
+                swal(res.data.errors[0].message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast(res.data.errors[0].message, 4000)
             }
             this.setState({
                 addAssetRequest : false
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login : true
+                })
+            }
             console.error(error)
         })
     }
@@ -632,6 +652,7 @@ class AddAsset extends Component{
             this.getVendorName()
         })
         .catch(error => {
+
             console.error(error)
         })
 
@@ -709,6 +730,12 @@ class AddAsset extends Component{
                 {this.state.addAssetRequest ? this.addAssetIntoDb() : null}
                 {this.state.vendorListRequest ? this.handleVendorList() : null}
                 {this.state.assetTypeListRequest ? this.fetchAssetTypeList() : null}
+                {this.state.login ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
                 <br /><br />
             </div>
         );

@@ -3,7 +3,8 @@ import axios from 'axios'
 import {Table, Row, Col} from 'react-materialize'
 import { baseUrl } from './config';
 import './ListPage.css'
-import './MasterComponent.css'
+import './MasterComponent.css';
+import swal from 'sweetalert'
 
 class Profile extends Component{
     constructor(props){
@@ -46,7 +47,11 @@ class Profile extends Component{
             })
         })
         .catch(error => {
-            window.Materialize.toast('user details not found',3000)
+            // window.Materialize.toast('user details not found',3000)
+            swal('User details not found',{
+                buttons: false,
+                timer: 2000,
+              })
         })
        
     }

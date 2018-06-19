@@ -7,13 +7,17 @@ import UpdateConsumablePurchase from './UpdateConsumablePurchase'
 import {Parser} from 'json2csv';
 import fileSaver from 'file-saver'
 import { baseUrl } from './config';
-
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class HistoryConsumables extends Component{
    constructor(props){
        super(props)
        this.state = {
            history : [],
            fetchHistory : true,
+           redirect : false
        }
        this.getHistory = this.getHistory.bind(this)
        this.parsingDataToCsv = this.parsingDataToCsv.bind(this)
@@ -35,6 +39,11 @@ class HistoryConsumables extends Component{
            })
        })
        .catch(error => {
+           if(error.response.status === 401){
+               this.setState({
+                   redirect : true
+               })
+           }
            console.error(error)
        })
    }
@@ -69,6 +78,12 @@ class HistoryConsumables extends Component{
    render(){
        return(
            <div className="listComponent" >
+           {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable Details</h3>
            <Row className='splitModalButtons'>

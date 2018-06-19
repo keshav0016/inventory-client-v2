@@ -3,7 +3,11 @@ import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class UpdateAssetType extends Component{
     constructor(props){
         super(props)
@@ -14,7 +18,8 @@ class UpdateAssetType extends Component{
                 value: this.props.maxRequest,
                 error: '',
                 showError: false
-            }
+            },
+            redirect : false
         }
         // this.setAssetType = this.setAssetType.bind(this)
         this.setMaxRequest = this.setMaxRequest.bind(this)
@@ -71,14 +76,27 @@ class UpdateAssetType extends Component{
                 updateAssetTypeRequest : false
             })
             if(res.data.message){
-                window.Materialize.toast(res.data.message, 4000)
+                // window.Materialize.toast(res.data.message, 4000)
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 this.props.setHandleListRequest()
             }
             else{
-                window.Materialize.toast('This asset type already exists', 4000)
+                // window.Materialize.toast('This asset type already exists', 4000)
+                swal('This asset type already exists',{
+                    buttons: false,
+                    timer: 2000,
+                  })
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -129,6 +147,12 @@ class UpdateAssetType extends Component{
                     <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                  {this.state.updateAssetTypeRequest ? this.updateAssetTypeInDb() : null}
+                 {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

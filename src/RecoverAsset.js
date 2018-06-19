@@ -3,13 +3,17 @@ import axios from 'axios'
 import {Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
 class DeleteAsset extends Component{
     constructor(props){
         super(props)
         this.state = {
             recoverAssetRequest : false,
-            recoverInfo : {}
+            recoverInfo : {},
+            redirect : false
         }
         this.setRecoverAssetRequest = this.setRecoverAssetRequest.bind(this);
         this.recoverAssetFromDb = this.recoverAssetFromDb.bind(this)
@@ -33,13 +37,21 @@ class DeleteAsset extends Component{
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
+                // window.Materialize.toast(res.data.error, 4000)
+                swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 this.setState({
                     recoverAssetRequest : false
                 })                
             }
             else{
-                window.Materialize.toast('Asset recovered', 4000)
+                // window.Materialize.toast('Asset recovered', 4000)
+                swal('Asset recovered',{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 this.setState({
                     recoverAssetRequest : false
                 })
@@ -47,6 +59,11 @@ class DeleteAsset extends Component{
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -63,6 +80,11 @@ class DeleteAsset extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
         $('label').addClass('active')
@@ -82,6 +104,12 @@ class DeleteAsset extends Component{
                     <Button className="modal-close cancelButton">Cancel</Button>
                 </div>
                 {this.state.recoverAssetRequest ? this.recoverAssetFromDb() : null}
+                {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

@@ -2,8 +2,12 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import { baseUrl } from './config';
-import $ from 'jquery'
-
+import $ from 'jquery';
+import swal from 'sweetalert'
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class AssignAsset extends Component{
     constructor(props){
         super(props)
@@ -27,7 +31,8 @@ class AssignAsset extends Component{
             },
             employees : [],
             assets : []
-            ,assignForce : false
+            ,assignForce : false,
+            redirect : false
         }
         this.assignAssetIntoDb = this.assignAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
@@ -139,7 +144,11 @@ class AssignAsset extends Component{
             this.setState({
                 assignAssetRequest : false
             })
-            window.Materialize.toast(res.data.message, 4000)
+            // window.Materialize.toast(res.data.message, 4000)
+            swal(res.data.message,{
+                buttons: false,
+                timer: 2000,
+              })
             if(res.data.requireAssignForce){
                 this.setState({
                     assignForce : true
@@ -147,6 +156,13 @@ class AssignAsset extends Component{
             }
             else{
                 this.props.setHandleListRequest()
+            }
+        })
+        .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
             }
         })
     }
@@ -196,6 +212,13 @@ class AssignAsset extends Component{
                 assets : res.data.assets
             })
         })
+        .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
+        })
     }
     clearFields(){
         this.setState({
@@ -233,6 +256,12 @@ class AssignAsset extends Component{
                     <Button className="cancelButton" onClick ={this.clearFields} >Cancel</Button>
                 </div>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}
+                {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
             </div>
         )
     }

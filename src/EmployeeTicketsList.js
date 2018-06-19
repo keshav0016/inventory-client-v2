@@ -9,7 +9,9 @@ import $ from 'jquery'
 import './TicketsList.css'
 import { baseUrl } from './config';
 import Tickets from './Tickets'
-
+import {
+    Redirect
+  } from 'react-router-dom';
 
 class EmployeeTicketsList extends Component{
     constructor(props){
@@ -25,7 +27,8 @@ class EmployeeTicketsList extends Component{
             isPendingChecked : true,
             isAcceptedChecked : false,
             isRejectedChecked : false,
-            selectedIndex : 0
+            selectedIndex : 0,
+            redirect : false
         }
         this.setAssetPage = this.setAssetPage.bind(this)
         this.setConsumablePage = this.setConsumablePage.bind(this)
@@ -105,6 +108,11 @@ class EmployeeTicketsList extends Component{
                 // }
             })
             .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect : true
+                    })
+                }
                 console.error(error)
             })
         }
@@ -125,6 +133,11 @@ class EmployeeTicketsList extends Component{
                 
             })
             .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect : true
+                    })
+                }
                 console.error(error)
             })
         }
@@ -145,6 +158,12 @@ class EmployeeTicketsList extends Component{
         return(
             <div className="listComponent" >
                 <h4 className="title">Employee Tickets List</h4>
+                {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 {filterSlideButton}
                 {/* <SideNav className="filterSliderPane" trigger={filterSlideButton} options={{ closeOnClick: true, edge: 'right' }}>

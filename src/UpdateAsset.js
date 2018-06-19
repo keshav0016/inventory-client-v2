@@ -4,12 +4,16 @@ import {Row, Input, Button, Badge} from 'react-materialize'
 import moment from 'moment'
 import { baseUrl } from './config';
 import $ from 'jquery';
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
 
 class UpdateAsset extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            redirect : false,
             serial_number: {
                 value: this.props.asset.serial_number,
                 error: '',
@@ -337,13 +341,21 @@ class UpdateAsset extends Component {
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
+                // window.Materialize.toast(res.data.error, 4000)
+                swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 this.setState({
                     updateAssetRequest : false
                 })                
             }
             else{
-                window.Materialize.toast('Asset Updated', 4000)
+                // window.Materialize.toast('Asset Updated', 4000)
+                swal('Asset Updated',{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 this.setState({
                     updateAssetRequest: false
                 })
@@ -351,6 +363,11 @@ class UpdateAsset extends Component {
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -443,6 +460,12 @@ class UpdateAsset extends Component {
                     <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
                 </div>
                 {this.state.updateAssetRequest ? this.updateAssetIntoDb() : null}
+                {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }
