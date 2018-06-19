@@ -5,7 +5,8 @@ import './Employee.css'
 import './adminDash.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
-import './ListPage.css'
+import './ListPage.css';
+import swal from 'sweetalert';
 //CHANGE THE USER ID IN CLIENT AS WELL AS SERVER
 
 class Tickets extends Component{
@@ -226,9 +227,17 @@ class Tickets extends Component{
                 })
             })
             if(res.data.message){
-                window.Materialize.toast(res.data.message, 4000)
+                // window.Materialize.toast(res.data.message, 4000)
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
             }else if(res.data.error === 'ticket can not be created'){
-                window.Materialize.toast('sorry, request can not be made', 4000)
+               swal('sorry, request can not be made',{
+                buttons: false,
+                timer: 2000,
+              })
+                // window.Materialize.toast('sorry, request can not be made', 4000)
 
             }
             this.props.setHandleListRequest()
@@ -251,7 +260,11 @@ class Tickets extends Component{
            })
        })
        .catch(error => {
-        window.Materialize.toast('Sorry, there are no resources available', 4000)
+        // window.Materialize.toast('Sorry, there are no resources available', 4000)
+        swal('There are no resources available',{
+            buttons: false,
+            timer: 2000,
+          })
     })
     $('label').addClass('active')
    }

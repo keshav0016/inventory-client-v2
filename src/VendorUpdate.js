@@ -3,6 +3,10 @@ import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
 
 class VendorUpdate extends Component{
     constructor(props){
@@ -28,7 +32,8 @@ class VendorUpdate extends Component{
                 error:'',
                 showError:false
             },
-            update: false
+            update: false,
+            redirect : false
         }
         this.handleId = this.handleId.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
@@ -161,14 +166,22 @@ class VendorUpdate extends Component{
        })
        .then((res) => {
         if(res.data.message === 'vendor has been updated'){
-            window.Materialize.toast('Vendor has been Edited', 4000)
+            // window.Materialize.toast('Vendor has been Edited', 4000)
+            swal('Vendor has been Edited',{
+                buttons: false,
+                timer: 2000,
+              })
             this.setState({
                 update : false
             })
             this.props.setHandleListRequest()
             
         }else{
-            window.Materialize.toast(res.data.error, 4000)
+            // window.Materialize.toast(res.data.error, 4000)
+            swal(res.data.error,{
+                buttons: false,
+                timer: 2000,
+              })
             this.setState({
                 update : false
             })
@@ -176,7 +189,16 @@ class VendorUpdate extends Component{
           
        })
        .catch(error => {
-         window.Materialize.toast('can not edit vendor', 4000)
+           if(error.response.status === 401){
+               this.setState({
+                   redirect: true
+               })
+           }
+        //  window.Materialize.toast('can not edit vendor', 4000)
+        swal('can not edit vendor',{
+            buttons: false,
+            timer: 2000,
+          })
          this.setState({
             update : false
         })
@@ -221,6 +243,12 @@ class VendorUpdate extends Component{
                     <Button  onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                  {this.state.update ? this.handleUpdate() : null}
+                 {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

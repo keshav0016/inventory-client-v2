@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
  import LoginForm from './LoginForm';
  import Logout from './Logout';
@@ -14,11 +15,33 @@ import ForgotPasswordForm from './ForgotPassword'
 import ResetPassword from './ResetPassword'
 import './materialize-overrides.css';
 import NotFound from './NotFound';
-
+import axios from 'axios';
 
 class App extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      redirect : false,
+      routes : true
+    }
+  }
+
+  componentDidMount(){
+    axios.interceptors.response.use(function(res){
+      if(res.status === 401){
+        this.setState({
+          redirect : true,
+          routes: false
+        })
+      }
+      return res;
+    })
+  }
+    
+
   render() {
     return (
+      <div>
       <Router>
           <div>
             <Route path="/admin" component={Homepage} />
@@ -32,8 +55,17 @@ class App extends Component {
             <Route  exact path ='/user/reset/:user' component={ResetPassword}/>    
             <Route path='/unauthorized' component={NotFound} />
                     
+              {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
           </div>
       </Router>
+     
+      </div>
+     
+     
     );
   }
 }

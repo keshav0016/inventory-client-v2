@@ -9,6 +9,7 @@ import { baseUrl } from './config';
 import {
     Redirect, Link
   } from 'react-router-dom';
+import swal from 'sweetalert';  
 
 class RepairAsset extends Component{
     constructor(props){
@@ -40,7 +41,8 @@ class RepairAsset extends Component{
             isDisabled : false,
             repairAsset: true,
             redirect: false
-            ,loading : true
+            ,loading : true,
+            login : false
         }
         this.repairAssetIntoDb = this.repairAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
@@ -208,8 +210,19 @@ class RepairAsset extends Component{
                 repairAsset: false,
                 redirect: true
             })
-            window.Materialize.toast('Repair information has been stored', 4000)
+            // window.Materialize.toast('Repair information has been stored', 4000)
+            swal('Repair information has been stored',{
+                buttons: false,
+                timer: 2000,
+              })
             // this.props.setHandleListRequest()
+        })
+        .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login : true
+                })
+            }
         })
     }
 
@@ -259,6 +272,11 @@ class RepairAsset extends Component{
             this.getVendorName()
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login : true
+                })
+            }
             console.error(error)
         })
 
@@ -272,6 +290,13 @@ class RepairAsset extends Component{
                 assetDetails : res.data.assetDetails,
                 loading : false
             })
+        })
+        .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login : true
+                })
+            }
         })
     }
 
@@ -345,6 +370,12 @@ class RepairAsset extends Component{
             <div>
             {this.state.repairAsset ? repairAssetForm : null}
             {this.state.redirect ? (<Redirect  to ={{pathname:'/admin/assets'}}/>) : null}
+            {this.state.login ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

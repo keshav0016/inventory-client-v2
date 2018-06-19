@@ -3,7 +3,10 @@ import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
 
 class AddAssetType extends Component{
     constructor(props){
@@ -111,7 +114,11 @@ class AddAssetType extends Component{
                     }
                 })
                 $('.modal-overlay').click()
-                window.Materialize.toast(res.data.message, 4000)
+                // window.Materialize.toast(res.data.message, 4000)
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 if(this.props.setAssetTypeListRequest){
                     this.props.setAssetTypeListRequest(assetTypeName)
                 }
@@ -131,6 +138,11 @@ class AddAssetType extends Component{
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.error(error)
         })
     }
@@ -180,6 +192,12 @@ class AddAssetType extends Component{
                     <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}
+                {this.state.login ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
             </div>
 
         )

@@ -2,13 +2,14 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Button} from 'react-materialize'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
 
 class DeleteAsset extends Component{
     constructor(props){
         super(props)
         this.state = {
-            deleteAssetRequest : false
+            deleteAssetRequest : false,
+            redirect : false
         }
         this.setDeleteAssetRequest = this.setDeleteAssetRequest.bind(this);
         this.deleteAssetFromDb = this.deleteAssetFromDb.bind(this)
@@ -33,13 +34,21 @@ class DeleteAsset extends Component{
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
+                swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast(res.data.error, 4000)
                 this.setState({
                     deleteAssetRequest : false
                 })                
             }
             else{
-                window.Materialize.toast('Asset deleted', 4000)
+                swal("Asset has been deleted",{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast('Asset deleted', 4000)
                 this.setState({
                     deleteAssetRequest : false
                 })
@@ -47,6 +56,11 @@ class DeleteAsset extends Component{
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -66,6 +80,12 @@ class DeleteAsset extends Component{
                         <Button onClick = {this.setDeleteAssetRequest} style={{margin: '0 20px'}}>Delete</Button>
                         <Button className="modal-close" style={{margin: '0 20px'}}>Cancel</Button>
                 </div>
+                {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

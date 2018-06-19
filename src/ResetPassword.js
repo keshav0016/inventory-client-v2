@@ -7,7 +7,8 @@ import {
 import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
-import logo from './LOGO.png'
+import logo from './LOGO.png';
+import swal from 'sweetalert';
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -203,14 +204,22 @@ class ResetPassword extends Component {
             })
                 .then((res) => {
                     if (res.data.message === 'password has been changed') {
-                        window.Materialize.toast('password has been changed', 4000)
+                        // window.Materialize.toast('password has been changed', 4000)
+                        swal("password has been changed",{
+                            buttons: false,
+                            timer: 2000,
+                          })
                         this.setState({
                             employee: true
                         })
                     }
                 })
         } else {
-            window.Materialize.toast('passwords does not match', 4000)
+            // window.Materialize.toast('passwords does not match', 4000)
+            swal("passwords does not match",{
+                buttons: false,
+                timer: 2000,
+              })
         }
 
     }

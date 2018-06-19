@@ -4,8 +4,12 @@ import {Table, Preloader, Row, Button, Modal} from 'react-materialize'
 import './Employee.css'
 import { baseUrl } from './config';
 import RecoverAsset from "./RecoverAsset";
-import $ from 'jquery'
-
+import $ from 'jquery';
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class EmployeeHistory extends Component {
     constructor(props){
         super(props)
@@ -14,7 +18,8 @@ class EmployeeHistory extends Component {
             data : [],
             history : [],
             historyAssets :[],
-            loading : true
+            loading : true,
+            redirect : false
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -30,6 +35,12 @@ class EmployeeHistory extends Component {
            
         <div className="listComponent" >
             <h3 className="title">Items held by Employee</h3>
+            {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
                 {this.state.loading ? <Row><Preloader size='small' /></Row> : 
                 (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> : 
             <div>
@@ -83,12 +94,25 @@ class EmployeeHistory extends Component {
                 loading : false
             })
             if(this.state.data.length === 0){
-                window.Materialize.toast('There are no items for the user',3000)
+                // window.Materialize.toast('There are no items for the user',3000)
+                swal('There are no items for the user',{
+                    buttons: false,
+                    timer: 2000,
+                  })
 
             }
         })
         .catch(error => {
-            window.Materialize.toast('list not found',3000)
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
+            // window.Materialize.toast('list not found',3000)
+            swal('List not Found',{
+                buttons: false,
+                timer: 2000,
+              })
           })
     }
 }

@@ -7,7 +7,8 @@ import {
 import './Employee.css'
 import $ from 'jquery'
 import { baseUrl } from './config';
-import logo from './LOGO.png'
+import logo from './LOGO.png';
+import swal from 'sweetalert';
 
 class PasswordChange extends Component {
     constructor(props) {
@@ -196,7 +197,11 @@ class PasswordChange extends Component {
             })
                 .then((res) => {
                     if (res.data.message === 'password has been changed') {
-                        window.Materialize.toast('Password has been changed', 4000)
+                        // window.Materialize.toast('Password has been changed', 4000)
+                        swal('Password has been changed',{
+                            buttons: false,
+                            timer: 2000,
+                          })
                         this.setState({
                             employee: true
                         })

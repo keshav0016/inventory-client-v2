@@ -7,6 +7,7 @@ import './TicketsList.css'
 import $ from 'jquery'
 import {Link} from 'react-router-dom'
 import { baseUrl } from './config';
+import swal from 'sweetalert';
 
 class TicketsList extends Component{
     constructor(props){
@@ -160,14 +161,26 @@ class TicketsList extends Component{
                 ,reason : ''
             })
             if(res.data.message === 'Requested Quantity greater than available'){
-                window.Materialize.toast('Requested Quantity greater than available', 4000)
+                // window.Materialize.toast('Requested Quantity greater than available', 4000)
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
             }
             else{
                 if(res.data.message === 'Requested item is disabled'){
-                    window.Materialize.toast('Requested item is disabled', 4000)
+                    // window.Materialize.toast('Requested item is disabled', 4000)
+                    swal(res.data.message,{
+                        buttons: false,
+                        timer: 2000,
+                      })
                 }
                 else{
-                    window.Materialize.toast('Ticket Accepted', 4000)
+                    // window.Materialize.toast('Ticket Accepted', 4000)
+                    swal('Ticket Accepted',{
+                        buttons: false,
+                        timer: 2000,
+                      })
                     $(".modal-overlay").click()        
                 }
             }
@@ -193,12 +206,20 @@ class TicketsList extends Component{
                 handleListRequest:true
                 ,reason : ''
             })
-            window.Materialize.toast(res.data.message,4000)
+            // window.Materialize.toast(res.data.message,4000)
+            swal(res.data.message,{
+                buttons: false,
+                timer: 2000,
+              })
             $(".modal-overlay").click()        
 
         })
         .catch(error =>{
-            window.Materialize.toast(error.data.error,4000)
+            // window.Materialize.toast(error.data.error,4000)
+            swal(error.data.error,{
+                buttons: false,
+                timer: 2000,
+              })
         })
     }
 

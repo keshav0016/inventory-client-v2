@@ -4,11 +4,16 @@ import moment from 'moment'
 import {Row, Input, Button, Badge} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class ReceiveAsset extends Component{
     constructor(props){
         super(props)
         this.state = {
+            redirect: false,
             to : {
                 value: '',
                 error: '',
@@ -208,7 +213,11 @@ class ReceiveAsset extends Component{
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
+                // window.Materialize.toast(res.data.error, 4000)
+                swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
                 this.setState({
                     receiveAssetRequest : false
                 })                
@@ -238,11 +247,20 @@ class ReceiveAsset extends Component{
                     }),
                     total : 0,
                 })
-                window.Materialize.toast('Asset Received', 4000)                
+                // window.Materialize.toast('Asset Received', 4000)  
+                swal("Asset Received",{
+                    buttons: false,
+                    timer: 2000,
+                  })              
                 this.props.setHandleListRequest()
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -317,6 +335,12 @@ class ReceiveAsset extends Component{
                     <Button className="cancelButton" onClick = {this.clearFields}>Cancel</Button>
                 </div>
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}
+                {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

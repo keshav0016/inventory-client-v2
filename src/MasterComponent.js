@@ -20,6 +20,7 @@ import AddAsset from './AddAsset'
 import RepairAsset from './RepairAsset'
 import Tickets from './Tickets'
 import EmployeeAdd from './EmployeeAdd';
+import EmployeeUpdate from './EmployeeUpdate'
 import AcceptAssetTicket from './AcceptAssetTicket'
 import AssetType from './AssetType'
 import axios from 'axios';
@@ -28,15 +29,26 @@ import NotFound from './NotFound';
 import logo from './LOGO.png'
 import './MasterComponent.css'
 import $ from 'jquery'
+import UpdateAsset from './UpdateAsset';
 
 class MasterComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             unauth: false,
+            redirect: false
         }
     }
     componentDidMount(){
+        axios.interceptors.response.use(function(res){
+            if(res.status === 401){
+              this.setState({
+                redirect : true,
+                // routes: false
+              })
+            }
+            return res;
+        })
         axios({
             method : 'get',
             url : `${baseUrl}/admin/ticket/dashboard`,
@@ -60,7 +72,13 @@ class MasterComponent extends Component {
         return (
             <React.Fragment>
                 <Route path='/unauthorized' component={NotFound} />
-                
+                {this.state.redirect? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />
+                    :null}
                 {this.state.unauth ? <Redirect to="/unauthorized" /> : (
                     <div className="masterComponentBackground">
                         <div>
@@ -88,22 +106,24 @@ class MasterComponent extends Component {
                         <div>
                             
                             <Route exact path="/admin" component={Admindashboard} />
-                            <Route exact path="/admin/assets" component={Assets} />
                             <Route exact path="/admin/consumables" component={Consumables} />
-                            <Route exact path="/admin/employees" component={EmployeesList} />
-                            <Route exact path="/admin/tickets" component={TicketsList} />
                             <Route exact path="/admin/consumables/history/:consumable" component={HistoryConsumables} />
                             <Route exact path='/admin/consumables/add' component={AddConsumables} />
+                            <Route exact path="/admin/consumables/history" component={EntireHistoryConsumables} />
+                            <Route exact path="/admin/employees" component={EmployeesList} />
                             <Route exact path='/admin/employees/details/:employee' component={EmployeeHistory} />
+                            <Route exact path='/admin/employees/create' component={EmployeeAdd} />
+                            <Route exact path='/admin/employees/update' component={EmployeeUpdate} />
+                            <Route exact path="/admin/tickets" component={TicketsList} />
                             <Route exact path='/admin/vendor' component={Vendor} />
+                            <Route exact path="/admin/assets" component={Assets} />
                             <Route exact path='/admin/assets/history/:asset' component={History} />
                             <Route exact path='/admin/assets/create' component={AddAsset} />
                             <Route exact path='/admin/assets/repair/:asset' component={RepairAsset} />
                             <Route exact path='/employee/RequestTicket' component={Tickets} />
-                            <Route exact path='/admin/employees/create' component={EmployeeAdd} />
                             <Route exact path='/admin/tickets/asset/accept/:ticket' component={AcceptAssetTicket} />
-                            <Route exact path="/admin/consumables/history" component={EntireHistoryConsumables} />
                             <Route exact path="/admin/assetType" component={AssetType} />
+                            <Route exact path="/admin/assets/update" component={UpdateAsset} />
                         </div>
                     </div>
                 )}

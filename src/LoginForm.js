@@ -9,7 +9,8 @@ import {
 } from 'react-router-dom';
 import Row from 'react-materialize/lib/Row';
 import { baseUrl } from './config';
-import logo from './LOGO.png'
+import logo from './LOGO.png';
+import swal from 'sweetalert';
 // import querystring from "querystring";
 // import PasswordChange from './PwdChange';
 // import EmplooyeeDB from './EmplooyeeDB';
@@ -131,8 +132,12 @@ class LoginForm extends Component {
           })
         }
       })
-      .catch(() => {
-        window.Materialize.toast('Wrong credentials', 3000)
+      .catch((error) => {
+        // window.Materialize.toast('Wrong credentials', 3000)
+        swal("Wrong Credentials",{
+          buttons: false,
+          timer: 2000,
+        })
 
       })
   }
@@ -140,7 +145,11 @@ class LoginForm extends Component {
   componentDidMount(){
     // console.log(querystring.parse())
     if(this.props.location.search ==="?sessionExpired=true"){
-      window.Materialize.toast("Session expired", 4000)
+      // window.Materialize.toast("Session expired", 4000)
+      swal('Your Session has expired, login again to continue',{
+        buttons: false,
+        timer: 2000,
+      })
     }
   }
 

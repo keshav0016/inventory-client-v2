@@ -4,7 +4,11 @@ import {Row, Input, Button, Badge} from 'react-materialize'
 import $ from 'jquery'
 import moment from 'moment'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class UpdateConsumablePurchase extends Component{
     constructor(props){
         super(props)
@@ -36,7 +40,8 @@ class UpdateConsumablePurchase extends Component{
             },
             total : this.props.consumable.total,
             updateConsumable : false,
-            calculateTotal : false
+            calculateTotal : false,
+            redirect : false
         }
         this.setPurchaseQuantity = this.setPurchaseQuantity.bind(this)
         this.updateConsumablePurchase = this.updateConsumablePurchase.bind(this)
@@ -237,9 +242,18 @@ class UpdateConsumablePurchase extends Component{
             $('label').addClass('active')
             $(".modal-overlay").click()
             this.props.getHistory()
-            window.Materialize.toast('Consumable Purchase Detail Updated', 4000)
+            // window.Materialize.toast('Consumable Purchase Detail Updated', 4000)
+            swal('Consumable Purchase Detail Updated',{
+                buttons: false,
+                timer: 2000,
+              })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.log(error)
         })
     }
@@ -311,6 +325,12 @@ class UpdateConsumablePurchase extends Component{
                 </div>
                     {this.state.updateConsumable ? this.updateConsumablePurchase() : null}
                     {this.state.calculateTotal ? this.calculateTotal() : null}
+                    {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>  
         )
     }

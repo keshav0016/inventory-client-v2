@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
-
+import swal from 'sweetalert';
 
 
 class UpdateConsumables extends Component {
@@ -21,7 +21,8 @@ class UpdateConsumables extends Component {
                 error:'',
                 showError:false
             },
-            updateConsumableRequest : false
+            updateConsumableRequest : false,
+            redirect: false
         }
 
         this.setConsumableName=this.setConsumableName.bind(this)
@@ -134,10 +135,19 @@ class UpdateConsumables extends Component {
                 },
                 updateConsumableRequest : false
             })
-            window.Materialize.toast('Consumable Updated Successfully', 4000)
+            // window.Materialize.toast('Consumable Updated Successfully', 4000)
+            swal('Consumable Updated Successfully',{
+                buttons: false,
+                timer: 2000,
+              })
             this.props.setHandleListRequest()
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -152,6 +162,12 @@ class UpdateConsumables extends Component {
                 </Row>
                 <Button waves='light' onClick={this.checkForValidation}>Update</Button>
                 {this.state.updateConsumableRequest ? this.UpdateConsumable () : null}
+                {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

@@ -2,13 +2,17 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import { Button} from 'react-materialize'
 import { baseUrl } from './config';
-
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class DeleteConsumable extends Component{
     constructor(props){
         super(props)
         this.state = {
-            deleteConsumableRequest : false
+            deleteConsumableRequest : false,
+            redirect : false
         }
         this.setDeleteConsumableRequest = this.setDeleteConsumableRequest.bind(this);
         this.deleteConsumableFroDb = this.deleteConsumableFroDb.bind(this)
@@ -32,13 +36,21 @@ class DeleteConsumable extends Component{
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)
+                swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast(res.data.error, 4000)
                 this.setState({
                     deleteConsumableRequest : false
                 })                
             }
             else{
-                window.Materialize.toast(res.data.error, 4000)
+                swal('consumable is Disabled',{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast(res.data.error, 4000)
                 this.setState({
                     deleteConsumableRequest : false
                 })
@@ -46,6 +58,11 @@ class DeleteConsumable extends Component{
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -65,6 +82,12 @@ class DeleteConsumable extends Component{
                         <Button onClick = {this.setDeleteConsumableRequest}>Disable</Button>
                         <Button className="modal-close cancelButton">Cancel</Button>
                 </div>
+                {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }

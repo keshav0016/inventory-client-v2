@@ -7,7 +7,10 @@ import './Employee.css'
 import {Parser} from 'json2csv';
 import fileSaver from 'file-saver'
 import { baseUrl } from './config';
-
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class Assets extends Component{
     constructor(props){
         super(props)
@@ -19,6 +22,7 @@ class Assets extends Component{
             assignedEmployee : {},
             repairDetails : {},
             handleListRequest : true,
+            redirect : false
         }
         this.handleList = this.handleList.bind(this)
         this.parsingDataToCsv = this.parsingDataToCsv.bind(this)
@@ -42,6 +46,11 @@ class Assets extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect : true
+                })
+            }
             console.error(error)
         })
     }
@@ -77,6 +86,12 @@ class Assets extends Component{
     render(){
         return(
             <div  className="listComponent" >
+            {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className="title">Asset Details</h3>
                 {this.state.assetDetails ? <div>

@@ -5,6 +5,9 @@ import moment from 'moment'
 import './Employee.css'
 import './ListPage.css'
 import { baseUrl } from './config';
+import {
+    Redirect
+  } from 'react-router-dom';
 
 class EntireHistoryConsumables extends Component{
    constructor(props){
@@ -13,7 +16,8 @@ class EntireHistoryConsumables extends Component{
            history : [],
            fetchHistory : true,
            isPurchased : false,
-           isAssigned : false
+           isAssigned : false,
+           redirect : false
        }
        this.getHistory = this.getHistory.bind(this)
        this.setPurchased = this.setPurchased.bind(this)
@@ -33,6 +37,11 @@ class EntireHistoryConsumables extends Component{
            })
        })
        .catch(error => {
+           if(error.response.status === 401){
+               this.setState({
+                   redirect: true
+               })
+           }
            console.error(error)
        })
    }
@@ -63,6 +72,12 @@ class EntireHistoryConsumables extends Component{
     </div>     
        return(
            <div className="listComponent">
+           {this.state.redirect ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable History</h3>
             {filterSlideButton}

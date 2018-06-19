@@ -4,7 +4,11 @@ import {Row, Input, Button} from 'react-materialize'
 // import $ from 'jquery'
 import { baseUrl } from './config';
 import $ from 'jquery'
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class AddVendor extends Component{
     constructor(props){
         super(props)
@@ -24,7 +28,8 @@ class AddVendor extends Component{
                 value: '',
                 error: '',
                 showError: false
-            }
+            },
+            redirect: false
         }
         this.checkForValidation = this.checkForValidation.bind(this)
         this.addVendorIntoDb = this.addVendorIntoDb.bind(this)
@@ -160,7 +165,11 @@ class AddVendor extends Component{
                     })
                 }
                 else{
-                    window.Materialize.toast(res.data.error, 4000)
+                   swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                    // window.Materialize.toast(res.data.error, 4000)
                 }
                 this.setState({
                     addVendorRequest : false
@@ -186,7 +195,11 @@ class AddVendor extends Component{
                     },
                     addVendorRequest : false
                 })
-                window.Materialize.toast(res.data.message, 4000)
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast(res.data.message, 4000)
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
                 }                
@@ -196,6 +209,11 @@ class AddVendor extends Component{
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -242,6 +260,12 @@ class AddVendor extends Component{
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}
+                    {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
             </div>
         )
     }

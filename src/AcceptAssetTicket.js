@@ -4,6 +4,7 @@ import {Row, Input, Button, Preloader, Col, Icon} from 'react-materialize'
 import {Redirect, Link} from 'react-router-dom'
 import './Employee.css'
 import { baseUrl } from './config';
+import swal from 'sweetalert';
 
 
 class AcceptAssetTicket extends Component{
@@ -26,7 +27,8 @@ class AcceptAssetTicket extends Component{
             ,unAuth : false
             ,loading : true
             ,redirect : false
-            ,acceptTicketRequest : false
+            ,acceptTicketRequest : false,
+            login: false
         }
         this.setCurrentAssetSelected = this.setCurrentAssetSelected.bind(this) 
         this.handleExpected = this.handleExpected.bind(this)
@@ -149,10 +151,18 @@ class AcceptAssetTicket extends Component{
                 ,acceptTicketRequest : false
             })
             if(res.data.message === 'Requested Quantity greater than available'){
-                window.Materialize.toast('Requested Quantity greater than available', 4000)
+                swal("Requested Quantity is greater than available",{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast('Requested Quantity greater than available', 4000)
             }
             else{
-                window.Materialize.toast('Ticket Accepted', 4000)
+                // window.Materialize.toast('Ticket Accepted', 4000)
+                swal("Ticket is Accepted",{
+                    buttons: false,
+                    timer: 2000,
+                  });
                 this.setState({
                     redirect : true
                 })
@@ -160,6 +170,11 @@ class AcceptAssetTicket extends Component{
             console.log('success')
         })
         .catch(error =>{
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.log('error')
         })
     }
@@ -219,6 +234,12 @@ class AcceptAssetTicket extends Component{
                 </React.Fragment>))}
                 {this.state.redirect ? <Redirect push to="/admin/tickets"/> : null}
                 {this.state.acceptTicketRequest ? this.acceptTicket() : null}
+                {this.state.login ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />: null}
             </Row>
             </div>
         )

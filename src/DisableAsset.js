@@ -2,11 +2,17 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Button} from 'react-materialize'
 import { baseUrl } from './config';
-
-
+import swal from 'sweetalert';
+import {
+    Redirect
+  } from 'react-router-dom';
+  
 class DisableAsset extends Component{
     constructor(props){
         super(props)
+        this.state = {
+            redirect : false
+        }
         this.disableAssetFromDb = this.disableAssetFromDb.bind(this)
     }
 
@@ -21,14 +27,27 @@ class DisableAsset extends Component{
         })
         .then(res => {
             if(res.data.error){
-                window.Materialize.toast(res.data.error, 4000)              
+                swal(res.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast(res.data.error, 4000)              
             }
             else{
-                window.Materialize.toast('Asset Disabled', 4000)
+                swal('Asset is Disabled',{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                // window.Materialize.toast('Asset Disabled', 4000)
                 this.props.setHandleListRequest()
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -48,6 +67,12 @@ class DisableAsset extends Component{
                         <Button onClick = {this.disableAssetFromDb} >OK</Button>
                         <Button className="cancelButton modal-close" >Cancel</Button>
                 </div>
+                {this.state.redirect ?  <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }
