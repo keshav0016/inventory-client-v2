@@ -164,13 +164,13 @@ class AddVendor extends Component{
                         })
                     })
                 }
-                else{
-                   swal(res.data.error,{
-                    buttons: false,
-                    timer: 2000,
-                  })
-                    // window.Materialize.toast(res.data.error, 4000)
-                }
+                // else{
+                //    swal(res.data.error,{
+                //     buttons: false,
+                //     timer: 2000,
+                //   })
+                //     // window.Materialize.toast(res.data.error, 4000)
+                // }
                 this.setState({
                     addVendorRequest : false
                 })                
