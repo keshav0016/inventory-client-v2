@@ -115,6 +115,8 @@ class LoginForm extends Component {
       .then((res) => {
         if(res.data.message === 'user not found'){
           return Promise.reject('Wrong credentials');
+        }if(res.data.message === 'User is disabled'){
+          return Promise.reject('Sorry! You can not use this Application')
         }
         if (res.data.passwordSame === true) {
           this.setState({
@@ -138,7 +140,10 @@ class LoginForm extends Component {
           buttons: false,
           timer: 2000,
         })
-
+        swal("Sorry! Your account has been deactivated, Please contact the HR Team",{
+          buttons: false,
+          timer: 2000,
+        })
       })
   }
 
