@@ -312,7 +312,7 @@ class EmployeeUpdate extends Component{
                         })
                     this.props.setHandleListRequest()
 
-                } else if (res.data.error[0].message === "email must be unique") {
+                }else if (res.data.error[0].message === "email must be unique") {
                     this.setState({
                         email: Object.assign(this.state.email, {
                             error:"This Email is already taken by another employee",
