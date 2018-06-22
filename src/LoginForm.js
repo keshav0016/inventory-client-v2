@@ -115,8 +115,16 @@ class LoginForm extends Component {
       .then((res) => {
         if(res.data.message === 'user not found'){
           return Promise.reject('Wrong credentials');
+          // swal("Wrong Credentials",{
+          //   buttons: false,
+          //   timer: 2000,
+          // })
         }if(res.data.message === 'User is disabled'){
-          return Promise.reject('Sorry! You can not use this Application')
+          return Promise.reject('Your account has been suspended, contact your administrator or HR department')
+          // swal("Your account has been suspended, contact your administrator or hr department",{
+          //   buttons: false,
+          //   timer: 2000,
+          // })
         }
         if (res.data.passwordSame === true) {
           this.setState({
@@ -135,15 +143,26 @@ class LoginForm extends Component {
         }
       })
       .catch((error) => {
-        // window.Materialize.toast('Wrong credentials', 3000)
-        swal("Wrong Credentials",{
-          buttons: false,
-          timer: 2000,
-        })
-        swal("Sorry! Your account has been deactivated, Please contact the HR Team",{
-          buttons: false,
-          timer: 2000,
-        })
+        if(error === "Your account has been suspended, contact your administrator or HR department"){
+          swal("Your account has been suspended, contact your administrator or HR department",{
+            buttons: false,
+            timer: 2000,
+          })
+        }
+        if(error === "Wrong Credentials"){
+          swal("Wrong Credentials",{
+            buttons: false,
+            timer: 2000,
+          })
+        }
+        if(error.response.status === 401){
+          swal("Wrong Credentials",{
+            buttons: false,
+            timer: 2000,
+          })
+        }
+       
+        
       })
   }
 
