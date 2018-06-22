@@ -73,6 +73,7 @@ class VendorUpdate extends Component{
     }
 
     checkForValidation(){
+        var contactRegex = /^[6-9]\d{9}$/;
         if(!this.state.id.value){
             this.setState({
                 id:Object.assign(this.state.id, {
@@ -121,15 +122,23 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.contact.value.length !== 10){
+        if(!this.state.contact.value){
             this.setState({
                 contact:Object.assign(this.state.contact, {
-                    error: 'Enter a Phone number',
+                    error: 'Contact number should not be empty',
                     showError: true
                 })
             })
         }
-        if(this.state.contact.value.length === 10){
+        if(this.state.contact.value && !contactRegex.test(Number(this.state.contact.value))){
+            this.setState({
+                contact:Object.assign(this.state.contact, {
+                    error: 'Enter a valid 10 digit contact number',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.contact.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 contact:Object.assign(this.state.contact, {
                     error: '',
@@ -137,7 +146,7 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.id.value && this.state.name.value && this.state.address.value && this.state.contact.value.length === 10){
+        if(this.state.id.value && this.state.name.value && this.state.address.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 update: true
             })

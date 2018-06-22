@@ -5,7 +5,7 @@ import {Redirect, Link} from 'react-router-dom'
 import './Employee.css'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
-
+import moment from 'moment';
 
 class AcceptAssetTicket extends Component{
     constructor(props){
@@ -28,7 +28,8 @@ class AcceptAssetTicket extends Component{
             ,loading : true
             ,redirect : false
             ,acceptTicketRequest : false,
-            login: false
+            login: false,
+            d1 : new Date()
         }
         this.setCurrentAssetSelected = this.setCurrentAssetSelected.bind(this) 
         this.handleExpected = this.handleExpected.bind(this)
@@ -43,6 +44,13 @@ class AcceptAssetTicket extends Component{
                 expected_recovery : Object.assign(this.state.expected_recovery, {
                     showError : true,
                     error : 'Expected Recovery date is Required'
+                })
+            })
+        }else if(moment(this.state.expected_recovery.value).format("MM-DD-YYYY") < moment(this.state.d1).format("MM-DD-YYYY")){
+            this.setState({
+                expected_recovery : Object.assign(this.state.expected_recovery, {
+                    showError : true,
+                    error : 'Expected Recovery date should not be less than current date'
                 })
             })
         }

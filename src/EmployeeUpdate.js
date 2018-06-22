@@ -450,13 +450,14 @@ class EmployeeUpdate extends Component {
                           })
                         this.props.setHandleListRequest()
 
-                    } else if (res.data.error[0].message) {
-                        // window.Materialize.toast(res.data.error[0].message, 4000)
-                        swal(res.data.error[0].message,{
-                            buttons: false,
-                            timer: 2000,
-                          })
-
+                    } else if (res.data.error[0].message === "email must be unique") {
+                        this.setState({
+                            email: Object.assign(this.state.email, {
+                                error:"This Email is already taken by another employee",
+                                showError:true
+                            }),
+                        })
+                       
                     }
 
                 })

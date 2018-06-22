@@ -564,12 +564,13 @@ class AddAsset extends Component{
                     timer: 2000,
                   })
                 // window.Materialize.toast('asset is already there', 4000)
-            }else if(res.data.errors){
-                swal(res.data.errors[0].message,{
-                    buttons: false,
-                    timer: 2000,
-                  })
-                // window.Materialize.toast(res.data.errors[0].message, 4000)
+            }else if(res.data.errors[0].message === 'serial_number must be unique'){
+                this.setState({
+                    serial_number:Object.assign(this.state.serial_number, {
+                        error: 'The serial number is already assigned to another asset',
+                        showError : true
+                    })
+                })
             }
             this.setState({
                 addAssetRequest : false

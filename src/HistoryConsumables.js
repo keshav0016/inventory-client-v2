@@ -10,7 +10,7 @@ import { baseUrl } from './config';
 import {
     Redirect
   } from 'react-router-dom';
-  
+
 class HistoryConsumables extends Component{
    constructor(props){
        super(props)
@@ -99,7 +99,7 @@ class HistoryConsumables extends Component{
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchased</h5>
                                 <Modal
                                     actions={null}
-                                    trigger={<Button style={{float : 'right'}}>Edit</Button>}>
+                                    trigger={<Button style={{position: 'relative',left: '400px'}}>Edit</Button>}>
                                     <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
                                 </Modal>
                                 <div className='historyCards' >
