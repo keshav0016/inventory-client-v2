@@ -306,7 +306,7 @@ class EmployeeUpdate extends Component{
             .then((res) => {
                 if (res.data.message === 'employee has been updated') {
                     // window.Materialize.toast('Employee Edited', 4000)
-                    swal("Employee is Edited",{
+                    swal("Employee details has been Updated",{
                         buttons: false,
                         timer: 2000,
                         })
