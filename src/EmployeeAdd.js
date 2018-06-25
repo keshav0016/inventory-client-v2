@@ -440,7 +440,7 @@ class EmployeeAdd extends Component {
       <div className="listComponent" >
       <h3 className="title">Add Employee</h3>
         <Row>
-        <Input type="number" onChange={this.handleUser_Id}s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
+          <Input onChange={this.handleUser_Id}s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
           <Input  onChange={this.handleFirstname}s={12} m={6} l={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
           <Input  onChange={this.handleLastname} s={12} m={6} l={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
           <Input type="number" min='0'label="Age" value={this.state.age.value} onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>

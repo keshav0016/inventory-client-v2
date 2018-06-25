@@ -341,3 +341,13 @@ label {
         width: 30%
     }
 }
+@media screen and (max-width: 767px){
+    .miniAssetCheckbox [type="checkbox"] + label::before, [type="checkbox"]:not(.filled-in) + label::after {
+        border-color: #000;
+    }
+    .miniAssetCheckbox  [type="checkbox"]:checked+label:before {
+        border-top: 2px #000;
+        border-left: 2px #000;    
+    }
+   
+}
