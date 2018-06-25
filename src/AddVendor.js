@@ -76,7 +76,7 @@ class AddVendor extends Component{
         if(!contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 contact:Object.assign(this.state.contact, {
-                    error: 'Enter a valid contact number',
+                    error: 'Enter a valid 10 digit contact number',
                     showError: true
                 })
             })
@@ -89,22 +89,22 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.contact.value.length < 10 && this.state.contact.value.length > 0 ){
-            this.setState({
-                contact:Object.assign(this.state.contact, {
-                    error: 'Contact number less than 10 digits',
-                    showError: true
-                })
-            })
-        }
-        if(this.state.contact.value.length > 10){
-            this.setState({
-                contact:Object.assign(this.state.contact, {
-                    error: 'Contact number greater than 10 digits',
-                    showError: true
-                })
-            })
-        }
+        // if(this.state.contact.value.length < 10 && this.state.contact.value.length > 0 ){
+        //     this.setState({
+        //         contact:Object.assign(this.state.contact, {
+        //             error: 'Contact number less than 10 digits',
+        //             showError: true
+        //         })
+        //     })
+        // }
+        // if(this.state.contact.value.length > 10){
+        //     this.setState({
+        //         contact:Object.assign(this.state.contact, {
+        //             error: 'Contact number greater than 10 digits',
+        //             showError: true
+        //         })
+        //     })
+        // }
         if(this.state.contact.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 contact:Object.assign(this.state.contact, {
@@ -164,13 +164,6 @@ class AddVendor extends Component{
                         })
                     })
                 }
-                // else{
-                //    swal(res.data.error,{
-                //     buttons: false,
-                //     timer: 2000,
-                //   })
-                //     // window.Materialize.toast(res.data.error, 4000)
-                // }
                 this.setState({
                     addVendorRequest : false
                 })                
@@ -250,7 +243,7 @@ class AddVendor extends Component{
                 <h5 className='title'>Add Vendor</h5 >
                 <Row>
                     <Input s={12} m={6} l={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input s={12} m={6} l={6} className="vendorContact" label="Contact" type='number' value = {this.state.contact.value} onChange ={this.setContact} error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
+                    <Input s={12} m={6} l={6} className="vendorContact" label="Contact"  value = {this.state.contact.value} onChange ={this.setContact} error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
                     <Input s={12} m={6} l={6} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 
                 </Row>

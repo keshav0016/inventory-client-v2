@@ -121,10 +121,7 @@ class LoginForm extends Component {
           // })
         }if(res.data.message === 'User is disabled'){
           return Promise.reject('Your account has been suspended, contact your administrator or HR department')
-          // swal("Your account has been suspended, contact your administrator or hr department",{
-          //   buttons: false,
-          //   timer: 2000,
-          // })
+         
         }
         if (res.data.passwordSame === true) {
           this.setState({
@@ -155,13 +152,7 @@ class LoginForm extends Component {
             timer: 2000,
           })
         }
-        if(error.response.status === 401){
-          swal("Wrong Credentials",{
-            buttons: false,
-            timer: 2000,
-          })
-        }
-       
+  
         
       })
   }
