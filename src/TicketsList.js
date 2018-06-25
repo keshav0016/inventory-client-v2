@@ -267,7 +267,7 @@ class TicketsList extends Component{
     }
 
     renderAcceptConsumableTicket(ticket){
-        return ticket.status === 'Pending' ? <Modal
+        return ticket.status === 'Pending' ? <Modal className="modal"
             actions={null}
             trigger={<Button floating icon='done'></Button>}>
             <Row className="no-footer" >

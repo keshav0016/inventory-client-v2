@@ -54,7 +54,7 @@ class Consumables extends Component{
                     error:'The Min Quantity is -ve',
                     showError:true
                 }),
-                handleListRequest : true
+                handleListRequest : false
             })
         }
         if(Number(this.state.minQuantity.value) >= 0){
@@ -74,10 +74,10 @@ class Consumables extends Component{
                     error:'The Max Quantity is -ve',
                     showError:true
                 }),
-                handleListRequest : true
+                handleListRequest : false
             })
         }
-        if(Number(this.state.maxQuantity.value) >= 0){
+        if(Number(this.state.minQuantity) >=0 && Number(this.state.maxQuantity.value) >= 0){
             // window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
             this.setState({
                 maxQuantity: Object.assign(this.state.maxQuantity, {
@@ -114,7 +114,7 @@ class Consumables extends Component{
                             error:'The Min Quantity > the Max Quantity',
                             showError:true
                         }),
-                        handleListRequest : true
+                        handleListRequest : false
                     })
                 }
             }
