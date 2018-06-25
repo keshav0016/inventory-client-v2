@@ -79,6 +79,11 @@ body {
     max-height: 85%;
 }
 
+.modal .modal-content {
+    padding: 15px;
+    padding-bottom: 0px;
+}
+
 div.input-field.no-vendor-error.col input[type=text].autocomplete
 {
     border-bottom: 1px solid #F44336;
@@ -290,6 +295,10 @@ label {
 [type="checkbox"]:checked+label:before {
     border-right: 2px solid white;
     border-bottom: 2px solid white;    
+}
+
+[type="checkbox"]+label:before, [type="checkbox"]:not(.filled-in)+label:after {
+    border-color: white;
 }
 
 /* #mobileAssetFilters {
