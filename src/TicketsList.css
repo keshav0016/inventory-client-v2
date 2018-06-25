@@ -30,3 +30,15 @@
         width: calc(100vw - 40px)
     }
 }
+
+@media only screen and (max-width: 1023px) {
+    .miniTicketListCheckbox [type="checkbox"] + label::before, [type="checkbox"]:not(.filled-in) + label::after {
+        border-color: #000;
+    }
+    .miniTicketListCheckbox  [type="checkbox"]:checked+label:before {
+        border-bottom: 2px solid #000;
+        border-right: 2px solid #000;
+        border-top: 2px solid white;
+        border-left: 2px solid white;  
+    }
+}

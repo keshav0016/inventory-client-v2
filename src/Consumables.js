@@ -247,6 +247,7 @@ class Consumables extends Component{
             },
             handleListRequest:true
         })
+        $('.modal-overlay').trigger('click')
     }
 
     renderDropdown(consumable){
@@ -307,7 +308,7 @@ class Consumables extends Component{
                 </Row>
                 <div className='splitModalButtons' >
                 <Button onClick={this.checkForValidation}>Apply</Button>
-                <Button className="modal-close">Cancel</Button>
+                <Button onClick={this.resetFilter} >Reset</Button>
                 </div>
                 </div>
                 </Modal>
