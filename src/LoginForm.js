@@ -152,6 +152,12 @@ class LoginForm extends Component {
             timer: 2000,
           })
         }
+        if(error.response.status === 401){
+          swal("Wrong Credentials",{
+            buttons: false,
+            timer: 2000,
+          })
+        }
   
         
       })

@@ -96,12 +96,14 @@ class HistoryConsumables extends Component{
                         <CardPanel className='z-depth-2'>
                             {consumable.vendor_name ? 
                             <div> 
-                                <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchased</h5>
+                                <h5 style={{fontFamily : 'Roboto', fontWeight : 300, display: "inline-block"}}>Purchased</h5>
+                                <div style={{display: 'inline-block',position: 'relative',float: 'right',top: '5px',marginRight: '20px'}}>
                                 <Modal
                                     actions={null}
-                                    trigger={<Button style={{position: 'relative',left: '400px'}}>Edit</Button>}>
+                                    trigger={<Button style={{}}>Edit</Button>}>
                                     <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
                                 </Modal>
+                                </div>
                                 <div className='historyCards' >
                                     <div style={{float : 'left'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>

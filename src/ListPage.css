@@ -247,3 +247,12 @@
     display: none;
   }
 }
+
+@media only screen and (max-width: 767px){
+
+  .dropdown-button {
+      padding: 0 0;
+      background-color: #26a69a;
+      color: white;
+}
+}

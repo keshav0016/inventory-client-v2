@@ -264,14 +264,14 @@ class Assets extends Component{
                     <Input name='filter' type='checkbox' value='red' label='Non-Electronics' onClick={this.setNonElectronicsChecked} checked={this.state.isNonElectronicsChecked} />
                     <Input name='filter' type='checkbox' value='red' label='Other' onClick={this.setOtherChecked} checked={this.state.isOtherChecked} />
                 </div>
-                <div>
+                <div style={{textAlign: "center"}}>
                 <Col>
-                <Button style={{width:'100%'}} className='modal-close' >Close</Button>
+                <Button style={{position: "relative"}} className='modal-close' >Close</Button>
                 </Col>
                 </div>
                 </div>
                 </Modal>
-                <h3 className='title'>List Of Assets</h3>
+                <h3 className='title'>List of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
                     <Input s={12} m={6} l={4} placeholder="Search by name, ID or serial No:" style={{textAlign:'center'}} onChange = {this.setSearch} />
                     {/* <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/> */}
