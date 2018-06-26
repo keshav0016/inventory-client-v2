@@ -43,6 +43,11 @@ class Admindashboard extends Component {
 
             })
             .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect: error.response.status
+                    })
+                }
                 // window.Materialize.toast('details not found', 4000)
                 if (error.response.status) {
                     this.setState({

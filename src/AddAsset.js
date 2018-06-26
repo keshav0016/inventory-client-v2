@@ -599,6 +599,11 @@ class AddAsset extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.error(error)
         })
     }
@@ -653,7 +658,11 @@ class AddAsset extends Component{
             this.getVendorName()
         })
         .catch(error => {
-
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.error(error)
         })
 

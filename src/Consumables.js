@@ -4,7 +4,7 @@ import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, P
 // import AddConsumables from './AddConsumables'
 import AssignConsumables from './AssignConsumable'
 import DeleteConsumable from './DeleteConsumable'
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import './ListPage.css'
 import './Employee.css'
 import $ from 'jquery'
@@ -32,7 +32,8 @@ class Consumables extends Component{
                 error:'',
                 showError:false
             },
-            keyword : ''
+            keyword : '',
+            redirect : false
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -171,6 +172,11 @@ class Consumables extends Component{
                 }
             })
             .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect: true
+                    })
+                }
                 console.error(error)
             })
         }
@@ -297,6 +303,11 @@ class Consumables extends Component{
         </div>
         return(
             <div className="listComponent">
+             {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Modal
                 actions={null}

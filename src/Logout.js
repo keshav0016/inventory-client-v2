@@ -41,9 +41,18 @@ class Logout extends Component{
             
         })
         .catch(error=>{
-            this.setState({
-                home : true
-            })
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true,
+                })
+            }else{
+                
+                this.setState({
+                    home : true
+                })
+            }
+            
+            
         })
     }
 }

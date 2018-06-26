@@ -109,6 +109,11 @@ class AcceptAssetTicket extends Component{
             }
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.error(error)
         })
     }

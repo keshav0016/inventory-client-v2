@@ -8,6 +8,7 @@ import $ from 'jquery'
 import {Link} from 'react-router-dom'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
+import {Redirect} from 'react-router-dom'
 
 class TicketsList extends Component{
     constructor(props){
@@ -24,7 +25,8 @@ class TicketsList extends Component{
             isAcceptedChecked : false,
             isRejectedChecked : false,
             checkAll : false,
-            expected_recovery : ''
+            expected_recovery : '',
+            redirect: false
             ,reason : ''
             ,selectedIndex : this.props.location.hash ? (this.props.location.hash === '#asset' ? 0 : 1) : 0
         }
@@ -140,6 +142,12 @@ class TicketsList extends Component{
             })
         })
         .catch(error => {
+
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -187,6 +195,12 @@ class TicketsList extends Component{
             console.log('success')
         })
         .catch(error =>{
+
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.log('error')
         })
     }
@@ -215,6 +229,12 @@ class TicketsList extends Component{
 
         })
         .catch(error =>{
+
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             // window.Materialize.toast(error.data.error,4000)
             swal(error.data.error,{
                 buttons: false,
@@ -238,6 +258,12 @@ class TicketsList extends Component{
             }
         })
         .catch(error => {
+
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -311,6 +337,11 @@ class TicketsList extends Component{
         
         return(
             <div className="listComponent" >
+            {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                 <h3 className="title">Ticket list</h3>
                 <Modal 
                 id='mobileAssetFilters'

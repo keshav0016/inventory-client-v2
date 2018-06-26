@@ -7,6 +7,7 @@ import EmployeeDelete from './EmployeeDelete';
 import EnableEmployee from './EnableEmployee'
 import {
   Link,
+  Redirect
 } from 'react-router-dom';
 
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input, Row } from 'react-materialize'
@@ -24,6 +25,7 @@ class EmployeesList extends Component {
       search: '',
       handleListRequest : true,
       loading : true,
+      redirect: false
 
      
     }
@@ -58,6 +60,11 @@ class EmployeesList extends Component {
       })
     })
     .catch(error => {
+      if(error.response.status === 401){
+        this.setState({
+            redirect: true
+        })
+    }
       // window.Materialize.toast('list not found',3000)
       swal("List not Found",{
         buttons: false,
@@ -113,6 +120,11 @@ class EmployeesList extends Component {
   render() {
     return (
       <div className="listComponent">
+       {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
         {this.state.handleListRequest ? this.handleList() : null}
         <h3 className="title">List of Employees</h3>
         <Row>

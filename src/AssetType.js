@@ -7,7 +7,7 @@ import $ from 'jquery'
 import './ListPage.css'
 import './Employee.css'
 import { baseUrl } from './config';
-
+import {Redirect} from 'react-router-dom'
 class AssetType extends Component{
     constructor(props){
         super(props)
@@ -37,6 +37,11 @@ class AssetType extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -80,6 +85,11 @@ class AssetType extends Component{
         return(
             <div className="listComponent">
                 {this.state.handleListRequest ? this.handleList() : null}
+                {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                 <br />
                 <h3 className='title' >Asset Types</h3 >
                 {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : ( this.state.assetTypeList.length === 0 ? <div className="noRecordsScreen">No Records</div> : <div>

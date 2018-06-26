@@ -31,7 +31,8 @@ class ResetPassword extends Component {
                 showError: false
             },
             change: true
-            , employee: false
+            , employee: false,
+            redirect: false
         }
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this)
         this.handleNewPassword = this.handleNewPassword.bind(this)
@@ -78,6 +79,11 @@ class ResetPassword extends Component {
             <div>
                 {this.state.change ? change : null}
                 {this.state.employee ? (<Redirect push to='/login' />) : null}
+                {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
             </div>
         )
     }
@@ -213,6 +219,14 @@ class ResetPassword extends Component {
                             employee: true
                         })
                     }
+                })
+                .catch(error => {
+                    if(error.response.status === 401){
+                        this.setState({
+                            redirect: true
+                        })
+                    }
+                    
                 })
         } else {
             // window.Materialize.toast('passwords does not match', 4000)

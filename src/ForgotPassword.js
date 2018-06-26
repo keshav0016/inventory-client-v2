@@ -112,6 +112,11 @@ class ForgotPasswordForm extends Component {
                     }
                 })
                 .catch((error) => {
+                    if(error.response.status === 401){
+                        this.setState({
+                            login: true
+                        })
+                    }
                     console.log(error)
                 })
         }
@@ -120,6 +125,7 @@ class ForgotPasswordForm extends Component {
 
     render() {
         return (
+            
             <div className="white" style={{ height: '100vh', position: 'relative' }}>
                 <div className='header1' style={{ padding: '20px 0', color: 'white', textAlign: 'center' }}>
                     <Col s={2} offset={"m2"}>
@@ -151,6 +157,12 @@ class ForgotPasswordForm extends Component {
                                     </Col> */}
                                 {/* </Row> */}
                                 {this.state.redirect ? <Redirect push to={`/user/reset/${this.state.user_id.value}`} /> : null}
+                                {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
+
                             </Card>
                         </form>
                     </Col>

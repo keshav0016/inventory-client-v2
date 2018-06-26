@@ -16,6 +16,7 @@ import './ListPage.css'
 import './Asset.css'
 import './MasterComponent.css'
 import { baseUrl } from './config';
+import {Redirect} from 'react-router-dom'
 
 class Assets extends Component{
     constructor(props){
@@ -37,7 +38,8 @@ class Assets extends Component{
                 value:'',
                 error:'',
                 showError:false
-            }
+            },
+            redirect: false
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -69,6 +71,11 @@ class Assets extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
             console.error(error)
         })
     }
@@ -246,6 +253,11 @@ class Assets extends Component{
     </div>       
         return(
             <div className="listComponent">
+             {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Modal 
                 id='mobileAssetFilters'

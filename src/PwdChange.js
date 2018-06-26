@@ -29,7 +29,8 @@ class PasswordChange extends Component {
                 showError: false,
                 error: ""
             },
-            change: true
+            change: true,
+            redirect: false
         }
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this)
         this.handleNewPassword = this.handleNewPassword.bind(this)
@@ -67,6 +68,11 @@ class PasswordChange extends Component {
                         </form>
                     </Col>
                 </Row>
+                {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
             </div>
         );
         return (
@@ -204,6 +210,13 @@ class PasswordChange extends Component {
                           })
                         this.setState({
                             employee: true
+                        })
+                    }
+                })
+                .catch(error => {
+                    if(error.response.status === 401){
+                        this.setState({
+                            redirect: true
                         })
                     }
                 })

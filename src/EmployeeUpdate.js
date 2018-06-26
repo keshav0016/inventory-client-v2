@@ -50,6 +50,7 @@ class EmployeeUpdate extends Component{
                 showError: false,
                 error: "",
             },
+            currentDesignation: this.props.user.designation,
             addEmployee: true,
             redirect: false,
             login: false
@@ -270,7 +271,7 @@ class EmployeeUpdate extends Component{
                   }),
               })
           }
-            if(this.props.user.department !== this.state.department.value && this.props.user.designation === this.state.designation.value){
+            if(this.props.user.department !== this.state.department.value && this.state.currentDesignation === this.state.designation.value){
                 this.setState({
                         designation: Object.assign(this.state.designation, {
                         error: "Designation should also be changed",
@@ -400,9 +401,9 @@ class EmployeeUpdate extends Component{
                     <option value='Testing'>Testing</option>
 
                     </Input>
-                    <Input type="text"  defaultValue={this.state.designation.value} label="Current Designation" s={12} m={6} l={6} disabled/>
+                    {/* <Input type="text"  defaultValue={this.state.designation.value} label="Current Designation" s={12} m={6} l={6} disabled/> */}
 
-
+                    
                     {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Team Lead'>Team Lead</option>
