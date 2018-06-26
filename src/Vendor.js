@@ -7,6 +7,7 @@ import $ from 'jquery'
 import './ListPage.css'
 import './Employee.css'
 import { baseUrl } from './config';
+import {Redirect} from 'react-router-dom'
 
 class Vendor extends Component{
     constructor(props){
@@ -17,6 +18,7 @@ class Vendor extends Component{
             page : 1,
             handleListRequest : true,
             search : '',
+            redirect: false
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -39,6 +41,13 @@ class Vendor extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
+            
+
             console.error(error)
         })
     }
@@ -88,6 +97,11 @@ class Vendor extends Component{
     render(){
         return(
             <div className="listComponent">
+             {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className="title">Vendors</h3 >
                     {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : 

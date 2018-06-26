@@ -397,6 +397,11 @@ class AddConsumables extends Component{
             // window.Materialize.toast('Consumable Added Successfully', 4000)
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.log(error)
         })
     }
@@ -440,6 +445,11 @@ class AddConsumables extends Component{
             this.getVendorName()
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    login: true
+                })
+            }
             console.error(error)
         })
     }

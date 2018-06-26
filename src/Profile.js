@@ -5,6 +5,7 @@ import { baseUrl } from './config';
 import './ListPage.css'
 import './MasterComponent.css';
 import swal from 'sweetalert'
+import {Redirect} from 'react-router-dom'
 
 class Profile extends Component{
     constructor(props){
@@ -47,6 +48,12 @@ class Profile extends Component{
             })
         })
         .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
+            
             // window.Materialize.toast('user details not found',3000)
             swal('User details not found',{
                 buttons: false,
@@ -89,6 +96,11 @@ class Profile extends Component{
           </Table>
             </Col>
             </Row>
+            {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
               </div>
         )
     }

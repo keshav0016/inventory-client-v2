@@ -36,6 +36,11 @@ class EmployeeDB extends Component {
                 <React.Fragment>
                     {this.state.redirect === 403 ? <Redirect to="/unauthorized" /> : null}
                     {/* {this.state.redirect === 401 ? <Redirect to="/unauthorized" /> : null} */}
+                    {this.state.redirect === 401? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                     <Route path='/unauthorized' component={NotFound} />
                     <div>
                         <div className="masterComponentBackground">

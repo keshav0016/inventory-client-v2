@@ -276,6 +276,14 @@ class ReceiveAsset extends Component{
                 repairInfo : res.data.repairInfo
             })
         })
+        .catch(error => {
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
+            
+        })
         $('label').addClass('active')
     }
 

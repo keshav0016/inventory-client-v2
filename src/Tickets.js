@@ -7,6 +7,7 @@ import $ from 'jquery'
 import { baseUrl } from './config';
 import './ListPage.css';
 import swal from 'sweetalert';
+import {Redirect} from 'react-router-dom'
 //CHANGE THE USER ID IN CLIENT AS WELL AS SERVER
 
 class Tickets extends Component{
@@ -32,7 +33,8 @@ class Tickets extends Component{
                 ,error : ''
                 ,showError : false
             },
-            disableItems : true
+            disableItems : true,
+            redirect: false
         }
         this.requestQuantity = this.requestQuantity.bind(this)
         this.requestResourceType = this.requestResourceType.bind(this)
@@ -242,10 +244,16 @@ class Tickets extends Component{
             }
             this.props.setHandleListRequest()
         })
-        // .catch(error => {
-        //     window.Materialize.toast('sorry, request can not be made', 4000)
-        // })
+        .catch(error => {
+            // window.Materialize.toast('sorry, request can not be made', 4000)
+            if(error.response.status === 401){
+                this.setState({
+                    redirect: true
+                })
+            }
+        })
     }
+    
 
    componentDidMount(){
        axios({
@@ -260,6 +268,11 @@ class Tickets extends Component{
            })
        })
        .catch(error => {
+        if(error.response.status === 401){
+            this.setState({
+                redirect: true
+            })
+        }
         // window.Materialize.toast('Sorry, there are no resources available', 4000)
         swal('There are no resources available',{
             buttons: false,
@@ -322,7 +335,11 @@ class Tickets extends Component{
                     <Button className=''waves='light' type = "submit" name = "action" onClick={this.checkForValidation} >Request</Button>
                     <Button  onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
                 </div>
-                   
+                {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
             </div>
         )
     }
