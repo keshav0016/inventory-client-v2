@@ -247,6 +247,9 @@ class UpdateConsumablePurchase extends Component{
                 buttons: false,
                 timer: 2000,
               })
+              setTimeout((function() {
+                window.location.reload();
+              }), 2100);
         })
         .catch(error => {
             if(error.response.status === 401){

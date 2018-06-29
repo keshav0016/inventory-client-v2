@@ -119,6 +119,9 @@ class AddAssetType extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  setTimeout((function() {
+                    window.location.reload();
+                  }), 2100);
                 if(this.props.setAssetTypeListRequest){
                     this.props.setAssetTypeListRequest(assetTypeName)
                 }

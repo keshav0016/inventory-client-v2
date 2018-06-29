@@ -356,6 +356,9 @@ class UpdateAsset extends Component {
                     buttons: false,
                     timer: 2000,
                   })
+                  setTimeout((function() {
+                    window.location.reload();
+                  }), 2100);
                 this.setState({
                     updateAssetRequest: false
                 })

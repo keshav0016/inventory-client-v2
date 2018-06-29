@@ -170,8 +170,7 @@ class AcceptAssetTicket extends Component{
                   })
                 // window.Materialize.toast('Requested Quantity greater than available', 4000)
             }
-            else{
-                // window.Materialize.toast('Ticket Accepted', 4000)
+            else{                
                 swal("Ticket is Accepted",{
                     buttons: false,
                     timer: 2000,
@@ -179,6 +178,10 @@ class AcceptAssetTicket extends Component{
                 this.setState({
                     redirect : true
                 })
+                setTimeout((function() {
+                    window.location.reload();
+                }), 2100);
+
             }
             console.log('success')
         })

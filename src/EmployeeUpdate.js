@@ -304,6 +304,8 @@ class EmployeeUpdate extends Component{
                         timer: 2000,
                         })
                     this.props.setHandleListRequest()
+                    $(".modal-overlay").trigger('click');        
+
 
                 }else if (res.data.error[0].message === "email must be unique") {
                     this.setState({
@@ -372,7 +374,11 @@ class EmployeeUpdate extends Component{
                 error: "",
             }
         })
-        $(".modal-overlay").trigger('click');        
+        setTimeout((function() {
+            window.location.reload();
+          }), 2100);
+        $(".modal-overlay").trigger('click'); 
+        this.props.setHandleListRequest()       
     }
             
     render() {
@@ -403,8 +409,8 @@ class EmployeeUpdate extends Component{
                     </Input>
                     {/* <Input type="text"  defaultValue={this.state.designation.value} label="Current Designation" s={12} m={6} l={6} disabled/> */}
 
-                    
-                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    <p style={{display: "block", marginLeft: "10px"}}>Current Designation: <b>{this.state.currentDesignation}</b></p>
+                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="New Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Team Lead'>Team Lead</option>
                         <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>

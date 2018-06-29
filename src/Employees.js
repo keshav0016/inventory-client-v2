@@ -43,6 +43,8 @@ class EmployeesList extends Component {
       handleListRequest : true
     })
     $(".modal-overlay").click()
+    window.location.reload();
+
   }
 
   handleList(){
@@ -85,6 +87,7 @@ class EmployeesList extends Component {
       <Button><Icon tiny>more_vert</Icon></Button>
     }>
       <Modal
+
         actions={null}
         trigger={<NavItem>Enable</NavItem>}>
         {<EnableEmployee user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
@@ -94,11 +97,13 @@ class EmployeesList extends Component {
         <Button className='btn-mini'> <Icon>more_vert</Icon></Button>
       }>
         <Modal
+
           actions={null}
           trigger={<NavItem >Disable</NavItem >}>
           <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
         <Modal
+
           actions={null}
           className='editAssetBottomPadding'
           trigger={<NavItem >Edit</NavItem >}>

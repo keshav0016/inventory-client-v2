@@ -43,7 +43,7 @@ class EmployeeDelete extends Component {
                   })
             }else if(res.data.message === 'can not disable employee'){
                 // window.Materialize.toast(res.data.message, 4000)
-                swal(res.data.message,{
+                swal("Can not disable the employee",{
                     buttons: false,
                     timer: 2000,
                   })
@@ -60,8 +60,7 @@ class EmployeeDelete extends Component {
                     redirect : true
                 })
             }else{
-
-                swal("can not disable Employee",{
+                swal("Can not disable Employee",{
                     buttons: false,
                     timer: 2000,
                   })
