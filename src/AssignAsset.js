@@ -75,7 +75,7 @@ class AssignAsset extends Component{
         if(!this.state.from.value){
             this.setState({
                 from:Object.assign(this.state.from, {
-                    error: 'The from date is required',
+                    error: 'The FROM date is required',
                     showError: true
                 })
             })
@@ -91,7 +91,7 @@ class AssignAsset extends Component{
         if(!this.state.expected_recovery.value){
             this.setState({
                 expected_recovery:Object.assign(this.state.expected_recovery, {
-                    error: 'The expected delivery date is required',
+                    error: 'The Expected Recovery date is required',
                     showError: true
                 })
             })
@@ -106,15 +106,15 @@ class AssignAsset extends Component{
         }
         if(new Date(this.state.from.value) > new Date(this.state.expected_recovery.value)) {
             this.setState({
-                from:Object.assign(this.state.from, {
-                    error: 'The delivery date cannot be before the from date',
+                expected_recovery: Object.assign(this.state.expected_recovery, {
+                    error: 'The Expected Recovery cannot be before the FROM date',
                     showError: true
                 })
             })
         }
         if(new Date(this.state.from.value) <= new Date(this.state.expected_recovery.value)) {
             this.setState({
-                from:Object.assign(this.state.from, {
+                expected_recovery: Object.assign(this.state.expected_recovery, {
                     error: '',
                     showError: false
                 })
