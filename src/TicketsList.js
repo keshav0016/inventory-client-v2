@@ -342,7 +342,7 @@ class TicketsList extends Component{
                   pathname: "/login",
                   search: '?sessionExpired=true'
               }}/>: null}
-                <h3 className="title">Ticket list</h3>
+                <h3 className="title">Ticket List</h3>
                 <Modal 
                 id='mobileAssetFilters'
                 actions={null}
