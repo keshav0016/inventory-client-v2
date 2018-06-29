@@ -58,11 +58,17 @@ class VendorUpdate extends Component{
         })
     }
     handleContact(e){
-        this.setState({
-        contact: Object.assign(this.state.contact, {
-            value: e.target.value
-            })  
-        })
+    
+        if(e.target.value.length <= 10){
+
+            this.setState({
+                contact : Object.assign(this.state.contact, {
+                    value: e.target.value
+                })
+            })
+        }
+        
+       
     }
     handleAddress(e){
         this.setState({
