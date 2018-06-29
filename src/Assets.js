@@ -231,7 +231,7 @@ class Assets extends Component{
                 trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
                 {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
             </Modal>
-            <NavItem href={`/admin/assets/history/${item.asset_id}`}>Details</NavItem>
+            <NavItem href={`/admin/assets/history/${item.asset_id}`}>History</NavItem>
     </Dropdown>
         )}
 
