@@ -187,11 +187,14 @@ class AddVendor extends Component{
                         showError: false
                     },
                     addVendorRequest : false
+
                 })
+                $('.modal-overlay').trigger('click');                
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
-                  })
+                })
+                
                 // window.Materialize.toast(res.data.message, 4000)
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
@@ -243,13 +246,13 @@ class AddVendor extends Component{
                 <h5 className='title'>Add Vendor</h5 >
                 <Row>
                     <Input s={12} m={6} l={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input s={12} m={6} l={6} className="vendorContact" label="Contact"  value = {this.state.contact.value} onChange ={this.setContact} error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
+                    <Input s={12} m={6} l={6} className="vendorContact" label="Contact"  value = {this.state.contact.value} onChange ={this.setContact} type="number" maxlength="10" error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
                     <Input s={12} m={6} l={6} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 
                 </Row>
                 <div className='splitModalButtons'>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
+                    <Button onClick={this.cancelAll} className="modal-close cancelButton">Cancel</Button>
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}

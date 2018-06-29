@@ -551,10 +551,16 @@ class AddAsset extends Component{
                     addAsset: false,
                     redirect: true
                 })
+
                 swal("Asset has been added",{
                     buttons: false,
                     timer: 2000,
                   })
+                  setTimeout((function() {
+                    window.location.reload();
+                  }), 2100);
+
+
                 // window.Materialize.toast('Asset Added', 4000)                
                 // this.props.setHandleListRequest(true)
                 $('label').addClass('active')     
@@ -564,13 +570,15 @@ class AddAsset extends Component{
                     timer: 2000,
                   })
                 // window.Materialize.toast('asset is already there', 4000)
-            }else if(res.data.errors[0].message === 'serial_number must be unique'){
-                this.setState({
-                    serial_number:Object.assign(this.state.serial_number, {
-                        error: 'The serial number is already assigned to another asset',
-                        showError : true
+            }else if(res.data.errors){
+                if(res.data.errors[0].message === 'serial_number must be unique'){
+                    this.setState({
+                        serial_number:Object.assign(this.state.serial_number, {
+                            error: 'The serial number is already assigned to another asset',
+                            showError : true
+                        })
                     })
-                })
+                }
             }
             this.setState({
                 addAssetRequest : false
@@ -581,8 +589,10 @@ class AddAsset extends Component{
                 this.setState({
                     login : true
                 })
+            }else{
+
+                console.error(error)
             }
-            console.error(error)
         })
     }
 
@@ -709,8 +719,8 @@ class AddAsset extends Component{
                         />
                         <Col s={1} m={2} l={1} className="addAssetModalButtons1">
                             <Modal
+                                modalOptions={{ dismissible: false }}
                                 actions={null}
-                                id="addVendor"
                                 trigger={<Button floating icon='add' ></Button>}>
                                 <AddVendor  setVendorListRequest = {this.setVendorListRequest}/>
                             </Modal>
@@ -721,6 +731,7 @@ class AddAsset extends Component{
                         <Input s={11} m={4} l={5} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
                         <Col s={1} m={2} l={1} className="addAssetModalButtons2">
                                     <Modal
+                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     trigger={<Button floating icon='add'></Button>}>
                                     <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>

@@ -278,7 +278,7 @@ class Assets extends Component{
                 </div>
                 <div style={{textAlign: "center"}}>
                 <Col>
-                <Button style={{position: "relative"}} className='modal-close' >Close</Button>
+                <Button style={{position: "relative",marginBottom: "8px"}} className='modal-close' >Close</Button>
                 </Col>
                 </div>
                 </div>
