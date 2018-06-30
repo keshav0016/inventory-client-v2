@@ -97,15 +97,15 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(Number(this.state.amount.value) === 0){
-            this.setState({
-                amount : Object.assign(this.state.amount, {
-                    showError : true,
-                    error : 'Amount cannot be zero'
-                })
-            })
-        }
-        if(Number(this.state.amount.value) > 0){
+        // if(Number(this.state.amount.value) === 0){
+        //     this.setState({
+        //         amount : Object.assign(this.state.amount, {
+        //             showError : true,
+        //             error : 'Amount cannot be zero'
+        //         })
+        //     })
+        // }
+        if(Number(this.state.amount.value) >= 0){
             this.setState({
                 amount : Object.assign(this.state.amount, {
                     showError : false,
@@ -130,7 +130,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(this.state.to.value < this.state.repairInfo.from){
+        if(new Date(this.state.to.value) < new Date(this.state.repairInfo.from)){
             this.setState({
                 to: Object.assign(this.state.to, {
                     showError : true,
@@ -138,15 +138,15 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(this.state.to.value === this.state.repairInfo.from){
-            this.setState({
-                to: Object.assign(this.state.to, {
-                    showError : true,
-                    error: 'Recieve from service = Given for service'
-                })
-            })
-        }
-        if(this.state.to.value > this.state.repairInfo.from){
+        // if(this.state.to.value === this.state.repairInfo.from){
+        //     this.setState({
+        //         to: Object.assign(this.state.to, {
+        //             showError : true,
+        //             error: 'Recieve from service = Given for service'
+        //         })
+        //     })
+        // }
+        if(new Date(this.state.to.value) >= new Date(this.state.repairInfo.from)){
             this.setState({
                 to: Object.assign(this.state.to, {
                     showError : false,
@@ -154,7 +154,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && this.state.to.value > this.state.repairInfo.from){
+        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value) > new Date(this.state.repairInfo.from)){
             this.setState({
                 receiveAssetRequest : true
             })
@@ -248,6 +248,7 @@ class ReceiveAsset extends Component{
                     total : 0,
                 })
                 // window.Materialize.toast('Asset Received', 4000)  
+                this.props.setHandleListRequest()
                 swal("Asset Received",{
                     buttons: false,
                     timer: 2000,

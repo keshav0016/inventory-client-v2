@@ -334,7 +334,6 @@ class RepairAsset extends Component{
                             />
                                 <Col s={2} l={1} m={2} className='addAssetModalButtons2'>
                                 <Modal
-                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     // id="addVendor"
                                     trigger={<Button icon='add' floating></Button>}>

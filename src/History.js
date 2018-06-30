@@ -10,6 +10,7 @@ import { baseUrl } from './config';
 import {
     Redirect
   } from 'react-router-dom';
+import xlsx from 'node-xlsx';
   
 class Assets extends Component{
     constructor(props){
@@ -56,31 +57,36 @@ class Assets extends Component{
     }
 
     parsingDataToCsv(){
-        const fields = ['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']
-        const assetsExport = []
-        this.state.history.forEach(assetDetail => {
-            return assetsExport.push({
-                "Id" : this.state.assetDetails.asset_id,
-                "Type" : this.state.assetDetails.assetType,
-                "Name" : this.state.assetDetails.asset_name,
-                "Category" : this.state.assetDetails.category,
-                "Amount" : this.state.assetDetails.amount,
-                "GST" : this.state.assetDetails.gst,
-                "Total" : this.state.assetDetails.total,
-                "Purchase Vendor" : this.state.assetDetails.vendor,
-                "Assigned Employee" : assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : null,
-                "Assigned From" : assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : null,
-                "Assigned To" : assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : null,
-                "Service Vendor" : assetDetail.vendor ? assetDetail.vendor : null,
-                "Service From" : assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : null,
-                "Service To" : assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : null,
-            })
+        // const fields = 
+        const assetsExport = [['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']]
+        this.state.history.map(assetDetail => {
+            return assetsExport.push([
+                this.state.assetDetails.asset_id,
+                this.state.assetDetails.assetType,
+                this.state.assetDetails.asset_name,
+                this.state.assetDetails.category,
+                this.state.assetDetails.amount,
+                this.state.assetDetails.gst,
+                this.state.assetDetails.total,
+                this.state.assetDetails.vendor,
+                assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : 'Nil',
+                assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
+                assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
+                assetDetail.vendor ? assetDetail.vendor : 'Nil',
+                assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
+                assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
+            ])
         })
-        
-        const json2csvParser = new Parser({fields})
-        const csv = json2csvParser.parse(assetsExport)
-        const blob = new Blob([csv], {type : 'text/csv'})
-        fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
+
+        var buffer = xlsx.build([{name: 'Asset-History',data: assetsExport}]);
+        // const json2csvParser = new Parser({fields})
+        // const csv = json2csvParser.parse(assetsExport)
+        // const blob = new Blob([csv], {type : 'text/csv'})
+        // fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
+
+        const blob = new Blob([buffer],{ type: 'application/vnd.ms-excel' });
+        const file = new File([blob], `Asset-${this.props.match.params.asset}.xlsx`,{ type: 'application/vnd.ms-excel' });
+        fileSaver.saveAs(file);
     }
 
     render(){
@@ -108,28 +114,6 @@ class Assets extends Component{
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
                 </Row>
                     {/* <Row> */}
-                        <Col s={12} m={12}>
-                        <CardPanel className="z-depth-2" >
-                            <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
-                            <div className="historyCards" >
-                                <div style={{float : 'left'}} >
-                                    <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
-                                    <h6><b>Serial Number</b> : {this.state.assetDetails.serial_number}</h6>
-                                    <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
-                                    <h6><b>Vendor</b> : {this.state.assetDetails.vendor}</h6>
-                                    <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
-                                    <h6><b>Asset Type</b> : {this.state.assetDetails.assetType}</h6>
-                                </div>
-                                <div style={{float: 'right'}} >
-                                    <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
-                                    <h6><b>Description</b> : {this.state.assetDetails.description}</h6>
-                                    <h6><b>Amount</b> : {this.state.assetDetails.amount}</h6>
-                                    <h6><b>GST</b> : {this.state.assetDetails.gst}</h6>
-                                    <h6><b>Total</b> : {this.state.assetDetails.total}</h6>
-                                </div>
-                            </div>
-                        </CardPanel>
-                        </Col>
                     {this.state.history.map((element, index) => {
                         return <Col s={12} m={12} key={index}>
                             <CardPanel className="z-depth-2" >
@@ -165,6 +149,28 @@ class Assets extends Component{
                             </CardPanel>
                         </Col>
                     })}
+                        <Col s={12} m={12}>
+                        <CardPanel className="z-depth-2" >
+                            <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
+                            <div className="historyCards" >
+                                <div style={{float : 'left'}} >
+                                    <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
+                                    <h6><b>Serial Number</b> : {this.state.assetDetails.serial_number}</h6>
+                                    <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
+                                    <h6><b>Vendor</b> : {this.state.assetDetails.vendor}</h6>
+                                    <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
+                                    <h6><b>Asset Type</b> : {this.state.assetDetails.assetType}</h6>
+                                </div>
+                                <div style={{float: 'right'}} >
+                                    <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
+                                    <h6><b>Description</b> : {this.state.assetDetails.description}</h6>
+                                    <h6><b>Amount</b> : {this.state.assetDetails.amount}</h6>
+                                    <h6><b>GST</b> : {this.state.assetDetails.gst}</h6>
+                                    <h6><b>Total</b> : {this.state.assetDetails.total}</h6>
+                                </div>
+                            </div>
+                        </CardPanel>
+                        </Col>
                     {/* </Row> */}
                 </div>} 
                 </div>: <h4 className = 'heading'>No such Asset</h4>}
