@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Button, Modal, Preloader, Row} from 'react-materialize'
+import {Col, CardPanel, Button, Modal, Preloader, Row, Icon} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import UpdateConsumablePurchase from './UpdateConsumablePurchase'
@@ -87,7 +87,7 @@ class HistoryConsumables extends Component{
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable Details</h3>
            <Row className='splitModalButtons'>
-                <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
+                <a href='/admin/consumables'><Button style={{float : 'left'}}><Icon>arrow_back</Icon></Button></a>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
            </Row> 
             {this.state.fetchHistory ? <Row><Preloader size='small' /></Row> :
