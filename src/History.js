@@ -10,6 +10,7 @@ import { baseUrl } from './config';
 import {
     Redirect
   } from 'react-router-dom';
+import xlsx from 'node-xlsx';
   
 class Assets extends Component{
     constructor(props){
@@ -56,31 +57,36 @@ class Assets extends Component{
     }
 
     parsingDataToCsv(){
-        const fields = ['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']
-        const assetsExport = []
-        this.state.history.forEach(assetDetail => {
-            return assetsExport.push({
-                "Id" : this.state.assetDetails.asset_id,
-                "Type" : this.state.assetDetails.assetType,
-                "Name" : this.state.assetDetails.asset_name,
-                "Category" : this.state.assetDetails.category,
-                "Amount" : this.state.assetDetails.amount,
-                "GST" : this.state.assetDetails.gst,
-                "Total" : this.state.assetDetails.total,
-                "Purchase Vendor" : this.state.assetDetails.vendor,
-                "Assigned Employee" : assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : null,
-                "Assigned From" : assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : null,
-                "Assigned To" : assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : null,
-                "Service Vendor" : assetDetail.vendor ? assetDetail.vendor : null,
-                "Service From" : assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : null,
-                "Service To" : assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : null,
-            })
+        // const fields = 
+        const assetsExport = [['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']]
+        this.state.history.map(assetDetail => {
+            return assetsExport.push([
+                this.state.assetDetails.asset_id,
+                this.state.assetDetails.assetType,
+                this.state.assetDetails.asset_name,
+                this.state.assetDetails.category,
+                this.state.assetDetails.amount,
+                this.state.assetDetails.gst,
+                this.state.assetDetails.total,
+                this.state.assetDetails.vendor,
+                assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : 'Nil',
+                assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
+                assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
+                assetDetail.vendor ? assetDetail.vendor : 'Nil',
+                assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
+                assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
+            ])
         })
-        
-        const json2csvParser = new Parser({fields})
-        const csv = json2csvParser.parse(assetsExport)
-        const blob = new Blob([csv], {type : 'text/csv'})
-        fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
+
+        var buffer = xlsx.build([{name: 'Asset-History',data: assetsExport}]);
+        // const json2csvParser = new Parser({fields})
+        // const csv = json2csvParser.parse(assetsExport)
+        // const blob = new Blob([csv], {type : 'text/csv'})
+        // fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
+
+        const blob = new Blob([buffer],{ type: 'application/vnd.ms-excel' });
+        const file = new File([blob], `Asset-${this.props.match.params.asset}.xlsx`,{ type: 'application/vnd.ms-excel' });
+        fileSaver.saveAs(file);
     }
 
     render(){

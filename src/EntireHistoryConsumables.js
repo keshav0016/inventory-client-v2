@@ -85,7 +85,6 @@ class EntireHistoryConsumables extends Component{
                 {filterPane}
             </SideNav> */}
             <Modal 
-                modalOptions={{ dismissible: false }}
                 actions={null}
                 trigger={filterSlideButton}>
                 <p style={{fontFamily: 'Roboto',fontWeight: 300}} className="adminDashboardTitle">History Filters</p>

@@ -10,6 +10,7 @@ import { baseUrl } from './config';
 import {
     Redirect
   } from 'react-router-dom';
+import xlsx from 'node-xlsx';
 
 class HistoryConsumables extends Component{
    constructor(props){
@@ -50,29 +51,28 @@ class HistoryConsumables extends Component{
 
 
    parsingDataToCsv(){
-    const fields = ['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']
-    const consumablesExport = []
-    this.state.history.forEach(consumableDetail => {
-        return consumablesExport.push({
-            "Id" : this.props.match.params.consumable,
-            "Name" : consumableDetail.consumable.name,
-            "Purchase Quantity" : consumableDetail.vendor_name ? consumableDetail.quantity : null,
-            "Vendor" : consumableDetail.vendor_name ? consumableDetail.vendor_name : null,
-            "Purchase Date" : consumableDetail.vendor_name ? moment(consumableDetail.purchase_date).format('DD MMM YYYY') : null,
-            "Individual Price" : consumableDetail.vendor_name ? consumableDetail.item_price : null,
-            "Collective Price" : consumableDetail.vendor_name ? consumableDetail.whole_price : null,
-            "GST" : consumableDetail.vendor_name ? consumableDetail.gst : null,
-            "Total" : consumableDetail.vendor_name ? consumableDetail.total : null,
-            "Assigned Employee" : consumableDetail.vendor_name ? null : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
-            "Assigned Date" : consumableDetail.vendor_name ? null : moment(consumableDetail.assigned_date).format('DD MMM YYYY'),
-            "Assigned Quantity" : consumableDetail.vendor_name ? null : consumableDetail.quantity,
-        })
+    const consumablesExport = [['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']]
+    this.state.history.map(consumableDetail => {
+        return consumablesExport.push([
+            this.props.match.params.consumable,
+            consumableDetail.consumable.name,
+            consumableDetail.vendor_name ? consumableDetail.quantity : 'Nil',
+            consumableDetail.vendor_name ? consumableDetail.vendor_name : 'Nil',
+            consumableDetail.vendor_name ? moment(consumableDetail.purchase_date).format('DD MMM YYYY') : 'Nil',
+            consumableDetail.vendor_name ? consumableDetail.item_price : 'Nil',
+            consumableDetail.vendor_name ? consumableDetail.whole_price : 'Nil',
+            consumableDetail.vendor_name ? consumableDetail.gst : 'Nil',
+            consumableDetail.vendor_name ? consumableDetail.total : 'Nil',
+            consumableDetail.vendor_name ? 'Nil' : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
+            consumableDetail.vendor_name ? 'Nil' : moment(consumableDetail.assigned_date).format('DD MMM YYYY'),
+            consumableDetail.vendor_name ? 'Nil' : consumableDetail.quantity,
+        ])
     })
     
-    const json2csvParser = new Parser({fields})
-    const csv = json2csvParser.parse(consumablesExport)
-    const blob = new Blob([csv], {type : 'text/csv'})
-    fileSaver.saveAs(blob, `Consumable-${this.props.match.params.consumable}.csv`)
+    var buffer = xlsx.build([{name: 'Consumable-History',data: consumablesExport}]);
+    const blob = new Blob([buffer],{ type: 'application/vnd.ms-excel' });
+    const file = new File([blob], `Asset-${this.props.match.params.asset}.xlsx`,{ type: 'application/vnd.ms-excel' });
+    fileSaver.saveAs(file);
 }
 
    render(){
@@ -101,7 +101,6 @@ class HistoryConsumables extends Component{
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300, display: "inline-block"}}>Purchased</h5>
                                 <div style={{display: 'inline-block',position: 'relative',float: 'right',top: '5px',marginRight: '20px'}}>
                                 <Modal 
-                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     trigger={<Button style={{}}>Edit</Button>}>
                                     <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
