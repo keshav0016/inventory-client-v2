@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Employee.css';
-import {Button, Icon, Dropdown, Input, Row } from 'react-materialize'
+import {Button, Icon, Dropdown, Input, Row } from 'react-materialize';
+import {Redirect} from 'react-router-dom'
 
 class RequestTicket extends Component {
     constructor(props){
@@ -22,13 +23,15 @@ class RequestTicket extends Component {
 
     render(){
         return(
-            <div >
-            {this.state.redirect ? <Redirect
-                                to={{
-                                    pathname: "/login",
-                                    search: '?sessionExpired=true'
-                                }}
+            <div>
+                  {this.state.redirect? <Redirect
+              to={{
+                  pathname: "/login",
+                  search: '?sessionExpired=true'
+              }}/>: null}
                             /> : null}
+            <div >
+          
                 <Row>
                     <Input label='Id' s={6} defaultValue=''/>
                     <Input name='on' type='date' label = 'Date'onChange={this.handleDate} />
@@ -43,6 +46,7 @@ class RequestTicket extends Component {
                 </Row>
                 <Button onClick={this.handleCreate}>Add</Button>
               
+            </div>
             </div>
         )
     }

@@ -33,7 +33,7 @@ class EnableEmployee extends Component{
                     timer: 2000,
                   })            
             }
-            else{
+            else if(res.data.message === "Employee ennabled successfully"){
                 // window.Materialize.toast('Employee Enabled', 4000)
                 swal('Employee is enabled',{
                     buttons: false,
