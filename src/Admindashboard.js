@@ -107,10 +107,6 @@ class Admindashboard extends Component {
                             </div>}
                         </Card>
                     </Col>
-                    {/* <Col m={4}>
-                    <img src="https://d1qb2nb5cznatu.cloudfront.net/startups/i/202930-f19ff2e90358dfd16343b9dbe24c31d4-medium_jpg.jpg?buster=1457063274" alt="WAL Logo" className="adminDasboardLogo" />
-
-                    </Col > */}
                 </Row>
                 {this.state.redirect === 403 ? <Redirect from='/admin' to='/employee/Profile/' /> : null}
                 {this.state.redirect === 401 ? <Redirect from='/admin' to='/login' /> : null}
