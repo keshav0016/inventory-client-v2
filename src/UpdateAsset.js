@@ -352,7 +352,7 @@ class UpdateAsset extends Component {
             }
             else{
                 // window.Materialize.toast('Asset Updated', 4000)
-                swal('Asset Updated',{
+                swal('Asset details has been Updated',{
                     buttons: false,
                     timer: 2000,
                   })
