@@ -243,7 +243,7 @@ class UpdateConsumablePurchase extends Component{
             $(".modal-overlay").click()
             this.props.getHistory()
             // window.Materialize.toast('Consumable Purchase Detail Updated', 4000)
-            swal('Consumable Purchase Detail Updated',{
+            swal('Consumable Purchase Details has been Updated',{
                 buttons: false,
                 timer: 2000,
               })
