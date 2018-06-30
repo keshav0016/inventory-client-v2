@@ -325,7 +325,7 @@ class Consumables extends Component{
                 </Modal>
                 <h3 className="title">List of Consumables</h3>
                 <Row>
-                <Input className='consumableSorting' label='Sort By' s={12} l={2} m={2} type='select' onChange={this.sortBy}>
+                <Input className='consumableSorting' label='Sort By' s={12} l={3} m={3} type='select' onChange={this.sortBy}>
                     <option value='default'>Sort By</option>
                     <option value='quantityAsc'>Quantity [Low - High]</option>
                     <option value='quantityDesc'>Quantity [High - Low]</option>

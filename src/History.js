@@ -79,8 +79,8 @@ class Assets extends Component{
         
         const json2csvParser = new Parser({fields})
         const csv = json2csvParser.parse(assetsExport)
-        const blob = new Blob([csv], {type : 'text/csv'})
-        fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.csv`)
+        const blob = new Blob([csv], {type : 'text/xls'})
+        fileSaver.saveAs(blob, `Asset-${this.props.match.params.asset}.xls`)
     }
 
     render(){

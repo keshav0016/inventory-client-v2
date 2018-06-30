@@ -76,7 +76,7 @@ class Profile extends Component{
             </Row>
             <Row>
             <Col s={12} m={8} l={8} offset={'m2 l2'} >
-            <Table centered hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
+            <Table hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
               <thead>
                   <tr>
                       <th data-field="item"> Item</th>
