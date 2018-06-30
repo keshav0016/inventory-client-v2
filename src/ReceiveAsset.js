@@ -251,7 +251,9 @@ class ReceiveAsset extends Component{
                 swal("Asset Received",{
                     buttons: false,
                     timer: 2000,
-                  })              
+                  }) 
+                  $('.modal-close').trigger('click')
+             
                 this.props.setHandleListRequest()
             }
         })
