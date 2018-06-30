@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Preloader, Col, Icon} from 'react-materialize'
+import {Row, Input, Button, Preloader, Col} from 'react-materialize'
 import {Redirect, Link} from 'react-router-dom'
 import './Employee.css'
 import { baseUrl } from './config';
