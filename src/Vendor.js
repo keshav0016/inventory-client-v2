@@ -118,12 +118,12 @@ class Vendor extends Component{
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody  style={{wordBreak: 'normal'}}>
                         {this.state.vendorList.map((item, key) => {
                             return <tr key={item.id}>
                             <td>{item.id}</td>
                             <td>{item.name}</td>
-                            <td>{item.address}</td>
+                            <td style={{wordBreak : 'break-word', width: '40%'}}>{item.address}</td>
                             <td className='vendorContact' >{item.contact}</td>
                             <td>{this.renderButton(key)}</td>
                             </tr>
