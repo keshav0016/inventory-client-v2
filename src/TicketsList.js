@@ -355,8 +355,10 @@ class TicketsList extends Component{
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} disabled={this.state.checkAll} />
                         <Input name='filter' type='checkbox' value='red' label='Select All' onClick={this.setCheckAll}  />
                     </Row>
-                    <div className='splitModalButtons'>
-                        <Button className='modal-close' >Close</Button>
+                    <div style={{textAlign: "center"}}>
+                        <Col>
+                            <Button style={{position: "relative",marginBottom: "8px"}} className='modal-close' >Close</Button>
+                        </Col>
                     </div>
                 </div>
                 </Modal>

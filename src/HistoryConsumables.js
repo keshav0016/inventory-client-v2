@@ -86,10 +86,12 @@ class HistoryConsumables extends Component{
                             /> : null}
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable Details</h3>
-           <Row className='splitModalButtons'>
+           <Row >
                 <a href='/admin/consumables'><Button style={{float : 'left'}}><Icon>arrow_back</Icon></Button></a>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
            </Row> 
+
+           
             {this.state.fetchHistory ? <Row><Preloader size='small' /></Row> :
             (this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
