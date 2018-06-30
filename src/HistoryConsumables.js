@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Col, CardPanel, Button, Modal, Preloader, Row} from 'react-materialize'
+import {Col, CardPanel, Button, Modal, Preloader, Row, Icon} from 'react-materialize'
 import moment from 'moment'
 import './Employee.css'
 import UpdateConsumablePurchase from './UpdateConsumablePurchase'
@@ -86,10 +86,12 @@ class HistoryConsumables extends Component{
                             /> : null}
             {this.state.fetchHistory ? this.getHistory() : null}
             <h3 className="title">Consumable Details</h3>
-           <Row className='splitModalButtons'>
-                <a href='/admin/consumables'><Button style={{float : 'left'}}>Go Back</Button></a>
+           <Row >
+                <a href='/admin/consumables'><Button style={{float : 'left'}}><Icon>arrow_back</Icon></Button></a>
                 <Button style={{float : 'right'}} onClick={this.parsingDataToCsv}>Export</Button>
            </Row> 
+
+           
             {this.state.fetchHistory ? <Row><Preloader size='small' /></Row> :
             (this.state.history.length > 0  ? this.state.history.map((consumable, index) => {
                 return <Col s={12} m={12} key={index}>
@@ -98,7 +100,8 @@ class HistoryConsumables extends Component{
                             <div> 
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300, display: "inline-block"}}>Purchased</h5>
                                 <div style={{display: 'inline-block',position: 'relative',float: 'right',top: '5px',marginRight: '20px'}}>
-                                <Modal
+                                <Modal 
+                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     trigger={<Button style={{}}>Edit</Button>}>
                                     <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>

@@ -243,7 +243,7 @@ class UpdateConsumablePurchase extends Component{
             $(".modal-overlay").click()
             this.props.getHistory()
             // window.Materialize.toast('Consumable Purchase Detail Updated', 4000)
-            swal('Consumable Purchase Detail Updated',{
+            swal('Consumable Purchase Details has been Updated',{
                 buttons: false,
                 timer: 2000,
               })
@@ -324,7 +324,7 @@ class UpdateConsumablePurchase extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button  onClick={this.checkForValidation}>Update</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton modal-close">Cancel</Button>
                 </div>
                     {this.state.updateConsumable ? this.updateConsumablePurchase() : null}
                     {this.state.calculateTotal ? this.calculateTotal() : null}

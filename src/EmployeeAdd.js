@@ -241,7 +241,7 @@ class EmployeeAdd extends Component {
     if(!reg.test(this.state.email.value)){
         this.setState({
             email: Object.assign(this.state.email, {
-                error:"Enter Valid West Agile Labs' Email",
+                error:"Enter Valid West Agile Lab's Email",
                 showError:true
             }),
         })
@@ -508,7 +508,7 @@ class EmployeeAdd extends Component {
             <Row>
                 <Col offset={'l6'} style={{float: 'right'}}>
                     <Button onClick = {this.handleCreate} >SUBMIT</Button>
-                    <Link to='/admin/employees'><Button className="cancelButton">Cancel</Button></Link>                            
+                    <Link to='/admin/employees'><Button className="cancelButton modal-close">Cancel</Button></Link>                            
                 </Col>
             </Row>
         </div>

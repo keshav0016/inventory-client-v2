@@ -118,15 +118,15 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(Number(this.props.consumable.quantity) === Number(this.state.quantity.value)){
-            // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
-            this.setState({
-                quantity:Object.assign(this.state.quantity, {
-                    error: 'Assign quantity = Available quantity',
-                    showError:true
-                })
-            })
-        }
+        // if(Number(this.props.consumable.quantity) === Number(this.state.quantity.value)){
+        //     // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
+        //     this.setState({
+        //         quantity:Object.assign(this.state.quantity, {
+        //             error: 'Assign quantity = Available quantity',
+        //             showError:true
+        //         })
+        //     })
+        // }
         if(Number(this.props.consumable.quantity) > Number(this.state.quantity.value) && Number(this.state.quantity.value) > 0){
             // window.Materialize.toast('The Requested quantity is greater than the Available quantity', 4000)
             this.setState({
@@ -152,7 +152,7 @@ class AssignConsumables extends Component {
                 })
             })
         }
-        if(this.state.user_id.value !== 'Select' && Number(this.state.quantity.value) > 0 && Number(this.props.consumable.quantity) > Number(this.state.quantity.value)){
+        if(this.state.user_id.value !== 'Select' && Number(this.state.quantity.value) > 0 && Number(this.props.consumable.quantity) >= Number(this.state.quantity.value)){
             this.setState({
                 assignConsumableRequest : true
             })
@@ -242,7 +242,7 @@ class AssignConsumables extends Component {
                 </Row>
                 <div className='splitModalButtons'>
                     <Button waves='light' onClick={this.checkForValidation}>Assign</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}

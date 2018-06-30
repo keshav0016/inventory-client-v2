@@ -196,6 +196,7 @@ class Assets extends Component{
             <Button ><Icon tiny>more_vert</Icon></Button>
         }>
         <Modal
+            modalOptions={{ dismissible: false }}
             actions={null}
             trigger={<NavItem>Enable</NavItem> }>
             {<EnableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />}
@@ -205,28 +206,33 @@ class Assets extends Component{
             <Button><Icon tiny>more_vert</Icon></Button>
         }>
             <Modal
+                modalOptions={{ dismissible: false }}
                 actions={null}
                 trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
                 {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
             </Modal>
             <Modal
+                modalOptions={{ dismissible: false }}
                 actions={null}
                 className='editAssetBottomPadding'
                 trigger={<NavItem>Edit</NavItem>}>
                 <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
             <Modal
+                modalOptions={{ dismissible: false }}
                 actions={null}
                 trigger={item.current_status === 'Available' ? <NavItem>Assign</NavItem> : null}>
                 {item.current_status === 'Available' ? <AssignAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
             </Modal>
             <Modal
+                modalOptions={{ dismissible: false }}
                 actions={null}
                 trigger={item.current_status === 'Assigned' ? <NavItem>Recover</NavItem> : null}>
                 {item.current_status === 'Assigned' ? <RecoverAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
             </Modal>
             {item.current_status === 'Available' ? <NavItem href={ `/admin/assets/repair/${item.asset_id}`}>Repair</NavItem> : null}
             <Modal
+                modalOptions={{ dismissible: false }}
                 actions={null}
                 trigger={item.current_status === 'Service' ? <NavItem>Receive</NavItem> : null}>
                 {item.current_status === 'Service' ? <ReceiveAsset asset = {item.asset_id} setHandleListRequest={this.setHandleListRequest} /> : null}
@@ -259,7 +265,8 @@ class Assets extends Component{
                   search: '?sessionExpired=true'
               }}/>: null}
                 {this.state.handleListRequest ? this.handleList() : null}
-                <Modal 
+                <Modal
+                modalOptions={{ dismissible: false }} 
                 id='mobileAssetFilters'
                 actions={null}
                 trigger={filterSlideButton}>

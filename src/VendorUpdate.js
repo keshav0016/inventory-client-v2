@@ -182,7 +182,7 @@ class VendorUpdate extends Component{
        .then((res) => {
         if(res.data.message === 'vendor has been updated'){
             // window.Materialize.toast('Vendor has been Edited', 4000)
-            swal('Vendor has been Edited',{
+            swal('Vendor details has been updated',{
                 buttons: false,
                 timer: 2000,
               })
@@ -253,12 +253,12 @@ class VendorUpdate extends Component{
                 <Row>
                     {/* <Input  value={this.state.id.value} onChange={this.handleId}s={12} m={6} l={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />       */}
                     <Input  value={this.state.name.value} onChange={this.handleName}s={12} m={6} l={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input  value={this.state.contact.value} className="vendorContact" onChange={this.handleContact}s={12} m={6} l={6} type="number" label="Contact"  error={this.state.contact.showError ? this.state.contact.error : null} />    
+                    <Input  type="number" value={this.state.contact.value} className="vendorContact" onChange={this.handleContact}s={12} m={6} l={6}  label="Contact"  error={this.state.contact.showError ? this.state.contact.error : null} />    
                     <Input  value={this.state.address.value} onChange={this.handleAddress} s={12} m={6} l={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
                 </Row>
                 <div className='splitModalButtons'>
                     <Button onClick={this.checkForValidation}>Update</Button>
-                    <Button  onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
+                    <Button  onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                  {this.state.update ? this.handleUpdate() : null}
                  {this.state.redirect ? <Redirect

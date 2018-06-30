@@ -258,7 +258,7 @@ class EmployeeUpdate extends Component{
           if(!reg.test(this.state.email.value)){
               this.setState({
                   email: Object.assign(this.state.email, {
-                      error:"Enter Valid West Agile Labs' Email",
+                      error:"Enter Valid West Agile Lab's Email",
                       showError:true
                   }),
               })
@@ -447,7 +447,7 @@ class EmployeeUpdate extends Component{
                 </Row>
                     <div className="splitModalButtons">
                         <Button className='addbtn' onClick={this.handleUpdate}>Update</Button>
-                        <Button onClick={this.setFields} className="cancelButton">Cancel</Button>                
+                        <Button onClick={this.setFields} className="cancelButton modal-close">Cancel</Button>                
                     </div>
 
             </div>

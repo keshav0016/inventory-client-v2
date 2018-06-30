@@ -352,7 +352,7 @@ class UpdateAsset extends Component {
             }
             else{
                 // window.Materialize.toast('Asset Updated', 4000)
-                swal('Asset Updated',{
+                swal('Asset details has been Updated',{
                     buttons: false,
                     timer: 2000,
                   })
@@ -460,7 +460,7 @@ class UpdateAsset extends Component {
                 </Row>
                 <div className="splitModalButtons">
                     <Button waves='light' onClick={this.checkForValidation}>Update</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton">Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton modal-close">Cancel</Button>
                 </div>
                 {this.state.updateAssetRequest ? this.updateAssetIntoDb() : null}
                 {this.state.redirect ? <Redirect

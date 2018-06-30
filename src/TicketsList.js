@@ -294,7 +294,7 @@ class TicketsList extends Component{
                 <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Reject</Button>
-                    <Button onClick={this.cancelReason} className="cancelButton" >Cancel</Button>
+                    <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
                 </div>
             </Row>
         </Modal> : null
@@ -363,8 +363,10 @@ class TicketsList extends Component{
                         <Input name='filter' type='checkbox' value='red' label='Rejected' onClick={this.setRejectedChecked} disabled={this.state.checkAll} />
                         <Input name='filter' type='checkbox' value='red' label='Select All' onClick={this.setCheckAll}  />
                     </Row>
-                    <div className='splitModalButtons'>
-                        <Button className='modal-close' >Close</Button>
+                    <div style={{textAlign: "center"}}>
+                        <Col>
+                            <Button style={{position: "relative",marginBottom: "8px"}} className='modal-close' >Close</Button>
+                        </Col>
                     </div>
                 </div>
                 </Modal>
@@ -477,6 +479,7 @@ class TicketsList extends Component{
                                             return <CardPanel key={index}>
                                                 <div style={{ float: 'right' }}>
                                                     {this.renderAcceptConsumableTicket(item)}
+                                                    <Row></Row>
                                                     {this.renderRejectConsumableTicket(item)}
                                                 </div>
                                                 <div className='historyCards'  >

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {CardPanel, Col, Row, Button, Preloader} from 'react-materialize'
+import {CardPanel, Col, Row, Button, Preloader, Icon} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 import './Employee.css'
@@ -103,7 +103,7 @@ class Assets extends Component{
                 {this.state.assetDetails.current_status === 'Service' ? <b><p className = "heading">Currently under Service to {this.state.repairDetails.vendor} vendor and the Expected recovery is {moment(this.state.repairDetails.expected_delivery).format('DD MMM YYYY')}</p></b> : null}
                 </React.Fragment>}
                 <Row className="splitModalButtons">
-                    <a href='/admin/assets'><Button style={{float : 'left'}}>Go Back</Button></a>
+                    <a href='/admin/assets'><Button style={{float : 'left'}}><Icon>arrow_back</Icon></Button></a>
                     <Button style={{float : 'right', marginRight : '20px'}} onClick={this.parsingDataToCsv}>Export</Button>
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
                 </Row>

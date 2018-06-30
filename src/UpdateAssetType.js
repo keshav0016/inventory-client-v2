@@ -147,7 +147,7 @@ class UpdateAssetType extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button onClick={this.checkForValidation} >Update</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                  {this.state.updateAssetTypeRequest ? this.updateAssetTypeInDb() : null}
                  {this.state.redirect ? <Redirect

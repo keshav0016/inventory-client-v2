@@ -79,6 +79,12 @@ body {
     max-height: 85%;
 }
 
+.modal.open {
+    left:50% !important;
+    top:50% !important;
+    transform: translate(-50%,-50%) !important;
+}
+
 .modal .modal-content {
     padding: 15px;
     padding-bottom: 0px;
@@ -283,9 +289,8 @@ label {
 .employeeListDropdown {
     white-space: nowrap;
 }
-
-.vendorContact::-webkit-inner-spin-button, 
-.vendorContact::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;

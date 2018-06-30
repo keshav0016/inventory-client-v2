@@ -130,7 +130,6 @@ class AddVendor extends Component{
     }
     setContact(e){
         if(e.target.value.length <= 10){
-
             this.setState({
                 contact : Object.assign(this.state.contact, {
                     value: e.target.value
@@ -249,7 +248,7 @@ class AddVendor extends Component{
                 <h5 className='title'>Add Vendor</h5 >
                 <Row>
                     <Input s={12} m={6} l={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input s={12} m={6} l={6} className="vendorContact" label="Contact"  value = {this.state.contact.value} onChange ={this.setContact} type="number" error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
+                    <Input s={12} m={6} l={6} className="vendorContact" type="number" label="Contact"  value = {this.state.contact.value} onChange ={this.setContact}  error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
                     <Input s={12} m={6} l={6} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 
                 </Row>

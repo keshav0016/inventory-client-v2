@@ -6,6 +6,7 @@ import './Employee.css'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import moment from 'moment';
+import $ from 'jquery'
 
 class AcceptAssetTicket extends Component{
     constructor(props){
@@ -36,6 +37,11 @@ class AcceptAssetTicket extends Component{
         this.setReason = this.setReason.bind(this)
         this.acceptTicket = this.acceptTicket.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
+        this.clear = this.clear.bind(this)
+    }
+
+    clear(){
+        $(".modal-overlay").trigger('click');
     }
 
     checkForValidation(){
@@ -217,7 +223,6 @@ class AcceptAssetTicket extends Component{
                 {this.state.loading ? <Row><Preloader size='small' /></Row> :
                 (this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
                 (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : <React.Fragment>
-                    <Row>
                         <Row>
                             <Input s={12} m={12} l={12} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
                         </Row>
@@ -227,9 +232,6 @@ class AcceptAssetTicket extends Component{
                         <Row>
                             <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>{this.availableAssetsDropdown()}</Input>
                         </Row>
-                    </Row>
-                    <br />
-                    <Row>
                         {this.state.currentAssetSelected.serial_number ? 
                         <div>
                             <h5>Asset name : {this.state.currentAssetSelected.asset_name}</h5>
@@ -238,12 +240,11 @@ class AcceptAssetTicket extends Component{
                             <h5>Invoice number : {this.state.currentAssetSelected.invoice_number}</h5>
                             <h5>Vendor : {this.state.currentAssetSelected.vendor}</h5>
                         </div> : null}
-                    </Row>
                     <div className='splitModalButtons'>
                         <Row>
                             <Col offset={'l6'} style={{float: 'right'}}>
-                                <Button onClick = {this.checkForValidation} >Accept <Icon small right>send</Icon></Button>
-                                <Link to='/admin/tickets'><Button className="cancelButton">Cancel</Button></Link>                            
+                                <Button onClick = {this.checkForValidation} >Accept</Button>
+                                <Link to='/admin/tickets'><Button className="cancelButton modal-close">Cancel</Button></Link>                            
                             </Col>
                         </Row>
                     </div>
