@@ -52,6 +52,8 @@ class DeleteAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal-close').trigger('click')
+
                 this.setState({
                     recoverAssetRequest : false
                 })
