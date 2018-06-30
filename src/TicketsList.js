@@ -5,7 +5,6 @@ import moment from 'moment'
 import './ListPage.css'
 import './TicketsList.css'
 import $ from 'jquery'
-import {Link} from 'react-router-dom'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import {Redirect} from 'react-router-dom'
@@ -268,13 +267,22 @@ class TicketsList extends Component{
         })
     }
 
-    renderAcceptAssetTicket(ticket){
-        //if(this.fetchAvailableAssets(ticket)){
-            return ticket.status === 'Pending' && ticket.user !== null ?  <Link  to={`/admin/tickets/asset/accept/${ticket.ticket_number}`}><Button floating icon='done'></Button></Link> : null 
-        //}
-        //else{
-        //    return ticket.status === 'Pending' && ticket.user !== null ? <Button floating onClick={() => {window.Materialize.toast('No available Asset for this Type', 4000)}} icon='done'></Button> : null
-        //}
+    async renderAcceptAssetTicket(ticket){
+        let response = await axios({
+            method : 'get'
+            ,url : `${baseUrl}/admin/ticket/available?ticket=${ticket.ticket_number}`
+            ,withCredentials : true
+        })
+
+        if(response.data.assets.length){
+            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}`
+        }
+        else{
+            swal("No available Asset for this Type",{
+                buttons: false,
+                timer: 2000,
+            })
+        }
     }
 
     renderRejectAssetTicket(ticket){
@@ -387,7 +395,7 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
-                                        <td>{this.renderAcceptAssetTicket(ticket)}</td>
+                                        <td>{ticket.status === 'Pending' && ticket.user !== null ? <Button onClick = {async () => {await this.renderAcceptAssetTicket(ticket)}} floating icon='done'></Button> : null}</td>
                                         <td>{this.renderRejectAssetTicket(ticket)}</td>
                                         </tr>
                                         )
@@ -403,7 +411,7 @@ class TicketsList extends Component{
                                         {this.state.assetsTicket.map((item, index) => {
                                             return <CardPanel key={index}>
                                                 <div style={{ float: 'right' }}>
-                                                    {this.renderAcceptAssetTicket(item)}
+                                                {item.status === 'Pending' && item.user !== null ? <Button onClick = {async () => {await this.renderAcceptAssetTicket(item)}} floating icon='done'></Button> : null}
                                                     <Row></Row>
                                                     {this.renderRejectAssetTicket(item)}
                                                 </div>
