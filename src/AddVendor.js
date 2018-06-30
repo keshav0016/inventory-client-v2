@@ -130,7 +130,6 @@ class AddVendor extends Component{
     }
     setContact(e){
         if(e.target.value.length <= 10){
-
             this.setState({
                 contact : Object.assign(this.state.contact, {
                     value: e.target.value

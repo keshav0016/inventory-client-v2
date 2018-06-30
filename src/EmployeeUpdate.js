@@ -258,7 +258,7 @@ class EmployeeUpdate extends Component{
           if(!reg.test(this.state.email.value)){
               this.setState({
                   email: Object.assign(this.state.email, {
-                      error:"Enter Valid West Agile Labs' Email",
+                      error:"Enter Valid West Agile Lab's Email",
                       showError:true
                   }),
               })
