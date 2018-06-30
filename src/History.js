@@ -108,7 +108,7 @@ class Assets extends Component{
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
                 </Row>
                     {/* <Row> */}
-                    {this.state.history.reverse().map((element, index) => {
+                    {this.state.history.map((element, index) => {
                         return <Col s={12} m={12} key={index}>
                             <CardPanel className="z-depth-2" >
                                 {element.vendor ? <div>
