@@ -6,6 +6,7 @@ import './Employee.css'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import moment from 'moment';
+import $ from 'jquery'
 
 class AcceptAssetTicket extends Component{
     constructor(props){
@@ -36,6 +37,11 @@ class AcceptAssetTicket extends Component{
         this.setReason = this.setReason.bind(this)
         this.acceptTicket = this.acceptTicket.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
+        this.clear = this.clear.bind(this)
+    }
+
+    clear(){
+        $(".modal-overlay").trigger('click');
     }
 
     checkForValidation(){
@@ -243,7 +249,7 @@ class AcceptAssetTicket extends Component{
                         <Row>
                             <Col offset={'l6'} style={{float: 'right'}}>
                                 <Button onClick = {this.checkForValidation} >Accept <Icon small right>send</Icon></Button>
-                                <Link to='/admin/tickets'><Button className="cancelButton">Cancel</Button></Link>                            
+                                <Link to='/admin/tickets'><Button className="cancelButton modal-close">Cancel</Button></Link>                            
                             </Col>
                         </Row>
                     </div>

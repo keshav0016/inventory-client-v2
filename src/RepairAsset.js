@@ -353,7 +353,7 @@ class RepairAsset extends Component{
                             {/* </Row>
                             <Row style={{float : 'right'}}> */}
                                     <Button  onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                                    <Link to='/admin/assets'><Button className="cancelButton" >Cancel</Button></Link>                                                    
+                                    <Link to='/admin/assets'><Button className="cancelButton modal-close" >Cancel</Button></Link>                                                    
                                 </Col>
                         </div>
                     </Row>}

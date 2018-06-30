@@ -508,7 +508,7 @@ class EmployeeAdd extends Component {
             <Row>
                 <Col offset={'l6'} style={{float: 'right'}}>
                     <Button onClick = {this.handleCreate} >SUBMIT</Button>
-                    <Link to='/admin/employees'><Button className="cancelButton">Cancel</Button></Link>                            
+                    <Link to='/admin/employees'><Button className="cancelButton modal-close">Cancel</Button></Link>                            
                 </Col>
             </Row>
         </div>

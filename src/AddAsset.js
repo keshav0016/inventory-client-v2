@@ -106,6 +106,11 @@ class AddAsset extends Component{
         this.setAssetTypeListRequest = this.setAssetTypeListRequest.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
         this.getVendorName = this.getVendorName.bind(this)
+        this.clear = this.clear.bind(this)
+    }
+
+    clear(){
+        $(".modal-overlay").trigger('click');
     }
 
     checkForValidation(){
@@ -743,7 +748,7 @@ class AddAsset extends Component{
                             <Row>
                                 <Col offset={'l6'} style={{float: 'right'}}>
                                     <Button onClick = {this.checkForValidation} >SUBMIT</Button>
-                                    <Link to='/admin/assets'><Button className="cancelButton">Cancel</Button></Link>                            
+                                    <Link to='/admin/assets'><Button onClick={this.clear} className="cancelButton modal-close">Cancel</Button></Link>                            
                                 </Col>
                             </Row>
                         </div>

@@ -253,7 +253,7 @@ class AssignAsset extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"}</Button>
-                    <Button className="cancelButton" onClick ={this.clearFields} >Cancel</Button>
+                    <Button className="cancelButton modal-close" onClick ={this.clearFields} >Cancel</Button>
                 </div>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}
                 {this.state.redirect ?  <Redirect
