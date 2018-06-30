@@ -559,6 +559,7 @@ class AddConsumables extends Component{
                         />
                         <Col s={1} m={2} l={1} className='addAssetModalButtons2' >
                             <Modal
+                            modalOptions={{ dismissible: false }}
                             actions={null}
                             id="addVendor"
                             trigger={<Button id="triggerAddVendor" floating icon="add"></Button>}>
@@ -578,7 +579,7 @@ class AddConsumables extends Component{
                         <Row>
                             <Col offset={'l6'} style={{float: 'right'}}>
                                 <Button onClick = {this.checkForValidation} >SUBMIT</Button>
-                                <Link to='/admin/consumables'><Button className="cancelButton">Cancel</Button></Link>                            
+                                <Link to='/admin/consumables'><Button className="cancelButton close-modal">Cancel</Button></Link>                            
                             </Col>
                         </Row>
                     {/* </Row> */}

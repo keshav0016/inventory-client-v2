@@ -88,6 +88,7 @@ class Vendor extends Component{
 
     renderButton(key){
         return <Modal
+            modalOptions={{ dismissible: false }}
             actions={null}
             trigger={<Button>Edit</Button>}>
             <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest} />
@@ -149,6 +150,7 @@ class Vendor extends Component{
                     </Col>
 
                 <Modal
+                    modalOptions={{ dismissible: false }}
                     id="addVendor"
                     actions={null}
                     // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}

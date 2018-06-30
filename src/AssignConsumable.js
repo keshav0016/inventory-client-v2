@@ -242,7 +242,7 @@ class AssignConsumables extends Component {
                 </Row>
                 <div className='splitModalButtons'>
                     <Button waves='light' onClick={this.checkForValidation}>Assign</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                 {this.state.fetchEmployeeList ? this.getEmployeeList() : null}
                 {this.state.assignConsumableRequest ? this.AssignConsumable () : null}

@@ -340,7 +340,7 @@ class ReceiveAsset extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button waves='light' onClick = {this.checkForValidation} >Submit</Button><span> </span>
-                    <Button className="cancelButton" onClick = {this.clearFields}>Cancel</Button>
+                    <Button className="cancelButton modal-close" onClick = {this.clearFields}>Cancel</Button>
                 </div>
                 {this.state.receiveAssetRequest ? this.receiveAssetIntoDb() : null}
                 {this.state.redirect ? <Redirect

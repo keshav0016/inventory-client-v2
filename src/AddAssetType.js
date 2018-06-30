@@ -192,7 +192,7 @@ class AddAssetType extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button onClick={this.checkForValidation} >Submit</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}
                 {this.state.login ?  <Redirect

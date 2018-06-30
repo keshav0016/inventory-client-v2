@@ -338,7 +338,7 @@ class Tickets extends Component{
                 </div>
                 <div className='splitModalButtons'>
                     <Button className=''waves='light' type = "submit" name = "action" onClick={this.checkForValidation} >Request</Button>
-                    <Button  onClick={this.cancelAll} className="cancelButton" >Cancel</Button>
+                    <Button  onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                 {this.state.redirect? <Redirect
               to={{

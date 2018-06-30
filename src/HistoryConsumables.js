@@ -98,7 +98,8 @@ class HistoryConsumables extends Component{
                             <div> 
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300, display: "inline-block"}}>Purchased</h5>
                                 <div style={{display: 'inline-block',position: 'relative',float: 'right',top: '5px',marginRight: '20px'}}>
-                                <Modal
+                                <Modal 
+                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     trigger={<Button style={{}}>Edit</Button>}>
                                     <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>

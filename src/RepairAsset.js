@@ -334,6 +334,7 @@ class RepairAsset extends Component{
                             />
                                 <Col s={2} l={1} m={2} className='addAssetModalButtons2'>
                                 <Modal
+                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     // id="addVendor"
                                     trigger={<Button icon='add' floating></Button>}>
@@ -352,7 +353,7 @@ class RepairAsset extends Component{
                             {/* </Row>
                             <Row style={{float : 'right'}}> */}
                                     <Button  onClick = {this.checkForValidation} >Submit <Icon small right>send</Icon></Button>
-                                    <Link to='/admin/assets'><Button className="cancelButton" >Cancel</Button></Link>                                                    
+                                    <Link to='/admin/assets'><Button className="cancelButton modal-close" >Cancel</Button></Link>                                                    
                                 </Col>
                         </div>
                     </Row>}
