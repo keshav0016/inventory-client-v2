@@ -170,7 +170,6 @@ class EmployeeTicketsList extends Component{
                     {filterPane}
                 </SideNav> */}
                 <Modal 
-                modalOptions={{ dismissible: false }}
                 id='mobileAssetFilters'
                 actions={null}
                 trigger={filterSlideButton}>
@@ -309,7 +308,6 @@ class EmployeeTicketsList extends Component{
                     </div>
                 </Tabs>}
                 <Modal 
-                    modalOptions={{ dismissible: false }}
                     actions={null}
                     trigger={<a><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add'></Button></a>}>
                     <Tickets setHandleListRequest={this.setHandleListRequest}/>

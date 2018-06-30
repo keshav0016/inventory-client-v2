@@ -724,7 +724,6 @@ class AddAsset extends Component{
                         />
                         <Col s={1} m={2} l={1} className="addAssetModalButtons1">
                             <Modal
-                                modalOptions={{ dismissible: false }}
                                 actions={null}
                                 trigger={<Button floating icon='add' ></Button>}>
                                 <AddVendor  setVendorListRequest = {this.setVendorListRequest}/>
@@ -736,7 +735,6 @@ class AddAsset extends Component{
                         <Input s={11} m={4} l={5} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
                         <Col s={1} m={2} l={1} className="addAssetModalButtons2">
                                     <Modal
-                                    modalOptions={{ dismissible: false }}
                                     actions={null}
                                     trigger={<Button floating icon='add'></Button>}>
                                     <AddAssetType setAssetTypeListRequest = {this.setAssetTypeListRequest}/>

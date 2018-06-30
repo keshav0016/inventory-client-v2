@@ -559,7 +559,6 @@ class AddConsumables extends Component{
                         />
                         <Col s={1} m={2} l={1} className='addAssetModalButtons2' >
                             <Modal
-                            modalOptions={{ dismissible: false }}
                             actions={null}
                             id="addVendor"
                             trigger={<Button id="triggerAddVendor" floating icon="add"></Button>}>

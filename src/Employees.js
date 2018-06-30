@@ -87,7 +87,6 @@ class EmployeesList extends Component {
       <Button><Icon tiny>more_vert</Icon></Button>
     }>
       <Modal
-        modalOptions={{ dismissible: false }}
         actions={null}
         trigger={<NavItem>Enable</NavItem>}>
         {<EnableEmployee user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />}
@@ -97,13 +96,11 @@ class EmployeesList extends Component {
         <Button className='btn-mini'> <Icon>more_vert</Icon></Button>
       }>
         <Modal
-          modalOptions={{ dismissible: false }}
           actions={null}
           trigger={<NavItem >Disable</NavItem >}>
           <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
         <Modal
-          modalOptions={{ dismissible: false }}
           actions={null}
           className='editAssetBottomPadding'
           trigger={<NavItem >Edit</NavItem >}>
