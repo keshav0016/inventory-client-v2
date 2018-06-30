@@ -108,29 +108,7 @@ class Assets extends Component{
                     <a href={`${baseUrl}/asset/qr?text=${this.props.match.params.asset}`} target='_blank'><Button style={{float : 'right', marginRight : '20px'}}>QR</Button></a>
                 </Row>
                     {/* <Row> */}
-                        <Col s={12} m={12}>
-                        <CardPanel className="z-depth-2" >
-                            <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
-                            <div className="historyCards" >
-                                <div style={{float : 'left'}} >
-                                    <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
-                                    <h6><b>Serial Number</b> : {this.state.assetDetails.serial_number}</h6>
-                                    <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
-                                    <h6><b>Vendor</b> : {this.state.assetDetails.vendor}</h6>
-                                    <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
-                                    <h6><b>Asset Type</b> : {this.state.assetDetails.assetType}</h6>
-                                </div>
-                                <div style={{float: 'right'}} >
-                                    <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
-                                    <h6><b>Description</b> : {this.state.assetDetails.description}</h6>
-                                    <h6><b>Amount</b> : {this.state.assetDetails.amount}</h6>
-                                    <h6><b>GST</b> : {this.state.assetDetails.gst}</h6>
-                                    <h6><b>Total</b> : {this.state.assetDetails.total}</h6>
-                                </div>
-                            </div>
-                        </CardPanel>
-                        </Col>
-                    {this.state.history.map((element, index) => {
+                    {this.state.history.reverse().map((element, index) => {
                         return <Col s={12} m={12} key={index}>
                             <CardPanel className="z-depth-2" >
                                 {element.vendor ? <div>
@@ -165,6 +143,28 @@ class Assets extends Component{
                             </CardPanel>
                         </Col>
                     })}
+                        <Col s={12} m={12}>
+                        <CardPanel className="z-depth-2" >
+                            <h5 style={{fontFamily : 'Roboto', fontWeight : 300}}>Purchase</h5>
+                            <div className="historyCards" >
+                                <div style={{float : 'left'}} >
+                                    <h6><b>Asset Name</b> : {this.state.assetDetails.asset_name}</h6>
+                                    <h6><b>Serial Number</b> : {this.state.assetDetails.serial_number}</h6>
+                                    <h6><b>Invoice Number</b> : {this.state.assetDetails.invoice_number}</h6>
+                                    <h6><b>Vendor</b> : {this.state.assetDetails.vendor}</h6>
+                                    <h6><b>Category</b> : {this.state.assetDetails.category}</h6>
+                                    <h6><b>Asset Type</b> : {this.state.assetDetails.assetType}</h6>
+                                </div>
+                                <div style={{float: 'right'}} >
+                                    <h6><b>Purchase Date</b> : {moment(this.state.assetDetails.purchase_date).format('DD MMM YYYY')}</h6>
+                                    <h6><b>Description</b> : {this.state.assetDetails.description}</h6>
+                                    <h6><b>Amount</b> : {this.state.assetDetails.amount}</h6>
+                                    <h6><b>GST</b> : {this.state.assetDetails.gst}</h6>
+                                    <h6><b>Total</b> : {this.state.assetDetails.total}</h6>
+                                </div>
+                            </div>
+                        </CardPanel>
+                        </Col>
                     {/* </Row> */}
                 </div>} 
                 </div>: <h4 className = 'heading'>No such Asset</h4>}
