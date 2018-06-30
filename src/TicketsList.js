@@ -469,6 +469,7 @@ class TicketsList extends Component{
                                             return <CardPanel key={index}>
                                                 <div style={{ float: 'right' }}>
                                                     {this.renderAcceptConsumableTicket(item)}
+                                                    <Row></Row>
                                                     {this.renderRejectConsumableTicket(item)}
                                                 </div>
                                                 <div className='historyCards'  >
