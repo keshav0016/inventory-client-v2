@@ -36,7 +36,7 @@ class Tickets extends Component{
             disableItems : true,
             redirect: false
         }
-        this.requestQuantity = this.requestQuantity.bind(this)
+        // this.requestQuantity = this.requestQuantity.bind(this)
         this.requestResourceType = this.requestResourceType.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.confirmRequest = this.confirmRequest.bind(this)
@@ -62,15 +62,15 @@ class Tickets extends Component{
         }
     }
 
-    requestQuantity(e){
-        if(this.state.item_type.value === 'consumables'){
-            this.setState({
-                quantity: Object.assign(this.state.quantity, {
-                    value : e.target.value
-                })
-            })
-        }
-    }
+    // requestQuantity(e){
+    //     if(this.state.item_type.value === 'consumables'){
+    //         this.setState({
+    //             quantity: Object.assign(this.state.quantity, {
+    //                 value : e.target.value
+    //             })
+    //         })
+    //     }
+    // }
 
     itemTypeDropdown(e){
         if(e.target.value === 'Select'){
@@ -98,6 +98,11 @@ class Tickets extends Component{
                 this.setState({
                     item_type : Object.assign(this.state.item_type, {
                         value : 'consumables'
+                        ,showError : false
+                    }),
+
+                    quantity : Object.assign(this.state.quantity, {
+                        value : 1
                         ,showError : false
                     }),
                     disableItems : false
@@ -327,7 +332,7 @@ class Tickets extends Component{
                     </Input>
                 </Row>
                 <Row>
-                    <Input  s={12} label="Quantity" type="number" min={0} value = {this.state.quantity.value} onChange = {this.requestQuantity}  error={this.state.quantity.showError ? this.state.quantity.error : null}/>
+                    <Input  s={12} label="Quantity" type="number" min={0} value = {this.state.quantity.value}  error={this.state.quantity.showError ? this.state.quantity.error : null}/>
                 </Row>
                 {this.state.requestResource ? this.confirmRequest() : null} 
                 </div>
