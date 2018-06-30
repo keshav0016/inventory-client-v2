@@ -79,6 +79,12 @@ body {
     max-height: 85%;
 }
 
+.modal.open {
+    left:50% !important;
+    top:50% !important;
+    transform: translate(-50%,-50%) !important;
+}
+
 .modal .modal-content {
     padding: 15px;
     padding-bottom: 0px;
