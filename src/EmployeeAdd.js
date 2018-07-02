@@ -180,7 +180,7 @@ class EmployeeAdd extends Component {
         })
       })
     }
-    if(this.state.age.value){
+
       if(this.state.age.value < 18){
         this.setState({
           age: Object.assign(this.state.age, {
@@ -196,7 +196,7 @@ class EmployeeAdd extends Component {
           })
         })
       }
-      else{
+      if(this.state.age.value > 18 && this.state.age.value < 70){
         this.setState({
           age: Object.assign(this.state.age, {
               error: '',
@@ -204,7 +204,7 @@ class EmployeeAdd extends Component {
           })
         })
       }
-    }
+
     if(!this.state.department.value){
       this.setState({
         department: Object.assign(this.state.department, {
