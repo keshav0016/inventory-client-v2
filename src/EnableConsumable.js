@@ -6,7 +6,8 @@ import swal from 'sweetalert'
 import {
     Redirect
   } from 'react-router-dom';
-  
+  import $ from 'jquery'
+
 class EnableConsumable extends Component{
     constructor(props){
         super(props)
@@ -39,6 +40,7 @@ class EnableConsumable extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal').hide()
                 this.props.setHandleListRequest()
             }
         })

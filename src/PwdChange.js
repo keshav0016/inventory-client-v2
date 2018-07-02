@@ -24,13 +24,14 @@ class PasswordChange extends Component {
                 showError: false,
                 error: ""
             },
-            user_id:  { 
-                value: '',
-                showError: false,
-                error: ""
-            },
+            // user_id:  { 
+            //     value: '',
+            //     showError: false,
+            //     error: ""
+            // },
             change: true,
-            redirect: false
+            redirect: false,
+            user_id: this.props.location.state.user_id
         }
         this.handleConfirmPassword = this.handleConfirmPassword.bind(this)
         this.handleNewPassword = this.handleNewPassword.bind(this)
@@ -50,9 +51,6 @@ class PasswordChange extends Component {
                     <Col s={12} m={6} l={4} offset={'m3 l4'} style={{ marginTop: 0 }}>
                         <form onSubmit={this.handleSubmit}>
                             <Card className="z-depth-2" title="Reset your password" style={{ padding: '15px' }}>
-                                <Row>
-                                    <Input s={12} label="User Id" onChange={this.handleUserid} error={this.state.user_id.showError ? this.state.user_id.error : null}icon="account_box" autoFocus></Input>
-                                </Row>
                                 <Row>
                                     <Input s={12} type='password' onChange={this.handleNewPassword} error={this.state.New_Password.showError ? this.state.New_Password.error : null}label="New Password" icon="lock"></Input>
                                 </Row>
@@ -98,11 +96,15 @@ class PasswordChange extends Component {
         })
     }
     handleNewPassword(e) {
-        this.setState({
-            New_Password: Object.assign(this.state.New_Password, {
-                value: e.target.value
+        if(e.target.value.length >= 6){
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    value: e.target.value,
+                    showError: false
+                })
             })
-        })
+        }
+
     }
     componentDidMount() {
         $('label').addClass('active')
@@ -113,22 +115,22 @@ class PasswordChange extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
-        if(!this.state.user_id.value){
-            this.setState({
-                user_id: Object.assign(this.state.user_id, {
-                    error: 'User Id is Required',
-                    showError: true
-                }),
-            })
+        // if(!this.state.user_id.value){
+        //     this.setState({
+        //         user_id: Object.assign(this.state.user_id, {
+        //             error: 'User Id is Required',
+        //             showError: true
+        //         }),
+        //     })
            
-        }else{
-            this.setState({
-                user_id: Object.assign(this.state.user_id, {
-                    error: '',
-                    showError: false
-                }),
-            })
-        }
+        // }else{
+        //     this.setState({
+        //         user_id: Object.assign(this.state.user_id, {
+        //             error: '',
+        //             showError: false
+        //         }),
+        //     })
+        // }
         if(this.state.New_Password.value.length === 0){
             this.setState({
                 New_Password: Object.assign(this.state.New_Password, {
@@ -195,7 +197,7 @@ class PasswordChange extends Component {
                 method: 'post',
                 url: `${baseUrl}/employee/ticket/changepassword`,
                 data: {
-                    user_id: this.state.user_id.value,
+                    user_id: this.state.user_id,
                     password: this.state.New_Password.value
                     , email: this.state.email
                 },

@@ -168,7 +168,8 @@ class AddVendor extends Component{
                 }
                 this.setState({
                     addVendorRequest : false
-                })                
+                })  
+                            
             }
             else{
                 let vendorName = this.state.name.value.charAt(0).toUpperCase() + this.state.name.value.slice(1).toLowerCase()
@@ -191,13 +192,15 @@ class AddVendor extends Component{
                     addVendorRequest : false
 
                 })
-                $('.modal-overlay').trigger('click');                
+           
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
                 })
-                
-                // window.Materialize.toast(res.data.message, 4000)
+                $('.modal').hide() 
+                setTimeout((function() {
+                    window.location.reload();
+                }), 2100);
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
                 }                

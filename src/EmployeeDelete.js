@@ -28,34 +28,33 @@ class EmployeeDelete extends Component {
           withCredentials: true
         })
         .then((res) => {
-            if(res.data.message === 'Employee disabled successfully'){
-                this.props.setHandleListRequest(true)
-                // window.Materialize.toast('Employee disabled successfully', 4000)
-                swal("Employee is disabled successfully",{
-                    buttons: false,
-                    timer: 2000,
-                  })
-            }else if(res.data.message === 'recover the assets first'){
-                // window.Materialize.toast(`Recover the assets first `, 4000)
+           if(res.data.message === 'recover the assets first'){
+
                 swal("Recover the assets first",{
                     buttons: false,
                     timer: 2000,
                   })
             }else if(res.data.message === 'can not disable employee'){
-                // window.Materialize.toast(res.data.message, 4000)
+
                 swal("Can not disable the employee",{
                     buttons: false,
                     timer: 2000,
                   })
+            }else  if(res.data.message === 'Employee disabled successfully'){                
+                swal("Employee is disabled successfully",{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                $('.modal').hide()
+                  
+                this.props.setHandleListRequest()
+
             }
-            $('.modal-overlay').trigger('click')
         })
         .catch(error => {
+            console.log(error)
             if(error.response.status === 401){
-                // swal("session expired, so you need to login again",{
-                //     buttons: false,
-                //     timer: 2000,
-                // })
+
                 this.setState({
                     redirect : true
                 })
@@ -66,7 +65,7 @@ class EmployeeDelete extends Component {
                   })
                 $('.modal-overlay').trigger('click')
             }
-            // window.Materialize.toast('can not disable employee', 4000)
+
         })
         
     }

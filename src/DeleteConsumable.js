@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
-  
+  import $ from 'jquery'
 class DeleteConsumable extends Component{
     constructor(props){
         super(props)
@@ -50,7 +50,7 @@ class DeleteConsumable extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                // window.Materialize.toast(res.data.error, 4000)
+                  $('.modal').hide()
                 this.setState({
                     deleteConsumableRequest : false
                 })

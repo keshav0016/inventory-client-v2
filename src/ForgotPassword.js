@@ -27,7 +27,8 @@ class ForgotPasswordForm extends Component {
                 error: '',
                 showError: false
             }
-            , redirect: false
+            , redirect: false,
+            login : false
         }
         this.getUserid = this.getUserid.bind(this);
         this.getEmail = this.getEmail.bind(this);
@@ -157,11 +158,11 @@ class ForgotPasswordForm extends Component {
                                     </Col> */}
                                 {/* </Row> */}
                                 {this.state.redirect ? <Redirect push to={`/user/reset/${this.state.user_id.value}`} /> : null}
-                                {this.state.redirect? <Redirect
-              to={{
-                  pathname: "/login",
-                  search: '?sessionExpired=true'
-              }}/>: null}
+                                {this.state.login? <Redirect
+                                    to={{
+                                        pathname: "/login",
+                                        search: '?sessionExpired=true'
+                                    }}/>: null}
 
                             </Card>
                         </form>

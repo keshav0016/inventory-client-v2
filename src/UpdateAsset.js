@@ -356,9 +356,7 @@ class UpdateAsset extends Component {
                     buttons: false,
                     timer: 2000,
                   })
-                  setTimeout((function() {
-                    window.location.reload();
-                  }), 2100);
+                  $('.modal').hide()
                 this.setState({
                     updateAssetRequest: false
                 })
@@ -430,7 +428,9 @@ class UpdateAsset extends Component {
                 showError: false
             }
         })
-        $(".modal-overlay").trigger('click');
+        $('.modal').hide()
+        // this.props.setHandleListRequest()
+
     }
 
 

@@ -193,7 +193,8 @@ class Consumables extends Component{
         this.setState({
             handleListRequest : true
         })
-        $(".modal-overlay").click()
+        window.location.reload()
+        // $(".modal-overlay").click()
     }
 
     setPage(e){
@@ -261,7 +262,7 @@ class Consumables extends Component{
         <Dropdown trigger={
             <Button> <Icon>more_vert</Icon></Button>
             }><Modal
-            
+            modalOptions={{dismissible: false}}
             actions={null}
             trigger={<NavItem>Enable</NavItem> }>
             {<EnableConsumable  consumable={consumable} setHandleListRequest={this.setHandleListRequest} />}
@@ -276,11 +277,13 @@ class Consumables extends Component{
                 <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
             </Modal> */}
             <Modal 
+                    modalOptions={{dismissible: false}}
                     actions={null}
                     trigger={<NavItem>Disable</NavItem>}>
                     <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
             <Modal
+                modalOptions={{dismissible: false}}
                 actions={null}
                 trigger={<NavItem>Assign</NavItem >}>
                 <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>

@@ -124,7 +124,11 @@ class TicketsList extends Component{
         })
         $('.modal-overlay').trigger('click')
     }
-
+    componentDidMount(){
+        this.timerId = setInterval(() => this.handleList(),
+            3000
+        )
+    }
     handleList(){
         axios({
             method : 'get',
@@ -224,7 +228,12 @@ class TicketsList extends Component{
                 buttons: false,
                 timer: 2000,
               })
-            $(".modal-overlay").click()        
+              setTimeout((function() {
+                window.location.reload();
+            }), 2100);
+            //   this.setHandleListRequest()
+            $(".modal-overlay").click()   
+                 
 
         })
         .catch(error =>{
@@ -287,6 +296,7 @@ class TicketsList extends Component{
 
     renderRejectAssetTicket(ticket){
         return ticket.status === 'Pending' && ticket.user !== null ? <Modal
+            modalOptions={{dismissible:false}}
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
             <Row className="no-footer" >
@@ -302,6 +312,7 @@ class TicketsList extends Component{
 
     renderAcceptConsumableTicket(ticket){
         return ticket.status === 'Pending' ? <Modal className="modal"
+            modalOptions={{dismissible:false}}
             actions={null}
             trigger={<Button floating icon='done'></Button>}>
             <Row className="no-footer" >
@@ -317,6 +328,7 @@ class TicketsList extends Component{
 
     renderRejectConsumableTicket(ticket){
         return ticket.status === 'Pending' ? <Modal
+            modalOptions={{dismissible:false}}
             actions={null}
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
             <Row className="no-footer" >
@@ -352,6 +364,7 @@ class TicketsList extends Component{
               }}/>: null}
                 <h3 className="title">Ticket List</h3>
                 <Modal 
+                modalOptions={{dismissible:false}}
                 id='mobileAssetFilters'
                 actions={null}
                 trigger={filterSlideButton}>
