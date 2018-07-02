@@ -184,7 +184,7 @@ class EmployeeAdd extends Component {
       if(this.state.age.value < 18 || this.state.age.value > 70){
         this.setState({
           age: Object.assign(this.state.age, {
-            error: "Invalid age",
+            error: "Age should be Greater than 18",
             showError: true,
           })
         })
@@ -262,7 +262,7 @@ class EmployeeAdd extends Component {
             }),
         })
     }
-    if(userIdReg.test(this.state.user_id.value) && !this.state.first_name.showError && !this.state.last_name.showError && this.state.age.value && this.state.gender.value && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
+    if(userIdReg.test(this.state.user_id.value) && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
       axios({
         method: 'post',
         url: `${baseUrl}/employees/create`,

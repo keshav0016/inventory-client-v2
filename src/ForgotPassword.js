@@ -163,7 +163,6 @@ class ForgotPasswordForm extends Component {
                                         pathname: "/login",
                                         search: '?sessionExpired=true'
                                     }}/>: null}
-
                             </Card>
                         </form>
                     </Col>
