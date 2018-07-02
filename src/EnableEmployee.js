@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
-
+import $ from 'jquery'
 class EnableEmployee extends Component{
     constructor(props){
         super(props)
@@ -39,6 +39,7 @@ class EnableEmployee extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                $('.modal').hide()
                 this.props.setHandleListRequest()
             }
         })

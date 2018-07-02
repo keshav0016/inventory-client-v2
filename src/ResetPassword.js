@@ -182,11 +182,21 @@ class ResetPassword extends Component {
         })
     }
     handleNewPassword(e) {
-        this.setState({
-            New_Password: Object.assign(this.state.New_Password, {
-                value: e.target.value
+        if(e.target.value > 6){
+
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    value: e.target.value
+                })
             })
-        })
+        }else{
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    error: 'The new password should be minimum 6 letters',
+                    showError: true
+                })
+            })
+        }
     }
     componentDidMount() {
         $('label').addClass('active')

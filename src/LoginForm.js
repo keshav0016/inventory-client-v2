@@ -219,7 +219,7 @@ class LoginForm extends Component {
     return (
       <div>
         {this.state.login ? loginform : null}
-        {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange' , user:{user_id:this.state.user_id.value}}}/>) : null}
+        {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange/' , state:{user_id:this.state.user_id.value}}}/>) : null}
         {this.state.employee ? (<Redirect  to ={{pathname:`/employee/Profile/` , user:{user_id:this.state.user_id.value}}}/>) : null}
         {this.state.admin ? (<Redirect push to ='/admin'/>): null}
       </div>

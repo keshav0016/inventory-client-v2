@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
+  import $ from 'jquery'
   
 class EnableAsset extends Component{
     constructor(props){
@@ -39,6 +40,7 @@ class EnableAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal').hide()
                 this.props.setHandleListRequest()
             }
         })

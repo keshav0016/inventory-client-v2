@@ -88,6 +88,11 @@ class EmployeeTicketsList extends Component{
             handleListRequest : true
         })
     }
+    componentDidMount(){
+        this.timerId = setInterval(() => this.handleList(),
+            3000
+        )
+    }
     handleList(){
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){
             axios({

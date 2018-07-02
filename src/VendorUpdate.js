@@ -186,10 +186,14 @@ class VendorUpdate extends Component{
                 buttons: false,
                 timer: 2000,
               })
-            this.setState({
-                update : false
-            })
-            this.props.setHandleListRequest()
+              $('.modal').hide()
+              setTimeout((function() {
+                window.location.reload();
+            }), 2100);
+              this.setState({
+                  update : false
+                })
+                this.props.setHandleListRequest()
             
         }else{
             // window.Materialize.toast(res.data.error, 4000)

@@ -144,11 +144,12 @@ class AssignAsset extends Component{
             this.setState({
                 assignAssetRequest : false
             })
-            // window.Materialize.toast(res.data.message, 4000)
             swal(res.data.message,{
                 buttons: false,
                 timer: 2000,
               })
+              $('.modal').hide()
+
             if(res.data.requireAssignForce){
                 this.setState({
                     assignForce : true

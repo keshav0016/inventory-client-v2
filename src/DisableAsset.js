@@ -6,6 +6,7 @@ import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
+  import $ from 'jquery'
   
 class DisableAsset extends Component{
     constructor(props){
@@ -38,7 +39,7 @@ class DisableAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                // window.Materialize.toast('Asset Disabled', 4000)
+                  $('.modal').hide()
                 this.props.setHandleListRequest()
             }
         })
