@@ -103,6 +103,13 @@ class PasswordChange extends Component {
                     showError: false
                 })
             })
+        }else if(e.target.value.length < 6){
+            this.setState({
+                New_Password: Object.assign(this.state.New_Password, {
+                    error: 'Minimum 6 letters password required',
+                    showError: true
+                })
+            })
         }
 
     }
