@@ -198,10 +198,17 @@ class EmployeeUpdate extends Component{
             })
           }
           if(this.state.age.value){
-            if(this.state.age.value < 1 || this.state.age.value > 70){
+            if(this.state.age.value < 18){
               this.setState({
                 age: Object.assign(this.state.age, {
-                  error: "Invalid age",
+                  error: "Age should be Greater than 18",
+                  showError: true,
+                })
+              })
+            }if(this.state.age.value > 70){
+              this.setState({
+                age: Object.assign(this.state.age, {
+                  error: "Age should not be Greater than 70",
                   showError: true,
                 })
               })
@@ -214,7 +221,7 @@ class EmployeeUpdate extends Component{
                 })
               })
             }
-          }
+        }
           if(!this.state.department.value){
             this.setState({
               department: Object.assign(this.state.department, {

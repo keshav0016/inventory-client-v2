@@ -101,14 +101,23 @@ class ForgotPasswordForm extends Component {
                 withCredentials: true
             })
                 .then((res) => {
-                    // window.Materialize.toast(res.data.message, 4000)
-                    swal(res.data.message,{
-                        buttons: false,
-                        timer: 2000,
-                      })
+                    if(res.data.message === "User is Disabled"){
+                        swal('Your Account has been disabled. You can not access the tool anymore',{
+                            buttons: false,
+                            timer: 2000,
+                          })
+                    }
                     if (res.data.message === 'Check Your Email') {
+                        swal(res.data.message,{
+                            buttons: false,
+                            timer: 2000,
+                        })
                         this.setState({
                             redirect: true
+                        })
+                    }else{
+                        this.setState({
+                            redirect: false
                         })
                     }
                 })
