@@ -247,6 +247,7 @@ class UpdateConsumablePurchase extends Component{
                 buttons: false,
                 timer: 2000,
               })
+              $('.modal').hide()
               setTimeout((function() {
                 window.location.reload();
               }), 2100);
