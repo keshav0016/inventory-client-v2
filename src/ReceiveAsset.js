@@ -253,6 +253,8 @@ class ReceiveAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   }) 
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
                   $('.modal-close').trigger('click')
              
                 this.props.setHandleListRequest()

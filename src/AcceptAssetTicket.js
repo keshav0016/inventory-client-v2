@@ -181,12 +181,14 @@ class AcceptAssetTicket extends Component{
                     buttons: false,
                     timer: 2000,
                   });
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
                 this.setState({
                     redirect : true
                 })
-                setTimeout((function() {
-                    window.location.reload();
-                }), 2100);
+                // setTimeout((function() {
+                //     window.location.reload();
+                // }), 2100);
 
             }
             console.log('success')

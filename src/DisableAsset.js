@@ -32,6 +32,8 @@ class DisableAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
                 // window.Materialize.toast(res.data.error, 4000)              
             }
             else{
@@ -40,6 +42,8 @@ class DisableAsset extends Component{
                     timer: 2000,
                   })
                   $('.modal').hide()
+                  $('.modal-overlay').hide()
+
                 this.props.setHandleListRequest()
             }
         })

@@ -193,7 +193,7 @@ class Consumables extends Component{
         this.setState({
             handleListRequest : true
         })
-        window.location.reload()
+        // window.location.reload()
         // $(".modal-overlay").click()
     }
 

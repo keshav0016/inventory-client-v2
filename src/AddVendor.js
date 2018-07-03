@@ -198,9 +198,11 @@ class AddVendor extends Component{
                     timer: 2000,
                 })
                 $('.modal').hide() 
-                setTimeout((function() {
-                    window.location.reload();
-                }), 2100);
+                $('.modal-overlay').hide()
+
+                // setTimeout((function() {
+                //     window.location.reload();
+                // }), 2100);
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
                 }                

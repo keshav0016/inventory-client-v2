@@ -4,7 +4,6 @@ import {Col, CardPanel, Button, Modal, Preloader, Row, Icon} from 'react-materia
 import moment from 'moment'
 import './Employee.css'
 import UpdateConsumablePurchase from './UpdateConsumablePurchase'
-import {Parser} from 'json2csv';
 import fileSaver from 'file-saver'
 import { baseUrl } from './config';
 import {

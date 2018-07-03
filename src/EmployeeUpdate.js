@@ -309,6 +309,7 @@ class EmployeeUpdate extends Component{
                         timer: 2000,
                         })
                         $('.modal').hide()
+                        $('.modal-overlay').hide()
                         this.props.setHandleListRequest()
 
 
@@ -382,7 +383,9 @@ class EmployeeUpdate extends Component{
         // setTimeout((function() {
         //     window.location.reload();
         //   }), 2100);
-          $('.modal').hide()
+        //   $('.modal').hide()
+        //   $('.modal-overlay').hide()
+
           this.props.setHandleListRequest()       
     }
             

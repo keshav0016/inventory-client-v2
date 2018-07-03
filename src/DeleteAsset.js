@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Button} from 'react-materialize'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
-
+import $ from 'jquery'
 class DeleteAsset extends Component{
     constructor(props){
         super(props)
@@ -48,6 +48,8 @@ class DeleteAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
                 // window.Materialize.toast('Asset deleted', 4000)
                 this.setState({
                     deleteAssetRequest : false

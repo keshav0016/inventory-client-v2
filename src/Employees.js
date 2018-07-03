@@ -11,7 +11,6 @@ import {
 } from 'react-router-dom';
 
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input, Row } from 'react-materialize'
-import $ from 'jquery'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 
@@ -43,7 +42,7 @@ class EmployeesList extends Component {
       handleListRequest : true
     })
     // $(".modal-overlay").click()
-    window.location.reload();
+    // window.location.reload();
 
   }
 
@@ -136,7 +135,7 @@ class EmployeesList extends Component {
         <Input s={12} m={6} l={4} placeholder="Search by Employee ID or Employee Name" onChange = {this.setSearch} />
         </Row>
 
-                {this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+                {this.state.loading ? <Row><Preloader size='small' /></Row> :(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
             <Table centered className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>
@@ -186,7 +185,7 @@ class EmployeesList extends Component {
                                     </CardPanel>
                         })}
                     </Col>
-          </div>}
+                </div>)}
           <Link to={{ pathname : '/admin/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>
                 
           <div>
