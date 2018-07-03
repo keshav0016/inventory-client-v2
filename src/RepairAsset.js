@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Icon, Modal, Autocomplete, Col, Preloader} from 'react-materialize'
+import {Row,Button, Icon, Modal, Autocomplete, Col, Preloader} from 'react-materialize'
 import AddVendor from './AddVendor'
 import $ from 'jquery'
 import moment from 'moment'

@@ -297,7 +297,7 @@ class TicketsList extends Component{
         })
 
         if(response.data.assets.length){
-            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}`
+            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}?on=${ticket.date}`
         }
         else{
             swal("No available Asset for this Type",{
