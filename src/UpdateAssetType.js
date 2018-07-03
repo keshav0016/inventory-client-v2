@@ -83,6 +83,7 @@ class UpdateAssetType extends Component{
                   })
                   $('.modal').hide()
                   $('.modal-overlay').hide()
+                  
                 //   setTimeout((function() {
                 //     window.location.reload();
                 //   }), 2100);
