@@ -4,7 +4,7 @@ import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
-
+import {Redirect} from 'react-router-dom'
 
 class UpdateConsumables extends Component {
     constructor(props) {

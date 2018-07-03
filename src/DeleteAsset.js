@@ -4,6 +4,7 @@ import {Button} from 'react-materialize'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import $ from 'jquery'
+import {Redirect} from 'react-router-dom'
 class DeleteAsset extends Component{
     constructor(props){
         super(props)
