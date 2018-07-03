@@ -184,7 +184,7 @@ class EmployeeAdd extends Component {
       if(this.state.age.value < 18){
         this.setState({
           age: Object.assign(this.state.age, {
-            error: "Age should be Greater than 18",
+            error: "Age should be Greater than or equal to 18",
             showError: true,
           })
         })
@@ -196,7 +196,7 @@ class EmployeeAdd extends Component {
           })
         })
       }
-      if(this.state.age.value > 18 && this.state.age.value < 70){
+      if(this.state.age.value >= 18 && this.state.age.value < 70){
         this.setState({
           age: Object.assign(this.state.age, {
               error: '',
