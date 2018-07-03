@@ -135,8 +135,8 @@ class EmployeesList extends Component {
         <Row>
         <Input s={12} m={6} l={4} placeholder="Search by Employee ID or Employee Name" onChange = {this.setSearch} />
         </Row>
-                {this.state.loading ? <Row><Preloader size='small' /></Row> :
-                (this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+
+                {this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
             <Table centered className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
               <thead>
@@ -186,7 +186,7 @@ class EmployeesList extends Component {
                                     </CardPanel>
                         })}
                     </Col>
-          </div>)}
+          </div>}
           <Link to={{ pathname : '/admin/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>
                 
           <div>
