@@ -259,7 +259,17 @@ class AssignAsset extends Component{
                 <h5 className="title">Assign Asset</h5>
                 <Row>
                     <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} value={this.state.user_id.value} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
-                    <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
+                    {/* <Input s={12} type='date' label="From *" 
+                    value = {this.state.from.value} onChange = {this.setFrom} 
+                    error={this.state.from.showError ? this.state.from.error : null} 
+                    /> */}
+                     <DateInput
+                        label="From *" 
+                        options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
+                        value = {this.state.from.value} 
+                        onChange = {this.setFrom} 
+                        error={this.state.from.showError ? this.state.from.error : null} 
+                    />
                     <DateInput
                         label="Expected Recovery*" 
                         options={{min: moment(this.state.from.value, "D MMMM, YYYY").toDate()}}
