@@ -28,7 +28,7 @@ class Assets extends Component{
             loading : true,
             isAvailableChecked : false,
             isAssignedChecked : false,
-            isServiceChecked : false,
+            isServiceChecked : this.props.location.hash === '#service' ? true : false,
             isElectronicsChecked : false,
             isNonElectronicsChecked : false,
             isOtherChecked : false,
