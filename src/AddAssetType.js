@@ -32,14 +32,16 @@ class AddAssetType extends Component{
     }
 
     checkForValidation(){
-        // if(!this.state.assetType){
-        //     window.Materialize.toast('All the * marked fields are required', 4000)
-        // }
-        // else{
-        //     this.setState({
-        //         createAssetRequest : true
-        //     })
-        // }
+
+        var assetType = /^[a-zA-Z]+$/;
+        if(!assetType.test(this.state.assetType.value)){
+            this.setState({
+                assetType: Object.assign(this.state.assetType, {
+                    error: "The Asset Type should only conatin alphabets",
+                    showError: true
+                })
+            })
+        }
         if(!this.state.assetType.value){
             this.setState({
                 assetType: Object.assign(this.state.assetType, {
@@ -48,7 +50,7 @@ class AddAssetType extends Component{
                 })
             })
         }
-        if(this.state.assetType.value){
+        if(assetType.test(this.state.assetType.value)){
             this.setState({
                 assetType: Object.assign(this.state.assetType, {
                     error: '',
@@ -80,7 +82,7 @@ class AddAssetType extends Component{
                 })
             })
         }
-        if(this.state.assetType.value && Number(this.state.maxRequest.value) > 0) {
+        if(assetType.test(this.state.assetType.value) && Number(this.state.maxRequest.value) > 0) {
             this.setState({
                 createAssetRequest : true
             })
