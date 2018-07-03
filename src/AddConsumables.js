@@ -8,6 +8,8 @@ import {
     Redirect, Link
   } from 'react-router-dom';
 import swal from 'sweetalert';
+import DateInput from './shared/DateInput'
+import moment from 'moment'
 class AddConsumables extends Component{
     constructor(props){
         super(props)
@@ -535,7 +537,18 @@ class AddConsumables extends Component{
                             onChange = {this.setConsumableName}
                             value={this.state.name.value}
                         />
-                    <Input s={12} m={6} l={6} name='on' type='date' label="Purchased Date" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    {/* <Input s={12} m={6} l={6} name='on' type='date' 
+                    label="Purchased Date" onChange={this.setPurchaseDate} 
+                    value = {this.state.purchase_date.value} 
+                    error={this.state.purchase_date.showError ? this.state.purchase_date.error : null}
+                     /> */}
+                     <DateInput
+                                label="Purchased Date *" 
+                                options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
+                                value = {this.state.purchase_date.value} 
+                                onChange = {this.handleExpected} 
+                                error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
+                            /> 
                     <br/>
                     <br/>
                     <br/>
