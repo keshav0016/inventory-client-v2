@@ -6,7 +6,8 @@ import './Employee.css'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import moment from 'moment';
-import $ from 'jquery'
+import $ from 'jquery';
+import DateInput from './shared/DateInput';
 
 class AcceptAssetTicket extends Component{
     constructor(props){
@@ -30,14 +31,15 @@ class AcceptAssetTicket extends Component{
             ,redirect : false
             ,acceptTicketRequest : false,
             login: false,
-            d1 : new Date()
+            d1 : new Date(),
+            on: this.props.match.params.on
         }
         this.setCurrentAssetSelected = this.setCurrentAssetSelected.bind(this) 
         this.handleExpected = this.handleExpected.bind(this)
-        this.setReason = this.setReason.bind(this)
         this.acceptTicket = this.acceptTicket.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.clear = this.clear.bind(this)
+        this.setReason = this.setReason.bind(this)
     }
 
     clear(){
@@ -226,7 +228,17 @@ class AcceptAssetTicket extends Component{
                 (this.state.unAuth ? <div><h5 style={{color : 'red'}}>Ticket has either been Accepted/Rejected or does not exist</h5></div> :
                 (this.state.availableAssetsList.length === 0 ? <h4>No available Asset for this Type</h4> : <React.Fragment>
                         <Row>
-                            <Input s={12} m={12} l={12} name='on' type='date' label="Expected Recovery*" onChange={this.handleExpected} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}/>
+                            {/* <Input s={12} m={12} l={12} name='on' type='date' 
+                            label="Expected Recovery*" onChange={this.handleExpected} 
+                            error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null}
+                            /> */}
+                             <DateInput
+                                label="Expected Recovery*" 
+                                options={{min: moment(this.state.on, "D MMMM, YYYY").toDate()}}
+                                value = {this.state.expected_recovery.value} 
+                                onChange = {this.handleExpected} 
+                                error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} 
+                            />
                         </Row>
                         <Row>
                             <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
