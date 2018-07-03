@@ -177,6 +177,8 @@ class TicketsList extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
                 //   setTimeout((function() {
                 //     window.location.reload();
                 // }), 2100);
@@ -188,6 +190,7 @@ class TicketsList extends Component{
                         buttons: false,
                         timer: 2000,
                       })
+
                     //   setTimeout((function() {
                     //     window.location.reload();
                     // }), 2100);
@@ -198,6 +201,8 @@ class TicketsList extends Component{
                         buttons: false,
                         timer: 2000,
                       })
+                      $('.modal').hide()
+                      $('.modal-overlay').hide()
                     $(".modal-overlay").click()        
                 }
             }
@@ -234,11 +239,13 @@ class TicketsList extends Component{
                 buttons: false,
                 timer: 2000,
               })
+              $('.modal').hide()
+              $('.modal-overlay').hide()
             //   setTimeout((function() {
             //     window.location.reload();
             // }), 2100);
             //   this.setHandleListRequest()
-            $(".modal-overlay").click()   
+            // $(".modal-overlay").click()   
                  
 
         })
