@@ -7,7 +7,7 @@ import swal from 'sweetalert'
 import {
     Redirect
   } from 'react-router-dom';
-  
+
 class AssignAsset extends Component{
     constructor(props){
         super(props)
@@ -192,7 +192,7 @@ class AssignAsset extends Component{
             })
         })
     }
-
+    
     setExpectedRecovery(e){
         this.setState({
             expected_recovery : Object.assign(this.state.expected_recovery, {
