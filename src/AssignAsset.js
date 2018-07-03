@@ -8,6 +8,8 @@ import {
     Redirect
   } from 'react-router-dom';
 
+import DateInput from './shared/DateInput';
+import moment from 'moment'
 class AssignAsset extends Component{
     constructor(props){
         super(props)
@@ -40,6 +42,12 @@ class AssignAsset extends Component{
         this.checkForValidation = this.checkForValidation.bind(this)
         this.setEmployee = this.setEmployee.bind(this)
         this.clearFields = this.clearFields.bind(this)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        if(prevState.from.value !== this.state.from.value){
+            this.forceUpdate()
+        }
     }
 
     checkForValidation(){
@@ -252,7 +260,22 @@ class AssignAsset extends Component{
                 <Row>
                     <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} value={this.state.user_id.value} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
                     <Input s={12} type='date' label="From *" value = {this.state.from.value} onChange = {this.setFrom} error={this.state.from.showError ? this.state.from.error : null} />
-                    <Input s={12} type='date' label="Expected Recovery*"  className='datepicker' value = {this.state.expected_recovery.value} onChange = {this.setExpectedRecovery} error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} />
+                    <DateInput
+                        label="Expected Recovery*" 
+                        options={{min: moment(this.state.from.value, "D MMMM, YYYY").toDate()}}
+                        value = {this.state.expected_recovery.value} 
+                        onChange = {this.setExpectedRecovery} 
+                        error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} 
+                    />
+                    {/* <Input s={12} 
+                        type='date' label="Expected Recovery*" 
+                        min={this.state.from.value} 
+                        options={{min: moment(this.state.from.value, "D MMMM, YYYY").toDate()}}
+                        className='datepicker' 
+                        value = {this.state.expected_recovery.value} 
+                        onChange = {this.setExpectedRecovery} 
+                        error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} 
+                    /> */}
                 </Row>
                 <div className="splitModalButtons">
                     <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"}</Button>
