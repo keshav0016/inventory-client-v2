@@ -561,9 +561,9 @@ class AddAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  setTimeout((function() {
-                    window.location.reload();
-                  }), 2100);
+                //   setTimeout((function() {
+                //     window.location.reload();
+                //   }), 2100);
 
 
                 // window.Materialize.toast('Asset Added', 4000)                

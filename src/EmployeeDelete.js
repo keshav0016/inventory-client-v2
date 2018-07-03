@@ -46,7 +46,7 @@ class EmployeeDelete extends Component {
                     timer: 2000,
                   })
                 $('.modal').hide()
-                  
+                $('.modal-overlay').hide()
                 this.props.setHandleListRequest()
 
             }

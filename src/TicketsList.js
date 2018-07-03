@@ -177,9 +177,9 @@ class TicketsList extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  setTimeout((function() {
-                    window.location.reload();
-                }), 2100);
+                //   setTimeout((function() {
+                //     window.location.reload();
+                // }), 2100);
             }
             else{
                 if(res.data.message === 'Requested item is disabled'){
@@ -188,9 +188,9 @@ class TicketsList extends Component{
                         buttons: false,
                         timer: 2000,
                       })
-                      setTimeout((function() {
-                        window.location.reload();
-                    }), 2100);
+                    //   setTimeout((function() {
+                    //     window.location.reload();
+                    // }), 2100);
                 }
                 else{
                     // window.Materialize.toast('Ticket Accepted', 4000)
@@ -234,9 +234,9 @@ class TicketsList extends Component{
                 buttons: false,
                 timer: 2000,
               })
-              setTimeout((function() {
-                window.location.reload();
-            }), 2100);
+            //   setTimeout((function() {
+            //     window.location.reload();
+            // }), 2100);
             //   this.setHandleListRequest()
             $(".modal-overlay").click()   
                  

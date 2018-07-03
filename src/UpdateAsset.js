@@ -350,13 +350,15 @@ class UpdateAsset extends Component {
                     updateAssetRequest : false
                 })                
             }
-            else{
-                // window.Materialize.toast('Asset Updated', 4000)
+            else if(res.data.message === 'Asset updated successfully'){
+
                 swal('Asset details has been Updated',{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
+                $('.modal').hide()
+                $('.modal-overlay').hide()
+
                 this.setState({
                     updateAssetRequest: false
                 })
@@ -429,6 +431,8 @@ class UpdateAsset extends Component {
             }
         })
         $('.modal').hide()
+        $('.modal-overlay').hide()
+
         // this.props.setHandleListRequest()
 
     }

@@ -248,9 +248,11 @@ class UpdateConsumablePurchase extends Component{
                 timer: 2000,
               })
               $('.modal').hide()
-              setTimeout((function() {
-                window.location.reload();
-              }), 2100);
+              $('.modal-overlay').hide()
+
+            //   setTimeout((function() {
+            //     window.location.reload();
+            //   }), 2100);
         })
         .catch(error => {
             if(error.response.status === 401){

@@ -81,9 +81,9 @@ class UpdateAssetType extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  setTimeout((function() {
-                    window.location.reload();
-                  }), 2100);
+                //   setTimeout((function() {
+                //     window.location.reload();
+                //   }), 2100);
                 this.props.setHandleListRequest()
             }
             else{

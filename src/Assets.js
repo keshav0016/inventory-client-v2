@@ -10,7 +10,6 @@ import DisableAsset from './DisableAsset'
 import EnableAsset from './EnableAsset'
 import {Link} from 'react-router-dom'
 import moment from 'moment'
-import $ from 'jquery'
 import './Employee.css'
 import './ListPage.css'
 import './Asset.css'
@@ -155,8 +154,7 @@ class Assets extends Component{
         this.setState({
             handleListRequest : true
         })
-        // $(".modal-overlay").click()
-        window.location.reload();
+
         if(itemAdded){
             this.setPage(1)
         }
@@ -297,7 +295,7 @@ class Assets extends Component{
                     {/* <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button> */}
                 </Row>
                 {filterPane}
-                {this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+                {this.state.loading ? <Row><Preloader size='small' /></Row> :(this.state.assetList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                 <div>
                 <Table centered className="assetTable desktopView listTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
@@ -358,7 +356,7 @@ class Assets extends Component{
                         })}
                     </Col>
                     {this.state.assetList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination filterPadding' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
-                    </div> }
+                    </div> )}
                 
                 
                 <Link to={{ pathname : '/admin/assets/create'}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>

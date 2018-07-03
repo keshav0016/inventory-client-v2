@@ -4,7 +4,6 @@ import {CardPanel, Col, Row, Button, Preloader, Icon} from 'react-materialize'
 import moment from 'moment'
 import './ListPage.css'
 import './Employee.css'
-import {Parser} from 'json2csv';
 import fileSaver from 'file-saver'
 import { baseUrl } from './config';
 import {

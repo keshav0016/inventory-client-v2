@@ -184,9 +184,9 @@ class AcceptAssetTicket extends Component{
                 this.setState({
                     redirect : true
                 })
-                setTimeout((function() {
-                    window.location.reload();
-                }), 2100);
+                // setTimeout((function() {
+                //     window.location.reload();
+                // }), 2100);
 
             }
             console.log('success')
