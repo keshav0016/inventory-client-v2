@@ -313,6 +313,7 @@ class EmployeeTicketsList extends Component{
                     </div>
                 </Tabs>}
                 <Modal 
+                    modalOptions={{dismissible: false}}
                     actions={null}
                     trigger={<a><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add'></Button></a>}>
                     <Tickets setHandleListRequest={this.setHandleListRequest}/>
