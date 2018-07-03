@@ -10,7 +10,7 @@ import {
     Redirect, Link
   } from 'react-router-dom';
 import swal from 'sweetalert';  
-
+import DateInput from './shared/DateInput'
 class RepairAsset extends Component{
     constructor(props){
         super(props)
@@ -347,7 +347,14 @@ class RepairAsset extends Component{
                             <Input l={6} s={10} m={8} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
                         </Row>
                         <Row>
-                            <Input l={6} s={10} m={8} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} />
+                            {/* <Input l={6} s={10} m={8} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} /> */}
+                            <DateInput
+                        label="Expected Delivery*" 
+                        options={{min: moment(this.state.from.value, "D MMMM, YYYY").toDate()}}
+                        value = {this.state.expected_delivery.value} 
+                        onChange = {this.setExpectedDelivery} 
+                        error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} 
+                    />
                         </Row>
                         <div className="splitModalButtons">
                                 <Col  >
