@@ -96,10 +96,10 @@ class Admindashboard extends Component {
                                     <Card header={<div style={{paddingTop:'3%', paddingBottom:'5%', paddingLeft: '3%'}} >
                                             <Icon>build</Icon>
                                             <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Asset repair recover notification</span>
-                                        </div>} className="teal-text dashboardContent small"  actions={[<a href='/admin/assets#service'>Go to Asset List</a>]}>
+                                        </div>} className="teal-text dashboardContent small"  actions={[<a href='/admin/assets#service'>Go to Asset Service List</a>]}>
                                         <div style={{maxHeight:"200px", overflow:"auto", paddingBottom: "50px"}} >
                                             {this.state.repairDateNear.map((repair, index) => {
-                                                return <p style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
+                                                return <li style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</li>
                                             })}
                                         </div>
                                     </Card>
