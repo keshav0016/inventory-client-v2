@@ -265,6 +265,7 @@ class Assets extends Component{
               }}/>: null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Modal
+                modalOptions={{dismissible:false}}
                 id='mobileAssetFilters'
                 actions={null}
                 trigger={filterSlideButton}>

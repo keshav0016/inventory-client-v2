@@ -75,6 +75,7 @@ class AssetType extends Component{
 
     renderButton(item){
         return <Modal
+            modalOptions={{dismissible:false}}
             actions={null}
             trigger={<Button>Edit</Button>}>
             <UpdateAssetType assetType={item.assetType} maxRequest={item.maxRequest} id={item.id} setHandleListRequest={this.setHandleListRequest}/>
@@ -132,6 +133,7 @@ class AssetType extends Component{
                     </Col>
 
                 <Modal
+                    modalOptions={{dismissible:false}}
                     actions ={null}
                     trigger={<Button floating large className = 'red addVendorButton' waves = 'light' icon = 'add' style={{position: 'fixed'}} />}>
                     <AddAssetType setHandleListRequest = {this.setHandleListRequest}/>
