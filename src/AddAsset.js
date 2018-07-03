@@ -10,7 +10,8 @@ import {
     Redirect, Link
   } from 'react-router-dom';
 import swal from 'sweetalert';
-  
+import DateInput from './shared/DateInput'  
+import moment from 'moment'
 
 class AddAsset extends Component{
     constructor(props){
@@ -694,7 +695,18 @@ class AddAsset extends Component{
                 <Row>
                     <Input s={12} m={6} l={6} label="Serial Number *" value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
                     <Input s={12} m={6} l={6} label="Asset Name *" value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
-                    <Input s={12} m={6} l={6} name='on' type='date' label="Purchased Date *" onChange={this.setPurchaseDate} value = {this.state.purchase_date.value} error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} />
+                    {/* <Input s={12} m={6} l={6} name='on' type='date' 
+                    label="Purchased Date *" onChange={this.setPurchaseDate} 
+                    value = {this.state.purchase_date.value} 
+                    error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
+                    /> */}
+                    <DateInput
+                                label="Purchased Date *" 
+                                options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
+                                value = {this.state.purchase_date.value} 
+                                onChange = {this.handleExpected} 
+                                error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
+                            />
                     <Input s={12} m={6} l={6} label="Description" value = {this.state.description} onChange = {this.setDescription}/>
                     <Input s={12} m={6} l={6} label="Invoice Number *" value = {this.state.invoice_number.value} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
                     <Input s={12} m={6} l={6} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />

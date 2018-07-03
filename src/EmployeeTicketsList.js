@@ -28,7 +28,8 @@ class EmployeeTicketsList extends Component{
             isAcceptedChecked : false,
             isRejectedChecked : false,
             selectedIndex : 0,
-            redirect : false
+            redirect : false,
+            refresh: false,
         }
         this.setAssetPage = this.setAssetPage.bind(this)
         this.setConsumablePage = this.setConsumablePage.bind(this)
@@ -38,6 +39,13 @@ class EmployeeTicketsList extends Component{
         this.setAcceptedChecked = this.setAcceptedChecked.bind(this)
         this.setRejectedChecked = this.setRejectedChecked.bind(this)
         this.setActiveTab = this.setActiveTab.bind(this);
+        this.handleTicketsOpenClick = this.handleTicketsOpenClick.bind(this);
+    }
+
+    handleTicketsOpenClick(){
+        this.setState({
+            refresh: false,
+        })
     }
 
     setActiveTab(index) {
@@ -89,10 +97,17 @@ class EmployeeTicketsList extends Component{
         })
     }
     componentDidMount(){
-        this.timerId = setInterval(() => this.handleList(),
+        this.handleList();
+        this.timerId = setInterval(
+            () => {
+                if(this.state.refresh){
+                    this.handleList()
+                }
+            },
             3000
         )
     }
+    
     handleList(){
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){
             axios({
@@ -106,7 +121,8 @@ class EmployeeTicketsList extends Component{
                     consumablePagination : res.data.consumablePagination,
                     AssetsticketsList : res.data.ticketsAssetsListing,
                     ConsumablesticketsList : res.data.ticketsConsumableListing,
-                    handleListRequest : false
+                    handleListRequest : false,
+                    refresh: true,
                 })
                 // if(this.state.ticketsList.length === 0){
                 //     window.Materialize.toast("no tickets to show", 4000)
@@ -315,7 +331,11 @@ class EmployeeTicketsList extends Component{
                 <Modal 
                     modalOptions={{dismissible: false}}
                     actions={null}
-                    trigger={<a><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add'></Button></a>}>
+                    trigger={<a><Button 
+                        fab='vertical' floating large className = 'red' 
+                        waves = 'light' icon = 'add'
+                        onClick={this.handleTicketsOpenClick}
+                        ></Button></a>}>
                     <Tickets setHandleListRequest={this.setHandleListRequest}/>
                 </Modal>
                 {/* <Link to={{ pathname : '/employee/RequestTicket'}}><Button fab='vertical' floating large className = 'red' waves = 'light' icon = 'add' /></Link>                 */}
