@@ -93,14 +93,15 @@ class Admindashboard extends Component {
                                 </Col>
                                 {this.state.repairDateNear.length > 0 ?
                                 <Col s={12} m={6} l={6} offset={'m3 l3'} >
-                                    <Card className="teal-text dashboardContent small"  actions={[<a href='/admin/assets'>Go to Asset List</a>]}>
-                                    <div style={{marginTop:'3%', marginBottom:'5%'}} >
-                                    <Icon>build</Icon>
-                                    <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Asset repair recover notification</span>
-                                    </div>
-                                        {this.state.repairDateNear.map((repair, index) => {
-                                            return <p style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
-                                        })}
+                                    <Card header={<div style={{paddingTop:'3%', paddingBottom:'5%', paddingLeft: '3%'}} >
+                                            <Icon>build</Icon>
+                                            <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Asset repair recover notification</span>
+                                        </div>} className="teal-text dashboardContent small"  actions={[<a href='/admin/assets#service'>Go to Asset List</a>]}>
+                                        <div style={{maxHeight:"200px", overflow:"auto", paddingBottom: "50px"}} >
+                                            {this.state.repairDateNear.map((repair, index) => {
+                                                return <p style={{ display: 'list-item' }} key={repair.asset_id}>Collect {repair.asset.asset_name} ({repair.asset.assetType}) with serial number : {repair.asset.serial_number} from {repair.vendor} on {moment(repair.expected_delivery).format('DD MMM YYYY')}</p>
+                                            })}
+                                        </div>
                                     </Card>
                                 </Col>
                                     : null}
