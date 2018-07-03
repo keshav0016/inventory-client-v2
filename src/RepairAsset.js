@@ -344,7 +344,18 @@ class RepairAsset extends Component{
                                 </Col>
                         </Row>
                         <Row>
-                            <Input l={6} s={10} m={8} type='date' label="Given for Repair On *" value = {this.state.from.value} onChange = {this.setFrom} disabled = {this.state.isDisabled} error={this.state.from.showError ? this.state.from.error : null} />
+                            {/* <Input l={6} s={10} m={8} type='date' 
+                            label="Given for Repair On *" value = {this.state.from.value} 
+                            onChange = {this.setFrom} disabled = {this.state.isDisabled} 
+                            error={this.state.from.showError ? this.state.from.error : null} 
+                            /> */}
+                            <DateInput
+                                label="Given for Repair On *" 
+                                options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
+                                value = {this.state.from.value} 
+                                onChange = {this.setFrom} 
+                                error={this.state.from.showError ? this.state.from.error : null} 
+                            />
                         </Row>
                         <Row>
                             {/* <Input l={6} s={10} m={8} type='date' label="Expected Delivery*"  value = {this.state.expected_delivery.value} onChange = {this.setExpectedDelivery} disabled = {this.state.isDisabled} error={this.state.expected_delivery.showError ? this.state.expected_delivery.error : null} /> */}

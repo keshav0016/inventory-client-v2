@@ -19,11 +19,25 @@ class DateInput extends Component{
         // }
         let self = this;
         const $ = window.jQuery;
-        try {
-            $(`#${self.input._id}`).pickadate('picker').set('min', self.props.options.min)
-            // $((self.input).dateInput).pickadate('set', 'min', self.props.options.min);
-        } catch (error) {
-            console.error(error)
+        if(self.props.options.min){
+
+            try {
+                $(`#${self.input._id}`).pickadate('picker').set('min', self.props.options.min)
+                // $(`#${self.input._id}`).pickadate('picker').set('max', self.props.options.max)
+    
+                // $((self.input).dateInput).pickadate('set', 'min', self.props.options.min);
+            } catch (error) {
+                console.error(error)
+            }
+        }else{
+            try {
+                // $(`#${self.input._id}`).pickadate('picker').set('min', self.props.options.min)
+                $(`#${self.input._id}`).pickadate('picker').set('max', self.props.options.max)
+    
+                // $((self.input).dateInput).pickadate('set', 'min', self.props.options.min);
+            } catch (error) {
+                console.error(error)
+            }
         }
         
     }
