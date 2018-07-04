@@ -33,6 +33,7 @@ class UpdateConsumables extends Component {
 
     checkForValidation(){
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
+        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
         
         if(!this.state.name.value){
             this.setState({
@@ -42,7 +43,7 @@ class UpdateConsumables extends Component {
                 })
             })
         }
-        if(this.state.name.value && !alpha.test(this.state.name.value)){
+        if(this.state.name.value && !alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error:'The Consumable name should only be alphabets',
@@ -50,7 +51,7 @@ class UpdateConsumables extends Component {
                 })
             })
         }
-        if(alpha.test(this.state.name.value)){
+        if(alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error:'',

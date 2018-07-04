@@ -42,6 +42,7 @@ class AddVendor extends Component{
     checkForValidation(){
         var contactRegex = /^[6-9]\d{9}$/;
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
+        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
 
         if(!this.state.name.value){
             this.setState({
@@ -51,7 +52,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.name.value && !alpha.test(this.state.name.value)){
+        if(this.state.name.value && !alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: 'The Vendor name should only be alphabets',
@@ -59,7 +60,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(alpha.test(this.state.name.value)){
+        if(alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: '',
