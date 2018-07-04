@@ -131,8 +131,16 @@ class EmployeeUpdate extends Component{
         $('label').addClass('active')
     }
    handleUpdate(){
+    var nameReg = /^[a-zA-Z]+$/;
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
-       
+    if(!nameReg.test(this.state.first_name.value) ){
+        this.setState({
+          first_name: Object.assign(this.state.first_name, {
+            error: "Enter alphabets",
+            showError: true,
+          })
+        })
+      }
         if(!this.state.first_name.value ){
             this.setState({
               first_name: Object.assign(this.state.first_name, {
@@ -141,12 +149,20 @@ class EmployeeUpdate extends Component{
               })
             })
           }
-          if(this.state.first_name.value ){
+          if(nameReg.test(this.state.first_name.value) ){
             this.setState({
               first_name: Object.assign(this.state.first_name, {
                   error: '',
                   showError: false,
               })
+            })
+          }
+          if(!nameReg.test(this.state.last_name.value)){
+            this.setState({
+              last_name: Object.assign(this.state.last_name, {
+                error: "Enter alphabets",
+                showError: true,
+              }),
             })
           }
           if(!this.state.last_name.value){
@@ -157,7 +173,7 @@ class EmployeeUpdate extends Component{
               }),
             })
           }
-          if(this.state.last_name.value){
+          if(nameReg.test(this.state.last_name.value)){
             this.setState({
               last_name: Object.assign(this.state.last_name, {
                   error: '',

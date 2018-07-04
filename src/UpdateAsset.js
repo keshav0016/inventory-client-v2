@@ -25,7 +25,11 @@ class UpdateAsset extends Component {
                 showError: false
             },
             purchase_date: this.props.asset.purchase_date,
-            description: this.props.asset.description,
+            description: {
+                value: this.props.asset.description,
+                error: '',
+                showError: false
+            },
             invoice_number:{
                 value: this.props.asset.invoice_number,
                 error: '',
@@ -93,6 +97,18 @@ class UpdateAsset extends Component {
         //         updateAssetRequest: true
         //     })
         // }
+
+        var alphaNum = /^[a-zA-Z0-9]+$/
+        var alpha = /^[a-zA-Z]+$/
+
+        if(!alphaNum.test(this.state.serial_number.value)){
+            this.setState({
+                serial_number:Object.assign(this.state.serial_number, {
+                    error: 'Enter alphabet or digit',
+                    showError : true
+                })
+            })
+        }
         if(!this.state.serial_number.value){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
@@ -101,11 +117,19 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.serial_number.value){
+        if(alphaNum.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: '',
                     showError : false
+                })
+            })
+        }
+        if(!alpha.test(this.state.asset_name.value)){
+            this.setState({
+                asset_name:Object.assign(this.state.asset_name, {
+                    error: 'Enter alphabets',
+                    showError : true
                 })
             })
         }
@@ -117,11 +141,43 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.asset_name.value){
+        if(alpha.test(this.state.asset_name.value)){
             this.setState({
                 asset_name:Object.assign(this.state.asset_name, {
                     error: '',
                     showError : false
+                })
+            })
+        }
+        if(!alpha.test(this.state.description.value)){
+            this.setState({
+                description:Object.assign(this.state.description, {
+                    error: 'Enter alphabets',
+                    showError : true
+                })
+            })
+        }
+        if(!this.state.description.value){
+            this.setState({
+                description:Object.assign(this.state.description, {
+                    error: 'The description is required',
+                    showError : true
+                })
+            })
+        }
+        if(alpha.test(this.state.description.value)){
+            this.setState({
+                description:Object.assign(this.state.description, {
+                    error: '',
+                    showError : false
+                })
+            })
+        }
+        if(!alphaNum.test(this.state.invoice_number.value)){
+            this.setState({
+                invoice_number:Object.assign(this.state.invoice_number, {
+                    error: 'Enter alphabets or digits',
+                    showError : true
                 })
             })
         }
@@ -133,7 +189,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.invoice_number.value){
+        if(alphaNum.test(this.state.invoice_number.value)){
             this.setState({
                 invoice_number:Object.assign(this.state.invoice_number, {
                     error: '',
@@ -181,6 +237,14 @@ class UpdateAsset extends Component {
                 })
             })
         }
+        if(!alpha.test(this.state.condition.value)){
+            this.setState({
+                condition:Object.assign(this.state.condition, {
+                    error: 'Enter alphabets',
+                    showError: true
+                })
+            })
+        }
         if(!this.state.condition.value){
             this.setState({
                 condition:Object.assign(this.state.condition, {
@@ -189,11 +253,19 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.condition.value){
+        if(alpha.test(this.state.condition.value)){
             this.setState({
                 condition:Object.assign(this.state.condition, {
                     error: '',
                     showError: false
+                })
+            })
+        }
+        if(!alpha.test(this.state.location.value)){
+            this.setState({
+                location:Object.assign(this.state.location, {
+                    error:'Enter alphabets',
+                    showError: true
                 })
             })
         }
@@ -205,11 +277,19 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.location.value){
+        if(alpha.test(this.state.location.value)){
             this.setState({
                 location:Object.assign(this.state.location, {
                     error:'',
                     showError: false
+                })
+            })
+        }
+        if(!alpha.test(this.state.vendor.value)){
+            this.setState({
+                vendor:Object.assign(this.state.vendor, {
+                    error:'Enter alphabets',
+                    showError:true
                 })
             })
         }
@@ -221,7 +301,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.vendor.value){
+        if(alpha.test(this.state.vendor.value)){
             this.setState({
                 vendor:Object.assign(this.state.vendor, {
                     error:'',
@@ -229,7 +309,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(this.state.serial_number.value && this.state.asset_name.value && this.state.invoice_number.value && this.state.vendor.value && Number(this.state.amount.value) > 0 && this.state.condition.value && this.state.location.value && Number(this.state.gst.value) >= 0){
+        if(alphaNum.test(this.state.serial_number.value) && alpha.test(this.state.asset_name.value) && alpha.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && alpha.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alpha.test(this.state.condition.value) && alpha.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
             this.setState({
                         updateAssetRequest: true
                     }) 
@@ -260,7 +340,9 @@ class UpdateAsset extends Component {
     
     setDescription(e) {
         this.setState({
-            description: e.target.value
+            description: Object.assign(this.state.description, {
+                value: e.target.value
+            })
         })
     }
     
@@ -330,7 +412,7 @@ class UpdateAsset extends Component {
                 serial_number: this.state.serial_number.value,
                 asset_name: this.state.asset_name.value,
                 purchase_date: this.state.purchase_date,
-                description: this.state.description,
+                description: this.state.description.value,
                 invoice_number: this.state.invoice_number.value,
                 vendor: this.state.vendor.value,
                 amount: this.state.amount.value,
@@ -396,7 +478,11 @@ class UpdateAsset extends Component {
                 showError: false
             },
             purchase_date: this.props.asset.purchase_date,
-            description: this.props.asset.description,
+            description: {
+                value: this.props.asset.description,
+                error: '',
+                showError: false
+            },
             invoice_number:{
                 value: this.props.asset.invoice_number,
                 error: '',
@@ -447,7 +533,7 @@ class UpdateAsset extends Component {
                     <Input s={12} m={3} l={3} label="Serial Number *" value={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
                     <Input s={12} m={3} l={3} label="Asset Name *" value={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
                     <Input s={12} m={3} l={3} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} value={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
-                    <Input s={12} m={3} l={3} label="Description" value={this.state.description} onChange={this.setDescription} />
+                    <Input s={12} m={3} l={3} label="Description" value={this.state.description.value} onChange={this.setDescription} error={this.state.description.showError ? this.state.description.error : null} />
                     <Input s={12} m={3} l={3} label="Invoice Number *" value={this.state.invoice_number.value} onChange={this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
                     <Input s={12} m={3} l={3} label="Vendor *" value={this.state.vendor.value} onChange={this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error : null} />
                     <Input s={12} m={3} l={3} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null}/>
