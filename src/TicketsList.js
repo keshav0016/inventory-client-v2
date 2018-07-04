@@ -124,11 +124,11 @@ class TicketsList extends Component{
         })
         $('.modal-overlay').trigger('click')
     }
-    componentDidMount(){
-        this.timerId = setInterval(() => this.handleList(),
-            3000
-        )
-    }
+    // componentDidMount(){
+    //     this.timerId = setInterval(() => this.handleList(),
+    //         3000
+    //     )
+    // }
     handleList(){
         axios({
             method : 'get',
@@ -297,7 +297,7 @@ class TicketsList extends Component{
         })
 
         if(response.data.assets.length){
-            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}?on=${ticket.date}`
+            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}`
         }
         else{
             swal("No available Asset for this Type",{

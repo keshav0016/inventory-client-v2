@@ -80,22 +80,10 @@ class VendorUpdate extends Component{
 
     checkForValidation(){
         var contactRegex = /^[6-9]\d{9}$/;
-        if(!this.state.id.value){
-            this.setState({
-                id:Object.assign(this.state.id, {
-                    error: 'The vendor id is required',
-                    showError: true
-                })
-            })
-        }
-        if(this.state.id.value){
-            this.setState({
-                id:Object.assign(this.state.id, {
-                    error: '',
-                    showError: false
-                })
-            })
-        }
+        var alpha = /^[a-zA-Z]+$/;
+        var alphaNum = /^[a-zA-Z0-9]+$/;
+
+    
         if(!this.state.name.value){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -103,8 +91,16 @@ class VendorUpdate extends Component{
                     showError: true
                 })
             })
+        }  
+        if(this.state.name.value && !alpha.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should only be alphabets',
+                    showError: true
+                })
+            })
         }
-        if(this.state.name.value){
+        if(alpha.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: '',
@@ -152,7 +148,7 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.id.value && this.state.name.value && this.state.address.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
+        if(!this.state.name.showError && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 update: true
             })

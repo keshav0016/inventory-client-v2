@@ -41,6 +41,8 @@ class AddVendor extends Component{
 
     checkForValidation(){
         var contactRegex = /^[6-9]\d{9}$/;
+        var alpha = /^[a-zA-Z]+$/;
+
         if(!this.state.name.value){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -49,7 +51,15 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.name.value){
+        if(this.state.name.value && !alpha.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should only be alphabets',
+                    showError: true
+                })
+            })
+        }
+        if(alpha.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: '',
@@ -65,7 +75,15 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.address.value){
+        if(this.state.address.value && !alpha.test(this.state.address.value)){
+            this.setState({
+                address:Object.assign(this.state.address, {
+                    error: 'The vendor address should only be alphabets',
+                    showError: true
+                })
+            })
+        }
+        if(alpha.test(this.state.address.value)){
             this.setState({
                 address:Object.assign(this.state.address, {
                     error: '',
@@ -113,7 +131,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.name.value && this.state.address.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
+        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
             this.setState({
                 addVendorRequest: true
             })
