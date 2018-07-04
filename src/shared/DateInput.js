@@ -43,7 +43,7 @@ class DateInput extends Component{
     }
     render(){
         return (
-            <Input s={12} 
+            <Input s={12} m={6} l={6}
                 ref={(node)=>{this.input = node}}
                 type='date' label={this.props.label} 
                 options={this.props.options}
