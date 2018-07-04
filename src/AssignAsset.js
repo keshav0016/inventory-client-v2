@@ -265,7 +265,7 @@ class AssignAsset extends Component{
                     /> */}
                      <DateInput
                         label="From *" 
-                        options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
+                        options={{min: moment(new Date(), "D MMMM, YYYY").toDate()}}
                         value = {this.state.from.value} 
                         onChange = {this.setFrom} 
                         error={this.state.from.showError ? this.state.from.error : null} 
