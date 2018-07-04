@@ -82,9 +82,7 @@ class AddAssetType extends Component{
                 })
             })
         }
-
         if(assetType.test(this.state.assetType.value) && Number(this.state.maxRequest.value) > 0) {
-
             this.setState({
                 createAssetRequest : true
             })

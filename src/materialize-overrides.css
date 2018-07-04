@@ -159,6 +159,12 @@ div.input-field.consumable-empty-error.col input[type=text].autocomplete
     box-shadow: 0 1px 0 0 #F44336;   
 }
 
+div.input-field.consumable-alpha-error.col input[type=text].autocomplete
+{
+    border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;   
+}
+
 div.select-wrapper.invalid.initialized input[type=text].select-dropdown
 {
     border-bottom: 1px solid #F44336;
@@ -168,6 +174,19 @@ div.select-wrapper.invalid.initialized input[type=text].select-dropdown
 div.input-field.consumable-empty-error.col label.active:after
 {
     content: "Consumable field should not be empty";
+    color: #F44336;
+    opacity: 1;
+    top: 60px;
+    position: absolute;
+    white-space: nowrap;
+    font-size: 12px;
+    transition: none !important;
+    left: 0;
+}
+
+div.input-field.consumable-alpha-error.col label.active:after
+{
+    content: "Consumable field should only contain alphabets";
     color: #F44336;
     opacity: 1;
     top: 60px;

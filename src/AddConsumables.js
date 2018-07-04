@@ -19,6 +19,7 @@ class AddConsumables extends Component{
                 value: "",
                 showError: false,
                 error: "",
+                alphaError: false
             },
             vendor_name : {
                 value: "",
@@ -101,10 +102,19 @@ class AddConsumables extends Component{
     }
 
     checkForValidation(){
+
+        var alpha = /^[a-zA-Z]+$/
+
+        if (!alpha.test(this.state.name.value)) {
+            this.setState({
+                name: Object.assign(this.state.name, {
+                    alphaError: true,
+                })
+            })
+        }
         if (!this.state.name.value) {
             this.setState({
                 name: Object.assign(this.state.name, {
-                    error: "Name is required",
                     showError: true,
                 })
             })
@@ -112,8 +122,14 @@ class AddConsumables extends Component{
         if (this.state.name.value) {
             this.setState({
                 name: Object.assign(this.state.name, {
-                    error: "",
                     showError: false,
+                })
+            })
+        }
+        if (alpha.test(this.state.name.value)) {
+            this.setState({
+                name: Object.assign(this.state.name, {
+                    alphaError: false,
                 })
             })
         }
@@ -261,7 +277,7 @@ class AddConsumables extends Component{
                 })
             })
         }
-        if(this.state.name.value && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
+        if(this.state.name.value && alpha.test(this.state.name.value) && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
             this.setState({
                 addConsumableRequest : true
             })
@@ -349,7 +365,8 @@ class AddConsumables extends Component{
             this.setState({
                 name : {
                     value: "",
-                    showError: false,   
+                    showError: false,
+                    alphaError: false,   
                     error: "",
                 },
                 vendor_name : {
@@ -528,7 +545,7 @@ class AddConsumables extends Component{
                 <Row>
                     {/* <Input autoFocus s={12} m={6} l={6} label='Consumable' value = {this.state.name.value} onChange = {this.setConsumableName} error={this.state.name.showError ? this.state.name.error : null}/> */}
                         <Autocomplete s={12} m={6} l={6}
-                            className={this.state.name.showError ? 'consumable-empty-error': null}
+                            className={this.state.name.showError ? 'consumable-empty-error': (this.state.name.alphaError ? 'consumable-alpha-error' : null)}
                             autoFocus
                             title='Consumable'
                             data={
