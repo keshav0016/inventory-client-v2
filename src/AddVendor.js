@@ -41,7 +41,7 @@ class AddVendor extends Component{
 
     checkForValidation(){
         var contactRegex = /^[6-9]\d{9}$/;
-        var alpha = /^[a-zA-Z]+$/;
+        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
 
         if(!this.state.name.value){
             this.setState({
@@ -75,15 +75,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.address.value && !alpha.test(this.state.address.value)){
-            this.setState({
-                address:Object.assign(this.state.address, {
-                    error: 'The vendor address should only be alphabets',
-                    showError: true
-                })
-            })
-        }
-        if(alpha.test(this.state.address.value)){
+        if(this.state.address.value){
             this.setState({
                 address:Object.assign(this.state.address, {
                     error: '',

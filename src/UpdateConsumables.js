@@ -32,7 +32,7 @@ class UpdateConsumables extends Component {
     }
 
     checkForValidation(){
-        var alpha = /^[a-zA-Z]+$/;
+        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
         
         if(!this.state.name.value){
             this.setState({
