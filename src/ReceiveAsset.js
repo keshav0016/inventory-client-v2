@@ -8,6 +8,8 @@ import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
+import DateInput from './shared/DateInput';
+
   
 class ReceiveAsset extends Component{
     constructor(props){
@@ -154,7 +156,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value) > new Date(this.state.repairInfo.from)){
+        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value) >= new Date(this.state.repairInfo.from)){
             this.setState({
                 receiveAssetRequest : true
             })
@@ -336,7 +338,17 @@ class ReceiveAsset extends Component{
                         <h6><b>Expected Recovery</b> : {moment(this.state.repairInfo.expected_delivery).format('DD MMM YYYY')}</h6>
                         </div> : null}
                    
-                    <Input s={6} name='on' type='date' label="Received from Service *" onChange={this.setTo} value = {this.state.to.value} error={this.state.to.showError ? this.state.to.error : null}/>
+                    {/* <Input s={6} name='on' type='date' label="Received from Service *" 
+                    onChange={this.setTo} value = {this.state.to.value} 
+                    error={this.state.to.showError ? this.state.to.error : null}
+                    /> */}
+                    <DateInput
+                                label="Received from Service *" 
+                                options={{min: moment(this.state.repairInfo.from, "D MMMM, YYYY").toDate()}}
+                                value = {this.state.to.value} 
+                                onChange = {this.setTo} 
+                                error={this.state.to.showError ? this.state.to.error : null} 
+                            />
                     <Input s={6} label="Repair Invoice *" value = {this.state.repair_invoice.value} onChange = {this.setRepairInvoice} error={this.state.repair_invoice.showError ? this.state.repair_invoice.error : null}/>
                     <Input s={6} label="Amount" type = "number" min={0} value = {this.state.amount.value} onChange = {this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null}/>
                     <Input s={6} label="GST" type = "number" min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null}/>

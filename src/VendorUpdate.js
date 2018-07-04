@@ -116,15 +116,7 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.address.value && !alpha.test(this.state.address.value)){
-            this.setState({
-                address:Object.assign(this.state.address, {
-                    error: 'The vendor address should only be alphabets',
-                    showError: true
-                })
-            })
-        }
-        if(alpha.test(this.state.address.value)){
+        if(this.state.address.value){
             this.setState({
                 address:Object.assign(this.state.address, {
                     error: '',
