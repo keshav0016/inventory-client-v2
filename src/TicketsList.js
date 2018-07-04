@@ -124,11 +124,11 @@ class TicketsList extends Component{
         })
         $('.modal-overlay').trigger('click')
     }
-    componentDidMount(){
-        this.timerId = setInterval(() => this.handleList(),
-            3000
-        )
-    }
+    // componentDidMount(){
+    //     this.timerId = setInterval(() => this.handleList(),
+    //         3000
+    //     )
+    // }
     handleList(){
         axios({
             method : 'get',
