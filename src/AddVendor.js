@@ -43,7 +43,52 @@ class AddVendor extends Component{
         var contactRegex = /^[4-9]\d{9}$/;
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
         var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
+        var space = /^\s{1,}$/
+        var preceeding = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+        var trailing = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
+        var precandtrail = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
 
+
+        if(!alphaNum.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should be alphanumeric',
+                    showError: true
+                })
+            })
+        }
+        if(precandtrail.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should not contain preceeding or trailing spaces',
+                    showError: true
+                })
+            })
+        }
+        if(preceeding.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should not contain preceeding spaces',
+                    showError: true
+                })
+            })
+        }
+        if(trailing.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should not contain trailing spaces',
+                    showError: true
+                })
+            })
+        }
+        if(space.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should not be spaces',
+                    showError: true
+                })
+            })
+        }
         if(!this.state.name.value){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -52,15 +97,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(this.state.name.value && !alphaNum.test(this.state.name.value)){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'The Vendor name should only be alphabets',
-                    showError: true
-                })
-            })
-        }
-        if(alphaNum.test(this.state.name.value)){
+        if(!preceeding.test(this.state.name.value) && !space.test(this.state.name.value) && !trailing.test(this.state.name.value) && !precandtrail.test(this.state.name.value) && alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: '',
