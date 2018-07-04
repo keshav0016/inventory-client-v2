@@ -239,6 +239,11 @@ class Tickets extends Component{
                     buttons: false,
                     timer: 2000,
                   })
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
+                this.props.setHandleListRequest()
+
+                  
             }else if(res.data.error === 'ticket can not be created'){
                swal('sorry, request can not be made',{
                 buttons: false,
@@ -258,9 +263,9 @@ class Tickets extends Component{
             }
         })
     }
-    
 
-   componentDidMount(){
+
+    componentDidMount(){
        axios({
            method:'get',
            url:`${baseUrl}/employee/ticket/listItems`,
@@ -278,7 +283,6 @@ class Tickets extends Component{
                 redirect: true
             })
         }
-        // window.Materialize.toast('Sorry, there are no resources available', 4000)
         swal('There are no resources available',{
             buttons: false,
             timer: 2000,
@@ -315,8 +319,8 @@ class Tickets extends Component{
 
 
    render(){
-        return(
-            <div className="" >
+       return(
+           <div className="" >
                 <h3 className="title">Ticket Request</h3>
                 <div className ='RequestForm'>
                 <Row>
