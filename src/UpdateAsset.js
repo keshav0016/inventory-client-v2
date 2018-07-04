@@ -98,8 +98,8 @@ class UpdateAsset extends Component {
         //     })
         // }
 
-        var alphaNum = /^[a-zA-Z0-9]+$/
-        var alpha = /^[a-zA-Z]+$/
+        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
 
         if(!alphaNum.test(this.state.serial_number.value)){
             this.setState({
