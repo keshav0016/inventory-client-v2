@@ -788,7 +788,7 @@ class AddAsset extends Component{
                                 label="Purchased Date *" 
                                 options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
                                 value = {this.state.purchase_date.value} 
-                                onChange = {this.handleExpected} 
+                                onChange={this.setPurchaseDate} 
                                 error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
                             />
                     <Input s={12} m={6} l={6} label="Description" value = {this.state.description.value} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
