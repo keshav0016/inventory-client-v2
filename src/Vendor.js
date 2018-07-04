@@ -35,7 +35,7 @@ class Vendor extends Component{
         })
         .then(res => {
             this.setState({
-                vendorList : res.data.vendors.sort((a, b) => a.asset_id - b.asset_id),
+                vendorList : res.data.vendors,
                 pagination : res.data.pagination,
                 handleListRequest : false
             })
@@ -68,7 +68,7 @@ class Vendor extends Component{
 
         // $(".modal-close").trigger('click')
         if(itemAdded){
-            this.setPage(this.state.pagination.totalPage)
+            this.setPage(this.state.pagination.currentPage)
         }
     }
     componentDidMount(){
@@ -98,12 +98,12 @@ class Vendor extends Component{
     render(){
         return(
             <div className="listComponent">
+                {this.state.handleListRequest ? this.handleList() : null}            
              {this.state.redirect? <Redirect
               to={{
                   pathname: "/login",
                   search: '?sessionExpired=true'
               }}/>: null}
-                {this.state.handleListRequest ? this.handleList() : null}
                 <h3 className="title">Vendors</h3 >
                     {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : 
                     (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
@@ -150,15 +150,13 @@ class Vendor extends Component{
                     </Col>
 
                 <Modal
-                modalOptions={{dismissible:false}}
-                    id="addVendor"
+                    modalOptions={{dismissible:false}}
                     actions={null}
-                    // actions={<div><Button id="addVendor" waves='light' >Submit <Icon small right>send</Icon></Button></div>}
                     trigger={<Button style={{position : 'fixed'}} floating large className = 'red addVendorButton' waves = 'light' icon = 'add' />}>
                     <AddVendor setHandleListRequest = {this.setHandleListRequest}/>
                 </Modal>
                 <div>
-                    {this.state.pagination.totalPage > 1 ? <Pagination className='pagination' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} /> : null}
+                {this.state.vendorList.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
                 </div>
                     </div>)} 
             </div>

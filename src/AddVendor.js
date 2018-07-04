@@ -40,7 +40,7 @@ class AddVendor extends Component{
     }
 
     checkForValidation(){
-        var contactRegex = /^[6-9]\d{9}$/;
+        var contactRegex = /^[4-9]\d{9}$/;
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
         var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
 
@@ -211,9 +211,7 @@ class AddVendor extends Component{
                 $('.modal').hide() 
                 $('.modal-overlay').hide()
 
-                // setTimeout((function() {
-                //     window.location.reload();
-                // }), 2100);
+
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
                 }                
