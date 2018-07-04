@@ -336,7 +336,8 @@ class UpdateAsset extends Component {
                 amount: this.state.amount.value,
                 gst: this.state.gst.value,
                 total: this.state.total,
-                category: this.state.category
+                category: this.state.category,
+                condition: this.state.condition.value
             }
         })
         .then(res => {
