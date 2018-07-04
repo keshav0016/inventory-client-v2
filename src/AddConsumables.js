@@ -563,7 +563,7 @@ class AddConsumables extends Component{
                                 label="Purchased Date *" 
                                 options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}
                                 value = {this.state.purchase_date.value} 
-                                onChange = {this.handleExpected} 
+                                onChange = {this.setPurchaseDate} 
                                 error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
                             /> 
                     <br/>
