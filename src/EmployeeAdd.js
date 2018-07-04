@@ -82,7 +82,7 @@ class EmployeeAdd extends Component {
 }
   handleCreate(){
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
-    var nameReg = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
+    var nameReg = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
     var userIdReg = /^[0-9]+$/;
     if(!userIdReg.test(this.state.user_id.value)){
       this.setState({

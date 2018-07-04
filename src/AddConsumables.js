@@ -104,8 +104,8 @@ class AddConsumables extends Component{
     checkForValidation(){
 
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
-
-        if (!alpha.test(this.state.name.value)) {
+        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+        if (!alphaNum.test(this.state.name.value)) {
             this.setState({
                 name: Object.assign(this.state.name, {
                     alphaError: true,
@@ -126,7 +126,7 @@ class AddConsumables extends Component{
                 })
             })
         }
-        if (alpha.test(this.state.name.value)) {
+        if (alphaNum.test(this.state.name.value)) {
             this.setState({
                 name: Object.assign(this.state.name, {
                     alphaError: false,
@@ -277,7 +277,7 @@ class AddConsumables extends Component{
                 })
             })
         }
-        if(this.state.name.value && alpha.test(this.state.name.value) && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
+        if(this.state.name.value && alphaNum.test(this.state.name.value) && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
             this.setState({
                 addConsumableRequest : true
             })

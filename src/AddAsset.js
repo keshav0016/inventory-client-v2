@@ -153,7 +153,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alpha.test(this.state.asset_name.value)){
+        if(!alphaNum.test(this.state.asset_name.value)){
             this.setState({
                 asset_name:Object.assign(this.state.asset_name, {
                     error: 'Enter alphabets',
@@ -169,7 +169,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alpha.test(this.state.asset_name.value)){
+        if(alphaNum.test(this.state.asset_name.value)){
             this.setState({
                 asset_name:Object.assign(this.state.asset_name, {
                     error: '',
@@ -193,7 +193,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alpha.test(this.state.description.value)){
+        if(!alphaNum.test(this.state.description.value)){
             this.setState({
                 description: Object.assign(this.state.description, {
                     error: 'Enter alphabets',
@@ -209,7 +209,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alpha.test(this.state.description.value)){
+        if(alphaNum.test(this.state.description.value)){
             this.setState({
                 description: Object.assign(this.state.description, {
                     error: '',
@@ -281,7 +281,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alpha.test(this.state.condition.value)){
+        if(!alphaNum.test(this.state.condition.value)){
             this.setState({
                 condition:Object.assign(this.state.condition, {
                     error: 'Enter alphabets',
@@ -297,7 +297,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alpha.test(this.state.condition.value)){
+        if(alphaNum.test(this.state.condition.value)){
             this.setState({
                 condition:Object.assign(this.state.condition, {
                     error: '',
@@ -305,7 +305,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alpha.test(this.state.location.value)){
+        if(!alphaNum.test(this.state.location.value)){
             this.setState({
                 location:Object.assign(this.state.location, {
                     error:'Enter alphabets',
@@ -321,7 +321,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alpha.test(this.state.location.value)){
+        if(alphaNum.test(this.state.location.value)){
             this.setState({
                 location:Object.assign(this.state.location, {
                     error:'',
@@ -329,7 +329,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alpha.test(this.state.vendor.value)){
+        if(!alphaNum.test(this.state.vendor.value)){
             this.setState({
                 vendor:Object.assign(this.state.vendor, {
                     error:'Enter alphabets',
@@ -345,7 +345,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alpha.test(this.state.vendor.value)){
+        if(alphaNum.test(this.state.vendor.value)){
             this.setState({
                 vendor:Object.assign(this.state.vendor, {
                     error:'',
@@ -401,7 +401,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alphaNum.test(this.state.serial_number.value) && alpha.test(this.state.asset_name.value) && this.state.purchase_date.value && alpha.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alpha.test(this.state.condition.value) && alpha.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alpha.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
+        if(alphaNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
             // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
                 addAssetRequest : true

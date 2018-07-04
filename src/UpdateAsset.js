@@ -125,7 +125,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alpha.test(this.state.asset_name.value)){
+        if(!alphaNum.test(this.state.asset_name.value)){
             this.setState({
                 asset_name:Object.assign(this.state.asset_name, {
                     error: 'Enter alphabets',
@@ -141,7 +141,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alpha.test(this.state.asset_name.value)){
+        if(alphaNum.test(this.state.asset_name.value)){
             this.setState({
                 asset_name:Object.assign(this.state.asset_name, {
                     error: '',
@@ -149,7 +149,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alpha.test(this.state.description.value)){
+        if(!alphaNum.test(this.state.description.value)){
             this.setState({
                 description:Object.assign(this.state.description, {
                     error: 'Enter alphabets',
@@ -165,7 +165,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alpha.test(this.state.description.value)){
+        if(alphaNum.test(this.state.description.value)){
             this.setState({
                 description:Object.assign(this.state.description, {
                     error: '',
@@ -237,7 +237,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alpha.test(this.state.condition.value)){
+        if(!alphaNum.test(this.state.condition.value)){
             this.setState({
                 condition:Object.assign(this.state.condition, {
                     error: 'Enter alphabets',
@@ -253,7 +253,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alpha.test(this.state.condition.value)){
+        if(alphaNum.test(this.state.condition.value)){
             this.setState({
                 condition:Object.assign(this.state.condition, {
                     error: '',
@@ -261,7 +261,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alpha.test(this.state.location.value)){
+        if(!alphaNum.test(this.state.location.value)){
             this.setState({
                 location:Object.assign(this.state.location, {
                     error:'Enter alphabets',
@@ -277,7 +277,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alpha.test(this.state.location.value)){
+        if(alphaNum.test(this.state.location.value)){
             this.setState({
                 location:Object.assign(this.state.location, {
                     error:'',
@@ -285,7 +285,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alpha.test(this.state.vendor.value)){
+        if(!alphaNum.test(this.state.vendor.value)){
             this.setState({
                 vendor:Object.assign(this.state.vendor, {
                     error:'Enter alphabets',
@@ -301,7 +301,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alpha.test(this.state.vendor.value)){
+        if(alphaNum.test(this.state.vendor.value)){
             this.setState({
                 vendor:Object.assign(this.state.vendor, {
                     error:'',
@@ -309,7 +309,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alphaNum.test(this.state.serial_number.value) && alpha.test(this.state.asset_name.value) && alpha.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && alpha.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alpha.test(this.state.condition.value) && alpha.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
+        if(alphaNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && alphaNum.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
             this.setState({
                         updateAssetRequest: true
                     }) 

@@ -20,7 +20,11 @@ class AcceptAssetTicket extends Component{
                 ,showError : false
             }
             // ,currentAssetSelectedError : false
-            ,reason : ''
+            ,reason : {
+                value: '',
+                error: '',
+                showError: false
+            }
             ,expected_recovery : {
                 value: '',
                 error: '',
@@ -47,6 +51,33 @@ class AcceptAssetTicket extends Component{
     }
 
     checkForValidation(){
+
+        var alphaNum=/^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+
+        if(!alphaNum.test(this.state.reason.value)){
+            this.setState({
+                reason: Object.assign(this.state.reason, {
+                    error: "Enter alphanumeric value",
+                    showError: true
+                })
+            })
+        }
+        if(!this.state.reason.value){
+            this.setState({
+                reason: Object.assign(this.state.reason, {
+                    error: "Reason is requires",
+                    showError: true
+                })
+            })
+        }
+        if(alphaNum.test(this.state.reason.value)){
+            this.setState({
+                reason: Object.assign(this.state.reason, {
+                    error: "",
+                    showError: false
+                })
+            })
+        }
         if(!this.state.expected_recovery.value){
             this.setState({
                 expected_recovery : Object.assign(this.state.expected_recovery, {
@@ -89,7 +120,7 @@ class AcceptAssetTicket extends Component{
             })
         }
 
-        if(!this.state.expected_recovery.showError && !this.state.currentAssetSelected.showError){
+        if(!this.state.expected_recovery.showError && !this.state.currentAssetSelected.showError && alphaNum.test(this.state.reason.value)){
             this.setState({
                 acceptTicketRequest : true
             })
@@ -160,7 +191,7 @@ class AcceptAssetTicket extends Component{
             data:{
                 ticket_number:this.props.match.params.ticket,
                 expected_recovery : this.state.expected_recovery.value
-                ,reason : this.state.reason
+                ,reason : this.state.reason.value
                 ,requested_asset_id : this.state.currentAssetSelected.value.asset_id
             },
             withCredentials:true
@@ -168,7 +199,9 @@ class AcceptAssetTicket extends Component{
         .then(res =>{
             this.setState({
                 handleListRequest:true
-                ,reason : ''
+                ,reason : Object.assign(this.state.reason, {
+                    value : ''
+                })
                 ,acceptTicketRequest : false
             })
             if(res.data.message === 'Requested Quantity greater than available'){
@@ -215,7 +248,9 @@ class AcceptAssetTicket extends Component{
 
     setReason(e){
         this.setState({
-            reason : e.target.value
+            reason : Object.assign(this.state.reason, {
+                value: e.target.value
+            })
         })
     }
 
@@ -241,7 +276,7 @@ class AcceptAssetTicket extends Component{
                             />
                         </Row>
                         <Row>
-                            <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason} />
+                            <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason.value} error={this.state.reason.showError ? this.state.reason.error : null}/>
                         </Row>
                         <Row>
                             <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>{this.availableAssetsDropdown()}</Input>
