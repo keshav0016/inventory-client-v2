@@ -155,8 +155,7 @@ class TicketsList extends Component{
                 consumablePagination : res.data.consumablePagination,
                 handleListRequest : false
             })
-
-            $('.modal-overlay').trigger('click')
+            // $('.modal-overlay').trigger('click')
         })
         .catch(error => {
 
@@ -188,42 +187,48 @@ class TicketsList extends Component{
                     , value : ''
                 }
             })
+            $('.modal-close').trigger('click')
+            // $('.modal-overlay').trigger('click')            
+            // $('.modal-overlay').hide()
+            
             if(res.data.message === 'Requested Quantity greater than available'){
                 // window.Materialize.toast('Requested Quantity greater than available', 4000)
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
-                  })
+                })
                 //   $('.modal').hide()
-                //   $('.modal-overlay').hide()
                 //   setTimeout((function() {
-                //     window.location.reload();
-                // }), 2100);
-            }
-            else{
-                if(res.data.message === 'Requested item is disabled'){
-                    // window.Materialize.toast('Requested item is disabled', 4000)
-                    swal(res.data.message,{
-                        buttons: false,
-                        timer: 2000,
-                      })
-
-                    //   setTimeout((function() {
                     //     window.location.reload();
                     // }), 2100);
                 }
                 else{
-                    // window.Materialize.toast('Ticket Accepted', 4000)
-                    swal('Ticket Accepted',{
-                        buttons: false,
-                        timer: 2000,
-                      })
-                    //   $('.modal').hide()
-                    //   $('.modal-overlay').hide()
-                    $(".modal-overlay").click()        
-                }
-            }
+                    if(res.data.message === 'Requested item is disabled'){
+                        // window.Materialize.toast('Requested item is disabled', 4000)
+                        swal(res.data.message,{
+                            buttons: false,
+                            timer: 2000,
+                        })
+                        
+                        //   setTimeout((function() {
+                            //     window.location.reload();
+                            // }), 2100);
+                        }
+                        else{
+                            swal('Ticket Accepted',{
+                                buttons: false,
+                                timer: 2000,
+                            })
+                            // $('.modal-overlay').trigger('click')
+                            //   $('.modal').hide()
+                            //   $('.modal-overlay').hide()
+                            // $(".modal-overlay").click()      
+                        }
+                    }
+                    // $('.swal-overlay').hide()
             console.log('success')
+            $('.modal-overlay').remove()
+            $('body').removeAttr( 'style' )
         })
         .catch(error =>{
 
