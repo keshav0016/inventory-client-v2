@@ -26,7 +26,11 @@ class TicketsList extends Component{
             checkAll : false,
             expected_recovery : '',
             redirect: false
-            ,reason : ''
+            ,reason : {
+                value : ''
+                , showError : false
+                , error : ''
+            }
             ,selectedIndex : this.props.location.hash ? (this.props.location.hash === '#asset' ? 0 : 1) : 0
         }
         this.setAssetPage = this.setAssetPage.bind(this)
@@ -114,13 +118,21 @@ class TicketsList extends Component{
 
     setReason(e){
         this.setState({
-            reason : e.target.value
+            reason : {
+                ...this.state.reason
+                , value : e.target.value
+                , showError : false
+            }
         })
     }
 
     cancelReason(){
         this.setState({
-            reason:''
+            reason: {
+                ...this.state.reason
+                , value : ''
+                , showError : false
+            }
         })
         $('.modal-overlay').trigger('click')
     }
@@ -162,14 +174,17 @@ class TicketsList extends Component{
             data:{
                 ticket_number:ticket_number,
                 expected_recovery : this.state.expected_recovery
-                ,reason : this.state.reason
+                ,reason : this.state.reason.value
             },
             withCredentials:true
         })
         .then(res =>{
             this.setState({
                 handleListRequest:true
-                ,reason : ''
+                ,reason : {
+                    ...this.state.reason
+                    , value : ''
+                }
             })
             if(res.data.message === 'Requested Quantity greater than available'){
                 // window.Materialize.toast('Requested Quantity greater than available', 4000)
@@ -220,48 +235,63 @@ class TicketsList extends Component{
     }
 
     rejectTicket(ticket_number){
-        axios({
-            method:'post',
-            url:`${baseUrl}/admin/ticket/reject`,
-            data:{
-                ticket_number:ticket_number
-                ,reason : this.state.reason
-            },
-            withCredentials:true
-        })
-        .then(res =>{
+        if(this.state.reason.value.length === 0){
             this.setState({
-                handleListRequest:true
-                ,reason : ''
+                reason : {
+                    ...this.state.reason
+                    , showError : true
+                    , error : 'Reason is required'
+                }
             })
-            // window.Materialize.toast(res.data.message,4000)
-            swal(res.data.message,{
-                buttons: false,
-                timer: 2000,
-              })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
-            //   setTimeout((function() {
-            //     window.location.reload();
-            // }), 2100);
-            //   this.setHandleListRequest()
-            // $(".modal-overlay").click()   
-                 
+        }
 
-        })
-        .catch(error =>{
-
-            if(error.response.status === 401){
+        else{
+            axios({
+                method:'post',
+                url:`${baseUrl}/admin/ticket/reject`,
+                data:{
+                    ticket_number:ticket_number
+                    ,reason : this.state.reason.value
+                },
+                withCredentials:true
+            })
+            .then(res =>{
                 this.setState({
-                    redirect: true
+                    handleListRequest:true
+                    ,reason : {
+                        ...this.state.reason
+                        , value : ''
+                    }
                 })
-            }
-            // window.Materialize.toast(error.data.error,4000)
-            swal(error.data.error,{
-                buttons: false,
-                timer: 2000,
-              })
-        })
+                // window.Materialize.toast(res.data.message,4000)
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+                  $('.modal').hide()
+                  $('.modal-overlay').hide()
+                //   setTimeout((function() {
+                //     window.location.reload();
+                // }), 2100);
+                //   this.setHandleListRequest()
+                // $(".modal-overlay").click()   
+                     
+    
+            })
+            .catch(error =>{
+    
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect: true
+                    })
+                }
+                // window.Materialize.toast(error.data.error,4000)
+                swal(error.data.error,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+            })
+        }
     }
 
     fetchAvailableAssets(ticket){
@@ -314,7 +344,7 @@ class TicketsList extends Component{
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
             <Row className="no-footer" >
                 <h5 className="title">Remarks for rejection</h5>
-                <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason} />
+                <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason.value} error = {this.state.reason.showError ? this.state.reason.error : null}/>
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Reject</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
@@ -330,7 +360,7 @@ class TicketsList extends Component{
             trigger={<Button floating icon='done'></Button>}>
             <Row className="no-footer" >
                 <h5 className="title">Remarks for acceptance</h5>
-                <Input s={12} onChange={this.setReason} label="Remarks" />
+                <Input s={12} onChange={this.setReason} value={this.state.reason.value} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.acceptTicket.bind(this, ticket.ticket_number)}>Accept</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
@@ -346,7 +376,7 @@ class TicketsList extends Component{
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
             <Row className="no-footer" >
                 <h5 className="title">Remarks for rejection</h5>
-                <Input s={12} onChange={this.setReason} label="Remarks" />
+                <Input s={12} onChange={this.setReason} value={this.state.reason.value}  error = {this.state.reason.showError ? this.state.reason.error : null} label="Remarks" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Reject</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
