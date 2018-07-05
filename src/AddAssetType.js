@@ -31,6 +31,18 @@ class AddAssetType extends Component{
         this.cancelAll = this.cancelAll.bind(this)
     }
 
+    componentDidMount(){
+        $(document).ready(function(){
+          $('label').addClass('active');
+      }) 
+      }
+    
+      componentDidUpdate(){
+        $(document).ready(function(){
+          $('label').addClass('active');
+      }) 
+    }
+    
     checkForValidation(){
 
         var assetType = /^[a-zA-Z]+$/;

@@ -38,6 +38,17 @@ class AddVendor extends Component{
         this.setContact = this.setContact.bind(this)
         this.cancelAll = this.cancelAll.bind(this)
     }
+    componentDidMount(){
+        $(document).ready(function(){
+          $('label').addClass('active');
+      }) 
+      }
+    
+      componentDidUpdate(){
+        $(document).ready(function(){
+          $('label').addClass('active');
+      }) 
+    }
 
     checkForValidation(){
         var contactRegex = /^[4-9]\d{9}$/;
