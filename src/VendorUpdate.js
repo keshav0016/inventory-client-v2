@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
-import $ from 'jquery'
+// import $ from 'jquery'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
+  const $ = window.jQuery;
 
 class VendorUpdate extends Component{
     constructor(props){
@@ -177,20 +178,22 @@ class VendorUpdate extends Component{
        })
        .then((res) => {
         if(res.data.message === 'vendor has been updated'){
-            // window.Materialize.toast('Vendor has been Edited', 4000)
+            this.setState({
+                update : false
+              })
+            $('.modal-close').trigger('click')
             swal('Vendor details has been updated',{
                 buttons: false,
                 timer: 2000,
               })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+            //   $('.modal-overlay').trigger('click') 
+            //   $('.modal').hide()
+            //   $('.modal-overlay').remove()
 
             //   setTimeout((function() {
             //     window.location.reload();
             // }), 2100);
-              this.setState({
-                  update : false
-                })
+             
                 this.props.setHandleListRequest()
             
         }else{

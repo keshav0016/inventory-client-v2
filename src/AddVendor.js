@@ -185,7 +185,7 @@ class AddVendor extends Component{
             this.setState({
                 addVendorRequest: true
             })
-            $('.modal-overlay').trigger('click');
+            // $('.modal-overlay').trigger('click');
         }
     }
 
@@ -265,8 +265,9 @@ class AddVendor extends Component{
                     buttons: false,
                     timer: 2000,
                 })
-                $('.modal').hide() 
-                $('.modal-overlay').hide()
+                $('.modal-close').trigger('click')
+                // $('.modal').hide() 
+                // $('.modal-overlay').hide()
 
 
                 if(this.props.setVendorListRequest){

@@ -320,12 +320,13 @@ class EmployeeUpdate extends Component{
             })
             .then((res) => {
                 if (res.data.message === 'employee has been updated') {
+                    $('.modal-close').trigger('click')
                     swal("Employee details has been Updated",{
                         buttons: false,
                         timer: 2000,
                         })
-                        $('.modal').hide()
-                        $('.modal-overlay').hide()
+                        // $('.modal').hide()
+                        // $('.modal-overlay').hide()
                         this.props.setHandleListRequest()
 
 

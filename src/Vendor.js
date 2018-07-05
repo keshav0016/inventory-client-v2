@@ -41,6 +41,7 @@ class Vendor extends Component{
             })
         })
         .catch(error => {
+            console.error(error)
             if(error.response.status === 401){
                 this.setState({
                     redirect: true
@@ -64,12 +65,15 @@ class Vendor extends Component{
         this.setState({
             handleListRequest : true
         })
-        $(".modal-overlay").click()
 
-        // $(".modal-close").trigger('click')
+        
         if(itemAdded){
-            this.setPage(this.state.pagination.currentPage)
+            this.setPage(this.state.pagination.totalPage)
         }
+        $('.modal-overlay').trigger('click')
+        // $(".modal-overlay").click()
+        
+        // $(".modal-close").trigger('click')
     }
     componentDidMount(){
         $('label').addClass('active')
@@ -88,7 +92,7 @@ class Vendor extends Component{
 
     renderButton(key){
         return <Modal
-            modalOptions={{dismissible:false}}
+            modalOptions={{dismissible:false,backdrop: 'static'}}
             actions={null}
             trigger={<Button>Edit</Button>}>
             <VendorUpdate user={this.state.vendorList[key]} setHandleListRequest={this.setHandleListRequest} />

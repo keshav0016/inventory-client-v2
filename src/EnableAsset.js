@@ -35,13 +35,13 @@ class EnableAsset extends Component{
                   })            
             }
             else{
-                // window.Materialize.toast('Asset Enabled', 4000)
+                $('.modal-close').trigger('click')
                 swal('Asset is Enabled',{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
 
                 this.props.setHandleListRequest()
             }

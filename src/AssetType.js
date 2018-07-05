@@ -51,7 +51,7 @@ class AssetType extends Component{
         this.setState({
             handleListRequest : true
         })
-        $(".modal-overlay").click()
+        $('.modal-overlay').trigger('click')
 
         if(itemAdded){
             this.setPage(this.state.pagination.totalPage)

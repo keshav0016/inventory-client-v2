@@ -40,20 +40,22 @@ class DeleteConsumable extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 // window.Materialize.toast(res.data.error, 4000)
                 this.setState({
                     deleteConsumableRequest : false
                 })                
             }
-            else{
+            else if('Consumable disabled successfully'){
+                $('.modal-close').trigger('click')
                 swal('consumable is Disabled',{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
 
                 this.setState({
                     deleteConsumableRequest : false

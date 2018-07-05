@@ -434,17 +434,18 @@ class UpdateAsset extends Component {
                 })                
             }
             else if(res.data.message === 'Asset updated successfully'){
-
+                this.setState({
+                    updateAssetRequest: false
+                })
+                $('.modal-close').trigger('click')
                 swal('Asset details has been Updated',{
                     buttons: false,
                     timer: 2000,
                   })
-                $('.modal').hide()
-                $('.modal-overlay').hide()
+                // $('.modal').hide()
+                // $('.modal-overlay').hide()
 
-                this.setState({
-                    updateAssetRequest: false
-                })
+               
                 this.props.setHandleListRequest()
             }
         })
@@ -517,8 +518,8 @@ class UpdateAsset extends Component {
                 showError: false
             }
         })
-        $('.modal').hide()
-        $('.modal-overlay').hide()
+        // $('.modal').hide()
+        // $('.modal-overlay').hide()
 
         // this.props.setHandleListRequest()
 

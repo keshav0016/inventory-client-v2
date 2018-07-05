@@ -127,14 +127,14 @@ class AddAssetType extends Component{
                         showError: false
                     }
                 })
-                $('.modal-overlay').click()
-                // window.Materialize.toast(res.data.message, 4000)
+                $('.modal-close').trigger('click')
+
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 //   setTimeout((function() {
                 //     window.location.reload();
                 //   }), 2100);
