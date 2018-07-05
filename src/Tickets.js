@@ -239,8 +239,11 @@ class Tickets extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                  $('.modal-close').trigger('click')
+
+                  
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 this.props.setHandleListRequest()
 
                   

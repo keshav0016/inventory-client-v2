@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
-import $ from 'jquery'
+// import $ from 'jquery'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import {
     Redirect
   } from 'react-router-dom';
+  const $ = window.jQuery;
 
 class VendorUpdate extends Component{
     constructor(props){
@@ -182,8 +183,10 @@ class VendorUpdate extends Component{
                 buttons: false,
                 timer: 2000,
               })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+              $('.modal-close').trigger('click')
+            //   $('.modal-overlay').trigger('click') 
+            //   $('.modal').hide()
+            //   $('.modal-overlay').remove()
 
             //   setTimeout((function() {
             //     window.location.reload();

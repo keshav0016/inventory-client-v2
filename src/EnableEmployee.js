@@ -34,13 +34,14 @@ class EnableEmployee extends Component{
                   })            
             }
             else if(res.data.message === "Employee ennabled successfully"){
-                // window.Materialize.toast('Employee Enabled', 4000)
+                $('.modal-close').trigger('click')
+
                 swal('Employee is enabled',{
                     buttons: false,
                     timer: 2000,
                   })
-                $('.modal').hide()
-                $('.modal-overlay').hide()
+                // $('.modal').hide()
+                // $('.modal-overlay').hide()
 
                 this.props.setHandleListRequest()
             }

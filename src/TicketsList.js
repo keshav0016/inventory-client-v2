@@ -143,6 +143,7 @@ class TicketsList extends Component{
                 consumablePagination : res.data.consumablePagination,
                 handleListRequest : false
             })
+            $('.modal-overlay').trigger('click')
         })
         .catch(error => {
 
@@ -177,8 +178,8 @@ class TicketsList extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 //   setTimeout((function() {
                 //     window.location.reload();
                 // }), 2100);
@@ -201,8 +202,8 @@ class TicketsList extends Component{
                         buttons: false,
                         timer: 2000,
                       })
-                      $('.modal').hide()
-                      $('.modal-overlay').hide()
+                    //   $('.modal').hide()
+                    //   $('.modal-overlay').hide()
                     $(".modal-overlay").click()        
                 }
             }
@@ -230,17 +231,17 @@ class TicketsList extends Component{
             withCredentials:true
         })
         .then(res =>{
+            $('.modal-close').trigger('click')
             this.setState({
                 handleListRequest:true
                 ,reason : ''
             })
-            // window.Materialize.toast(res.data.message,4000)
             swal(res.data.message,{
                 buttons: false,
                 timer: 2000,
               })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+            //   $('.modal').hide()
+            //   $('.modal-overlay').hide()
             //   setTimeout((function() {
             //     window.location.reload();
             // }), 2100);

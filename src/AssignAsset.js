@@ -152,12 +152,16 @@ class AssignAsset extends Component{
             this.setState({
                 assignAssetRequest : false
             })
-            swal(res.data.message,{
-                buttons: false,
-                timer: 2000,
-              })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+            if(res.data.message === "Asset Assigned"){
+              $('.modal-close').trigger('click')
+                
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                  })
+            }
+            //   $('.modal').hide()
+            //   $('.modal-overlay').hide()
 
 
             if(res.data.requireAssignForce){

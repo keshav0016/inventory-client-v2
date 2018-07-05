@@ -82,7 +82,8 @@ class EmployeeAdd extends Component {
 }
   handleCreate(){
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
-    var nameReg = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
+    var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
+    // var name = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var userIdReg = /^[0-9]+$/;
     if(!userIdReg.test(this.state.user_id.value)){
       this.setState({
@@ -276,8 +277,8 @@ class EmployeeAdd extends Component {
         url: `${baseUrl}/employees/create`,
         data:{
           user_id: this.state.user_id.value,
-          first_name:this.state.first_name.value,
-          last_name:this.state.last_name.value,
+          first_name:this.state.first_name.value.trim(),
+          last_name:this.state.last_name.value.trim(),
           age:this.state.age.value,
           gender: this.state.gender.value,
           department:this.state.department.value,
@@ -331,8 +332,9 @@ class EmployeeAdd extends Component {
             buttons: false,
             timer: 2000,
           });
-          $('.modal').hide()
-          $('.modal-overlay').hide()
+          $('.modal-close').trigger('click')
+          // $('.modal').hide()
+          // $('.modal-overlay').hide()
           // setTimeout((function() {
           //   window.location.reload();
           // }), 2100);
@@ -454,8 +456,8 @@ class EmployeeAdd extends Component {
       <h3 className="title">Add Employee</h3>
         <Row>
           <Input onChange={this.handleUser_Id}s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
-          <Input  onChange={this.handleFirstname}s={12} m={6} l={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
-          <Input  onChange={this.handleLastname} s={12} m={6} l={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
+          <Input  onChange={this.handleFirstname}s={12} m={6} l={6} defaultValue={this.state.first_name.value.trim()} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
+          <Input  onChange={this.handleLastname} s={12} m={6} l={6} defaultValue={this.state.last_name.value.trim()} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
           <Input type="number" label="Age" onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
           <Input s={12} m={6} l={6} type='select'  label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
             <option value='select'>select</option>
