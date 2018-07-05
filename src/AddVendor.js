@@ -53,7 +53,7 @@ class AddVendor extends Component{
     checkForValidation(){
         var contactRegex = /^[4-9]\d{9}$/;
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
-        var alphaNum = /^\s{0,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{0,}$/;
+        var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var space = /^\s{1,}$/
         var preceeding = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
         var trailing = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
@@ -240,7 +240,8 @@ class AddVendor extends Component{
                             
             }
             else{
-                let vendorName = this.state.name.value.charAt(0).toUpperCase() + this.state.name.value.slice(1).toLowerCase()
+                let vendorName = this.state.name.value.trim()
+                vendorName = vendorName.charAt(0).toUpperCase() + vendorName.slice(1).toLowerCase()
                 this.setState({
                     name: {
                         value: '',

@@ -241,6 +241,7 @@ class Assets extends Component{
         )}
 
     render(){
+        let that = this
         let filterSlideButton = <Button floating large className='teal filterContainerSliderButton' waves='light' icon='filter_list'></Button>;
         let filterPane = <div className="filterContainer">
             <p style={{ fontFamily: 'Roboto', fontWeight: 300, color: 'white', fontSize: '20px', marginLeft: '30px' }}>Filter by Current Status</p>
@@ -329,7 +330,7 @@ class Assets extends Component{
                             <td className='extraFields'>{item.condition}</td>
                             <td className='extraFields'>{item.location}</td>
                             <td className='extraFields'>{item.category}</td>
-                            <td>{this.renderDropdown(item)}</td>
+                            <td>{that.renderDropdown(item)}</td>
                             </tr>
                         })}
                     </tbody>

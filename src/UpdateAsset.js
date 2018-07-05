@@ -98,7 +98,7 @@ class UpdateAsset extends Component {
         //     })
         // }
 
-        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+        var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
 
         if(!alphaNum.test(this.state.serial_number.value)){
@@ -409,12 +409,12 @@ class UpdateAsset extends Component {
             withCredentials: true,
             data: {
                 asset_id : this.props.asset.asset_id,
-                serial_number: this.state.serial_number.value,
-                asset_name: this.state.asset_name.value,
+                serial_number: this.state.serial_number.value.trim(),
+                asset_name: this.state.asset_name.value.trim(),
                 purchase_date: this.state.purchase_date,
-                description: this.state.description.value,
-                invoice_number: this.state.invoice_number.value,
-                vendor: this.state.vendor.value,
+                description: this.state.description.value.trim(),
+                invoice_number: this.state.invoice_number.value.trim(),
+                vendor: this.state.vendor.value.trim(),
                 amount: this.state.amount.value,
                 gst: this.state.gst.value,
                 total: this.state.total,
@@ -525,21 +525,24 @@ class UpdateAsset extends Component {
 
     }
 
+    componentWillReceiveProps(prevProps){
 
+    }
 
     render() {
+        
         return (
             <div className="no-footer">
             <h5 className="title">Update Asset</h5> 
                 <Row className="assetUpdateForm" >
-                    <Input s={12} m={3} l={3} label="Serial Number *" value={this.state.serial_number.value} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
-                    <Input s={12} m={3} l={3} label="Asset Name *" value={this.state.asset_name.value} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
+                    <Input s={12} m={3} l={3} label="Serial Number *" defaultValue={this.state.serial_number.value.trim()} onChange={this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} />
+                    <Input s={12} m={3} l={3} label="Asset Name *" defaultValue={this.state.asset_name.value.trim()} onChange={this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null} />
                     <Input s={12} m={3} l={3} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} value={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
-                    <Input s={12} m={3} l={3} label="Description" value={this.state.description.value} onChange={this.setDescription} error={this.state.description.showError ? this.state.description.error : null} />
-                    <Input s={12} m={3} l={3} label="Invoice Number *" value={this.state.invoice_number.value} onChange={this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
+                    <Input s={12} m={3} l={3} label="Description" defaultValue={this.state.description.value.trim()} onChange={this.setDescription} error={this.state.description.showError ? this.state.description.error : null} />
+                    <Input s={12} m={3} l={3} label="Invoice Number *" defaultValue={this.state.invoice_number.value.trim()} onChange={this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
                     <Input s={12} m={3} l={3} label="Vendor *" value={this.state.vendor.value} onChange={this.setVendor} error={this.state.vendor.showError ? this.state.vendor.error : null} />
-                    <Input s={12} m={3} l={3} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null}/>
-                    <Input s={12} m={3} l={3} label="Location *" value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
+                    <Input s={12} m={3} l={3} label="Condition *" defaultValue = {this.state.condition.value.trim()} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null}/>
+                    <Input s={12} m={3} l={3} label="Location *" defaultValue = {this.state.location.value.trim()} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
                     <Input s={12} m={3} l={3} label="Amount *" type="number" min={0} value={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={12} m={3} l={3} label="GST" type="number" min={0} value={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     <br />
