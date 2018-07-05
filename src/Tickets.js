@@ -305,7 +305,7 @@ class Tickets extends Component{
                 ,error : ''
                 ,showError : false
             },
-            assets: '',
+            // assets: '',
             item_type: {
                 value : 'Select'
                 ,error : ''
@@ -344,7 +344,7 @@ class Tickets extends Component{
                 {this.state.requestResource ? this.confirmRequest() : null} 
                 </div>
                 <div className='splitModalButtons'>
-                    <Button className=''waves='light' type = "submit" name = "action" onClick={this.checkForValidation} >Request</Button>
+                    <Button className=''waves='light' type = "button" name = "action" onClick={this.checkForValidation} >Request</Button>
                     <Button  onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
                 </div>
                 {this.state.redirect? <Redirect
