@@ -127,7 +127,7 @@ class AddAssetType extends Component{
                         showError: false
                     }
                 })
-                $('.modal-close').trigger('click')
+                $('.assettypeclose').trigger('click')
 
                 swal(res.data.message,{
                     buttons: false,
@@ -208,7 +208,7 @@ class AddAssetType extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button onClick={this.checkForValidation} >Submit</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton assettypeclose modal-close" >Cancel</Button>
                 </div>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}
                 {this.state.login ?  <Redirect
