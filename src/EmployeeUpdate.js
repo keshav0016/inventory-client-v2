@@ -85,7 +85,7 @@ class EmployeeUpdate extends Component{
     handleAge(e) {
         this.setState({
             age: Object.assign(this.state.age, {
-                value: e.target.value
+                value: Number(e.target.value)
             })
 
         })
@@ -414,7 +414,7 @@ class EmployeeUpdate extends Component{
 
                  <Input  defaultValue={this.state.first_name.value} onChange={this.handleFirstname}s={12} m={6} l={6} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
                     <Input  defaultValue={this.state.last_name.value}onChange={this.handleLastname} s={12} m={6} l={6}label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
-                    <Input type="number"min='0' label="age" defaultValue={this.state.age.value}onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
+                    <Input type="number"min='0' label="age" defaultValue={this.state.age.value} onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
                     <Input s={12} m={6} l={6} type='select' label="Gender" defaultValue={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
                         <option value='select'>select</option>
                         <option value='Male'>Male</option>
