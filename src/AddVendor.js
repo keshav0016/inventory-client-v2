@@ -38,6 +38,17 @@ class AddVendor extends Component{
         this.setContact = this.setContact.bind(this)
         this.cancelAll = this.cancelAll.bind(this)
     }
+    componentDidMount(){
+        $(document).ready(function(){
+          $('label').addClass('active');
+      }) 
+      }
+    
+      componentDidUpdate(){
+        $(document).ready(function(){
+          $('label').addClass('active');
+      }) 
+    }
 
     checkForValidation(){
         var contactRegex = /^[4-9]\d{9}$/;
@@ -245,8 +256,8 @@ class AddVendor extends Component{
                     buttons: false,
                     timer: 2000,
                 })
-                $('.modal').hide() 
-                $('.modal-overlay').hide()
+                // $('.modal').hide() 
+                // $('.modal-overlay').hide()
 
 
                 if(this.props.setVendorListRequest){
