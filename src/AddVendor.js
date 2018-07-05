@@ -185,7 +185,7 @@ class AddVendor extends Component{
             this.setState({
                 addVendorRequest: true
             })
-            $('.modal-overlay').trigger('click');
+            // $('.modal-overlay').trigger('click');
         }
     }
 
@@ -266,9 +266,7 @@ class AddVendor extends Component{
                     buttons: false,
                     timer: 2000,
                 })
-                $('.modal').hide() 
-                $('.modal-overlay').hide()
-
+                $('.vendorclosebutton').trigger('click')
 
                 if(this.props.setVendorListRequest){
                     this.props.setVendorListRequest(vendorName)
@@ -326,7 +324,7 @@ class AddVendor extends Component{
                 </Row>
                 <div className='splitModalButtons'>
                     <Button style={{bottom: '0%'}} waves='light' onClick = {this.checkForValidation} >Submit</Button>
-                    <Button onClick={this.cancelAll} className="modal-close cancelButton">Cancel</Button>
+                    <Button onClick={this.cancelAll} className="modal-close vendorclosebutton cancelButton">Cancel</Button>
                 </div>
                     {/* {$('#addVendor').click(this.checkForValidation)} */}
                     {this.state.addVendorRequest ? this.addVendorIntoDb() : null}

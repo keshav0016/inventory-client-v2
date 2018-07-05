@@ -9,6 +9,7 @@ import {
   Link,
   Redirect
 } from 'react-router-dom';
+import $ from 'jquery';
 
 import {Modal, Button, Table, Icon, Dropdown, NavItem, Pagination,Preloader, Col, CardPanel, Input, Row } from 'react-materialize'
 import { baseUrl } from './config';
@@ -59,6 +60,7 @@ class EmployeesList extends Component {
         handleListRequest : false,
         loading: false
       })
+      $('.modal-overlay').trigger('click')
     })
     .catch(error => {
       if(error.response.status === 401){

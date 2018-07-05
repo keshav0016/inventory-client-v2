@@ -194,14 +194,14 @@ class AssignConsumables extends Component {
                 },
                 assignConsumableRequest : false
             })
-            this.props.setHandleListRequest()
-            // window.Materialize.toast('Consumable Assigned Successfully', 4000)
             swal("Consumable Assigned Successfully",{
                 buttons: false,
                 timer: 2000,
-              })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+            })
+            $('.modal-close').trigger('click')
+            this.props.setHandleListRequest()
+            //   $('.modal').hide()
+            //   $('.modal-overlay').hide()
         })
         .catch(error => {
             if(error.response.status === 401){

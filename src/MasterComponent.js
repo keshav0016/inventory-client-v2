@@ -60,10 +60,10 @@ class MasterComponent extends Component {
             })
         })
 
-        var $a = $('.masterComponentSideBar a').click(function() {
-            $a.removeClass('selected');
-            $(this).addClass('selected');
-        })
+        // var $a = $('.masterComponentSideBar a').click(function() {
+        //     $a.removeClass('selected');
+        //     $(this).addClass('selected');
+        // })
     }
 
     render() {
@@ -93,14 +93,14 @@ class MasterComponent extends Component {
                             </div>
                             </Row>
                             <SideNav className="masterComponentSideBar" trigger={menuButton} options={{ closeOnClick: true }}>
-                                <Link className="selected" to="/admin">Dashboard</Link>
-                                <Link to="/admin/assets">Assets</Link>
-                                <Link to="/admin/assetType">Asset Types</Link>
-                                <Link to="/admin/consumables">Consumables</Link>
+                                <Link className={window.location.pathname === '/admin' ? 'selected' : null} to="/admin">Dashboard</Link>
+                                <Link className={window.location.pathname === '/admin/assets' ? 'selected' : null} to="/admin/assets">Assets</Link>
+                                <Link className={window.location.pathname === '/admin/assetType' ? 'selected' : null} to="/admin/assetType">Asset Types</Link>
+                                <Link className={window.location.pathname === '/admin/consumables' ? 'selected' : null} to="/admin/consumables">Consumables</Link>
                                 {/* <Link to="/admin/consumables/history">Consumable History</Link> */}
-                                <Link to="/admin/employees">Employees</Link>
-                                <Link to="/admin/tickets">Tickets</Link>
-                                <Link to="/admin/vendor">Vendor</Link>
+                                <Link className={window.location.pathname === '/admin/employees' ? 'selected' : null} to="/admin/employees">Employees</Link>
+                                <Link className={window.location.pathname === '/admin/tickets' ? 'selected' : null} to="/admin/tickets">Tickets</Link>
+                                <Link className={window.location.pathname === '/admin/vendor' ? 'selected' : null} to="/admin/vendor">Vendors</Link>
                             </SideNav>
                         </div>
                         <div>

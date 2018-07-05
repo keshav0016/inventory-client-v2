@@ -76,13 +76,13 @@ class UpdateAssetType extends Component{
                 updateAssetTypeRequest : false
             })
             if(res.data.message){
-                // window.Materialize.toast(res.data.message, 4000)
+                $('.modal-close').trigger('click')
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                   
                 //   setTimeout((function() {
                 //     window.location.reload();
@@ -90,7 +90,7 @@ class UpdateAssetType extends Component{
                 this.props.setHandleListRequest()
             }
             else{
-                // window.Materialize.toast('This asset type already exists', 4000)
+
                 swal('This asset type already exists',{
                     buttons: false,
                     timer: 2000,

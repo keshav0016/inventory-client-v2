@@ -128,14 +128,14 @@ class AddAssetType extends Component{
                         showError: false
                     }
                 })
-                $('.modal-overlay').click()
-                // window.Materialize.toast(res.data.message, 4000)
+                $('.assettypeclose').trigger('click')
+
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 //   setTimeout((function() {
                 //     window.location.reload();
                 //   }), 2100);
@@ -209,7 +209,7 @@ class AddAssetType extends Component{
                 </Row>
                 <div className="splitModalButtons">
                     <Button onClick={this.checkForValidation} >Submit</Button>
-                    <Button onClick={this.cancelAll} className="cancelButton modal-close" >Cancel</Button>
+                    <Button onClick={this.cancelAll} className="cancelButton assettypeclose modal-close" >Cancel</Button>
                 </div>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}
                 {this.state.login ?  <Redirect

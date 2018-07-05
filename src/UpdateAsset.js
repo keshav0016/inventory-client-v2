@@ -418,9 +418,10 @@ class UpdateAsset extends Component {
                 amount: this.state.amount.value,
                 gst: this.state.gst.value,
                 total: this.state.total,
-                category: this.state.category.trim(),
-                condition: this.state.condition.value.trim()
-            }
+                category: this.state.category,
+                condition: this.state.condition.value,
+                location: this.state.location.value
+            } 
         })
         .then(res => {
             if(res.data.error){
@@ -434,18 +435,18 @@ class UpdateAsset extends Component {
                 })                
             }
             else if(res.data.message === 'Asset updated successfully'){
-
+                this.setState({
+                    updateAssetRequest: false
+                })
+                $('.modal-close').trigger('click')
                 swal('Asset details has been Updated',{
                     buttons: false,
                     timer: 2000,
                   })
-                $('.modal').hide()
-                $('.modal-overlay').hide()
+                  this.props.setHandleListRequest()
+                // $('.modal').hide()
+                // $('.modal-overlay').hide()
 
-                this.setState({
-                    updateAssetRequest: false
-                })
-                this.props.setHandleListRequest()
             }
         })
         .catch(error => {
@@ -517,8 +518,8 @@ class UpdateAsset extends Component {
                 showError: false
             }
         })
-        $('.modal').hide()
-        $('.modal-overlay').hide()
+        // $('.modal').hide()
+        // $('.modal-overlay').hide()
 
         // this.props.setHandleListRequest()
 

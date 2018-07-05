@@ -49,8 +49,8 @@ class DeleteAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 // window.Materialize.toast('Asset deleted', 4000)
                 this.setState({
                     deleteAssetRequest : false

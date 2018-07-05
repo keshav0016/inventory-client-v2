@@ -111,12 +111,12 @@ class AddAsset extends Component{
         this.setAssetTypeListRequest = this.setAssetTypeListRequest.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
         this.getVendorName = this.getVendorName.bind(this)
-        this.clear = this.clear.bind(this)
+        // this.clear = this.clear.bind(this)
     }
 
-    clear(){
-        $(".modal-overlay").trigger('click');
-    }
+    // clear(){
+    //     $(".modal-overlay").trigger('click');
+    // }
 
     checkForValidation(){
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
@@ -402,7 +402,6 @@ class AddAsset extends Component{
             })
         }
         if(alphaNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
-            // window.Materialize.toast('All the * marked fields are required', 4000)
             this.setState({
                 addAssetRequest : true
             })
@@ -412,11 +411,12 @@ class AddAsset extends Component{
     setVendorListRequest(vendorName){
         this.setState({
             vendorListRequest : true
-            ,vendor : Object.assign({
+            ,vendor : {
+                ...this.state.vendor,
                 value : vendorName
-            })
+            }
         })
-        $('.modal-overlay').click()
+        // $('.modal-overlay').trigger('click')   
     }
 
     setSerialNumber(e){
@@ -518,7 +518,6 @@ class AddAsset extends Component{
 
     vendorListDropdown(){
         var vendorArr = []
-        vendorArr.push(<option key='Select' value='Select'>Select</option>)
         this.state.vendorList.forEach(vendor => {
             vendorArr.push(<option key={vendor.id} value={vendor.name}>{vendor.name}</option>)
         });
@@ -549,6 +548,7 @@ class AddAsset extends Component{
                 value : assetTypeName
             })
         })
+        // $('.modal-overlay').trigger('click')
     }
 
     addAssetIntoDb(){
@@ -646,8 +646,8 @@ class AddAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 //   setTimeout((function() {
                 //     window.location.reload();
                 //   }), 2100);
@@ -754,7 +754,7 @@ class AddAsset extends Component{
         })
         .then(res => {
             this.setState({
-                vendorList : res.data.vendors.sort((a, b) => a.asset_id - b.asset_id),
+                vendorList : res.data.vendors,
                 vendorListRequest : false
             })
             this.getVendorName()
@@ -767,8 +767,6 @@ class AddAsset extends Component{
             }
             console.error(error)
         })
-
-        // $("#triggerAddVendor").hide()
     }
 
 
@@ -846,7 +844,8 @@ class AddAsset extends Component{
                             <Row>
                                 <Col offset={'l6'} style={{float: 'right'}}>
                                     <Button onClick = {this.checkForValidation} >SUBMIT</Button>
-                                    <Link to='/admin/assets'><Button onClick={this.clear} className="cancelButton modal-close">Cancel</Button></Link>                            
+                                    <Link to='/admin/assets'><Button className="cancelButton modal-close">Cancel</Button></Link>                               
+                        
                                 </Col>
                             </Row>
                         </div>

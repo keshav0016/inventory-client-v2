@@ -131,7 +131,7 @@ class EmployeeUpdate extends Component{
         $('label').addClass('active')
     }
    handleUpdate(){
-    var nameReg = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
+    var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
     if(!nameReg.test(this.state.first_name.value) ){
         this.setState({
@@ -320,12 +320,13 @@ class EmployeeUpdate extends Component{
             })
             .then((res) => {
                 if (res.data.message === 'employee has been updated') {
+                    $('.modal-close').trigger('click')
                     swal("Employee details has been Updated",{
                         buttons: false,
                         timer: 2000,
                         })
-                        $('.modal').hide()
-                        $('.modal-overlay').hide()
+                        // $('.modal').hide()
+                        // $('.modal-overlay').hide()
                         this.props.setHandleListRequest()
 
 

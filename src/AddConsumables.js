@@ -412,8 +412,8 @@ class AddConsumables extends Component{
                 buttons: false,
                 timer: 2000,
               });
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+            //   $('.modal').hide()
+            //   $('.modal-overlay').hide()
             //   setTimeout((function() {
             //     window.location.reload();
             //   }), 2100);

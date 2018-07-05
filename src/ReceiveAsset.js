@@ -132,7 +132,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(new Date(this.state.to.value) < new Date(this.state.repairInfo.from)){
+        if(new Date(this.state.to.value).toDateString() < new Date(this.state.repairInfo.from).toDateString()){
             this.setState({
                 to: Object.assign(this.state.to, {
                     showError : true,
@@ -156,7 +156,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value) >= new Date(this.state.repairInfo.from)){
+        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value).toDateString() >= new Date(this.state.repairInfo.from).toDateString()){
             this.setState({
                 receiveAssetRequest : true
             })
@@ -255,8 +255,8 @@ class ReceiveAsset extends Component{
                     buttons: false,
                     timer: 2000,
                   }) 
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                   $('.modal-close').trigger('click')
              
                 this.props.setHandleListRequest()

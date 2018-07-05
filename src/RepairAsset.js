@@ -173,6 +173,7 @@ class RepairAsset extends Component{
             })
         })
         $('.modal-overlay').trigger('click')
+        // $('.modal-close').trigger('click')
     }
 
     vendorListDropdown(){
@@ -210,13 +211,13 @@ class RepairAsset extends Component{
                 repairAsset: false,
                 redirect: true
             })
-            // window.Materialize.toast('Repair information has been stored', 4000)
+            $('.modal-close').trigger('click')
             swal('Repair information has been stored',{
                 buttons: false,
                 timer: 2000,
               })
-              $('.modal').hide()
-              $('.modal-overlay').hide()
+            //   $('.modal').hide()
+            //   $('.modal-overlay').hide()
             // this.props.setHandleListRequest()
         })
         .catch(error => {

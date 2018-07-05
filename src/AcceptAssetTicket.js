@@ -65,7 +65,7 @@ class AcceptAssetTicket extends Component{
         if(!this.state.reason.value){
             this.setState({
                 reason: Object.assign(this.state.reason, {
-                    error: "Reason is requires",
+                    error: "Reason is required",
                     showError: true
                 })
             })
@@ -216,8 +216,9 @@ class AcceptAssetTicket extends Component{
                     buttons: false,
                     timer: 2000,
                   });
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                  $('.modal-close').trigger('click')
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 this.setState({
                     redirect : true
                 })
