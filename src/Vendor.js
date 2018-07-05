@@ -66,11 +66,11 @@ class Vendor extends Component{
             handleListRequest : true
         })
 
-        $('.modal-overlay').trigger('click')
-
+        
         if(itemAdded){
             this.setPage(this.state.pagination.totalPage)
         }
+        $('.modal-overlay').trigger('click')
         // $(".modal-overlay").click()
         
         // $(".modal-close").trigger('click')

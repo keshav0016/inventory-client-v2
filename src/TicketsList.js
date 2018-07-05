@@ -155,6 +155,7 @@ class TicketsList extends Component{
                 consumablePagination : res.data.consumablePagination,
                 handleListRequest : false
             })
+
             $('.modal-overlay').trigger('click')
         })
         .catch(error => {
@@ -257,6 +258,7 @@ class TicketsList extends Component{
                 withCredentials:true
             })
             .then(res =>{
+                $('.modal-close').trigger('click')
                 this.setState({
                     handleListRequest:true
                     ,reason : {
@@ -264,7 +266,8 @@ class TicketsList extends Component{
                         , value : ''
                     }
                 })
-                $('.modal-close').trigger('click')
+                $('.modal-overlay').trigger('click')
+                
                 // window.Materialize.toast(res.data.message,4000)
                 swal(res.data.message,{
                     buttons: false,
