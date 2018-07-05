@@ -434,6 +434,9 @@ class UpdateAsset extends Component {
                 })                
             }
             else if(res.data.message === 'Asset updated successfully'){
+                this.setState({
+                    updateAssetRequest: false
+                })
                 $('.modal-close').trigger('click')
                 swal('Asset details has been Updated',{
                     buttons: false,
@@ -442,9 +445,7 @@ class UpdateAsset extends Component {
                 // $('.modal').hide()
                 // $('.modal-overlay').hide()
 
-                this.setState({
-                    updateAssetRequest: false
-                })
+               
                 this.props.setHandleListRequest()
             }
         })
