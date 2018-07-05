@@ -131,7 +131,7 @@ class EmployeeUpdate extends Component{
         $('label').addClass('active')
     }
    handleUpdate(){
-    var nameReg = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
+    var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
     if(!nameReg.test(this.state.first_name.value) ){
         this.setState({
