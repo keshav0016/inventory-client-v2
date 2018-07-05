@@ -156,7 +156,7 @@ class ReceiveAsset extends Component{
                 })
             })
         }
-        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value) >= new Date(this.state.repairInfo.from)){
+        if(!this.state.to.showError && !this.state.amount.showError && !this.state.gst.showError && !this.state.repair_invoice.showError && new Date(this.state.to.value).toDateString() >= new Date(this.state.repairInfo.from).toDateString()){
             this.setState({
                 receiveAssetRequest : true
             })
