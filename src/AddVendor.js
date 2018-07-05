@@ -42,49 +42,58 @@ class AddVendor extends Component{
     checkForValidation(){
         var contactRegex = /^[4-9]\d{9}$/;
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
-        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/;
+        var alphaNum = /^\s{0,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{0,}$/;
         var space = /^\s{1,}$/
         var preceeding = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
         var trailing = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
         var precandtrail = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
 
 
-        if(!alphaNum.test(this.state.name.value)){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'The Vendor name should be alphanumeric',
-                    showError: true
-                })
-            })
-        }
-        if(precandtrail.test(this.state.name.value)){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'The Vendor name should not contain preceeding or trailing spaces',
-                    showError: true
-                })
-            })
-        }
-        if(preceeding.test(this.state.name.value)){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'The Vendor name should not contain preceeding spaces',
-                    showError: true
-                })
-            })
-        }
-        if(trailing.test(this.state.name.value)){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'The Vendor name should not contain trailing spaces',
-                    showError: true
-                })
-            })
-        }
+        // if(!alphaNum.test(this.state.name.value)){
+        //     this.setState({
+        //         name:Object.assign(this.state.name, {
+        //             error: 'The Vendor name should be alphanumeric',
+        //             showError: true
+        //         })
+        //     })
+        // }
+        // if(precandtrail.test(this.state.name.value)){
+        //     this.setState({
+        //         name:Object.assign(this.state.name, {
+        //             error: 'The Vendor name should not contain preceeding or trailing spaces',
+        //             showError: true
+        //         })
+        //     })
+        // }
+        // if(preceeding.test(this.state.name.value)){
+        //     this.setState({
+        //         name:Object.assign(this.state.name, {
+        //             error: 'The Vendor name should not contain preceeding spaces',
+        //             showError: true
+        //         })
+        //     })
+        // }
+        // if(trailing.test(this.state.name.value)){
+        //     this.setState({
+        //         name:Object.assign(this.state.name, {
+        //             error: 'The Vendor name should not contain trailing spaces',
+        //             showError: true
+        //         })
+        //     })
+        // }
         if(space.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: 'The Vendor name should not be spaces',
+                    showError: true
+                })
+            })
+        }
+        //use if needed !preceeding.test(this.state.name.value) && !space.test(this.state.name.value) && !trailing.test(this.state.name.value) && !precandtrail.test(this.state.name.value) &&
+        if(!alphaNum.test(this.state.name.value)){
+            this.setState({
+                name:Object.assign(this.state.name, {
+                    error: 'The Vendor name should be alphanumeric',
                     showError: true
                 })
             })
@@ -97,7 +106,7 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(!preceeding.test(this.state.name.value) && !space.test(this.state.name.value) && !trailing.test(this.state.name.value) && !precandtrail.test(this.state.name.value) && alphaNum.test(this.state.name.value)){
+        if(alphaNum.test(this.state.name.value) && !space.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
                     error: '',
@@ -199,7 +208,7 @@ class AddVendor extends Component{
             url : `${baseUrl}/vendor/create`,
             withCredentials : true,
             data : {
-                name: this.state.name.value,
+                name: this.state.name.value.trim(),
                 address : this.state.address.value,
                 contact : this.state.contact.value
             }
@@ -298,7 +307,7 @@ class AddVendor extends Component{
             <div className="no-footer">
                 <h5 className='title'>Add Vendor</h5 >
                 <Row>
-                    <Input s={12} m={6} l={6} label="Vendor Name" value = {this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input s={12} m={6} l={6} label="Vendor Name" defaultValue = {this.state.name.value.trim()} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
                     <Input s={12} m={6} l={6} className="vendorContact" type="number" label="Contact"  value = {this.state.contact.value} onChange ={this.setContact}  error={this.state.contact.showError ? this.state.contact.error : null} ></Input>
                     <Input s={12} m={6} l={6} label="Address" value = {this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
 

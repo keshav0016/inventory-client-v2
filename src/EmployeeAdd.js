@@ -189,16 +189,15 @@ class EmployeeAdd extends Component {
           })
         })
       }
-      // if(this.state.age.value > 70){
-      //   this.setState({
-      //     age: Object.assign(this.state.age, {
-      //       error: "Age should not be Greater than 70",
-      //       showError: true,
-      //     })
-      //   })
-      // }
-      //add below if needed  && this.state.age.value < 70
-      if(this.state.age.value >= 18){
+      if(this.state.age.value > 70){
+        this.setState({
+          age: Object.assign(this.state.age, {
+            error: "Age should not be Greater than 70",
+            showError: true,
+          })
+        })
+      }
+      if(this.state.age.value >= 18 && this.state.age.value < 70){
         this.setState({
           age: Object.assign(this.state.age, {
               error: '',
@@ -457,7 +456,7 @@ class EmployeeAdd extends Component {
           <Input onChange={this.handleUser_Id}s={12} m={6} l={6} value={this.state.user_id.value} label="Employee Id" error={this.state.user_id.showError ? this.state.user_id.error : null} />
           <Input  onChange={this.handleFirstname}s={12} m={6} l={6} value={this.state.first_name.value} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
           <Input  onChange={this.handleLastname} s={12} m={6} l={6} value={this.state.last_name.value} label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
-          <Input type="number" min='0'label="Age" value={this.state.age.value} onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
+          <Input type="number" label="Age" onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
           <Input s={12} m={6} l={6} type='select'  label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
             <option value='select'>select</option>
             <option value='Male'>Male</option>
