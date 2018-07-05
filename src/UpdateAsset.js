@@ -100,8 +100,9 @@ class UpdateAsset extends Component {
 
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
+        var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
 
-        if(!alphaNum.test(this.state.serial_number.value)){
+        if(!num.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: 'Enter alphabet or digit',
@@ -117,7 +118,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alphaNum.test(this.state.serial_number.value)){
+        if(num.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: '',
@@ -173,7 +174,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alphaNum.test(this.state.invoice_number.value)){
+        if(!num.test(this.state.invoice_number.value)){
             this.setState({
                 invoice_number:Object.assign(this.state.invoice_number, {
                     error: 'Enter alphabets or digits',
@@ -189,7 +190,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alphaNum.test(this.state.invoice_number.value)){
+        if(num.test(this.state.invoice_number.value)){
             this.setState({
                 invoice_number:Object.assign(this.state.invoice_number, {
                     error: '',
@@ -309,7 +310,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alphaNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && alphaNum.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
+        if(num.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
             this.setState({
                         updateAssetRequest: true
                     }) 
@@ -447,7 +448,9 @@ class UpdateAsset extends Component {
                 // $('.modal').hide()
                 // $('.modal-overlay').hide()
 
+                this.props.setHandleListRequest()
             }
+            this.props.onFinish()
         })
         .catch(error => {
             if(error.response.status === 401){
@@ -522,7 +525,7 @@ class UpdateAsset extends Component {
         // $('.modal-overlay').hide()
 
         // this.props.setHandleListRequest()
-
+        this.props.onFinish()
     }
 
     componentWillReceiveProps(prevProps){

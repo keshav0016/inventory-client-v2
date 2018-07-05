@@ -39,6 +39,8 @@ class Assets extends Component{
                 showError:false
             },
             redirect: false
+            ,showModal : false
+            ,currentItem : null
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -53,6 +55,7 @@ class Assets extends Component{
         this.setSearchAssetId = this.setSearchAssetId.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.renderDropdown = this.renderDropdown.bind(this)
+        this.handleUpdateModalClose = this.handleUpdateModalClose.bind(this)
     }
 
     handleList(){
@@ -189,9 +192,16 @@ class Assets extends Component{
         }
     }
 
+    handleUpdateModalClose(){
+        this.setState({
+            showModal : false
+            ,currentItem : null
+        })
+    }
+
     renderDropdown(item){
         return (
-        item.disabled === 1 ? <Dropdown trigger={
+        item.disabled === 1 ? <Dropdown key={item.asset_id} trigger={
             <Button ><Icon tiny>more_vert</Icon></Button>
         }>
         <Modal
@@ -210,13 +220,18 @@ class Assets extends Component{
                 trigger={item.current_status === 'Available' ? <NavItem>Disable</NavItem> : null}>
                 {item.current_status === 'Available' ? <DisableAsset asset = {item} setHandleListRequest={this.setHandleListRequest} /> : null}
             </Modal>
-            <Modal
+            <button className="editButton" onClick={() => {this.setState({
+                showModal : true
+                , currentItem : item
+            })}}>Edit</button>
+            {/* <Modal
                 modalOptions={{dismissible: false}}
                 actions={null}
+                key={`update_modal_${item.asset_id}`}
                 className='editAssetBottomPadding'
                 trigger={<NavItem>Edit</NavItem>}>
-                <UpdateAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />
-            </Modal>
+                <UpdateAsset key={`update_asset_${item.asset_id}`}asset = {item} setHandleListRequest={this.setHandleListRequest} />
+            </Modal> */}
             <Modal
                 modalOptions={{dismissible: false}}
                 actions={null}
@@ -362,7 +377,16 @@ class Assets extends Component{
                 
                 
                 <Link to={{ pathname : '/admin/assets/create'}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>
-                
+                {this.state.showModal ? (
+                    <Modal
+                        modalOptions={{ dismissible: false }}
+                        open={this.state.showModal}
+                        actions={null}
+                        className='editAssetBottomPadding'>
+                        <UpdateAsset onFinish={this.handleUpdateModalClose} asset={this.state.currentItem} setHandleListRequest={this.setHandleListRequest} />
+                    </Modal>
+
+                ) : null}
             </div>
         )
     }
