@@ -235,7 +235,7 @@ class TicketsList extends Component{
     }
 
     rejectTicket(ticket_number){
-        if(this.state.reason.value.length === 0){
+        if(this.state.reason.value.length === 0 || this.state.reason.value.length > 0 && this.state.reason.value.trim().length === 0){
             this.setState({
                 reason : {
                     ...this.state.reason
@@ -344,7 +344,7 @@ class TicketsList extends Component{
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear'></Button>}>
             <Row className="no-footer" >
                 <h5 className="title">Remarks for rejection</h5>
-                <Input s={12} onChange={this.setReason} label="Remarks" value={this.state.reason.value} error = {this.state.reason.showError ? this.state.reason.error : null}/>
+                <Input s={12} onChange={this.setReason} label="Remarks*" value={this.state.reason.value} error = {this.state.reason.showError ? this.state.reason.error : null}/>
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)} >Reject</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
@@ -376,7 +376,7 @@ class TicketsList extends Component{
             trigger={<Button style={{ backgroundColor: '#212121' }} floating icon='clear' ></Button>}>
             <Row className="no-footer" >
                 <h5 className="title">Remarks for rejection</h5>
-                <Input s={12} onChange={this.setReason} value={this.state.reason.value}  error = {this.state.reason.showError ? this.state.reason.error : null} label="Remarks" />
+                <Input s={12} onChange={this.setReason} value={this.state.reason.value}  error = {this.state.reason.showError ? this.state.reason.error : null} label="Remarks*" />
                 <div className='splitModalButtons'>
                     <Button onClick={this.rejectTicket.bind(this, ticket.ticket_number)}>Reject</Button>
                     <Button onClick={this.cancelReason} className="cancelButton modal-close" >Cancel</Button>
