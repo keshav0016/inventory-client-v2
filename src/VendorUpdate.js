@@ -81,7 +81,7 @@ class VendorUpdate extends Component{
     checkForValidation(){
         var contactRegex = /^[4-9]\d{9}$/;
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
-        var alphaNum = /^\s{0,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{0,}$/
+        var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
 
     
         if(!this.state.name.value){

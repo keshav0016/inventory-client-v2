@@ -45,11 +45,11 @@ class AddAssetType extends Component{
     
     checkForValidation(){
 
-        var assetType = /^[a-zA-Z]+$/;
+        var assetType = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/
         if(!assetType.test(this.state.assetType.value)){
             this.setState({
                 assetType: Object.assign(this.state.assetType, {
-                    error: "The Asset Type should only conatin alphabets",
+                    error: "The Asset Type should only contain alphabets",
                     showError: true
                 })
             })
@@ -107,12 +107,13 @@ class AddAssetType extends Component{
             ,url : `${baseUrl}/assetType/create`
             ,withCredentials : true
             ,data : {
-                assetType : this.state.assetType.value
+                assetType : this.state.assetType.value.trim()
                 ,maxRequest : this.state.maxRequest.value
             }
         })
         .then(res => {
-            let assetTypeName = this.state.assetType.value.charAt(0).toUpperCase() + this.state.assetType.value.slice(1).toLowerCase()
+            let assetTypeName = this.state.assetType.value.trim()
+            assetTypeName = assetTypeName.charAt(0).toUpperCase() + assetTypeName.slice(1).toLowerCase()
             if(res.data.message){
                 this.setState({
                     createAssetRequest : false
@@ -203,7 +204,7 @@ class AddAssetType extends Component{
             <div className="no-footer">
                 <h5 className='title' >Add Asset Type</h5 >
                 <Row>
-                    <Input s={12} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
+                    <Input s={12} defaultValue={this.state.assetType.value.trim()} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
                     <Input s={12} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                 <div className="splitModalButtons">

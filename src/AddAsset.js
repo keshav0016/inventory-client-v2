@@ -119,7 +119,7 @@ class AddAsset extends Component{
     }
 
     checkForValidation(){
-        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+        var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         if(!alphaNum.test(this.state.serial_number.value)){
             this.setState({
@@ -557,18 +557,18 @@ class AddAsset extends Component{
             url : `${baseUrl}/asset/create`,
             withCredentials : true,
             data : {
-                serial_number : this.state.serial_number.value ,
-                asset_name : this.state.asset_name.value,
+                serial_number : this.state.serial_number.value.trim() ,
+                asset_name : this.state.asset_name.value.trim(),
                 purchase_date : this.state.purchase_date.value,
-                description : this.state.description.value,
-                invoice_number : this.state.invoice_number.value,
+                description : this.state.description.value.trim(),
+                invoice_number : this.state.invoice_number.value.trim() ,
                 vendor : this.state.vendor.value,
                 amount : this.state.amount.value,
                 gst : this.state.gst.value,
                 total : this.state.total,
                 category : this.state.category.value,
-                condition : this.state.condition.value,
-                location : this.state.location.value
+                condition : this.state.condition.value.trim() ,
+                location : this.state.location.value.trim()
                 ,assetType : this.state.assetType.value
             }
         })
@@ -777,8 +777,8 @@ class AddAsset extends Component{
             <div className="listComponent" >
                 <h3 className='title'>Add Asset</h3>
                 <Row>
-                    <Input s={12} m={6} l={6} label="Serial Number *" value = {this.state.serial_number.value} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
-                    <Input s={12} m={6} l={6} label="Asset Name *" value = {this.state.asset_name.value} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
+                    <Input s={12} m={6} l={6} label="Serial Number *" defaultValue = {this.state.serial_number.value.trim()} onChange = {this.setSerialNumber} error={this.state.serial_number.showError ? this.state.serial_number.error : null} autoFocus />
+                    <Input s={12} m={6} l={6} label="Asset Name *" defaultValue = {this.state.asset_name.value.trim()} onChange = {this.setAssetName} error={this.state.asset_name.showError ? this.state.asset_name.error : null}/>
                     {/* <Input s={12} m={6} l={6} name='on' type='date' 
                     label="Purchased Date *" onChange={this.setPurchaseDate} 
                     value = {this.state.purchase_date.value} 
@@ -791,10 +791,10 @@ class AddAsset extends Component{
                                 onChange={this.setPurchaseDate} 
                                 error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
                             />
-                    <Input s={12} m={6} l={6} label="Description" value = {this.state.description.value} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
-                    <Input s={12} m={6} l={6} label="Invoice Number *" value = {this.state.invoice_number.value} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
-                    <Input s={12} m={6} l={6} label="Condition *" value = {this.state.condition.value} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
-                    <Input s={12} m={6} l={6} label="Location *" value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
+                    <Input s={12} m={6} l={6} label="Description" defaultValue = {this.state.description.value.trim()} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
+                    <Input s={12} m={6} l={6} label="Invoice Number *" defaultValue = {this.state.invoice_number.value.trim()} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
+                    <Input s={12} m={6} l={6} label="Condition *" defaultValue = {this.state.condition.value.trim()} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
+                    <Input s={12} m={6} l={6} label="Location *" defaultValue = {this.state.location.value.trim()} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
                     <br />
                     <div className={this.state.category.showError ? 'category-error': 'no-error'}>
                     <Input s={12} m={6} l={6} type='select' label='Category' onChange = {this.setCategory} value={this.state.category.value} error={this.state.category.showError ? this.state.category.error : null}>

@@ -104,7 +104,7 @@ class AddConsumables extends Component{
     checkForValidation(){
 
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
-        var alphaNum = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
+        var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         if (!alphaNum.test(this.state.name.value)) {
             this.setState({
                 name: Object.assign(this.state.name, {
@@ -349,7 +349,7 @@ class AddConsumables extends Component{
             method :'post',
             url :`${baseUrl}/consumables/create`,
             data : {
-                name : this.state.name.value,
+                name : this.state.name.value.trim(),
                 vendor_name : this.state.vendor_name.value,
                 purchase_date : this.state.purchase_date.value,
                 purchased_quantity : this.state.purchased_quantity.value,
@@ -552,7 +552,7 @@ class AddConsumables extends Component{
                                 this.state.consumableNamesListObj
                             }
                             onChange = {this.setConsumableName}
-                            value={this.state.name.value}
+                            defaultValue={this.state.name.value.trim()}
                         />
                     {/* <Input s={12} m={6} l={6} name='on' type='date' 
                     label="Purchased Date" onChange={this.setPurchaseDate} 

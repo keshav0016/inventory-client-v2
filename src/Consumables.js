@@ -258,6 +258,18 @@ class Consumables extends Component{
     }
 
     renderDropdown(consumable){
+
+        let assign_modal = ''
+        if(consumable.quantity > 0){
+            assign_modal = <Modal
+            modalOptions={{dismissible: false}}
+            actions={null}
+            trigger={<NavItem>Assign</NavItem >}>
+            <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
+            </Modal>
+             
+        }
+
         return consumable.disable === 1 ? 
         <Dropdown trigger={
             <Button> <Icon>more_vert</Icon></Button>
@@ -282,12 +294,7 @@ class Consumables extends Component{
                     trigger={<NavItem>Disable</NavItem>}>
                     <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
-            <Modal
-                modalOptions={{dismissible: false}}
-                actions={null}
-                trigger={<NavItem>Assign</NavItem >}>
-                <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
-            </Modal>
+            {assign_modal}
             <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>History</NavItem >
         </Dropdown>
     }
