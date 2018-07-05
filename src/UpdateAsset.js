@@ -419,8 +419,9 @@ class UpdateAsset extends Component {
                 gst: this.state.gst.value,
                 total: this.state.total,
                 category: this.state.category,
-                condition: this.state.condition.value
-            }
+                condition: this.state.condition.value,
+                location: this.state.location.value
+            } 
         })
         .then(res => {
             if(res.data.error){
@@ -442,11 +443,10 @@ class UpdateAsset extends Component {
                     buttons: false,
                     timer: 2000,
                   })
+                  this.props.setHandleListRequest()
                 // $('.modal').hide()
                 // $('.modal-overlay').hide()
 
-               
-                this.props.setHandleListRequest()
             }
         })
         .catch(error => {
