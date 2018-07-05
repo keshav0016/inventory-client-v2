@@ -256,8 +256,8 @@ class AddVendor extends Component{
                     buttons: false,
                     timer: 2000,
                 })
-                // $('.modal').hide() 
-                // $('.modal-overlay').hide()
+                $('.modal').hide() 
+                $('.modal-overlay').hide()
 
 
                 if(this.props.setVendorListRequest){
