@@ -34,14 +34,15 @@ class EnableConsumable extends Component{
                     timer: 2000,
                   })             
             }
-            else{
-                // window.Materialize.toast('Consumable Enabled', 4000)
+            else if('consumable ennabled successfully'){
+                $('.modal-close').trigger('click')
+
                 swal('Consumable is Enabled',{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
 
                 this.props.setHandleListRequest()
             }

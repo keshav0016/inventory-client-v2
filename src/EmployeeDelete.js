@@ -40,13 +40,16 @@ class EmployeeDelete extends Component {
                     buttons: false,
                     timer: 2000,
                   })
-            }else  if(res.data.message === 'Employee disabled successfully'){                
+            }else  if(res.data.message === 'Employee disabled successfully'){ 
+                $('.modal-close').trigger('click')
+                               
                 swal("Employee is disabled successfully",{
                     buttons: false,
                     timer: 2000,
                   })
-                $('.modal').hide()
-                $('.modal-overlay').hide()
+
+                // $('.modal').hide()
+                // $('.modal-overlay').hide()
                 this.props.setHandleListRequest()
 
             }

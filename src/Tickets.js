@@ -235,12 +235,15 @@ class Tickets extends Component{
             })
             if(res.data.message){
                 // window.Materialize.toast(res.data.message, 4000)
+                $('.modal-close').trigger('click')
                 swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+
+                  
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
                 this.props.setHandleListRequest()
 
                   

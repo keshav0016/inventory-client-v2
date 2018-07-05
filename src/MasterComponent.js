@@ -100,7 +100,7 @@ class MasterComponent extends Component {
                                 {/* <Link to="/admin/consumables/history">Consumable History</Link> */}
                                 <Link to="/admin/employees">Employees</Link>
                                 <Link to="/admin/tickets">Tickets</Link>
-                                <Link to="/admin/vendor">Vendor</Link>
+                                <Link to="/admin/vendor">Vendors</Link>
                             </SideNav>
                         </div>
                         <div>

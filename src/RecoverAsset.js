@@ -46,19 +46,22 @@ class DeleteAsset extends Component{
                     recoverAssetRequest : false
                 })                
             }
-            else{
-                // window.Materialize.toast('Asset recovered', 4000)
+            else if(res.data.message === 'Asset recovered'){
+                this.setState({
+                    recoverAssetRequest : false
+                })
+                $('.modal-close').trigger('click')
+                this.props.setHandleListRequest()
+
                 swal('Asset recovered',{
                     buttons: false,
                     timer: 2000,
                   })
-                  $('.modal').hide()
-                  $('.modal-overlay').hide()
+                
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
 
-                this.setState({
-                    recoverAssetRequest : false
-                })
-                this.props.setHandleListRequest()
+               
             }
         })
         .catch(error => {
