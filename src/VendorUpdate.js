@@ -96,7 +96,7 @@ class VendorUpdate extends Component{
         if(this.state.name.value && !alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
-                    error: 'The Vendor name should only be alphabets',
+                    error: 'Enter a valid Name without special characters',
                     showError: true
                 })
             })
@@ -117,7 +117,15 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.address.value){
+        if(this.state.address.value && !alphaNum.test(this.state.address.value)){
+            this.setState({
+                address:Object.assign(this.state.address, {
+                    error: 'Enter a valid address without special characters',
+                    showError: true
+                })
+            })
+        }
+        if(this.state.address.value && alphaNum.test(this.state.address.value)){
             this.setState({
                 address:Object.assign(this.state.address, {
                     error: '',
@@ -172,7 +180,7 @@ class VendorUpdate extends Component{
                id: this.state.id.value,
                name: this.state.name.value.trim(),
                contact:this.state.contact.value,
-                address:this.state.address.value,
+                address:this.state.address.value.trim(),
            },
            withCredentials: true
        })
@@ -259,7 +267,7 @@ class VendorUpdate extends Component{
                     {/* <Input  value={this.state.id.value} onChange={this.handleId}s={12} m={6} l={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />       */}
                     <Input  defaultValue={this.state.name.value.trim()} onChange={this.handleName}s={12} m={6} l={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
                     <Input  type="number" value={this.state.contact.value} className="vendorContact" onChange={this.handleContact}s={12} m={6} l={6}  label="Contact"  error={this.state.contact.showError ? this.state.contact.error : null} />    
-                    <Input  value={this.state.address.value} onChange={this.handleAddress} s={12} m={6} l={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
+                    <Input  defaultValue={this.state.address.value.trim()} onChange={this.handleAddress} s={12} m={6} l={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
                 </Row>
                 <div className='splitModalButtons'>
                     <Button onClick={this.checkForValidation}>Update</Button>
