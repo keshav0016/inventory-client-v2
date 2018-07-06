@@ -121,7 +121,8 @@ class AddAsset extends Component{
     checkForValidation(){
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
-        if(!alphaNum.test(this.state.serial_number.value)){
+        var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
+        if(!num.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: 'Enter alphabets or numbers',
@@ -137,7 +138,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alphaNum.test(this.state.serial_number.value)){
+        if(num.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: '',
@@ -217,7 +218,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alphaNum.test(this.state.invoice_number.value)){
+        if(!num.test(this.state.invoice_number.value)){
             this.setState({
                 invoice_number:Object.assign(this.state.invoice_number, {
                     error: 'Enter alphabets or number',
@@ -233,7 +234,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alphaNum.test(this.state.invoice_number.value)){
+        if(num.test(this.state.invoice_number.value)){
             this.setState({
                 invoice_number:Object.assign(this.state.invoice_number, {
                     error: '',
@@ -401,7 +402,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alphaNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && alphaNum.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
+        if(num.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
             this.setState({
                 addAssetRequest : true
             })
