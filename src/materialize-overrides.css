@@ -294,7 +294,7 @@ a.selected:hover {
 }
 
 label {
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .consumableSorting .dropdown-content.select-dropdown span{
