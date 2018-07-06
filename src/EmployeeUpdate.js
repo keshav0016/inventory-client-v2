@@ -53,7 +53,8 @@ class EmployeeUpdate extends Component{
             currentDesignation: this.props.user.designation,
             addEmployee: true,
             redirect: false,
-            login: false
+            login: false,
+            UpdateRequest: false,
             
         }
         this.handleUpdate = this.handleUpdate.bind(this)
@@ -65,6 +66,7 @@ class EmployeeUpdate extends Component{
         this.handleGender = this.handleGender.bind(this)
         this.setFields = this.setFields.bind(this)
         this.setEmail = this.setEmail.bind(this)
+        this.checkForValidation = this.checkForValidation.bind(this)
 
     }
     handleFirstname(e) {
@@ -130,8 +132,8 @@ class EmployeeUpdate extends Component{
     componentDidMount(){
         $('label').addClass('active')
     }
-   handleUpdate(){
-    var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
+    checkForValidation(){
+        var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
     if(!nameReg.test(this.state.first_name.value) ){
         this.setState({
@@ -303,60 +305,69 @@ class EmployeeUpdate extends Component{
                 }
        
         if(!this.state.department.showError && !this.state.designation.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && !this.state.email.showError){
-            axios({
-                method: 'post',
-                url: `${baseUrl}/employees/update`,
-                data:{
-                    user_id: this.props.user.user_id,
-                    first_name:this.state.first_name.value,
-                    last_name:this.state.last_name.value,
-                    age:this.state.age.value,
-                    gender: this.state.gender.value,
-                    department:this.state.department.value,
-                    designation:this.state.designation.value,
-                    email:this.state.email.value 
-                },
-                withCredentials: true
-            })
-            .then((res) => {
-                if (res.data.message === 'employee has been updated') {
-                    $('.modal-close').trigger('click')
-                    swal("Employee details has been Updated",{
-                        buttons: false,
-                        timer: 2000,
-                        })
-                        // $('.modal').hide()
-                        // $('.modal-overlay').hide()
-                        this.props.setHandleListRequest()
-
-
-                } else if (res.data.error[0].message === "email must be unique") {
-                    this.setState({
-                        email: Object.assign(this.state.email, {
-                            error:"This Email is already taken by another employee",
-                            showError:true
-                        }),
-                    })
-                    
-                } 
-
-            })
-            .catch(error => {
-                if(error.response.status === 401){
-                    this.setState({
-                        login : true
-                    })
-                }else{
-
-                    swal("can not Edit the Employee",{
-                        buttons: false,
-                        timer: 2000,
-                        })
-                }
-
-
+            this.setState({
+                UpdateRequest: true
             })
         }
+    }
+
+    handleUpdate(){
+        axios({
+            method: 'post',
+            url: `${baseUrl}/employees/update`,
+            data:{
+                user_id: this.props.user.user_id,
+                first_name:this.state.first_name.value,
+                last_name:this.state.last_name.value,
+                age:this.state.age.value,
+                gender: this.state.gender.value,
+                department:this.state.department.value,
+                designation:this.state.designation.value,
+                email:this.state.email.value 
+            },
+            withCredentials: true
+        })
+        .then((res) => {
+            if (res.data.message === 'employee has been updated') {
+                this.setState({
+                    UpdateRequest: false
+                })
+                $('.modal-close').trigger('click')
+                swal("Employee details has been Updated",{
+                    buttons: false,
+                    timer: 2000,
+                })
+                this.props.setListRequest()
+
+            } 
+            else if (res.data.error[0].message === "email must be unique") {
+                this.setState({
+                    UpdateRequest: false,
+                    email: Object.assign(this.state.email, {
+                        error:"This Email is already taken by another employee",
+                        showError:true
+                    }),
+                })
+                
+            } 
+        })
+        .catch(error => {
+            console.error(error)
+            if(error.response.status === 401){
+                this.setState({
+                    login : true
+                })
+            }else{
+
+                swal("can not Edit the Employee",{
+                    buttons: false,
+                    timer: 2000,
+                    })
+            }
+
+
+        })
+        
 
     }
     setFields(){
@@ -397,13 +408,7 @@ class EmployeeUpdate extends Component{
                 error: "",
             }
         })
-        // setTimeout((function() {
-        //     window.location.reload();
-        //   }), 2100);
-        //   $('.modal').hide()
-        //   $('.modal-overlay').hide()
-
-          this.props.setHandleListRequest()       
+        //   this.props.setListRequest()       
     }
             
     render() {
@@ -413,17 +418,17 @@ class EmployeeUpdate extends Component{
                 <h5 className="title">Edit Employee</h5>
                 <Row>
 
-                 <Input  defaultValue={this.state.first_name.value} onChange={this.handleFirstname}s={12} m={6} l={6} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
-                    <Input  defaultValue={this.state.last_name.value}onChange={this.handleLastname} s={12} m={6} l={6}label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
-                    <Input type="number"min='0' label="age" defaultValue={this.state.age.value} onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
-                    <Input s={12} m={6} l={6} type='select' label="Gender" defaultValue={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
+                 <Input  value={this.state.first_name.value} onChange={this.handleFirstname}s={12} m={6} l={6} label="First Name" error={this.state.first_name.showError ? this.state.first_name.error : null}/>
+                    <Input  value={this.state.last_name.value}onChange={this.handleLastname} s={12} m={6} l={6}label="Last Name" error={this.state.last_name.showError ? this.state.last_name.error : null}/>
+                    <Input type="number"min='0' label="age" value={this.state.age.value} onChange={this.handleAge}s={12} m={6} l={6} error={this.state.age.showError ? this.state.age.error : null}/>
+                    <Input s={12} m={6} l={6} type='select' label="Gender" value={this.state.gender.value} onChange={this.handleGender} error={this.state.gender.showError ? this.state.gender.error : null}>
                         <option value='select'>select</option>
                         <option value='Male'>Male</option>
                         <option value='Female'>Female</option>
                         <option value='Other'>Other</option>
                     </Input>
-                    <Input s={12} m={6} l={6}  label="Email*" type = "email" onChange={this.setEmail} defaultValue={this.state.email.value} error={this.state.email.showError ? this.state.email.error : null}/>
-                    <Input s={12} m={6} l={6} type='select' label="Department" onChange={this.handleDepartment} defaultValue={this.state.department.value} error={this.state.department.showError ? this.state.department.error : null}>
+                    <Input s={12} m={6} l={6}  label="Email*" type = "email" onChange={this.setEmail} value={this.state.email.value} error={this.state.email.showError ? this.state.email.error : null}/>
+                    <Input s={12} m={6} l={6} type='select' label="Department" onChange={this.handleDepartment} value={this.state.department.value} error={this.state.department.showError ? this.state.department.error : null}>
                     <option value='HR'>HR</option>
                     <option value='Delivery'>Delivery</option>
                     <option value='Finance/Accounting'>Finance/Accounting</option>
@@ -435,7 +440,7 @@ class EmployeeUpdate extends Component{
                     {/* <Input type="text"  defaultValue={this.state.designation.value} label="Current Designation" s={12} m={6} l={6} disabled/> */}
 
                     {/* <p style={{display: "block", marginLeft: "10px"}}>Current Designation: <b>{this.state.currentDesignation}</b></p> */}
-                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="New Designation"  defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="New Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Team Lead'>Team Lead</option>
                         <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>
@@ -445,36 +450,36 @@ class EmployeeUpdate extends Component{
 
 
                     </Input> : null}
-                    {this.state.department.value === 'HR' ? <Input s={12} m={6} l={6} type='select'  label="Designation"  defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'HR' ? <Input s={12} m={6} l={6} type='select'  label="Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Sr.HR Manager'>Sr.HR Manager</option>
                         <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
                     </Input> : null }
-                    {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select'  label="Designation"  defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Delivery' ? <Input s={12} m={6} l={6} type='select'  label="Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Delivery Manager'>Delivery Manager</option>
                         <option value='Sr.Project Manager'>Sr.Project Manager</option>
                         <option value='Project Manager'>Project Manager</option>
                     </Input> : null }
-                    {this.state.department.value === 'Finance/Accounting' ?<Input s={12} m={6} l={6} type='select' label="Designation"  defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
+                    {this.state.department.value === 'Finance/Accounting' ?<Input s={12} m={6} l={6} type='select' label="Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
                     <option value='select'>select</option>
                     <option value='Finance Director'>Finance Director</option></Input>: null }
-                    {this.state.department.value === 'Pre sales' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue={this.state.designation.value}onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Pre sales' ? <Input s={12} m={6} l={6} type='select'  label="Designation" value={this.state.designation.value}onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Lead Presales'>Lead Presales</option>
                         <option value='Presales Associate'>Presales Associate</option>
                     </Input> : null }
-                    {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select'  label="Designation"  defaultValue={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select'  label="Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='QA Lead'>QA Lead</option>
                         <option value='Software Test Engineer'>Software Test Engineer</option>
                     </Input> : null}
                 </Row>
                     <div className="splitModalButtons">
-                        <Button className='addbtn' onClick={this.handleUpdate}>Update</Button>
+                        <Button className='addbtn' onClick={this.checkForValidation}>Update</Button>
                         <Button onClick={this.setFields} className="cancelButton modal-close">Cancel</Button>                
                     </div>
-
+                {this.state.UpdateRequest ? this.handleUpdate() : null}
             </div>
         )
     }

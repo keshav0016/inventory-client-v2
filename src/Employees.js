@@ -38,14 +38,11 @@ class EmployeesList extends Component {
 
  
 
-  setHandleListRequest(){
+setHandleListRequest(){
     this.setState({
       handleListRequest : true
     })
-    // $(".modal-overlay").click()
-    // window.location.reload();
-
-  }
+}
 
   handleList(){
     axios({
@@ -60,7 +57,7 @@ class EmployeesList extends Component {
         handleListRequest : false,
         loading: false
       })
-      $('.modal-overlay').trigger('click')
+      // $('.modal-overlay').trigger('click')
     })
     .catch(error => {
       if(error.response.status === 401){
@@ -108,7 +105,7 @@ class EmployeesList extends Component {
           actions={null}
           className='editAssetBottomPadding'
           trigger={<NavItem >Edit</NavItem >}>
-          <EmployeeUpdate user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
+          <EmployeeUpdate user={this.state.data[key]} setListRequest={this.setHandleListRequest} />
         </Modal>
         <NavItem href={`/admin/employees/details/${item.user_id}`}>Items Held</NavItem>
       </Dropdown>
