@@ -388,4 +388,10 @@ input[type=number] {
    
 }
 
+.editButton {
+    width: 100%;
+    color:#26a69a;
+    border: none;
+    font-size: 16px;
+}
 
