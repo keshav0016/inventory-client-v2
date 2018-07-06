@@ -228,7 +228,7 @@ class EmployeeUpdate extends Component{
                 })
               })
             }
-            else if(this.state.age.value >= 18 && this.state.age.value < 70){
+            else if(this.state.age.value >= 18 && this.state.age.value <= 70){
               this.setState({
                 age: Object.assign(this.state.age, {
                     error: '',
