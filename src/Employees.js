@@ -26,7 +26,8 @@ class EmployeesList extends Component {
       handleListRequest : true,
       loading : true,
       redirect: false
-
+      ,showModal : false
+      ,currentItem : null
      
     }
     this.handleList = this.handleList.bind(this)
@@ -34,14 +35,24 @@ class EmployeesList extends Component {
     this.setHandleListRequest = this.setHandleListRequest.bind(this)
     this.renderDropdown = this.renderDropdown.bind(this)
     this.setSearch = this.setSearch.bind(this)
+    this.handleUpdateModalClose = this.handleUpdateModalClose.bind(this)
+    
   }
 
  
+  handleUpdateModalClose(){
+    this.setState({
+        showModal : false
+        ,currentItem : null
+    })
+}
 
 setHandleListRequest(){
     this.setState({
       handleListRequest : true
     })
+    $('.modal-overlay').trigger('click')
+
 }
 
   handleList(){
@@ -100,13 +111,17 @@ setHandleListRequest(){
           trigger={<NavItem >Disable</NavItem >}>
           <EmployeeDelete user={this.state.data[key]} setHandleListRequest={this.setHandleListRequest} />
         </Modal>
-        <Modal
+        <button className="editButton" onClick={() => {this.setState({
+                showModal : true
+                , currentItem : item
+            })}}>Edit</button>
+        {/* <Modal
           modalOptions={{dismissible: false}}        
           actions={null}
           className='editAssetBottomPadding'
           trigger={<NavItem >Edit</NavItem >}>
           <EmployeeUpdate user={this.state.data[key]} setListRequest={this.setHandleListRequest} />
-        </Modal>
+        </Modal> */}
         <NavItem href={`/admin/employees/details/${item.user_id}`}>Items Held</NavItem>
       </Dropdown>
   }
@@ -186,7 +201,16 @@ setHandleListRequest(){
                     </Col>
                 </div>)}
           <Link to={{ pathname : '/admin/employees/create',setHandleListRequest : this.setHandleListRequest}}><Button fab="vertical" floating large className = 'red' waves = 'light' icon = 'add' /></Link>
-                
+          {this.state.showModal ? (
+                    <Modal
+                        modalOptions={{ dismissible: false }}
+                        open={this.state.showModal}
+                        actions={null}
+                        className='editAssetBottomPadding'>
+                        <EmployeeUpdate onFinish={this.handleUpdateModalClose} user={this.state.currentItem} setHandleListRequest={this.setHandleListRequest} />
+                    </Modal>
+
+                ) : null}
           <div>
             {this.state.data.length === 0 || this.state.pagination.totalPage < 2 ? null : <Pagination className='pagination' items={this.state.pagination.totalPage} activePage={this.state.page} maxButtons={5} onSelect = {this.setPage} />}
           </div> 

@@ -129,9 +129,7 @@ class EmployeeUpdate extends Component{
             })
         })
     }
-    componentDidMount(){
-        $('label').addClass('active')
-    }
+   
     checkForValidation(){
         var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
@@ -311,6 +309,14 @@ class EmployeeUpdate extends Component{
         }
     }
 
+    componentDidMount(){
+        $('label').addClass('active')
+    }
+
+    componentDidUpdate(){
+        $('label').addClass('active')
+    }
+
     handleUpdate(){
         axios({
             method: 'post',
@@ -337,7 +343,7 @@ class EmployeeUpdate extends Component{
                     buttons: false,
                     timer: 2000,
                 })
-                this.props.setListRequest()
+                this.props.setHandleListRequest()
 
             } 
             else if (res.data.error[0].message === "email must be unique") {
@@ -408,6 +414,7 @@ class EmployeeUpdate extends Component{
                 error: "",
             }
         })
+        this.props.onFinish()
         //   this.props.setListRequest()       
     }
             
