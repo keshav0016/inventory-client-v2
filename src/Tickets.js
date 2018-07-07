@@ -15,6 +15,7 @@ class Tickets extends Component{
         super(props)
         this.state = {
             availableItems: [],
+            availableAssets: [],
             user_id: this.props.user_id,
             requestResource: false,
             quantity:{
@@ -33,8 +34,15 @@ class Tickets extends Component{
                 ,error : ''
                 ,showError : false
             },
+            asset: {
+                value : 'Select'
+                ,error : ''
+                ,showError : false
+            },
             disableItems : true,
-            redirect: false
+            itemType: false,
+            redirect: false,
+            assetsInput: false
         }
         // this.requestQuantity = this.requestQuantity.bind(this)
         this.requestResourceType = this.requestResourceType.bind(this)
@@ -43,6 +51,8 @@ class Tickets extends Component{
         this.requestUser = this.requestUser.bind(this)
         this.itemTypeDropdown = this.itemTypeDropdown.bind(this)
         this.cancelAll = this.cancelAll.bind(this)
+        this.itemList = this.itemList.bind(this)
+        this.requestAsset = this.requestAsset.bind(this)
     }
     requestResourceType(e){
         if(e.target.value !== 'Select'){
@@ -50,7 +60,8 @@ class Tickets extends Component{
                 item: Object.assign(this.state.item, {
                     value : e.target.value
                     ,showError : false
-                })
+                }),
+                itemType: true
             })
         }
         else{
@@ -60,6 +71,48 @@ class Tickets extends Component{
                 })
             })
         }
+    }
+    
+    requestAsset(e){
+        this.setState({
+            asset: Object.assign(this.state.asset, {
+                value : e.target.value
+            })
+        })
+    }
+
+    //sending request to get assets for the selected asset type
+    itemList(){
+        if(this.state.item_type.value === "assets"){
+        axios({
+            method:'get',
+            url:`${baseUrl}/employee/ticket/listAssets?assetType=${this.state.item.value}`,
+               withCredentials:true
+           })
+           .then((res) => {
+               this.setState({
+                   availableAssets: res.data.assetsArr,
+                   itemType: false ,
+                   assetsInput: true
+               })
+           })
+           .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect: true
+                    })
+                }
+                swal('There are no resources available',{
+                    buttons: false,
+                    timer: 2000,
+                })
+            })
+        }
+        // else{
+        //     this.setState({
+        //         assetsInput: false
+        //     })
+        // }
     }
 
     // requestQuantity(e){
@@ -122,10 +175,18 @@ class Tickets extends Component{
         }
         else{
             for(let index = this.state.assets + 1; index < this.state.availableItems.length; index++){
-                itemArr.push(<option key={index} value={this.state.availableItems[index]}>{this.state.availableItems[index]}</option>)
+                itemArr.push(<option key={index} value={this.state.availableAssets[index]}>{this.state.availableItems[index]}</option>)
             }
         }
         return itemArr
+    }
+    assetsDropdown(){
+        var assetsList = []
+        assetsList.push(<option key='Select' value='Select'>Select</option>)
+        for(let index = 0; index <= this.state.availableAssets.length; index++){
+            assetsList.push(<option key={index} value={this.state.availableAssets[index]}>{this.state.availableAssets[index]}</option>)
+        }
+        return assetsList
     }
 
     checkForValidation(){
@@ -231,7 +292,8 @@ class Tickets extends Component{
                 disableItems : true
                 ,item_type : Object.assign(this.state.item_type, {
                     value : 'Select'
-                })
+                }),
+                assetsInput: false
             })
             if(res.data.message){
                 // window.Materialize.toast(res.data.message, 4000)
@@ -291,6 +353,7 @@ class Tickets extends Component{
             timer: 2000,
           })
     })
+   
     $('label').addClass('active')
    }
 
@@ -323,6 +386,7 @@ class Tickets extends Component{
 
    render(){
        return(
+           
            <div className="" >
                 <h3 className="title">Ticket Request</h3>
                 <div className ='RequestForm'>
@@ -333,11 +397,19 @@ class Tickets extends Component{
                         <option value='consumables'>Consumables</option>                        
                     </Input>
                 </Row>
+                {this.state.itemType ? this.itemList(): null}
                 <Row>
                     <Input s={12} label='Items' type='select' value={this.state.disableItems ? 'Select' : this.state.item.value} onChange={this.requestResourceType}  error={this.state.item.showError ? this.state.item.error : null}>
                         {this.itemDropdown()}
                     </Input>
                 </Row>
+                {this.state.assetsInput ? (
+                     <Row>
+                     <Input s={12} label='Assets' type='select' value={this.state.disableItems ? 'Select' : this.state.asset.value} onChange={this.requestAsset}  error={this.state.asset.showError ? this.state.asset.error : null}>
+                         {this.assetsDropdown()}
+                     </Input>
+                 </Row>
+                 ) : null}
                 <Row>
                     <Input  s={12} label="Quantity" type="number" min={0} value = {this.state.quantity.value}  error={this.state.quantity.showError ? this.state.quantity.error : null}/>
                 </Row>
