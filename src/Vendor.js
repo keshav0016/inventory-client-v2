@@ -146,7 +146,8 @@ class Vendor extends Component{
                                                 <h6><b>Address</b> : {item.address}</h6>                                                                                                     
                                             </div>
                                             <div style={{float : 'right'}}>
-                                                <h6><b>Contact No.</b> : {item.contact}</h6>                                                                                                                
+                                                <h6><b>Contact No.</b> : {item.contact}</h6>   
+                                                <h6><b>Landline No.</b> : {item.landline.code}-{item.landline.number}</h6>                                                                                                              
                                                 {this.renderButton(index)}
                                             </div>
                                         </div>

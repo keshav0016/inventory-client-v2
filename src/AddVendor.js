@@ -72,7 +72,7 @@ class AddVendor extends Component{
         var precandtrail = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
         var stdCode = /^0[0-9]\d{3,5}$/
         var number = /^[1-9]\d{7,10}$/
-        var landline = /^0[0-9]\d{11,13}$/
+        var landline = /^0[0-9]\d{9,11}$/
 
         // if(!alphaNum.test(this.state.name.value)){
         //     this.setState({
@@ -297,7 +297,7 @@ class AddVendor extends Component{
               
             })
         }
-        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && stdCode.test(Number(this.state.std.value)) && !this.state.number.showError){
+        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && stdCode.test(this.state.std.value) && !this.state.number.showError){
             this.setState({
                 addVendorRequest: true
             })
