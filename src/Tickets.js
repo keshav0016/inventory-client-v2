@@ -378,7 +378,8 @@ class Tickets extends Component{
                 value : 'Select'
                 ,error : ''
                 ,showError : false
-            }
+            },
+            assetsInput: false
        })
        $(".modal-overlay").trigger('click');        
     }

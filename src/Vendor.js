@@ -116,6 +116,8 @@ class Vendor extends Component{
                             <th data-field="name">Vendor Name</th>
                             <th data-field="address">Address</th>
                             <th data-field="contact">Contact No</th>
+                            <th data-field="landline">LandLine No</th>
+                            
                             
                         </tr>
                     </thead>
@@ -127,6 +129,7 @@ class Vendor extends Component{
                             <td>{item.name}</td>
                             <td style={{wordBreak : 'break-word', width: '40%'}}>{item.address}</td>
                             <td className='vendorContact' >{item.contact}</td>
+                            <td className='vendorContact' >{item.landline.code} - {item.landline.number}</td>
                             <td>{this.renderButton(key)}</td>
                             </tr>
                         })}
