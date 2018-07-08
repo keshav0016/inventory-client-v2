@@ -98,14 +98,18 @@ class Tickets extends Component{
            })
            .catch(error => {
                 if(error.response.status === 401){
+                    $('.modal-overlay').remove()
+                    $('body').removeAttr( 'style' )
                     this.setState({
                         redirect: true
                     })
+                }else{
+
+                    swal('There are no resources available',{
+                        buttons: false,
+                        timer: 2000,
+                    })
                 }
-                swal('There are no resources available',{
-                    buttons: false,
-                    timer: 2000,
-                })
             })
         }
         // else{
@@ -322,6 +326,8 @@ class Tickets extends Component{
         .catch(error => {
             // window.Materialize.toast('sorry, request can not be made', 4000)
             if(error.response.status === 401){
+                $('.modal-overlay').remove()
+                $('body').removeAttr( 'style' )
                 this.setState({
                     redirect: true
                 })
@@ -344,14 +350,18 @@ class Tickets extends Component{
        })
        .catch(error => {
         if(error.response.status === 401){
+            $('.modal-overlay').remove()
+            $('body').removeAttr( 'style' )
             this.setState({
                 redirect: true
             })
+        }else{
+
+            swal('There are no resources available',{
+                buttons: false,
+                timer: 2000,
+            })
         }
-        swal('There are no resources available',{
-            buttons: false,
-            timer: 2000,
-          })
     })
    
     $('label').addClass('active')

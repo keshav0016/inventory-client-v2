@@ -4,7 +4,8 @@ import axios from 'axios';
 import {Row, Input, Button} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
-import swal from 'sweetalert'
+import swal from 'sweetalert';
+import {Redirect} from 'react-router-dom'
 
 class EmployeeUpdate extends Component{
     constructor(props){
@@ -360,6 +361,8 @@ class EmployeeUpdate extends Component{
         .catch(error => {
             console.error(error)
             if(error.response.status === 401){
+                $('.modal-overlay').remove()
+                $('body').removeAttr( 'style' )
                 this.setState({
                     login : true
                 })
@@ -487,6 +490,12 @@ class EmployeeUpdate extends Component{
                         <Button onClick={this.setFields} className="cancelButton modal-close">Cancel</Button>                
                     </div>
                 {this.state.UpdateRequest ? this.handleUpdate() : null}
+                {this.state.login ? <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            /> : null}
             </div>
         )
     }
