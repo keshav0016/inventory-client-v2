@@ -424,6 +424,8 @@ class AddVendor extends Component{
         })
         .catch(error => {
             if(error.response.status === 401){
+                $('.modal-overlay').remove()
+                $('body').removeAttr( 'style' )
                 this.setState({
                     redirect: true
                 })

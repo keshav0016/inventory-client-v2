@@ -52,13 +52,15 @@ class Profile extends Component{
                 this.setState({
                     redirect: true
                 })
+            }else{
+
+                swal('User details not found',{
+                    buttons: false,
+                    timer: 2000,
+                })
             }
             
             // window.Materialize.toast('user details not found',3000)
-            swal('User details not found',{
-                buttons: false,
-                timer: 2000,
-              })
         })
        
     }

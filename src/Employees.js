@@ -75,12 +75,14 @@ setHandleListRequest(){
         this.setState({
             redirect: true
         })
-    }
+      }else{
+
+        swal("List not Found",{
+          buttons: false,
+          timer: 2000,
+        })
+      }
       // window.Materialize.toast('list not found',3000)
-      swal("List not Found",{
-        buttons: false,
-        timer: 2000,
-      })
     })
   }
 

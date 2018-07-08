@@ -160,6 +160,8 @@ class TicketsList extends Component{
         .catch(error => {
 
             if(error.response.status === 401){
+                $('.modal-overlay').remove()
+                $('body').removeAttr( 'style' )
                 this.setState({
                     redirect: true
                 })
@@ -233,6 +235,8 @@ class TicketsList extends Component{
         .catch(error =>{
 
             if(error.response.status === 401){
+                $('.modal-overlay').remove()
+                $('body').removeAttr( 'style' )
                 this.setState({
                     redirect: true
                 })
@@ -291,15 +295,19 @@ class TicketsList extends Component{
             .catch(error =>{
     
                 if(error.response.status === 401){
+                    $('.modal-overlay').remove()
+                    $('body').removeAttr( 'style' )
                     this.setState({
                         redirect: true
                     })
+                }else{
+
+                    swal(error.data.error,{
+                        buttons: false,
+                        timer: 2000,
+                    })
                 }
                 // window.Materialize.toast(error.data.error,4000)
-                swal(error.data.error,{
-                    buttons: false,
-                    timer: 2000,
-                  })
             })
         }
     }
@@ -321,6 +329,8 @@ class TicketsList extends Component{
         .catch(error => {
 
             if(error.response.status === 401){
+                $('.modal-overlay').remove()
+                $('body').removeAttr( 'style' )
                 this.setState({
                     redirect: true
                 })

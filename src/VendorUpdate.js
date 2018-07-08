@@ -336,18 +336,22 @@ class VendorUpdate extends Component{
        })
        .catch(error => {
            if(error.response.status === 401){
+            $('.modal-overlay').remove()
+            $('body').removeAttr( 'style' )
                this.setState({
-                   redirect: true
+                   redirect: true,
+                   update: false
+               })
+           }else{
+
+               swal('can not edit vendor',{
+                   buttons: false,
+                   timer: 2000,
+                 })
+                this.setState({
+                   update : false
                })
            }
-        //  window.Materialize.toast('can not edit vendor', 4000)
-        swal('can not edit vendor',{
-            buttons: false,
-            timer: 2000,
-          })
-         this.setState({
-            update : false
-        })
        })
    }
 
