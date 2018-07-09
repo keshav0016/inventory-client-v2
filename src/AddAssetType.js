@@ -198,6 +198,13 @@ class AddAssetType extends Component{
                 showError: false
             }
         })
+        // if(this.props.setAssetTypeListRequest){
+        //     this.props.setAssetTypeListRequest()
+        // }
+        // else{
+        //     this.props.setHandleListRequest()
+        // }
+        
         $(".modal-overlay").trigger('click');
     }
     
@@ -206,7 +213,7 @@ class AddAssetType extends Component{
             <div className="no-footer">
                 <h5 className='title' >Add Asset Type</h5 >
                 <Row>
-                    <Input s={12} defaultValue={this.state.assetType.value.trim()} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
+                    <Input s={12} defaultValue={this.state.assetType.value.trim()} value={this.state.assetType.value} label="Asset Type*" onChange={this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null}/>
                     <Input s={12} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                 <div className="splitModalButtons">

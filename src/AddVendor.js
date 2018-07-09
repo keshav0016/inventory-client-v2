@@ -468,6 +468,12 @@ class AddVendor extends Component{
                 showError: false
             },
         })
+        // if(this.props.setVendorListRequest){
+        //     this.props.setVendorListRequest()
+        // }                
+        // else{
+        //     this.props.setHandleListRequest(true)
+        // }
         $(".modal-overlay").trigger('click');        
     }
 
@@ -484,13 +490,14 @@ class AddVendor extends Component{
             <div className="no-footer">
                 <h5 className='title'>Add Vendor</h5 >
                 <Row>
-                    <Input s={12} m={6} l={6} label="Vendor Name" defaultValue = {this.state.name.value.trim()} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
-                    <Input s={12} m={6} l={6} label="Address" defaultValue = {this.state.address.value.trim()} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
+                    <Input s={12} m={6} l={6} label="Vendor Name" defaultValue = {this.state.name.value.trim()} value={this.state.name.value} onChange = {this.setName} error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input s={12} m={6} l={6} label="Address" defaultValue = {this.state.address.value.trim()} value={this.state.address.value} onChange = {this.setAddress} error={this.state.address.showError ? this.state.address.error : null} />
                     <Input s={12} m={6} l={6} className="vendorContact" 
                         type="number" label="Mobile No"  value = {this.state.contact.value} 
                         onChange ={this.setContact}  
                         error={this.state.contact.showError ? this.state.contact.error : null} >
                     </Input>
+                    {/* <h5 className="landlineText">landline:</h5> */}
                     <Input s={2} m={2} l={2} className="vendorContact" 
                         type="number" label="STD code"  value = {this.state.std.value} 
                         onChange ={this.setStd}  
