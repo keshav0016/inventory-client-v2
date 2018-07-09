@@ -128,7 +128,7 @@ class Vendor extends Component{
                             <td>{item.name}</td>
                             <td style={{wordBreak : 'break-word', width: '40%'}}>{item.address}</td>
                             <td className='vendorContact' >{item.contact}</td>
-                            <td className='vendorContact' >{item.landline ? (item.landline.code !==null && item.landline.number !==null ? `${item.landline.code}-${item.landline.number}` :null ): null } </td>
+                            <td className='vendorContact' >{item.landline !==null ? (item.landline.code !==null && item.landline.number !==null ? `${item.landline.code}-${item.landline.number}` :null ): null } </td>
                             <td>{this.renderButton(key)}</td>
                             </tr>
                         })}
