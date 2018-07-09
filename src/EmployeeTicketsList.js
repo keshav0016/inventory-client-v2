@@ -218,6 +218,7 @@ class EmployeeTicketsList extends Component{
                                     <th data-field="ticket_number">Ticket Number</th>
                                     <th data-field="date">Requested Date</th>
                                     <th data-field="requestedItem">Requested Item</th>
+                                    <th data-field="requestedAsset">Requested Asset</th>
                                     <th data-field="quantity">Quantity</th>
                                     <th data-field="status">Status</th>
                                     <th data-field='remarks'>Remarks</th>
@@ -229,6 +230,7 @@ class EmployeeTicketsList extends Component{
                                         <td>{ticket.ticket_number}</td>
                                         <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item}`: `${ticket.requested_consumable_item}`}</td>
+                                        <td>{ticket.requested_asset_item ? `${ticket.asset_name}`: `-`}   </td> 
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status !== 'Pending' ? `${ticket.reason}` : '-'}</td>

@@ -251,6 +251,14 @@ class Tickets extends Component{
                 })
             })
         }
+        if (this.state.asset.value === 'Select') {
+            this.setState({
+                asset : Object.assign(this.state.asset, {
+                    error : 'Asset is required'
+                    ,showError: true
+                })
+            })
+        }
 
         if(!this.state.quantity.showError && !this.state.item.showError && !this.state.item_type.showError){
             this.setState({
@@ -281,6 +289,7 @@ class Tickets extends Component{
                 item: this.state.item.value,
                 item_type:this.state.item_type.value,
                 quantity:this.state.quantity.value,
+                assetName: this.state.asset.value
             },
             withCredentials:true
         })
