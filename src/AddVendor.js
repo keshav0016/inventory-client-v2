@@ -70,9 +70,9 @@ class AddVendor extends Component{
         var preceeding = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
         var trailing = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
         var precandtrail = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
-        var stdCode = /^[0][0-9]\d$/
+        var stdCode = /^[0-9]\d{4}$/
         var number = /^[1-9]\d{7,10}$/
-        var landline = /^0[0-9]\d{9,11}$/
+        var landline = /^[0-9]\d{9,12}$/
 
         // if(!alphaNum.test(this.state.name.value)){
         //     this.setState({
@@ -252,7 +252,14 @@ class AddVendor extends Component{
                 })
             })
         }
-        
+        if(stdCode.test(this.state.std.value)){
+            this.setState({
+                std:Object.assign(this.state.std, {
+                    error: '',
+                    showError: false
+                })
+            })
+        }
         
         //validation for number
         if(!number.test(Number(this.state.number.value))){
@@ -273,6 +280,19 @@ class AddVendor extends Component{
                 std:Object.assign(this.state.std, {
                     error: 'Enter valid landline ',
                     showError: true
+                })
+              
+            })
+        }
+        if(landline.test(this.state.std.value+this.state.number.value)){
+            this.setState({
+                number:Object.assign(this.state.number, {
+                    error: '',
+                    showError: false
+                }),
+                std:Object.assign(this.state.std, {
+                    error: '',
+                    showError: false
                 })
               
             })
