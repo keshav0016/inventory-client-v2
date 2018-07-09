@@ -70,7 +70,7 @@ class AddVendor extends Component{
         var preceeding = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
         var trailing = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
         var precandtrail = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
-        var stdCode = /^0[0-9]\d{3,5}$/
+        var stdCode = /^[0][0-9]\d$/
         var number = /^[1-9]\d{7,10}$/
         var landline = /^0[0-9]\d{9,11}$/
 
@@ -222,23 +222,28 @@ class AddVendor extends Component{
 
 
         //validation for std code
-        if(!Number(this.state.std.value.length) > 3){
-            this.setState({
-                std:Object.assign(this.state.std, {
-                    error: 'Enter valid code',
-                    showError: true
-                })
-            })
-        }
 
-        if(!this.state.std.value){
-            this.setState({
-                std:Object.assign(this.state.std, {
-                    error: 'STD code is required',
-                    showError: true
-                })
+    if(!this.state.std.value && !this.state.number.value){
+        this.setState({
+            number:Object.assign(this.state.number, {
+                error: '',
+                showError: false
+            }),
+            std:Object.assign(this.state.std, {
+                error: '',
+                showError: false
             })
-        }
+        })
+        
+    }else{
+        // if(!Number(this.state.std.value.length) >= 3){
+        //     this.setState({
+        //         std:Object.assign(this.state.std, {
+        //             error: 'Enter valid code',
+        //             showError: true
+        //         })
+        //     })
+        // }
         if(!stdCode.test(this.state.std.value)){
             this.setState({
                 std:Object.assign(this.state.std, {
@@ -250,15 +255,6 @@ class AddVendor extends Component{
         
         
         //validation for number
-
-        if(!this.state.number.value){
-            this.setState({
-                number:Object.assign(this.state.number, {
-                    error: 'Number is required',
-                    showError: true
-                })
-            })
-        }
         if(!number.test(Number(this.state.number.value))){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -267,22 +263,6 @@ class AddVendor extends Component{
                 })
             })
         }
-
-        //validation for both number and std code
-
-        // if(!landline.test(Number(this.state.std.value+this.state.number.value))){
-        //     this.setState({
-        //         number:Object.assign(this.state.number, {
-        //             error: '',
-        //             showError: true
-        //         }),
-        //         std:Object.assign(this.state.std, {
-        //             error: 'Enter a valid landline number',
-        //             showError: true
-        //         })
-              
-        //     })
-        // }
 
         if(!landline.test(this.state.std.value+this.state.number.value)){
             this.setState({
@@ -297,7 +277,8 @@ class AddVendor extends Component{
               
             })
         }
-        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && stdCode.test(this.state.std.value) && !this.state.number.showError){
+    }
+        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && !this.state.std.showError && !this.state.number.showError){
             this.setState({
                 addVendorRequest: true
             })
