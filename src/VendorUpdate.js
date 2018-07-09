@@ -399,9 +399,9 @@ class VendorUpdate extends Component{
                 <h5 className="title">Update Vendor</h5 >
                 <Row>
                     {/* <Input  value={this.state.id.value} onChange={this.handleId}s={12} m={6} l={6} label="Id" error={this.state.id.showError ? this.state.id.error : null} />       */}
-                    <Input  defaultValue={this.state.name.value.trim()} onChange={this.handleName}s={12} m={6} l={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
+                    <Input  defaultValue={this.state.name.value.trim()} value={this.state.name.value}onChange={this.handleName}s={12} m={6} l={6} label="Name" error={this.state.name.showError ? this.state.name.error : null} />
                     <Input  type="number" value={this.state.contact.value} className="vendorContact" onChange={this.handleContact}s={12} m={6} l={6}  label="Contact"  error={this.state.contact.showError ? this.state.contact.error : null} />    
-                    <Input  defaultValue={this.state.address.value.trim()} onChange={this.handleAddress} s={12} m={6} l={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
+                    <Input  defaultValue={this.state.address.value.trim()} value={this.state.address.value} onChange={this.handleAddress} s={12} m={6} l={6} label="Address" error={this.state.address.showError ? this.state.address.error : null} />
                     <Input s={2} m={2} l={2} className="vendorContact" 
                         type="number" label="STD code"  value = {this.state.std.value} 
                         onChange ={this.handleStd}  
