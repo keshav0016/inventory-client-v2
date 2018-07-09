@@ -347,7 +347,7 @@ class TicketsList extends Component{
         })
 
         if(response.data.assets.length){
-            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}`
+            window.location = `/admin/tickets/asset/accept/${ticket.ticket_number}?asset=${ticket.asset_name}`
         }
         else{
             swal("No available Asset for this Type",{
@@ -459,6 +459,7 @@ class TicketsList extends Component{
                                         <th data-field="employeeName">Employee</th>
                                         <th data-field="date">Request Date</th>
                                         <th data-field="requestedItem">Item</th>
+                                        <th data-field="requestedAsset">Requested Asset</th>
                                         <th data-field="quantity">Quantity</th>
                                         <th data-field="status">Status</th>
                                     </tr>
@@ -471,6 +472,7 @@ class TicketsList extends Component{
                                         <td>{ticket.user !== null? ticket.user.first_name + " " + ticket.user.last_name : <b style={{color:'teal'}}>Employee has left</b>}</td>
                                         <td>{moment(ticket.date).format('DD MMM YYYY')}</td>
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
+                                        <td>{ticket.requested_asset_item ? `${ticket.asset_name}` : `-`}</td>    
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
                                         <td>{ticket.status === 'Pending' && ticket.user !== null ? <Button onClick = {async () => {await this.renderAcceptAssetTicket(ticket)}} floating icon='done'></Button> : null}</td>
@@ -499,6 +501,7 @@ class TicketsList extends Component{
                                                         <h6><b>Employee</b> : {item.user !== null ? item.user.first_name + " " + item.user.last_name : <b style={{ color: 'teal' }}>Employee has left</b>}</h6>
                                                         <h6><b>Request Date</b> : {moment(item.date).format('DD MMM YYYY')}</h6>
                                                         <h6><b>Item</b> : {item.requested_asset_item ? `${item.requested_asset_item} ` : `${item.requested_consumable_item} `}</h6>
+                                                        <h6><b>Requested Asset</b> : {item.requested_asset_item ? `${item.asset_name}` : `-`}</h6>
                                                     </div>
                                                     <div style={{ float: 'right' }}>
                                                         <h6><b>Quantity</b> : {item.quantity}</h6>

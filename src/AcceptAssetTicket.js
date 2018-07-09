@@ -30,6 +30,11 @@ class AcceptAssetTicket extends Component{
                 error: '',
                 showError: false
             }
+            ,asset : {
+                value: this.props.location.search.slice(1).split('=')[1],
+                error: '',
+                showError: false
+            }
             ,unAuth : false
             ,loading : true
             ,redirect : false
@@ -44,6 +49,7 @@ class AcceptAssetTicket extends Component{
         this.checkForValidation = this.checkForValidation.bind(this)
         this.clear = this.clear.bind(this)
         this.setReason = this.setReason.bind(this)
+        // this.setAsset = this.setAsset.bind(this)
     }
 
     clear(){
@@ -120,7 +126,7 @@ class AcceptAssetTicket extends Component{
             })
         }
 
-        if(!this.state.expected_recovery.showError && !this.state.currentAssetSelected.showError && alphaNum.test(this.state.reason.value)){
+        if(!this.state.expected_recovery.showError && alphaNum.test(this.state.reason.value)){
             this.setState({
                 acceptTicketRequest : true
             })
@@ -160,6 +166,11 @@ class AcceptAssetTicket extends Component{
     componentDidMount(){
         this.fetchAvailableAssets()
     }
+    // setAsset(e){
+    //     this.setState({
+    //         asset : 
+    //     })
+    // }
 
     availableAssetsDropdown(){
         var availableAssetsArr = []
@@ -192,7 +203,8 @@ class AcceptAssetTicket extends Component{
                 ticket_number:this.props.match.params.ticket,
                 expected_recovery : this.state.expected_recovery.value
                 ,reason : this.state.reason.value
-                ,requested_asset_id : this.state.currentAssetSelected.value.asset_id
+                ,requested_asset_id : this.state.currentAssetSelected.value.asset_id,
+                asset : this.props.location.search.slice(1).split('=')[1]
             },
             withCredentials:true
         })
@@ -276,11 +288,22 @@ class AcceptAssetTicket extends Component{
                                 error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} 
                             />
                         </Row>
+                        {/* <Row>
+                            <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select'
+                             onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} 
+                             error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>
+                             {this.availableAssetsDropdown()}
+                            </Input>
+                        </Row> */}
                         <Row>
-                            <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason.value} error={this.state.reason.showError ? this.state.reason.error : null}/>
+                            <Input s={12} m={6} l={6} label = "Requested Asset" type = 'text'
+                                 onChange = {this.setAsset} value={this.state.asset.value} 
+                                 error={this.state.asset.showError ? this.state.asset.error : null}
+                            />
+                            
                         </Row>
                         <Row>
-                            <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select' onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>{this.availableAssetsDropdown()}</Input>
+                            <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason.value} error={this.state.reason.showError ? this.state.reason.error : null}/>
                         </Row>
                         {this.state.currentAssetSelected.serial_number ? 
                         <div>
