@@ -117,6 +117,8 @@ class VendorUpdate extends Component{
         var stdCode = /^0[0-9]\d{3,5}$/
         var number = /^[1-9]\d{7,10}$/
         var landline = /^0[0-9]\d{9,11}$/
+        var addressReg = /^\s{0,}[a-zA-Z0-9,:-]*[a-zA-Z,:-]{1}[a-zA-Z0-9,:-]*(\s{1}[a-zA-Z0-9,:-]+)*\s{0,}$/
+
     
         if(!this.state.name.value){
             this.setState({
@@ -150,7 +152,7 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.address.value && !alphaNum.test(this.state.address.value)){
+        if(this.state.address.value && !addressReg.test(this.state.address.value)){
             this.setState({
                 address:Object.assign(this.state.address, {
                     error: 'Enter a valid address without special characters',
@@ -158,7 +160,7 @@ class VendorUpdate extends Component{
                 })
             })
         }
-        if(this.state.address.value && alphaNum.test(this.state.address.value)){
+        if(this.state.address.value && addressReg.test(this.state.address.value)){
             this.setState({
                 address:Object.assign(this.state.address, {
                     error: '',
