@@ -194,82 +194,82 @@ class VendorUpdate extends Component{
         }
 
         //validation for std code
-        if(!Number(this.state.std.value.length) > 3){
-            this.setState({
-                std:Object.assign(this.state.std, {
-                    error: 'Enter valid code',
-                    showError: true
-                })
-            })
-        }
-
-        if(!this.state.std.value){
-            this.setState({
-                std:Object.assign(this.state.std, {
-                    error: 'STD code is required',
-                    showError: true
-                })
-            })
-        }
-        if(!stdCode.test(this.state.std.value)){
-            this.setState({
-                std:Object.assign(this.state.std, {
-                    error: 'Enter valid code',
-                    showError: true
-                })
-            })
-        }
-        
-        
-        //validation for number
-
-        if(!this.state.number.value){
+        if(!this.state.std.value && !this.state.number.value){
             this.setState({
                 number:Object.assign(this.state.number, {
-                    error: 'Number is required',
-                    showError: true
-                })
-            })
-        }
-        if(!number.test(Number(this.state.number.value))){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'Enter a valid number',
+                    error: '',
+                    showError: false
+                }),
+                std:Object.assign(this.state.std, {
+                    error: '',
                     showError: false
                 })
             })
-        }
-
-        //validation for both number and std code
-
-        // if(!landline.test(Number(this.state.std.value+this.state.number.value))){
-        //     this.setState({
-        //         number:Object.assign(this.state.number, {
-        //             error: '',
-        //             showError: true
-        //         }),
-        //         std:Object.assign(this.state.std, {
-        //             error: 'Enter a valid landline number',
-        //             showError: true
-        //         })
-              
-        //     })
-        // }
-
-        if(!landline.test(this.state.std.value+this.state.number.value)){
-            this.setState({
-                number:Object.assign(this.state.number, {
-                    error: 'number',
-                    showError: true
-                }),
-                std:Object.assign(this.state.std, {
-                    error: 'Enter valid landline ',
-                    showError: true
+            
+        }else{
+            // if(!Number(this.state.std.value.length) >= 3){
+            //     this.setState({
+            //         std:Object.assign(this.state.std, {
+            //             error: 'Enter valid code',
+            //             showError: true
+            //         })
+            //     })
+            // }
+            if(!stdCode.test(this.state.std.value)){
+                this.setState({
+                    std:Object.assign(this.state.std, {
+                        error: 'Enter valid code',
+                        showError: true
+                    })
                 })
-              
-            })
+            }
+            if(stdCode.test(this.state.std.value)){
+                this.setState({
+                    std:Object.assign(this.state.std, {
+                        error: '',
+                        showError: false
+                    })
+                })
+            }
+            
+            //validation for number
+            if(!number.test(Number(this.state.number.value))){
+                this.setState({
+                    name:Object.assign(this.state.name, {
+                        error: 'Enter a valid number',
+                        showError: false
+                    })
+                })
+            }
+    
+            if(!landline.test(this.state.std.value+this.state.number.value)){
+                this.setState({
+                    number:Object.assign(this.state.number, {
+                        error: 'number',
+                        showError: true
+                    }),
+                    std:Object.assign(this.state.std, {
+                        error: 'Enter valid landline ',
+                        showError: true
+                    })
+                  
+                })
+            }
+            if(landline.test(this.state.std.value+this.state.number.value)){
+                this.setState({
+                    number:Object.assign(this.state.number, {
+                        error: '',
+                        showError: false
+                    }),
+                    std:Object.assign(this.state.std, {
+                        error: '',
+                        showError: false
+                    })
+                  
+                })
+            }
         }
-        if(!this.state.name.showError && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && stdCode.test(this.state.std.value) && !this.state.number.showError){
+        if(!this.state.name.showError && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && !this.state.std.showError && !this.state.number.showError){
             this.setState({
                 update: true
             })
