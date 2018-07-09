@@ -410,13 +410,23 @@ class AddAsset extends Component{
     }
 
     setVendorListRequest(vendorName){
-        this.setState({
-            vendorListRequest : true
-            ,vendor : {
-                ...this.state.vendor,
-                value : vendorName
-            }
-        })
+        if(vendorName){
+
+            this.setState({
+                vendorListRequest : true
+                ,vendor : {
+                    ...this.state.vendor,
+                    value : vendorName
+                }
+            })
+        }else{
+            this.setState({
+                vendorListRequest : false
+                ,vendor : {
+                    value : ''
+                }
+            })
+        }
         // $('.modal-overlay').trigger('click')   
     }
 
@@ -543,12 +553,22 @@ class AddAsset extends Component{
     }
 
     setAssetTypeListRequest(assetTypeName){
-        this.setState({
-            assetTypeListRequest : true
-            ,assetType : Object.assign({
-                value : assetTypeName
+        if(assetTypeName){
+
+            this.setState({
+                assetTypeListRequest : true
+                ,assetType : Object.assign({
+                    value : assetTypeName
+                })
             })
-        })
+        }else{
+            this.setState({
+                assetTypeListRequest : false
+                ,assetType : Object.assign({
+                    value : ""
+                })
+            })
+        }
         // $('.modal-overlay').trigger('click')
     }
 

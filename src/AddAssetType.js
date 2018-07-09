@@ -198,6 +198,13 @@ class AddAssetType extends Component{
                 showError: false
             }
         })
+        if(this.props.setAssetTypeListRequest){
+            this.props.setAssetTypeListRequest()
+        }
+        else{
+            this.props.setHandleListRequest()
+        }
+        
         $(".modal-overlay").trigger('click');
     }
     
