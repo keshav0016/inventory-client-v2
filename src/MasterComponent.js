@@ -31,6 +31,7 @@ import './MasterComponent.css'
 import $ from 'jquery'
 import UpdateAsset from './UpdateAsset';
 
+
 class MasterComponent extends Component {
     constructor(props) {
         super(props);
