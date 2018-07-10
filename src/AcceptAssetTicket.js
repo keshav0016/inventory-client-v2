@@ -31,7 +31,7 @@ class AcceptAssetTicket extends Component{
                 showError: false
             }
             ,asset : {
-                value: this.props.location.search.slice(1).split('=')[1],
+                value: decodeURIComponent(this.props.location.search.slice(1).split('=')[1]),
                 error: '',
                 showError: false
             }
@@ -296,7 +296,7 @@ class AcceptAssetTicket extends Component{
                             </Input>
                         </Row> */}
                         <Row>
-                            <Input s={12} m={6} l={6} label = "Requested Asset" type = 'text'
+                            <Input s={12} m={6} l={6} label = "Requested Asset" 
                                  onChange = {this.setAsset} value={this.state.asset.value} 
                                  error={this.state.asset.showError ? this.state.asset.error : null}
                             />
