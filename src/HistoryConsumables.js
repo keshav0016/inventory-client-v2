@@ -79,7 +79,7 @@ class HistoryConsumables extends Component{
                     `${element.quantity}`,
                     `${element.consumable.quantity}`,
                     `${element.vendor_name}`,
-                    `${element.purchase_date}`,
+                    `${moment(element.purchase_date).format('DD MM YYYY')}`,
                     `${element.item_price}`,
                     `${element.total}`,
                     `${element.gst}`,
@@ -105,7 +105,7 @@ class HistoryConsumables extends Component{
                     `${element.user_id}`,
                     `${element.user.first_name}${element.user.last_name}`,
                     `${element.quantity}`,
-                    `${element.assigned_date}`,
+                    `${moment(element.assigned_date).format('DD MM YYYY')}`,
                     `${element.ticket_number ? element.ticket_number : "Nil"}`
                 ])
             }

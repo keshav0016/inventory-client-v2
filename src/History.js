@@ -90,7 +90,7 @@ class Assets extends Component{
                     `${this.state.assetDetails.gst}`,
                     `${this.state.assetDetails.total}`,
                     `${this.state.assetDetails.vendor}`,
-                    `${this.state.assetDetails.purchase_date}`
+                    `${moment(this.state.assetDetails.purchase_date).format('DD MM YYYY')}`
                 ])
             
         }else{
@@ -110,9 +110,9 @@ class Assets extends Component{
                     `${element.user_id}`,
                     `${element.user.first_name} ${element.user.last_name}`,
                     `${element.ticket_number ? element.ticket_number : "Nil"}`,
-                    `${element.from}`,
-                    `${element.expected_recovery}`,
-                    `${element.to}`
+                    `${moment(element.from).format('DD MM YYYY')}`,
+                    `${moment(element.expected_recovery).format('DD MM YYYY')}`,
+                    `${moment(element.to).format('DD MM YYYY')}`
                 ])
             })
         }else{
@@ -130,9 +130,9 @@ class Assets extends Component{
                 return AssetRepairDetails.push([
                     `${element.asset_id}`,
                     `${element.vendor}`,
-                    `${element.from}`,
-                    `${element.expected_delivery}`,
-                    `${element.to}`,
+                    `${moment(element.from).format('DD MM YYYY')}`,
+                    `${moment(element.expected_delivery).format('DD MM YYYY')}`,
+                    `${moment(element.to).format('DD MM YYYY')}`,
                     `${element.repair_invoice}`,
                     `${element.amount}`,
                     `${element.gst}`,
