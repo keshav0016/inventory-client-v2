@@ -79,7 +79,7 @@ class HistoryConsumables extends Component{
                     `${element.quantity}`,
                     `${element.consumable.quantity}`,
                     `${element.vendor_name}`,
-                    `${moment(element.purchase_date).format('DD MM YYYY')}`,
+                    `${moment(element.purchase_date).format('DD/MM/YYYY')}`,
                     `${element.item_price}`,
                     `${element.total}`,
                     `${element.gst}`,
@@ -105,7 +105,7 @@ class HistoryConsumables extends Component{
                     `${element.user_id}`,
                     `${element.user.first_name}${element.user.last_name}`,
                     `${element.quantity}`,
-                    `${moment(element.assigned_date).format('DD MM YYYY')}`,
+                    `${moment(element.assigned_date).format('DD/MM/YYYY')}`,
                     `${element.ticket_number ? element.ticket_number : "Nil"}`
                 ])
             }
@@ -119,7 +119,7 @@ class HistoryConsumables extends Component{
     }
     var buffer = xlsx.build([{name: 'Consumable-Details',data: ConsumableDetails},{name: 'Consumable-Assigned-Details',data: ConsumableAssignedDetails}]);
     const blob = new Blob([buffer],{ type: 'application/vnd.ms-excel' });
-    const file = new File([blob], `Asset-${this.props.match.params.asset}.xlsx`,{ type: 'application/vnd.ms-excel' });
+    const file = new File([blob], `Consumable-${this.props.match.params.consumable}.xlsx`,{ type: 'application/vnd.ms-excel' });
     fileSaver.saveAs(file);
 }
 
