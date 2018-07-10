@@ -84,7 +84,7 @@ class MasterComponent extends Component {
                         <div>
                             <Row>
                             <div className="white lighten-1 z-depth-2 navbar col s12" style={{ overflow: 'hidden',position: 'fixed', width:'100%', zIndex: 997}}>
-                                <a className="logo-wrapper">
+                                <a className="logo-wrapper" >
                                     <img className="navbarImage" src={logo} alt="WAL Logo" />
                                 </a>
                                 <div>
