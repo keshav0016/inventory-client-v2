@@ -123,17 +123,17 @@ class LoginForm extends Component {
           return Promise.reject('Your account has been suspended, contact your administrator or HR department')
          
         }
-        if (res.data.passwordSame === true) {
+        if (res.data.passwordSame === true && res.data.user.role === "Employee" && res.data.user.first_login === 1) {
           this.setState({
             change: true,
             admin: false
           })
-        } else if (res.data.passwordSame === false && res.data.user.role === 'Admin') {
+        } else if (res.data.passwordSame === true && res.data.user.role === 'Admin') {
           this.setState({
             admin: true
 
           })
-        } else {
+        } else if(res.data.user.first_login === 0){
           this.setState({
             employee: true
           })
