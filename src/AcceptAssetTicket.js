@@ -9,6 +9,7 @@ import moment from 'moment';
 import $ from 'jquery';
 import DateInput from './shared/DateInput';
 
+
 class AcceptAssetTicket extends Component{
     constructor(props){
         super(props)
