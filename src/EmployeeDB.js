@@ -51,8 +51,8 @@ class EmployeeDB extends Component {
                                             <div>
                                             <Row>
                                             <div fixed className="white lighten-1 z-depth-2 navbar col s12" style={{ overflow: 'hidden',position: 'fixed', width:'100%', zIndex: 997}}>
-                                                    <a className="logo-wrapper" href="/employee/Profile">
-                                                        <img className="navbarImage" src={logo} alt="WAL Logo" />
+                                                    <a className="logo-wrapper" >
+                                                       <a href="/employee/Profile"> <img className="navbarImage" src={logo} alt="WAL Logo" /></a>
                                                     </a>
                                                     <div>
                                                         <a href="/logout"><Icon className="masterComponentLogoutButton">power_settings_new</Icon></a>
