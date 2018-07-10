@@ -57,27 +57,97 @@ class Assets extends Component{
 
     parsingDataToCsv(){
         // const fields = 
-        const assetsExport = [['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']]
-        this.state.history.map(assetDetail => {
-            return assetsExport.push([
-                this.state.assetDetails.asset_id,
-                this.state.assetDetails.assetType,
-                this.state.assetDetails.asset_name,
-                this.state.assetDetails.category,
-                this.state.assetDetails.amount,
-                this.state.assetDetails.gst,
-                this.state.assetDetails.total,
-                this.state.assetDetails.vendor,
-                assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : 'Nil',
-                assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
-                assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
-                assetDetail.vendor ? assetDetail.vendor : 'Nil',
-                assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
-                assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
-            ])
-        })
+        // const assetsExport = [['Id', 'Type', 'Name', 'Category', 'Amount', 'GST', 'Total', 'Purchase Vendor', 'Assigned Employee', 'Assigned From', 'Assigned To', 'Service Vendor', 'Service From', 'Service To']]
+        // this.state.history.map(assetDetail => {
+        //     return assetsExport.push([
+        //         this.state.assetDetails.asset_id,
+        //         this.state.assetDetails.assetType,
+        //         this.state.assetDetails.asset_name,
+        //         this.state.assetDetails.category,
+        //         this.state.assetDetails.amount,
+        //         this.state.assetDetails.gst,
+        //         this.state.assetDetails.total,
+        //         this.state.assetDetails.vendor,
+        //         assetDetail.user ? assetDetail.user.first_name + ' ' + assetDetail.user.last_name : 'Nil',
+        //         assetDetail.user ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
+        //         assetDetail.user && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
+        //         assetDetail.vendor ? assetDetail.vendor : 'Nil',
+        //         assetDetail.vendor ? moment(assetDetail.from).format('DD MMM YYYY') : 'Nil',
+        //         assetDetail.vendor && assetDetail.to ? moment(assetDetail.to).format('DD MMM YYYY') : 'Nil',
+        //     ])
+        // })
 
-        var buffer = xlsx.build([{name: 'Asset-History',data: assetsExport}]);
+        if(this.state.assetDetails){
+            var AssetPurchaseDetails = [[
+                "Asset Id","Asset Type","Asset Name","Category","Amount","GST","Total","Vendor name","Purchased Date"
+            ]]
+            AssetPurchaseDetails.push(
+                    [`${this.state.assetDetails.asset_id}`,
+                    `${this.state.assetDetails.assetType}`,
+                    `${this.state.assetDetails.asset_name}`,
+                    `${this.state.assetDetails.category}`,
+                    `${this.state.assetDetails.amount}`,
+                    `${this.state.assetDetails.gst}`,
+                    `${this.state.assetDetails.total}`,
+                    `${this.state.assetDetails.vendor}`,
+                    `${this.state.assetDetails.purchase_date}`
+                ])
+            
+        }else{
+            var AssetPurchaseDetails = [[
+                "Asset Id","Asset Type","Asset Name","Category","Amount","GST","Total","Vendor name","Purchased Date"
+            ],[
+                "Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil"
+            ]]
+
+        }
+        if(this.state.historyAssigned.length !== 0){
+            var AssetAssignedDetails = [[
+                "User Id","Employee Name","Ticket Number","From","Expected Recovery","To"
+            ]]
+            this.state.historyAssigned.map(element => {
+                return AssetAssignedDetails.push([
+                    `${element.user_id}`,
+                    `${element.user.first_name} ${element.user.last_name}`,
+                    `${element.ticket_number ? element.ticket_number : "Nil"}`,
+                    `${element.from}`,
+                    `${element.expected_recovery}`,
+                    `${element.to}`
+                ])
+            })
+        }else{
+            var AssetAssignedDetails = [[
+                "User Id","Employee Name","Ticket Number","From","Expected Recovery","To"
+            ],[
+                "Nil","Nil","Nil","Nil","Nil","Nil"
+            ]]
+        }
+        if(this.state.historyRepair.length !== 0){
+            var AssetRepairDetails = [[
+                "Asset Id","Servicer Name","From","Expected Delivery","To","Repair Invoice","Amount","GST","Total"
+            ]]
+            this.state.historyRepair.map(element => {
+                return AssetRepairDetails.push([
+                    `${element.asset_id}`,
+                    `${element.vendor}`,
+                    `${element.from}`,
+                    `${element.expected_delivery}`,
+                    `${element.to}`,
+                    `${element.repair_invoice}`,
+                    `${element.amount}`,
+                    `${element.gst}`,
+                    `${element.total}`
+                ])
+            })
+        }else{
+            var AssetRepairDetails = [[
+                "Asset Id","Servicer Name","From","Expected Delivery","To","Repair Invoice","Amount","GST","Total"
+            ],[
+                "Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil"
+            ]]
+        }
+
+        var buffer = xlsx.build([{name: 'Asset-Details',data: AssetPurchaseDetails},{name: 'Asset-Assigned-Details',data: AssetAssignedDetails},{name: 'Asset-Repair-Details',data: AssetRepairDetails}]);
         // const json2csvParser = new Parser({fields})
         // const csv = json2csvParser.parse(assetsExport)
         // const blob = new Blob([csv], {type : 'text/csv'})
