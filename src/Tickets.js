@@ -148,7 +148,9 @@ class Tickets extends Component{
                         value : 1
                         ,showError : false
                     }),
-                    disableItems : false
+                    disableItems : false,
+                    itemType: true,
+                    assetsInput: true
                 })
             }
             else{
@@ -162,7 +164,9 @@ class Tickets extends Component{
                         value : 1
                         ,showError : false
                     }),
-                    disableItems : false
+                    disableItems : false,
+                    itemType: false,
+                    assetsInput: false
                 })
             }
         }
