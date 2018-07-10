@@ -50,25 +50,74 @@ class HistoryConsumables extends Component{
 
 
    parsingDataToCsv(){
-    const consumablesExport = [['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']]
-    this.state.history.map(consumableDetail => {
-        return consumablesExport.push([
-            this.props.match.params.consumable,
-            consumableDetail.consumable.name,
-            consumableDetail.vendor_name ? consumableDetail.quantity : 'Nil',
-            consumableDetail.vendor_name ? consumableDetail.vendor_name : 'Nil',
-            consumableDetail.vendor_name ? moment(consumableDetail.purchase_date).format('DD MMM YYYY') : 'Nil',
-            consumableDetail.vendor_name ? consumableDetail.item_price : 'Nil',
-            consumableDetail.vendor_name ? consumableDetail.whole_price : 'Nil',
-            consumableDetail.vendor_name ? consumableDetail.gst : 'Nil',
-            consumableDetail.vendor_name ? consumableDetail.total : 'Nil',
-            consumableDetail.vendor_name ? 'Nil' : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
-            consumableDetail.vendor_name ? 'Nil' : moment(consumableDetail.assigned_date).format('DD MMM YYYY'),
-            consumableDetail.vendor_name ? 'Nil' : consumableDetail.quantity,
-        ])
-    })
-    
-    var buffer = xlsx.build([{name: 'Consumable-History',data: consumablesExport}]);
+    // const consumablesExport = [['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']]
+    // this.state.history.map(consumableDetail => {
+    //     return consumablesExport.push([
+    //         this.props.match.params.consumable,
+    //         consumableDetail.consumable.name,
+    //         consumableDetail.vendor_name ? consumableDetail.quantity : 'Nil',
+    //         consumableDetail.vendor_name ? consumableDetail.vendor_name : 'Nil',
+    //         consumableDetail.vendor_name ? moment(consumableDetail.purchase_date).format('DD MMM YYYY') : 'Nil',
+    //         consumableDetail.vendor_name ? consumableDetail.item_price : 'Nil',
+    //         consumableDetail.vendor_name ? consumableDetail.whole_price : 'Nil',
+    //         consumableDetail.vendor_name ? consumableDetail.gst : 'Nil',
+    //         consumableDetail.vendor_name ? consumableDetail.total : 'Nil',
+    //         consumableDetail.vendor_name ? 'Nil' : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
+    //         consumableDetail.vendor_name ? 'Nil' : moment(consumableDetail.assigned_date).format('DD MMM YYYY'),
+    //         consumableDetail.vendor_name ? 'Nil' : consumableDetail.quantity,
+    //     ])
+    // })
+    if(this.state.history.length !== 0){
+        var ConsumableDetails = [[
+            'Id', 'Name', 'Purchase Quantity', 'Present Quantity','Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total'
+        ]]
+        this.state.history.map(element => {
+            if(!element.user){
+                return ConsumableDetails.push([
+                    `${element.consumable_id}`,
+                    `${element.consumable.name}`,
+                    `${element.quantity}`,
+                    `${element.consumable.quantity}`,
+                    `${element.vendor_name}`,
+                    `${element.purchase_date}`,
+                    `${element.item_price}`,
+                    `${element.total}`,
+                    `${element.gst}`,
+                    `${element.whole_price}`
+                ])
+            }
+        })
+    }
+    else{
+        var ConsumableDetails = [[
+            'Id', 'Name', 'Purchase Quantity','Present Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total'
+        ],[
+            "Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil","Nil"
+        ]]
+    }
+    if(this.state.history.length !== 0){
+        var ConsumableAssignedDetails = [[
+            "Employee Id",'Employee Name',"Assigned Quantity","Assigned Date","Ticket Number"
+        ]]
+        this.state.history.map(element => {
+            if(element.user){
+                return ConsumableAssignedDetails.push([
+                    `${element.user_id}`,
+                    `${element.user.first_name}${element.user.last_name}`,
+                    `${element.quantity}`,
+                    `${element.assigned_date}`,
+                    `${element.ticket_number ? element.ticket_number : "Nil"}`
+                ])
+            }
+        })
+    }else{
+        var ConsumableAssignedDetails = [[
+            "Employee Id",'Employee Name',"Assigned Quantity","Assigned Date","Ticket Number"
+        ],[
+            "Nil","Nil","Nil","Nil","Nil"
+        ]]
+    }
+    var buffer = xlsx.build([{name: 'Consumable-Details',data: ConsumableDetails},{name: 'Consumable-Assigned-Details',data: ConsumableAssignedDetails}]);
     const blob = new Blob([buffer],{ type: 'application/vnd.ms-excel' });
     const file = new File([blob], `Asset-${this.props.match.params.asset}.xlsx`,{ type: 'application/vnd.ms-excel' });
     fileSaver.saveAs(file);
