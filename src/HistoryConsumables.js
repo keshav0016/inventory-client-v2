@@ -81,9 +81,9 @@ class HistoryConsumables extends Component{
                     `${element.vendor_name}`,
                     `${moment(element.purchase_date).format('DD/MM/YYYY')}`,
                     `${element.item_price}`,
-                    `${element.total}`,
+                    `${element.whole_price}`,
                     `${element.gst}`,
-                    `${element.whole_price}`
+                    `${element.total}`
                 ])
             }
         })
