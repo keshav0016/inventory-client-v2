@@ -214,7 +214,7 @@ class ResetPassword extends Component {
                 .then((res) => {
                     if (res.data.message === 'password has been changed') {
                         // window.Materialize.toast('password has been changed', 4000)
-                        swal("password has been changed",{
+                        swal("Password has been changed",{
                             buttons: false,
                             timer: 2000,
                           })
