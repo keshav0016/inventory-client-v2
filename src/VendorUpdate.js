@@ -117,9 +117,9 @@ class VendorUpdate extends Component{
         var stdCode = /^0[0-9]\d{3,5}$/
         var number = /^[1-9]\d{7,10}$/
         var landline = /^0[0-9]\d{9,11}$/
-        var addressReg = /^\s{0,}[a-zA-Z0-9,:-]*[a-zA-Z,:-]{1}[a-zA-Z0-9,:-]*(\s{1}[a-zA-Z0-9,:-]+)*\s{0,}$/
+        var addressReg = /^\s{0,}[a-zA-Z0-9_@.:,-/#&+"'-*]*[a-zA-Z_@.:,-/#&+"'-*]{1}[a-zA-Z0-9_@.:,-/#&+"'-*]*(\s{1}[a-zA-Z0-9_@.:,-/#&+"'-*]+)*\s{0,}$/
+        
 
-    
         if(!this.state.name.value){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -171,26 +171,28 @@ class VendorUpdate extends Component{
         if(!this.state.contact.value){
             this.setState({
                 contact:Object.assign(this.state.contact, {
-                    error: 'Contact number should not be empty',
-                    showError: true
-                })
-            })
-        }
-        if(this.state.contact.value && !contactRegex.test(Number(this.state.contact.value))){
-            this.setState({
-                contact:Object.assign(this.state.contact, {
-                    error: 'Enter a valid 10 digit contact number',
-                    showError: true
-                })
-            })
-        }
-        if(this.state.contact.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
-            this.setState({
-                contact:Object.assign(this.state.contact, {
                     error: '',
                     showError: false
                 })
             })
+        }else if(this.state.contact){
+
+            if(this.state.contact.value && !contactRegex.test(Number(this.state.contact.value))){
+                this.setState({
+                    contact:Object.assign(this.state.contact, {
+                        error: 'Enter a valid 10 digit contact number',
+                        showError: true
+                    })
+                })
+            }
+            if(this.state.contact.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
+                this.setState({
+                    contact:Object.assign(this.state.contact, {
+                        error: '',
+                        showError: false
+                    })
+                })
+            }
         }
 
         //validation for std code
@@ -269,7 +271,7 @@ class VendorUpdate extends Component{
                 })
             }
         }
-        if(!this.state.name.showError && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && !this.state.std.showError && !this.state.number.showError){
+        if(!this.state.name.showError && !this.state.address.showError && !this.state.contact.showError&& !this.state.std.showError && !this.state.number.showError){
             this.setState({
                 update: true
             })

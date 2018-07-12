@@ -122,7 +122,9 @@ class AddAsset extends Component{
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
-        if(!num.test(this.state.serial_number.value)){
+        var serialNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+\s{0,}$/
+        
+        if(!serialNum.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: 'Enter alphabets or numbers',
@@ -138,7 +140,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(num.test(this.state.serial_number.value)){
+        if(serialNum.test(this.state.serial_number.value)){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: '',
