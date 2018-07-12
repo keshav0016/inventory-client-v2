@@ -311,7 +311,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(num.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
+        if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
             this.setState({
                         updateAssetRequest: true
                     }) 
