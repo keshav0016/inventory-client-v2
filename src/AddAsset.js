@@ -149,7 +149,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(this.state.serial_number.value.length > 20){
+        if(this.state.serial_number.value.length > 50){
             this.setState({
                 serial_number:Object.assign(this.state.serial_number, {
                     error: 'The serial number should not be too long',
