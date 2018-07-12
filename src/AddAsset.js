@@ -123,6 +123,7 @@ class AddAsset extends Component{
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
         var serialNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
+        var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
         // /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
         
         if(!serialNum.test(this.state.serial_number.value)){
@@ -197,7 +198,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(!alphaNum.test(this.state.description.value)){
+        if(!descriptionNum.test(this.state.description.value)){
             this.setState({
                 description: Object.assign(this.state.description, {
                     error: 'Enter alphabets',
@@ -213,7 +214,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(alphaNum.test(this.state.description.value)){
+        if(descriptionNum.test(this.state.description.value)){
             this.setState({
                 description: Object.assign(this.state.description, {
                     error: '',
@@ -405,7 +406,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
+        if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && descriptionNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
             this.setState({
                 addAssetRequest : true
             })
