@@ -102,6 +102,8 @@ class UpdateAsset extends Component {
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
         var serialNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
+        var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/
+
 
         if(!serialNum.test(this.state.serial_number.value)){
             this.setState({
@@ -151,7 +153,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(!alphaNum.test(this.state.description.value)){
+        if(!descriptionNum.test(this.state.description.value)){
             this.setState({
                 description:Object.assign(this.state.description, {
                     error: 'Enter alphabets',
@@ -167,7 +169,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(alphaNum.test(this.state.description.value)){
+        if(descriptionNum.test(this.state.description.value)){
             this.setState({
                 description:Object.assign(this.state.description, {
                     error: '',
@@ -311,7 +313,7 @@ class UpdateAsset extends Component {
                 })
             })
         }
-        if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
+        if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && descriptionNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && alphaNum.test(this.state.vendor.value) && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && Number(this.state.gst.value) >= 0){
             this.setState({
                         updateAssetRequest: true
                     }) 

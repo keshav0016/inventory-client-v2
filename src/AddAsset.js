@@ -123,7 +123,7 @@ class AddAsset extends Component{
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
         var serialNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
-        var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
+        var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/
         // /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
         
         if(!serialNum.test(this.state.serial_number.value)){
