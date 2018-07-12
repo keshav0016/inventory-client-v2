@@ -73,8 +73,9 @@ class AddVendor extends Component{
         var stdCode = /^[0-9]\d{4}$/
         var number = /^[1-9]\d{7,10}$/
         var landline = /^[0-9]\d{9,12}$/
-        var addressReg = /^\s{0,}[a-zA-Z0-9,:-]*[a-zA-Z,:-]{1}[a-zA-Z0-9,:-]*(\s{1}[a-zA-Z0-9,:-]+)*\s{0,}$/
+        var addressReg = /^\s{0,}[a-zA-Z0-9_@.:,-/#&+"'-*]*[a-zA-Z_@.:,-/#&+"'-*]{1}[a-zA-Z0-9_@.:,-/#&+"'-*]*(\s{1}[a-zA-Z0-9_@.:,-/#&+"'-*]+)*\s{0,}$/
 
+        
         // if(!alphaNum.test(this.state.name.value)){
         //     this.setState({
         //         name:Object.assign(this.state.name, {
@@ -180,21 +181,31 @@ class AddVendor extends Component{
                 })
             })
         }
-        if(!contactRegex.test(Number(this.state.contact.value))){
-            this.setState({
-                contact:Object.assign(this.state.contact, {
-                    error: 'Enter a valid 10 digit contact number',
-                    showError: true
-                })
-            })
-        }
+       
         if(!this.state.contact.value){
             this.setState({
                 contact:Object.assign(this.state.contact, {
-                    error: 'Mobile number should not be empty',
-                    showError: true
+                    error: '',
+                    showError: false
                 })
             })
+        }else if(this.state.contact.value){
+            if(!contactRegex.test(Number(this.state.contact.value))){
+                this.setState({
+                    contact:Object.assign(this.state.contact, {
+                        error: 'Enter a valid 10 digit contact number',
+                        showError: true
+                    })
+                })
+            }
+            if(this.state.contact.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
+                this.setState({
+                    contact:Object.assign(this.state.contact, {
+                        error: '',
+                        showError: false
+                    })
+                })
+            }
         }
         // if(this.state.contact.value.length < 10 && this.state.contact.value.length > 0 ){
         //     this.setState({
@@ -212,14 +223,7 @@ class AddVendor extends Component{
         //         })
         //     })
         // }
-        if(this.state.contact.value && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
-            this.setState({
-                contact:Object.assign(this.state.contact, {
-                    error: '',
-                    showError: false
-                })
-            })
-        }
+       
 
 
         //validation for std code
@@ -299,7 +303,23 @@ class AddVendor extends Component{
             })
         }
     }
-        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value)) && !this.state.std.showError && !this.state.number.showError){
+    // if(!this.state.contact && !this.state.code && !this.state.number){
+    //     this.setState({
+    //         contact: Object.assign(this.state.number, {
+    //             error: 'Enter mobile number',
+    //             showError:true
+    //         }),
+    //         number:Object.assign(this.state.number, {
+    //             error: '',
+    //             showError: false
+    //         }),
+    //         std:Object.assign(this.state.std, {
+    //             error: '',
+    //             showError: false
+    //         })
+    //     })
+    // }
+        if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && !this.state.contact.showError && !this.state.std.showError && !this.state.number.showError){
             this.setState({
                 addVendorRequest: true
             })
