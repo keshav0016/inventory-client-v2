@@ -405,7 +405,7 @@ class AddAsset extends Component{
                 })
             })
         }
-        if(num.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
+        if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && alphaNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
             this.setState({
                 addAssetRequest : true
             })
