@@ -15,6 +15,7 @@ class UpdateConsumablePurchase extends Component{
         this.state = {
             consumable_id: this.props.consumable.consumable_id,
             name : this.props.consumable.consumable.name,
+            description : this.props.consumable.consumable.description,
             vendor_name : this.props.consumable.vendor_name,
             purchase_date : this.props.consumable.purchase_date,
             purchased_quantity : {
@@ -320,6 +321,7 @@ class UpdateConsumablePurchase extends Component{
                 <Row>
                     <p><b>Consumable: </b>{this.props.consumable.consumable.name}</p>
                     <p><b>Vendor: </b>{this.props.consumable.vendor_name}</p>
+                    <p><b>Description: </b>{this.props.consumable.consumable.description}</p>
                     <p><b>Purchase Date: </b>{moment(this.props.consumable.purchase_date).format('DD MMM YYYY')}</p>
                     <Input s={6} label="Purchased Quantity" type='number' min={0} value = {this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null} />
                     <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null} />

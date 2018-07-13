@@ -159,6 +159,7 @@ class HistoryConsumables extends Component{
                                     <div style={{float : 'left'}} >
                                         <h6><b>Consumable</b> : {consumable.consumable.name}</h6>
                                         <h6><b>Vendor Name</b> : {consumable.vendor_name}</h6>
+                                        <h6><b>Description</b> : {consumable.consumable.description}</h6>
                                         <h6><b>Purchase Date</b> : {moment(consumable.purchase_date).format('DD MMM YYYY')}</h6>
                                         {consumable.purchase_date ? <h6><b>Purchased Quantity</b> : {consumable.quantity}</h6> : null}
                                     </div>

@@ -21,6 +21,11 @@ class AddConsumables extends Component{
                 error: "",
                 alphaError: false
             },
+            description : {
+                value: "",
+                showError: false,
+                error: ""
+            },
             vendor_name : {
                 value: "",
                 showError: false,
@@ -88,6 +93,7 @@ class AddConsumables extends Component{
         this.getVendorName = this.getVendorName.bind(this)
         this.handleConsumableNameList = this.handleConsumableNameList.bind(this)
         this.getConsumableNameList = this.getConsumableNameList.bind(this)
+        this.setDescription = this.setDescription.bind(this)
     }
     componentDidMount(){
         $(document).ready(function(){
@@ -105,6 +111,8 @@ class AddConsumables extends Component{
 
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
+        var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/
+
         if (!alphaNum.test(this.state.name.value)) {
             this.setState({
                 name: Object.assign(this.state.name, {
@@ -130,6 +138,30 @@ class AddConsumables extends Component{
             this.setState({
                 name: Object.assign(this.state.name, {
                     alphaError: false,
+                })
+            })
+        }
+        if(!this.state.description.value){
+            this.setState({
+                description: Object.assign(this.state.description, {
+                    error: "Description is required",
+                    showError: true
+                })
+            })
+        }
+        if(this.state.description.value && !descriptionNum.test(this.state.description.value)){
+            this.setState({
+                description: Object.assign(this.state.description, {
+                    error: "Enter a valid Description",
+                    showError: true
+                })
+            })
+        }
+        if(this.state.description.value && descriptionNum.test(this.state.description.value)){
+            this.setState({
+                description: Object.assign(this.state.description, {
+                    error: "",
+                    showError: false
                 })
             })
         }
@@ -299,6 +331,13 @@ class AddConsumables extends Component{
             })
         })
     }
+    setDescription(e){
+        this.setState({
+            description : Object.assign(this.state.description, {
+                value: e.target.value
+            })
+        })
+    }
 
     setPurchaseDate(e){
         this.setState({
@@ -357,7 +396,8 @@ class AddConsumables extends Component{
                 whole_price : this.state.whole_price,
                 discount : this.state.discount.value,
                 gst : this.state.gst.value,
-                total : this.state.total
+                total : this.state.total,
+                description : this.state.description.value
             },
             withCredentials:true
         })
@@ -559,6 +599,8 @@ class AddConsumables extends Component{
                     value = {this.state.purchase_date.value} 
                     error={this.state.purchase_date.showError ? this.state.purchase_date.error : null}
                      /> */}
+                    <Input s={12} m={6} l={6} label="Description"  type="text" value={this.state.description.value} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
+
                      <DateInput
                                 label="Purchased Date *" 
                                 options={{max: moment(new Date(), "D MMMM, YYYY").toDate()}}

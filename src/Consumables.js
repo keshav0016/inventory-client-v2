@@ -360,6 +360,7 @@ class Consumables extends Component{
                         <tr>
                             <th data-field="consumable_id">Cons. Id</th>
                             <th data-field="name">Consumable Name</th>
+                            <th data-field="description">Description</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
                             <th data-field="purchaseDate">Purchase Date</th>
                         </tr>
@@ -370,6 +371,7 @@ class Consumables extends Component{
                             return (<tr key={consumable.consumable_id} className={consumable.disable === 1 ? 'disabled' : 'enabled'} >
                             <td >{consumable.consumable_id}</td>
                             <td >{consumable.name}</td>
+                            <td >{consumable.description}</td>
                             <td >{consumable.quantity}</td>
                             <td>{moment(consumable.createdAt).format('DD MMM YYYY')}</td>
                             <td>{this.renderDropdown(consumable)}</td>
@@ -389,6 +391,7 @@ class Consumables extends Component{
                                             <div style={{float : 'left'}} >                                
                                                 <h6><b>Consumable Id</b> : {item.consumable_id}</h6>
                                                 <h6><b>Consumable Name</b> : {item.name}</h6>
+                                                <h6><b>Description</b> : {item.description}</h6>
                                             </div>
                                             <div style={{float : 'right'}}>
                                                 <h6><b>Quantity</b> : {item.quantity}</h6>

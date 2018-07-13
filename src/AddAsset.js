@@ -814,7 +814,7 @@ class AddAsset extends Component{
                                 onChange={this.setPurchaseDate} 
                                 error={this.state.purchase_date.showError ? this.state.purchase_date.error : null} 
                             />
-                    <Input s={12} m={6} l={6} label="Description" defaultValue = {this.state.description.value.trim()} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
+                    <Input s={12} m={6} l={6} label="Description *" defaultValue = {this.state.description.value.trim()} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
                     <Input s={12} m={6} l={6} label="Invoice Number *" defaultValue = {this.state.invoice_number.value.trim()} onChange = {this.setInvoiceNumber} error={this.state.invoice_number.showError ? this.state.invoice_number.error : null} />
                     <Input s={12} m={6} l={6} label="Condition *" defaultValue = {this.state.condition.value.trim()} onChange = {this.setCondition} error={this.state.condition.showError ? this.state.condition.error : null} />
                     <Input s={12} m={6} l={6} label="Location *" defaultValue = {this.state.location.value.trim()} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
