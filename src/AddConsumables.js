@@ -309,7 +309,7 @@ class AddConsumables extends Component{
                 })
             })
         }
-        if(this.state.name.value && alphaNum.test(this.state.name.value) && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
+        if(this.state.name.value && alphaNum.test(this.state.name.value) && !this.state.description.showError && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
             this.setState({
                 addConsumableRequest : true
             })
@@ -439,6 +439,11 @@ class AddConsumables extends Component{
                 },
                 gst : {
                     value: 0,
+                    showError: false,
+                    error: ""
+                },
+                description : {
+                    value: "",
                     showError: false,
                     error: ""
                 },
@@ -594,11 +599,6 @@ class AddConsumables extends Component{
                             onChange = {this.setConsumableName}
                             defaultValue={this.state.name.value.trim()}
                         />
-                    {/* <Input s={12} m={6} l={6} name='on' type='date' 
-                    label="Purchased Date" onChange={this.setPurchaseDate} 
-                    value = {this.state.purchase_date.value} 
-                    error={this.state.purchase_date.showError ? this.state.purchase_date.error : null}
-                     /> */}
                     <Input s={12} m={6} l={6} label="Description"  type="text" value={this.state.description.value} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
 
                      <DateInput

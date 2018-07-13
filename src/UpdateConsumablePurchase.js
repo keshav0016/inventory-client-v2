@@ -17,7 +17,7 @@ class UpdateConsumablePurchase extends Component{
             name : this.props.consumable.consumable.name,
             description : this.props.consumable.consumable.description,
             vendor_name : this.props.consumable.vendor_name,
-            purchase_date : this.props.consumable.purchase_date,
+            purchase_date :this.props.consumable.purchase_date,
             purchased_quantity : {
                 value: this.props.consumable.quantity,
                 error: '',
@@ -44,6 +44,7 @@ class UpdateConsumablePurchase extends Component{
             calculateTotal : false,
             redirect : false
         }
+        this.setPurchaseDate = this.setPurchaseDate.bind(this)
         this.setPurchaseQuantity = this.setPurchaseQuantity.bind(this)
         this.updateConsumablePurchase = this.updateConsumablePurchase.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
@@ -61,6 +62,8 @@ class UpdateConsumablePurchase extends Component{
     componentDidUpdate(){
         $('label').addClass('active')
     }
+
+   
 
     calculateWholePrice(){
         this.setState({
@@ -95,6 +98,14 @@ class UpdateConsumablePurchase extends Component{
         //         updateConsumable : true
         //     })
         // }
+        if(!this.state.purchase_date){
+            this.setState({
+                purchase_date: ({
+                    error: 'Purchased is required',
+                    showError: true
+                })
+            })
+        }
         if(Number(this.state.purchased_quantity.value) === 0){
             this.setState({
                 purchased_quantity:Object.assign(this.state.purchased_quantity, {
@@ -175,13 +186,18 @@ class UpdateConsumablePurchase extends Component{
                 })
             })
         }
-        if(Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0){
+        if(!this.state.purchase_date.showError && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0){
             this.setState({
                 updateConsumable : true
             })
         }
     }
 
+    setPurchaseDate(e){
+        this.setState({
+            purchase_date: e.target.value
+        })
+    }
     setPurchaseQuantity(e){
         this.setState({
             purchased_quantity : Object.assign(this.state.purchased_quantity, {
@@ -286,7 +302,12 @@ class UpdateConsumablePurchase extends Component{
             consumable_id: this.props.consumable.consumable_id,
             name : this.props.consumable.consumable.name,
             vendor_name : this.props.consumable.vendor_name,
-            purchase_date : this.props.consumable.purchase_date,
+            // purchase_date : this.props.consumable.purchase_date,
+            purchased_date : {
+                value: this.props.consumable.purchase_date,
+                error: '',
+                showError: false
+            },
             purchased_quantity : {
                 value: this.props.consumable.quantity,
                 error: '',
@@ -322,7 +343,8 @@ class UpdateConsumablePurchase extends Component{
                     <p><b>Consumable: </b>{this.props.consumable.consumable.name}</p>
                     <p><b>Vendor: </b>{this.props.consumable.vendor_name}</p>
                     <p><b>Description: </b>{this.props.consumable.consumable.description}</p>
-                    <p><b>Purchase Date: </b>{moment(this.props.consumable.purchase_date).format('DD MMM YYYY')}</p>
+                    {/* <p><b>Purchase Date: </b>{moment(this.props.consumable.purchase_date).format('DD MMM YYYY')}</p> */}
+                    <Input s={12} m={3} l={3} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} value={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
                     <Input s={6} label="Purchased Quantity" type='number' min={0} value = {this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null} />
                     <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null} />
                     <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />

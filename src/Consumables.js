@@ -12,6 +12,7 @@ import { baseUrl } from './config';
 import EnableConsumable from './EnableConsumable';
 import moment from 'moment'
 import './MasterComponent.css'
+import UpdateConsumables from './UpdateConsumables'
 
 class Consumables extends Component{
     constructor(props){
@@ -34,6 +35,9 @@ class Consumables extends Component{
             },
             keyword : '',
             redirect : false
+            ,showModal : false
+            ,currentItem : null
+            ,purchaseDetails : []
         }
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
@@ -45,8 +49,17 @@ class Consumables extends Component{
         this.checkForValidation = this.checkForValidation.bind(this)
         this.resetFilter = this.resetFilter.bind(this)
         this.renderDropdown = this.renderDropdown.bind(this)
-    }
+        this.handleUpdateModalClose = this.handleUpdateModalClose.bind(this)
 
+    }
+    
+
+    handleUpdateModalClose(){
+        this.setState({
+            showModal : false
+            ,currentItem : null
+        })
+    }
     checkForValidation(){
         if(Number(this.state.minQuantity.value) < 0){
             // window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
@@ -209,7 +222,7 @@ class Consumables extends Component{
             $(".modal-close").trigger('click')
         }
     }
-
+   
     sortBy(e){
         this.setState({
             sort:e.target.value,
@@ -288,6 +301,10 @@ class Consumables extends Component{
                 trigger={<NavItem>Edit</NavItem >}>
                 <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
             </Modal> */}
+              <button className="editButton" onClick={() => {this.setState({
+                showModal : true
+                , currentItem : consumable
+            })}}>Edit</button>
             <Modal 
                     modalOptions={{dismissible: false}}
                     actions={null}
@@ -362,7 +379,6 @@ class Consumables extends Component{
                             <th data-field="name">Consumable Name</th>
                             <th data-field="description">Description</th>
                             <th data-field="quantity">Available Consumable Quantity</th>
-                            <th data-field="purchaseDate">Purchase Date</th>
                         </tr>
                     </thead>
 
@@ -371,9 +387,8 @@ class Consumables extends Component{
                             return (<tr key={consumable.consumable_id} className={consumable.disable === 1 ? 'disabled' : 'enabled'} >
                             <td >{consumable.consumable_id}</td>
                             <td >{consumable.name}</td>
-                            <td >{consumable.description}</td>
+                            <td style={{wordBreak : 'break-word', width: '40%'}}>{consumable.description}</td>
                             <td >{consumable.quantity}</td>
-                            <td>{moment(consumable.createdAt).format('DD MMM YYYY')}</td>
                             <td>{this.renderDropdown(consumable)}</td>
                             </tr>
                             )
@@ -407,6 +422,16 @@ class Consumables extends Component{
                 }
                 {filterPane}
                 <Link to={{ pathname : '/admin/consumables/add', setHandleListRequest : this.setHandleListRequest}}><Button floating fab="vertical" large className = 'red addVendorButton' waves = 'light' icon = 'add' /></Link>
+                {this.state.showModal ? (
+                    <Modal
+                        modalOptions={{ dismissible: false }}
+                        open={this.state.showModal}
+                        actions={null}
+                        className='editAssetBottomPadding'>
+                        <UpdateConsumables onFinish={this.handleUpdateModalClose} consumable={this.state.currentItem} purchaseDetails={this.state.purchaseDetails} setHandleListRequest={this.setHandleListRequest} />
+                    </Modal>
+
+                ) : null}
             </div>
         )
     }
