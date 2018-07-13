@@ -191,7 +191,7 @@ class Tickets extends Component{
     assetsDropdown(){
         var assetsList = []
         assetsList.push(<option key='Select' value='Select'>Select</option>)
-        for(let index = 0; index <= this.state.availableAssets.length; index++){
+        for(let index = 0; index <= this.state.availableAssets.length -1; index++){
             assetsList.push(<option key={index} value={this.state.availableAssets[index]}>{this.state.availableAssets[index]}</option>)
         }
         return assetsList
@@ -255,13 +255,16 @@ class Tickets extends Component{
                 })
             })
         }
-        if (this.state.asset.value === 'Select') {
-            this.setState({
-                asset : Object.assign(this.state.asset, {
-                    error : 'Asset is required'
-                    ,showError: true
+        if(this.state.item_type.value === "assets"){
+
+            if (this.state.asset.value === 'Select') {
+                this.setState({
+                    asset : Object.assign(this.state.asset, {
+                        error : 'Asset is required'
+                        ,showError: true
+                    })
                 })
-            })
+            }
         }
 
         if(!this.state.quantity.showError && !this.state.item.showError && !this.state.item_type.showError){
@@ -429,7 +432,7 @@ class Tickets extends Component{
                 </Row>
                 {this.state.assetsInput ? (
                      <Row>
-                     <Input s={12} label='Assets' type='select' value={this.state.disableItems ? 'Select' : this.state.asset.value} onChange={this.requestAsset}  error={this.state.asset.showError ? this.state.asset.error : null}>
+                     <Input s={12} label='Assets' type='select' value={this.state.asset.value} onChange={this.requestAsset}  error={this.state.asset.showError ? this.state.asset.error : null}>
                          {this.assetsDropdown()}
                      </Input>
                  </Row>
