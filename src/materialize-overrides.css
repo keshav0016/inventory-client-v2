@@ -394,4 +394,20 @@ input[type=number] {
     border: none;
     font-size: 16px;
 }
+.editButtonPurchase {
+    /* width: 50px;
+    color:#26a69a;
+    border: solid;
+    font-size: 20px; */
+    text-decoration: none;
+    color: #fff;
+    background-color: #26a69a;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+    border-radius: 3px;
+    width: 70px;
+    padding: 7px;
+}
 

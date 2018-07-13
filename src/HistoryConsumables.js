@@ -18,9 +18,18 @@ class HistoryConsumables extends Component{
            history : [],
            fetchHistory : true,
            redirect : false
+           ,showModal : false
+           ,currentItem : null
        }
        this.getHistory = this.getHistory.bind(this)
        this.parsingDataToCsv = this.parsingDataToCsv.bind(this)
+       this.handleUpdateModalClose = this.handleUpdateModalClose.bind(this)
+    }
+    handleUpdateModalClose(){
+        this.setState({
+            showModal : false
+            ,currentItem : null
+        })
     }
 
    getHistory(){
@@ -148,12 +157,18 @@ class HistoryConsumables extends Component{
                             <div> 
                                 <h5 style={{fontFamily : 'Roboto', fontWeight : 300, display: "inline-block"}}>Purchased</h5>
                                 <div style={{display: 'inline-block',position: 'relative',float: 'right',top: '5px',marginRight: '20px'}}>
-                                <Modal 
+                                <div>
+                                <button className="editButtonPurchase" onClick={() => {this.setState({
+                                    showModal : true
+                                    , currentItem : consumable
+                                })}}>Edit</button>
+                                </div>
+                                {/* <Modal 
                                     modalOptions={{dismissible:false}}
                                     actions={null}
                                     trigger={<Button style={{}}>Edit</Button>}>
-                                    <UpdateConsumablePurchase consumable={consumable} getHistory={this.getHistory}/>
-                                </Modal>
+                                    <UpdateConsumablePurchase onFinish={this.handleUpdateModalClose} consumable={consumable} getHistory={this.getHistory}/>
+                                </Modal> */}
                                 </div>
                                 <div className='historyCards' >
                                     <div style={{float : 'left'}} >
@@ -194,6 +209,16 @@ class HistoryConsumables extends Component{
                        <div>
                            <h4>No such Consumable found</h4>
                        </div>)}
+                       {this.state.showModal ? (
+                    <Modal
+                        modalOptions={{ dismissible: false }}
+                        open={this.state.showModal}
+                        actions={null}
+                        className='editAssetBottomPadding'>
+                        <UpdateConsumablePurchase onFinish={this.handleUpdateModalClose} consumable={this.state.currentItem} getHistory={this.getHistory} />
+                    </Modal>
+
+                ) : null}
            </div>
        )
    }
