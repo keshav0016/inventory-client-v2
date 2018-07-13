@@ -331,6 +331,7 @@ class UpdateConsumablePurchase extends Component{
             },
             total : this.props.consumable.total  
         })
+        this.props.onFinish()
         $(".modal-overlay").trigger('click');
     }
 
