@@ -96,17 +96,17 @@ class EmployeeTicketsList extends Component{
             handleListRequest : true
         })
     }
-    componentDidMount(){
-        this.handleList();
-        this.timerId = setInterval(
-            () => {
-                if(this.state.refresh){
-                    this.handleList()
-                }
-            },
-            3000
-        )
-    }
+    // componentDidMount(){
+    //     this.handleList();
+    //     this.timerId = setInterval(
+    //         () => {
+    //             if(this.state.refresh){
+    //                 this.handleList()
+    //             }
+    //         },
+    //         3000
+    //     )
+    // }
     
     handleList(){
         if(!this.state.isPendingChecked && !this.state.isAcceptedChecked && !this.state.isRejectedChecked){

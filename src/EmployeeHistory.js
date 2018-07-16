@@ -56,8 +56,8 @@ class EmployeeHistory extends Component {
                 <tbody>
                     {this.state.data.map((item, index) => {
                         return <tr key={index}>
-                            <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable ? `${item.consumable.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
-                            <td>{item.asset_id ? "1": item.quantity}</td>
+                            <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable_id ? `${item.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
+                            <td>{item.asset_id ? "1": item.sum}</td>
                             <td><Modal
                             modalOptions={{dismissible:false}}
                                 actions={null}

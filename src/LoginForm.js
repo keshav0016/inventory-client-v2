@@ -133,7 +133,7 @@ class LoginForm extends Component {
             admin: true
 
           })
-        } else if(res.data.user.first_login === 0){
+        } else if(res.data.user.first_login === 0 || res.data.user.first_login === null){
           this.setState({
             employee: true
           })
