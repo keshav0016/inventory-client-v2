@@ -289,19 +289,20 @@ class AcceptAssetTicket extends Component{
                                 error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} 
                             />
                         </Row>
-                        {/* <Row>
-                            <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select'
-                             onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} 
-                             error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>
-                             {this.availableAssetsDropdown()}
-                            </Input>
-                        </Row> */}
+                        
                         <Row>
                             <Input s={12} m={6} l={6} label = "Requested Asset" 
                                  onChange = {this.setAsset} value={this.state.asset.value} 
                                  error={this.state.asset.showError ? this.state.asset.error : null}
                             />
                             
+                        </Row>
+                        <Row>
+                            <Input s={12} m={12} l={12} label = "Asset Id*" type = 'select'
+                             onChange = {this.setCurrentAssetSelected} value={this.state.currentAssetSelected.asset_id} 
+                             error={this.state.currentAssetSelected.showError ? this.state.currentAssetSelected.error : null}>
+                             {this.availableAssetsDropdown()}
+                            </Input>
                         </Row>
                         <Row>
                             <Input s={12} m={12} l={12} onChange = {this.setReason} label="Remarks" value={this.state.reason.value} error={this.state.reason.showError ? this.state.reason.error : null}/>
