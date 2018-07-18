@@ -340,12 +340,12 @@ class UpdateConsumablePurchase extends Component{
         return(
             <div className="no-footer" >
                 <h5 className="title">Update Purchase</h5>
-                <Row>
+                <Row className='consumableUpdate'>
                     <p><b>Consumable: </b>{this.props.consumable.consumable.name}</p>
                     <p><b>Vendor: </b>{this.props.consumable.vendor_name}</p>
                     <p><b>Description: </b>{this.props.consumable.consumable.description}</p>
                     {/* <p><b>Purchase Date: </b>{moment(this.props.consumable.purchase_date).format('DD MMM YYYY')}</p> */}
-                    <Input s={12} m={3} l={3} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} value={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
+                    <Input s={6} label='Purchase Date' name='on' type='date' onChange={this.setPurchaseDate} value={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} placeholder={`${moment(this.state.purchase_date).format('D MMMM, YYYY')}`} />
                     <Input s={6} label="Purchased Quantity" type='number' min={0} value = {this.state.purchased_quantity.value} onChange = {this.setPurchaseQuantity} error={this.state.purchased_quantity.showError ? this.state.purchased_quantity.error : null} />
                     <Input s={6} label="Price" type='number' min={0} value = {this.state.item_price.value} onChange = {this.setItemPrice} error={this.state.item_price.showError ? this.state.item_price.error : null} />
                     <Input s={6} label="GST %" type='number' min={0} value = {this.state.gst.value} onChange = {this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />

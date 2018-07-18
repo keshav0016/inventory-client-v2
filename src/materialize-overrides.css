@@ -202,6 +202,11 @@ div.input-field.consumable-alpha-error.col label.active:after
     opacity: 1; 
 }
 
+.consumableUpdate ::placeholder {
+    color: black;
+    opacity: 1; 
+}
+
 .picker__date-display{
     display: none;
 }
