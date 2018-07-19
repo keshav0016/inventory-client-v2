@@ -450,7 +450,7 @@ class EmployeeUpdate extends Component{
                     {/* <Input type="text"  defaultValue={this.state.designation.value} label="Current Designation" s={12} m={6} l={6} disabled/> */}
 
                     {/* <p style={{display: "block", marginLeft: "10px"}}>Current Designation: <b>{this.state.currentDesignation}</b></p> */}
-                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="New Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                    {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation"  value={this.state.designation.value} onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
                         <option value='Team Lead'>Team Lead</option>
                         <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>
