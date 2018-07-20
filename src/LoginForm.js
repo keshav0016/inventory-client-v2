@@ -34,7 +34,8 @@ class LoginForm extends Component {
       },
       admin: false,
       employee: false,
-      login: true
+      login: true,
+      userRole : ''
     }
     this.getUserid = this.getUserid.bind(this);
     this.getPassword = this.getPassword.bind(this);
@@ -43,6 +44,7 @@ class LoginForm extends Component {
   }
 
   checkForValidation(e){
+    var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
     e.preventDefault();
     if(!this.state.user_id.value){
       this.setState({
@@ -123,20 +125,36 @@ class LoginForm extends Component {
           return Promise.reject('Your account has been suspended, contact your administrator or HR department')
          
         }
-        if (res.data.passwordSame === true && res.data.user.role === "Employee" && res.data.user.first_login === 1) {
-          this.setState({
-            change: true,
-            admin: false
-          })
-        } else if (res.data.passwordSame === true && res.data.user.role === 'Admin') {
-          this.setState({
-            admin: true
+        if(res.data.admin){
+          if(res.data.passwordSame === true && res.data.admin.firstLogin === 1){
+            this.setState({
+              change: true,
+              admin: false,
+              userRole: "Admin"
 
-          })
-        } else if(res.data.user.first_login === 0 || res.data.user.first_login === null){
-          this.setState({
-            employee: true
-          })
+            })
+          }
+          if(res.data.passwordSame === true && res.data.admin.firstLogin === 0){
+            this.setState({
+              change: false,
+              admin: true,
+            })
+          }
+        }
+        if(res.data.user){
+
+          if (res.data.passwordSame === true && res.data.user.first_login === 1) {
+            this.setState({
+              change: true,
+              admin: false,
+              userRole: res.data.user.role
+            })
+          } else if (res.data.passwordSame === true &&  res.data.user.user_id && res.data.user.first_login === 0) {
+            this.setState({
+              employee: true
+  
+            })
+          }
         }
       })
       .catch((error) => {
@@ -219,7 +237,7 @@ class LoginForm extends Component {
     return (
       <div>
         {this.state.login ? loginform : null}
-        {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange/' , state:{user_id:this.state.user_id.value}}}/>) : null}
+        {this.state.change ? (<Redirect  to ={{pathname:'/user/passwordchange/' , state:{user_id:this.state.user_id.value, role: this.state.userRole}}}/>) : null}
         {this.state.employee ? (<Redirect  to ={{pathname:`/employee/Profile/` , user:{user_id:this.state.user_id.value}}}/>) : null}
         {this.state.admin ? (<Redirect push to ='/admin'/>): null}
       </div>

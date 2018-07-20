@@ -211,25 +211,25 @@ class ResetPassword extends Component {
                 },
                 withCredentials: true
             })
-                .then((res) => {
-                    if (res.data.message === 'password has been changed') {
-                        swal("Password has been changed",{
-                            buttons: false,
-                            timer: 2000,
-                          })
-                        this.setState({
-                            employee: true
+            .then((res) => {
+                if (res.data.message === 'password has been changed') {
+                    swal("Password has been changed",{
+                        buttons: false,
+                        timer: 2000,
                         })
-                    }
-                })
-                .catch(error => {
-                    if(error.response.status === 401){
-                        this.setState({
-                            redirect: true
-                        })
-                    }
-                    
-                })
+                    this.setState({
+                        employee: true
+                    })
+                }
+            })
+            .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect: true
+                    })
+                }
+                
+            })
         } else {
             // window.Materialize.toast('passwords does not match', 4000)
             swal("passwords does not match",{
