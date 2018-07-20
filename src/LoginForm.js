@@ -156,6 +156,11 @@ class LoginForm extends Component {
             })
           }
         }
+        if(res.data.user.role === 'Admin'){
+          this.setState({
+            admin: true
+          })
+        }
       })
       .catch((error) => {
         if(error === "Your account has been suspended, contact your administrator or HR department"){

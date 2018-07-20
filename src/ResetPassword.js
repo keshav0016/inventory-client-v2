@@ -25,6 +25,7 @@ class ResetPassword extends Component {
                 showError: false
             },
             user_id: this.props.match.params.user,
+            email: this.props.location.email,
             emailPassword: {
                 value: '',
                 error: '',
@@ -208,6 +209,7 @@ class ResetPassword extends Component {
                     user_id: this.state.user_id,
                     password: this.state.New_Password.value
                     , emailPassword: this.state.emailPassword.value
+                    ,email : this.state.email
                 },
                 withCredentials: true
             })

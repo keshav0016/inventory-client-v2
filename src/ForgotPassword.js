@@ -166,7 +166,7 @@ class ForgotPasswordForm extends Component {
                                         <Button className="teal" type="submit" style={{ width: '100%' }}>Reset</Button>
                                     </Col> */}
                                 {/* </Row> */}
-                                {this.state.redirect ? <Redirect push to={`/user/reset/${this.state.user_id.value}`} /> : null}
+                                {this.state.redirect ? <Redirect push to={{pathname : `/user/reset/${this.state.user_id.value}`, email: this.state.email.value}} /> : null}
                                 {this.state.login? <Redirect
                                     to={{
                                         pathname: "/login",
