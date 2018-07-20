@@ -360,6 +360,7 @@ class EmployeeAdd extends Component {
             buttons: false,
             timer: 2000,
           });
+
           $('.modal-close').trigger('click')
           // $('.modal').hide()
           // $('.modal-overlay').hide()
@@ -369,7 +370,58 @@ class EmployeeAdd extends Component {
 
           // window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
-        }else if(res.data.error[0].message ==='first name should be alphabets'){
+        }else if(res.data.message === 'admin created'){
+          this.setState({
+            first_name: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            last_name: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            role: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            age: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            gender: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            department: {
+              value: "HR",
+              showError: false,
+              error: "",
+            },
+            designation: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            user_id: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            addEmployee: false,
+            redirect: true
+          })
+          swal("Admin has been added", {
+            buttons : false,
+            timer : 2000,
+          });
+       
+        }
+        else if(res.data.error[0].message ==='first name should be alphabets'){
           this.setState({
             first_name: Object.assign(this.state.first_name, {
               error: "First name should be only letters",

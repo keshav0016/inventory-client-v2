@@ -317,7 +317,6 @@ class Assets extends Component{
                 <Table centered className="assetTable desktopView listTable" style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead>
                         <tr >
-                            <th data-field="asset_id">Asset ID</th>
                             <th data-field="serial_number">Serial No.</th>
                             <th data-field="asset_name">Asset Name</th>
                             <th data-field="asset_type">Asset Type</th>
@@ -326,15 +325,14 @@ class Assets extends Component{
                             <th className='tabView' data-field="vendor">Vendor</th>
                             <th data-field="current_status">Current Status</th>
                             <th className='extraFields' data-field="condition">Condition</th>
-                            <th className='extraFields' data-field="location">Location</th>
                             <th className='extraFields' data-field="category">Category</th>
+                            <th className='extraFields' data-field='user'>User</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {this.state.assetList.map((item, index) => {
                             return <tr key={item.asset_id} className={item.disabled === 1 ? 'disabled' : 'enabled' } >
-                            <td>{item.asset_id}</td>
                             <td>{item.serial_number}</td>
                             <td>{item.asset_name}</td>
                             <td>{item.assetType}</td>
@@ -343,8 +341,8 @@ class Assets extends Component{
                             <td className='tabView'>{item.vendor}</td>
                             <td>{item.current_status}</td>
                             <td className='extraFields'>{item.condition}</td>
-                            <td className='extraFields'>{item.location}</td>
                             <td className='extraFields'>{item.category}</td>
+                            <td className='extraFields'>{item.assets_assigneds.map(asset => {return asset.user_id})}</td>
                             <td>{that.renderDropdown(item)}</td>
                             </tr>
                         })}
