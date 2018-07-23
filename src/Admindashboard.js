@@ -94,7 +94,7 @@ class Admindashboard extends Component {
                                     <div  style={{maxHeight:"100px", overflow:"auto"}}>
                                         {this.state.consumablesLowStock.length !== 0 ? 
                                             <Table  className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
-                                            <thead>
+                                            <thead style={{color: 'black'}}>
                                             <tr>
                                                 <th data-field="name">Name</th>
                                                 <th data-field="quantity">Available Quantity</th>
@@ -102,7 +102,7 @@ class Admindashboard extends Component {
                                             </thead>
                                             <tbody>{this.state.consumablesLowStock.map(consumable => {
                                             return(
-                                            <tr>
+                                            <tr style={{color: 'black'}}>
                                                 <td>{consumable.name}</td>
                                                 <td>{consumable.quantity}</td>
                                             </tr>
