@@ -16,6 +16,7 @@ import ResetPassword from './ResetPassword'
 import './materialize-overrides.css';
 import NotFound from './NotFound';
 import axios from 'axios';
+import changePassword from './ChangePassword'
 
 class App extends Component {
   constructor(props){
@@ -54,6 +55,7 @@ class App extends Component {
             <Route  exact path ='/forgotpassword' component={ForgotPasswordForm}/>
             <Route  exact path ='/user/reset/:user' component={ResetPassword}/>    
             <Route path='/unauthorized' component={NotFound} />
+            <Route exact path = '/changepassword' component = {changePassword}/>
                     
               {this.state.redirect? <Redirect
               to={{

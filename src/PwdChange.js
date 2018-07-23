@@ -204,7 +204,7 @@ class PasswordChange extends Component {
 
                 axios({
                     method: 'post',
-                    url: `${baseUrl}/employee/ticket/changepassword`,
+                    url: `${baseUrl}/user/passwordchange`,
                     data: {
                         user_id: this.state.user_id,
                         password: this.state.New_Password.value
@@ -232,35 +232,35 @@ class PasswordChange extends Component {
                     }
                 })
             }else if(this.props.location.state.role === "Admin" && this.props.location.state.admin){
-                axios({
-                    method: 'post',
-                    url: `${baseUrl}/admin/ticket/changepassword`,
-                    data: {
-                        user_id: this.state.user_id,
-                        password: this.state.New_Password.value
-                        , email: this.state.email
-                    },
-                    withCredentials: true
-                })
-                .then((res) => {
-                    if (res.data.message === 'password has been changed') {
-                        // window.Materialize.toast('Password has been changed', 4000)
-                        swal('Password has been changed',{
-                            buttons: false,
-                            timer: 2000,
-                            })
-                        this.setState({
-                            employee: true
-                        })
-                    }
-                })
-                .catch(error => {
-                    if(error.response.status === 401){
-                        this.setState({
-                            redirect: true
-                        })
-                    }
-                })
+                // axios({
+                //     method: 'post',
+                //     url: `${baseUrl}/admin/ticket/changepassword`,
+                //     data: {
+                //         user_id: this.state.user_id,
+                //         password: this.state.New_Password.value
+                //         , email: this.state.email
+                //     },
+                //     withCredentials: true
+                // })
+                // .then((res) => {
+                //     if (res.data.message === 'password has been changed') {
+                //         // window.Materialize.toast('Password has been changed', 4000)
+                //         swal('Password has been changed',{
+                //             buttons: false,
+                //             timer: 2000,
+                //             })
+                //         this.setState({
+                //             employee: true
+                //         })
+                //     }
+                // })
+                // .catch(error => {
+                //     if(error.response.status === 401){
+                //         this.setState({
+                //             redirect: true
+                //         })
+                //     }
+                // })
             }
         } 
         // else {

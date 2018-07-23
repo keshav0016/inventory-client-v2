@@ -155,11 +155,11 @@ class LoginForm extends Component {
   
             })
           }
-        }
-        if(res.data.user.role === 'Admin'){
-          this.setState({
-            admin: true
-          })
+          else if(res.data.user.role === 'Admin'){
+            this.setState({
+              admin: true
+            })
+          }
         }
       })
       .catch((error) => {

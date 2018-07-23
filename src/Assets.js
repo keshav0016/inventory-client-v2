@@ -342,7 +342,7 @@ class Assets extends Component{
                             <td>{item.current_status}</td>
                             <td className='extraFields'>{item.condition}</td>
                             <td className='extraFields'>{item.category}</td>
-                            <td className='extraFields'>{item.assets_assigneds.map(asset => {return asset.user_id})}</td>
+                            <td className='extraFields'>{item.assets_assigneds.map(asset => {if(asset.to === null ){return asset.user_id}else { return null}})}</td>
                             <td>{that.renderDropdown(item)}</td>
                             </tr>
                         })}

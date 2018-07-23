@@ -31,6 +31,7 @@ import './MasterComponent.css'
 import $ from 'jquery'
 import UpdateAsset from './UpdateAsset';
 import AdminList from './Admins';
+import changePassword from './ChangePassword';
 
 
 class MasterComponent extends Component {
@@ -128,6 +129,7 @@ class MasterComponent extends Component {
                             <Route exact path="/admin/assetType" component={AssetType} />
                             <Route exact path="/admin/assets/update" component={UpdateAsset} />
                             <Route exact path='/admin/list' component={AdminList} />
+                            <Route exact path='/changepassword' component = {changePassword}/>
                         </div>
                     </div>
                 )}
