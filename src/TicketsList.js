@@ -462,6 +462,7 @@ class TicketsList extends Component{
                                         <th data-field="requestedAsset">Requested Asset</th>
                                         <th data-field="quantity">Quantity</th>
                                         <th data-field="status">Status</th>
+                                        <th data-field='adminName'>Admin Name</th>
                                     </tr>
                                 </thead>
 
@@ -475,6 +476,7 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.asset_name}` : `-`}</td>    
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
+                                        <td>{ticket.status === 'Accepted' || ticket.status === 'Rejected' ? ticket.adminName : null}</td>
                                         <td>{ticket.status === 'Pending' && ticket.user !== null ? <Button onClick = {async () => {await this.renderAcceptAssetTicket(ticket)}} floating icon='done'></Button> : null}</td>
                                         <td>{this.renderRejectAssetTicket(ticket)}</td>
                                         </tr>
@@ -506,6 +508,7 @@ class TicketsList extends Component{
                                                     <div style={{ float: 'right' }}>
                                                         <h6><b>Quantity</b> : {item.quantity}</h6>
                                                         <h6><b>Status</b> : {item.status}</h6>
+                                                        <h6><b>Admin Name</b> : {item.status === 'Accepted' || item.status === 'Rejected' ? item.adminName : null}</h6>
                                                     </div>
                                                 </div>
                                             </CardPanel>
@@ -527,6 +530,8 @@ class TicketsList extends Component{
                                         <th data-field="requestedItem">Item</th>
                                         <th data-field="quantity">Quantity</th>
                                         <th data-field="status">Status</th>
+                                        <th data-field='adminName'>Admin Name</th>
+
                                     </tr>
                                 </thead>
 
@@ -539,6 +544,7 @@ class TicketsList extends Component{
                                         <td>{ticket.requested_asset_item ? `${ticket.requested_asset_item} `: `${ticket.requested_consumable_item} `}</td>
                                         <td>{ticket.quantity}</td>
                                         <td>{ticket.status}</td>
+                                        <td>{ticket.status === 'Accepted' || ticket.status === 'Rejected' ? ticket.adminName : null}</td>
                                         <td>{this.renderAcceptConsumableTicket(ticket)}</td>
                                         <td>{this.renderRejectConsumableTicket(ticket)}</td>
                                         </tr>
@@ -571,6 +577,7 @@ class TicketsList extends Component{
                                                     <div style={{ float: 'right' }}>
                                                         <h6><b>Quantity</b> : {item.quantity}</h6>
                                                         <h6><b>Status</b> : {item.status}</h6>
+                                                        <h6><b>Admin Name</b> : {item.status === 'Accepted' || item.status === 'Pending' ? item.adminName : null}</h6>
                                                     </div>
                                                 </div>
                                             </CardPanel>
