@@ -91,7 +91,7 @@ class Admindashboard extends Component {
                                     <p>Pending Requests: {this.state.consumablesPendingCount}</p>
                                     {/* <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p> */}
                                     <p>consumables running low on stock: {this.state.consumablesLowStock.length !== 0 ? this.state.consumablesLowStock.length : null}</p>
-                                    <div  style={{maxHeight:"155px", overflow:"auto"}}>
+                                    <div  style={{maxHeight:"100px", overflow:"auto"}}>
                                         {this.state.consumablesLowStock.length !== 0 ? 
                                             <Table  className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                                             <thead>

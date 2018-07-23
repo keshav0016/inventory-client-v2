@@ -31,6 +31,7 @@ class ProtectedRoute extends Component {
                     ck.token ? (
                         <MasterComponent/>
                     ) : (
+                            ck.passwordChange ? 
                             <React.Fragment>
                                 <Redirect
                                     to={{
@@ -39,6 +40,7 @@ class ProtectedRoute extends Component {
                                     }}
                                 />
                             </React.Fragment>
+                            : <Redirect to='/login'/>
                             
                         )
                 }

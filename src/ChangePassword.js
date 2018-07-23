@@ -80,12 +80,12 @@ class ChangePassword extends Component {
                 })
             }else{
 
-                this.setState({
-                    login : true
-                })
                 swal('Password has been changed', {
                     buttons : false,
                     timer : 2000
+                })
+                this.setState({
+                    login : true
                 })
                 $('.modal-close').trigger('click')
                 $('.modal-overlay').remove()
