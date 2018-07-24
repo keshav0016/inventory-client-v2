@@ -38,7 +38,7 @@ class AssignAsset extends Component{
         }
         this.assignAssetIntoDb = this.assignAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
-        this.setExpectedRecovery = this.setExpectedRecovery.bind(this)
+        // this.setExpectedRecovery = this.setExpectedRecovery.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.setEmployee = this.setEmployee.bind(this)
         this.clearFields = this.clearFields.bind(this)
@@ -128,7 +128,7 @@ class AssignAsset extends Component{
                 })
             })
         }
-        if(this.state.user_id.value!=='Select' && this.state.from.value && this.state.expected_recovery.value && new Date(this.state.from.value) <= new Date(this.state.expected_recovery.value)) {
+        if(this.state.user_id.value!=='Select' && !this.state.from.showError ) {
             this.setState({
                 assignAssetRequest : true
             })
@@ -143,8 +143,8 @@ class AssignAsset extends Component{
                 asset_id : this.props.asset,
                 user_id : this.state.user_id.value,
                 from : this.state.from.value,
-                expected_recovery : this.state.expected_recovery.value
-                ,assignForce : this.state.assignForce
+                assignForce : this.state.assignForce
+                // expected_recovery : this.state.expected_recovery.value
             },
             withCredentials : true
         })
@@ -209,13 +209,13 @@ class AssignAsset extends Component{
         })
     }
     
-    setExpectedRecovery(e){
-        this.setState({
-            expected_recovery : Object.assign(this.state.expected_recovery, {
-                value: e.target.value
-            })
-        })
-    }
+    // setExpectedRecovery(e){
+    //     this.setState({
+    //         expected_recovery : Object.assign(this.state.expected_recovery, {
+    //             value: e.target.value
+    //         })
+    //     })
+    // }
 
     componentDidMount(){
         axios({
@@ -266,12 +266,17 @@ class AssignAsset extends Component{
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
                 <h5 className="title">Assign Asset</h5>
                 <Row>
-                    <Input s={12} type="select" label="Assign to*" onChange = {this.setEmployee} value={this.state.user_id.value} error={this.state.user_id.showError ? this.state.user_id.error : null}>{this.setEmployeeDropdown()}</Input>
-                    {/* <Input s={12} type='date' label="From *" 
+                    <Input s={6} type="select" label="Assign to*" 
+                        onChange = {this.setEmployee} 
+                        value={this.state.user_id.value} 
+                        error={this.state.user_id.showError ? this.state.user_id.error : null}>
+                        {this.setEmployeeDropdown()}
+                        </Input>
+                    <Input s={6} type='date' label="From *" 
                     value = {this.state.from.value} onChange = {this.setFrom} 
                     error={this.state.from.showError ? this.state.from.error : null} 
-                    /> */}
-                     <DateInput
+                    />
+                     {/* <DateInput
                         label="From *" 
                         options={{min: moment(new Date(), "D MMMM, YYYY").toDate()}}
                         value = {this.state.from.value} 
@@ -284,7 +289,7 @@ class AssignAsset extends Component{
                         value = {this.state.expected_recovery.value} 
                         onChange = {this.setExpectedRecovery} 
                         error={this.state.expected_recovery.showError ? this.state.expected_recovery.error : null} 
-                    />
+                    /> */}
                     {/* <Input s={12} 
                         type='date' label="Expected Recovery*" 
                         min={this.state.from.value} 
