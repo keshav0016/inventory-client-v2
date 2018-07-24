@@ -266,13 +266,13 @@ class AssignAsset extends Component{
                 {this.state.assignAssetRequest ? this.assignAssetIntoDb() : null}
                 <h5 className="title">Assign Asset</h5>
                 <Row>
-                    <Input s={6} type="select" label="Assign to*" 
+                    <Input s={12} type="select" label="Assign to*" 
                         onChange = {this.setEmployee} 
                         value={this.state.user_id.value} 
                         error={this.state.user_id.showError ? this.state.user_id.error : null}>
                         {this.setEmployeeDropdown()}
                         </Input>
-                    <Input s={6} type='date' label="From *" 
+                    <Input s={12} type='date' label="From *" 
                     value = {this.state.from.value} onChange = {this.setFrom} 
                     error={this.state.from.showError ? this.state.from.error : null} 
                     />
