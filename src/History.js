@@ -103,7 +103,9 @@ class Assets extends Component{
         }
         if(this.state.historyAssigned.length !== 0){
             var AssetAssignedDetails = [[
-                "User Id","Employee Name","Ticket Number","From","Expected Recovery","To"
+                // "User Id","Employee Name","Ticket Number","From","Expected Recovery","To"
+                "User Id","Employee Name","Ticket Number","From","To","Assigned by"
+                
             ]]
             this.state.historyAssigned.map(element => {
                 return AssetAssignedDetails.push([
@@ -111,13 +113,15 @@ class Assets extends Component{
                     `${element.user.first_name} ${element.user.last_name}`,
                     `${element.ticket_number ? element.ticket_number : "Nil"}`,
                     `${moment(element.from).format('DD/MM/YYYY')}`,
-                    `${moment(element.expected_recovery).format('DD/MM/YYYY')}`,
-                    `${element.to ? moment(element.to).format('DD/MM/YYYY') : "Nil"}`
+                    // `${moment(element.expected_recovery).format('DD/MM/YYYY')}`,
+                    `${element.to ? moment(element.to).format('DD/MM/YYYY') : "Nil"}`,
+                    `${element.adminName ? element.adminName : "Nil"}`,
+
                 ])
             })
         }else{
             var AssetAssignedDetails = [[
-                "User Id","Employee Name","Ticket Number","From","Expected Recovery","To"
+                "User Id","Employee Name","Ticket Number","From","To","Assigned by"
             ],[
                 "Nil","Nil","Nil","Nil","Nil","Nil"
             ]]
@@ -210,8 +214,8 @@ class Assets extends Component{
                                             <h6><b>From</b> : {moment(element.from).format('DD MMM YYYY')}</h6>
                                         </div>
                                         <div style={{float: 'right'}} >
-                                            {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : <h6><b>Expected Recovery</b> : { moment(element.expected_recovery).format('DD MMM YYYY') }</h6>}
-                                            {element.ticekt_number ? <h6><b>Ticket Number</b> : {element.ticekt_number}</h6> : <h6><b>Assigned by admin</b></h6>}
+                                            {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : null}
+                                            {element.ticekt_number ? <h6><b>Ticket Number</b> : {element.ticekt_number}</h6> : <h6><b>Assigned by </b>{element.adminName}</h6>}
                                         </div>
                                     </div>
                                 </div>}

@@ -106,7 +106,7 @@ class HistoryConsumables extends Component{
     }
     if(this.state.history.length !== 0){
         var ConsumableAssignedDetails = [[
-            "Employee Id",'Employee Name',"Assigned Quantity","Assigned Date","Ticket Number"
+            "Employee Id",'Employee Name',"Assigned Quantity","Assigned Date","Ticket Number","Assigned by"
         ]]
         this.state.history.map(element => {
             if(element.user){
@@ -115,15 +115,17 @@ class HistoryConsumables extends Component{
                     `${element.user.first_name}${element.user.last_name}`,
                     `${element.quantity}`,
                     `${moment(element.assigned_date).format('DD/MM/YYYY')}`,
-                    `${element.ticket_number ? element.ticket_number : "Nil"}`
+                    `${element.ticket_number ? element.ticket_number : "Nil"}`,
+                    `${element.adminName ? element.adminName : "Nil"}`,
+
                 ])
             }
         })
     }else{
         var ConsumableAssignedDetails = [[
-            "Employee Id",'Employee Name',"Assigned Quantity","Assigned Date","Ticket Number"
+            "Employee Id",'Employee Name',"Assigned Quantity","Assigned Date","Ticket Number","Assigned by"
         ],[
-            "Nil","Nil","Nil","Nil","Nil"
+            "Nil","Nil","Nil","Nil","Nil","Nil"
         ]]
     }
     var buffer = xlsx.build([{name: 'Consumable-Details',data: ConsumableDetails},{name: 'Consumable-Assigned-Details',data: ConsumableAssignedDetails}]);
@@ -198,7 +200,7 @@ class HistoryConsumables extends Component{
                                         <h6><b>Assigned Date</b> : {moment(consumable.assigned_date).format('DD MMM YYYY')}</h6>
                                     </div>
                                     <div style={{float: 'right'}} >
-                                        {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.quantity}</h6>) : 'Assigned by Admin'}
+                                        {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.quantity}</h6>) : <h6><b>Assigned by </b>{consumable.adminName}</h6>}
                                         {consumable.assigned_date ? (<h6><b>Assigned Quantity</b> : {consumable.quantity}</h6>) : null}
                                     </div>
                                 </div>
