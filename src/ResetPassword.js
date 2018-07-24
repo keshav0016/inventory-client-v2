@@ -25,6 +25,7 @@ class ResetPassword extends Component {
                 showError: false
             },
             user_id: this.props.match.params.user,
+            email: this.props.location.email,
             emailPassword: {
                 value: '',
                 error: '',
@@ -208,28 +209,29 @@ class ResetPassword extends Component {
                     user_id: this.state.user_id,
                     password: this.state.New_Password.value
                     , emailPassword: this.state.emailPassword.value
+                    ,email : this.state.email
                 },
                 withCredentials: true
             })
-                .then((res) => {
-                    if (res.data.message === 'password has been changed') {
-                        swal("Password has been changed",{
-                            buttons: false,
-                            timer: 2000,
-                          })
-                        this.setState({
-                            employee: true
+            .then((res) => {
+                if (res.data.message === 'password has been changed') {
+                    swal("Password has been changed",{
+                        buttons: false,
+                        timer: 2000,
                         })
-                    }
-                })
-                .catch(error => {
-                    if(error.response.status === 401){
-                        this.setState({
-                            redirect: true
-                        })
-                    }
-                    
-                })
+                    this.setState({
+                        employee: true
+                    })
+                }
+            })
+            .catch(error => {
+                if(error.response.status === 401){
+                    this.setState({
+                        redirect: true
+                    })
+                }
+                
+            })
         } else {
             // window.Materialize.toast('passwords does not match', 4000)
             swal("passwords does not match",{

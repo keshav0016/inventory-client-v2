@@ -253,7 +253,9 @@ div.input-field.consumable-alpha-error.col label.active:after
 
 @media only screen and (min-width : 760px) {
     .employeeProfile {
-        float: right;
+        /* float: right; */
+        margin-left: 20px;
+        margin-top: 30px
     }
 }
 
@@ -263,6 +265,17 @@ div.input-field.consumable-alpha-error.col label.active:after
     font-weight: 400;
     display: inline-block;
     font-size: 25px;
+    margin-top: 10px
+}
+
+.employeeTitle {
+    font-family: "Roboto";
+    font-weight: 400;
+    display: inline-block;
+    font-size: 25px;
+    color: white;
+    margin-left: 20px;
+    margin-top: 20px
 }
 
 .recoverTitle {

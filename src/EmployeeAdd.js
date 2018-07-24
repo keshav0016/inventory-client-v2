@@ -34,6 +34,11 @@ class EmployeeAdd extends Component {
         showError: false,
         error: "",
       },
+      role: {
+        value: "",
+        showError: false,
+        error: "",
+      },
       department: {
         value: "HR",
         showError: false,
@@ -67,6 +72,7 @@ class EmployeeAdd extends Component {
     this.handleGender = this.handleGender.bind(this)
     this.handleUser_Id = this.handleUser_Id.bind(this)
     this.setEmail = this.setEmail.bind(this)
+    this.handleRole = this.handleRole.bind(this)
 
   }
   componentDidMount(){
@@ -271,7 +277,23 @@ class EmployeeAdd extends Component {
             }),
         })
     }
-    if(userIdReg.test(this.state.user_id.value) && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
+    if(this.state.role.value === 'select'){
+      this.setState({
+        role: Object.assign(this.state.role, {
+          error: "Role is required",
+          showError: true,
+        }),
+      })
+    }
+    if(this.state.role.value !== 'select'){
+      this.setState({
+        role: Object.assign(this.state.role, {
+          error: "",
+          showError: false,
+        }),
+      })
+    }
+    if(userIdReg.test(this.state.user_id.value) && !this.state.role.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
       axios({
         method: 'post',
         url: `${baseUrl}/employees/create`,
@@ -283,7 +305,8 @@ class EmployeeAdd extends Component {
           gender: this.state.gender.value,
           department:this.state.department.value,
           designation:this.state.designation.value,
-          email:this.state.email.value
+          email:this.state.email.value,
+          role: this.state.role.value
         },
         withCredentials: true
       })
@@ -296,6 +319,11 @@ class EmployeeAdd extends Component {
               error: "",
             },
             last_name: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            role: {
               value: "",
               showError: false,
               error: "",
@@ -332,6 +360,7 @@ class EmployeeAdd extends Component {
             buttons: false,
             timer: 2000,
           });
+
           $('.modal-close').trigger('click')
           // $('.modal').hide()
           // $('.modal-overlay').hide()
@@ -341,7 +370,58 @@ class EmployeeAdd extends Component {
 
           // window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
-        }else if(res.data.error[0].message ==='first name should be alphabets'){
+        }else if(res.data.message === 'admin created'){
+          this.setState({
+            first_name: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            last_name: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            role: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            age: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            gender: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            department: {
+              value: "HR",
+              showError: false,
+              error: "",
+            },
+            designation: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            user_id: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            addEmployee: false,
+            redirect: true
+          })
+          swal("Admin has been added", {
+            buttons : false,
+            timer : 2000,
+          });
+       
+        }
+        else if(res.data.error[0].message ==='first name should be alphabets'){
           this.setState({
             first_name: Object.assign(this.state.first_name, {
               error: "First name should be only letters",
@@ -436,6 +516,13 @@ class EmployeeAdd extends Component {
       })  
     })
   }
+  handleRole(e){
+    this.setState({
+      role: Object.assign(this.state.role, {
+        value: e.target.value
+      })  
+    })
+  }
   handleUser_Id(e){
     this.setState({
       user_id:Object.assign(this.state.user_id, {
@@ -510,6 +597,11 @@ class EmployeeAdd extends Component {
             <option value='QA Lead'>QA Lead</option>
             <option value='Software Test Engineer'>Software Test Engineer</option>
           </Input> : null}
+        <Input s={12} m={6} l={6} type='select' label="Role" onChange={this.handleRole} error={this.state.role.showError ? this.state.role.error : null}>
+            <option value='select'>select</option>
+            <option value='Admin'>Admin</option>
+            <option value='Employee'>Employee</option>
+          </Input>
         </Row>
         {/* <div className="splitModalButtons" >
         <Row>

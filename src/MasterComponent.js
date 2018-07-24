@@ -30,6 +30,8 @@ import logo from './LOGO.png'
 import './MasterComponent.css'
 import $ from 'jquery'
 import UpdateAsset from './UpdateAsset';
+import AdminList from './Admins';
+import changePassword from './ChangePassword';
 
 
 class MasterComponent extends Component {
@@ -102,6 +104,7 @@ class MasterComponent extends Component {
                                 <Link className={window.location.pathname === '/admin/employees' ? 'selected' : null} to="/admin/employees">Employees</Link>
                                 <Link className={window.location.pathname === '/admin/tickets' ? 'selected' : null} to="/admin/tickets">Tickets</Link>
                                 <Link className={window.location.pathname === '/admin/vendor' ? 'selected' : null} to="/admin/vendor">Vendors</Link>
+                                <Link className={window.location.pathname === '/admin/list' ? 'selected' : null} to='/admin/list'>Admins</Link>
                             </SideNav>
                         </div>
                         <div>
@@ -125,6 +128,8 @@ class MasterComponent extends Component {
                             <Route exact path='/admin/tickets/asset/accept/:ticket' component={AcceptAssetTicket} />
                             <Route exact path="/admin/assetType" component={AssetType} />
                             <Route exact path="/admin/assets/update" component={UpdateAsset} />
+                            <Route exact path='/admin/list' component={AdminList} />
+                            <Route exact path='/changepassword' component = {changePassword}/>
                         </div>
                     </div>
                 )}

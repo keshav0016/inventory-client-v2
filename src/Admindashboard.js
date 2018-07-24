@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import moment from 'moment'
-import { Row, Col, Card, Icon, Preloader } from 'react-materialize'
+import { Row, Col, Card, Icon, Preloader, Button , Modal, Table} from 'react-materialize'
 import './adminDash.css'
 import './Employee.css'
 import { baseUrl } from './config';
 import { Redirect } from "react-router-dom";
+import ChangePassword from './ChangePassword';
 
 class Admindashboard extends Component {
     constructor(props) {
@@ -67,18 +68,51 @@ class Admindashboard extends Component {
                 <Row>
                     <Col s={12} m={12} l={12}>
                         <Card className="z-depth-0" >
+                            <div style ={{marginTop: '20px'}}>
                             <h3  className='title'>Dashboard</h3 >
+                            <div style = {{display: 'inline-block',width: '10px'}}>
+                            <Modal
+                                modalOptions={{dismissible:false}}
+                                actions={null}
+                                trigger={<Button style = {{marginLeft: '1065px', display : 'inline-block', paddingLeft: '10px', paddingRight: '10px'}} small >Change Password</Button>}>
+                                <ChangePassword />
+                                {/* <p>change password</p> */}
+                            </Modal>     
+                            </div>
+                            </div>       
                             {   this.state.handleListRequest ? <Row><Preloader size='small' /></Row> :
                             <div>
                                 <Col s={12} m={6} l={6} >
                                 <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets#consumable'>Go to Consumables request list</a>]}>
-                                    <div style={{marginTop:'3%', marginBottom:'5%'}} >
+                                    <div style={{paddingTop:'3%', paddingBottom:'5%', paddingLeft: '3%'}} >
                                     <Icon>developer_board</Icon>
                                     <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Consumables</span>
                                     </div>
                                     <p>Pending Requests: {this.state.consumablesPendingCount}</p>
                                     {/* <p>Accepted Requests: {this.state.consumablesAcceptedCount}</p> */}
-                                    <p>No of consumables running low on stock: {this.state.consumablesLowStock}</p>
+                                    <p>consumables running low on stock: {this.state.consumablesLowStock.length !== 0 ? this.state.consumablesLowStock.length : null}</p>
+                                    <div  style={{maxHeight:"100px", overflow:"auto"}}>
+                                        {this.state.consumablesLowStock.length !== 0 ? 
+                                            <Table  className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
+                                            <thead style={{color: 'black'}}>
+                                            <tr>
+                                                <th data-field="name">Name</th>
+                                                <th data-field="quantity">Available Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>{this.state.consumablesLowStock.map(consumable => {
+                                            return(
+                                            <tr style={{color: 'black'}}>
+                                                <td>{consumable.name}</td>
+                                                <td>{consumable.quantity}</td>
+                                            </tr>
+                                            )
+                                            },this)}
+                                            </tbody>
+                                        </Table>
+                                        : null}
+
+                                    </div>
                                 </Card>
                                 </Col>
                                 <Col s={12} m={6} l={6} >
