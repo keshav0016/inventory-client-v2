@@ -215,7 +215,8 @@ class Assets extends Component{
                                         </div>
                                         <div style={{float: 'right'}} >
                                             {element.to ? <h6><b>To</b> : { moment(element.to).format('DD MMM YYYY') }</h6> : null}
-                                            {element.ticekt_number ? <h6><b>Ticket Number</b> : {element.ticekt_number}</h6> : <h6><b>Assigned by </b>{element.adminName}</h6>}
+                                            {element.ticket_number ? <h6><b>Ticket Number</b> : {element.ticket_number}</h6> : <h6><b>Ticket Number</b> : {'Nil'}</h6>}
+                                            {element.ticket_number ? (element.adminName ? <h6><b>Accepted by</b>  {element.adminName}</h6> : "Nil") : (element.adminName ? <h6><b>Assigned by </b>{element.adminName}</h6> : "Nil") }
                                         </div>
                                     </div>
                                 </div>}

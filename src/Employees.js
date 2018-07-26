@@ -45,15 +45,15 @@ class EmployeesList extends Component {
         showModal : false
         ,currentItem : null
     })
-}
+  }
 
-setHandleListRequest(){
+  setHandleListRequest(){
     this.setState({
       handleListRequest : true
     })
     $('.modal-overlay').trigger('click')
 
-}
+  }
 
   handleList(){
     axios({
@@ -130,12 +130,11 @@ setHandleListRequest(){
   
   setSearch(e){
     this.setState({
-        search : e.target.value,
-        handleListRequest : true
-        
+      search : e.target.value,
+      handleListRequest : true 
     })
     this.setPage(1)
-}
+  }
 
   render() {
     return (

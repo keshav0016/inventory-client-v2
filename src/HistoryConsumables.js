@@ -200,8 +200,10 @@ class HistoryConsumables extends Component{
                                         <h6><b>Assigned Date</b> : {moment(consumable.assigned_date).format('DD MMM YYYY')}</h6>
                                     </div>
                                     <div style={{float: 'right'}} >
-                                        {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.quantity}</h6>) : <h6><b>Assigned by </b>{consumable.adminName}</h6>}
+                                        {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.ticket_number}</h6>) : <h6><b>Ticket</b> : {'Nil'}</h6>}
                                         {consumable.assigned_date ? (<h6><b>Assigned Quantity</b> : {consumable.quantity}</h6>) : null}
+                                        {consumable.ticket_number ? (consumable.adminName ? <h6><b>Accepted by</b>  {consumable.adminName}</h6> : "Nil") : (consumable.adminName ? <h6><b>Assigned by </b>{consumable.adminName}</h6> : "Nil") }
+
                                     </div>
                                 </div>
                             </div>}

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel, Row} from 'react-materialize'
+import {Table, Button, Modal, Pagination, Preloader, Col, CardPanel, Row, Input} from 'react-materialize'
 import AddVendor from './AddVendor'
 import VendorUpdate from './VendorUpdate'
 import $ from 'jquery'
@@ -23,14 +23,22 @@ class Vendor extends Component{
         this.handleList = this.handleList.bind(this)
         this.setHandleListRequest = this.setHandleListRequest.bind(this)
         this.setPage = this.setPage.bind(this)
-        this.setSearch = this.setSearch.bind(this)
         this.renderButton = this.renderButton.bind(this)
+        this.setSearch = this.setSearch.bind(this)
+    }
+    setSearch(e){
+        this.setState({
+            search : e.target.value,
+            handleListRequest : true
+            
+        })
+        this.setPage(1)
     }
 
     handleList(){
         axios({
             method : 'get',
-            url : `${baseUrl}/vendor/list?page=${this.state.page}&search=%${this.state.search}%`,
+            url : `${baseUrl}/vendor/list?page=${this.state.page}&search=${this.state.search}`,
             withCredentials : true
         })
         .then(res => {
@@ -52,12 +60,12 @@ class Vendor extends Component{
         })
     }
 
-    setSearch(e){
-        this.setState({
-            search : e.target.value,
-        })
-        this.setPage(1)
-    }
+    // setSearch(e){
+    //     this.setState({
+    //         search : e.target.value,
+    //     })
+    //     this.setPage(1)
+    // }
 
 
     setHandleListRequest(itemAdded){
@@ -106,8 +114,12 @@ class Vendor extends Component{
                   search: '?sessionExpired=true'
               }}/>: null}
                 <h3 className="title">Vendors</h3 >
+                    <Row>
+                        <Input s={6} m={4} l={4} placeholder="Search by Vendor Name" onChange = {this.setSearch} />
+                    </Row>
                     {this.state.handleListRequest ? <Row><Preloader size='small' /></Row> : 
                     (this.state.vendorList.length === 0 ? <div className='noRecordsScreen'>No Records</div> : <div>
+                        
                 <Table hoverable className='desktopView' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                     <thead >
                         <tr>
