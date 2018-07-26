@@ -127,7 +127,7 @@ class AcceptAssetTicket extends Component{
             })
         }
 
-        if(!this.state.expected_recovery.showError && alphaNum.test(this.state.reason.value)){
+        if(!this.state.currentAssetSelected.showError && !this.state.expected_recovery.showError && alphaNum.test(this.state.reason.value)){
             this.setState({
                 acceptTicketRequest : true
             })
