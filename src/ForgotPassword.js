@@ -107,6 +107,12 @@ class ForgotPasswordForm extends Component {
                             timer: 2000,
                           })
                     }
+                    if(res.data.message === 'user ID and Email does not match'){
+                        swal('Enter Correct credentials',{
+                            buttons: false,
+                            timer: 2000,
+                        })
+                    }
                     if (res.data.message === 'Check Your Email') {
                         swal(res.data.message,{
                             buttons: false,
