@@ -407,11 +407,25 @@ input[type=number] {
 }
 
 .editButton {
-    width: 100%;
+    /* width: 100%;
     color:#26a69a;
     border: none;
+    font-size: 16px; */
+    width: 100%;
+    color: #26a69a;
+    border: none;
     font-size: 16px;
+    font-size: 16px;
+    color: #26a69a;
+    display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+    text-align: left;
 }
+.editButton:hover {
+    background-color: rgb(233, 233, 233)
+}
+
 .editButtonPurchase {
     /* width: 50px;
     color:#26a69a;
