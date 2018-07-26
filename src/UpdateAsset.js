@@ -607,7 +607,7 @@ class UpdateAsset extends Component {
                     <Input s={12} m={3} l={3} label="Amount *" type="number" min={0} value={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={12} m={3} l={3} label="GST" type="number" min={0} value={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     <br />
-                    <Badge>Total : ₹{this.state.total}</Badge>
+                    <Badge className="totalBadge"><b >Total</b> : ₹{this.state.total}</Badge>
                     <Input s={12} m={3} l={3} type='select' label="Category" onChange={this.setCategory} value={this.state.category}>
                         <option value='Electronics'>Electronics</option>
                         <option value='Non-Electronics'>Non - Electronics</option>

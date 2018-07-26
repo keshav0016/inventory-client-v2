@@ -443,3 +443,8 @@ input[type=number] {
     padding: 7px;
 }
 
+.totalBadge {
+    margin-top: 30px;
+    margin-right: 60px
+}
+
