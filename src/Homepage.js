@@ -32,16 +32,17 @@ class ProtectedRoute extends Component {
                         <MasterComponent/>
                     ) : (
                             ck.passwordChange ? 
+                            <Redirect to='/login'/>
+                           
+                            : 
                             <React.Fragment>
-                                <Redirect
-                                    to={{
-                                        pathname: "/login",
-                                        search: '?sessionExpired=true'
-                                    }}
-                                />
-                            </React.Fragment>
-                            : <Redirect to='/login'/>
-                            
+                            <Redirect
+                                to={{
+                                    pathname: "/login",
+                                    search: '?sessionExpired=true'
+                                }}
+                            />
+                        </React.Fragment>
                         )
                 }
             />
