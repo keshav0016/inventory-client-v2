@@ -73,9 +73,9 @@ class Profile extends Component{
             <div className="filterContainer">
                 <h3 className="employeeTitle">Profile</h3>
                 <div className='employeeProfile'>
-                    <h6 style={{color: 'white', fontWeight: '300'}}>Name : <b style={{color : 'white'}}>{this.state.profile.first_name} {this.state.profile.last_name}</b></h6>
-                    <h6 style={{color: 'white', fontWeight: '300'}}>No of Assets held : <b style={{color : 'white'}}>{this.state.assetsCount}</b></h6>
-                    <h6 style={{color: 'white', fontWeight: '300'}}>No of Consumables held : <b style={{color: 'white'}}>{this.state.consumablesCount}</b> </h6>
+                    <h6 style={{color: 'white', fontWeight: '300'}}>Name : <b style={{color : 'white',fontSize:'18px', fontWeight: '400'}}>{this.state.profile.first_name} {this.state.profile.last_name}</b></h6>
+                    <h6 style={{color: 'white', fontWeight: '300'}}>No of Assets held : <b style={{color : 'white',fontWeight: '400'}}>{this.state.assetsCount}</b></h6>
+                    <h6 style={{color: 'white', fontWeight: '300'}}>No of Consumables held : <b style={{color: 'white', fontWeight: '400'}}>{this.state.consumablesCount}</b> </h6>
                 </div>
                 <div style = {{display: 'inline-block',width: '10px'}}>
                 <Modal
