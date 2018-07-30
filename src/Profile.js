@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Row, Col, Modal, Button} from 'react-materialize'
+import {Table, Row, Col, Modal, Button, Preloader,Input} from 'react-materialize'
 import { baseUrl } from './config';
 import './ListPage.css'
 import './MasterComponent.css';
@@ -18,7 +18,27 @@ class Profile extends Component{
             historyAssets :[],
             assetsCount: '',
             consumablesCount: '',
+            loading : true,
+            reason : {
+                value:'',
+                error:'',
+                showError:false
+            }
         }
+        this.returnAsset = this.returnAsset.bind(this)
+        this.cancelReason = this.cancelReason.bind(this)
+    }
+    cancelReason(){
+        this.setState({
+            reason:{
+                value:'',
+                error:'',
+                showError:false
+            }
+        })
+    }
+    returnAsset(assetId){
+
     }
     componentDidMount(){
         axios({
@@ -33,7 +53,8 @@ class Profile extends Component{
                 history : res.data.history,
                 historyAssets : res.data.historyAssets,
                 data : res.data.historyAssets.concat(res.data.history).sort((a,b) => b.id - a.id), 
-                handleList : false
+                handleList : false,
+                loading : false
 
             })
         })
@@ -89,28 +110,27 @@ class Profile extends Component{
             
             </div>
             <Row>
-                {this.state.data.length !== 0 ? 
-            // <Col s={12} m={8} l={8} offset={'m2 l2'} >
-            <Table hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
-              <thead>
-                  <tr>
-                      <th data-field="item"> Item</th>
-                      <th data-field="quantity">Quantity</th>
-                   
-                  </tr>
-              </thead>
-      
-              <tbody>
-                  {this.state.data.map((item, index) => {
-                      return <tr key={index}>
-                          <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable_id ? `${item.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
-                          <td>{item.asset_id ? "1": item.sum}</td>
-                      </tr>
-                  })}
-              </tbody>
-          </Table>
-            // </Col>
-            : <div className="noRecordsScreen">No Records</div>}
+            {this.state.loading ? <Row><Preloader size='small' /></Row> :(this.state.data.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
+
+                <div>
+                <Table hoverable style={{fontFamily : 'Roboto', fontWeight : 350}}>
+                <thead>
+                    <tr>
+                        <th data-field="item"> Item</th>
+                        <th data-field="quantity">Quantity</th>
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {this.state.data.map((item, index) => {
+                        return <tr key={index}>
+                            <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable_id ? `${item.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
+                            <td>{item.asset_id ? "1": item.sum}</td>
+                        </tr>
+                    })}
+                </tbody>
+            </Table>
+            </div>)}
             </Row>
             {this.state.redirect? <Redirect
               to={{
