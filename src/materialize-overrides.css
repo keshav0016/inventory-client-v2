@@ -335,6 +335,9 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 } */
+.input-field label:not(.label-icon).active {
+    color: #26a69a
+}
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -445,6 +448,6 @@ input[type=number] {
 
 .totalBadge {
     margin-top: 30px;
-    margin-right: 60px
+    margin-right: 60px;
 }
 
