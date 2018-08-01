@@ -202,7 +202,7 @@ class HistoryConsumables extends Component{
                                     <div style={{float: 'right'}} >
                                         {consumable.ticket_number ? (<h6><b>Ticket</b> : {consumable.ticket_number}</h6>) : <h6><b>Ticket</b> : {'Nil'}</h6>}
                                         {consumable.assigned_date ? (<h6><b>Assigned Quantity</b> : {consumable.quantity}</h6>) : null}
-                                        {consumable.ticket_number ? (consumable.adminName ? <h6><b>Accepted by</b>  {consumable.adminName}</h6> : "Nil") : (consumable.adminName ? <h6><b>Assigned by </b>{consumable.adminName}</h6> : "Nil") }
+                                        {consumable.ticket_number ? (consumable.adminName ? <h6><b>Accepted by</b>  {consumable.adminName}</h6> : null) : (consumable.adminName ? <h6><b>Assigned by </b>{consumable.adminName}</h6> : null) }
 
                                     </div>
                                 </div>
