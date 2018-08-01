@@ -51,6 +51,11 @@ class EmployeeUpdate extends Component{
                 showError: false,
                 error: "",
             },
+            role: {
+                value: this.props.user.role,
+                showError: false,
+                error: "",
+              },
             currentDesignation: this.props.user.designation,
             addEmployee: true,
             redirect: false,
@@ -67,6 +72,7 @@ class EmployeeUpdate extends Component{
         this.handleGender = this.handleGender.bind(this)
         this.setFields = this.setFields.bind(this)
         this.setEmail = this.setEmail.bind(this)
+        this.handleRole = this.handleRole.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
 
     }
@@ -129,6 +135,14 @@ class EmployeeUpdate extends Component{
                 value: e.target.value
             })
         })
+    }
+    handleRole(e){
+        this.setState({
+            role: Object.assign(this.state.role, {
+                value: e.target.value
+            })
+        })
+        
     }
    
     checkForValidation(){
@@ -294,16 +308,40 @@ class EmployeeUpdate extends Component{
                   }),
               })
           }
-            if(this.props.user.department !== this.state.department.value && this.state.currentDesignation === this.state.designation.value){
-                this.setState({
-                        designation: Object.assign(this.state.designation, {
-                        error: "Designation should also be changed",
-                        showError: true,
-                        }),
-                    })     
-                }
+          if(!this.state.role.value){
+            this.setState({
+              role: Object.assign(this.state.role, {
+                error: "Role is required",
+                showError: true,
+              }),
+            })
+          }
+          if(this.state.role.value === 'select'){
+            this.setState({
+                role: Object.assign(this.state.role, {
+                  error: "Role is required",
+                  showError: true,
+                }),
+              })
+          }
+          if(this.state.role.value !== 'select'){
+            this.setState({
+              role: Object.assign(this.state.role, {
+                error: "",
+                showError: false,
+              }),
+            })
+          }
+        if(this.props.user.department !== this.state.department.value && this.state.currentDesignation === this.state.designation.value){
+            this.setState({
+                designation: Object.assign(this.state.designation, {
+                error: "Designation should also be changed",
+                showError: true,
+                }),
+            })     
+        }
        
-        if(!this.state.department.showError && !this.state.designation.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && !this.state.email.showError){
+        if(!this.state.role.showError && !this.state.department.showError && !this.state.designation.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && !this.state.email.showError){
             this.setState({
                 UpdateRequest: true
             })
@@ -330,7 +368,8 @@ class EmployeeUpdate extends Component{
                 gender: this.state.gender.value,
                 department:this.state.department.value,
                 designation:this.state.designation.value,
-                email:this.state.email.value 
+                email:this.state.email.value ,
+                role : this.state.role.value
             },
             withCredentials: true
         })
@@ -415,6 +454,11 @@ class EmployeeUpdate extends Component{
                 value: this.props.user.email,
                 showError: false,
                 error: "",
+            },
+            role : {
+                value : this.props.user.role,
+                showError : false,
+                error : ""
             }
         })
         this.props.onFinish()
@@ -438,6 +482,11 @@ class EmployeeUpdate extends Component{
                         <option value='Other'>Other</option>
                     </Input>
                     <Input s={12} m={6} l={6}  label="Email*" type = "email" onChange={this.setEmail} value={this.state.email.value} error={this.state.email.showError ? this.state.email.error : null}/>
+                    <Input s={12} m={6} l={6} type='select' label="Role" onChange={this.handleRole} value={this.state.role.value} error={this.state.role.showError ? this.state.role.error : null}>
+                        <option value='select'>select</option>
+                        <option value='Admin'>Admin</option>
+                        <option value='Employee'>Employee</option>
+                    </Input>
                     <Input s={12} m={6} l={6} type='select' label="Department" onChange={this.handleDepartment} value={this.state.department.value} error={this.state.department.showError ? this.state.department.error : null}>
                     <option value='HR'>HR</option>
                     <option value='Delivery'>Delivery</option>

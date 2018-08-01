@@ -81,7 +81,7 @@ class AdminList extends Component{
                                 return <CardPanel key = {index} className={item.disable === 1 ? 'disabled' : 'enabled' } >
                                         <div className='historyCards'  >
                                             <div style={{float : 'left'}} >                                
-                                                <h6><b>Admin Id</b> : {item.id}</h6>
+                                                {/* <h6><b>Admin Id</b> : {item.id}</h6> */}
                                                 <h6><b>First Name</b> : {item.first_name}</h6>
                                                 <h6><b>Last Name</b> : {item.last_name}</h6>  
                                             </div>
