@@ -84,7 +84,7 @@ class Admindashboard extends Component {
                             <div>
                                 <Col s={12} m={6} l={6} >
                                 <Card className="teal-text dashboardContent small" actions={[<a href='/admin/tickets#consumable'>Go to Consumables request list</a>]}>
-                                    <div style={{paddingTop:'3%', paddingBottom:'5%', paddingLeft: '3%'}} >
+                                    <div style={{marginTop:'3%', marginBottom:'5%'}} >
                                     <Icon>developer_board</Icon>
                                     <span style={{fontFamily:'Roboto',color:'black',fontWeight:300, fontSize: '23px', marginLeft: '2%'}} >Consumables</span>
                                     </div>
