@@ -55,6 +55,7 @@ class AdminList extends Component{
                     }}/>: null
                 }
                 <h3 className="title">List of Admins</h3>
+                        {this.state.adminsList.length === 0 ?  <div className = 'noRecordsScreen'>No Records</div> :
                     <div>
                         <Table centered className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                             <thead>
@@ -91,8 +92,12 @@ class AdminList extends Component{
                                     </CardPanel>
                                 })}
                         </Col>
+                        
                     </div>
+                }
+                            
                 </div>
+            
         )
     }
     
