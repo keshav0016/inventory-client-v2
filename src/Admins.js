@@ -6,7 +6,6 @@ import {Table,Col, CardPanel } from 'react-materialize'
 import swal from 'sweetalert';
 
 
-
 class AdminList extends Component{
     constructor(props){
         super(props)
