@@ -155,7 +155,7 @@ class ResetPassword extends Component {
         //         })
         //     })
         // }
-        if (this.state.Confirm_Password.value && this.state.New_Password.value && this.state.emailPassword.value && this.state.New_Password.value === this.state.Confirm_Password.value) {
+        if (this.state.Confirm_Password.value && this.state.New_Password.value && !this.state.emailPassword.showError && this.state.New_Password.value === this.state.Confirm_Password.value) {
             this.handleSubmit()
         }
     }
@@ -221,6 +221,13 @@ class ResetPassword extends Component {
                         })
                     this.setState({
                         employee: true
+                    })
+                }else if(res.data.message === 'enter correct secret key'){
+                    this.setState({
+                        emailPassword: Object.assign(this.state.emailPassword, {
+                            error: 'Enter correct secret key',
+                            showError: true
+                        })
                     })
                 }
             })
