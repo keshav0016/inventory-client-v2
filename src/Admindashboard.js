@@ -70,11 +70,11 @@ class Admindashboard extends Component {
                         <Card className="z-depth-0" >
                             <div style ={{marginTop: '20px'}}>
                             <h3  className='title'>Dashboard</h3 >
-                            <div style = {{display: 'inline-block',width: '10px'}}>
+                            <div className="changePassword">
                             <Modal
                                 modalOptions={{dismissible:false}}
                                 actions={null}
-                                trigger={<Button style = {{marginLeft: '1065px', display : 'inline-block', paddingLeft: '10px', paddingRight: '10px'}} small >Change Password</Button>}>
+                                trigger={<Button small >Change Password</Button>}>
                                 <ChangePassword />
                                 {/* <p>change password</p> */}
                             </Modal>     

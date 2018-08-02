@@ -451,3 +451,10 @@ input[type=number] {
     margin-right: 60px;
 }
 
+.changePassword {
+    float: right;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
