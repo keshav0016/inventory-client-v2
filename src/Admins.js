@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { baseUrl } from './config';
 import {Redirect} from 'react-materialize'
-import {Table,Col, CardPanel } from 'react-materialize'
+import {Table,Col, CardPanel,Preloader,Row } from 'react-materialize'
 import swal from 'sweetalert';
 
 
@@ -11,6 +11,7 @@ class AdminList extends Component{
         super(props)
         this.state = {
             adminsList : [],
+            loading : true
 
         }
         this.handleList = this.handleList.bind(this)
@@ -27,7 +28,8 @@ class AdminList extends Component{
         })
         .then(res => {
             this.setState({
-                adminsList : res.data.admins
+                adminsList : res.data.admins,
+                loading : false
             })
         })
         .catch(error => {
@@ -54,7 +56,7 @@ class AdminList extends Component{
                     }}/>: null
                 }
                 <h3 className="title">List of Admins</h3>
-                        {this.state.adminsList.length === 0 ?  <div className = 'noRecordsScreen'>No Records</div> :
+                {this.state.loading ? <Row><Preloader size='small' /></Row> :(this.state.adminsList.length === 0 ? <div className = 'noRecordsScreen'>No Records</div> :
                     <div>
                         <Table centered className='desktopView listTable' style={{fontFamily: 'Roboto', fontWeight: 350}}>
                             <thead>
@@ -92,7 +94,7 @@ class AdminList extends Component{
                                 })}
                         </Col>
                         
-                    </div>
+                    </div>)
                 }
                             
                 </div>
