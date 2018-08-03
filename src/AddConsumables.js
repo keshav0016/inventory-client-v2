@@ -73,7 +73,8 @@ class AddConsumables extends Component{
             calculateTotal : false,
             redirect: false,
             addConsumable: true,
-            getConsumableName: true
+            getConsumableName: true,
+            disabled: false
         }
         this.setConsumableName = this.setConsumableName.bind(this)
         this.setVendorName = this.setVendorName.bind(this)
@@ -112,6 +113,8 @@ class AddConsumables extends Component{
         var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/
+
+       
 
         if (!alphaNum.test(this.state.name.value)) {
             this.setState({
@@ -311,7 +314,8 @@ class AddConsumables extends Component{
         }
         if(this.state.name.value && alphaNum.test(this.state.name.value) && !this.state.description.showError && this.state.purchase_date.value && Number(this.state.purchased_quantity.value) > 0 && Number(this.state.item_price.value) > 0 && Number(this.state.gst.value) >= 0 && Number(this.state.discount.value) >= 0 && this.state.vendor_name.value && this.state.vendor_name.value in this.state.vendorNames){
             this.setState({
-                addConsumableRequest : true
+                addConsumableRequest : true,
+                disabled: true
             })
         }
             }
@@ -652,7 +656,7 @@ class AddConsumables extends Component{
                     </Col> */}
                         <Row>
                             <Col offset={'l6'} style={{float: 'right'}}>
-                                <Button onClick = {this.checkForValidation} >SUBMIT</Button>
+                                <Button onClick = {this.checkForValidation} disabled={this.state.disabled} >SUBMIT</Button>
                                 <Link to='/admin/consumables'><Button className="cancelButton close-modal">Cancel</Button></Link>                            
                             </Col>
                         </Row>

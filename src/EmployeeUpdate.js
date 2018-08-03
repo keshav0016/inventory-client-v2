@@ -61,6 +61,7 @@ class EmployeeUpdate extends Component{
             redirect: false,
             login: false,
             UpdateRequest: false,
+            disabled : false
             
         }
         this.handleUpdate = this.handleUpdate.bind(this)
@@ -343,7 +344,8 @@ class EmployeeUpdate extends Component{
        
         if(!this.state.role.showError && !this.state.department.showError && !this.state.designation.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && !this.state.email.showError){
             this.setState({
-                UpdateRequest: true
+                UpdateRequest: true,
+                disabled : true
             })
         }
     }
@@ -535,7 +537,7 @@ class EmployeeUpdate extends Component{
                     </Input> : null}
                 </Row>
                     <div className="splitModalButtons">
-                        <Button className='addbtn' onClick={this.checkForValidation}>Update</Button>
+                        <Button className='addbtn' onClick={this.checkForValidation} disabled={this.state.disabled}>Update</Button>
                         <Button onClick={this.setFields} className="cancelButton modal-close">Cancel</Button>                
                     </div>
                 {this.state.UpdateRequest ? this.handleUpdate() : null}

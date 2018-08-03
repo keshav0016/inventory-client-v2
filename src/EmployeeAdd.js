@@ -294,6 +294,9 @@ class EmployeeAdd extends Component {
       })
     }
     if(userIdReg.test(this.state.user_id.value) && !this.state.role.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
+      this.setState({
+        disabled: true
+      })
       axios({
         method: 'post',
         url: `${baseUrl}/employees/create`,
@@ -611,7 +614,7 @@ class EmployeeAdd extends Component {
         <div className="splitModalButtons" >
             <Row>
                 <Col offset={'l6'} style={{float: 'right'}}>
-                    <Button onClick = {this.handleCreate} >SUBMIT</Button>
+                    <Button onClick = {this.handleCreate} disabled={this.state.disabled}>SUBMIT</Button>
                     <Link to='/admin/employees'><Button className="cancelButton modal-close">Cancel</Button></Link>                            
                 </Col>
             </Row>
