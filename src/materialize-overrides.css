@@ -133,7 +133,7 @@ div.input-field.no-vendor-available.col label.active:after
     content: "The vendor is not in the list";
     color: #F44336;
     opacity: 1;
-    top: 34px;
+    /* top: 34px; */
     position: absolute;
     white-space: nowrap;
     font-size: 12px;
