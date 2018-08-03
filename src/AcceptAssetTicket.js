@@ -42,7 +42,8 @@ class AcceptAssetTicket extends Component{
             ,acceptTicketRequest : false,
             login: false,
             d1 : new Date(),
-            on: this.props.match.params.on
+            on: this.props.match.params.on,
+            disabled: false
         }
         this.setCurrentAssetSelected = this.setCurrentAssetSelected.bind(this) 
         this.handleExpected = this.handleExpected.bind(this)
@@ -129,7 +130,8 @@ class AcceptAssetTicket extends Component{
 
         if(!this.state.currentAssetSelected.showError && !this.state.expected_recovery.showError && alphaNum.test(this.state.reason.value)){
             this.setState({
-                acceptTicketRequest : true
+                acceptTicketRequest : true,
+                disabled: true
             })
         }
     }
@@ -318,7 +320,7 @@ class AcceptAssetTicket extends Component{
                     <div className='splitModalButtons'>
                         <Row>
                             <Col offset={'l6'} style={{float: 'right'}}>
-                                <Button onClick = {this.checkForValidation} >Accept</Button>
+                                <Button onClick = {this.checkForValidation} disabled={this.state.disabled} >Accept</Button>
                                 <Link to='/admin/tickets'><Button className="cancelButton modal-close">Cancel</Button></Link>                            
                             </Col>
                         </Row>

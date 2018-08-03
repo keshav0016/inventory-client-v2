@@ -23,6 +23,7 @@ class AddAssetType extends Component{
                 showError: false
             }
             ,createAssetRequest : false
+            ,disabled : false
         }
         this.checkForValidation = this.checkForValidation.bind(this)
         this.setAssetType = this.setAssetType.bind(this)
@@ -96,7 +97,8 @@ class AddAssetType extends Component{
         }
         if(assetType.test(this.state.assetType.value) && Number(this.state.maxRequest.value) > 0) {
             this.setState({
-                createAssetRequest : true
+                createAssetRequest : true,
+                disabled : true
             })
         }
     }
@@ -217,7 +219,7 @@ class AddAssetType extends Component{
                     <Input s={12} value={this.state.maxRequest.value} type="number" min={1} label="Maximum request for this asset?" onChange={this.setMaxRequest} error={this.state.maxRequest.showError ? this.state.maxRequest.error : null} />
                 </Row>
                 <div className="splitModalButtons">
-                    <Button onClick={this.checkForValidation} >Submit</Button>
+                    <Button onClick={this.checkForValidation} disabled={this.state.disabled}>Submit</Button>
                     <Button onClick={this.cancelAll} className="cancelButton assettypeclose modal-close" >Cancel</Button>
                 </div>
                 {this.state.createAssetRequest ? this.createAssetTypeInDb() : null}

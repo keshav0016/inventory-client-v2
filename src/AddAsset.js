@@ -89,7 +89,8 @@ class AddAsset extends Component{
             ,assetTypeListRequest : true,
             addAsset: true,
             redirect: false,
-            login: false
+            login: false,
+            disabled: false
         }
         this.setSerialNumber = this.setSerialNumber.bind(this)
         this.setAssetName = this.setAssetName.bind(this)
@@ -408,7 +409,8 @@ class AddAsset extends Component{
         }
         if(serialNum.test(this.state.serial_number.value) && alphaNum.test(this.state.asset_name.value) && this.state.purchase_date.value && descriptionNum.test(this.state.description.value) && num.test(this.state.invoice_number.value) && this.state.vendor.value && Number(this.state.amount.value) > 0 && alphaNum.test(this.state.condition.value) && alphaNum.test(this.state.location.value) && this.state.category.value !=='Select' && this.state.assetType.value !=='Select' && Number(this.state.gst.value) >= 0 && alphaNum.test(this.state.vendor.value) && this.state.vendor.value in this.state.vendorNames ){
             this.setState({
-                addAssetRequest : true
+                addAssetRequest : true,
+                disabled : true
             })
         }
     }
@@ -868,7 +870,7 @@ class AddAsset extends Component{
                         <div className="splitModalButtons"> 
                             <Row>
                                 <Col offset={'l6'} style={{float: 'right'}}>
-                                    <Button onClick = {this.checkForValidation} >SUBMIT</Button>
+                                    <Button onClick = {this.checkForValidation} disabled={this.state.disabled} >SUBMIT</Button>
                                     <Link to='/admin/assets'><Button className="cancelButton modal-close">Cancel</Button></Link>                               
                         
                                 </Col>
