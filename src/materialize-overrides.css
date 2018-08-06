@@ -447,8 +447,9 @@ input[type=number] {
 }
 
 .totalBadge {
-    margin-top: 30px;
-    margin-right: 60px;
+    /* float: left */
+    /* margin-top: 30px;
+    margin-right: 80px; */
 }
 
 .changePassword {
