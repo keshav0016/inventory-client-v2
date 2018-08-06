@@ -331,7 +331,7 @@ class AddConsumables extends Component{
     setVendorName(e, value){
         this.setState({
             vendor_name : Object.assign(this.state.vendor_name, {
-                value: value
+                value: value.trim()
             })
         })
     }
