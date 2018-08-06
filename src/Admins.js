@@ -69,9 +69,9 @@ class AdminList extends Component{
                             <tbody>{this.state.adminsList.map(function (item,key){
                                 return(
                                 <tr key={item.id} className={item.disable === 1 ? 'disabled' : 'enabled'}>
-                                <td>{item.first_name}</td>
-                                <td>{item.last_name}</td>
-                                <td className="extraFields">{item.email}</td>
+                                <td>{item.user_id==="Admin" ? "Admin" : item.first_name}</td>
+                                <td>{item.user_id==="Admin" ? "-" : item.last_name}</td>
+                                <td className="extraFields">{item.user_id==="Admin" ? "hr@westagilelabs.com" : item.email}</td>
                                 </tr>
                                 )
                             },this)}
