@@ -52,6 +52,22 @@ class ChangePassword extends Component {
     }
 
     checkValidation(){
+        if(!this.state.newPassword.value){
+            this.setState({
+                newPassword: Object.assign(this.state.newPassword, {
+                    error: 'Enter new password',
+                    showError: true
+                }),
+            })
+        }
+        if(!this.state.currentPassword.value){
+            this.setState({
+                currentPassword: Object.assign(this.state.currentPassword, {
+                    error: 'Enter current password',
+                    showError: true
+                }),
+            })
+        }
         if(!this.state.currentPassword.showError && !this.state.newPassword.showError){
             this.setState({
                 change : true

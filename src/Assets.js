@@ -307,7 +307,7 @@ class Assets extends Component{
                 </Modal>
                 <h3 className='title'>List of Assets</h3>
                 <Row style={{position : 'relative', left : '0'}}>
-                    <Input s={12} m={6} l={4} placeholder="Search by name, ID or serial No:" style={{textAlign:'center'}} onChange = {this.setSearch} />
+                    <Input s={12} m={6} l={4} placeholder="Search by name or serial No:" style={{textAlign:'center'}} onChange = {this.setSearch} />
                     {/* <Input s={3} type='number' min={1} label="Search Asset ID" onChange = {this.setSearchAssetId} value={this.state.searchAssetId.value} error={this.state.searchAssetId.showError ? this.state.searchAssetId.error : null}/> */}
                     {/* <Button onClick={this.checkForValidation} style={{marginRight: '30px', marginLeft : '30px'}} >Search Asset Id</Button> */}
                 </Row>
