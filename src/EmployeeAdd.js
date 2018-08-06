@@ -371,7 +371,6 @@ class EmployeeAdd extends Component {
           //   window.location.reload();
           // }), 2100);
 
-          // window.Materialize.toast('Employee added', 4000)
           // this.props.setHandleListRequest(true)
         }else if(res.data.message === 'admin created'){
           this.setState({
