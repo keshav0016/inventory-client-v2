@@ -479,7 +479,7 @@ class AddAsset extends Component{
     setVendor(e,value){
         this.setState({
             vendor : Object.assign(this.state.vendor, {
-                value : value
+                value : value.trim()
             })
         })
     }
