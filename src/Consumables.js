@@ -353,11 +353,11 @@ class Consumables extends Component{
                 <h3 className="title">List of Consumables</h3>
                 <Row>
                 <Input className='consumableSorting' label='Sort By' s={12} l={3} m={3} type='select' onChange={this.sortBy}>
-                    <option value='default'>Sort By</option>
-                    <option value='quantityAsc'>Quantity [Low - High]</option>
-                    <option value='quantityDesc'>Quantity [High - Low]</option>
+                    {/* <option value='default'>Sort By</option> */}
                     <option value='purchasedAsc'>Purchase Date [New - Old]</option>
                     <option value='purchasedDesc'>Purchase Date [Old - New]</option> 
+                    <option value='quantityAsc'>Quantity [Low - High]</option>
+                    <option value='quantityDesc'>Quantity [High - Low]</option>
                 </Input>
                 <Input s={12} l={3} m={3} type='text' label="Search by consumable name" onChange={this.searchKeyword}></Input>
                 </Row>
