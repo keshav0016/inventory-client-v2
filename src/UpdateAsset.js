@@ -607,12 +607,14 @@ class UpdateAsset extends Component {
                     <Input s={12} m={3} l={3} label="Amount *" type="number" min={0} value={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={12} m={3} l={3} label="GST" type="number" min={0} value={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
                     {/* <br /> */}
-                    <Badge ><b >Total</b> : ₹{this.state.total}</Badge>
+                  
                     <Input s={12} m={3} l={3} type='text' label="Category" onChange={this.setCategory} value={this.state.category} disabled>
                         {/* <option value='Electronics'>Electronics</option>
                         <option value='Non-Electronics'>Non - Electronics</option>
                         <option value='Other'>Other</option> */}
                     </Input>
+                    <Badge style={{float:'left'}} ><b style={{color:'teal'}}>Total</b> : ₹{this.state.total}</Badge>
+                
                 </Row>
                 <div className="splitModalButtons">
                     <Button waves='light' onClick={this.checkForValidation}>Update</Button>
