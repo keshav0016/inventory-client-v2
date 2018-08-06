@@ -149,7 +149,7 @@ class LoginForm extends Component {
               admin: false,
               userRole: res.data.user.role
             })
-          } else if (res.data.passwordSame === true &&  res.data.user.user_id && res.data.user.first_login === 0) {
+          } else if (res.data.passwordSame === true && res.data.user.role === "Employee" && res.data.user.user_id && res.data.user.first_login === 0) {
             this.setState({
               employee: true
   
