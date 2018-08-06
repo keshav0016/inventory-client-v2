@@ -189,7 +189,6 @@ class LoginForm extends Component {
   componentDidMount(){
     // console.log(querystring.parse())
     if(this.props.location.search ==="?sessionExpired=true"){
-      // window.Materialize.toast("Session expired", 4000)
       swal('Your Session has expired, login again to continue',{
         buttons: false,
         timer: 2000,
