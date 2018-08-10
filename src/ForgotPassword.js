@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './forgotpassword.css'
 import axios from 'axios';
 import { Input, Button, Row, Col, Card } from 'react-materialize';
-// import './Login.css';
-// import './Employee.css'
 import {
 
     Redirect, Link
