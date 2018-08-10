@@ -461,13 +461,6 @@ class AddConsumables extends Component{
                 buttons: false,
                 timer: 2000,
               });
-            //   $('.modal').hide()
-            //   $('.modal-overlay').hide()
-            //   setTimeout((function() {
-            //     window.location.reload();
-            //   }), 2100);
-
-            // window.Materialize.toast('Consumable Added Successfully', 4000)
         })
         .catch(error => {
             if(error.response.status === 401){
