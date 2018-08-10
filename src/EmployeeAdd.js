@@ -566,7 +566,7 @@ class EmployeeAdd extends Component {
           </Input>
           {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
-            <option value='Sr.Software DeveOps Engineer/Team Lead'>'Sr.Software DeveOps Engineer/Team Lead</option>
+            <option value='Sr.Software DeveOps Engineer/Team Lead'>Sr.Software DeveOps Engineer/Team Lead</option>
             <option value='Sr.Software DeveOps Engineer'>Sr.Software DeveOps Engineer</option>
             <option value='Team Lead'>Team Lead</option>
             <option value='Sr.Software Development Engineer'>Sr.Software Development Engineer</option>
