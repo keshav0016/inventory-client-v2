@@ -162,6 +162,7 @@ class EmployeesList extends Component {
                     <th className="extraFields" data-field="gender">Gender</th>
                     <th className="extraFields" data-field="department">Department</th>
                     <th data-field="designation">Designation</th>
+                    <th data-field="idno">Id Serial No</th>
                   </tr>
               </thead>
               <tbody>{this.state.data.map(function (item,key){
@@ -174,6 +175,7 @@ class EmployeesList extends Component {
                   <td className="extraFields">{item.gender}</td>
                   <td className="extraFields">{item.department}</td>
                   <td>{item.designation}</td>
+                  <td>{item.idSerialNo}</td>
                   <td>{this.renderDropdown(item, key)}</td>
                 </tr>
                 )

@@ -59,6 +59,11 @@ class EmployeeAdd extends Component {
         showError: false,
         error: "",
       },
+      idNo : {
+        value: '',
+        showError: false,
+        error: ''
+      },
       addEmployee: true,
       redirect: false,
       login : false
@@ -73,6 +78,7 @@ class EmployeeAdd extends Component {
     this.handleUser_Id = this.handleUser_Id.bind(this)
     this.setEmail = this.setEmail.bind(this)
     this.handleRole = this.handleRole.bind(this)
+    this.handleIdno = this.handleIdno.bind(this)
 
   }
   componentDidMount(){
@@ -91,6 +97,8 @@ class EmployeeAdd extends Component {
     var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     // var name = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var userIdReg = /^[0-9]+$/;
+    var idNoReg =/^\s{0,}[0-9,.+-@#%^&*'":;()]+(\s{1,}[0-9,.+-@#%^&*'":;()]+)*\s{0,}$/
+    
     if(!userIdReg.test(this.state.user_id.value)){
       this.setState({
         user_id: Object.assign(this.state.user_id, {
@@ -293,7 +301,32 @@ class EmployeeAdd extends Component {
         }),
       })
     }
-    if(userIdReg.test(this.state.user_id.value) && !this.state.role.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError){
+    if(!idNoReg.test(this.state.idNo.value)) {
+      this.setState({
+        idNo : Object.assign(this.state.idNo, {
+          error : 'Enter a valid id no',
+          showError : true
+        })
+      })
+    }
+    if(!this.state.idNo.value) {
+      this.setState({
+        idNo : Object.assign(this.state.idNo, {
+          error : 'Id no is reqruired',
+          showError : true
+        })
+      })
+    }
+   
+    if(idNoReg.test(this.state.idNo.value)) {
+      this.setState({
+        idNo : Object.assign(this.state.idNo, {
+          error : '',
+          showError : false
+        })
+      })
+    }
+    if(userIdReg.test(this.state.user_id.value) && !this.state.role.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && this.state.department.value && this.state.designation.value !== 'select' && !this.state.email.showError && !this.state.idNo.showError){
       this.setState({
         disabled: true
       })
@@ -309,7 +342,8 @@ class EmployeeAdd extends Component {
           department:this.state.department.value,
           designation:this.state.designation.value,
           email:this.state.email.value,
-          role: this.state.role.value
+          role: this.state.role.value,
+          idNo : this.state.idNo.value
         },
         withCredentials: true
       })
@@ -355,6 +389,11 @@ class EmployeeAdd extends Component {
               value: "",
               showError: false,
               error: "",
+            },
+            idNo : {
+              value : '',
+              showError : false,
+              error : ''
             },
             addEmployee: false,
             redirect: true
@@ -410,6 +449,11 @@ class EmployeeAdd extends Component {
               error: "",
             },
             user_id: {
+              value: "",
+              showError: false,
+              error: "",
+            },
+            idNo: {
               value: "",
               showError: false,
               error: "",
@@ -532,6 +576,13 @@ class EmployeeAdd extends Component {
       })  
     })
   }
+  handleIdno (e) {
+    this.setState ({
+      idNo : Object.assign(this.state.idNo, {
+        value : e.target.value
+      })
+    })
+  }
   setEmail(e){
     this.setState({
         email : Object.assign(this.state.email, {
@@ -606,6 +657,7 @@ class EmployeeAdd extends Component {
             <option value='Admin'>Admin</option>
             <option value='Employee'>Employee</option>
           </Input>
+          <Input type="text" label="Id serial no" onChange={this.handleIdno}s={12} m={6} l={6} error={this.state.idNo.showError ? this.state.idNo.error : null}/>
         </Row>
         {/* <div className="splitModalButtons" >
         <Row>
