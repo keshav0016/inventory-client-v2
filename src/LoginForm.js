@@ -107,7 +107,7 @@ class LoginForm extends Component {
   verifyCredentials() {
       axios({
         method: 'post',
-        url: `${baseUrl}/user/login`,
+        url: `${baseUrl}/api/user/login`,
         data: {
           user_id: this.state.user_id.value,
           password: this.state.password.value
