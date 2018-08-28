@@ -56,6 +56,11 @@ class EmployeeUpdate extends Component{
                 showError: false,
                 error: "",
               },
+              idNo : {
+                value: this.props.user.idSerialNo,
+                showError: false,
+                error: ''
+              },
             currentDesignation: this.props.user.designation,
             addEmployee: true,
             redirect: false,
@@ -75,7 +80,7 @@ class EmployeeUpdate extends Component{
         this.setEmail = this.setEmail.bind(this)
         this.handleRole = this.handleRole.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
-
+        this.handleIdno = this.handleIdno.bind(this)
     }
     handleFirstname(e) {
         this.setState({
@@ -145,10 +150,20 @@ class EmployeeUpdate extends Component{
         })
         
     }
+    handleIdno(e){
+        this.setState({
+            idNo: Object.assign(this.state.idNo, {
+                value: e.target.value
+            })
+        })
+        
+    }
    
     checkForValidation(){
         var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
     var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
+    var idNoReg = /^\s{0,}[0-9,.+-@#%^&*'":;()]+(\s{1,}[0-9,.+-@#%^&*'":;()]+)*\s{0,}$/
+
     if(!nameReg.test(this.state.first_name.value) ){
         this.setState({
           first_name: Object.assign(this.state.first_name, {
@@ -341,8 +356,33 @@ class EmployeeUpdate extends Component{
                 }),
             })     
         }
+        if(!idNoReg.test(this.state.idNo.value)) {
+            this.setState({
+              idNo : Object.assign(this.state.idNo, {
+                error : 'Enter a valid id no',
+                showError : true
+              })
+            })
+          }
+          if(!this.state.idNo.value) {
+            this.setState({
+              idNo : Object.assign(this.state.idNo, {
+                error : 'Id no is reqruired',
+                showError : true
+              })
+            })
+          }
+         
+          if(idNoReg.test(this.state.idNo.value)) {
+            this.setState({
+              idNo : Object.assign(this.state.idNo, {
+                error : '',
+                showError : false
+              })
+            })
+          }
        
-        if(!this.state.role.showError && !this.state.department.showError && !this.state.designation.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && !this.state.email.showError){
+        if(!this.state.idNo.showError && !this.state.role.showError && !this.state.department.showError && !this.state.designation.showError && !this.state.first_name.showError && !this.state.last_name.showError && !this.state.age.showError && !this.state.gender.showError && !this.state.email.showError){
             this.setState({
                 UpdateRequest: true,
                 disabled : true
@@ -371,7 +411,8 @@ class EmployeeUpdate extends Component{
                 department:this.state.department.value,
                 designation:this.state.designation.value,
                 email:this.state.email.value ,
-                role : this.state.role.value
+                role : this.state.role.value,
+                idNo : this.state.idNo.value
             },
             withCredentials: true
         })
@@ -461,6 +502,11 @@ class EmployeeUpdate extends Component{
                 value : this.props.user.role,
                 showError : false,
                 error : ""
+            },
+            idNo : {
+                value : this.props.user.idNo,
+                showError : false,
+                error : ""
             }
         })
         this.props.onFinish()
@@ -537,6 +583,7 @@ class EmployeeUpdate extends Component{
                         <option value='QA Lead'>QA Lead</option>
                         <option value='Software Test Engineer'>Software Test Engineer</option>
                     </Input> : null}
+                    <Input type="text" label="Id serial no" value={this.state.idNo.value} onChange={this.handleIdno} s={12} m={6} l={6} error={this.state.idNo.showError ? this.state.idNo.error : null}/>
                 </Row>
                     <div className="splitModalButtons">
                         <Button className='addbtn' onClick={this.checkForValidation} disabled={this.state.disabled}>Update</Button>
