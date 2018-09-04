@@ -160,8 +160,6 @@ class AssignAsset extends Component{
                     timer: 2000,
                   })
             }
-            //   $('.modal').hide()
-            //   $('.modal-overlay').hide()
 
 
             if(res.data.requireAssignForce){
