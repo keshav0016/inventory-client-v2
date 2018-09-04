@@ -608,6 +608,7 @@ class EmployeeAdd extends Component {
           <Input s={12} m={6} l={6}  label="Email*" type = "email" value={this.state.email.value} onChange={this.setEmail} error={this.state.email.showError ? this.state.email.error : null}/>
           <Input s={12} m={6} l={6} type='select' label="Department" defaultValue='HR'onChange={this.handleDepartment} error={this.state.department.showError ? this.state.department.error : null}>
             <option value='select'>select</option>
+            <option value='Leader ship'>Leader ship</option>
             <option value='HR'>HR</option>
             <option value='Delivery'>Delivery</option>
             <option value='Finance/Accounting'>Finance/Accounting</option>
@@ -639,6 +640,10 @@ class EmployeeAdd extends Component {
             <option value='Sr.Project Manager'>Sr.Project Manager</option>
             <option value='Project Manager'>Project Manager</option>
           </Input> : null }
+          {this.state.department.value === 'Leader ship' ?<Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
+          <option value='select'>select</option>
+          <option value='Managing Director'>Managing Director</option></Input>: null }
+          
           {this.state.department.value === 'Finance/Accounting' ?<Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
           <option value='select'>select</option>
           <option value='Finance Director'>Finance Director</option></Input>: null }
