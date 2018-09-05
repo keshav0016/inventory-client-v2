@@ -701,6 +701,7 @@ class AddAsset extends Component{
             }
             this.setState({
                 addAssetRequest : false
+                , disabled: false
             })
         })
         .catch(error => {

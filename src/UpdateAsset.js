@@ -62,6 +62,12 @@ class UpdateAsset extends Component {
                 error: '',
                 showError: false
             },
+            assetType: {
+                value: this.props.asset.assetType,
+                error: '',
+                showError: false
+            },
+            assetTypeList : [],
             updateAssetRequest: false
         }
 
@@ -80,6 +86,7 @@ class UpdateAsset extends Component {
         this.setLocation = this.setLocation.bind(this)
         this.calculateTotal = this.calculateTotal.bind(this)
         this.cancelAll = this.cancelAll.bind(this)
+        this.setAssetType = this.setAssetType.bind(this)
     }
 
     calculateTotal(){
@@ -424,7 +431,8 @@ class UpdateAsset extends Component {
                 total: this.state.total,
                 category: this.state.category,
                 condition: this.state.condition.value,
-                location: this.state.location.value
+                location: this.state.location.value,
+                assetType: this.state.assetType.value
             } 
         })
         .then(res => {
@@ -464,6 +472,44 @@ class UpdateAsset extends Component {
                 })
             }
             console.error(error)
+        })
+    }
+
+
+    fetchAssetTypeList(){
+        axios({
+            method: 'get',
+            url : `${baseUrl}/assetType/list`
+            ,withCredentials : true
+        })
+        .then(res => {
+            this.setState({
+                assetTypeList : res.data.assetTypes
+            })
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }
+
+    componentDidMount(){
+        this.fetchAssetTypeList()
+    }
+
+
+    assetTypeDropdown(){
+        var assetTypeArr = []
+        this.state.assetTypeList.forEach(assetType => {
+            assetTypeArr.push(<option key={assetType.id} value={assetType.assetType}>{assetType.assetType}</option>)
+        });
+        return assetTypeArr
+    }
+
+    setAssetType(e){
+        this.setState({
+            assetType : Object.assign(this.state.assetType, {
+                value: e.target.value
+            })
         })
     }
 
@@ -606,6 +652,7 @@ class UpdateAsset extends Component {
                     <Input s={12} m={3} l={3} label="Location *" value = {this.state.location.value} onChange = {this.setLocation} error={this.state.location.showError ? this.state.location.error : null} />
                     <Input s={12} m={3} l={3} label="Amount *" type="number" min={0} value={this.state.amount.value} onChange={this.setAmount} error={this.state.amount.showError ? this.state.amount.error : null} />
                     <Input s={12} m={3} l={3} label="GST" type="number" min={0} value={this.state.gst.value} onChange={this.setGst} error={this.state.gst.showError ? this.state.gst.error : null} />
+                    
                     {/* <br /> */}
                   
                     <Input s={12} m={3} l={3} type='text' label="Category" onChange={this.setCategory} value={this.state.category} disabled>
@@ -613,6 +660,7 @@ class UpdateAsset extends Component {
                         <option value='Non-Electronics'>Non - Electronics</option>
                         <option value='Other'>Other</option> */}
                     </Input>
+                    <Input s={11} m={4} l={5} type='select' label='Asset Type*' value={this.state.assetType.value} onChange = {this.setAssetType} error={this.state.assetType.showError ? this.state.assetType.error : null} >{this.assetTypeDropdown()}</Input>
                     <Badge style={{float:'left'}} ><b style={{color:'teal'}}>Total</b> : ₹{this.state.total}</Badge>
                 
                 </Row>
