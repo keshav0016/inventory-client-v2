@@ -241,7 +241,7 @@ class UpdateConsumables extends Component {
                                 this.state.consumableNamesListObj
                             }
                             onChange = {this.setConsumableName}
-                            value={this.state.name.value.trim()}
+                            value={this.state.name.value}
                         />
                     <Input s={12} m={6} l={6} label="Description"  type="text" value={this.state.description.value} onChange = {this.setDescription} error={this.state.description.showError ? this.state.description.error : null}/>
                 
