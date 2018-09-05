@@ -563,7 +563,7 @@ class EmployeeUpdate extends Component{
                     </Input> : null}
                     {this.state.department.value === 'Operation' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
                         <option value='select'>select</option>
-                        <option value='Operation Manager'>Operation Manager</option>
+                        <option value='Operation Manager'>Operations Manager</option>
 
 
                     </Input> : null}
