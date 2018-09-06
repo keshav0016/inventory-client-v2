@@ -615,7 +615,7 @@ class EmployeeAdd extends Component {
             <option value='Pre sales'>Pre sales</option>
             <option value='Developer/Designer'>Developer/Designer</option>
             <option value='Testing'>Testing</option>
-            <option value='Operation'>Operations</option>
+            <option value='Operations'>Operations</option>
           </Input>
           {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
@@ -629,9 +629,9 @@ class EmployeeAdd extends Component {
             
             
           </Input> : null}
-          {this.state.department.value === 'Operation' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+          {this.state.department.value === 'Operations' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
-            <option value='Operation Manager'>Operations Manager</option>
+            <option value='Operations Manager'>Operations Manager</option>
             
             
           </Input> : null}
