@@ -152,7 +152,8 @@ class AssignAsset extends Component{
 
             if(res.data.requireAssignForce){
                 this.setState({
-                    assignForce : true
+                    assignForce : true,
+                    disabled : false
                 })
             }
             else{
