@@ -118,6 +118,7 @@ class Profile extends Component{
                     <tr>
                         <th data-field="item"> Item</th>
                         <th data-field="quantity">Quantity</th>
+                        <th data-field="status">Status</th>
                     </tr>
                 </thead>
         
@@ -126,6 +127,7 @@ class Profile extends Component{
                         return <tr key={index}>
                             <td>{item.asset_id ? ( item.asset ? `${item.asset.asset_name} [Asset]` : `${item.asset_id} [Asset]`) : ( item.consumable_id ? `${item.name} [consumable]` : `${item.consumable_id} [consumable]`)}</td>
                             <td>{item.asset_id ? "1": item.sum}</td>
+                            <td>{item.asset ? (item.to ? "Recovered" : "Assigned") : "Assigned"}</td>
                         </tr>
                     })}
                 </tbody>
