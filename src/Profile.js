@@ -89,7 +89,7 @@ class Profile extends Component{
    
     render(){
         return (
-            <div className="listComponent" >
+            <div className="listComponentEmployee" >
             <h5 className='title'>List of Items held</h5>
             <div className="filterContainer">
                 <h3 className="employeeTitle">Profile</h3>
