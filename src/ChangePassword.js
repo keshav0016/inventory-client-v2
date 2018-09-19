@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 import {Button,Row, Input} from 'react-materialize';
-import logo from './LOGO.png';
+// import logo from './LOGO.png';
 import {Redirect} from 'react-router-dom';
 import $ from 'jquery'
 import {baseUrl} from './config';

@@ -242,7 +242,7 @@ class TicketsList extends Component{
     }
 
     rejectTicket(ticket_number){
-        if(this.state.reason.value.length === 0 || this.state.reason.value.length > 0 && this.state.reason.value.trim().length === 0){
+        if(this.state.reason.value.length === 0 || (this.state.reason.value.length > 0 && this.state.reason.value.trim().length === 0)){
             this.setState({
                 reason : {
                     ...this.state.reason

@@ -1,58 +1,64 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import {Button} from 'react-materialize'
+import { Button} from 'react-materialize'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
-import $ from 'jquery'
-import {Redirect} from 'react-router-dom'
-class DeleteAsset extends Component{
+import {
+    Redirect
+  } from 'react-router-dom';
+  import $ from 'jquery'
+class DisableConsumable extends Component{
     constructor(props){
         super(props)
         this.state = {
-            deleteAssetRequest : false,
+            deleteConsumableRequest : false,
             redirect : false
         }
-        this.setDeleteAssetRequest = this.setDeleteAssetRequest.bind(this);
-        this.deleteAssetFromDb = this.deleteAssetFromDb.bind(this)
+        this.setDeleteConsumableRequest = this.setDeleteConsumableRequest.bind(this);
+        this.deleteConsumableFroDb = this.deleteConsumableFroDb.bind(this)
     }
 
-    setDeleteAssetRequest(){
-        this.deleteAssetFromDb();
+    setDeleteConsumableRequest(){
+        // this.setState({
+        //     deleteConsumableRequest : true
+        // })
+        this.deleteConsumableFroDb();
     }
 
-    deleteAssetFromDb(){
+    deleteConsumableFroDb(){
         axios({
             method : 'post',
-            url : `${baseUrl}/asset/delete`,
+            url : `${baseUrl}/consumables/disable`,
             data : {
-                asset_id : this.props.asset.asset_id
+                consumable_id : this.props.consumable.consumable_id
             }
             ,withCredentials : true
         })
         .then(res => {
-            if(res.data.assets === 0) {
-                swal(res.data.message,{
-                    buttons: false,
-                    timer: 2000,
-                })
-            }
             if(res.data.error){
                 swal(res.data.error,{
                     buttons: false,
                     timer: 2000,
-                })
+                  })
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
+                // window.Materialize.toast(res.data.error, 4000)
                 this.setState({
-                    deleteAssetRequest : false
+                    deleteConsumableRequest : false
                 })                
             }
-            else{
+            else if('Consumable disabled successfully'){
                 $('.modal-close').trigger('click')
-                swal(res.data.message,{
+                swal('consumable is Disabled',{
                     buttons: false,
                     timer: 2000,
-                })
+                  })
+
+                //   $('.modal').hide()
+                //   $('.modal-overlay').hide()
+
                 this.setState({
-                    deleteAssetRequest : false
+                    deleteConsumableRequest : false
                 })
                 this.props.setHandleListRequest()
             }
@@ -73,16 +79,16 @@ class DeleteAsset extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h5 className="title">Delete Asset</h5>                            
-                <p>{`Do you really want to delete `}
+                <h5 className="title">Disable Consumable</h5>                            
+                <p>{`Do you really want to disable `}
                     <b style={{color:'teal'}}>
-                        {`${this.props.asset.asset_name} `}
+                        {`${this.props.consumable.name} `}
                     </b>
                     {`?`}
                 </p>
-                <div className="splitModalButtons">
-                        <Button onClick = {this.setDeleteAssetRequest}>Delete</Button>
-                        <Button className="modal-close" >Cancel</Button>
+                <div className='splitModalButtons'>
+                        <Button onClick = {this.setDeleteConsumableRequest}>Disable</Button>
+                        <Button className="modal-close cancelButton modal-close">Cancel</Button>
                 </div>
                 {this.state.redirect ?  <Redirect
                                 to={{
@@ -96,4 +102,4 @@ class DeleteAsset extends Component{
 }
 
 
-export default DeleteAsset
+export default DisableConsumable

@@ -65,50 +65,14 @@ class AddVendor extends Component{
 
     checkForValidation(){
         var contactRegex = /^[6-9]\d{9}$/;
-        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
+        // var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var space = /^\s{1,}$/
-        var preceeding = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*$/
-        var trailing = /^[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
-        var precandtrail = /^\s{1,}[a-zA-Z0-9]+(\s{1,1}[a-zA-Z0-9]+)*\s{1,}$/
         var stdCode = /^[0-9]\d{4}$/
         var number = /^[1-9]\d{7,10}$/
         var landline = /^[0-9]\d{9,12}$/
         var addressReg = /^\s{0,}[a-zA-Z0-9_@.:,-/#&+"'-*]*[a-zA-Z_@.:,-/#&+"'-*]{1}[a-zA-Z0-9_@.:,-/#&+"'-*]*(\s{1}[a-zA-Z0-9_@.:,-/#&+"'-*]+)*\s{0,}$/
 
-        
-        // if(!alphaNum.test(this.state.name.value)){
-        //     this.setState({
-        //         name:Object.assign(this.state.name, {
-        //             error: 'The Vendor name should be alphanumeric',
-        //             showError: true
-        //         })
-        //     })
-        // }
-        // if(precandtrail.test(this.state.name.value)){
-        //     this.setState({
-        //         name:Object.assign(this.state.name, {
-        //             error: 'The Vendor name should not contain preceeding or trailing spaces',
-        //             showError: true
-        //         })
-        //     })
-        // }
-        // if(preceeding.test(this.state.name.value)){
-        //     this.setState({
-        //         name:Object.assign(this.state.name, {
-        //             error: 'The Vendor name should not contain preceeding spaces',
-        //             showError: true
-        //         })
-        //     })
-        // }
-        // if(trailing.test(this.state.name.value)){
-        //     this.setState({
-        //         name:Object.assign(this.state.name, {
-        //             error: 'The Vendor name should not contain trailing spaces',
-        //             showError: true
-        //         })
-        //     })
-        // }
         if(!this.state.name.value){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -125,7 +89,6 @@ class AddVendor extends Component{
                 })
             })
         }
-        //use if needed !preceeding.test(this.state.name.value) && !space.test(this.state.name.value) && !trailing.test(this.state.name.value) && !precandtrail.test(this.state.name.value) &&
         if(!alphaNum.test(this.state.name.value)){
             this.setState({
                 name:Object.assign(this.state.name, {
@@ -208,118 +171,76 @@ class AddVendor extends Component{
                 })
             }
         }
-        // if(this.state.contact.value.length < 10 && this.state.contact.value.length > 0 ){
-        //     this.setState({
-        //         contact:Object.assign(this.state.contact, {
-        //             error: 'Contact number less than 10 digits',
-        //             showError: true
-        //         })
-        //     })
-        // }
-        // if(this.state.contact.value.length > 10){
-        //     this.setState({
-        //         contact:Object.assign(this.state.contact, {
-        //             error: 'Contact number greater than 10 digits',
-        //             showError: true
-        //         })
-        //     })
-        // }
-       
-
-
         //validation for std code
 
-    if(!this.state.std.value && !this.state.number.value){
-        this.setState({
-            number:Object.assign(this.state.number, {
-                error: '',
-                showError: false
-            }),
-            std:Object.assign(this.state.std, {
-                error: '',
-                showError: false
-            })
-        })
-        
-    }else{
-        // if(!Number(this.state.std.value.length) >= 3){
-        //     this.setState({
-        //         std:Object.assign(this.state.std, {
-        //             error: 'Enter valid code',
-        //             showError: true
-        //         })
-        //     })
-        // }
-        if(!stdCode.test(this.state.std.value)){
+        if(!this.state.std.value && !this.state.number.value){
             this.setState({
-                std:Object.assign(this.state.std, {
-                    error: 'Enter valid code',
-                    showError: true
-                })
-            })
-        }
-        if(stdCode.test(this.state.std.value)){
-            this.setState({
+                number:Object.assign(this.state.number, {
+                    error: '',
+                    showError: false
+                }),
                 std:Object.assign(this.state.std, {
                     error: '',
                     showError: false
                 })
             })
-        }
-        
+            
+        }else{
+            
+            if(!stdCode.test(this.state.std.value)){
+                this.setState({
+                    std:Object.assign(this.state.std, {
+                        error: 'Enter valid code',
+                        showError: true
+                    })
+                })
+            }
+            if(stdCode.test(this.state.std.value)){
+                this.setState({
+                    std:Object.assign(this.state.std, {
+                        error: '',
+                        showError: false
+                    })
+                })
+            }
+            
         //validation for number
-        if(!number.test(Number(this.state.number.value))){
-            this.setState({
-                name:Object.assign(this.state.name, {
-                    error: 'Enter a valid number',
-                    showError: false
+            if(!number.test(Number(this.state.number.value))){
+                this.setState({
+                    name:Object.assign(this.state.name, {
+                        error: 'Enter a valid number',
+                        showError: false
+                    })
                 })
-            })
-        }
+            }
 
-        if(!landline.test(this.state.std.value+this.state.number.value)){
-            this.setState({
-                number:Object.assign(this.state.number, {
-                    error: 'number',
-                    showError: true
-                }),
-                std:Object.assign(this.state.std, {
-                    error: 'Enter valid landline ',
-                    showError: true
+            if(!landline.test(this.state.std.value+this.state.number.value)){
+                this.setState({
+                    number:Object.assign(this.state.number, {
+                        error: 'number',
+                        showError: true
+                    }),
+                    std:Object.assign(this.state.std, {
+                        error: 'Enter valid landline ',
+                        showError: true
+                    })
+                
                 })
-              
-            })
-        }
-        if(landline.test(this.state.std.value+this.state.number.value)){
-            this.setState({
-                number:Object.assign(this.state.number, {
-                    error: '',
-                    showError: false
-                }),
-                std:Object.assign(this.state.std, {
-                    error: '',
-                    showError: false
+            }
+            if(landline.test(this.state.std.value+this.state.number.value)){
+                this.setState({
+                    number:Object.assign(this.state.number, {
+                        error: '',
+                        showError: false
+                    }),
+                    std:Object.assign(this.state.std, {
+                        error: '',
+                        showError: false
+                    })
+                
                 })
-              
-            })
+            }
         }
-    }
-    // if(!this.state.contact && !this.state.code && !this.state.number){
-    //     this.setState({
-    //         contact: Object.assign(this.state.number, {
-    //             error: 'Enter mobile number',
-    //             showError:true
-    //         }),
-    //         number:Object.assign(this.state.number, {
-    //             error: '',
-    //             showError: false
-    //         }),
-    //         std:Object.assign(this.state.std, {
-    //             error: '',
-    //             showError: false
-    //         })
-    //     })
-    // }
         if(this.state.name.value && !this.state.name.showError && this.state.address.value && !this.state.address.showError && !this.state.contact.showError && !this.state.std.showError && !this.state.number.showError){
             this.setState({
                 addVendorRequest: true,
@@ -458,10 +379,6 @@ class AddVendor extends Component{
         })
     }
 
-    // componentDidMount(){
-    //     $('#addVendor').click(this.checkForValidation)
-    // }
-
     cancelAll(){
         this.setState({
             name : {
@@ -490,24 +407,11 @@ class AddVendor extends Component{
                 showError: false
             },
         })
-        // if(this.props.setVendorListRequest){
-        //     this.props.setVendorListRequest()
-        // }                
-        // else{
-        //     this.props.setHandleListRequest(true)
-        // }
         $(".modal-overlay").trigger('click');        
     }
 
 
     render(){
-        const code = (
-        <Input s={2} m={2} l={2}
-        value={this.state.number.value}
-        onChange={this.handleNumber}
-        error={this.state.number.showError ? this.state.number.error : null} 
-        />
-        )
         return(
             <div className="no-footer">
                 <h5 className='title'>Add Vendor</h5 >

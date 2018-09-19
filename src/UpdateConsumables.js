@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {Row, Input, Button, Autocomplete, Badge} from 'react-materialize'
+import {Row, Input, Button, Autocomplete} from 'react-materialize'
 import $ from 'jquery'
 import { baseUrl } from './config';
 import swal from 'sweetalert';
 import {Redirect} from 'react-router-dom'
-import moment from 'moment'
+// import moment from 'moment'
 
 class UpdateConsumables extends Component {
     constructor(props) {
@@ -59,7 +59,7 @@ class UpdateConsumables extends Component {
     }
 
     checkForValidation(){
-        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
+        // var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/
 

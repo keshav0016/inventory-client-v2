@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Table, Button, Modal, Pagination, Dropdown, Icon, NavItem, Row, Input, Preloader, Col, CardPanel} from 'react-materialize'
 // import AddConsumables from './AddConsumables'
 import AssignConsumables from './AssignConsumable'
-import DeleteConsumable from './DeleteConsumable'
+import DisableConsumable from './DisableConsumable'
 import {Link, Redirect} from 'react-router-dom';
 import './ListPage.css'
 import './Employee.css'
@@ -13,6 +13,7 @@ import EnableConsumable from './EnableConsumable';
 import moment from 'moment'
 import './MasterComponent.css'
 import UpdateConsumables from './UpdateConsumables'
+import DeleteConsumable from './DeleteConsumable'
 
 class Consumables extends Component{
     constructor(props){
@@ -62,7 +63,6 @@ class Consumables extends Component{
     }
     checkForValidation(){
         if(Number(this.state.minQuantity.value) < 0){
-            // window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
             this.setState({
                 minQuantity: Object.assign(this.state.minQuantity, {
                     error:'The Min Quantity is -ve',
@@ -72,7 +72,6 @@ class Consumables extends Component{
             })
         }
         if(Number(this.state.minQuantity.value) >= 0){
-            // window.Materialize.toast('The minimum filter for quantity cannot be negative', 4000)
             this.setState({
                 minQuantity: Object.assign(this.state.minQuantity, {
                     error:'',
@@ -82,7 +81,6 @@ class Consumables extends Component{
             })
         }
         if(Number(this.state.maxQuantity.value) < 0){
-            // window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
             this.setState({
                 maxQuantity: Object.assign(this.state.maxQuantity, {
                     error:'The Max Quantity is -ve',
@@ -92,7 +90,6 @@ class Consumables extends Component{
             })
         }
         if(Number(this.state.minQuantity) >=0 && Number(this.state.maxQuantity.value) >= 0){
-            // window.Materialize.toast('The maximum filter for quantity cannot be negative', 4000)
             this.setState({
                 maxQuantity: Object.assign(this.state.maxQuantity, {
                     error:'',
@@ -102,7 +99,6 @@ class Consumables extends Component{
             })
         }
         if(Number(this.state.minQuantity.value) > Number(this.state.maxQuantity.value)){
-            // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
             if(this.state.maxQuantity.value === ''){
                 this.setState({
                     minQuantity: Object.assign(this.state.minQuantity, {
@@ -134,7 +130,6 @@ class Consumables extends Component{
             }
             }
         if(Number(this.state.minQuantity.value) <= Number(this.state.maxQuantity.value) && Number(this.state.minQuantity.value)>0){
-            // window.Materialize.toast('The min filter should not be greater than the max filter', 4000)
             this.setState({
                 minQuantity: Object.assign(this.state.minQuantity, {
                     error:'',
@@ -206,8 +201,6 @@ class Consumables extends Component{
         this.setState({
             handleListRequest : true
         })
-        // window.location.reload()
-        // $(".modal-overlay").click()
     }
 
     setPage(e){
@@ -222,7 +215,6 @@ class Consumables extends Component{
             $(".modal-close").trigger('click')
         }
     }
-   
     sortBy(e){
         this.setState({
             sort:e.target.value,
@@ -280,7 +272,6 @@ class Consumables extends Component{
             trigger={<NavItem>Assign</NavItem >}>
             <AssignConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
             </Modal>
-             
         }
 
         return consumable.disable === 1 ? 
@@ -301,7 +292,7 @@ class Consumables extends Component{
                 trigger={<NavItem>Edit</NavItem >}>
                 <UpdateConsumables consumable={consumable} setHandleListRequest={this.setHandleListRequest}/>
             </Modal> */}
-              <button className="editButton" onClick={() => {this.setState({
+            <button className="editButton" onClick={() => {this.setState({
                 showModal : true
                 , currentItem : consumable
             })}}>Edit</button>
@@ -309,10 +300,16 @@ class Consumables extends Component{
                     modalOptions={{dismissible: false}}
                     actions={null}
                     trigger={<NavItem>Disable</NavItem>}>
-                    <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
+                    <DisableConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
             </Modal>
             {assign_modal}
             <NavItem href={`/admin/consumables/history/${consumable.consumable_id}`}>History</NavItem >
+            <Modal 
+                    modalOptions={{dismissible: false}}
+                    actions={null}
+                    trigger={<NavItem>Delete</NavItem>}>
+                    <DeleteConsumable consumable = {consumable} setHandleListRequest={this.setHandleListRequest} />
+            </Modal>
         </Dropdown>
     }
 
@@ -330,11 +327,11 @@ class Consumables extends Component{
         </div>
         return(
             <div className="listComponent">
-             {this.state.redirect? <Redirect
-              to={{
-                  pathname: "/login",
-                  search: '?sessionExpired=true'
-              }}/>: null}
+                {this.state.redirect? <Redirect
+                to={{
+                    pathname: "/login",
+                    search: '?sessionExpired=true'
+                }}/>: null}
                 {this.state.handleListRequest ? this.handleList() : null}
                 <Modal
                 actions={null}

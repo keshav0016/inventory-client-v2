@@ -96,17 +96,9 @@ class UpdateAsset extends Component {
     }
 
     checkForValidation() {
-        // if (!this.state.serial_number || !this.state.asset_name || !this.state.purchase_date || !this.state.invoice_number || !this.state.vendor || !this.state.amount) {
-        //     window.Materialize.toast('All the * marked fields are required', 4000)
-        // }
-        // else {
-        //     this.setState({
-        //         updateAssetRequest: true
-        //     })
-        // }
 
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
-        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
+        // var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
         var serialNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
         var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/
@@ -436,32 +428,28 @@ class UpdateAsset extends Component {
             } 
         })
         .then(res => {
-            if(res.data.error){
-                // window.Materialize.toast(res.data.error, 4000)
-                swal(res.data.error,{
-                    buttons: false,
-                    timer: 2000,
-                  })
-                this.setState({
-                    updateAssetRequest : false
-                })                
-            }
-            else if(res.data.message === 'Asset updated successfully'){
+            if(res.data.message === 'Asset updated successfully') {
+                $('.modal-close').trigger('click')
                 this.setState({
                     updateAssetRequest: false
                 })
-                $('.modal-close').trigger('click')
                 swal('Asset details has been Updated',{
                     buttons: false,
                     timer: 2000,
-                  })
-                  this.props.setHandleListRequest()
-                // $('.modal').hide()
-                // $('.modal-overlay').hide()
-
+                })
                 this.props.setHandleListRequest()
+                this.props.onFinish()
+
             }
-            this.props.onFinish()
+            if(res.data.error === "serial_number must be unique"){
+                this.setState({
+                    updateAssetRequest : false,
+                    serial_number : Object.assign(this.state.serial_number, {
+                        error : `Serial number is given to another asset`,
+                        showError : true
+                    })
+                })                
+            }
         })
         .catch(error => {
             if(error.response.status === 401){
@@ -512,14 +500,6 @@ class UpdateAsset extends Component {
             })
         })
     }
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     if (prevState.amount !== this.state.amount || prevState.gst !== this.state.gst) {
-    //         this.setState({
-    //             total: this.state.amount + ((this.state.amount * this.state.gst) / 100)
-    //         })
-    //     }
-    // }
 
     cancelAll(){
         this.setState({
@@ -572,10 +552,6 @@ class UpdateAsset extends Component {
                 showError: false
             }
         })
-        // $('.modal').hide()
-        // $('.modal-overlay').hide()
-
-        // this.props.setHandleListRequest()
         this.props.onFinish()
     }
 
