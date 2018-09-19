@@ -627,7 +627,7 @@ class EmployeeAdd extends Component {
     })
   }
   handleGender(e){
-    if(!e.target.value === 'select') {
+    if(e.target.value === 'select') {
       this.setState({
         gender: Object.assign(this.state.gender, {
           error: "Gender  is required",
@@ -741,11 +741,6 @@ class EmployeeAdd extends Component {
         })
       })
     }
-    // this.setState ({
-    //   email : Object.assign(this.state.email, {
-    //     value : e.target.value
-    //   })
-    // })
   }
   render() {
     var addEmployeeForm = (
