@@ -28,7 +28,7 @@ import { baseUrl } from './config';
 import NotFound from './NotFound';
 import logo from './LOGO.png'
 import './MasterComponent.css'
-import $ from 'jquery'
+// import $ from 'jquery'
 import UpdateAsset from './UpdateAsset';
 import AdminList from './Admins';
 import changePassword from './ChangePassword';

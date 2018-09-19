@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {Table, Row, Col, Modal, Button, Preloader,Input} from 'react-materialize'
+import {Table, Row, Modal, Button, Preloader} from 'react-materialize'
 import { baseUrl } from './config';
 import './ListPage.css'
 import './MasterComponent.css';

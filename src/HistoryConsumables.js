@@ -59,23 +59,6 @@ class HistoryConsumables extends Component{
 
 
    parsingDataToCsv(){
-    // const consumablesExport = [['Id', 'Name', 'Purchase Quantity', 'Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total', 'Assigned Employee', 'Assigned Date', 'Assigned Quantity']]
-    // this.state.history.map(consumableDetail => {
-    //     return consumablesExport.push([
-    //         this.props.match.params.consumable,
-    //         consumableDetail.consumable.name,
-    //         consumableDetail.vendor_name ? consumableDetail.quantity : 'Nil',
-    //         consumableDetail.vendor_name ? consumableDetail.vendor_name : 'Nil',
-    //         consumableDetail.vendor_name ? moment(consumableDetail.purchase_date).format('DD MMM YYYY') : 'Nil',
-    //         consumableDetail.vendor_name ? consumableDetail.item_price : 'Nil',
-    //         consumableDetail.vendor_name ? consumableDetail.whole_price : 'Nil',
-    //         consumableDetail.vendor_name ? consumableDetail.gst : 'Nil',
-    //         consumableDetail.vendor_name ? consumableDetail.total : 'Nil',
-    //         consumableDetail.vendor_name ? 'Nil' : consumableDetail.user.first_name + ' ' + consumableDetail.user.last_name,
-    //         consumableDetail.vendor_name ? 'Nil' : moment(consumableDetail.assigned_date).format('DD MMM YYYY'),
-    //         consumableDetail.vendor_name ? 'Nil' : consumableDetail.quantity,
-    //     ])
-    // })
     if(this.state.history.length !== 0){
         var ConsumableDetails = [[
             'Id', 'Name', 'Purchase Quantity', 'Present Quantity','Vendor', 'Purchase Date', 'Individual Price', 'Collective Price', 'GST', 'Total'

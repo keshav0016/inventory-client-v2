@@ -3,7 +3,7 @@ import axios from 'axios'
 import {Table, Button, Modal, Pagination, Icon, Dropdown, NavItem, Row, Input, Preloader, Col, CardPanel} from 'react-materialize'
 import AssignAsset from './AssignAsset'
 import UpdateAsset from './UpdateAsset'
-// import DeleteAsset from './DeleteAsset'
+import DeleteAsset from './DeleteAsset'
 import RecoverAsset from './RecoverAsset'
 import ReceiveAsset from './ReceiveAsset'
 import DisableAsset from './DisableAsset'
@@ -232,6 +232,12 @@ class Assets extends Component{
                 trigger={<NavItem>Edit</NavItem>}>
                 <UpdateAsset key={`update_asset_${item.asset_id}`}asset = {item} setHandleListRequest={this.setHandleListRequest} />
             </Modal> */}
+            <Modal
+                modalOptions={{dismissible: false}}
+                actions={null}
+                trigger={item.current_status === 'Available' ? <NavItem>Delete</NavItem> : null}>
+                {<DeleteAsset asset = {item} setHandleListRequest={this.setHandleListRequest} />}
+            </Modal>
             <Modal
                 modalOptions={{dismissible: false}}
                 actions={null}

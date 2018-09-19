@@ -112,7 +112,7 @@ class VendorUpdate extends Component{
 
     checkForValidation(){
         var contactRegex = /^[4-9]\d{9}$/;
-        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
+        // var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/;
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
         var stdCode = /^0[0-9]\d{3,5}$/
         var number = /^[1-9]\d{7,10}$/
@@ -209,14 +209,6 @@ class VendorUpdate extends Component{
             })
             
         }else{
-            // if(!Number(this.state.std.value.length) >= 3){
-            //     this.setState({
-            //         std:Object.assign(this.state.std, {
-            //             error: 'Enter valid code',
-            //             showError: true
-            //         })
-            //     })
-            // }
             if(!stdCode.test(this.state.std.value)){
                 this.setState({
                     std:Object.assign(this.state.std, {
@@ -276,13 +268,6 @@ class VendorUpdate extends Component{
                 update: true
             })
         }
-
-
-        // if(!this.state.name.showError && !this.state.address.showError && this.state.contact.value.length === 10 && contactRegex.test(Number(this.state.contact.value))){
-        //     this.setState({
-        //         update: true
-        //     })
-        // }
     }
     
     componentDidMount(){
@@ -316,18 +301,10 @@ class VendorUpdate extends Component{
                 buttons: false,
                 timer: 2000,
               })
-            //   $('.modal-overlay').trigger('click') 
-            //   $('.modal').hide()
-            //   $('.modal-overlay').remove()
-
-            //   setTimeout((function() {
-            //     window.location.reload();
-            // }), 2100);
              
                 this.props.setHandleListRequest()
             
         }else{
-            // window.Materialize.toast(res.data.error, 4000)
             swal(res.data.error,{
                 buttons: false,
                 timer: 2000,

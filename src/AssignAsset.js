@@ -8,8 +8,8 @@ import {
     Redirect
   } from 'react-router-dom';
 
-import DateInput from './shared/DateInput';
-import moment from 'moment'
+// import DateInput from './shared/DateInput';
+// import moment from 'moment'
 class AssignAsset extends Component{
     constructor(props){
         super(props)
