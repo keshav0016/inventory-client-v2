@@ -35,7 +35,7 @@ class EmployeeAdd extends Component {
         error: "",
       },
       role: {
-        value: "",
+        value: "select",
         showError: false,
         error: "",
       },
@@ -123,18 +123,18 @@ class EmployeeAdd extends Component {
         })
       })
     }
-    if(!this.state.first_name.value ){
-      this.setState({
-        first_name: Object.assign(this.state.first_name, {
-          error: "First name  is required",
-          showError: true,
-        })
-      })
-    }
     if(!nameReg.test(this.state.first_name.value)){
       this.setState({
         first_name: Object.assign(this.state.first_name, {
           error: "First name should be alphabets",
+          showError: true,
+        })
+      })
+    }
+    if(!this.state.first_name.value ){
+      this.setState({
+        first_name: Object.assign(this.state.first_name, {
+          error: "First name  is required",
           showError: true,
         })
       })
@@ -147,18 +147,18 @@ class EmployeeAdd extends Component {
         })
       })
     }
-    if(!this.state.last_name.value){
-      this.setState({
-        last_name: Object.assign(this.state.last_name, {
-          error: "Last name  is required",
-          showError: true,
-        }),
-      })
-    }
     if(!nameReg.test(this.state.last_name.value)){
       this.setState({
         last_name: Object.assign(this.state.last_name, {
           error: "Last name should be alphabets",
+          showError: true,
+        }),
+      })
+    }
+    if(!this.state.last_name.value){
+      this.setState({
+        last_name: Object.assign(this.state.last_name, {
+          error: "Last name  is required",
           showError: true,
         }),
       })
@@ -187,6 +187,24 @@ class EmployeeAdd extends Component {
         })
       })
     }
+    
+
+    if(this.state.age.value < 18){
+      this.setState({
+        age: Object.assign(this.state.age, {
+          error: "Age should be Greater than or equal to 18",
+          showError: true,
+        })
+      })
+    }
+    if(this.state.age.value > 70){
+      this.setState({
+        age: Object.assign(this.state.age, {
+          error: "Age should not be Greater than 70",
+          showError: true,
+        })
+      })
+    }
     if(!this.state.age.value) {
       this.setState({
         age: Object.assign(this.state.age, {
@@ -195,31 +213,14 @@ class EmployeeAdd extends Component {
         })
       })
     }
-
-      if(this.state.age.value < 18){
-        this.setState({
-          age: Object.assign(this.state.age, {
-            error: "Age should be Greater than or equal to 18",
-            showError: true,
-          })
+    if(this.state.age.value >= 18 && this.state.age.value <= 70){
+      this.setState({
+        age: Object.assign(this.state.age, {
+            error: '',
+            showError: false,
         })
-      }
-      if(this.state.age.value > 70){
-        this.setState({
-          age: Object.assign(this.state.age, {
-            error: "Age should not be Greater than 70",
-            showError: true,
-          })
-        })
-      }
-      if(this.state.age.value >= 18 && this.state.age.value <= 70){
-        this.setState({
-          age: Object.assign(this.state.age, {
-              error: '',
-              showError: false,
-          })
-        })
-      }
+      })
+    }
 
     if(!this.state.department.value){
       this.setState({
@@ -272,18 +273,18 @@ class EmployeeAdd extends Component {
     if(!this.state.email.value){
       this.setState({
         email: Object.assign(this.state.email, {
-            error:"The Email should not be empty",
+            error:"Email is required",
             showError:true
         }),
     })
     }
     if(reg.test(this.state.email.value)){
-        this.setState({
-            email: Object.assign(this.state.email, {
-                error: '',
-                showError:false
-            }),
-        })
+      this.setState({
+        email: Object.assign(this.state.email, {
+            error: '',
+            showError:false
+        }),
+      })
     }
     if(this.state.role.value === 'select'){
       this.setState({
@@ -317,7 +318,7 @@ class EmployeeAdd extends Component {
         })
       })
     }
-   
+
     if(idNoReg.test(this.state.idNo.value)) {
       this.setState({
         idNo : Object.assign(this.state.idNo, {
@@ -517,27 +518,97 @@ class EmployeeAdd extends Component {
     
   }
   handleFirstname(e){
-    this.setState({
-      first_name: Object.assign(this.state.first_name, {
-        value: e.target.value
-      })  
-      
-    })
+    var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
+
+    if(nameReg.test(e.target.value)){
+      this.setState({
+        first_name: Object.assign(this.state.first_name, {
+          value: e.target.value,
+          showError : false,
+          error : ''
+        })  
+      })
+    }
+    if(!nameReg.test(e.target.value)){
+      this.setState({
+        first_name: Object.assign(this.state.first_name, {
+          value : '',
+          error: "First name should be alphabets",
+          showError: true
+        })
+      })
+    }
+    if(!e.target.value){
+      this.setState({
+        first_name: Object.assign(this.state.first_name, {
+          error: "First name  is required",
+          showError: true,
+        })
+      })
+    }
   }
   handleLastname(e){
-    this.setState({
-      last_name: Object.assign(this.state.last_name, {
-        value: e.target.value
-      })  
-    })
+    var nameReg = /^\s{0,}[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*\s{0,}$/;
+
+    if(nameReg.test(e.target.value)){
+      this.setState({
+        last_name: Object.assign(this.state.last_name, {
+          value: e.target.value,
+          showError : false,
+          error : ''
+        })  
+      })
+    }
+    if(!nameReg.test(e.target.value)){
+      this.setState({
+        last_name: Object.assign(this.state.last_name, {
+          error: "Last name should be alphabets",
+          showError: true,
+        })
+      })
+    }
+    if(!e.target.value){
+      this.setState({
+        last_name: Object.assign(this.state.last_name, {
+          error: "Last name  is required",
+          showError: true,
+        })
+      })
+    }
   }
   handleAge(e){
-    this.setState({
-      age: Object.assign(this.state.age, {
-        value: Number(e.target.value)
-      })  
-      
-    })
+    if(e.target.value < 70 && e.target.value > 18) {
+      this.setState ({
+        age : Object.assign(this.state.age, {
+          value : e.target.value,
+          error : '',
+          showError : false
+        })
+      })
+    }
+    if(e.target.value >70) {
+      this.setState ({
+        age : Object.assign(this.state.age, {
+          error : 'Age should be less than 70',
+          showError : true
+        })
+      })
+    }
+    if(e.target.value < 18) {
+      this.setState ({
+        age : Object.assign(this.state.age, {
+          error : 'Age should be greater than 18',
+          showError : true
+        })
+      })
+    }if(!e.target.value) {
+      this.setState ({
+        age : Object.assign(this.state.age, {
+          error : "Age is required",
+          showError : true
+        })
+      })
+    } 
   }
   handleDepartment(e){
     this.setState({
@@ -556,11 +627,22 @@ class EmployeeAdd extends Component {
     })
   }
   handleGender(e){
-    this.setState({
-      gender: Object.assign(this.state.gender, {
-        value: e.target.value
-      })  
-    })
+    if(e.target.value === 'select') {
+      this.setState({
+        gender: Object.assign(this.state.gender, {
+          error: "Gender  is required",
+          showError: true,
+        }),
+      })
+    } else {
+      this.setState({
+        gender: Object.assign(this.state.gender, {
+          value: e.target.value,
+          showError : false,
+          error : ''
+        })  
+      })
+    }
   }
   handleRole(e){
     this.setState({
@@ -570,25 +652,95 @@ class EmployeeAdd extends Component {
     })
   }
   handleUser_Id(e){
-    this.setState({
-      user_id:Object.assign(this.state.user_id, {
-        value: e.target.value
-      })  
-    })
+    var userIdReg = /^[0-9]+$/;
+    if (userIdReg.test(e.target.value)){
+      this.setState({
+        user_id:Object.assign(this.state.user_id, {
+          value: e.target.value,
+          showError : false,
+          error : ''
+        })  
+      })
+    }
+    if(!userIdReg.test(e.target.value)){
+      this.setState({
+        user_id: Object.assign(this.state.user_id, {
+            error: "Employee Id should be a number",
+            showError: true,
+            value : ''
+        })
+      })
+    } 
+    if (!e.target.value){
+      this.setState({
+        user_id: Object.assign(this.state.user_id, {
+            error: "Employee Id is required",
+            showError: true,
+            value : ''
+        })
+      })
+    }
   }
   handleIdno (e) {
-    this.setState ({
-      idNo : Object.assign(this.state.idNo, {
-        value : e.target.value
+    var idNoReg =/^\s{0,}[0-9,.+-@#%^&*'":;()]+(\s{1,}[0-9,.+-@#%^&*'":;()]+)*\s{0,}$/
+
+    if(!idNoReg.test(e.target.value)) {
+      this.setState({
+        idNo : Object.assign(this.state.idNo, {
+          error : 'Enter a valid id no',
+          showError : true
+        })
       })
-    })
+    }
+    if(!e.target.value) {
+      this.setState({
+        idNo : Object.assign(this.state.idNo, {
+          error : 'Id no is reqruired',
+          showError : true,
+          value : ''
+        })
+      })
+    }
+    if(idNoReg.test(e.target.value)) {
+      this.setState ({
+        idNo : Object.assign(this.state.idNo, {
+          value : e.target.value,
+          error : '',
+          showError : false
+        })
+      })
+    }
+    
   }
   setEmail(e){
-    this.setState({
+    var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
+
+    if(reg.test(e.target.value)){
+      this.setState({
         email : Object.assign(this.state.email, {
-          value: e.target.value
+          value: e.target.value,
+          showError : false,
+          error : ''
+        })  
+      })
+    }
+    if(!reg.test(e.target.value)){
+      this.setState({
+        email : Object.assign(this.state.email, {
+          error:"Enter Valid West Agile Lab's Email",
+          showError: true,
+          value : e.target.value
         })
-    })
+      })
+    }
+    if(!e.target.value){
+      this.setState({
+        email : Object.assign(this.state.email, {
+          error: "Email  is required",
+          showError: true,
+        })
+      })
+    }
   }
   render() {
     var addEmployeeForm = (

@@ -11,11 +11,8 @@ import Row from 'react-materialize/lib/Row';
 import { baseUrl } from './config';
 import logo from './LOGO.png';
 import swal from 'sweetalert';
-// import querystring from "querystring";
-// import PasswordChange from './PwdChange';
-// import EmplooyeeDB from './EmplooyeeDB';
-// import AdminHomepage from './AdminHomepage';
-// import Homepage from './Homepage';
+import $ from 'jquery'
+
 
 class LoginForm extends Component {
 
@@ -43,8 +40,10 @@ class LoginForm extends Component {
     this.checkForValidation = this.checkForValidation.bind(this)
   }
 
+  
+
   checkForValidation(e){
-    var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
+    // var reg = /^[a-zA-Z0-9._-]+@westagilelabs.com$/;
     e.preventDefault();
     if(!this.state.user_id.value){
       this.setState({
@@ -194,6 +193,14 @@ class LoginForm extends Component {
         timer: 2000,
       })
     }
+    $(document).ready(function(){
+      $('label').addClass('active');
+    }) 
+  }
+  componentDidUpdate(){
+      $(document).ready(function(){
+        $('label').addClass('active');
+    }) 
   }
 
   render() {

@@ -200,7 +200,7 @@ class PasswordChange extends Component {
         //     })
         // }
         if (this.state.Confirm_Password.value === this.state.New_Password.value && this.state.Confirm_Password.value.length >= 6) {
-            if(this.props.location.state.role === 'Employee' || this.props.location.state.role === 'Admin' && this.props.location.state.user_id){
+            if(this.props.location.state.role === 'Employee' || (this.props.location.state.role === 'Admin' && this.props.location.state.user_id)){
 
                 axios({
                     method: 'post',

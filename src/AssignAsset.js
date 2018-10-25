@@ -8,8 +8,8 @@ import {
     Redirect
   } from 'react-router-dom';
 
-import DateInput from './shared/DateInput';
-import moment from 'moment'
+// import DateInput from './shared/DateInput';
+// import moment from 'moment'
 class AssignAsset extends Component{
     constructor(props){
         super(props)
@@ -34,11 +34,12 @@ class AssignAsset extends Component{
             employees : [],
             assets : []
             ,assignForce : false,
-            redirect : false
+            redirect : false,
+            disabled : false
+
         }
         this.assignAssetIntoDb = this.assignAssetIntoDb.bind(this)
         this.setFrom = this.setFrom.bind(this)
-        // this.setExpectedRecovery = this.setExpectedRecovery.bind(this)
         this.checkForValidation = this.checkForValidation.bind(this)
         this.setEmployee = this.setEmployee.bind(this)
         this.clearFields = this.clearFields.bind(this)
@@ -51,19 +52,6 @@ class AssignAsset extends Component{
     }
 
     checkForValidation(){
-        // if(this.state.user_id === 'Select' || !this.state.from || !this.state.expected_recovery){
-        //     window.Materialize.toast('All the * marked fields are required', 4000)
-        // }
-        // else{
-        //     if(new Date(this.state.from) > new Date(this.state.expected_recovery)){
-        //         window.Materialize.toast('Expected Recovery cannot be less than FROM', 4000)
-        //     }
-        //     else{
-        //         this.setState({
-        //             assignAssetRequest : true
-        //         })
-        //     }
-        // }
         if(this.state.user_id.value === 'Select'){
             this.setState({
                 user_id:Object.assign(this.state.user_id, {
@@ -130,7 +118,8 @@ class AssignAsset extends Component{
         }
         if(this.state.user_id.value!=='Select' && !this.state.from.showError ) {
             this.setState({
-                assignAssetRequest : true
+                assignAssetRequest : true,
+                disabled : true
             })
         }
     }
@@ -144,7 +133,6 @@ class AssignAsset extends Component{
                 user_id : this.state.user_id.value,
                 from : this.state.from.value,
                 assignForce : this.state.assignForce
-                // expected_recovery : this.state.expected_recovery.value
             },
             withCredentials : true
         })
@@ -164,7 +152,8 @@ class AssignAsset extends Component{
 
             if(res.data.requireAssignForce){
                 this.setState({
-                    assignForce : true
+                    assignForce : true,
+                    disabled : false
                 })
             }
             else{
@@ -206,14 +195,6 @@ class AssignAsset extends Component{
             })
         })
     }
-    
-    // setExpectedRecovery(e){
-    //     this.setState({
-    //         expected_recovery : Object.assign(this.state.expected_recovery, {
-    //             value: e.target.value
-    //         })
-    //     })
-    // }
 
     componentDidMount(){
         axios({
@@ -299,7 +280,7 @@ class AssignAsset extends Component{
                     /> */}
                 </Row>
                 <div className="splitModalButtons">
-                    <Button waves='light' onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"}</Button>
+                    <Button waves='light' disabled={this.state.disabled} onClick = {this.checkForValidation} >{this.state.assignForce ? "Assign Anyway" : "Submit"}</Button>
                     <Button className="cancelButton modal-close" onClick ={this.clearFields} >Cancel</Button>
                 </div>
                 {this.state.assignForce ? <p style={{color : 'red'}}>This Employee Already has this type of Asset</p> : null}

@@ -121,7 +121,7 @@ class AddAsset extends Component{
 
     checkForValidation(){
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
-        var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
+        // var alpha = /^[a-zA-Z]+(\s{1,1}[a-zA-Z]+)*$/
         var num = /^\s{0,}[a-zA-Z0-9]+\s{0,}$/
         var serialNum = /^\s{0,}[a-zA-Z0-9_@.:,-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,-/#+&-*]+)*\s{0,}$/
         var descriptionNum = /^\s{0,}[a-zA-Z0-9_@.:,"'-/#+&-*]+(\s{1,1}[a-zA-Z0-9_@.:,"'-/#+&-*]+)*\s{0,}$/

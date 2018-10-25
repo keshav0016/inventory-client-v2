@@ -5,8 +5,8 @@ import { baseUrl } from './config';
 import swal from 'sweetalert';
 import {
     Redirect
-  } from 'react-router-dom';
-  import $ from 'jquery'
+} from 'react-router-dom';
+import $ from 'jquery'
 class DeleteConsumable extends Component{
     constructor(props){
         super(props)
@@ -19,9 +19,6 @@ class DeleteConsumable extends Component{
     }
 
     setDeleteConsumableRequest(){
-        // this.setState({
-        //     deleteConsumableRequest : true
-        // })
         this.deleteConsumableFroDb();
     }
 
@@ -35,28 +32,27 @@ class DeleteConsumable extends Component{
             ,withCredentials : true
         })
         .then(res => {
+            if(res.data.consumables === 0) {
+                swal(res.data.message,{
+                    buttons: false,
+                    timer: 2000,
+                })
+            }
             if(res.data.error){
                 swal(res.data.error,{
                     buttons: false,
                     timer: 2000,
-                  })
-                //   $('.modal').hide()
-                //   $('.modal-overlay').hide()
-                // window.Materialize.toast(res.data.error, 4000)
+                })
                 this.setState({
                     deleteConsumableRequest : false
                 })                
             }
-            else if('Consumable disabled successfully'){
+            else{
                 $('.modal-close').trigger('click')
-                swal('consumable is Disabled',{
+                swal(res.data.message,{
                     buttons: false,
                     timer: 2000,
-                  })
-
-                //   $('.modal').hide()
-                //   $('.modal-overlay').hide()
-
+                })
                 this.setState({
                     deleteConsumableRequest : false
                 })
@@ -79,15 +75,15 @@ class DeleteConsumable extends Component{
     render(){
         return(
             <div className="no-footer">
-                <h5 className="title">Disable Consumable</h5>                            
-                <p>{`Do you really want to disable `}
+                <h5 className="title">Delete Consumable</h5>                            
+                <p>{`Do you really want to delete `}
                     <b style={{color:'teal'}}>
                         {`${this.props.consumable.name} `}
                     </b>
                     {`?`}
                 </p>
                 <div className='splitModalButtons'>
-                        <Button onClick = {this.setDeleteConsumableRequest}>Disable</Button>
+                        <Button onClick = {this.setDeleteConsumableRequest}>Delete</Button>
                         <Button className="modal-close cancelButton modal-close">Cancel</Button>
                 </div>
                 {this.state.redirect ?  <Redirect
