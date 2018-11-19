@@ -115,9 +115,6 @@ class AddAsset extends Component{
         // this.clear = this.clear.bind(this)
     }
 
-    // clear(){
-    //     $(".modal-overlay").trigger('click');
-    // }
 
     checkForValidation(){
         var alphaNum = /^\s{0,}[a-zA-Z0-9]*[a-zA-Z]{1}[a-zA-Z0-9]*(\s{1}[a-zA-Z0-9]+)*\s{0,}$/
