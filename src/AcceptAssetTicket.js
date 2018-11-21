@@ -111,7 +111,6 @@ class AcceptAssetTicket extends Component{
         }
 
         if(!this.state.currentAssetSelected.value.serial_number){
-            // window.Materialize.toast('Select any asset ID if available', 4000)
             this.setState({
                 currentAssetSelected : Object.assign(this.state.currentAssetSelected, {
                     error : 'Select any asset ID if available'
