@@ -789,6 +789,7 @@ class EmployeeAdd extends Component {
           </Input> : null}
           {this.state.department.value === 'HR' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='Select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
+            <option value='Sr.Manager'>Sr.Manager</option>
             <option value='Sr.HR Manager'>Sr.HR Manager</option>
             <option value='HR Manager'>HR Manager</option>
             <option value='HR Recruitment Manager'>HR Recruitment Manager</option>
