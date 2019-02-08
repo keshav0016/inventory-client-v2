@@ -29,14 +29,6 @@ class UpdateAssetType extends Component{
     }
 
     checkForValidation(){
-        // if(this.state.maxRequest <= 0 ){
-        //     window.Materialize.toast('Max request should be atleast 1', 4000)
-        // }
-        // else{
-        //     this.setState({
-        //         updateAssetTypeRequest : true
-        //     })
-        // }
         if(Number(this.state.maxRequest.value) < 0) {
             this.setState({
                 maxRequest: Object.assign(this.state.maxRequest, {
