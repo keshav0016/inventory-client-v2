@@ -779,6 +779,7 @@ class EmployeeAdd extends Component {
             <option value='Software Development Engineer'>Software Development Engineer</option>
             <option value='Senior Product Designer'>Senior Product Designer</option>
             <option value='UI/UX Designer'>UI/UX Designer</option>
+            <option value = 'Product Designer'>Product Designer</option>
             <option value='Intern'>Intern</option>
           </Input> : null}
           {this.state.department.value === 'Operations' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
