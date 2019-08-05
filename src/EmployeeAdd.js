@@ -769,6 +769,7 @@ class EmployeeAdd extends Component {
             <option value='Testing'>Testing</option>
             <option value='Operations'>Operations</option>
             <option value='Digital Marketing'>Digital Marketing</option>
+            <option value='Business Development'>Business Development</option>
           </Input>
           {this.state.department.value === 'Developer/Designer' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
@@ -786,6 +787,13 @@ class EmployeeAdd extends Component {
             <option value='select'>select</option>
             <option value='Operations Manager'>Operations Manager</option>
           </Input> : null}
+          {this.state.department.value === 'Business Development' ? <Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
+                        <option value='select'>select</option>
+                        <option value='Business Analyst'>Business Analyst</option>
+                        <option value='Lead Business Analyst '>Lead Business Analyst </option>
+                        <option value='Business Development Manager '>Business Development Manager </option>
+
+            </Input> : null}
           {this.state.department.value === 'Digital Marketing' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
             <option value='select'>select</option>
             <option value='Chief of digital marketing'>Chief of digital marketing</option>
@@ -806,6 +814,7 @@ class EmployeeAdd extends Component {
             <option value='Delivery Manager'>Delivery Manager</option>
             <option value='Sr.Project Manager'>Sr.Project Manager</option>
             <option value='Project Manager'>Project Manager</option>
+            <option value='Product Manager'>Product Manager</option>
             <option value='Intern'>Intern</option>
           </Input> : null }
           {this.state.department.value === 'Leadership' ?<Input s={12} m={6} l={6} type='select' label="Designation" defaultValue='select' onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null} >
@@ -821,6 +830,7 @@ class EmployeeAdd extends Component {
             <option value='select'>select</option>
             <option value='Lead Presales'>Lead Presales</option>
             <option value='Presales Associate'>Presales Associate</option>
+            <option value='Presales Consultant '> Presales Consultant </option>
             <option value='Intern'>Intern</option>
           </Input> : null }
           {this.state.department.value === 'Testing' ? <Input s={12} m={6} l={6} type='select'  label="Designation" defaultValue='select'onChange={this.handleDesignation} error={this.state.designation.showError ? this.state.designation.error : null}>
